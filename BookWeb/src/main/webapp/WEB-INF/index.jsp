@@ -45,11 +45,11 @@
 	<header class="container blog-header py-3" id="bookWebheader"></header>
 	<!-- header -->
 
-	<!-- body -->
 	<div class="container media">
-		<label id="test"></label>
-	</div>
 	<!-- body -->
+		
+	<!-- body -->
+	</div>
 
 	<!-- footer -->
 	<footer class="container py-5" id="bookWebFooter"></footer>
