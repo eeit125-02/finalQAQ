@@ -1,3 +1,7 @@
 
-*.MF
-*.properties
+.DS_Store
+BookWeb/src/test/.DS_Store
+BookWeb/target/classes/.DS_Store
+BookWeb/target/classes/com/.DS_Store
+BookWeb/target/classes/com/web/.DS_Store
+BookWeb/target/classes/com/web/book/.DS_Store
