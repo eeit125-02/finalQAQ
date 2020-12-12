@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -54,7 +55,7 @@ background-color:orange;
 			<legend>會員中心</legend>
 			<div>
 				<button type="submit" name="mb_inf">會員資訊</button>
-				<a href="Modify.jsp">會員修改</a>				
+				<a href="<c:url="/Modify">">會員修改</a>				
 			</div>
 			<a href="login.jsp">登出</a>
 		</fieldset>

@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%
-	response.setContentType("text/html;charset=UTF-8");
+response.setContentType("text/html;charset=UTF-8");
 response.setHeader("Cache-Control", "no-cache"); // HTTP 1.1
 response.setHeader("Pragma", "no-cache"); // HTTP 1.0
 response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
@@ -69,7 +70,7 @@ span {
 					 size="12" onblur="">
 			</div>
 			<div class="a10">
-				<button style="text-decoration: none" name="submit">登入</button>
+				<a href="<c:url value='/login' />"><button style="text-decoration: none" name="submit">登入</button></a>
 			</div>
 			<div>
 				<a href="password.html">忘記密碼?</a> <a href="account.html">忘記帳號?</a>
@@ -78,6 +79,7 @@ span {
 			<div class="a10">
 				<a href="registe.jsp" style="text-decoration: none">新帳號註冊</a>
 			</div>
+			
 		</fieldset>
 	</form>
 </body>
