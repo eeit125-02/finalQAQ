@@ -13,25 +13,26 @@ import javax.persistence.Table;
 public class ActBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	String MB_ID;
+	private String MB_ID;
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	Integer ACT_ID;
-	String ACT_Image;
-	String ACT_Name;
-	String ACT_Theme;
-	String ACT_Date;
-	String ACT_Loc;
-	String ACT_Intro;
-	String ACT_Guest;
-	String ACT_Pax;
-	String ACT_Rule;
-	String ACT_Tag;
-	String ACT_Place;
+	private Integer ACT_ID;
+	private String ACT_Image;
+	private String ACT_Name;
+	private String ACT_Theme;
+	private String ACT_Date;
+	private String ACT_Loc;
+	private String ACT_Intro;
+	private String ACT_Guest;
+	private String ACT_Pax;
+	private String ACT_Rule;
+	private String ACT_Tag;
+	private String ACT_Place;
 			
 	
 	public ActBean(String MB_ID, Integer ACT_ID, String ACT_Image, String ACT_Name, String ACT_Theme, String ACT_Date, String ACT_Loc,
 			String ACT_Intro, String ACT_Guest, String ACT_Pax, String ACT_Rule, String ACT_Tag, String ACT_Place) {
+		super();
 		this.MB_ID = MB_ID;
 		this.ACT_ID = ACT_ID;
 		this.ACT_Image = ACT_Image;
@@ -48,7 +49,7 @@ public class ActBean implements Serializable {
 	}
 
 	public ActBean() {
-
+		super();
 	}
 
 	public String getMB_ID() {
@@ -155,6 +156,37 @@ public class ActBean implements Serializable {
 		ACT_Place = aCT_Place;
 	}
 
-	
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("ActBean [MB_ID=");
+		builder.append(MB_ID);
+		builder.append(", ACT_ID=");
+		builder.append(ACT_ID);
+		builder.append(", ACT_Image=");
+		builder.append(ACT_Image);
+		builder.append(", ACT_Name=");
+		builder.append(ACT_Name);
+		builder.append(", ACT_Theme=");
+		builder.append(ACT_Theme);
+		builder.append(", ACT_Date=");
+		builder.append(ACT_Date);
+		builder.append(", ACT_Loc=");
+		builder.append(ACT_Loc);
+		builder.append(", ACT_Intro=");
+		builder.append(ACT_Intro);
+		builder.append(", ACT_Guest=");
+		builder.append(ACT_Guest);
+		builder.append(", ACT_Pax=");
+		builder.append(ACT_Pax);
+		builder.append(", ACT_Rule=");
+		builder.append(ACT_Rule);
+		builder.append(", ACT_Tag=");
+		builder.append(ACT_Tag);
+		builder.append(", ACT_Place=");
+		builder.append(ACT_Place);
+		builder.append("]");
+		return builder.toString();
+	}
 
 }
