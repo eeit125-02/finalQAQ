@@ -1,5 +1,10 @@
 Manifest-Version: 1.0
+<<<<<<< Updated upstream
 Built-By: hsin
 Build-Jdk: 11.0.8
+=======
+Built-By: Student
+Build-Jdk: 1.8.0_232
+>>>>>>> Stashed changes
 Created-By: Maven Integration for Eclipse
 
