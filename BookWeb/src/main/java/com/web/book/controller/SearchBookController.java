@@ -131,5 +131,9 @@ public class SearchBookController {
 				model.addAttribute("pageresult", result1);
 				return "SearchBook/Page";
 		}
-	
+	@RequestMapping(value = "SearchBook/Search")
+	public String serchPage(Model model) {
+		
+		return "SearchBook/Search";
+	}
 }
