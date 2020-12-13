@@ -10,7 +10,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="NOVEL_ARTICLE")
-public class ArticleBean implements Serializable{
+public class PostBean implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	@Id
@@ -22,10 +22,10 @@ public class ArticleBean implements Serializable{
 	String article_content;
 	
 	
-	public ArticleBean() {
+	public PostBean() {
 	}
 	
-	public ArticleBean(String article_title, String article_content) {
+	public PostBean(String article_title, String article_content) {
 		this.article_title = article_title;
 		this.article_content = article_content;
 	}
