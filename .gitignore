@@ -1,7 +1,7 @@
 /.metadata/
 *.DS_Store
-/BookWeb/target/
-/target
-.project
-.classpath
-.settings
+BookWeb/target/
+BookWeb/.classpath
+BookWeb/.settings/
+BookWeb/.project
+/Servers/
