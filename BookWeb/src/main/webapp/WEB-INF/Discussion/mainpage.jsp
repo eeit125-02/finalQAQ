@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -32,8 +35,8 @@
 
 <script>
 	$(document).ready(function() {
-		$("#bookWebheader").load('header');
-        $("#bookWebFooter").load('footer');        
+		$("#bookWebheader").load("<c:url value='/header'/>");
+        $("#bookWebFooter").load("<c:url value='/footer'/>");        
 	});
 </script>
 <title>書適論壇</title>
@@ -44,7 +47,7 @@
 	<header class="container blog-header py-3" id="bookWebheader"></header>
 	<!-- header -->
 
-	<div class="container-fluid media" style="margin: 20px 0px">
+	<div class="container-fluid" style="margin: 20px 0px">
 		<div class="row">
 			<!-- sidebar area -->
 			<div class="col-2 text-center">
@@ -57,7 +60,7 @@
 						role="tab">討論天地</a> <a
 						class="list-group-item list-group-item-action"
 						id="list-member-list" data-toggle="list" href="#list-member"
-						role="tab">會員專區</a> <a
+						role="tab">會員專區</a> <a
 						class="list-group-item list-group-item-action"
 						id="list-manager-list" data-toggle="list" href="#list-manager"
 						role="tab">管理員專區</a>
@@ -90,7 +93,7 @@
 						<ul class="nav nav-tabs" id="novelTab" role="tablist">
 
 							<li class="nav-item"><a class="nav-link" id="novel_rule-tab"
-								data-toggle="tab" href="#novel_rule" role="tab">板規</a></li>
+								data-toggle="tab" href="#novel_rule" role="tab">板規</a></li>
 
 							<li class="nav-item"><a class="nav-link active"
 								id="novel_latest-tab" data-toggle="tab" href="#novel_latest"
@@ -98,7 +101,7 @@
 
 							<li class="nav-item"><a class="nav-link"
 								id="novel_search-tab" data-toggle="tab" href="#novel_search"
-								role="tab">搜尋結果</a></li>
+								role="tab">搜尋結果</a></li>
 
 						</ul>
 						<br>
@@ -117,15 +120,15 @@
 								<!-- post and command -->
 								<div
 									style="border: #ADADAD 2px solid; border-radius: 5px; text-align: left; padding: 10px; margin: 0px 10px">
-									<p>[member] [time]</p>
-									<h3>[post title]</h3>
+									<p>[member] [time]</p>
+									<h3>[post title]</h3>
 									<p>[post content]</p>
-									<span>留言 [no.]</span> <br>
+									<span>留言 [no.]</span> <br>
 									<br>
 
 									<div class="input-group mb-3">
 										<input type="text" class="form-control" id="command_input"
-											placeholder="請輸入留言">
+											placeholder="請輸入留言">
 										<div class="input-group-append">
 											<button class="btn btn-outline-secondary" id="command_btn"
 												type="button">留言</button>
@@ -148,15 +151,15 @@
 								<!-- post and command -->
 								<div
 									style="border: #ADADAD 2px solid; border-radius: 5px; text-align: left; padding: 10px; margin: 0px 10px">
-									<p>[member] [time]</p>
-									<h3>[post title]</h3>
+									<p>[member] [time]</p>
+									<h3>[post title]</h3>
 									<p>[post content]</p>
-									<span>留言 [no.]</span> <br>
+									<span>留言 [no.]</span> <br>
 									<br>
 
 									<div class="input-group mb-3">
 										<input type="text" class="form-control" id="command_input"
-											placeholder="請輸入留言">
+											placeholder="請輸入留言">
 										<div class="input-group-append">
 											<button class="btn btn-outline-secondary" id="command_btn"
 												type="button">留言</button>
@@ -187,7 +190,7 @@
 								href="#pills-member_new_post" role="tab">新增貼文</a></li>
 							<li class="nav-item"><a class="nav-link"
 								id="pills-member_post-tab" data-toggle="pill"
-								href="#pills-member_post" role="tab">個人貼文紀錄</a></li>
+								href="#pills-member_post" role="tab">個人貼文紀錄</a></li>
 						</ul>
 						<div class="tab-content" id="pills-tabContent">
 							<!-- write new post page -->
@@ -196,25 +199,27 @@
 								<!-- new post form -->
 								<div
 									style="border: #ADADAD 2px solid; border-radius: 5px; text-align: left; padding: 10px; margin: 0px 10px; padding-top: 20px">
-									<form>
+									
+									<form:form method='post' action='add_post' modelAttribute="postBean">
 										<div class="form-group row">
-											<label for="new_title" class="col-2 text-center h5">貼文標題</label>
-											<div class="col-9">
-												<input type="text" class="form-control" id="new_title"
-													placeholder="請輸入貼文標題">
+											<label for="new_title" class="col-2 text-center h5">貼文標題</label>
+											<div class="col-9">												
+												<form:input type="text" class="form-control" id="post_title" path="post_title"
+													placeholder="請輸入貼文標題"/>
 											</div>
 										</div>
 										<div class="form-group row">
 											<label for="new_content" class="col-2 text-center h5">貼文內容</label>
 											<div class="col-9">
-												<textarea class="form-control" id="new_content" rows="6"
-													placeholder="請輸入貼文內容"></textarea>
+												<form:textarea class="form-control" id="post_content" path="post_content" rows="6"
+													placeholder="請輸入貼文內容"></form:textarea>
 											</div>
 										</div>
+											<form:hidden path="post_time"/> <form:hidden path="mb_id"/>
 										<div class="text-center">
-											<button type="submit" class="btn btn-primary">送出貼文</button>
+											<button type="submit" class="btn btn-primary">送出貼文</button>
 										</div>
-									</form>
+									</form:form>
 								</div>
 							</div>
 
@@ -236,10 +241,10 @@
 
 									<div class="input-group mb-3">
 										<input type="text" class="form-control" id="command_input"
-											placeholder="請輸入留言">
+											placeholder="請輸入留言">
 										<div class="input-group-append">
 											<button class="btn btn-outline-secondary" id="command_btn"
-												type="button">留言</button>
+												type="button">留言</button>
 										</div>
 
 									</div>
@@ -265,7 +270,7 @@
 											<div class="modal-body">
 												<form>
 													<div class="form-group">
-														<label for="article-name" class="col-form-label h5">貼文標題</label>
+														<label for="article-name" class="col-form-label h5">貼文標題</label>
 														<input type="text" class="form-control" id="article-name">
 													</div>
 													<div class="form-group">
@@ -276,7 +281,7 @@
 											</div>
 											<div class="modal-footer">
 												<button type="button" class="btn btn-secondary"
-													data-dismiss="modal">取消</button>
+													data-dismiss="modal">取消</button>
 												<button type="button" class="btn btn-primary">送出修改內容</button>
 											</div>
 										</div>
@@ -286,7 +291,7 @@
 							</div>
 						</div>
 					</div>
-
+</div>
 <!-- =====================================================manager page===================================================== -->
 					<div class="tab-pane fade" id="list-manager" role="tabpanel">
 						管理員專區</div>
