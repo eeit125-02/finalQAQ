@@ -28,19 +28,19 @@ public class PostBean implements Serializable{
 	Timestamp post_time;
 	
 	@OneToMany(mappedBy="postBean", cascade=CascadeType.ALL)
-	private Set<PostBean> posts=new LinkedHashSet<>( );
+	private Set<CommandBean> commands=new LinkedHashSet<>( );
 
 	public PostBean() {}
-	
+
 	public PostBean(Integer post_id, String post_title, String post_content, Integer mb_id, Timestamp post_time,
-			Set<PostBean> posts) {
+			Set<CommandBean> commands) {
 		super();
 		this.post_id = post_id;
 		this.post_title = post_title;
 		this.post_content = post_content;
 		this.mb_id = mb_id;
 		this.post_time = post_time;
-		this.posts = posts;
+		this.commands = commands;
 	}
 
 	public Integer getPost_id() {
@@ -83,14 +83,14 @@ public class PostBean implements Serializable{
 		this.post_time = post_time;
 	}
 
-	public Set<PostBean> getPosts() {
-		return posts;
+	public Set<CommandBean> getCommands() {
+		return commands;
 	}
 
-	public void setPosts(Set<PostBean> posts) {
-		this.posts = posts;
+	public void setCommands(Set<CommandBean> commands) {
+		this.commands = commands;
 	}
-
+	
 	
 	
 }
