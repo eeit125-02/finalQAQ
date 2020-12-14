@@ -2,3 +2,6 @@
 *.DS_Store
 /BookWeb/target/
 /target
+.project
+.classpath
+.settings
