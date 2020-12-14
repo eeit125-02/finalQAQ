@@ -1,0 +1,18 @@
+@import url(https://fonts.googleapis.com/earlyaccess/cwtexyen.css);
+body{
+    font-family: "cwTeXYen", sans-serif;
+    font-weight: 800;
+    line-height: 2;
+    font-size: 18px;
+}
+fieldset {
+    border-radius: 25px;
+    padding: 20px;
+    margin: auto;
+    background-color: beige;
+    width: 400px
+}
+legend {
+    text-align: center;
+    font-size: 30px;
+}
