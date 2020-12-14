@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%
 	response.setContentType("text/html;charset=UTF-8");
 response.setHeader("Cache-Control", "no-cache"); // HTTP 1.1
@@ -15,22 +16,25 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 <!-- <link rel="stylesheet" href="import.css">   -->
 <style>
 @import url(https://fonts.googleapis.com/earlyaccess/cwtexyen.css);
-body{
-    font-family: "cwTeXYen", sans-serif;
-    font-weight: 800;
-    line-height: 2;
-    font-size: 18px;
+
+body {
+	font-family: "cwTeXYen", sans-serif;
+	font-weight: 800;
+	line-height: 2;
+	font-size: 18px;
 }
+
 fieldset {
-    border-radius: 25px;
-    padding: 20px;
-    margin: auto;
-    background-color: beige;
-    width: 400px
+	border-radius: 25px;
+	padding: 20px;
+	margin: auto;
+	background-color: beige;
+	width: 400px
 }
+
 legend {
-    text-align: center;
-    font-size: 30px;
+	text-align: center;
+	font-size: 30px;
 }
 
 p {
@@ -80,13 +84,13 @@ span {
 </head>
 
 <body>
-<%-- 	<jsp:useBean id="Member" class="model.MemberBean" scope="session" /> --%>
-	<form action="./Login" method="post">
+	<%-- 	<jsp:useBean id="Member" class="model.MemberBean" scope="session" /> --%>
+<!-- 	<form action="./Login" method="post"> -->
 		<fieldset>
 			<legend>會員修改</legend>
 			<div class="a2">
 				<label>帳號:</label>
-				<jsp:getProperty name="Member" property="mB_Account" />
+				<p>${account.getMb_Account}</p>
 				<span id="idsp2"></span><br />
 				<p style="color: gray;">(1.不可空白 2.至少6個字且必須包含英文字母、數字)</p>
 			</div>
@@ -100,7 +104,12 @@ span {
 					value="" size="12" onblur="Checkpwd1()"> <span id="idsp9"></span><br />
 			</div>
 
-			<!--  <div class="a1">
+			<div class="a11">
+				<a href="<c:url="/Update">"><button type="submit" name="Update">送出</button></a> 
+				<button type="reset" value="清除"></button>
+			</div>
+		</fieldset>
+		<!--  <div class="a1">
             <label>姓名:</label>
             <input type="text" id="name" name="name" size="12" value="" readonly>
         </div><br>
@@ -143,34 +152,10 @@ span {
             <input type="checkbox" name="type" id="type9" value="二">XX
             <span id="idsp8"></span><br />
         </div><br>-->
-			<div class="a11">
-				<input type="submit" name="update" value="送出"></input> <input
-					type="reset" value="清除"></input>
-			</div>
-		</fieldset>
+
 
 
 		<script>
-			// function Checkname() {
-			//     let name = document.getElementById("name").value
-			//     let namelen = name.length;
-			//     let sp = document.getElementById("idsp")
-			//     var rex = /^[\u4E00-\u9FA5]+$/;
-			//     if (name.length >= 2 && rex.test(name) && name != "") {
-			//         sp.innerHTML = "正確"
-			//     }
-			//     // else if(name==""){
-			//     //     sp.innerHTML="不可為空白"
-			//     // }else if(name != rex.test(name)){
-			//     //     sp.innerHTML="請輸入中文"
-			//     // }else if(name.length <= 1){
-			//     //     sp.innerHTML="長度必須大於2"
-			//     // }
-			//     else {
-			//         sp.innerHTML = "錯誤"
-			//     }
-			// }
-
 			function Checkpwd() {
 				let pwd = document.getElementById("pwd").value
 				let pwdlen = pwd.length;
@@ -213,17 +198,6 @@ span {
 					sp.innerHTML = "錯誤"
 
 			}
-			// function Checkdate(){
-			//     let date = document.getElementById("dates").value
-			//     let sp=document.getElementById("idsp2")
-			//     InputDate = date.replace(/-/g,"/");
-			//     let d = new Date(InputDate)
-			//     let dates1 = InputDate.split("/")
-			//     if(dates1[0]== d.getFullYear() && dates1[1] == (d.getMonth() + 1) && dates1[2] == d.getDate()){
-			//         sp.innerHTML="正確"
-			//     }else 
-			//     sp.innerHTML="錯誤"
-			// }
 		</script>
 	</form>
 </body>

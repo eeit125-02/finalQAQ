@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%
 	request.setCharacterEncoding("UTF-8");
 response.setContentType("text/html;charset=UTF-8");
@@ -79,52 +80,53 @@ span {
 
 <body>
 <%-- 	<jsp:useBean id="reg_member" class="model.MemberBean" scope="session" /> --%>
-	<form action="Register" method="post">
+<!-- 	<form action="Register" method="post"> -->
 		<fieldset>
 			<legend>會員確認</legend>
 			<div class="a2">
 				<label>帳號:</label>
-				<jsp:getProperty name="reg_member" property="mB_Account" />
+				<p>${reg_member.getMb_Account}</p>
 			</div>
 			<div class="a3">
 				<label>密碼:</label>
-				<jsp:getProperty name="reg_member" property="mB_Password" />
+				<p>${reg_member.getMb_Password}</p>
 			</div>
 			<div class="a1">
 				<label>姓名:</label>
-				<jsp:getProperty name="reg_member" property="mB_Name" />
+				<p>${reg_member.getMb_Name}</p>
 			</div>
 			<br>
 			<div class="a5">
 				<label>性別:</label>
-				<jsp:getProperty name="reg_member" property="mB_Sex" />
+				<p>${reg_member.getMb_Sex}</p>
 			</div>
 			<div class="a6">
 				<label>生日:</label>
-				<jsp:getProperty name="reg_member" property="mB_Birthday" />
+				<p>${reg_member.getMb_Birthday}</p>
 			</div>
 			<br />
 			<div class="a7">
 				<label>地址:</label>
-				<jsp:getProperty name="reg_member" property="mB_Address" />
+				<p>${reg_member.getMb_Address}</p>
 			</div>
 			<br />
 			<div class="a8">
 				<label>電話:</label>
-				<jsp:getProperty name="reg_member" property="mB_Tel" />
+				<p>${reg_member.getMb_Tel}</p>
 			</div>
 			<br />
 			<div class="a9">
 				<label>E-mail:</label>
-				<jsp:getProperty name="reg_member" property="mB_Mail" />
+				<p>${reg_member.getMb_Mail}</p>
 			</div>
 			<br />
 			<div class="a10">
 				<label>喜好類型:</label><br />
-				<jsp:getProperty name="reg_member" property="mB_type" />
+				<p>${reg_member.getMb_Type}</p>
 			</div>
 			<div class="a11">
-			<button type="submit" name="confirm">送出</button>
+			<a href="<c:url="/confirm">"><button type="submit" name="confirm">送出</button></a>
+			<a href="./Member/registe.jsp">返回</a>
 			</div>
 			<br>
 		</fieldset>

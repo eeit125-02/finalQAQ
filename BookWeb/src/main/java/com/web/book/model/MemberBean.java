@@ -1,7 +1,4 @@
 package com.web.book.model;
-
-
-import java.sql.Blob;
 import java.sql.Date;
 import java.sql.Timestamp;
 
@@ -29,7 +26,7 @@ public class MemberBean {
 	private Timestamp mb_Date;
 	private Integer mb_Lv;
 	private String mb_type;
-	private Blob mb_pic;
+	private String mb_pic;
 	
 	public MemberBean() {
 		super();
@@ -37,7 +34,7 @@ public class MemberBean {
 	
 	public MemberBean(Integer mb_ID, String mb_Account, String mb_Password, String mb_Sex, Date mb_Birthday,
 			String mb_Name, String mb_Mail, String mb_Tel, String mb_Address, Timestamp mb_Date, Integer mb_Lv,
-			String mb_type, Blob mb_pic) {
+			String mb_type, String mb_pic) {
 		super();
 		this.mb_ID = mb_ID;
 		this.mb_Account = mb_Account;
@@ -55,11 +52,11 @@ public class MemberBean {
 	}
 
 
-	public Blob getMb_pic() {
+	public String getMb_pic() {
 		return mb_pic;
 	}
 
-	public void setMb_pic(Blob mB_pic) {
+	public void setMb_pic(String mB_pic) {
 		this.mb_pic = mB_pic;
 	}
 
