@@ -10,8 +10,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 @Entity
 @Table(name = "Book_Report")
 
@@ -25,14 +23,14 @@ public class BookReportBean {
 	private String br_Content;
 	private Date br_DateTime;
 	
+	//@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	@ManyToOne
 	@JoinColumn(name = "bk_ID")
-	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	private BookBean book;
 	
+	//@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	@ManyToOne
 	@JoinColumn(name = "mb_ID")
-	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	private MemberBean member;
 	
 	public BookReportBean() {
@@ -108,7 +106,7 @@ public class BookReportBean {
 		builder.append(", br_Content=");
 		builder.append(br_Content);
 		builder.append(", br_DateTime=");
-		builder.append(br_DateTime);
+		builder.append(String.valueOf(br_DateTime));
 		builder.append(", book=");
 		builder.append(book);
 		builder.append(", member=");

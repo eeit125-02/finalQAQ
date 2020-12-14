@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -31,10 +32,10 @@
 </style>
 
 <script>
+	
 	$(document).ready(function() {
-		$("#bookWebheader").load('header');
-        $("#bookWebFooter").load('footer');
-        
+		$("#bookWebheader").load("<c:url value='/header'/>");
+        $("#bookWebFooter").load("<c:url value='/footer'/>");
 	});
 </script>
 <title>Insert title here</title>
@@ -47,7 +48,6 @@
 
 	<!-- body -->
 	<div class="container media">
-		<label id="test"></label>
 	</div>
 	<!-- body -->
 
