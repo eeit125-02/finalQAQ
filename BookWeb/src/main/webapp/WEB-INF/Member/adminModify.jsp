@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" import="java.util.*" import="memberbean.*"
 	import="member.*"%>
+	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%
 	request.setCharacterEncoding("UTF-8");
 %>
@@ -38,11 +39,6 @@ legend {
 <body>
 	<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-
-	<%
-		List user = (List)request.getAttribute("user");
-	request.setAttribute("list", user);
-	%>
 	<form action="./Login" method="post">
 		<fieldset>
 			<legend>會員清單</legend>
@@ -62,22 +58,22 @@ legend {
 					<th>類型</th>
 					<th>會員資料刪除</th>
 				</tr>
-				<c:forEach items="${list}" var="u">
+				<c:forEach items="${memberall}" var="u">
 					<tr>
-						<td>${u.getmB_ID()}</td>
-						<td>${u.getmB_Account()}</td>
-						<td>${u.getmB_Password()}</td>
-						<td>${u.getmB_Sex()}</td>
-						<td>${u.getmB_Birthday()}</td>
-						<td>${u.getmB_Name()}</td>
-						<td>${u.getmB_Mail()}</td>
-						<td>${u.getmB_Tel()}</td>
-						<td>${u.getmB_Address()}</td>
-						<td>${u.getmB_Date()}</td>
-						<td>${u.getmB_Lv()}</td>
-						<td>${u.getmB_type()}</td>
-						<td><button type="sumbit" name="delete"
-								value="${u.getmB_ID()}" onclick="confirmChoice( )">刪除</a></td>
+						<td>${u.getMb_ID()}</td>
+						<td>${u.getMb_Account()}</td>
+						<td>${u.getMb_Password()}</td>
+						<td>${u.getMb_Sex()}</td>
+						<td>${u.getMb_Birthday()}</td>
+						<td>${u.getMb_Name()}</td>
+						<td>${u.getMb_Mail()}</td>
+						<td>${u.getMb_Tel()}</td>
+						<td>${u.getMb_Address()}</td>
+						<td>${u.getMb_Date()}</td>
+						<td>${u.getMb_Lv()}</td>
+						<td>${u.getMb_type()}</td>
+						<td><a href="<c:url="/delete">"><button type="submit" name="delete"
+								value="${u.getMb_ID()}" onclick="confirmChoice( )">刪除</a></td>
 					</tr>
 				</c:forEach>
 			</table>

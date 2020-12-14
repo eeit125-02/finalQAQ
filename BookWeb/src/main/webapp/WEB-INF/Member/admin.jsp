@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -44,13 +45,12 @@ p {
 </style>
 </head>
 <body>
-	<form action="./Login" method="post">
 		<fieldset>
 			<legend>會員中心</legend>
 			<div>
-				<button type="submit" name="inf">會員資訊</button>
+				<a href="<c:url="/adminall">"><button type="submit" name="inf">會員資訊</button></a>
 			</div>
-			<a href="login.jsp">登出</a>
+			<a href="login.jsp">登出</a>1
 		</fieldset>
 </body>
 

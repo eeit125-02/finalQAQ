@@ -1,5 +1,7 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ taglib uri="http://www.springframework.org/tags" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -76,84 +78,66 @@ span {
 
 <body>
 <%-- 	<jsp:useBean id="Member" class="model.MemberBean" scope="session" /> --%>
-	<form action="./Member" method="post">
+<!-- 	<form action="./Member" method="post"> -->
 		<fieldset>
 			<legend>會員資料</legend>
 			<div class="a2">
 				<label>帳號:</label>
-				<jsp:getProperty name="Member" property="mB_Account" />
+				<p>${login.getMb_Account}</p>
 				<span id="idsp2"></span><br />
 				<p style="color: gray;">(1.不可空白 2.至少6個字且必須包含英文字母、數字)</p>
 			</div>
 			<div class="a3">
 				<label>密碼:</label>
-				<jsp:getProperty name="Member" property="mB_Password" />
+				<p>${login.getMb_Password}</p>
 				<span id="idsp1"></span><br />
 				<p style="color: gray;">(1.不可空白，2.至少6個字且必須包含英文字母、數字)</p>
 			</div>
 			<div class="a1">
 				<label>姓名:</label>
-				<jsp:getProperty name="Member" property="mB_Name" />
+				<p>${login.getMb_Name}</p>
 			</div>
 			<br>
 			<div class="a5">
 				<label>性別:</label>
-				<jsp:getProperty name="Member" property="mB_Sex" />
+				<p>${login.getMb_Sex}</p>
 				<span id="idsp3"></span>
 			</div>
 			<div class="a6">
 				<label>生日:</label>
-				<jsp:getProperty name="Member" property="mB_Birthday" />
+				<p>${login.getMb_Birthday}</p>
 				<span id="idsp4"></span><br />
 			</div>
 			<br />
 			<div class="a7">
 				<label>地址:</label>
-				<jsp:getProperty name="Member" property="mB_Address" />
+				<p>${login.getMb_Address}</p>
 				<span id="idsp5"></span><br />
 			</div>
 			<br />
 			<div class="a8">
 				<label>電話:</label>
-				<jsp:getProperty name="Member" property="mB_Tel" />
+				<p>${login.getMb_Tel}</p>
 				<span id="idsp6"></span><br />
 			</div>
 			<br />
 			<div class="a9">
 				<label>E-mail:</label>
-				<jsp:getProperty name="Member" property="mB_Mail" />
+				<p>${login.getMb_Mail}</p>
 				<span id="idsp7"></span><br />
 			</div>
 			<br />
 			<div class="a10">
 				<label>喜好類型:</label><br />
-				<jsp:getProperty name="Member" property="mB_type" />
+				<p>${login.getMb_Type}</p>
 				<span id="idsp8"></span><br />
 			</div>
 			<br>
+			<a href ="Member/city.jsp">回上一頁</a>
 		</fieldset>
 
 
 		<script>
-			// function Checkname() {
-			//     let name = document.getElementById("name").value
-			//     let namelen = name.length;
-			//     let sp = document.getElementById("idsp")
-			//     var rex = /^[\u4E00-\u9FA5]+$/;
-			//     if (name.length >= 2 && rex.test(name) && name != "") {
-			//         sp.innerHTML = "正確"
-			//     }
-			//     // else if(name==""){
-			//     //     sp.innerHTML="不可為空白"
-			//     // }else if(name != rex.test(name)){
-			//     //     sp.innerHTML="請輸入中文"
-			//     // }else if(name.length <= 1){
-			//     //     sp.innerHTML="長度必須大於2"
-			//     // }
-			//     else {
-			//         sp.innerHTML = "錯誤"
-			//     }
-			// }
 
 			function Checkpwd() {
 				let pwd = document.getElementById("pwd").value
@@ -197,17 +181,7 @@ span {
 					sp.innerHTML = "錯誤"
 
 			}
-			// function Checkdate(){
-			//     let date = document.getElementById("dates").value
-			//     let sp=document.getElementById("idsp2")
-			//     InputDate = date.replace(/-/g,"/");
-			//     let d = new Date(InputDate)
-			//     let dates1 = InputDate.split("/")
-			//     if(dates1[0]== d.getFullYear() && dates1[1] == (d.getMonth() + 1) && dates1[2] == d.getDate()){
-			//         sp.innerHTML="正確"
-			//     }else 
-			//     sp.innerHTML="錯誤"
-			// }
+		
 		</script>
 	</form>
 </body>
