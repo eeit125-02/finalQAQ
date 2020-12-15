@@ -24,16 +24,10 @@ public class ActCollectBean implements Serializable{
 	
 	@ManyToOne
 	@JoinColumn(name="act_ID")
-	@JoinColumn(name="act_Name")
-	@JoinColumn(name="act_Date")
 	private ActBean act;
 	
 	@ManyToOne
-	@JoinColumn(name="mb_Account")
-	@JoinColumn(name="mb_Name")
-	@JoinColumn(name="mb_Birthday")
-	@JoinColumn(name="mb_Mail")
-	@JoinColumn(name="mb_Tel")
+	@JoinColumn(name="mb_ID")
 	private MemberBean member;
 
 	public ActCollectBean() {

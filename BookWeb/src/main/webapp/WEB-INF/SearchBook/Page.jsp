@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -32,9 +33,9 @@
 
 <script>
 	$(document).ready(function() {
-		$("#bookWebheader").load('header');
-        $("#bookWebFooter").load('footer');
-        
+		$("#bookWebheader").load("<c:url value='/header'/>");
+		$("#bookWebFooter").load("<c:url value='/footer'/>");
+
 	});
 </script>
 <title>Insert title here</title>
@@ -48,97 +49,105 @@
 	<!-- body -->
 	<div class="container media">
 		<label id="test"></label>
-		
-<!-- 		內容開始 -->
-		
+
+		<!-- 		內容開始 -->
+
 		<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 
-                <br>
-                <hr>
-                <br>
+		<br>
+		<hr>
+		<br>
 		<div class="collect">
-		<a class="btn btn-outline-dark" href="Search.jsp" role="button">搜尋首頁</a><br><br>
-		<a href='collectlist'><button type="submit" name="list" class="btn btn-outline-dark" value="5">收藏清單</button></a>
-		<!-- value=會員ID -->
+			<a class="btn btn-outline-dark" href="Search.jsp" role="button">搜尋首頁</a><br>
+			<br> <a href='collectlist'><button type="submit" name="list"
+					class="btn btn-outline-dark" value="5">收藏清單</button></a>
+			<!-- value=會員ID -->
 		</div>
 
-               <div class="row">
-                    <div class="col-sm-5">
+		<div class="row">
+			<div class="col-sm-5">
 
-                        <p class="s-corner">
-                        <img class="mainpic" alt="" src="${pageresult.bk_Pic}" height="390">
-                        </p>
-                        <div class="detail">
-                            <h6>詳細資訊：</h6>
-                            <p>　　ISBN：${pageresult.bk_ISBN}<br>　　頁數：${pageresult.bk_Page}<br></p>
-          
-                        </div>
+				<p class="s-corner">
+					<img class="mainpic" alt="" src="${pageresult.bk_Pic}" height="390">
+				</p>
+				<div class="detail">
+					<h6>詳細資訊：</h6>
+					<p>
+						ISBN：${pageresult.bk_ISBN}<br> 頁數：${pageresult.bk_Page}<br>
+					</p>
 
-                        <div class="detail">
-                            <h6>相關書評連結：</h6>
-                            <ul>
-                                <li>連結1</li>
-                                <li>連結2</li>
-                                <li>連結3</li>
+				</div>
 
-                            </ul>
-                        </div>
+				<div class="detail">
+					<h6>相關書評連結：</h6>
+					<ul>
+						<li>連結1</li>
+						<li>連結2</li>
+						<li>連結3</li>
 
-
-
-                    </div>
-                    <div class="col-sm-7">
-
-                        <div class="back">
-                            <h2 class="title">${pageresult.bk_Name}</h2>
-                            <hr><br>
-                            <h5>作者：${pageresult.bk_Author}</h5>
-                            <h5>出版社：${pageresult.bk_Publish}</h5>
-                            <h5>出版日期：${pageresult.bk_Date}</h5>
-                            <br>
-                            <figure>
-                                <h5>內容簡介：</h5>
-								<p>${pageresult.bk_Content}</p>
-                            </figure>
-
-                            <div class="collect">
-                                <img alt="點選收藏" src="Img/heartred.png" id="heart" width="25px">
-                                <a href='pagecollect'><button type="submit" name="pagecollect" class="btn btn-outline-danger btn-sm" value="${pageresult.bk_ID}">收藏本書</button></a>
-								<a href='updatebook'><button type="submit" name="update" class="btn btn-outline-info btn-sm" value="${pageresult.bk_ID}">修改書訊</button></a>
-								
-                            </div>
-                            
-
-                        </div>
+					</ul>
+				</div>
 
 
 
+			</div>
+			<div class="col-sm-7">
 
-                        <div class="detail">
-                            <h6>二手拍賣連結：</h6>
-                            <ul>
-                                <li>連結1</li>
-                                <li>連結2</li>
-                                <li>連結3</li>
-                            </ul>
-                            <div class="follow">
-                                ＊有二手書時通知我  <img alt="加入追蹤" src="Img/heartwhite.png" id="heart" width="25px">
-                            </div>
+				<div class="back">
+					<h2 class="title">${pageresult.bk_Name}</h2>
+					<hr>
+					<br>
+					<h5>作者：${pageresult.bk_Author}</h5>
+					<h5>出版社：${pageresult.bk_Publish}</h5>
+					<h5>出版日期：${pageresult.bk_Date}</h5>
+					<br>
+					<figure>
+						<h5>內容簡介：</h5>
+						<p>${pageresult.bk_Content}</p>
+					</figure>
 
-                        </div>
-                        
+					<div class="collect">
+						<img alt="點選收藏" src="Img/heartred.png" id="heart" width="25px">
+						<a href='pagecollect'><button type="submit" name="pagecollect"
+								class="btn btn-outline-danger btn-sm"
+								value="${pageresult.bk_ID}">收藏本書</button></a> <a href='updatebook'><button
+								type="submit" name="update" class="btn btn-outline-info btn-sm"
+								value="${pageresult.bk_ID}">修改書訊</button></a>
 
-                    </div>
-                  </div>
-		
-</div>
+					</div>
 
-		
-		
-		
-<!-- 		內容結束 -->
-		
+
+				</div>
+
+
+
+
+				<div class="detail">
+					<h6>二手拍賣連結：</h6>
+					<ul>
+						<li>連結1</li>
+						<li>連結2</li>
+						<li>連結3</li>
+					</ul>
+					<div class="follow">
+						＊有二手書時通知我 <img alt="加入追蹤" src="Img/heartwhite.png" id="heart"
+							width="25px">
+					</div>
+
+				</div>
+
+
+			</div>
+		</div>
+
+	</div>
+
+
+
+
+	<!-- 		內容結束 -->
+
 	<!-- body -->
 
 	<!-- footer -->
