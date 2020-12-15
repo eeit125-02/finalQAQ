@@ -10,6 +10,8 @@ public interface BookReportDao {
 	
 	List<BookReportBean> bookReportBookAllList(Integer bk_ID);
 	
+	BookReportBean getBookReport(Integer br_ID);
+	
 	void deleteBookReport(Integer br_ID);
 	
 	void upDateBookReportData(Integer br_ID, Integer br_Score, String br_Content );

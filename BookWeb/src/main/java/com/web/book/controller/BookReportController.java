@@ -53,4 +53,33 @@ public class BookReportController {
 		bookReportService.deleteBookReport(br_ID);
 		return "true";
 	}
+	
+	@PostMapping("/getBookReport/{br_ID}")
+	@ResponseBody
+	public Map<String, Object> getBookReport( @PathVariable("br_ID") Integer br_ID ) {
+		BookReportBean bookReport =  bookReportService.getBookReport(br_ID);
+		Map<String, Object> data = new HashMap<>();
+		data.put("br_ID", bookReport.getBr_ID());
+		data.put("bk_Name", bookReport.getBook().getBk_Name());
+		data.put("bk_Author", bookReport.getBook().getBk_Author());
+		data.put("bk_Publish", bookReport.getBook().getBk_Publish());
+		data.put("br_Score", bookReport.getBr_Score());
+		data.put("bk_Pic", bookReport.getBook().getBk_Pic());
+		data.put("br_Content", bookReport.getBr_Content());
+		
+		return data;
+	}
+	
+	
+	@PostMapping("/upDateBookReport/{br_ID}/{br_Score}/{br_Content}")
+	@ResponseBody
+	public String upDateBookReport(
+			@PathVariable("br_ID") Integer br_ID, 
+			@PathVariable("br_Score") Integer br_Score,
+			@PathVariable("br_Content") String br_Content) {
+		
+		bookReportService.upDateBookReportData(br_ID, br_Score, br_Content);;
+		return "true";
+	}
+	
 }
