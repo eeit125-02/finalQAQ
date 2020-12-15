@@ -35,7 +35,7 @@
 <!-- 				<a class="dropdown-item text-muted" href="#">Another action</a>  -->
 <!-- 				<a class="dropdown-item text-muted" href="#">Something else here</a> -->
 <!-- 			</div> -->
-			<a class="p-2 text-muted" href="#">二手書交易系統</a> 
+			<a class="p-2 text-muted" href="<c:url value='/Transation/storeMain'/>">二手書交易系統</a> 
 			<a class="p-2 text-muted" href="#">共讀趣／閱讀沙龍</a> 
 			<a class="p-2 text-muted" href="#">討論區</a>
 			<a class="p-2 text-muted" href="<c:url value='/BookReport/bookReport'/>">閱讀履歷</a>
