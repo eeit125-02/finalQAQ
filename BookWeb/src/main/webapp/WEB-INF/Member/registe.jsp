@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%
 	response.setContentType("text/html;charset=UTF-8");
 response.setHeader("Cache-Control", "no-cache"); // HTTP 1.1
@@ -144,32 +145,13 @@ span {
 			</div>
 			<br>
 			<div class="a11">
-				<input type="submit" name="submit" value="送出"></input> <input
-					type="reset" value="清除"></input>
+				<a href="<c:url="/registe">"><button type="submit" name="submit" value="送出"></button></a> 
+				<button type="reset" value="清除"></button>>
 			</div>
 		</fieldset>
 
 
 		<script>
-			// function Checkname() {
-			//     let name = document.getElementById("name").value
-			//     let namelen = name.length;
-			//     let sp = document.getElementById("idsp")
-			//     var rex = /^[\u4E00-\u9FA5]+$/;
-			//     if (name.length >= 2 && rex.test(name) && name != "") {
-			//         sp.innerHTML = "正確"
-			//     }
-			//     // else if(name==""){
-			//     //     sp.innerHTML="不可為空白"
-			//     // }else if(name != rex.test(name)){
-			//     //     sp.innerHTML="請輸入中文"
-			//     // }else if(name.length <= 1){
-			//     //     sp.innerHTML="長度必須大於2"
-			//     // }
-			//     else {
-			//         sp.innerHTML = "錯誤"
-			//     }
-			// }
 
 			function Checkpwd() {
 				let pwd = document.getElementById("pwd").value
@@ -213,17 +195,7 @@ span {
 					sp.innerHTML = "錯誤"
 
 			}
-			// function Checkdate(){
-			//     let date = document.getElementById("dates").value
-			//     let sp=document.getElementById("idsp2")
-			//     InputDate = date.replace(/-/g,"/");
-			//     let d = new Date(InputDate)
-			//     let dates1 = InputDate.split("/")
-			//     if(dates1[0]== d.getFullYear() && dates1[1] == (d.getMonth() + 1) && dates1[2] == d.getDate()){
-			//         sp.innerHTML="正確"
-			//     }else 
-			//     sp.innerHTML="錯誤"
-			// }
+
 		</script>
 	</form>
 </body>

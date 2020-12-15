@@ -31,6 +31,7 @@ public class MemberDaoImpl implements MemberDao {
 		String hql = "FROM MemberBean WHERE mB_Account =:account and mB_Password = :pwd";
 		Session session = factory.getCurrentSession();
 
+		@SuppressWarnings("unchecked")
 		Query<MemberBean> query = session.createQuery(hql);
 		List<MemberBean> list = query.setParameter("account", account).setParameter("pwd", pwd).getResultList();
 		if (list.size() > 0) {
@@ -51,6 +52,7 @@ public class MemberDaoImpl implements MemberDao {
 		MemberBean mb = null;
 		String hql = "FROM MemberBean WHERE mB_Account=:account";
 		Session session = factory.getCurrentSession();
+		@SuppressWarnings("unchecked")
 		Query<MemberBean> query = session.createQuery(hql);
 		mb = query.setParameter("account", account).getSingleResult();
 
@@ -63,6 +65,7 @@ public class MemberDaoImpl implements MemberDao {
 		String hql = "FROM MemberBean";
 		Session session = factory.getCurrentSession();
 
+		@SuppressWarnings("unchecked")
 		Query<MemberBean> query = session.createQuery(hql);
 		dep = query.getResultList();
 
