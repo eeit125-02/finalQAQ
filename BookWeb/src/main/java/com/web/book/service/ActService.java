@@ -3,42 +3,37 @@ package com.web.book.service;
 import java.util.List;
 
 import com.web.book.model.ActBean;
-import com.web.book.model.ActCollectBean;
 import com.web.book.model.ActJoinBean;
 
 public interface ActService {	
 
-	//透過關鍵字查詢活動資料
-	public List<ActBean> getAllActs(String act_Name);
-	
-	//經由活動名稱查詢單筆資料
-	public ActBean getAct(String act_Name);
-	
-	//新增活動
-	public void createAct(ActBean ab);
-
-	//修改活動
-	public void updateAct(ActBean ab);
-	
-	//刪除活動
-	public void deleteAct(Integer Act_ID);
-
-	//會員報名活動清單
-	public List<ActJoinBean> getJoinRecords(String mb_ID);
-	
-	//報名活動
-	public void joinAct(ActJoinBean ajb);
+	//查詢所有活動資料
+			List<ActBean> getAllActs();
 			
-	//取消報名活動
-	public void cancelJoinAct(String act_Name);
-				
-	//會員活動收藏清單
-	List<ActCollectBean> getCollectRecords(String mb_ID);
-	
-	//收藏活動
-	public void collectAct(ActCollectBean acb);
-	
-	//刪除收藏活動
-	public void cancelCollectAct(String act_Name);
+			//經由活動名稱查詢單筆資料
+			ActBean getAct(String act_Name);
+			
+			//新增活動
+			void createAct(ActBean ab);
+
+			//修改活動
+			ActBean updateAct(ActBean ab);
+			
+			//刪除活動
+			void deleteAct(Integer Act_ID);
+
+			//會員報名活動清單
+			List<ActJoinBean> getJoinRecords(Integer mb_ID);
+			
+			//報名活動
+			void createActReg(Integer act_ID, Integer mb_ID);
+					
+			//取消報名活動
+			void cancelJoinAct(Integer join_ID);
+						
+			//修改報名資料
+			ActJoinBean updateJoinAct(Integer mb_ID);
+			
+			
 
 }

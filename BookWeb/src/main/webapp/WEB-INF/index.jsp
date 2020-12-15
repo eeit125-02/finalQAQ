@@ -45,6 +45,12 @@
 	<header class="container blog-header py-3" id="bookWebheader"></header>
 	<!-- header -->
 
+<<<<<<< Updated upstream
+=======
+	<!-- body -->
+	<div class="container media">
+		
+>>>>>>> Stashed changes
 	<!-- body -->
 	<div class="container media">
 		<label id="test"></label>

@@ -1,192 +1,222 @@
 package com.web.book.model;
 
 import java.io.Serializable;
+import java.sql.Blob;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import org.springframework.web.multipart.MultipartFile;
 
 @Entity
 @Table(name = "ACT_Records")
 public class ActBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	private String MB_ID;
+	private Integer mb_ID;
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Integer ACT_ID;
-	private String ACT_Image;
-	private String ACT_Name;
-	private String ACT_Theme;
-	private String ACT_Date;
-	private String ACT_Loc;
-	private String ACT_Intro;
-	private String ACT_Guest;
-	private String ACT_Pax;
-	private String ACT_Rule;
-	private String ACT_Tag;
-	private String ACT_Place;
-			
+	private Integer act_ID;
+	private Blob act_Image;
+	private String fileName;
+	private String act_Name;
+	private String act_Theme;
+	private String act_Date;
+	private String act_Loc;
+	private String act_Intro;
+	private String act_Guest;
+	private String act_Pax;
+	private String act_Rule;
+	private String act_Tag;
+	private String act_Place;
+	@Transient
+	private MultipartFile actImage;	
 	
-	public ActBean(String MB_ID, Integer ACT_ID, String ACT_Image, String ACT_Name, String ACT_Theme, String ACT_Date, String ACT_Loc,
-			String ACT_Intro, String ACT_Guest, String ACT_Pax, String ACT_Rule, String ACT_Tag, String ACT_Place) {
+	public ActBean(Integer mb_ID, Integer act_ID, Blob act_Image, String fileName, String act_Name, String act_Theme,
+			String act_Date, String act_Loc, String act_Intro, String act_Guest, String act_Pax, String act_Rule,
+			String act_Tag, String act_Place, MultipartFile actImage) {
 		super();
-		this.MB_ID = MB_ID;
-		this.ACT_ID = ACT_ID;
-		this.ACT_Image = ACT_Image;
-		this.ACT_Name = ACT_Name;
-		this.ACT_Theme = ACT_Theme;
-		this.ACT_Date = ACT_Date;
-		this.ACT_Loc = ACT_Loc;
-		this.ACT_Intro = ACT_Intro;
-		this.ACT_Guest = ACT_Guest;
-		this.ACT_Pax = ACT_Pax;
-		this.ACT_Rule = ACT_Rule;
-		this.ACT_Tag = ACT_Tag;
-		this.ACT_Place = ACT_Place;
+		this.mb_ID = mb_ID;
+		this.act_ID = act_ID;
+		this.act_Image = act_Image;
+		this.fileName = fileName;
+		this.act_Name = act_Name;
+		this.act_Theme = act_Theme;
+		this.act_Date = act_Date;
+		this.act_Loc = act_Loc;
+		this.act_Intro = act_Intro;
+		this.act_Guest = act_Guest;
+		this.act_Pax = act_Pax;
+		this.act_Rule = act_Rule;
+		this.act_Tag = act_Tag;
+		this.act_Place = act_Place;
+		this.actImage = actImage;
 	}
 
 	public ActBean() {
 		super();
 	}
 
-	public String getMB_ID() {
-		return MB_ID;
+	public Integer getmb_ID() {
+		return mb_ID;
 	}
 
-	public void setMB_ID(String mB_ID) {
-		MB_ID = mB_ID;
+	public void setmb_ID(Integer mb_ID) {
+		this.mb_ID = mb_ID;
 	}
 
-	public Integer getACT_ID() {
-		return ACT_ID;
+	public Integer getact_ID() {
+		return act_ID;
 	}
 
-	public void setACT_ID(Integer aCT_ID) {
-		ACT_ID = aCT_ID;
+	public void setact_ID(Integer act_ID) {
+		this.act_ID = act_ID;
 	}
 
-	public String getACT_Image() {
-		return ACT_Image;
+	public Blob getact_Image() {
+		return act_Image;
 	}
 
-	public void setACT_Image(String aCT_Image) {
-		ACT_Image = aCT_Image;
+	public void setact_Image(Blob act_Image) {
+		this.act_Image = act_Image;
 	}
 
-	public String getACT_Name() {
-		return ACT_Name;
+	public String getFileName() {
+		return fileName;
 	}
 
-	public void setACT_Name(String aCT_Name) {
-		ACT_Name = aCT_Name;
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
 	}
 
-	public String getACT_Theme() {
-		return ACT_Theme;
+	public String getact_Name() {
+		return act_Name;
 	}
 
-	public void setACT_Theme(String aCT_Theme) {
-		ACT_Theme = aCT_Theme;
+	public void setact_Name(String act_Name) {
+		this.act_Name = act_Name;
 	}
 
-	public String getACT_Date() {
-		return ACT_Date;
+	public String getact_Theme() {
+		return act_Theme;
 	}
 
-	public void setACT_Date(String aCT_Date) {
-		ACT_Date = aCT_Date;
+	public void setact_Theme(String act_Theme) {
+		this.act_Theme = act_Theme;
 	}
 
-	public String getACT_Loc() {
-		return ACT_Loc;
+	public String getact_Date() {
+		return act_Date;
 	}
 
-	public void setACT_Loc(String aCT_Loc) {
-		ACT_Loc = aCT_Loc;
+	public void setact_Date(String act_Date) {
+		this.act_Date = act_Date;
 	}
 
-	public String getACT_Intro() {
-		return ACT_Intro;
+	public String getact_Loc() {
+		return act_Loc;
 	}
 
-	public void setACT_Intro(String aCT_Intro) {
-		ACT_Intro = aCT_Intro;
+	public void setact_Loc(String act_Loc) {
+		this.act_Loc = act_Loc;
 	}
 
-	public String getACT_Guest() {
-		return ACT_Guest;
+	public String getact_Intro() {
+		return act_Intro;
 	}
 
-	public void setACT_Guest(String aCT_Guest) {
-		ACT_Guest = aCT_Guest;
+	public void setact_Intro(String act_Intro) {
+		this.act_Intro = act_Intro;
 	}
 
-	public String getACT_Pax() {
-		return ACT_Pax;
+	public String getact_Guest() {
+		return act_Guest;
 	}
 
-	public void setACT_Pax(String aCT_Pax) {
-		ACT_Pax = aCT_Pax;
+	public void setact_Guest(String act_Guest) {
+		this.act_Guest = act_Guest;
 	}
 
-	public String getACT_Rule() {
-		return ACT_Rule;
+	public String getact_Pax() {
+		return act_Pax;
 	}
 
-	public void setACT_Rule(String aCT_Rule) {
-		ACT_Rule = aCT_Rule;
+	public void setact_Pax(String act_Pax) {
+		this.act_Pax = act_Pax;
 	}
 
-	public String getACT_Tag() {
-		return ACT_Tag;
+	public String getact_Rule() {
+		return act_Rule;
 	}
 
-	public void setACT_Tag(String aCT_Tag) {
-		ACT_Tag = aCT_Tag;
+	public void setact_Rule(String act_Rule) {
+		this.act_Rule = act_Rule;
 	}
 
-	public String getACT_Place() {
-		return ACT_Place;
+	public String getact_Tag() {
+		return act_Tag;
 	}
 
-	public void setACT_Place(String aCT_Place) {
-		ACT_Place = aCT_Place;
+	public void setact_Tag(String act_Tag) {
+		this.act_Tag = act_Tag;
+	}
+
+	public String getact_Place() {
+		return act_Place;
+	}
+
+	public void setact_Place(String act_Place) {
+		this.act_Place = act_Place;
+	}
+
+	public MultipartFile getactImage() {
+		return actImage;
+	}
+
+	public void setactImage(MultipartFile actImage) {
+		this.actImage = actImage;
 	}
 
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("ActBean [MB_ID=");
-		builder.append(MB_ID);
-		builder.append(", ACT_ID=");
-		builder.append(ACT_ID);
-		builder.append(", ACT_Image=");
-		builder.append(ACT_Image);
-		builder.append(", ACT_Name=");
-		builder.append(ACT_Name);
-		builder.append(", ACT_Theme=");
-		builder.append(ACT_Theme);
-		builder.append(", ACT_Date=");
-		builder.append(ACT_Date);
-		builder.append(", ACT_Loc=");
-		builder.append(ACT_Loc);
-		builder.append(", ACT_Intro=");
-		builder.append(ACT_Intro);
-		builder.append(", ACT_Guest=");
-		builder.append(ACT_Guest);
-		builder.append(", ACT_Pax=");
-		builder.append(ACT_Pax);
-		builder.append(", ACT_Rule=");
-		builder.append(ACT_Rule);
-		builder.append(", ACT_Tag=");
-		builder.append(ACT_Tag);
-		builder.append(", ACT_Place=");
-		builder.append(ACT_Place);
+		builder.append("ActBean [mb_ID=");
+		builder.append(mb_ID);
+		builder.append(", act_ID=");
+		builder.append(act_ID);
+		builder.append(", act_Image=");
+		builder.append(act_Image);
+		builder.append(", fileName=");
+		builder.append(fileName);
+		builder.append(", act_Name=");
+		builder.append(act_Name);
+		builder.append(", act_Theme=");
+		builder.append(act_Theme);
+		builder.append(", act_Date=");
+		builder.append(act_Date);
+		builder.append(", act_Loc=");
+		builder.append(act_Loc);
+		builder.append(", act_Intro=");
+		builder.append(act_Intro);
+		builder.append(", act_Guest=");
+		builder.append(act_Guest);
+		builder.append(", act_Pax=");
+		builder.append(act_Pax);
+		builder.append(", act_Rule=");
+		builder.append(act_Rule);
+		builder.append(", act_Tag=");
+		builder.append(act_Tag);
+		builder.append(", act_Place=");
+		builder.append(act_Place);
+		builder.append(", actImage=");
+		builder.append(actImage);
 		builder.append("]");
 		return builder.toString();
 	}
-
+	
+	
 }
