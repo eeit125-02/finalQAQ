@@ -43,14 +43,21 @@ public class BookReportDaoImpl implements BookReportDao {
 		
 		return query.setParameter("book", book).getResultList();
 	}
+	
+	@Override
+	public BookReportBean getBookReport(Integer br_ID) {
+		
+		Session session = fatory.getCurrentSession();
+		
+		return session.get(BookReportBean.class, br_ID);
+	}
 
 	@Override
 	public void deleteBookReport(Integer br_ID) {
 		
 		Session session = fatory.getCurrentSession();
 		session.delete(session.load(BookReportBean.class, br_ID));
-		
-
+	
 	}
 
 	@Override
@@ -74,5 +81,4 @@ public class BookReportDaoImpl implements BookReportDao {
 		session.save(bookReport);
 		
 	}
-
 }

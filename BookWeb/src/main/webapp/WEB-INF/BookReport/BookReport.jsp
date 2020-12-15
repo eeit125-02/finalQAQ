@@ -151,12 +151,12 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 				</div>
 				<div class="modal-body">
 					<div class="media">
-						<!-- <img id="BkPicE" src="" class="w-25 p-3" alt="..."> -->
+						<img id="bk_Pic" src="" class="w-25 p-3" alt="...">
 						<div class="media-body">
-							<h5 class="mt-0" id="BkNameE">書名：</h5>
-							<p class="mt-0" id="BkWriterE">作者：</p>
-							<p class="mt-0" id="BkPublishE">出版社：</p>
-							評分：<select name="BrScore1">
+							<h5 class="mt-0" id="bk_Name">書名：</h5>
+							<p class="mt-0" id="bk_Author">作者：</p>
+							<p class="mt-0" id="bk_Publish">出版社：</p>
+							評分：<select id="br_Score">
 								<option>1</option>
 								<option>2</option>
 								<option>3</option>
@@ -166,14 +166,11 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 						</div>
 					</div>
 					<label for="message-text" class="col-form-label">心得:</label>
-					<textarea class="form-control" id="BrContentE"
-						style="height: 350px;" name="BrContent1"></textarea>
+					<textarea class="form-control" id="br_Content" style="height: 350px;" name="BrContent1"></textarea>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary"
-						data-dismiss="modal">Close</button>
-					<button type="submit" class="btn btn-primary" id="editButton"
-						name="editButton" value="edit">Save changes</button>
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+					<button type="button" class="btn btn-primary" id="editButton" name="editButton" data-dismiss="modal" value="edit">Save changes</button>
 				</div>
 			</div>
 		</div>
@@ -196,7 +193,7 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 					<p>確認是否要刪除心得</p>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-link" id="deleteSecond" data-dismiss="modal" name="beleteButton" value="123">Yes</button>
+					<button type="button" class="btn btn-link" id="deleteSecond" data-dismiss="modal">Yes</button>
 					<button type="button" class="btn btn-link" data-dismiss="modal">No</button>
 				</div>
 			</div>
@@ -212,34 +209,50 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 	
 		$("#bookWebheader").load("<c:url value='/header'/>");
         $("#bookWebFooter").load("<c:url value='/footer'/>");
-        window.onload = loadBookReportList();
+        $(document).ready(function(){
+        	loadBookReportList();
+        });
         
-		function deleteReport(){
-			var lastValue = true;
-			$('#deleteSecond').click(function(){
-				console.log($(this).val());
-				if (lastValue){					
-					var deleteURL = "deleteBookReport/" + $(this).val();
-					$.ajax({
-						async : true,
-						type : 'POST',
-						url : "<c:url value='/"+deleteURL+"'/>",
-						dataType : "json",
-						contentType : "application/json;charset=utf-8",
-						success : function(data) {
-							console.log(data);
-							loadBookReportList();
-							lastValue = false
-						}
-					});
-				}
-			})
-		}
+        $('#deleteSecond').click(function(){
+        	deleteReport($(this).val());
+		});
 		
-			
-
+		$('#editButton').click(function(){
+			let br_ID = $(this).val();
+			let br_Score = $('#br_Score').val();
+			let br_Content = $('#br_Content').val();
+			let editURL = "upDateBookReport/"+br_ID +"/"+br_Score+"/"+br_Content;
+			$.ajax({
+				async : true,
+				type : 'POST',
+				url : "<c:url value='/"+editURL+"'/>",
+				dataType : "json",
+				contentType : "application/json;charset=utf-8",
+				success : function(data) {
+					if(data){
+						loadBookReportList();
+					}
+				}
+			});
+		});
+        
+        function deleteReport(br_ID){
+			var deleteURL = "deleteBookReport/" + br_ID;
+			$.ajax({
+				async : false,
+				type : 'POST',
+				url : "<c:url value='/"+deleteURL+"'/>",
+				dataType : "json",
+				contentType : "application/json;charset=utf-8",
+				success : function(data) {
+					if(data){
+						loadBookReportList();
+					}
+				}
+			});
+		};
+		
 		function loadBookReportList(){
-			
 			$.ajax({
 				async : false,
 				cache : false,
@@ -264,8 +277,8 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 									+	"<p class=\"card-text\">評分："+data[i].br_Score+"</p>"
 									+	"<div class=\"d-flex justify-content-between align-items-center\">"
 									+	"<div class=\"btn-group\">"
-									+	"<button type=\"button\" class=\"btn btn-sm btn-outline-secondary\" data-toggle=\"modal\" data-target=\"#editModal\" id=\"editFirst\" name=\"editButtons\" value=\""+data[i].br_ID+"\">Edit</button>"
-									+	"<button type=\"button\" class=\"btn btn-sm btn-outline-secondary\" data-toggle=\"modal\" data-target=\"#deletModal\" id=\"deleteFirst\" name=\"beleteButtons\" value=\""+data[i].br_ID+"\">Delete</button>"
+									+	"<button type=\"button\" class=\"btn btn-sm btn-outline-secondary\" data-toggle=\"modal\" data-target=\"#editModal\" id=\"editFirst\" value=\""+data[i].br_ID+"\">Edit</button>"
+									+	"<button type=\"button\" class=\"btn btn-sm btn-outline-secondary\" data-toggle=\"modal\" data-target=\"#deletModal\" id=\"deleteFirst\" value=\""+data[i].br_ID+"\">Delete</button>"
 									+	"</div>"
 									+	"<small class=\"text-muted\">創建日期：<br>"+data[i].br_DateTime+"</small>"
 									+	"</div>"
@@ -278,13 +291,31 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 				}
 			});
 			$('.btn-outline-secondary').click(function(){
-				console.log("1"+$(this).val());
-				lastValue = true
-				$('#deleteSecond').val($(this).val());
-				deleteReport();
-			})
-		
+				if($(this).attr("id") == 'deleteFirst'){
+					$('#deleteSecond').val($(this).val());
+				}
+				if($(this).attr("id") == 'editFirst'){
+					$('#editButton').val($(this).val());
+					let editURL = "getBookReport/" + $(this).val();
+					$.ajax({
+						async : false,
+						type : 'POST',
+						url : "<c:url value='/"+editURL+"'/>",
+						dataType : "json",
+						contentType : "application/json;charset=utf-8",
+						success : function(data) {
+							$('#bk_Name').html(data.bk_Name);
+							$('#bk_Author').html("作者："+data.bk_Author);
+							$('#bk_Publish').html("出版社："+data.bk_Publish);
+							$('#bk_Pic').attr('src',data.bk_Pic);
+							$('#br_Content').val(data.br_Content);
+						}
+					});
+				}	
+			});
 		};
+		
+		
 	</script>
 </body>
 </html>

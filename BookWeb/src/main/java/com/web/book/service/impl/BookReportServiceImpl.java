@@ -26,8 +26,13 @@ public class BookReportServiceImpl implements BookReportService {
 	@Override
 	public List<BookReportBean> bookReportBookAllList(Integer bk_ID) {
 	
-		
 		return bookReportDao.bookReportBookAllList(bk_ID);
+	}
+	
+	@Override
+	public BookReportBean getBookReport(Integer br_ID) {
+		
+		return bookReportDao.getBookReport(br_ID);
 	}
 
 	@Override
@@ -50,5 +55,7 @@ public class BookReportServiceImpl implements BookReportService {
 		bookReportDao.insertBookReport(mb_ID, bk_ID, br_Score, br_Content);
 		
 	}
+
+	
 
 }
