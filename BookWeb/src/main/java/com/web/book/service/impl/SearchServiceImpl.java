@@ -59,24 +59,24 @@ public class SearchServiceImpl implements SearchService {
 	@Override
 	public int savebc(int bk_ID, int mb_ID) {
 		int count = 0;
-		Session session = factory.getCurrentSession();
-		Transaction tx = null;
-		
-		
-		try {
-			tx = session.beginTransaction();
-			MemberBean member = session.get(MemberBean.class, mb_ID);
-			BookBean book = session.get(BookBean.class, bk_ID);
-			Book_COLLECTBean bkc=new Book_COLLECTBean(1, sqlDate, null, book, member);
-			dao.savebc(bkc);
-			count++;
-			tx.commit();
-		} catch(Exception e) {
-			if (tx != null) {
-				tx.rollback();
-			}
-			e.printStackTrace();
-		}
+//		Session session = factory.getCurrentSession();
+//		Transaction tx = null;
+//		
+//		
+//		try {
+//			tx = session.beginTransaction();
+//			MemberBean member = session.get(MemberBean.class, mb_ID);
+//			BookBean book = session.get(BookBean.class, bk_ID);
+//			Book_COLLECTBean bkc=new Book_COLLECTBean(1, sqlDate, null, book, member);
+//			dao.savebc(bkc);
+//			count++;
+//			tx.commit();
+//		} catch(Exception e) {
+//			if (tx != null) {
+//				tx.rollback();
+//			}
+//			e.printStackTrace();
+//		}
 		return count;
 	}
 	

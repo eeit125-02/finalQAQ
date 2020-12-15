@@ -5,3 +5,5 @@ BookWeb/target/classes/.DS_Store
 BookWeb/target/classes/com/.DS_Store
 BookWeb/target/classes/com/web/.DS_Store
 BookWeb/target/classes/com/web/book/.DS_Store
+BookWeb/src/main/java/com/web/book/service/impl/SearchServiceImpl.java
+*.java
