@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -32,9 +33,9 @@
 
 <script>
 	$(document).ready(function() {
-		$("#bookWebheader").load('header');
-        $("#bookWebFooter").load('footer');
-        
+		$("#bookWebheader").load("<c:url value='/header'/>");
+		$("#bookWebFooter").load("<c:url value='/footer'/>");
+
 	});
 </script>
 <title>Insert title here</title>
@@ -50,62 +51,56 @@
 		<label id="test"></label>
 
 
-<!-- 內容開始 -->
+		<!-- 內容開始 -->
 
 
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+		<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 		<br>
 		<hr>
 		<br> <br>
-		
+
 		<div class="collect">
-		<a class="btn btn-outline-dark" href="Search.jsp" role="button">搜尋首頁</a>
-		<a href='collectlist'><button type="submit" name="list" class="btn btn-outline-dark" value="5">收藏清單</button></a>
-		<!-- value=會員ID -->
+			<a class="btn btn-outline-dark" href="Search.jsp" role="button">搜尋首頁</a>
+			<a href='collectlist'><button type="submit" name="list"
+					class="btn btn-outline-dark" value="5">收藏清單</button></a>
+			<!-- value=會員ID -->
 		</div>
-		
+
 		<h3>搜尋結果：</h3>
-		
-		
-		<br> 
 
-<c:forEach items="${searchresult}" var="row">  
 
-          <div class="book">
-              <img class="itemcov" alt="" src="${row.getBk_Pic()}" height="190">
-          
-       <h3>
-                   
-<a href='bookpage'><button type="submit" name="page" class="btn btn-link btn-lg" value="${row.getBk_ID()}">${row.getBk_Name()}</button></a>
-       </h3>
-
-		作者：${row.getBk_Author()}<br>
-		出版社：${row.getBk_Publish()}
-		${row.getBk_ID()}
-		
 		<br>
-		出版日期：${row.getBk_Date()}
-		<br>
-		
-		<p>${row.getBk_Content()}</p>
+
+		<c:forEach items="${searchresult}" var="row">
+
+			<div class="book">
+				<img class="itemcov" alt="" src="${row.getBk_Pic()}" height="190">
+
+				<h3>
+
+					<a href='bookpage'><button type="submit" name="page"
+							class="btn btn-link btn-lg" value="${row.getBk_ID()}">${row.getBk_Name()}</button></a>
+				</h3>
+
+				作者：${row.getBk_Author()}<br> 出版社：${row.getBk_Publish()}
+				${row.getBk_ID()} <br> 出版日期：${row.getBk_Date()} <br>
+
+				<p>${row.getBk_Content()}</p>
 
 
-				<div class="collect">				
-					<img alt="點選收藏"
-						src="Img/heartred.png" id="Img/heart" width="25px">
-					<a href='resultcollect'><button type="submit" name="collect" class="btn btn-outline-danger btn-sm" value="${row.getBk_ID()}">收藏本書</button></a>
+				<div class="collect">
+					<img alt="點選收藏" src="Img/heartred.png" id="Img/heart" width="25px">
+					<a href='resultcollect'><button type="submit" name="collect"
+							class="btn btn-outline-danger btn-sm" value="${row.getBk_ID()}">收藏本書</button></a>
 				</div>
 			</div>
-			
-</c:forEach>  		
-			
+
+		</c:forEach>
+
 	</div>
 
-
-
-
-<!-- 內容結束 -->
+	<!-- 內容結束 -->
 
 	<!-- body -->
 

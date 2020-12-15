@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -32,8 +33,8 @@
 
 <script>
 	$(document).ready(function() {
-		$("#bookWebheader").load('header');
-		$("#bookWebFooter").load('footer');
+		$("#bookWebheader").load("<c:url value='/header'/>");
+		$("#bookWebFooter").load("<c:url value='/footer'/>");
 
 	});
 </script>
@@ -64,35 +65,33 @@
 
 			<div class="col-sm-11">
 
-		<Form action="<c:url value='confirmupdate' />" method="POST">
-				<div class="back">
-					<h2 class="title">更新書目資訊：</h2>
-					<hr>
-					<br> <input type="hidden" name="id"
-						value="${bookresult.bk_ID}"> 
-					<span>書名：</sapn><input type="text" name="bookname" 
-							value="${bookresult.bk_Name}"><br><br>
-					<span>作者：</sapn><input type="text" name="bookauthor"
-							value="${bookresult.bk_Author}"><br> <br>
-					<span>出版社：</sapn><input type="text" name="bookpublish"
-							value="${bookresult.bk_Publish}"><br> <br>
-					<span>出版日期：</sapn><input type="text" name="bookdate"
-							value="${bookresult.bk_Date}"><br> <br>
-					<figure>
-					<span>內容簡介：</span>
-						<div class="context">
-						<textarea cols="100" rows="8" name="bookcontent">
-								${bookresult.bk_Content}
-						</textarea>
-						</div>
-					</figure>
-				</div>
-		</Form>
+				<Form action="<c:url value='confirmupdate' />" method="POST">
+					<div class="back">
+						<h2 class="title">更新書目資訊：</h2>
+						<hr>
+						<br> <input type="hidden" name="id"
+							value="${bookresult.bk_ID}"> <span>書名：</sapn><input
+							type="text" name="bookname" value="${bookresult.bk_Name}"><br>
+						<br> <span>作者：</sapn><input type="text" name="bookauthor"
+								value="${bookresult.bk_Author}"><br> <br> <span>出版社：</sapn><input
+									type="text" name="bookpublish" value="${bookresult.bk_Publish}"><br>
+									<br> <span>出版日期：</sapn><input type="text" name="bookdate"
+										value="${bookresult.bk_Date}"><br> <br>
+										<figure>
+											<span>內容簡介：</span>
+											<div class="context">
+												<textarea cols="100" rows="8" name="bookcontent">
+														${bookresult.bk_Content}
+												</textarea>
+											</div>
+										</figure>
+					</div>
+				</Form>
 			</div>
 			<div class="check">
 
 				<button type="submit" name="confirm"
-						class="btn btn-outline-danger btn-sm" value="">確認修改</button>
+					class="btn btn-outline-danger btn-sm" value="">確認修改</button>
 
 			</div>
 

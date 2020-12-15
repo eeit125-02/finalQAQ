@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -32,9 +33,9 @@
 
 <script>
 	$(document).ready(function() {
-		$("#bookWebheader").load('header');
-        $("#bookWebFooter").load('footer');
-        
+		$("#bookWebheader").load("<c:url value='/header'/>");
+		$("#bookWebFooter").load("<c:url value='/footer'/>");
+
 	});
 </script>
 <title>Insert title here</title>
@@ -49,54 +50,50 @@
 	<div class="container media">
 		<label id="test"></label>
 
-<!-- 內容開始 -->
+		<!-- 內容開始 -->
 
 
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+		<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 
-<c:forEach items="${collectresult}" var="row">  
+		<c:forEach items="${collectresult}" var="row">
 
-                <br>
-                <hr>
-                <br>
-		<div class="collect">
-		<a class="btn btn-outline-dark" href="Search.jsp" role="button">搜尋首頁</a>
-		</div>
-        <br>
-        <h3>收藏清單：</h3>
-        <br>
-              
-          <div class="book">
-           <img class="itemcov" alt="" src="${row.getBook().getBk_Pic()}" height="190">
-           
-       <h3>
-			${row.getBook().getBk_Name()}
-       </h3>
+			<br>
+			<hr>
+			<br>
+			<div class="collect">
+				<a class="btn btn-outline-dark" href="Search.jsp" role="button">搜尋首頁</a>
+			</div>
+			<br>
+			<h3>收藏清單：</h3>
+			<br>
 
-		作者：${row.getBook().getBk_Author()}<br>
-		出版社：${row.getBook().getBk_Publish()}
-		${row.getBook().getBk_ID()}
-		
-		<br>
-		出版日期：${row.getBook().getBk_Date()}
-		<br>
-		
-		<p>${row.getBook().getBk_Content()}</p>
-		<p>${row.getBc_ID()}</p>
-		
-		<div class="collect">
-		<a href='deletecollect'><button type="submit" name="deletebc" class="btn btn-outline-danger btn-sm" value="${row.getBc_ID()}">取消收藏</button></a>
-		</div>  
-						
-		</div>
-</c:forEach>
+			<div class="book">
+				<img class="itemcov" alt="" src="${row.getBook().getBk_Pic()}"
+					height="190">
 
-</div>
+				<h3>${row.getBook().getBk_Name()}</h3>
+
+				作者：${row.getBook().getBk_Author()}<br>
+				出版社：${row.getBook().getBk_Publish()} ${row.getBook().getBk_ID()} <br>
+				出版日期：${row.getBook().getBk_Date()} <br>
+
+				<p>${row.getBook().getBk_Content()}</p>
+				<p>${row.getBc_ID()}</p>
+
+				<div class="collect">
+					<a href='deletecollect'><button type="submit" name="deletebc"
+							class="btn btn-outline-danger btn-sm" value="${row.getBc_ID()}">取消收藏</button></a>
+				</div>
+
+			</div>
+		</c:forEach>
+
+	</div>
 
 
 
-<!-- 內容結束 -->
+	<!-- 內容結束 -->
 
 	<!-- body -->
 
