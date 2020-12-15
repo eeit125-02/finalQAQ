@@ -21,8 +21,7 @@ public class CommandBean implements Serializable{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	Integer command_id;
-	Integer post_id;	
+	Integer command_id;	
 	String command_content;
 	Integer mb_id;
 	Timestamp command_time;
@@ -33,11 +32,10 @@ public class CommandBean implements Serializable{
 	
 	public CommandBean() {}
 
-	public CommandBean(Integer command_id, Integer post_id, String command_content, Integer mb_id,
+	public CommandBean(Integer command_id, String command_content, Integer mb_id,
 			Timestamp command_time, PostBean postBean) {
 		super();
 		this.command_id = command_id;
-		this.post_id = post_id;
 		this.command_content = command_content;
 		this.mb_id = mb_id;
 		this.command_time = command_time;
@@ -50,14 +48,6 @@ public class CommandBean implements Serializable{
 
 	public void setCommand_id(Integer command_id) {
 		this.command_id = command_id;
-	}
-
-	public Integer getPost_id() {
-		return post_id;
-	}
-
-	public void setPost_id(Integer post_id) {
-		this.post_id = post_id;
 	}
 
 	public String getCommand_content() {

@@ -118,30 +118,45 @@
 								role="tabpanel">
 
 								<!-- post and command -->
+								<c:forEach var="stored_post" items="${allPost}">
 								<div
 									style="border: #ADADAD 2px solid; border-radius: 5px; text-align: left; padding: 10px; margin: 0px 10px">
-									<p>[member] [time]</p>
-									<h3>[post title]</h3>
-									<p>[post content]</p>
-									<span>留言 [no.]</span> <br>
-									<br>
+									<p>[member] ${stored_post.post_time}</p>
+									<h3>${stored_post.post_title}</h3>
+									<p>${stored_post.post_content}</p>
 
+									<form:form method='post' action='add_command' modelAttribute="commandBean">
 									<div class="input-group mb-3">
-										<input type="text" class="form-control" id="command_input"
-											placeholder="請輸入留言">
+										<form:input type="text" class="form-control" id="command_input" path="command_content"
+											placeholder="請輸入留言"/>
+										<form:hidden path="command_time"/> <form:hidden path="mb_id"/> 
+										<form:hidden path="postBean.post_id" value="${stored_post.post_id}"/>
+										<form:hidden path="postBean.post_title" value="${stored_post.post_title}"/>
+										<form:hidden path="postBean.post_content" value="${stored_post.post_content}"/>
+										<form:hidden path="postBean.mb_id" value="${stored_post.mb_id}"/>
+										<form:hidden path="postBean.post_time" value="${stored_post.post_time}"/>
 										<div class="input-group-append">
 											<button class="btn btn-outline-secondary" id="command_btn"
-												type="button">留言</button>
+												type="submit">留言</button>
 										</div>
-
 									</div>
+									</form:form>
+
+									<c:forEach var="stored_command" items="${allCommand}">
+									<c:set var="pi" value="${stored_post.post_id}"/>
+									<c:set var="ci" value="${stored_command.postBean.post_id}"/>									
+									<c:if test="${pi==ci}">
 									<div
 										style="background-color: #C4E1FF; margin: 10px; padding: 5px; border-radius: 10px;">
-										<p>[member] [time]</p>
-										<p>[command]</p>
+										<p>[member] ${stored_command.command_time}</p>
+										<p>${stored_command.command_content}</p>
 									</div>
+									</c:if>
+									</c:forEach>
+									
 								</div>
 								<br>
+								</c:forEach>
 
 							</div>
 
