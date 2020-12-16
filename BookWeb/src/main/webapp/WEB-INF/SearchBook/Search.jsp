@@ -41,8 +41,8 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 
 <script>
 	$(document).ready(function() {
-		$("#bookWebheader").load("<c:url value='/header'/>");
-		$("#bookWebFooter").load("<c:url value='/footer'/>");
+		$("#bookWebheader").load("//localhost:8080/BookWeb/header");
+       	$("#bookWebFooter").load("//localhost:8080/BookWeb/footer");
 
 	});
 </script>
