@@ -35,8 +35,8 @@
 
 <script>
 	$(document).ready(function() {
-		$("#bookWebheader").load('header');
-		$("#bookWebFooter").load('footer');
+		$("#bookWebheader").load("//localhost:8080/BookWeb/header");
+       	$("#bookWebFooter").load("//localhost:8080/BookWeb/footer");
 
 	});
 </script>
