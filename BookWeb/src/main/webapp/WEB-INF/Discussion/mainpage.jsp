@@ -36,7 +36,7 @@
 <script>
 	$(document).ready(function() {
 		$("#bookWebheader").load("<c:url value='/header'/>");
-        $("#bookWebFooter").load("<c:url value='/footer'/>");        
+		$("#bookWebFooter").load("<c:url value='/footer'/>");
 	});
 </script>
 <title>書適論壇</title>
@@ -51,7 +51,7 @@
 		<div class="row">
 			<!-- sidebar area -->
 			<div class="col-2 text-center">
-<!-- ====================================================sidebar==================================================== -->
+				<!-- ====================================================sidebar==================================================== -->
 				<h2>書適論壇</h2>
 				<br>
 				<div class="list-group" id="list-tab" role="tablist">
@@ -73,7 +73,7 @@
 				<!-- content connect to sidebar -->
 				<div class="tab-content" id="nav-tabContent">
 
-<!-- =====================================================discussion board area===================================================== -->
+					<!-- =====================================================discussion board area===================================================== -->
 					<div class="tab-pane fade show active" id="list-novel"
 						role="tabpanel">
 						<!-- search keyword -->
@@ -119,43 +119,51 @@
 
 								<!-- post and command -->
 								<c:forEach var="stored_post" items="${allPost}">
-								<div
-									style="border: #ADADAD 2px solid; border-radius: 5px; text-align: left; padding: 10px; margin: 0px 10px">
-									<p>[member] ${stored_post.post_time}</p>
-									<h3>${stored_post.post_title}</h3>
-									<p>${stored_post.post_content}</p>
-
-									<form:form method='post' action='add_command' modelAttribute="commandBean">
-									<div class="input-group mb-3">
-										<form:input type="text" class="form-control" id="command_input" path="command_content"
-											placeholder="請輸入留言"/>
-										<form:hidden path="command_time"/> <form:hidden path="mb_id"/> 
-										<form:hidden path="postBean.post_id" value="${stored_post.post_id}"/>
-										<form:hidden path="postBean.post_title" value="${stored_post.post_title}"/>
-										<form:hidden path="postBean.post_content" value="${stored_post.post_content}"/>
-										<form:hidden path="postBean.mb_id" value="${stored_post.mb_id}"/>
-										<form:hidden path="postBean.post_time" value="${stored_post.post_time}"/>
-										<div class="input-group-append">
-											<button class="btn btn-outline-secondary" id="command_btn"
-												type="submit">留言</button>
-										</div>
-									</div>
-									</form:form>
-
-									<c:forEach var="stored_command" items="${allCommand}">
-									<c:set var="pi" value="${stored_post.post_id}"/>
-									<c:set var="ci" value="${stored_command.postBean.post_id}"/>									
-									<c:if test="${pi==ci}">
 									<div
-										style="background-color: #C4E1FF; margin: 10px; padding: 5px; border-radius: 10px;">
-										<p>[member] ${stored_command.command_time}</p>
-										<p>${stored_command.command_content}</p>
+										style="border: #ADADAD 2px solid; border-radius: 5px; text-align: left; padding: 10px; margin: 0px 10px">
+										<p>[member] ${stored_post.post_time}</p>
+										<h3>${stored_post.post_title}</h3>
+										<p>${stored_post.post_content}</p>
+
+										<form:form method='post' action='add_command'
+											modelAttribute="commandBean">
+											<div class="input-group mb-3">
+												<form:input type="text" class="form-control"
+													id="command_input" path="command_content"
+													placeholder="請輸入留言" />
+												<form:hidden path="command_time" />
+												<form:hidden path="mb_id" />
+												<form:hidden path="postBean.post_id"
+													value="${stored_post.post_id}" />
+												<form:hidden path="postBean.post_title"
+													value="${stored_post.post_title}" />
+												<form:hidden path="postBean.post_content"
+													value="${stored_post.post_content}" />
+												<form:hidden path="postBean.mb_id"
+													value="${stored_post.mb_id}" />
+												<form:hidden path="postBean.post_time"
+													value="${stored_post.post_time}" />
+												<div class="input-group-append">
+													<button class="btn btn-outline-secondary" id="command_btn"
+														type="submit">留言</button>
+												</div>
+											</div>
+										</form:form>
+
+										<c:forEach var="stored_command" items="${allCommand}">
+											<c:set var="pi" value="${stored_post.post_id}" />
+											<c:set var="ci" value="${stored_command.postBean.post_id}" />
+											<c:if test="${pi==ci}">
+												<div
+													style="background-color: #C4E1FF; margin: 10px; padding: 5px; border-radius: 10px;">
+													<p>[member] ${stored_command.command_time}</p>
+													<p>${stored_command.command_content}</p>
+												</div>
+											</c:if>
+										</c:forEach>
+
 									</div>
-									</c:if>
-									</c:forEach>
-									
-								</div>
-								<br>
+									<br>
 								</c:forEach>
 
 							</div>
@@ -169,8 +177,7 @@
 									<p>[member] [time]</p>
 									<h3>[post title]</h3>
 									<p>[post content]</p>
-									<span>留言 [no.]</span> <br>
-									<br>
+									<span>留言 [no.]</span> <br> <br>
 
 									<div class="input-group mb-3">
 										<input type="text" class="form-control" id="command_input"
@@ -188,11 +195,11 @@
 									</div>
 								</div>
 								<br>
-								
+
 							</div>
 						</div>
 					</div>
-<!-- =====================================================member page===================================================== -->
+					<!-- =====================================================member page===================================================== -->
 					<div class="tab-pane fade" id="list-member" role="tabpanel">
 						<h3>[會員名稱] 的個人頁面</h3>
 						<br>
@@ -214,23 +221,25 @@
 								<!-- new post form -->
 								<div
 									style="border: #ADADAD 2px solid; border-radius: 5px; text-align: left; padding: 10px; margin: 0px 10px; padding-top: 20px">
-									
-									<form:form method='post' action='add_post' modelAttribute="postBean">
+
+									<form:form method='post' action='add_post'
+										modelAttribute="postBean">
 										<div class="form-group row">
 											<label for="new_title" class="col-2 text-center h5">貼文標題</label>
-											<div class="col-9">												
-												<form:input type="text" class="form-control" id="post_title" path="post_title"
-													placeholder="請輸入貼文標題"/>
+											<div class="col-9">
+												<form:input type="text" class="form-control" id="post_title"
+													path="post_title" placeholder="請輸入貼文標題" />
 											</div>
 										</div>
 										<div class="form-group row">
 											<label for="new_content" class="col-2 text-center h5">貼文內容</label>
 											<div class="col-9">
-												<form:textarea class="form-control" id="post_content" path="post_content" rows="6"
-													placeholder="請輸入貼文內容"></form:textarea>
+												<form:textarea class="form-control" id="post_content"
+													path="post_content" rows="6" placeholder="請輸入貼文內容"></form:textarea>
 											</div>
 										</div>
-											<form:hidden path="post_time"/> <form:hidden path="mb_id"/>
+										<form:hidden path="post_time" />
+										<form:hidden path="mb_id" />
 										<div class="text-center">
 											<button type="submit" class="btn btn-primary">送出貼文</button>
 										</div>
@@ -239,80 +248,112 @@
 							</div>
 
 							<!-- personal post record -->
+
 							<div class="tab-pane fade" id="pills-member_post" role="tabpanel">
-								<div
-									style="border: #ADADAD 2px solid; border-radius: 5px; text-align: left; padding: 10px; margin: 0px 10px">
-									<form class="form-inline float-right">
-										<button class="btn btn-outline-secondary btn-sm" type="button"
-											style="margin-right: 10px" data-toggle="modal"
-											data-target="#edit_post">修改</button>
-										<button class="btn btn-outline-secondary btn-sm" type="submit">刪除</button>
-									</form>
-									<p>[發文會員] [發文時間]</p>
-                                    <h3>[貼文標題]</h3>
-                                    <p>[貼文內容]</p>
-                                    <span>留言 [留言數量]</span><br>
-									<br>
-
-									<div class="input-group mb-3">
-										<input type="text" class="form-control" id="command_input"
-											placeholder="請輸入留言">
-										<div class="input-group-append">
-											<button class="btn btn-outline-secondary" id="command_btn"
-												type="button">留言</button>
-										</div>
-
-									</div>
+								<c:forEach var="stored_post" items="${allPost}">
 									<div
-										style="background-color: #C4E1FF; margin: 10px; padding: 5px; border-radius: 10px;">
-										 <p>[發文會員] [發文時間]</p>
-                                        <p>[發文內容]</p>
-								</div>
-								<br>
+										style="border: #ADADAD 2px solid; border-radius: 5px; text-align: left; padding: 10px; margin: 0px 10px">
+										<form class="form-inline float-right">
 
-								<!-- edit post jump out -->
+											<button class="btn btn-outline-secondary btn-sm"
+												type="button" style="margin-right: 10px" data-toggle="modal"
+												data-target="#edit_post">修改</button>
 
-								<div class="modal fade" id="edit_post" tabindex="-1"
-									role="dialog">
-									<div class="modal-dialog" role="document">
-										<div class="modal-content">
-											<div class="modal-header">
-												<h5 class="modal-title" id="edit_postLabel">修改貼文頁面</h5>
-												<button type="button" class="close" data-dismiss="modal">
-													<span aria-hidden="true">&times;</span>
-												</button>
-											</div>
-											<div class="modal-body">
-												<form>
-													<div class="form-group">
-														<label for="article-name" class="col-form-label h5">貼文標題</label>
-														<input type="text" class="form-control" id="article-name">
+											<button class="btn btn-outline-secondary btn-sm"
+												type="submit">刪除</button>
+										</form>
+
+										<!-- edit post jump out -->
+										<div class="modal fade" id="edit_post" tabindex="-1"
+											role="dialog">
+											<div class="modal-dialog" role="document">
+												<div class="modal-content">
+													<div class="modal-header">
+														<h5 class="modal-title" id="edit_postLabel">修改貼文頁面</h5>
+														<button type="button" class="close" data-dismiss="modal">
+															<span aria-hidden="true">&times;</span>
+														</button>
 													</div>
-													<div class="form-group">
-														<label for="article-text" class="col-form-label h5">貼文內容</label>
-														<textarea class="form-control" id="article-text" rows="10"></textarea>
+
+													<div class="modal-body">
+
+														<div class="form-group">
+															<label for="article-name" class="col-form-label h5">貼文標題</label>
+															<input type="text" class="form-control" id="article-name"
+																value="${stored_post.post_title}">
+														</div>
+														<div class="form-group">
+															<label for="article-text" class="col-form-label h5">貼文內容</label>
+															<textarea class="form-control" id="article-text"
+																rows="10">${stored_post.post_content}</textarea>
+														</div>
+
 													</div>
-												</form>
-											</div>
-											<div class="modal-footer">
-												<button type="button" class="btn btn-secondary"
-													data-dismiss="modal">取消</button>
-												<button type="button" class="btn btn-primary">送出修改內容</button>
+													<div class="modal-footer">
+														<button type="button" class="btn btn-secondary"
+															data-dismiss="modal">取消</button>
+														<button type="button" class="btn btn-primary">送出修改內容</button>
+													</div>
+												</div>
 											</div>
 										</div>
+
+
+
+										<p>[member] ${stored_post.post_time}</p>
+										<h3>${stored_post.post_title}</h3>
+										<p>${stored_post.post_content}</p>
+
+										<form:form method='post' action='add_command'
+											modelAttribute="commandBean">
+											<div class="input-group mb-3">
+												<form:input type="text" class="form-control"
+													id="command_input" path="command_content"
+													placeholder="請輸入留言" />
+												<form:hidden path="command_time" />
+												<form:hidden path="mb_id" />
+												<form:hidden path="postBean.post_id"
+													value="${stored_post.post_id}" />
+												<form:hidden path="postBean.post_title"
+													value="${stored_post.post_title}" />
+												<form:hidden path="postBean.post_content"
+													value="${stored_post.post_content}" />
+												<form:hidden path="postBean.mb_id"
+													value="${stored_post.mb_id}" />
+												<form:hidden path="postBean.post_time"
+													value="${stored_post.post_time}" />
+												<div class="input-group-append">
+													<button class="btn btn-outline-secondary" id="command_btn"
+														type="submit">留言</button>
+												</div>
+											</div>
+										</form:form>
+
+										<c:forEach var="stored_command" items="${allCommand}">
+											<c:set var="pi" value="${stored_post.post_id}" />
+											<c:set var="ci" value="${stored_command.postBean.post_id}" />
+											<c:if test="${pi==ci}">
+												<div
+													style="background-color: #C4E1FF; margin: 10px; padding: 5px; border-radius: 10px;">
+													<p>[member] ${stored_command.command_time}</p>
+													<p>${stored_command.command_content}</p>
+												</div>
+											</c:if>
+										</c:forEach>
 									</div>
-								</div>
+									<br>
+								</c:forEach>
 
 							</div>
 						</div>
 					</div>
-</div>
-<!-- =====================================================manager page===================================================== -->
-					<div class="tab-pane fade" id="list-manager" role="tabpanel">
-						管理員專區</div>
 				</div>
+				<!-- =====================================================manager page===================================================== -->
+				<div class="tab-pane fade" id="list-manager" role="tabpanel">
+					管理員專區</div>
 			</div>
 		</div>
+	</div>
 	</div>
 	</div>
 
