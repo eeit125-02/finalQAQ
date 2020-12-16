@@ -1,10 +1,8 @@
 package com.web.book.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
-public class ActController {
+public class ActController2 {
 	
-	@Autowired
-	Act
+//	@Autowired
+//	Act
 
 }
