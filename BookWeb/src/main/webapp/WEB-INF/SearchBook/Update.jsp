@@ -65,7 +65,7 @@
 
 			<div class="col-sm-11">
 
-				<Form action="<c:url value='confirmupdate' />" method="POST">
+				<form action="<c:url value='confirmupdate' />" method="POST">
 					<div class="back">
 						<h2 class="title">更新書目資訊：</h2>
 						<hr>
@@ -86,7 +86,7 @@
 											</div>
 										</figure>
 					</div>
-				</Form>
+				</form>
 			</div>
 			<div class="check">
 

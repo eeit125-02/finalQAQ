@@ -60,8 +60,9 @@
 		<br>
 		<div class="collect">
 			<a class="btn btn-outline-dark" href="Search.jsp" role="button">搜尋首頁</a><br>
-			<br> <a href='collectlist'><button type="submit" name="list"
-					class="btn btn-outline-dark" value="5">收藏清單</button></a>
+			<br> 			
+			<form name=a3 action="<c:url value='/collectlist' />" method="get"><button type="submit" name="list"
+					class="btn btn-outline-dark" value="5">收藏清單</button></form>
 			<!-- value=會員ID -->
 		</div>
 
@@ -109,11 +110,14 @@
 
 					<div class="collect">
 						<img alt="點選收藏" src="Img/heartred.png" id="heart" width="25px">
-						<a href='pagecollect'><button type="submit" name="pagecollect"
+						<form name=a1 action="<c:url value='/pagecollect' />" method="get">
+						<button type="submit" name="pagecollect"
 								class="btn btn-outline-danger btn-sm"
-								value="${pageresult.bk_ID}">收藏本書</button></a> <a href='updatebook'><button
-								type="submit" name="update" class="btn btn-outline-info btn-sm"
-								value="${pageresult.bk_ID}">修改書訊</button></a>
+								value="${pageresult.bk_ID}">收藏本書</button></form> 
+						
+						<form name=a2 action="<c:url value='/updatebook' />" method="get">
+						<button type="submit" name="update" class="btn btn-outline-info btn-sm"
+								value="${pageresult.bk_ID}">修改書訊</button></form>
 
 					</div>
 

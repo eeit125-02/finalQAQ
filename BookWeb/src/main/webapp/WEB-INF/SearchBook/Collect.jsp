@@ -56,7 +56,6 @@
 		<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 
-		<c:forEach items="${collectresult}" var="row">
 
 			<br>
 			<hr>
@@ -67,6 +66,7 @@
 			<br>
 			<h3>收藏清單：</h3>
 			<br>
+		<c:forEach items="${collectresult}" var="row">
 
 			<div class="book">
 				<img class="itemcov" alt="" src="${row.getBook().getBk_Pic()}"
@@ -82,8 +82,9 @@
 				<p>${row.getBc_ID()}</p>
 
 				<div class="collect">
-					<a href='deletecollect'><button type="submit" name="deletebc"
-							class="btn btn-outline-danger btn-sm" value="${row.getBc_ID()}">取消收藏</button></a>
+					<form name=a1 action="<c:url value='/deletecollect' />" method="get">
+					<button type="submit" name="deletebc"
+							class="btn btn-outline-danger btn-sm" value="${row.getBc_ID()}">取消收藏</button></form>
 				</div>
 
 			</div>

@@ -66,19 +66,19 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 		<br>
 		<hr>
 		<br>
-		<!-- 		<form action="searchBook" method="post"> -->
+				<form action="<c:url value='/searchbook' />" method="get">
 		<h3>輸入關鍵字：</h3>
 		<div class="form-inline">
 			<input class="form-control mr-sm-2" name="name" value=""
-				type="search" placeholder="Search" aria-label="Search"> <a
-				href='searchbook'><button
-					class="btn btn-outline-success my-2 my-sm-0" type="submit">查詢</button></a>
+				type="search" placeholder="Search" aria-label="Search"> 
+				<button
+					class="btn btn-outline-success my-2 my-sm-0" type="submit">查詢</button>
 		</div>
 
 		<br>
 		<hr>
 
-		<!-- 		</form> -->
+				</form>
 
 
 

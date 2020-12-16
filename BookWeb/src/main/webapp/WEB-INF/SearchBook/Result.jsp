@@ -62,8 +62,8 @@
 
 		<div class="collect">
 			<a class="btn btn-outline-dark" href="Search.jsp" role="button">搜尋首頁</a>
-			<a href='collectlist'><button type="submit" name="list"
-					class="btn btn-outline-dark" value="5">收藏清單</button></a>
+			<form name=a3 action="<c:url value='/collectlist' />" method="get"><button type="submit" name="list"
+					class="btn btn-outline-dark" value="5">收藏清單</button></form>
 			<!-- value=會員ID -->
 		</div>
 
@@ -78,9 +78,8 @@
 				<img class="itemcov" alt="" src="${row.getBk_Pic()}" height="190">
 
 				<h3>
-
-					<a href='bookpage'><button type="submit" name="page"
-							class="btn btn-link btn-lg" value="${row.getBk_ID()}">${row.getBk_Name()}</button></a>
+					<form name=a1 action="<c:url value='/bookpage' />" method="get"><button type="submit" name="page"
+							class="btn btn-link btn-lg" value="${row.getBk_ID()}">${row.getBk_Name()}</button></form>
 				</h3>
 
 				作者：${row.getBk_Author()}<br> 出版社：${row.getBk_Publish()}
@@ -91,8 +90,9 @@
 
 				<div class="collect">
 					<img alt="點選收藏" src="Img/heartred.png" id="Img/heart" width="25px">
-					<a href='resultcollect'><button type="submit" name="collect"
-							class="btn btn-outline-danger btn-sm" value="${row.getBk_ID()}">收藏本書</button></a>
+					<form name=a2 action="<c:url value='/resultcollect' />" method="get">
+					<button type="submit" name="collect"
+							class="btn btn-outline-danger btn-sm" value="${row.getBk_ID()}">收藏本書</button></form>
 				</div>
 			</div>
 
