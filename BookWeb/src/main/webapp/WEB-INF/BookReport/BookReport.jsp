@@ -25,6 +25,11 @@
 	font-size: 1. 125rem;
 	text-anchor: middle;
 }
+.ellipsis {
+	overflow:hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
 
 @media ( min-width : 768px) {
 	.bd-placeholder-img-lg {
@@ -56,15 +61,16 @@
 	<nav class="container">
 	
 		<div class="nav nav-tabs" id="nav-tab" role="tablist">
-			<a class="nav-item nav-link active" id="nav-read-tab"
-				data-toggle="tab" href="#nav-read" role="tab"
+			<a  class="nav-item nav-link active" id="nav-read-tab"
+				data-toggle="tab" href="#bookReportList" role="tab"
 				aria-controls="nav-home" aria-selected="true">讀書心得</a> 
 				
 			<a	class="nav-item nav-link" id="nav-fav-tab" data-toggle="tab"
 				href="#nav-fav" role="tab" aria-controls="nav-contact"
-				aria-selected="false">收藏</a> <a class="nav-item nav-link"
-				id="nav-com-tab" data-toggle="tab" href="#nav-com" role="tab"
-				aria-controls="nav-contact" aria-selected="false">評論</a>
+				aria-selected="false">收藏</a> 
+			<a  class="nav-item nav-link" id="nav-com-tab" data-toggle="tab" 
+				href="#nav-com" role="tab" aria-controls="nav-contact" 
+				aria-selected="false">評論</a>
 		</div>
 	</nav>
 	<!--功能列-->
@@ -86,7 +92,7 @@
 					<div class="card flex-md-row mb-4 shadow-sm h-md-250">
 						<div class="card-body d-flex flex-column align-items-start">
 							<h3 class="mb-0">
-								<a class="text-dark" href="#">書名</a>
+								<a class="text-dark " href="#">書名</a>
 							</h3>
 							<div class="mb-1 text-muted">日期</div>
 							<p class="card-text mb-auto">大綱</p>
@@ -131,7 +137,7 @@
 
 	<!--編輯畫面-->
 	<div class="modal" role="dialog" id="editModal" tabindex="-1">
-		<div class="modal-dialog modal-lg">
+		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
 					<h5 class="modal-title">更改內容</h5>
@@ -200,6 +206,7 @@
 	
 		$("#bookWebheader").load("//localhost:8080/BookWeb/header");
        	$("#bookWebFooter").load("//localhost:8080/BookWeb/footer");
+  
         $(document).ready(function(){
         	loadBookReportList();
         });
@@ -211,8 +218,8 @@
 		$('#editButton').click(function(){
 			let br_ID = $(this).val();
 			let br_Score = $('#br_Score').val();
-			let br_Content = $('#br_Content').val();
-			let editURL = location.href + "/upDateBookReport/"+br_ID +"/"+br_Score+"/"+br_Content;
+			let br_Content = $('#br_Content').val().replace(/\n|\r\n/g,"<br>");
+			let editURL = location.href + "/upDateBookReport/"+br_ID +"/"+br_Score+"/"+ br_Content;
 			$.ajax({
 				async : true,
 				type : 'POST',
@@ -263,13 +270,14 @@
 									+	"<image xlink:href=\""+data[i].bk_Pic+"\" width=\"100%\" height=\"100%\" />"
 									+	"</svg>"
 									+	"<div class=\"card-body\">"
-									+	"<p class=\"card-text\">"+data[i].bk_Name+"</p>"
+									+	"<p class=\"card-text ellipsis\">"+data[i].bk_Name+"</p>"
 									+	"<p class=\"card-text\">作者："+data[i].bk_Author+"</p>"
 									+	"<p class=\"card-text\">評分："+data[i].br_Score+"</p>"
 									+	"<div class=\"d-flex justify-content-between align-items-center\">"
 									+	"<div class=\"btn-group\">"
-									+	"<button type=\"button\" class=\"btn btn-sm btn-outline-secondary\" data-toggle=\"modal\" data-target=\"#editModal\" id=\"editFirst\" value=\""+data[i].br_ID+"\">Edit</button>"
-									+	"<button type=\"button\" class=\"btn btn-sm btn-outline-secondary\" data-toggle=\"modal\" data-target=\"#deletModal\" id=\"deleteFirst\" value=\""+data[i].br_ID+"\">Delete</button>"
+									+	"<button type=\"button\" class=\"btn btn-sm btn-outline-secondary\" id=\"view\" value=\""+data[i].br_ID+"\">view</button>"
+									+	"<button type=\"button\" class=\"btn btn-sm btn-outline-secondary\" data-toggle=\"modal\" data-target=\"#editModal\" id=\"edit\" value=\""+data[i].br_ID+"\">Edit</button>"
+									+	"<button type=\"button\" class=\"btn btn-sm btn-outline-secondary\" data-toggle=\"modal\" data-target=\"#deletModal\" id=\"delete\" value=\""+data[i].br_ID+"\">Delete</button>"
 									+	"</div>"
 									+	"<small class=\"text-muted\">創建日期：<br>"+data[i].br_DateTime+"</small>"
 									+	"</div>"
@@ -282,10 +290,10 @@
 				}
 			});
 			$('.btn-outline-secondary').click(function(){
-				if($(this).attr("id") == 'deleteFirst'){
+				if($(this).attr("id") == 'delete'){
 					$('#deleteSecond').val($(this).val());
 				}
-				if($(this).attr("id") == 'editFirst'){
+				if($(this).attr("id") == 'edit'){
 					$('#editButton').val($(this).val());
 					let getBookReportURL = location.href + "/getBookReport/" + $(this).val();
 					$.ajax({
@@ -299,7 +307,7 @@
 							$('#bk_Author').html("作者："+data.bk_Author);
 							$('#bk_Publish').html("出版社："+data.bk_Publish);
 							$('#bk_Pic').attr('src',data.bk_Pic);
-							$('#br_Content').val(data.br_Content);
+							$('#br_Content').val(data.br_Content.replace(/<br>/g,"\n"));
 						}
 					});
 				}	
