@@ -78,7 +78,7 @@ span {
 </head>
 
 <body>
-	<form action="Register" method="post">
+	<form action="<c:url value='/registe' />" method="post">
 		<fieldset>
 			<legend>會員註冊</legend>
 			<div class="a2">
@@ -145,11 +145,11 @@ span {
 			</div>
 			<br>
 			<div class="a11">
-				<a href="<c:url="/registe">"><button type="submit" name="submit" value="送出"></button></a> 
-				<button type="reset" value="清除"></button>>
+				<button type="submit" name="submit" value="送出">送出</button>
+				<button type="reset" value="清除">清除</button>
 			</div>
 		</fieldset>
-
+	</form>
 
 		<script>
 
@@ -197,7 +197,7 @@ span {
 			}
 
 		</script>
-	</form>
+
 </body>
 
 </html>

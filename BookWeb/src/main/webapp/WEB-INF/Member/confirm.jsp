@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%
 	request.setCharacterEncoding("UTF-8");
 response.setContentType("text/html;charset=UTF-8");
@@ -54,7 +54,7 @@ div {
 	margin-left: 50px;
 }
 
-.a11 button{
+.a11 button {
 	font-size: 16px;
 	text-align: center;
 }
@@ -79,58 +79,59 @@ span {
 </head>
 
 <body>
-<%-- 	<jsp:useBean id="reg_member" class="model.MemberBean" scope="session" /> --%>
-<!-- 	<form action="Register" method="post"> -->
+	<%-- 	<jsp:useBean id="reg_member" class="model.MemberBean" scope="session" /> --%>
+	<!-- 	<form action="Register" method="post"> -->
+	<form action="<c:url value="/confirm" />" method="post">
 		<fieldset>
 			<legend>會員確認</legend>
 			<div class="a2">
 				<label>帳號:</label>
-				<p>${reg_member.getMb_Account}</p>
+				<p>${reg_member.mb_Account}</p>
 			</div>
 			<div class="a3">
 				<label>密碼:</label>
-				<p>${reg_member.getMb_Password}</p>
+				<p>${reg_member.mb_Password}</p>
 			</div>
 			<div class="a1">
 				<label>姓名:</label>
-				<p>${reg_member.getMb_Name}</p>
+				<p>${reg_member.mb_Name}</p>
 			</div>
 			<br>
 			<div class="a5">
 				<label>性別:</label>
-				<p>${reg_member.getMb_Sex}</p>
+				<p>${reg_member.mb_Sex}</p>
 			</div>
 			<div class="a6">
 				<label>生日:</label>
-				<p>${reg_member.getMb_Birthday}</p>
+				<p>${reg_member.mb_Birthday}</p>
 			</div>
 			<br />
 			<div class="a7">
 				<label>地址:</label>
-				<p>${reg_member.getMb_Address}</p>
+				<p>${reg_member.mb_Address}</p>
 			</div>
 			<br />
 			<div class="a8">
 				<label>電話:</label>
-				<p>${reg_member.getMb_Tel}</p>
+				<p>${reg_member.mb_Tel}</p>
 			</div>
 			<br />
 			<div class="a9">
 				<label>E-mail:</label>
-				<p>${reg_member.getMb_Mail}</p>
+				<p>${reg_member.mb_Mail}</p>
 			</div>
 			<br />
 			<div class="a10">
 				<label>喜好類型:</label><br />
-				<p>${reg_member.getMb_Type}</p>
+				<p>${reg_member.mb_type}</p>
 			</div>
 			<div class="a11">
-			<a href="<c:url="/confirm">"><button type="submit" name="confirm">送出</button></a>
-			<a href="./Member/registe.jsp">返回</a>
+				<button type="submit" name="confirm">送出</button> 
+				<button><a href="<c:url value="/toRegiste" />" />返回</button>
 			</div>
 			<br>
 		</fieldset>
-	</form>
+			</form>
 </body>
 
 </html>

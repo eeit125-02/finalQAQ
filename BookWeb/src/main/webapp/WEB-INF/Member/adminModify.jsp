@@ -72,7 +72,7 @@ legend {
 						<td>${u.getMb_Date()}</td>
 						<td>${u.getMb_Lv()}</td>
 						<td>${u.getMb_type()}</td>
-						<td><a href="<c:url="/delete">"><button type="submit" name="delete"
+						<td><a href="<c:url value='/delete' />" ><button type="submit" name="delete"
 								value="${u.getMb_ID()}" onclick="confirmChoice( )">刪除</a></td>
 					</tr>
 				</c:forEach>

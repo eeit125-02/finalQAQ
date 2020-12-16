@@ -19,7 +19,7 @@ public class Register {
 	MemberService ms;
 
 	//註冊資料
-	@PostMapping("registe")
+	@PostMapping("/registe")
 	public String Registe(Model model, @RequestParam(value = "account") String mb_Account,
 			@RequestParam(value = "pwd") String mb_Password, @RequestParam(value = "sex") String mb_Sex,
 			@RequestParam(value = "date") Date mb_Birthday, @RequestParam(value = "name") String mb_Name,
@@ -40,7 +40,7 @@ public class Register {
 	}
 
 	//註冊資料確認後送至資料庫
-	@PostMapping("confirm")
+	@PostMapping("/confirm")
 	public String Confirm(Model model) {
 		MemberBean memberData = (MemberBean) model.getAttribute("reg_member");
 		ms.insertMember(memberData);

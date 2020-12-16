@@ -77,7 +77,7 @@ span {
 			</div>
 			<hr>
 			<div class="a10">
-				<a href="registe.jsp" style="text-decoration: none">新帳號註冊</a>
+				<a href="<c:url value='/toRegiste' />" style="text-decoration: none">新帳號註冊</a>
 			</div>
 			
 		</fieldset>

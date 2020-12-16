@@ -18,7 +18,7 @@
 			<a class="blog-header-logo text-dark" href="#">圖書資訊網</a>
 		</div>
 		<div class="col-4 d-flex justify-content-end align-items-center">
-			<a class="btn btn-sm btn-outline-secondary" href="#">登入</a>
+			<a class="btn btn-sm btn-outline-secondary" href="//localhost:8080/BookWeb/toLogin">登入</a>
 		</div>
 	</div>
 

@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
-
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.web.book.model.MemberBean;
@@ -64,6 +64,12 @@ public class Login {
 		return "Member/mb_inf";
 	}
 
+	//會員介面
+	@PostMapping("/toCity")
+	public String tocity(Model model) {
+		return "Member/city";
+	}
+	
 	// 管理員(會員資料)
 	@PostMapping("/adminall")
 	public String Memberall(Model model) {
@@ -84,4 +90,23 @@ public class Login {
 
 	}
 
+	@RequestMapping(value = "/toAdmin")
+	public String toadmin(Model model) {
+		
+		return "Member/admin";
+	}
+	
+	@RequestMapping(value = "/toLogin")
+	public String tologin(Model model) {
+		
+		return "Member/login";
+	}
+
+	
+	@RequestMapping(value = "/toRegiste")
+	public String toregiste(Model model) {
+		
+		return "Member/registe";
+	}
+	
 }

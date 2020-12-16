@@ -48,9 +48,9 @@ p {
 		<fieldset>
 			<legend>會員中心</legend>
 			<div>
-				<a href="<c:url="/adminall">"><button type="submit" name="inf">會員資訊</button></a>
+				<a href="<c:url value='/adminall' />"><button type="submit" name="inf">會員資訊</button></a>
 			</div>
-			<a href="login.jsp">登出</a>1
+			<a href="<c:url value='/login' />">登出</a>1
 		</fieldset>
 </body>
 

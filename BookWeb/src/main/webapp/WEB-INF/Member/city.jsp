@@ -53,8 +53,8 @@ background-color:orange;
 		<fieldset>
 			<legend>會員中心</legend>
 			<div>
-				<a href="<c:url="/mb_inf">"><button type="submit" name="mb_inf" value="${account.account}">會員資訊</button></a>
-				<a href="<c:url="/Modify">">"><button type="submit" name="Modify" value="${account.account}">會員修改</button></a>				
+				<a href="<c:url value='/mb_inf' />"><button type="submit" name="mb_inf" value="${account.account}">會員資訊</button></a>
+				<a href="<c:url value='/Modify' />">"><button type="submit" name="Modify" value="${account.account}">會員修改</button></a>				
 			</div>
 			<a href="login.jsp">登出</a>
 		</fieldset>

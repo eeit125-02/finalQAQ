@@ -1,19 +1,16 @@
 package com.web.book.service.impl;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.web.book.dao.MemberDao;
 import com.web.book.model.MemberBean;
 import com.web.book.service.MemberService;
 
-
+@Transactional
 @Service
 public class MemberServiceImpl implements MemberService {
 	

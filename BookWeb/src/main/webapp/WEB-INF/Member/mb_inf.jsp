@@ -133,7 +133,7 @@ span {
 				<span id="idsp8"></span><br />
 			</div>
 			<br>
-			<a href ="Member/city.jsp">回上一頁</a>
+			<a href ="<c:url value='/Membercity' />">回上一頁</a>
 		</fieldset>
 
 
