@@ -1,15 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8" import="com.web.book.model.*"
-	import="java.util.List"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
-<%
-	request.setCharacterEncoding("UTF-8");
-response.setContentType("text/html;charset=UTF-8");
-response.setHeader("Cache-Control", "no-cache"); // HTTP 1.1
-response.setHeader("Pragma", "no-cache"); // HTTP 1.0
-response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
-%>
+	pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -221,11 +212,11 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 			let br_ID = $(this).val();
 			let br_Score = $('#br_Score').val();
 			let br_Content = $('#br_Content').val();
-			let editURL = "upDateBookReport/"+br_ID +"/"+br_Score+"/"+br_Content;
+			let editURL = location.href + "/upDateBookReport/"+br_ID +"/"+br_Score+"/"+br_Content;
 			$.ajax({
 				async : true,
 				type : 'POST',
-				url : "<c:url value='/"+editURL+"'/>",
+				url : editURL,
 				dataType : "json",
 				contentType : "application/json;charset=utf-8",
 				success : function(data) {
@@ -237,11 +228,11 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 		});
         
         function deleteReport(br_ID){
-			var deleteURL = "deleteBookReport/" + br_ID;
+			var deleteURL = location.href + "/deleteBookReport/" + br_ID;
 			$.ajax({
 				async : false,
 				type : 'POST',
-				url : "<c:url value='/"+deleteURL+"'/>",
+				url : deleteURL,
 				dataType : "json",
 				contentType : "application/json;charset=utf-8",
 				success : function(data) {
@@ -257,7 +248,7 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 				async : false,
 				cache : false,
 				type : 'POST',
-				url : "<c:url value='/getBookReportList'/>",
+				url : location.href + "/getBookReportList",
 				dataType : "json",
 				contentType : "application/json;charset=utf-8",
 				error : function() {
@@ -296,11 +287,11 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 				}
 				if($(this).attr("id") == 'editFirst'){
 					$('#editButton').val($(this).val());
-					let editURL = "getBookReport/" + $(this).val();
+					let getBookReportURL = location.href + "/getBookReport/" + $(this).val();
 					$.ajax({
 						async : false,
 						type : 'POST',
-						url : "<c:url value='/"+editURL+"'/>",
+						url : getBookReportURL,
 						dataType : "json",
 						contentType : "application/json;charset=utf-8",
 						success : function(data) {

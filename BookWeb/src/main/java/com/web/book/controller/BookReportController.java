@@ -11,18 +11,20 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.web.book.model.BookReportBean;
 import com.web.book.service.BookReportService;
 
 @Controller
+@RequestMapping("/BookReport")
 public class BookReportController {
 	
 	@Autowired
 	BookReportService bookReportService;
 	
-	@GetMapping("/BookReport/bookReport" )
+	@GetMapping("" )
 	public String memberBookReport (Model model) {
 		return "BookReport/BookReport";
 	}
