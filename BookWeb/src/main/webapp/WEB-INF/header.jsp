@@ -36,8 +36,6 @@
 <!-- 			</div> -->
 			<a class="p-2 text-muted" href="//localhost:8080/BookWeb/Transation/storeMain">二手書交易系統</a> 
 			<a class="p-2 text-muted" href="#">共讀趣／閱讀沙龍</a> 
-			<a class="p-2 text-muted" href="#">討論區</a>
-			<%-- <a class="p-2 text-muted" href="<c:url value='/BookReport/bookReport'/>">閱讀履歷</a> --%>
 			<a class="p-2 text-muted" href="//localhost:8080/BookWeb/BookReport">閱讀履歷</a>
 			<a class="p-2 text-muted" href="//localhost:8080/BookWeb/Discussion/mainpage">書適論壇</a>
 			<!-- <a class="nav-link dropdown-toggle text-muted" href="#"
