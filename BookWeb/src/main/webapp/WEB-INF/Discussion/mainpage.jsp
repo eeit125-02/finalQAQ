@@ -253,50 +253,61 @@
 								<c:forEach var="stored_post" items="${allPost}">
 									<div
 										style="border: #ADADAD 2px solid; border-radius: 5px; text-align: left; padding: 10px; margin: 0px 10px">
-										<form class="form-inline float-right">
+										
+<!-- 										這裡改寫!!!!!!!!!!!!!!!!!!!!! -->
+										<c:url value="/edit_post.jsp" var="go_edit">
+										<c:param name="edit_post_id" value=" ${stored_post.post_id}"/>
+										<c:param name="edit_post_title" value=" ${stored_post.post_title}"/>
+										<c:param name="edit_post_content" value=" ${stored_post.post_content}"/>
+										</c:url> 
+										<form class="form-inline float-right" action="${go_edit}" method="post">
 
+<!-- 											<button class="btn btn-outline-secondary btn-sm" -->
+<!-- 												type="button" style="margin-right: 10px" data-toggle="modal" -->
+<!-- 												data-target="#edit_post">修改</button> -->
 											<button class="btn btn-outline-secondary btn-sm"
-												type="button" style="margin-right: 10px" data-toggle="modal"
-												data-target="#edit_post">修改</button>
+												type="submit" style="margin-right: 10px" >修改</button>
+										</form>
 
+										<form class="form-inline float-right">
 											<button class="btn btn-outline-secondary btn-sm"
 												type="submit">刪除</button>
 										</form>
 
 										<!-- edit post jump out -->
-										<div class="modal fade" id="edit_post" tabindex="-1"
-											role="dialog">
-											<div class="modal-dialog" role="document">
-												<div class="modal-content">
-													<div class="modal-header">
-														<h5 class="modal-title" id="edit_postLabel">修改貼文頁面</h5>
-														<button type="button" class="close" data-dismiss="modal">
-															<span aria-hidden="true">&times;</span>
-														</button>
-													</div>
+<!-- 										<div class="modal fade" id="edit_post" tabindex="-1" -->
+<!-- 											role="dialog"> -->
+<!-- 											<div class="modal-dialog" role="document"> -->
+<!-- 												<div class="modal-content"> -->
+<!-- 													<div class="modal-header"> -->
+<!-- 														<h5 class="modal-title" id="edit_postLabel">修改貼文頁面</h5> -->
+<!-- 														<button type="button" class="close" data-dismiss="modal"> -->
+<!-- 															<span aria-hidden="true">&times;</span> -->
+<!-- 														</button> -->
+<!-- 													</div> -->
 
-													<div class="modal-body">
+<!-- 													<div class="modal-body"> -->
 
-														<div class="form-group">
-															<label for="article-name" class="col-form-label h5">貼文標題</label>
-															<input type="text" class="form-control" id="article-name"
-																value="${stored_post.post_title}">
-														</div>
-														<div class="form-group">
-															<label for="article-text" class="col-form-label h5">貼文內容</label>
-															<textarea class="form-control" id="article-text"
-																rows="10">${stored_post.post_content}</textarea>
-														</div>
+<!-- 														<div class="form-group"> -->
+<!-- 															<label for="article-name" class="col-form-label h5">貼文標題</label> -->
+<!-- 															<input type="text" class="form-control" id="article-name" -->
+<%-- 																value="${stored_post.post_title}"> --%>
+<!-- 														</div> -->
+<!-- 														<div class="form-group"> -->
+<!-- 															<label for="article-text" class="col-form-label h5">貼文內容</label> -->
+<!-- 															<textarea class="form-control" id="article-text" -->
+<%-- 																rows="10">${stored_post.post_content}</textarea> --%>
+<!-- 														</div> -->
 
-													</div>
-													<div class="modal-footer">
-														<button type="button" class="btn btn-secondary"
-															data-dismiss="modal">取消</button>
-														<button type="button" class="btn btn-primary">送出修改內容</button>
-													</div>
-												</div>
-											</div>
-										</div>
+<!-- 													</div> -->
+<!-- 													<div class="modal-footer"> -->
+<!-- 														<button type="button" class="btn btn-secondary" -->
+<!-- 															data-dismiss="modal">取消</button> -->
+<!-- 														<button type="button" class="btn btn-primary">送出修改內容</button> -->
+<!-- 													</div> -->
+<!-- 												</div> -->
+<!-- 											</div> -->
+<!-- 										</div> -->
 
 
 
@@ -353,8 +364,6 @@
 					管理員專區</div>
 			</div>
 		</div>
-	</div>
-	</div>
 	</div>
 
 	<!-- footer -->
