@@ -88,7 +88,7 @@
 						<tr>
 							<%-- 				<td><a href='/FindActServlet?key=${act.ACT_Name}'></a></td> --%>
 							<td>${act.mb_ID}</td>
-							<td><a href='./FindActServlet?key=${act.act_ID}'>${act.act_ID}</a></td>
+							<td>${act.act_ID}</td>
 							<td>${act.act_Image}</td>
 							<td>${act.act_Name}</td>
 							<td>${act.act_Theme}</td>
@@ -100,6 +100,8 @@
 							<td>${act.act_Rule}</td>
 							<td>${act.act_Tag}</td>
 							<td>${act.act_Place}</td>
+							<td><a href='updateAct' ${act.act_ID}>編輯</a>
+							<td><a href='updateAct' ${act.act_ID}>刪除</a>
 						</tr>
 					</c:forEach>
 				</table>
@@ -108,7 +110,9 @@
 				<%-- 			</c:if> --%>
 			</c:if>
 			<p />
-			<a href='${pageContext.request.contextPath}/ActHomepage.jsp'>回到活動管理</a>
+			<a href='${pageContext.request.contextPath}/ActHomepage'>回到活動管理</a>
+			<a href='555'>管理</a>
+			<a href='showCreateForm' >新增活動</a><br>
 		</div>
 	</div>
 </body>

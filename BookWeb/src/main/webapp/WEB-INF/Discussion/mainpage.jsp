@@ -51,7 +51,8 @@
 		<div class="row">
 			<!-- sidebar area -->
 			<div class="col-2 text-center">
-				<!-- ====================================================sidebar==================================================== -->
+			
+<!-- ====================================================sidebar==================================================== -->
 				<h2>書適論壇</h2>
 				<br>
 				<div class="list-group" id="list-tab" role="tablist">
@@ -69,11 +70,10 @@
 
 			<!-- content area -->
 			<div class="col-10" style='text-align: center;'>
-
 				<!-- content connect to sidebar -->
 				<div class="tab-content" id="nav-tabContent">
 
-					<!-- =====================================================discussion board area===================================================== -->
+<!-- =====================================================discussion board area===================================================== -->
 					<div class="tab-pane fade show active" id="list-novel"
 						role="tabpanel">
 						<!-- search keyword -->
@@ -91,18 +91,11 @@
 
 						<!-- discussion board top tab -->
 						<ul class="nav nav-tabs" id="novelTab" role="tablist">
-
 							<li class="nav-item"><a class="nav-link" id="novel_rule-tab"
 								data-toggle="tab" href="#novel_rule" role="tab">板規</a></li>
-
 							<li class="nav-item"><a class="nav-link active"
 								id="novel_latest-tab" data-toggle="tab" href="#novel_latest"
 								role="tab">最新貼文</a></li>
-
-							<li class="nav-item"><a class="nav-link"
-								id="novel_search-tab" data-toggle="tab" href="#novel_search"
-								role="tab">搜尋結果</a></li>
-
 						</ul>
 						<br>
 
@@ -167,36 +160,6 @@
 								</c:forEach>
 
 							</div>
-
-							<!-- content of keyword searching tab -->
-							<div class="tab-pane fade" id="novel_search" role="tabpanel">
-
-								<!-- post and command -->
-								<div
-									style="border: #ADADAD 2px solid; border-radius: 5px; text-align: left; padding: 10px; margin: 0px 10px">
-									<p>[member] [time]</p>
-									<h3>[post title]</h3>
-									<p>[post content]</p>
-									<span>留言 [no.]</span> <br> <br>
-
-									<div class="input-group mb-3">
-										<input type="text" class="form-control" id="command_input"
-											placeholder="請輸入留言">
-										<div class="input-group-append">
-											<button class="btn btn-outline-secondary" id="command_btn"
-												type="button">留言</button>
-										</div>
-
-									</div>
-									<div
-										style="background-color: #C4E1FF; margin: 10px; padding: 5px; border-radius: 10px;">
-										<p>[member] [time]</p>
-										<p>[command]</p>
-									</div>
-								</div>
-								<br>
-
-							</div>
 						</div>
 					</div>
 					<!-- =====================================================member page===================================================== -->
@@ -215,9 +178,11 @@
 								href="#pills-member_post" role="tab">個人貼文紀錄</a></li>
 						</ul>
 						<div class="tab-content" id="pills-tabContent">
+						
 							<!-- write new post page -->
 							<div class="tab-pane fade show active" id="pills-member_new_post"
 								role="tabpanel">
+								
 								<!-- new post form -->
 								<div
 									style="border: #ADADAD 2px solid; border-radius: 5px; text-align: left; padding: 10px; margin: 0px 10px; padding-top: 20px">
@@ -248,68 +213,30 @@
 							</div>
 
 							<!-- personal post record -->
-
 							<div class="tab-pane fade" id="pills-member_post" role="tabpanel">
 								<c:forEach var="stored_post" items="${allPost}">
 									<div
 										style="border: #ADADAD 2px solid; border-radius: 5px; text-align: left; padding: 10px; margin: 0px 10px">
-										
-<!-- 										這裡改寫!!!!!!!!!!!!!!!!!!!!! -->
-										<c:url value="/edit_post.jsp" var="go_edit">
-										<c:param name="edit_post_id" value=" ${stored_post.post_id}"/>
-										<c:param name="edit_post_title" value=" ${stored_post.post_title}"/>
-										<c:param name="edit_post_content" value=" ${stored_post.post_content}"/>
-										</c:url> 
-										<form class="form-inline float-right" action="${go_edit}" method="post">
 
-<!-- 											<button class="btn btn-outline-secondary btn-sm" -->
-<!-- 												type="button" style="margin-right: 10px" data-toggle="modal" -->
-<!-- 												data-target="#edit_post">修改</button> -->
-											<button class="btn btn-outline-secondary btn-sm"
-												type="submit" style="margin-right: 10px" >修改</button>
+										<c:url value="go_edit" var="go_edit">
+											<c:param name="edit_post_id" value=" ${stored_post.post_id}" />
+											<c:param name="edit_post_time"
+												value=" ${stored_post.post_time}" />
+											<c:param name="edit_post_title"
+												value=" ${stored_post.post_title}" />
+											<c:param name="edit_post_content"
+												value=" ${stored_post.post_content}" />
+										</c:url>
+										<form class="form-inline float-right" action="${go_edit}"	method="post">
+											<button class="btn btn-outline-secondary btn-sm"	type="submit">修改</button>
 										</form>
 
-										<form class="form-inline float-right">
-											<button class="btn btn-outline-secondary btn-sm"
-												type="submit">刪除</button>
+										<c:url value="go_delete" var="go_delete">
+											<c:param name="delete_post_id"	value=" ${stored_post.post_id}" />
+										</c:url>
+										<form class="form-inline float-right" action="${go_delete}"	method="post">
+											<button class="btn btn-outline-secondary btn-sm"	type="submit">刪除</button>
 										</form>
-
-										<!-- edit post jump out -->
-<!-- 										<div class="modal fade" id="edit_post" tabindex="-1" -->
-<!-- 											role="dialog"> -->
-<!-- 											<div class="modal-dialog" role="document"> -->
-<!-- 												<div class="modal-content"> -->
-<!-- 													<div class="modal-header"> -->
-<!-- 														<h5 class="modal-title" id="edit_postLabel">修改貼文頁面</h5> -->
-<!-- 														<button type="button" class="close" data-dismiss="modal"> -->
-<!-- 															<span aria-hidden="true">&times;</span> -->
-<!-- 														</button> -->
-<!-- 													</div> -->
-
-<!-- 													<div class="modal-body"> -->
-
-<!-- 														<div class="form-group"> -->
-<!-- 															<label for="article-name" class="col-form-label h5">貼文標題</label> -->
-<!-- 															<input type="text" class="form-control" id="article-name" -->
-<%-- 																value="${stored_post.post_title}"> --%>
-<!-- 														</div> -->
-<!-- 														<div class="form-group"> -->
-<!-- 															<label for="article-text" class="col-form-label h5">貼文內容</label> -->
-<!-- 															<textarea class="form-control" id="article-text" -->
-<%-- 																rows="10">${stored_post.post_content}</textarea> --%>
-<!-- 														</div> -->
-
-<!-- 													</div> -->
-<!-- 													<div class="modal-footer"> -->
-<!-- 														<button type="button" class="btn btn-secondary" -->
-<!-- 															data-dismiss="modal">取消</button> -->
-<!-- 														<button type="button" class="btn btn-primary">送出修改內容</button> -->
-<!-- 													</div> -->
-<!-- 												</div> -->
-<!-- 											</div> -->
-<!-- 										</div> -->
-
-
 
 										<p>[member] ${stored_post.post_time}</p>
 										<h3>${stored_post.post_title}</h3>
@@ -358,10 +285,11 @@
 							</div>
 						</div>
 					</div>
+
+					<!-- =====================================================manager page===================================================== -->
+					<div class="tab-pane fade" id="list-manager" role="tabpanel">
+						管理員專區</div>
 				</div>
-				<!-- =====================================================manager page===================================================== -->
-				<div class="tab-pane fade" id="list-manager" role="tabpanel">
-					管理員專區</div>
 			</div>
 		</div>
 	</div>
