@@ -1,21 +1,19 @@
 package com.web.book.model;
 
-import java.io.Serializable;
-import java.sql.Blob;
 
+import java.sql.Blob;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Transient;
-
 import org.springframework.web.multipart.MultipartFile;
 
 @Entity
 @Table(name = "ACT_Records")
-public class ActBean implements Serializable {
-	private static final long serialVersionUID = 1L;
+public class ActBean {
+
 
 	private Integer mb_ID;
 	@Id
