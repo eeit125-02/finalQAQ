@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.web.book.model.CommandBean;
 import com.web.book.model.PostBean;
@@ -50,6 +51,7 @@ public class DiscussionController {
 		cb.setCommand_time(d);
 		model.addAttribute("commandBean",cb);
 	}
+
 	
 	//會員新增貼文
 	@PostMapping("Discussion/add_post")
@@ -63,6 +65,45 @@ public class DiscussionController {
 	public String processAddNewCommand(@ModelAttribute("commandBean")CommandBean cb) {
 		discussionService.addCommand(cb);
 		return "redirect:/Discussion/mainpage";
+	}
+	
+	//帶參數前往修改貼文頁面
+	@PostMapping("Discussion/go_edit")
+	public String goEditPage(Model model,
+			@RequestParam("edit_post_id") Integer edit_post_id,
+			@RequestParam("edit_post_title") String edit_post_title,
+			@RequestParam("edit_post_content") String edit_post_content
+			) {
+		model.addAttribute("edit_post_id", edit_post_id);
+		model.addAttribute("edit_post_title", edit_post_title);
+		model.addAttribute("edit_post_content", edit_post_content);
+		return "/Discussion/edit_post";
+	}
+	
+	//修改貼文
+	@PostMapping("Discussion/edit_post")
+	public String processPostEdit(Model model,
+			@RequestParam("edit_post_id") Integer edit_post_id,
+			@RequestParam("edit_post_title") String edit_post_title,
+			@RequestParam("edit_post_content") String edit_post_content,
+			@RequestParam("edit_post_time") Timestamp edit_post_time
+			) {
+		model.addAttribute("edit_post_id", edit_post_id);
+		model.addAttribute("edit_post_title", edit_post_title);
+		model.addAttribute("edit_post_content", edit_post_content);
+		Timestamp d = new Timestamp(System.currentTimeMillis());
+		model.addAttribute("edit_post_time", d);
+		discussionService.editPost(edit_post_id, edit_post_title,edit_post_content,edit_post_time);
+		return "redirect:/Discussion/mainpage"; 
+	}
+	
+	//刪除貼文
+	@PostMapping("Discussion/go_delete")
+	public String processPostDelete(Model model,
+			@RequestParam("delete_post_id") Integer delete_post_id) {
+		model.addAttribute("delete_post_id", delete_post_id);
+		discussionService.deletPost(delete_post_id);
+		return "redirect:/Discussion/mainpage"; 
 	}
 	
 }

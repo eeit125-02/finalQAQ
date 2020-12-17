@@ -1,5 +1,6 @@
 package com.web.book.dao;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 import com.web.book.model.CommandBean;
@@ -15,4 +16,9 @@ public interface DiscussionDao {
 	List<PostBean> getAllPost();
 	//依時間排序列出所有留言
 	List<CommandBean> getAllCommand();
+	//修改貼文
+	void editPost(Integer edit_post_id,  String edit_post_title,
+			String edit_post_content, Timestamp edit_post_time);
+	//刪除貼文
+	void deletPost(Integer delete_post_id);
 }
