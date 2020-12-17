@@ -262,6 +262,7 @@
 					alert('123 ');
 				},
 				success : function(data) {
+					console.log(data)
 					var insertData = "<div class=\"row\">";
 					for (let i = 0; i < data.length; i++) {
 						insertData +=	"<div class=\"col-md-4\">"
