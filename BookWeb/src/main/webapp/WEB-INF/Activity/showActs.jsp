@@ -100,8 +100,9 @@
 							<td>${act.act_Rule}</td>
 							<td>${act.act_Tag}</td>
 							<td>${act.act_Place}</td>
-							<td><a href='updateAct' ${act.act_ID}>編輯</a>
-							<td><a href='updateAct' ${act.act_ID}>刪除</a>
+							<td><a href="<c:url value='/showUpdateForm'/>?act_ID=${act.act_ID}">編輯</a>
+							<td><a href="<c:url value='deleteAct'/>?act_ID=${act.act_ID}">刪除</a>
+			
 						</tr>
 					</c:forEach>
 				</table>
@@ -110,8 +111,7 @@
 				<%-- 			</c:if> --%>
 			</c:if>
 			<p />
-			<a href='${pageContext.request.contextPath}/ActHomepage'>回到活動管理</a>
-			<a href='555'>管理</a>
+<%-- 			<a href='${pageContext.request.contextPath}/ActHomepage'>回到活動管理</a> --%>
 			<a href='showCreateForm' >新增活動</a><br>
 		</div>
 	</div>

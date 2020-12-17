@@ -16,8 +16,8 @@
 	<hr>
 	<div class="center">
 		<H1>新增活動資料</H1>
-		<form:form action="saveActs" method="post" modelAttribute="actbean">
-			<form:form path="act_ID" />
+		<form:form method="POST" modelAttribute="actbean">
+
 			<table>
 				<tr>
 					<td><form:label path="mb_ID">會員帳號:</form:label></td>
@@ -75,18 +75,15 @@
 				</tr>
 
 				<tr>
-					<td><form:label path="act_Tag">活動標籤:</form:label></td>
-					<td><form:input path="act_Tag" /></td>
-				</tr>
-
-				<tr>
 					<td><form:label path="act_Place">活動場所:</form:label></td>
 					<td><form:input path="act_Place" /></td>
 				</tr>
 
 			</table>
-			<input type='submit' value='提交' />
-			<input type='reset' name='name' value='還原'/>
+			
+
+			<input type='submit'  value='提交' />
+			<input type='reset'  value='還原' />
 			<br>
 			<br>
 			<a href='${pageContext.request.contextPath}/showActs'>回到活動管理</a>

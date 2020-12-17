@@ -1,14 +1,11 @@
 package com.web.book.model;
 
 
-import java.sql.Blob;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.persistence.Transient;
-import org.springframework.web.multipart.MultipartFile;
 
 @Entity
 @Table(name = "ACT_Records")
@@ -19,8 +16,7 @@ public class ActBean {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer act_ID;
-	private Blob act_Image;
-	private String fileName;
+	private String act_Image;
 	private String act_Name;
 	private String act_Theme;
 	private String act_Date;
@@ -31,17 +27,14 @@ public class ActBean {
 	private String act_Rule;
 	private String act_Tag;
 	private String act_Place;
-	@Transient
-	private MultipartFile actImage;	
-	
-	public ActBean(Integer mb_ID, Integer act_ID, Blob act_Image, String fileName, String act_Name, String act_Theme,
+
+	public ActBean(Integer mb_ID, Integer act_ID, String act_Image, String act_Name, String act_Theme,
 			String act_Date, String act_Loc, String act_Intro, String act_Guest, String act_Pax, String act_Rule,
-			String act_Tag, String act_Place, MultipartFile actImage) {
+			String act_Tag, String act_Place) {
 		super();
 		this.mb_ID = mb_ID;
 		this.act_ID = act_ID;
 		this.act_Image = act_Image;
-		this.fileName = fileName;
 		this.act_Name = act_Name;
 		this.act_Theme = act_Theme;
 		this.act_Date = act_Date;
@@ -52,7 +45,7 @@ public class ActBean {
 		this.act_Rule = act_Rule;
 		this.act_Tag = act_Tag;
 		this.act_Place = act_Place;
-		this.actImage = actImage;
+
 	}
 
 	public ActBean() {
@@ -75,21 +68,14 @@ public class ActBean {
 		this.act_ID = act_ID;
 	}
 
-	public Blob getact_Image() {
+	public String getact_Image() {
 		return act_Image;
 	}
 
-	public void setact_Image(Blob act_Image) {
+	public void setact_Image(String act_Image) {
 		this.act_Image = act_Image;
 	}
 
-	public String getFileName() {
-		return fileName;
-	}
-
-	public void setFileName(String fileName) {
-		this.fileName = fileName;
-	}
 
 	public String getact_Name() {
 		return act_Name;
@@ -171,13 +157,6 @@ public class ActBean {
 		this.act_Place = act_Place;
 	}
 
-	public MultipartFile getactImage() {
-		return actImage;
-	}
-
-	public void setactImage(MultipartFile actImage) {
-		this.actImage = actImage;
-	}
 
 	@Override
 	public String toString() {
@@ -188,8 +167,6 @@ public class ActBean {
 		builder.append(act_ID);
 		builder.append(", act_Image=");
 		builder.append(act_Image);
-		builder.append(", fileName=");
-		builder.append(fileName);
 		builder.append(", act_Name=");
 		builder.append(act_Name);
 		builder.append(", act_Theme=");
@@ -210,8 +187,6 @@ public class ActBean {
 		builder.append(act_Tag);
 		builder.append(", act_Place=");
 		builder.append(act_Place);
-		builder.append(", actImage=");
-		builder.append(actImage);
 		builder.append("]");
 		return builder.toString();
 	}

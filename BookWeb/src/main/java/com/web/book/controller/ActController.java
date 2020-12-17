@@ -10,7 +10,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.web.book.model.ActBean;
@@ -18,9 +17,9 @@ import com.web.book.service.ActService;
 
 @Controller
 public class ActController {
-	String noImage = "/images/NoImage.png";
-	String noImageFemale = "/images/NoImage_Female.jpg";
-	String noImageMale = "/images/NoImage_Male.png";
+//	String noImage = "/images/NoImage.png";
+//	String noImageFemale = "/images/NoImage_Female.jpg";
+//	String noImageMale = "/images/NoImage_Male.png";
 
 	@Autowired
 	ActService actService;
@@ -39,25 +38,39 @@ public class ActController {
 	// 顯示新增活動頁面
 	@GetMapping("/showCreateForm")
 	public String showCreateForm(Model model) {
-		ActBean actbean = new ActBean();
-		model.addAttribute("actbean", actbean);
+		ActBean ab = new ActBean();
+		model.addAttribute("actbean", ab);
 		return "Activity/ActForm";
 	}
 
 	// 新增成功後redirect所有活動紀錄
-	@PostMapping("/saveActs")
-	public String createAct(@ModelAttribute("actbean") ActBean actbean) {
-		actService.createAct(actbean);
+	@PostMapping("/showCreateForm")
+	public String createAct(@ModelAttribute("actbean") ActBean ab) {
+		actService.createAct(ab);
 		return "redirect:/showActs";
+		
+	}
+	
 
+	// 顯示修改活動頁面
+	@GetMapping("/showUpdateForm")
+	public String showUpdateForm(
+			Model model, 
+			@RequestParam(value="act_ID",required=false) Integer act_ID) {
+		ActBean ab = actService.getAct(act_ID);
+		model.addAttribute("ab", ab);
+		return "Activity/updateAct";
 	}
 
-	// 修改活動頁面
-	@GetMapping("/updateAct")
-	public String showUpdateForm(@RequestParam("act_Name") String act_Name, Model model) {
-		ActBean actbean = actService.getAct(act_Name);
-		model.addAttribute("actbean", actbean);
-		return "Activity/ActForm";
+	// 修改成功後redirect所有活動紀錄
+	@PostMapping("/showUpdateForm")
+	public String updateAct(
+			Model model, 
+			@ModelAttribute("ab")ActBean ab,
+	@RequestParam(value="act_ID",required=false) Integer act_ID) {
+		actService.updateAct(ab);
+		return "redirect:/showActs";
+
 	}
 
 	// 刪除活動後redirect所有活動紀錄
@@ -66,12 +79,4 @@ public class ActController {
 		actService.deleteAct(act_ID);
 		return "redirect:/showActs";
 	}
-
-	@GetMapping("/555")
-	public String p555(Model model) {
-		ActBean actbean = new ActBean();
-		model.addAttribute("actbean", actbean);
-		return "Activity/ActForm";
-	}
-
 }
