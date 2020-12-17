@@ -14,7 +14,8 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Document</title>
-<link rel="stylesheet" href="login.css">
+<link rel="stylesheet" href="css/login.css">
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <style>
 @import url(https://fonts.googleapis.com/earlyaccess/cwtexyen.css);
 
@@ -79,59 +80,89 @@ span {
 </head>
 
 <body>
-	<%-- 	<jsp:useBean id="reg_member" class="model.MemberBean" scope="session" /> --%>
-	<!-- 	<form action="Register" method="post"> -->
 	<form action="<c:url value="/confirm" />" method="post">
 		<fieldset>
 			<legend>會員確認</legend>
 			<div class="a2">
-				<label>帳號:</label>
-				<p>${reg_member.mb_Account}</p>
+				<label >帳號:</label>
+				<h3 id="mb_Account">${reg_member.mb_Account}</h3>
 			</div>
 			<div class="a3">
 				<label>密碼:</label>
-				<p>${reg_member.mb_Password}</p>
+				<h3 id="mb_Password">${reg_member.mb_Password}</h3>
 			</div>
 			<div class="a1">
 				<label>姓名:</label>
-				<p>${reg_member.mb_Name}</p>
+				<h3 id="mb_Name">${reg_member.mb_Name}</h3>
 			</div>
 			<br>
 			<div class="a5">
 				<label>性別:</label>
-				<p>${reg_member.mb_Sex}</p>
+				<h3 id="mb_Sex">${reg_member.mb_Sex}</h3>
 			</div>
 			<div class="a6">
 				<label>生日:</label>
-				<p>${reg_member.mb_Birthday}</p>
+				<h3 id="mb_Birthday">${reg_member.mb_Birthday}</h3>
 			</div>
 			<br />
 			<div class="a7">
 				<label>地址:</label>
-				<p>${reg_member.mb_Address}</p>
+				<h3 id="mb_Address">${reg_member.mb_Address}</h3>
 			</div>
 			<br />
 			<div class="a8">
 				<label>電話:</label>
-				<p>${reg_member.mb_Tel}</p>
+				<h3 id="mb_Tel">${reg_member.mb_Tel}</h3>
 			</div>
 			<br />
 			<div class="a9">
 				<label>E-mail:</label>
-				<p>${reg_member.mb_Mail}</p>
+				<h3 id="mb_Mail">${reg_member.mb_Mail}</h3>
 			</div>
 			<br />
 			<div class="a10">
 				<label>喜好類型:</label><br />
-				<p>${reg_member.mb_type}</p>
+				<h3 id="mb_type">${reg_member.mb_type}</h3>
 			</div>
 			<div class="a11">
-				<button type="submit" name="confirm">送出</button> 
+				<button type="button" id="submit1" name="confirm">送出</button> 
 				<button><a href="<c:url value="/toRegiste" />" />返回</button>
 			</div>
 			<br>
 		</fieldset>
 			</form>
 </body>
-
+<script>
+$(document).ready(function(){
+	$('#submit1').click(function(){
+		window.alert('註冊成功');
+		$('form').eq(0).submit();
+	})
+})
+// $('#submit1').click(function(){
+// 	let mb_Account = $('#mb_Account').html();
+// 	let mb_Password = $('#mb_Password').html();
+// 	let mb_Name = $('#mb_Name').html();
+// 	console.log(mb_Name);
+// 	let mb_Sex = $('#mb_Sex').html();
+// 	let mb_Birthday = $('#mb_Birthday').html();
+// 	let mb_mb_Address = $('#mb_Address').html();
+// 	let mb_mb_Tel = $('#mb_Tel').html();
+// 	let mb_Mail = $('#mb_Mail').html();
+// 	let mb_type = $('#mb_type').html();
+// 	let editURL = location.href + "/upDateBookReport/"+mb_Account+"/"+mb_Password+"/"+ mb_Name+"/"+mb_Sex+"/"+mb_Birthday+"/"+mb_Address+"/"+mb_Tel+"/"+mb_Mail+"/"+mb_type;
+// 	$.ajax({
+// 		async : false,
+// 		type : 'POST',
+// 		url : editURL,
+// 		dataType : "json",
+// 		contentType : "application/json;charset=utf-8",
+// 		success : function(data) {
+// 			if(data){
+// 				console.log(data);
+// 			}
+// 		}
+// 	});
+// });
+</script>
 </html>
