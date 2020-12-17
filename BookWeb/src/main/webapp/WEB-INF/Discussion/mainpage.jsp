@@ -51,8 +51,8 @@
 		<div class="row">
 			<!-- sidebar area -->
 			<div class="col-2 text-center">
-			
-<!-- ====================================================sidebar==================================================== -->
+
+				<!-- ====================================================sidebar==================================================== -->
 				<h2>書適論壇</h2>
 				<br>
 				<div class="list-group" id="list-tab" role="tablist">
@@ -73,17 +73,17 @@
 				<!-- content connect to sidebar -->
 				<div class="tab-content" id="nav-tabContent">
 
-<!-- =====================================================discussion board area===================================================== -->
+					<!-- =====================================================discussion board area===================================================== -->
 					<div class="tab-pane fade show active" id="list-novel"
 						role="tabpanel">
 						<!-- search keyword -->
 						<nav class="navbar navbar-light bg-light justify-content-between">
 							<a class="navbar-brand">搜尋貼文關鍵字­</a>
-							<form class="form-inline">
+							<form class="form-inline" action='search_keyword' method="post">
 								<input class="form-control mr-sm-2" type="search"
-									placeholder="請輸入關鍵字­">
+									placeholder="請輸入關鍵字­" name="keyword">
 								<button class="btn btn-outline-primary my-2 my-sm-0"
-									type="button" id="search_keyword">Search</button>
+									type="submit" id="search_keyword">Search</button>
 							</form>
 						</nav>
 						<br>
@@ -178,11 +178,11 @@
 								href="#pills-member_post" role="tab">個人貼文紀錄</a></li>
 						</ul>
 						<div class="tab-content" id="pills-tabContent">
-						
+
 							<!-- write new post page -->
 							<div class="tab-pane fade show active" id="pills-member_new_post"
 								role="tabpanel">
-								
+
 								<!-- new post form -->
 								<div
 									style="border: #ADADAD 2px solid; border-radius: 5px; text-align: left; padding: 10px; margin: 0px 10px; padding-top: 20px">
@@ -218,24 +218,27 @@
 									<div
 										style="border: #ADADAD 2px solid; border-radius: 5px; text-align: left; padding: 10px; margin: 0px 10px">
 
+										<c:url value="go_delete" var="go_delete">
+											<c:param name="delete_post_id"
+												value=" ${stored_post.post_id}" />
+										</c:url>
+										<form class="form-inline float-right" action="${go_delete}"
+											method="post">
+											<button class="btn btn-outline-secondary btn-sm"
+												type="submit" style="margin-left: 5px">刪除</button>
+										</form>
+
 										<c:url value="go_edit" var="go_edit">
 											<c:param name="edit_post_id" value=" ${stored_post.post_id}" />
-											<c:param name="edit_post_time"
-												value=" ${stored_post.post_time}" />
 											<c:param name="edit_post_title"
 												value=" ${stored_post.post_title}" />
 											<c:param name="edit_post_content"
 												value=" ${stored_post.post_content}" />
 										</c:url>
-										<form class="form-inline float-right" action="${go_edit}"	method="post">
-											<button class="btn btn-outline-secondary btn-sm"	type="submit">修改</button>
-										</form>
-
-										<c:url value="go_delete" var="go_delete">
-											<c:param name="delete_post_id"	value=" ${stored_post.post_id}" />
-										</c:url>
-										<form class="form-inline float-right" action="${go_delete}"	method="post">
-											<button class="btn btn-outline-secondary btn-sm"	type="submit">刪除</button>
+										<form class="form-inline float-right" action="${go_edit}"
+											method="post">
+											<button class="btn btn-outline-secondary btn-sm"
+												type="submit">修改</button>
 										</form>
 
 										<p>[member] ${stored_post.post_time}</p>
