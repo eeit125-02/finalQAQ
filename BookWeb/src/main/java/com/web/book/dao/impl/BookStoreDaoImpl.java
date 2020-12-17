@@ -34,6 +34,12 @@ public class BookStoreDaoImpl implements BookStoreDao {
 		Session session = factory.getCurrentSession();
 		return session.get(BookBean.class, bk_ID);
 	}
+	@Override
+	// 單一賣家商品詳細資料
+	public BookStoreBean getOneBookStore(Integer bks_ID) {
+		Session session = factory.getCurrentSession();
+		return session.get(BookStoreBean.class, bks_ID);
+	}
 	
 	// 搜尋會員賣場資料
 	@Override
@@ -67,19 +73,20 @@ public class BookStoreDaoImpl implements BookStoreDao {
 	}
 	
 	//找到會員賣場要修改的一筆資料
-//	public BookStoreBean searchOneData(Integer ) {
+//	@SuppressWarnings("unchecked")
+//	public BookStoreBean searchOneData(Integer bk_ID) {
 //		Session session = factory.getCurrentSession();
-//		String hql = "FROM BookStoreBean a where a.member = :member ";
+//		String hql = "FROM BookStoreBean a where a.book = :book ";
 //		Query<BookStoreBean> query = session.createQuery(hql);
-//		MemberBean member = session.load(MemberBean.class, mb_ID);
-//		return query.setParameter("member", member).getResultList();
+//		BookBean book = session.load(BookBean.class, bk_ID);
+//		return query.setParameter("book", book).getResultList();
 //	}
 	
 	// 修改會員賣場資料
 	@Override
-	public void updateBookStore(Integer bs_Num, Integer bs_Price, Integer bk_ID) {
+	public void updateBookStore(Integer bks_ID, Integer bs_Num, Integer bs_Price) {
 		Session session = factory.getCurrentSession();
-		BookStoreBean bookStore = session.load(BookStoreBean.class, bk_ID);
+		BookStoreBean bookStore = session.load(BookStoreBean.class, bks_ID);
 		bookStore.setBs_Num(bs_Num);
 		bookStore.setBs_Price(bs_Price);		
 	}

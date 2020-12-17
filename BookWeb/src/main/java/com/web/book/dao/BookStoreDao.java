@@ -12,6 +12,9 @@ public interface BookStoreDao {
 
 	// 單一商品詳細資料
 	BookBean getBookDetail(Integer bk_ID);
+	
+	// 單一賣家商品詳細資料
+	BookStoreBean getOneBookStore(Integer bks_ID);
 
 	// 搜尋會員賣場資料
 	List<BookStoreBean> searchMemberStore(Integer mb_ID);
@@ -23,7 +26,7 @@ public interface BookStoreDao {
 	void addBookName(Integer bs_Num, Integer bs_Price, Integer bk_ID, Integer bs_ID);
 
 	// 修改會員賣場資料
-	void updateBookStore(Integer bs_Num, Integer bs_Price, Integer bk_ID);
+	void updateBookStore(Integer bks_ID, Integer bs_Num, Integer bs_Price);
 
 	// 刪除會員賣場資料
 	void deleteBookStore(Integer bks_ID);

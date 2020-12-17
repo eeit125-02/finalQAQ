@@ -50,19 +50,17 @@
 		<!-- body -->
 
 		<FORM action="<c:url value='/QAQbook'/>" method="post">
-	<jsp:useBean id="bookqaq" class="com.web.book.model.BookBean" scope="request" />
-<!-- 		<input type="hidden" name="BK_ID" value=<jsp:getProperty name="bookqaq" property="bk_ID" />> -->
-		<jsp:getProperty name="bookqaq" property="bk_ID" /><BR> 
-		<jsp:getProperty name="bookqaq" property="bk_Name" /><BR> 
-		<jsp:getProperty name="bookqaq" property="bk_Author" /><BR> 
-		<jsp:getProperty name="bookqaq" property="bk_Publish" /><BR> 
-		價錢 : <INPUT TYPE="TEXT" NAME="price" value=0><BR>
-		數量 : <INPUT TYPE="TEXT" NAME="qty" value=0><BR>
-		<button type="submit" name="updatebk" value="<jsp:getProperty name="bookqaq" property="bk_ID" />">確定修改</button>
-	</FORM>
-	<FORM ACTION="<c:url value='/myStore'/>">
-		<button type="submit" name="">返回</button>
-	</FORM>
+			${bookStore.book.bk_ID}<BR>
+			 ${bookStore.book.bk_Name}<BR>
+			${bookStore.book.bk_Author}<BR>
+			 ${bookStore.book.bk_Publish}<BR>
+			價錢 : <INPUT TYPE="TEXT" NAME="price" value="${bookStore.bs_Price}"><BR> 數量 : <INPUT
+				TYPE="TEXT" NAME="qty" value="${bookStore.bs_Num}"><BR>
+			<button type="submit" name="updatebk" value="${bookStore.bks_ID}">確定修改</button>
+		</FORM>
+		<FORM ACTION="<c:url value='/myStore'/>">
+			<button type="submit" name="">返回</button>
+		</FORM>
 
 
 

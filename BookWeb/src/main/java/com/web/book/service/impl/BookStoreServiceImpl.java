@@ -29,6 +29,11 @@ public class BookStoreServiceImpl implements BookStoreService {
 	}
 
 	@Override
+	public BookStoreBean getOneBookStore(Integer bks_ID) {
+		return dao.getOneBookStore(bks_ID);
+	}
+	
+	@Override
 	public List<BookStoreBean> searchMemberStore(Integer mb_ID) {
 		return dao.searchMemberStore(mb_ID);
 	}
@@ -44,13 +49,15 @@ public class BookStoreServiceImpl implements BookStoreService {
 	}
 
 	@Override
-	public void updateBookStore(Integer bs_Num, Integer bs_Price, Integer bk_ID) {
-		dao.updateBookStore(bs_Num, bs_Price, bk_ID);
+	public void updateBookStore(Integer bks_ID, Integer bs_Num, Integer bs_Price) {
+		dao.updateBookStore(bks_ID, bs_Num, bs_Price);
 	}
 
 	@Override
 	public void deleteBookStore(Integer bks_ID) {
 		dao.deleteBookStore(bks_ID);
 	}
+
+	
 
 }

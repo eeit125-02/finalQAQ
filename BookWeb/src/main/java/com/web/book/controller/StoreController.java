@@ -47,12 +47,12 @@ public class StoreController {
 	
 	@PostMapping("/updateOrDelete")
 	public String updateOrDelete(Model model,
-			@RequestParam(value = "waitupbk" ,defaultValue="0") Integer bk_ID,
+			@RequestParam(value = "waitupbk" ,defaultValue="0") Integer bks_ID1,
 			@RequestParam(value = "deletebk",defaultValue="0") Integer bks_ID
 			) {
-		if(bk_ID!=0 && bks_ID==0) {
-			BookBean book = bookStoreService.getBookDetail(bk_ID);
-			model.addAttribute("bookqaq", book);
+		if(bks_ID1!=0 && bks_ID==0) {
+			BookStoreBean bookStore = bookStoreService.getOneBookStore(bks_ID1);
+			model.addAttribute("bookStore", bookStore);
 			return "/Transation/myUpdateStore";
 		} else {
 			bookStoreService.deleteBookStore(bks_ID);
@@ -65,14 +65,17 @@ public class StoreController {
 	
 	@PostMapping("/QAQbook")
 	public String QAQ(Model model,
-			@RequestParam(value = "updatebk") Integer bk_ID,
+			@RequestParam(value = "updatebk") Integer bks_ID,
 			@RequestParam(value = "price") Integer bs_Price,
 			@RequestParam(value = "qty") Integer bs_Num		
 			) {
-		System.out.println("1."+ bk_ID);
+		System.out.println("1."+ bks_ID);
 		System.out.println("2."+ bs_Price);
 		System.out.println("3."+ bs_Num);
-		bookStoreService.updateBookStore(bs_Num, bs_Price, bk_ID);
+		bookStoreService.updateBookStore(bks_ID,bs_Num, bs_Price);
+		Integer mb_ID = 1;
+		List<BookStoreBean> list = bookStoreService.searchMemberStore(mb_ID);
+		model.addAttribute("myBookList", list);
 		return "/Transation/myStore";
 	}
 	

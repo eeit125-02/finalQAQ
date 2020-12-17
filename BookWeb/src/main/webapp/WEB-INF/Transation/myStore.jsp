@@ -55,7 +55,7 @@
 			<button type="submit" name="">我要賣東西</button>
 			<br>
 		</form>
-		<form action="<c:url value='/Transation/storeMain' />" method="post">
+		<form action="<c:url value='/Transation/storeMain' />" method="get">
 			<button type="submit" name="">返回</button>
 			<br>
 		</form>
