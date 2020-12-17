@@ -58,7 +58,7 @@ span {
 </style>
 </head>
 <body>
-	<form action="Login" method="post">
+	<form action="<c:url value='/login' />" method="post">
 		<fieldset>
 			<legend>會員登入</legend>
 			<div class="a2">
@@ -70,7 +70,7 @@ span {
 					 size="12" onblur="">
 			</div>
 			<div class="a10">
-				<a href="<c:url value='/login' />"><button style="text-decoration: none" name="submit">登入</button></a>
+				<button type="submit" style="text-decoration: none" name="submit">登入</button>
 			</div>
 			<div>
 				<a href="password.html">忘記密碼?</a> <a href="account.html">忘記帳號?</a>

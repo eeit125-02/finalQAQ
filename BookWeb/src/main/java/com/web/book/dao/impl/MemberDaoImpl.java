@@ -28,10 +28,9 @@ public class MemberDaoImpl implements MemberDao {
 	@Override
 	public boolean Login(String account, String pwd) {
 		boolean result = false;
-		String hql = "FROM MemberBean WHERE mB_Account =:account and mB_Password = :pwd";
+		String hql = "FROM MemberBean WHERE mb_Account =:account and mb_Password =:pwd";
 		Session session = factory.getCurrentSession();
 
-		@SuppressWarnings("unchecked")
 		Query<MemberBean> query = session.createQuery(hql);
 		List<MemberBean> list = query.setParameter("account", account).setParameter("pwd", pwd).getResultList();
 		if (list.size() > 0) {
@@ -49,23 +48,19 @@ public class MemberDaoImpl implements MemberDao {
 
 	@Override
 	public MemberBean select(String account) {
-		MemberBean mb = null;
-		String hql = "FROM MemberBean WHERE mB_Account=:account";
+		String hql = "FROM MemberBean WHERE mb_Account=:account";
 		Session session = factory.getCurrentSession();
-		@SuppressWarnings("unchecked")
 		Query<MemberBean> query = session.createQuery(hql);
-		mb = query.setParameter("account", account).getSingleResult();
-
+		MemberBean mb =query.setParameter("account", account).getSingleResult();
 		return mb;
 	}
 
 	@Override
 	public List<MemberBean> adminselect() {
-		List<MemberBean> dep = new ArrayList<>();
+		List<MemberBean> dep = new ArrayList<MemberBean>();
 		String hql = "FROM MemberBean";
 		Session session = factory.getCurrentSession();
 
-		@SuppressWarnings("unchecked")
 		Query<MemberBean> query = session.createQuery(hql);
 		dep = query.getResultList();
 

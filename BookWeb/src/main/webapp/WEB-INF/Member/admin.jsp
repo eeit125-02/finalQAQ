@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -45,13 +45,15 @@ p {
 </style>
 </head>
 <body>
+	<form action="<c:url value='/adminall' />" method="post">
 		<fieldset>
 			<legend>會員中心</legend>
 			<div>
-				<a href="<c:url value='/adminall' />"><button type="submit" name="inf">會員資訊</button></a>
+				<button type="submit" name="inf">會員資訊</button>
 			</div>
-			<a href="<c:url value='/login' />">登出</a>1
+			<a href="<c:url value='/toLogin' />">登出</a>
 		</fieldset>
+	</form>
 </body>
 
 </html>

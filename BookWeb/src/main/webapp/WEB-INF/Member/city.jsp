@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -43,20 +43,26 @@ p {
 	margin-top: 0px;
 }
 
-button,a{
-border:2px solid ;
-background-color:orange;
+button, a {
+	border: 2px solid;
+	background-color: orange;
 }
 </style>
 </head>
 <body>
-		<fieldset>
-			<legend>會員中心</legend>
-			<div>
-				<a href="<c:url value='/mb_inf' />"><button type="submit" name="mb_inf" value="${account.account}">會員資訊</button></a>
-				<a href="<c:url value='/Modify' />">"><button type="submit" name="Modify" value="${account.account}">會員修改</button></a>				
-			</div>
-			<a href="login.jsp">登出</a>
-		</fieldset>
+
+	<fieldset>
+		<legend>會員中心</legend>
+		<div>
+			<form action="<c:url value='/mb_inf' />" method="post">
+				<button type="submit" name="mb_inf">會員資訊</button>
+			</form>
+			<form action="<c:url value='/Modify' />" method="post">
+				<button type="submit" name="Modify">會員修改</button>
+			</form>
+		</div>
+		<a href="<c:url value='/toLogin' />">登出</a>
+	</fieldset>
+
 </body>
 </html>
