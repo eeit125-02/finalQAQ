@@ -1,5 +1,6 @@
 package com.web.book.service.impl;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,6 +42,20 @@ public class DiscussionServiceImpl implements DiscussionService {
 	@Override
 	public List<CommandBean> getAllCommand() {
 		return discussionDao.getAllCommand();
+	}
+
+	//修改貼文
+	@Override
+	public void editPost(Integer edit_post_id,  String edit_post_title,
+			String edit_post_content, Timestamp edit_post_time) {
+		discussionDao.editPost(edit_post_id,  edit_post_title,
+				edit_post_content, edit_post_time);
+	}
+
+	//刪除貼文
+	@Override
+	public void deletPost(Integer delete_post_id) {
+		discussionDao.deletPost(delete_post_id);		
 	}
 
 

@@ -5,6 +5,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
@@ -18,6 +20,11 @@
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
 	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
 	crossorigin="anonymous">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/bottle.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/book_message2.css">
 <style>
 .bd-placeholder-img {
 	font-size: 1. 125rem;
@@ -47,7 +54,7 @@
 	<!-- header -->
 
 	<!-- body -->
-	<div class="container media">
+	<div class="container">
 		<label id="test"></label>
 
 		<!-- 		內容開始 -->
@@ -109,8 +116,8 @@
 					</figure>
 
 					<div class="collect">
-						<img alt="點選收藏" src="Img/heartred.png" id="heart" width="25px">
 						<form name=a1 action="<c:url value='/pagecollect' />" method="get">
+						<img alt="點選收藏" src="${pageContext.request.contextPath}/image/heartred.png" id="heart" width="25px">
 						<button type="submit" name="pagecollect"
 								class="btn btn-outline-danger btn-sm"
 								value="${pageresult.bk_ID}">收藏本書</button></form> 
@@ -135,7 +142,7 @@
 						<li>連結3</li>
 					</ul>
 					<div class="follow">
-						＊有二手書時通知我 <img alt="加入追蹤" src="Img/heartwhite.png" id="heart"
+						＊有二手書時通知我 <img alt="加入追蹤" src="${pageContext.request.contextPath}/image/heartwhite.png" id="heart"
 							width="25px">
 					</div>
 

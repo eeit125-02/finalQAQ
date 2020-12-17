@@ -5,6 +5,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
@@ -18,6 +20,9 @@
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
 	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
 	crossorigin="anonymous">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/bottle.css">
 <style>
 .bd-placeholder-img {
 	font-size: 1. 125rem;
@@ -47,7 +52,7 @@
 	<!-- header -->
 
 	<!-- body -->
-	<div class="container media">
+	<div class="container">
 		<label id="test"></label>
 
 		<!-- 內容開始 -->
@@ -61,7 +66,7 @@
 			<hr>
 			<br>
 			<div class="collect">
-				<a class="btn btn-outline-dark" href="Search.jsp" role="button">搜尋首頁</a>
+				<a class="btn btn-outline-dark" href="<c:url value='SearchBook/Search' />" role="button">搜尋首頁</a>
 			</div>
 			<br>
 			<h3>收藏清單：</h3>
@@ -72,14 +77,15 @@
 				<img class="itemcov" alt="" src="${row.getBook().getBk_Pic()}"
 					height="190">
 
-				<h3>${row.getBook().getBk_Name()}</h3>
+				<form name=a1 action="<c:url value='/bookpage' />" method="get"><button type="submit" name="page"
+							class="btn btn-link" value="${row.getBook().getBk_ID()}"><h3>
+							${row.getBook().getBk_Name()}</h3></button></form>
 
 				作者：${row.getBook().getBk_Author()}<br>
 				出版社：${row.getBook().getBk_Publish()} ${row.getBook().getBk_ID()} <br>
 				出版日期：${row.getBook().getBk_Date()} <br>
 
-				<p>${row.getBook().getBk_Content()}</p>
-				<p>${row.getBc_ID()}</p>
+				<p class="ellipsis">${row.getBook().getBk_Content()}</p>
 
 				<div class="collect">
 					<form name=a1 action="<c:url value='/deletecollect' />" method="get">

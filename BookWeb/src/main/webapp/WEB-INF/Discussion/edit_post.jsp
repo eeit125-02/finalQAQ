@@ -48,42 +48,45 @@
 	<!-- header -->
 	<div class="container-fluid" style="margin: 20px 0px">
 		<div class="row">
-			<!-- sidebar area -->
+			<!-- side area -->
 			<div class="col-2 text-center">
-				<!-- ====================================================sidebar==================================================== -->
 				<h2>書適論壇</h2>
 			</div>
-			<div class="col-10" style='text-align: center;'>
-			<div
-									style="border: #ADADAD 2px solid; border-radius: 5px; text-align: left; padding: 10px; margin: 0px 10px; padding-top: 20px">
 
-									<form:form method='post' action='add_post'
-										modelAttribute="postBean">
-										<div class="form-group row">
-											<label for="new_title" class="col-2 text-center h5">貼文標題</label>
-											<div class="col-9">
-												<form:input type="text" class="form-control" id="post_title"
-													path="post_title" placeholder="請輸入貼文標題" />
-											</div>
-										</div>
-										<div class="form-group row">
-											<label for="new_content" class="col-2 text-center h5">貼文內容</label>
-											<div class="col-9">
-												<form:textarea class="form-control" id="post_content"
-													path="post_content" rows="6" placeholder="請輸入貼文內容"></form:textarea>
-											</div>
-										</div>
-										<form:hidden path="post_time" />
-										<form:hidden path="mb_id" />
-										<div class="text-center">
-											<button type="submit" class="btn btn-primary">送出貼文</button>
-										</div>
-									</form:form>
-								</div>
+			<div class="col-10" style='text-align: center;'>
+				<h3>修改貼文</h3>
+				<div
+					style="border: #ADADAD 2px solid; border-radius: 5px; text-align: left; padding: 10px; margin: 0px 10px; padding-top: 20px">
+
+					<form action="edit_post" method="post">
+
+						<input type="hidden" name="edit_post_id" value="${param.edit_post_id}" />
+						<input type="hidden" name="edit_post_time" value="${param.edit_post_time}" />
+
+						<div class="form-group row">
+							<label for="new_title" class="col-2 text-center h5">貼文標題</label>
+							<div class="col-9">
+								<input type="text" class="form-control" name="edit_post_title"
+									value="${param.edit_post_title}" />
+							</div>
+						</div>
+
+						<div class="form-group row">
+							<label for="new_content" class="col-2 text-center h5">貼文內容</label>
+							<div class="col-9">
+								<textarea class="form-control" name="edit_post_content" rows="6">${param.edit_post_content}</textarea>
+							</div>
+						</div>
+						
+						<div class="text-center">
+							<button type="submit" class="btn btn-primary">送出貼文</button>
+						</div>
+					</form>
+
+				</div>
 			</div>
 		</div>
 	</div>
-
 	<!-- footer -->
 	<footer class="container py-5" id="bookWebFooter"></footer>
 	<!-- footer -->

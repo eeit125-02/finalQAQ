@@ -23,12 +23,10 @@ public class BookReportBean {
 	private String br_Content;
 	private Date br_DateTime;
 	
-	//@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	@ManyToOne
 	@JoinColumn(name = "bk_ID")
 	private BookBean book;
 	
-	//@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	@ManyToOne
 	@JoinColumn(name = "mb_ID")
 	private MemberBean member;

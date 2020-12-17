@@ -5,6 +5,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
@@ -18,6 +21,9 @@
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
 	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
 	crossorigin="anonymous">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/bottle.css">
 <style>
 .bd-placeholder-img {
 	font-size: 1. 125rem;
@@ -29,6 +35,7 @@
 		font-size: 3.5rem;
 	}
 }
+
 </style>
 
 <script>
@@ -47,7 +54,7 @@
 	<!-- header -->
 
 	<!-- body -->
-	<div class="container media">
+	<div class="container">
 		<label id="test"></label>
 
 
@@ -61,7 +68,7 @@
 		<br> <br>
 
 		<div class="collect">
-			<a class="btn btn-outline-dark" href="Search.jsp" role="button">搜尋首頁</a>
+			<a class="btn btn-outline-dark" href="<c:url value='SearchBook/Search' />" role="button">搜尋首頁</a>
 			<form name=a3 action="<c:url value='/collectlist' />" method="get"><button type="submit" name="list"
 					class="btn btn-outline-dark" value="5">收藏清單</button></form>
 			<!-- value=會員ID -->
@@ -85,12 +92,13 @@
 				作者：${row.getBk_Author()}<br> 出版社：${row.getBk_Publish()}
 				${row.getBk_ID()} <br> 出版日期：${row.getBk_Date()} <br>
 
-				<p>${row.getBk_Content()}</p>
+
+				<p class="ellipsis">${row.getBk_Content()}</p>
 
 
 				<div class="collect">
-					<img alt="點選收藏" src="Img/heartred.png" id="Img/heart" width="25px">
 					<form name=a2 action="<c:url value='/resultcollect' />" method="get">
+					<img alt="點選收藏" src="${pageContext.request.contextPath}/image/heartred.png" id="Img/heart" width="25px">
 					<button type="submit" name="collect"
 							class="btn btn-outline-danger btn-sm" value="${row.getBk_ID()}">收藏本書</button></form>
 				</div>

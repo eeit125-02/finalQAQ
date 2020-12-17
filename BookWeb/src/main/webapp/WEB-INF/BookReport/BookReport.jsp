@@ -213,17 +213,20 @@
         
         $('#deleteSecond').click(function(){
         	deleteReport($(this).val());
-		});
+		}); 
 		
 		$('#editButton').click(function(){
-			let br_ID = $(this).val();
-			let br_Score = $('#br_Score').val();
-			let br_Content = $('#br_Content').val().replace(/\n|\r\n/g,"<br>");
-			let editURL = location.href + "/upDateBookReport/"+br_ID +"/"+br_Score+"/"+ br_Content;
+			var editData = {
+				"br_ID": $(this).val(),
+				"br_Score": $('#br_Score').val(),
+				"br_Content": $('#br_Content').val().replace(/\n|\r\n/g,"<br>")
+			};
+			let editURL = location.href + "/upDateBookReport";
 			$.ajax({
 				async : true,
-				type : 'POST',
+				type : 'GET',
 				url : editURL,
+				data : editData,
 				dataType : "json",
 				contentType : "application/json;charset=utf-8",
 				success : function(data) {
@@ -262,6 +265,7 @@
 					alert('123 ');
 				},
 				success : function(data) {
+					
 					var insertData = "<div class=\"row\">";
 					for (let i = 0; i < data.length; i++) {
 						insertData +=	"<div class=\"col-md-4\">"
