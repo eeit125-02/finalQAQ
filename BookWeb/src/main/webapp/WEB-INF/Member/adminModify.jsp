@@ -39,7 +39,7 @@ legend {
 <body>
 	<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-	<form action="./Login" method="post">
+	<form action="./delete" method="post">
 		<fieldset>
 			<legend>會員清單</legend>
 			<table border="1" width="100%">
@@ -72,8 +72,8 @@ legend {
 						<td>${u.getMb_Date()}</td>
 						<td>${u.getMb_Lv()}</td>
 						<td>${u.getMb_type()}</td>
-						<td><a href="<c:url value='/delete' />" ><button type="submit" name="delete"
-								value="${u.getMb_ID()}" onclick="confirmChoice( )">刪除</a></td>
+						<td><button type="submit" name="delete"
+								value="${u.getMb_ID()}" onclick="confirmChoice( )">刪除</td>
 					</tr>
 				</c:forEach>
 			</table>

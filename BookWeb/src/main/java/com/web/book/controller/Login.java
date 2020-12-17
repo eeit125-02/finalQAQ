@@ -2,35 +2,44 @@ package com.web.book.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.web.book.model.MemberBean;
 import com.web.book.service.MemberService;
 
+
+@SessionAttributes("login")
 @Controller
 public class Login {
 
 	@Autowired
 	MemberService ms;
 
+	String Account;
+	
 	// 會員登入
 	@PostMapping("/login")
 	public String login(Model model, @RequestParam(value = "account") String account,
 			@RequestParam(value = "pwd") String pwd) {
 		boolean mb = ms.Login(account, pwd);
-		if (mb) {
+		if (mb) {		
+			Account=account;
 			if (account.equals("a123456") && pwd.equals("a123456")) {
-				MemberBean memberall = (MemberBean) ms.adminselect();
+				List<MemberBean> memberall = ms.adminselect();
 				model.addAttribute("admin", memberall);
 				return "Member/admin";
-			} else {
-				model.addAttribute("account", account);
-			}
+			} 
 		} else {
 			return "Member/login";
 		}
@@ -38,34 +47,34 @@ public class Login {
 	}
 	//會員資料
 	@PostMapping("/mb_inf")
-	public String Mb_inf(Model model, @RequestParam(value = "mb_inf") String account) {
-		MemberBean select = ms.select(account);
-		model.addAttribute("login", select);
+	public String Mb_inf(Model model) {
+		MemberBean select = ms.select(Account);
+		System.out.println(select);
+		model.addAttribute("login",select);
 		return "Member/mb_inf";
 	}
 
 	// 會員修改介面
 	@PostMapping("/Modify")
-	public String Modify(Model model, @RequestParam(value = "Modify") String account) {
-		MemberBean select = ms.select(account);
-		model.addAttribute("login", select);
+	public String Modify(Model model) {
+		model.addAttribute("account",Account);
 		return "Member/Modify";
 	}
 	//會員修改
 	@PostMapping("/Update")
 	public String Update(Model model, @RequestParam(value = "pwd") String pwd) {
-		MemberBean member = (MemberBean) model.getAttribute("select");
-		member.setMb_Password(pwd);
-		boolean update = ms.update(member);
+		MemberBean mb_inf = ms.select(Account);
+		System.out.println(mb_inf);
+		mb_inf.setMb_Password(pwd);
+		boolean update = ms.update(mb_inf);
 		if (update) {
-			MemberBean select = ms.select(member.getMb_Account());
-			model.addAttribute("login", select);
+			model.addAttribute("login", mb_inf);
 		}
 		return "Member/mb_inf";
 	}
 
 	//會員介面
-	@PostMapping("/toCity")
+	@GetMapping("/toCity")
 	public String tocity(Model model) {
 		return "Member/city";
 	}
@@ -92,7 +101,6 @@ public class Login {
 
 	@RequestMapping(value = "/toAdmin")
 	public String toadmin(Model model) {
-		
 		return "Member/admin";
 	}
 	

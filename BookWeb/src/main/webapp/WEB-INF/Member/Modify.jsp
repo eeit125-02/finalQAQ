@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%
 	response.setContentType("text/html;charset=UTF-8");
 response.setHeader("Cache-Control", "no-cache"); // HTTP 1.1
@@ -85,14 +85,13 @@ span {
 
 <body>
 	<%-- 	<jsp:useBean id="Member" class="model.MemberBean" scope="session" /> --%>
-<!-- 	<form action="./Login" method="post"> -->
+	<!-- 	<form action="./Login" method="post"> -->
+	<form action="<c:url value='/Update'/>" method="post">
 		<fieldset>
 			<legend>會員修改</legend>
 			<div class="a2">
 				<label>帳號:</label>
-				<p>${account.getMb_Account}</p>
-				<span id="idsp2"></span><br />
-				<p style="color: gray;">(1.不可空白 2.至少6個字且必須包含英文字母、數字)</p>
+				<p>${account}</p>
 			</div>
 			<div class="a3">
 				<label>密碼:</label> <input type="password" name="pwd" id="pwd"
@@ -105,11 +104,12 @@ span {
 			</div>
 
 			<div class="a11">
-				<a href="<c:url="/Update">"><button type="submit" name="Update">送出</button></a> 
-				<button type="reset" value="清除"></button>
+				<button type="submit" name="Update">送出</button>
+				<button type="reset">清除</button>
 			</div>
 		</fieldset>
-		<!--  <div class="a1">
+	</form>
+	<!--  <div class="a1">
             <label>姓名:</label>
             <input type="text" id="name" name="name" size="12" value="" readonly>
         </div><br>
@@ -155,50 +155,50 @@ span {
 
 
 
-		<script>
-			function Checkpwd() {
-				let pwd = document.getElementById("pwd").value
-				let pwdlen = pwd.length;
-				let sp = document.getElementById("idsp1")
-				var rex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]+$/;
-				if (pwd.length >= 6 && rex.test(pwd)) {
-					sp.innerHTML = "正確"
-				} else if (pwd == "") {
-					sp.innerHTML = "密碼不可為空白"
-				} else if (pwd.length < 6) {
-					sp.innerHTML = "密碼不足6碼"
-				} else if (pwd != rex.test(pwd)) {
-					sp.innerHTML = "密碼須包含英文、數字及特殊符號"
-				} else {
-					sp.innerHTML = "錯誤"
-				}
+	<script>
+		function Checkpwd() {
+			let pwd = document.getElementById("pwd").value
+			let pwdlen = pwd.length;
+			let sp = document.getElementById("idsp1")
+			var rex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]+$/;
+			if (pwd.length >= 6 && rex.test(pwd)) {
+				sp.innerHTML = "正確"
+			} else if (pwd == "") {
+				sp.innerHTML = "密碼不可為空白"
+			} else if (pwd.length < 6) {
+				sp.innerHTML = "密碼不足6碼"
+			} else if (pwd != rex.test(pwd)) {
+				sp.innerHTML = "密碼須包含英文、數字及特殊符號"
+			} else {
+				sp.innerHTML = "錯誤"
 			}
+		}
 
-			function Checkaccount() {
-				let account = document.getElementById("account").value
-				let accountlen = account.length;
-				let sp = document.getElementById("idsp2")
-				var rex1 = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]+$/
-				if (account == "") {
-					sp.innerHTML = "不可為空白"
-				} else if (rex1.test(account) && accountlen >= 6) {
-					sp.innerHTML = "正確"
-				} else {
-					sp.innerHTML = "格式錯誤"
-				}
+		function Checkaccount() {
+			let account = document.getElementById("account").value
+			let accountlen = account.length;
+			let sp = document.getElementById("idsp2")
+			var rex1 = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]+$/
+			if (account == "") {
+				sp.innerHTML = "不可為空白"
+			} else if (rex1.test(account) && accountlen >= 6) {
+				sp.innerHTML = "正確"
+			} else {
+				sp.innerHTML = "格式錯誤"
 			}
+		}
 
-			function Checkpwd1() {
-				let pwd = document.getElementById("pwd").value
-				let pwd1 = document.getElementById("pwd1").value
-				sp = document.getElementById("idsp9")
-				if (pwd == pwd1 && pwd1 != "") {
-					sp.innerHTML = "正確"
-				} else
-					sp.innerHTML = "錯誤"
+		function Checkpwd1() {
+			let pwd = document.getElementById("pwd").value
+			let pwd1 = document.getElementById("pwd1").value
+			sp = document.getElementById("idsp9")
+			if (pwd == pwd1 && pwd1 != "") {
+				sp.innerHTML = "正確"
+			} else
+				sp.innerHTML = "錯誤"
 
-			}
-		</script>
+		}
+	</script>
 	</form>
 </body>
 
