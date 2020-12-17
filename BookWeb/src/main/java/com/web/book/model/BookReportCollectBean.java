@@ -16,7 +16,22 @@ public class BookReportCollectBean {
 //	@ManyToOne
 //	@JoinColumn(name = "mb_ID")
 	private MemberBean member;
-	
-	
+
+	public BookReportBean getBookReport() {
+		return bookReport;
+	}
+
+	public void setBookReport(BookReportBean bookReport) {
+		this.bookReport = bookReport;
+	}
+
+	public MemberBean getMember() {
+		return member;
+	}
+
+	public void setMember(MemberBean member) {
+		this.member = member;
+	}
 	
 }
+
