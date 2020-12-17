@@ -74,9 +74,6 @@ public class DiscussionController {
 			@RequestParam("edit_post_title") String edit_post_title,
 			@RequestParam("edit_post_content") String edit_post_content
 			) {
-		model.addAttribute("edit_post_id", edit_post_id);
-		model.addAttribute("edit_post_title", edit_post_title);
-		model.addAttribute("edit_post_content", edit_post_content);
 		return "/Discussion/edit_post";
 	}
 	
@@ -85,15 +82,10 @@ public class DiscussionController {
 	public String processPostEdit(Model model,
 			@RequestParam("edit_post_id") Integer edit_post_id,
 			@RequestParam("edit_post_title") String edit_post_title,
-			@RequestParam("edit_post_content") String edit_post_content,
-			@RequestParam("edit_post_time") Timestamp edit_post_time
+			@RequestParam("edit_post_content") String edit_post_content
 			) {
-		model.addAttribute("edit_post_id", edit_post_id);
-		model.addAttribute("edit_post_title", edit_post_title);
-		model.addAttribute("edit_post_content", edit_post_content);
 		Timestamp d = new Timestamp(System.currentTimeMillis());
-		model.addAttribute("edit_post_time", d);
-		discussionService.editPost(edit_post_id, edit_post_title,edit_post_content,edit_post_time);
+		discussionService.editPost(edit_post_id, edit_post_title,edit_post_content, d);
 		return "redirect:/Discussion/mainpage"; 
 	}
 	
@@ -101,9 +93,18 @@ public class DiscussionController {
 	@PostMapping("Discussion/go_delete")
 	public String processPostDelete(Model model,
 			@RequestParam("delete_post_id") Integer delete_post_id) {
-		model.addAttribute("delete_post_id", delete_post_id);
 		discussionService.deletPost(delete_post_id);
 		return "redirect:/Discussion/mainpage"; 
 	}
 	
+	//搜尋關鍵字
+	@PostMapping("Discussion/search_keyword")
+	public String showKeywordSearchResult(Model model,
+			@RequestParam("keyword") String keyword) {
+		List<PostBean> post_list = discussionService.getAllPost();
+		model.addAttribute("allPost", post_list);
+		List<CommandBean> command_list = discussionService.getAllCommand();
+		model.addAttribute("allCommand", command_list);
+		return "/Discussion/search_result";
+	}
 }
