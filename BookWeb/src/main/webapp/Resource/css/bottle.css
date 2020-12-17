@@ -1,0 +1,23 @@
+.newbar{
+    float: right;
+}
+.book{
+    border-bottom: 2px solid lightgray;
+    padding: 25px;
+    width: 1000px;
+    height: auto;
+}
+
+
+.collect{
+    font-size: small;
+    color: indianred;
+    float: right;
+}
+
+
+
+.itemcov{
+    float:left;
+    padding-bottom: 20px;
+}

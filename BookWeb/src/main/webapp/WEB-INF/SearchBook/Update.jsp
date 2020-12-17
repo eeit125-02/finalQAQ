@@ -5,6 +5,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
@@ -18,6 +20,11 @@
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
 	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
 	crossorigin="anonymous">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/bottle.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/book_message2.css">
 <style>
 .bd-placeholder-img {
 	font-size: 1. 125rem;
@@ -47,7 +54,7 @@
 	<!-- header -->
 
 	<!-- body -->
-	<div class="container media">
+	<div class="container">
 		<label id="test"></label>
 
 		<!-- 內容開始 -->
@@ -86,13 +93,13 @@
 											</div>
 										</figure>
 					</div>
-				</form>
-			</div>
 			<div class="check">
 
 				<button type="submit" name="confirm"
 					class="btn btn-outline-danger btn-sm" value="">確認修改</button>
 
+			</div>
+				</form>
 			</div>
 
 		</div>

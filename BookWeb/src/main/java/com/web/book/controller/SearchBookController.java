@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -22,7 +23,6 @@ public class SearchBookController {
 	SearchService searchService;
 
 	// 查詢書籍關鍵字
-//	@RequestMapping(value = "/searchbook", params = { "name" })
 	@GetMapping("/searchbook")
 	public String gotoSearch(Model model, @RequestParam(value = "name") String name) {
 		List<BookBean> result = searchService.searchBook(name);
@@ -32,7 +32,6 @@ public class SearchBookController {
 
 	// 在查詢結果頁加入收藏
 	@SuppressWarnings("unused")
-//	@RequestMapping(value = "/resultcollect", params = { "collect" })
 	@GetMapping("/resultcollect")
 	public String gotoCollect(Model model, @RequestParam(value = "collect") Integer bk_id) {
 		int mb_id = 5;
@@ -45,7 +44,6 @@ public class SearchBookController {
 	}
 
 	// 取得單一本書的詳細資訊
-//	@RequestMapping(value = "/bookpage", params = { "page" })
 	@GetMapping("/bookpage")
 	public String gotoPage(Model model, @RequestParam(value = "page") Integer bk_id) {
 		BookBean result = searchService.getBook(bk_id);
@@ -54,7 +52,6 @@ public class SearchBookController {
 	}
 
 	// 會員收藏清單
-//	@RequestMapping(value = "/collectlist", params = { "list" })
 	@GetMapping("/collectlist")
 	public String gotoList(Model model, @RequestParam(value = "list") Integer mb_id) {
 		mb_id = 5;
@@ -66,7 +63,6 @@ public class SearchBookController {
 		
 	// 刪除收藏項目
 	@SuppressWarnings("unused")
-//	@RequestMapping(value = "/deletecollect", params = { "deletebc" })
 	@GetMapping("/deletecollect")
 	public String gotoDelete(Model model, @RequestParam(value = "deletebc") Integer bc_id) {
 		int result2 = searchService.delete(bc_id);
@@ -81,7 +77,6 @@ public class SearchBookController {
 	
 	// 在單獨頁面加入收藏
 	@SuppressWarnings("unused")
-//	@RequestMapping(value = "/pagecollect", params = { "name" })
 	@GetMapping("/pagecollect")
 	public String gotoPageCollect(Model model, @RequestParam(value = "pagecollect") Integer bk_id) {
 		int mb_id = 5;
@@ -95,7 +90,6 @@ public class SearchBookController {
 	
 	
 	// 前往修改書籍頁面
-//	@RequestMapping(value = "/updatebook", params = { "update" })
 	@GetMapping("/updatebook")
 	public String gotoUpdate(Model model, @RequestParam(value = "update") Integer bk_id) {
 		BookBean result = searchService.getBook(bk_id);
@@ -106,8 +100,7 @@ public class SearchBookController {
 	
 	// 最終更新頁面
 	@SuppressWarnings("unused")
-//	@RequestMapping(value = "/confirmupdate", params = {"id", "bookname", "bookauthor", "bookpublish", "bookdate", "bookcontent" })
-	@GetMapping("/confirmupdate")
+	@PostMapping("/confirmupdate")
 	public String gotoUpdateFin(Model model, 
 			@RequestParam(value = "id") Integer bk_ID,
 			@RequestParam(value = "bookname") String bk_Name,
@@ -135,6 +128,8 @@ public class SearchBookController {
 				return "SearchBook/Page";
 		}
 	
+	
+	//導覽列點選轉到漂流瓶的第一個頁面
 	@RequestMapping(value = "SearchBook/Search")
 	public String serchPage(Model model) {
 		
