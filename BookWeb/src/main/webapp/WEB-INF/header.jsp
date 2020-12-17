@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -34,9 +35,17 @@
 <!-- 				<a class="dropdown-item text-muted" href="#">Another action</a>  -->
 <!-- 				<a class="dropdown-item text-muted" href="#">Something else here</a> -->
 <!-- 			</div> -->
+
 			<a class="p-2 text-muted" href="//localhost:8080/BookWeb/Transation/storeMain">二手書交易系統</a> 
+<<<<<<< Updated upstream
 			<a class="p-2 text-muted" href="#">共讀趣／閱讀沙龍</a> 
 			<a class="p-2 text-muted" href="//localhost:8080/BookWeb/BookReport">閱讀履歷</a>
+=======
+			<a class="p-2 text-muted" href='<c:url value="/showActs"/>'>共讀趣／閱讀沙龍</a> 
+			<a class="p-2 text-muted" href="#">討論區</a>
+			<%-- <a class="p-2 text-muted" href="<c:url value='/BookReport/bookReport'/>">閱讀履歷</a> --%>
+			<a class="p-2 text-muted" href="//localhost:8080/BookWeb/BookReport/bookReport">閱讀履歷</a>
+>>>>>>> Stashed changes
 			<a class="p-2 text-muted" href="//localhost:8080/BookWeb/Discussion/mainpage">書適論壇</a>
 			<!-- <a class="nav-link dropdown-toggle text-muted" href="#"
 				id="navbarDropdownMenuLink2" role="button" data-toggle="dropdown"
