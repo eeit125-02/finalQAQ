@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.web.book.model.BookReportBean;
@@ -72,15 +73,15 @@ public class BookReportController {
 		return data;
 	}
 	
-	
-	@PostMapping("/upDateBookReport/{br_ID}/{br_Score}/{br_Content}")
+	@GetMapping("/upDateBookReport")
 	@ResponseBody
 	public String upDateBookReport(
-			@PathVariable("br_ID") Integer br_ID, 
-			@PathVariable("br_Score") Integer br_Score,
-			@PathVariable("br_Content") String br_Content) {
+			@RequestParam(value = "br_ID", required = true) Integer br_ID, 
+			@RequestParam(value = "br_Score", required = true) Integer br_Score,
+			@RequestParam(value = "br_Content", required = true) String br_Content) {
 		
-		bookReportService.upDateBookReportData(br_ID, br_Score, br_Content);;
+		bookReportService.upDateBookReportData(br_ID, br_Score, br_Content);
+		
 		return "true";
 	}
 	

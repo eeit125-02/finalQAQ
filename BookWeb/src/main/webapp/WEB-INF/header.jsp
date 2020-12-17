@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,7 +16,7 @@
 	<div class="row flex-nowrap justify-content-between align-items-center">
 
 		<div class="col-4 text-center">
-			<a class="blog-header-logo text-dark" href="#">圖書資訊網</a>
+			<a class="blog-header-logo text-dark" href="//localhost:8080/BookWeb">圖書資訊網</a>
 		</div>
 		<div class="col-4 d-flex justify-content-end align-items-center">
 			<a class="btn btn-sm btn-outline-secondary" href="//localhost:8080/BookWeb/toLogin">登入</a>
