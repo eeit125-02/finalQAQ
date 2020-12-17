@@ -35,6 +35,7 @@
 		font-size: 3.5rem;
 	}
 }
+
 </style>
 
 <script>
@@ -91,7 +92,8 @@
 				作者：${row.getBk_Author()}<br> 出版社：${row.getBk_Publish()}
 				${row.getBk_ID()} <br> 出版日期：${row.getBk_Date()} <br>
 
-				<p>${row.getBk_Content()}</p>
+
+				<p class="ellipsis">${row.getBk_Content()}</p>
 
 
 				<div class="collect">

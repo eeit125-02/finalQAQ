@@ -77,14 +77,15 @@
 				<img class="itemcov" alt="" src="${row.getBook().getBk_Pic()}"
 					height="190">
 
-				<h3>${row.getBook().getBk_Name()}</h3>
+				<form name=a1 action="<c:url value='/bookpage' />" method="get"><button type="submit" name="page"
+							class="btn btn-link" value="${row.getBook().getBk_ID()}"><h3>
+							${row.getBook().getBk_Name()}</h3></button></form>
 
 				作者：${row.getBook().getBk_Author()}<br>
 				出版社：${row.getBook().getBk_Publish()} ${row.getBook().getBk_ID()} <br>
 				出版日期：${row.getBook().getBk_Date()} <br>
 
-				<p>${row.getBook().getBk_Content()}</p>
-				<p>${row.getBc_ID()}</p>
+				<p class="ellipsis">${row.getBook().getBk_Content()}</p>
 
 				<div class="collect">
 					<form name=a1 action="<c:url value='/deletecollect' />" method="get">

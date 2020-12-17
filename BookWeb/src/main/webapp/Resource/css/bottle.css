@@ -21,3 +21,15 @@
     float:left;
     padding-bottom: 20px;
 }
+
+
+.ellipsis {
+
+overflow:hidden;
+white-space: nowrap;
+text-overflow: ellipsis;
+display: -webkit-box;
+-webkit-line-clamp: 4;
+-webkit-box-orient: vertical;
+white-space: normal;
+}
