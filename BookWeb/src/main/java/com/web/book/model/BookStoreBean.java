@@ -10,7 +10,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "BooK_Store")
-public class Book_Store {
+public class BookStoreBean {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,11 +27,11 @@ public class Book_Store {
 	@JoinColumn(name = "bs_ID")
 	private MemberBean member;
 
-	public Book_Store() {
+	public BookStoreBean() {
 		super();
 	}
 
-	public Book_Store(Integer bks_ID, Integer bs_Num, Integer bs_Price, BookBean book, MemberBean member) {
+	public BookStoreBean(Integer bks_ID, Integer bs_Num, Integer bs_Price, BookBean book, MemberBean member) {
 		super();
 		this.bks_ID = bks_ID;
 		this.bs_Num = bs_Num;

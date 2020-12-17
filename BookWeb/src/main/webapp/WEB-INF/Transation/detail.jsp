@@ -49,30 +49,40 @@
 	<div class="container media">
 		<!-- body -->
 
-		<form action="<c:url value='/myStore'/>" method="post">
-			<button type="submit" name="">我的清單</button>
-			<br>
+
+
+		<jsp:useBean id="bookdetail" class="com.web.book.model.BookBean" scope="request" />
+		<form method="POST">
+			<div>
+				<label for="url"></label> <img alt="xx" width="200px" height="300px"
+					src="<jsp:getProperty name="bookdetail" property="bk_Pic" />">
+			</div>
+			<div>
+				<label for="bk_Name">書名</label>
+				<jsp:getProperty name="bookdetail" property="bk_Name" />
+			</div>
+			<div>
+				<label for="bk_Author">作者</label>
+				<jsp:getProperty name="bookdetail" property="bk_Author" />
+			</div>
+			<div>
+				<label for="bk_Publish">出版社</label>
+				<jsp:getProperty name="bookdetail" property="bk_Publish" />
+			</div>
+			<div>
+				<label for="bk_Content">描述: </label>
+				<jsp:getProperty name="bookdetail" property="bk_Content" />
+			</div>
+
+			<div>
+				<input type="submit" value="放入購物車" name="">
+			</div>
 		</form>
+		
+		
+		<form action="<c:url value='/Transation/storeMain' />" method="get">
+			<button type="submit" name="">返回</button>
 			<br>
-		<form action="<c:url value='/detail'/>" method="post">
-			<table border="2" width="70%">
-				<tr>
-					<th>&nbsp;</th>
-					<th>編號</th>
-					<th>名字</th>
-					<th>作者</th>
-				</tr>
-				<c:forEach var="table" items="${bookstore}" begin="0" end="20">
-					<tr>
-						<th><button type="submit" value="${table.bk_ID}"
-								name="selectbk">檢視</button></th>
-						<td><img alt="XX" src="<c:out value="${table.bk_Pic}"/>"
-							width="50px" height="50px"></td>
-						<td><c:out value="${table.bk_Name}" /></td>
-						<td><c:out value="${table.bk_Author}" /></td>
-					</tr>
-				</c:forEach>
-			</table>
 		</form>
 
 

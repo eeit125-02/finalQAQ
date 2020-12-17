@@ -49,31 +49,20 @@
 	<div class="container media">
 		<!-- body -->
 
-		<form action="<c:url value='/myStore'/>" method="post">
-			<button type="submit" name="">我的清單</button>
-			<br>
-		</form>
-			<br>
-		<form action="<c:url value='/detail'/>" method="post">
-			<table border="2" width="70%">
-				<tr>
-					<th>&nbsp;</th>
-					<th>編號</th>
-					<th>名字</th>
-					<th>作者</th>
-				</tr>
-				<c:forEach var="table" items="${bookstore}" begin="0" end="20">
-					<tr>
-						<th><button type="submit" value="${table.bk_ID}"
-								name="selectbk">檢視</button></th>
-						<td><img alt="XX" src="<c:out value="${table.bk_Pic}"/>"
-							width="50px" height="50px"></td>
-						<td><c:out value="${table.bk_Name}" /></td>
-						<td><c:out value="${table.bk_Author}" /></td>
-					</tr>
-				</c:forEach>
-			</table>
-		</form>
+		<FORM action="<c:url value='/QAQbook'/>" method="post">
+	<jsp:useBean id="bookqaq" class="com.web.book.model.BookBean" scope="request" />
+<!-- 		<input type="hidden" name="BK_ID" value=<jsp:getProperty name="bookqaq" property="bk_ID" />> -->
+		<jsp:getProperty name="bookqaq" property="bk_ID" /><BR> 
+		<jsp:getProperty name="bookqaq" property="bk_Name" /><BR> 
+		<jsp:getProperty name="bookqaq" property="bk_Author" /><BR> 
+		<jsp:getProperty name="bookqaq" property="bk_Publish" /><BR> 
+		價錢 : <INPUT TYPE="TEXT" NAME="price" value=0><BR>
+		數量 : <INPUT TYPE="TEXT" NAME="qty" value=0><BR>
+		<button type="submit" name="updatebk" value="<jsp:getProperty name="bookqaq" property="bk_ID" />">確定修改</button>
+	</FORM>
+	<FORM ACTION="<c:url value='/myStore'/>">
+		<button type="submit" name="">返回</button>
+	</FORM>
 
 
 

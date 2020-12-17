@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
+<%@ page import="java.util.List"%>
+<%@ page import="com.web.book.model.BookBean"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -49,31 +50,60 @@
 	<div class="container media">
 		<!-- body -->
 
-		<form action="<c:url value='/myStore'/>" method="post">
-			<button type="submit" name="">我的清單</button>
-			<br>
+
+
+		<form action="<c:url value='/searchBookName'/>" method="post">
+			<div>
+				<input class="search-bar" type="text" name="searchbk" id="search"
+					placeholder="輸入名稱">
+				<button class="search-btn">搜尋</button>
+
+			</div>
 		</form>
-			<br>
-		<form action="<c:url value='/detail'/>" method="post">
-			<table border="2" width="70%">
+
+		<%
+			if (request.getParameter("searchbk") != null) {
+		%>
+		<p>
+			<%!List<BookBean> list;%>
+			<%!BookBean data;%>
+			<%
+				data = new BookBean();
+			list = (List) request.getAttribute("bookName");
+			%>
+		
+		<form action="<c:url value='/addBook'/>" method="post">
+			<%
+				for (BookBean data : list) {
+			%>
+			<table border="2" width="50%">
 				<tr>
-					<th>&nbsp;</th>
 					<th>編號</th>
-					<th>名字</th>
+					<th>書名</th>
 					<th>作者</th>
+					<th>出版社</th>
+					<th>二手價</th>
+					<th>數量</th>
+					<th>&nbsp;</th>
 				</tr>
-				<c:forEach var="table" items="${bookstore}" begin="0" end="20">
-					<tr>
-						<th><button type="submit" value="${table.bk_ID}"
-								name="selectbk">檢視</button></th>
-						<td><img alt="XX" src="<c:out value="${table.bk_Pic}"/>"
-							width="50px" height="50px"></td>
-						<td><c:out value="${table.bk_Name}" /></td>
-						<td><c:out value="${table.bk_Author}" /></td>
-					</tr>
-				</c:forEach>
+				<tr>
+					<td><%=data.getBk_ID()%></td>
+					<td><%=data.getBk_Name()%></td>
+					<td><%=data.getBk_Author()%></td>
+					<td><%=data.getBk_Publish()%></td>
+					<td><INPUT TYPE="TEXT" NAME="<%=data.getBk_ID()%>price"></td>
+					<td><INPUT TYPE="TEXT" NAME="<%=data.getBk_ID()%>qty"></td>
+					<td><button type="submit" value=<%=data.getBk_ID()%>
+							name="setbk">刊登</button></td>
+				</tr>
 			</table>
+			<%
+				}
+			%>
 		</form>
+		<%
+			}
+		%>
 
 
 

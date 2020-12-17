@@ -49,33 +49,46 @@
 	<div class="container media">
 		<!-- body -->
 
-		<form action="<c:url value='/myStore'/>" method="post">
-			<button type="submit" name="">我的清單</button>
+
+
+		<form action="<c:url value='/addMyBook'/>" method="post">
+			<button type="submit" name="">我要賣東西</button>
 			<br>
 		</form>
+		<form action="<c:url value='/Transation/storeMain' />" method="post">
+			<button type="submit" name="">返回</button>
 			<br>
-		<form action="<c:url value='/detail'/>" method="post">
-			<table border="2" width="70%">
+		</form>
+		<form action="<c:url value='/updateOrDelete'/>" method="post">
+			<table border="2" width="100%">
 				<tr>
-					<th>&nbsp;</th>
 					<th>編號</th>
-					<th>名字</th>
+					<th>書名</th>
 					<th>作者</th>
+					<th>出版社</th>
+					<th>二手價</th>
+					<th>數量</th>
+					<th>&nbsp;</th>
+					<th>&nbsp;</th>
 				</tr>
-				<c:forEach var="table" items="${bookstore}" begin="0" end="20">
+				<c:forEach var="table" items="${myBookList}">
 					<tr>
-						<th><button type="submit" value="${table.bk_ID}"
-								name="selectbk">檢視</button></th>
-						<td><img alt="XX" src="<c:out value="${table.bk_Pic}"/>"
-							width="50px" height="50px"></td>
-						<td><c:out value="${table.bk_Name}" /></td>
-						<td><c:out value="${table.bk_Author}" /></td>
+						<td><c:out value="${table.bks_ID}" /></td>
+						<td><c:out value="${table.book.bk_Name}" /></td>
+						<td><c:out value="${table.book.bk_Author}" /></td>
+						<td><c:out value="${table.book.bk_Publish}" /></td>
+						<td><c:out value="${table.bs_Price}" /></td>
+						<td><c:out value="${table.bs_Num}" /></td>
+						<td><button type="submit" value="${table.bks_ID}"
+								name="waitupbk">修改</button></td>
+						<td><button type="submit" value="${table.bks_ID}"
+								name="deletebk">刪除</button></td>
 					</tr>
 				</c:forEach>
 			</table>
 		</form>
 
-
+<%-- <input type="hidden" name="BK_ID" value="${table.bks_ID}"/> --%>
 
 		<!-- body -->
 	</div>
