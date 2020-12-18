@@ -29,8 +29,8 @@ public class Register {
 			@RequestParam(value = "mail") String mb_Mail, @RequestParam(value = "tel") String mb_Tel,
 			@RequestParam(value = "address") String mb_Address, @RequestParam(value = "type") String[] mb_Type,
 			@RequestParam(value = "pic") String mb_Pic) {
-		String type = "";
 		Timestamp ts = new Timestamp(System.currentTimeMillis());
+		String type = "";
 		for (int i = 0; i < mb_Type.length; i++) {
 			type += mb_Type[i] + " ";
 		}

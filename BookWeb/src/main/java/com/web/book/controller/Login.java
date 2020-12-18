@@ -1,5 +1,6 @@
 package com.web.book.controller;
 
+import java.sql.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -91,14 +92,37 @@ public class Login {
 
 	// 管理員會員刪除
 	@PostMapping("/delete")
-	public String Delete(Model model, @RequestParam(value = "delete") Integer Id) {
-		ms.deleteMember(Id);
+	public String Delete(Model model, @RequestParam(value = "delete",defaultValue="0") Integer deleteId,
+									  @RequestParam(value = "update",defaultValue="") String account) {
+		if(deleteId != 0) {
+		ms.deleteMember(deleteId);
 		List<MemberBean> inf = ms.adminselect();
 		model.addAttribute("memberall", inf);
 		return "Member/adminModify";
-
+		}else {
+		MemberBean member = ms.select(account);
+		model.addAttribute("member",member);
+		return "Member/adminupdate";
+		}
 	}
 
+	@PostMapping(value = "/adminupdate")
+	public String toadminupdate(Model model,@RequestParam(value = "pwd") String mb_Password,
+			 @RequestParam(value = "name") String mb_Name,@RequestParam(value = "mail") String mb_Mail, @RequestParam(value = "tel") String mb_Tel,
+			@RequestParam(value = "address") String mb_Address,
+			@RequestParam(value = "account") String account) {
+		MemberBean mb_inf = ms.select(account);
+		mb_inf.setMb_Password(mb_Password); 
+		mb_inf.setMb_Name(mb_Name);
+		mb_inf.setMb_Mail(mb_Mail);	
+		mb_inf.setMb_Tel(mb_Tel); 
+		mb_inf.setMb_Address(mb_Address);
+		boolean update = ms.update(mb_inf);
+		List<MemberBean> inf = ms.adminselect();
+		model.addAttribute("memberall", inf);
+		return "Member/adminModify";
+	}
+	
 	@RequestMapping(value = "/toAdmin")
 	public String toadmin(Model model) {
 		return "Member/admin";
@@ -109,7 +133,6 @@ public class Login {
 		
 		return "Member/login";
 	}
-
 	
 	@RequestMapping(value = "/toRegiste")
 	public String toregiste(Model model) {
