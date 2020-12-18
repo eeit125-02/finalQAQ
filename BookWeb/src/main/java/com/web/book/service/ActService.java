@@ -20,6 +20,8 @@ public interface ActService {
 			//刪除活動
 			int deleteAct(Integer Act_ID);
 
+	
+
 //			//會員報名活動清單
 //			List<ActJoinBean> getJoinRecords(Integer mb_ID);
 //			

@@ -31,6 +31,9 @@
 		font-size: 3.5rem;
 	}
 }
+
+td{width:100px
+}
 </style>
 
 <script>
@@ -80,6 +83,7 @@
 						<td>活動規則</td>
 						<td>活動標籤</td>
 						<td>活動場所</td>
+						<td colspan=2>編輯活動</td>
 					</tr>
 					<!-- 				</tr>" escapeXml='false'/> -->
 					<%-- 			</c:if> --%>
@@ -89,7 +93,7 @@
 							<%-- 				<td><a href='/FindActServlet?key=${act.ACT_Name}'></a></td> --%>
 							<td>${act.mb_ID}</td>
 							<td>${act.act_ID}</td>
-							<td>${act.act_Image}</td>
+							<td><img src="${act.act_Image}"/></td>
 							<td>${act.act_Name}</td>
 							<td>${act.act_Theme}</td>
 							<td>${act.act_Date}</td>
@@ -112,8 +116,14 @@
 			</c:if>
 			<p />
 <%-- 			<a href='${pageContext.request.contextPath}/ActHomepage'>回到活動管理</a> --%>
-			<a href='showCreateForm' >新增活動</a><br>
+			<button><a href='showCreateForm' >新增活動</a></button>
+			<button><a href='products' >活動</a></button>
+<!-- 			<button onclick="window.location.href='showCreateForm'">新增活動1</button> -->
 		</div>
 	</div>
+
+	<!-- footer -->
+	<footer class="container py-5" id="bookWebFooter"></footer>
+	<!-- footer -->
 </body>
 </html>

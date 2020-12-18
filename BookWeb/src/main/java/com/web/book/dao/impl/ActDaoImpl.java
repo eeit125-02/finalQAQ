@@ -87,6 +87,7 @@ public class ActDaoImpl implements ActDao {
 		return count;
 	}
 
+}
 //	//會員的報名活動清單
 //	@SuppressWarnings("unchecked")
 //	@Override
@@ -127,4 +128,4 @@ public class ActDaoImpl implements ActDao {
 //	}
 
 
-}
+

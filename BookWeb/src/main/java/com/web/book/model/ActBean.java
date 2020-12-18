@@ -1,20 +1,21 @@
 package com.web.book.model;
 
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import org.springframework.web.multipart.MultipartFile;
 
 @Entity
-@Table(name = "ACT_Records")
+@Table(name = "ACT_Records123")
 public class ActBean {
-
 
 	private Integer mb_ID;
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer act_ID;
 	private String act_Image;
 	private String act_Name;
@@ -27,10 +28,13 @@ public class ActBean {
 	private String act_Rule;
 	private String act_Tag;
 	private String act_Place;
-
-	public ActBean(Integer mb_ID, Integer act_ID, String act_Image, String act_Name, String act_Theme,
-			String act_Date, String act_Loc, String act_Intro, String act_Guest, String act_Pax, String act_Rule,
-			String act_Tag, String act_Place) {
+	@Transient
+	private MultipartFile file;
+	
+	
+	public ActBean(Integer mb_ID, Integer act_ID, String act_Image, String act_Name, String act_Theme, String act_Date,
+			String act_Loc, String act_Intro, String act_Guest, String act_Pax, String act_Rule, String act_Tag,
+			String act_Place, MultipartFile file) {
 		super();
 		this.mb_ID = mb_ID;
 		this.act_ID = act_ID;
@@ -45,8 +49,9 @@ public class ActBean {
 		this.act_Rule = act_Rule;
 		this.act_Tag = act_Tag;
 		this.act_Place = act_Place;
-
+		this.file = file;
 	}
+
 
 	public ActBean() {
 		super();
@@ -75,7 +80,6 @@ public class ActBean {
 	public void setact_Image(String act_Image) {
 		this.act_Image = act_Image;
 	}
-
 
 	public String getact_Name() {
 		return act_Name;
@@ -157,7 +161,6 @@ public class ActBean {
 		this.act_Place = act_Place;
 	}
 
-
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
@@ -190,6 +193,13 @@ public class ActBean {
 		builder.append("]");
 		return builder.toString();
 	}
-	
-	
+
+	public MultipartFile getfile() {
+		return file;
+	}
+
+	public void setfile(MultipartFile file) {
+		this.file = file;
+	}
+
 }

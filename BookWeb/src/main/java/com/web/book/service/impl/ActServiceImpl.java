@@ -48,6 +48,7 @@ public class ActServiceImpl implements ActService {
 		return actDao.deleteAct(act_ID);
 	}
 
+
 //	// 會員的報名活動清單
 //	@Override
 //	public List<ActJoinBean> getJoinRecords(Integer mb_ID) {
