@@ -22,6 +22,8 @@ public class BookReportBean {
 	private Integer br_Score;
 	private String br_Content;
 	private Date br_DateTime;
+	private Integer br_ClickNumber;
+	private Integer br_CollectionNumber;
 	
 	@ManyToOne
 	@JoinColumn(name = "bk_ID")
@@ -44,6 +46,9 @@ public class BookReportBean {
 		this.br_DateTime = br_DateTime;
 		this.book = book;
 		this.member = member;
+		this.br_ClickNumber = 0;
+		this.br_CollectionNumber = 0;
+		
 	}
 
 	public Integer getBr_ID() {
@@ -77,6 +82,22 @@ public class BookReportBean {
 	public void setBr_DateTime(Date br_DateTime) {
 		this.br_DateTime = br_DateTime;
 	}
+	
+	public Integer getBr_ClickNumber() {
+		return br_ClickNumber;
+	}
+
+	public void setBr_ClickNumber(Integer br_ClickNumber) {
+		this.br_ClickNumber = br_ClickNumber;
+	}
+
+	public Integer getBr_CollectionNumber() {
+		return br_CollectionNumber;
+	}
+
+	public void setBr_CollectionNumber(Integer br_CollectionNumber) {
+		this.br_CollectionNumber = br_CollectionNumber;
+	}
 
 	public BookBean getBook() {
 		return book;
@@ -94,23 +115,5 @@ public class BookReportBean {
 		this.member = member;
 	}
 
-	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("BookReportBean [br_ID=");
-		builder.append(br_ID);
-		builder.append(", br_Score=");
-		builder.append(br_Score);
-		builder.append(", br_Content=");
-		builder.append(br_Content);
-		builder.append(", br_DateTime=");
-		builder.append(String.valueOf(br_DateTime));
-		builder.append(", book=");
-		builder.append(book);
-		builder.append(", member=");
-		builder.append(member);
-		builder.append("]");
-		return builder.toString();
-	}
 
 }

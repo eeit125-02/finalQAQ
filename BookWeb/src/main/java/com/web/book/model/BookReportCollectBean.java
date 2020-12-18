@@ -20,6 +20,8 @@ public class BookReportCollectBean {
 	
 	private Date addDate;
 	
+	private Integer br_ClickNumber;
+	
 	@ManyToOne
 	@JoinColumn(name = "br_ID")
 	private BookReportBean bookReport;
@@ -39,6 +41,7 @@ public class BookReportCollectBean {
 		this.bookReport = bookReport;
 		this.member = member;
 		this.addDate = addDate;
+		this.br_ClickNumber = 0;
 	}
 
 	public Integer getRc_ID() {
@@ -52,6 +55,14 @@ public class BookReportCollectBean {
 	public Date getAddDate() {
 		return addDate;
 	}
+	
+	public Integer getBr_ClickNumber() {
+		return br_ClickNumber;
+	}
+
+	public void setBr_ClickNumber(Integer br_ClickNumber) {
+		this.br_ClickNumber = br_ClickNumber;
+	}
 
 	public void setAddDate(Date addDate) {
 		this.addDate = addDate;
@@ -64,7 +75,7 @@ public class BookReportCollectBean {
 	public void setBookReport(BookReportBean bookReport) {
 		this.bookReport = bookReport;
 	}
-
+	
 	public MemberBean getMember() {
 		return member;
 	}
