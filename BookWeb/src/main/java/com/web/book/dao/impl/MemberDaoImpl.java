@@ -40,6 +40,20 @@ public class MemberDaoImpl implements MemberDao {
 	}
 
 	@Override
+	public boolean checkAccount(String account) {
+		boolean result = false;
+		String hql = "FROM MemberBean WHERE mb_Account =:account";
+		Session session = factory.getCurrentSession();
+		Query<MemberBean> query = session.createQuery(hql);
+		List<MemberBean> list = query.setParameter("account", account).getResultList();
+		System.out.println(list.size());
+		if (list.size() > 0) {
+			result = true;
+		}
+		return result;
+	}
+	
+	@Override
 	public boolean update(MemberBean mb) {
 		Session session = factory.getCurrentSession();
 		session.saveOrUpdate(mb);

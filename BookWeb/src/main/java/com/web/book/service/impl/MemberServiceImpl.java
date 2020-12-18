@@ -22,6 +22,9 @@ public class MemberServiceImpl implements MemberService {
 		return dao.Login(account, pwd);	
 	}
 
+	public boolean checkAccount(String account) {
+		return dao.checkAccount(account);
+	}
 
 	@Override
 	public boolean insertMember(MemberBean memberData) {

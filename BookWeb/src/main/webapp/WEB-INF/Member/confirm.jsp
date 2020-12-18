@@ -116,7 +116,7 @@ span {
 				<label>密碼:</label>
 				<h3 id="mb_Password">${reg_member.mb_Password}</h3>
 			</div>
-			<div">
+			<div>
 				<label>姓名:</label>
 				<h3 id="mb_Name">${reg_member.mb_Name}</h3>
 			</div>
@@ -125,30 +125,30 @@ span {
 				<label>性別:</label>
 				<h3 id="mb_Sex">${reg_member.mb_Sex}</h3>
 			</div>
-			<div>
-				<label>生日:</label>
-				<h3 id="mb_Birthday">${reg_member.mb_Birthday}</h3>
-			</div>
-			<br />
-			<div>
-				<label>地址:</label>
-				<h3 id="mb_Address">${reg_member.mb_Address}</h3>
-			</div>
-			<br />
-			<div>
-				<label>電話:</label>
-				<h3 id="mb_Tel">${reg_member.mb_Tel}</h3>
-			</div>
-			<br />
+<!-- 			<div> -->
+<!-- 				<label>生日:</label> -->
+<%-- 				<h3 id="mb_Birthday">${reg_member.mb_Birthday}</h3> --%>
+<!-- 			</div> -->
+<!-- 			<br /> -->
+<!-- 			<div> -->
+<!-- 				<label>地址:</label> -->
+<%-- 				<h3 id="mb_Address">${reg_member.mb_Address}</h3> --%>
+<!-- 			</div> -->
+<!-- 			<br /> -->
+<!-- 			<div> -->
+<!-- 				<label>電話:</label> -->
+<%-- 				<h3 id="mb_Tel">${reg_member.mb_Tel}</h3> --%>
+<!-- 			</div> -->
+<!-- 			<br /> -->
 			<div>
 				<label>E-mail:</label>
 				<h3 id="mb_Mail">${reg_member.mb_Mail}</h3>
 			</div>
 			<br />
-			<div>
-				<label>喜好類型:</label><br />
-				<h3 id="mb_type">${reg_member.mb_type}</h3>
-			</div>
+<!-- 			<div> -->
+<!-- 				<label>喜好類型:</label><br /> -->
+<%-- 				<h3 id="mb_type">${reg_member.mb_type}</h3> --%>
+<!-- 			</div> -->
 			<div>
 				<button type="button" id="submit1" name="confirm">送出</button>
 				<button>
