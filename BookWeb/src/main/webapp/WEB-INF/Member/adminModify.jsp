@@ -75,6 +75,7 @@ legend {
 					</tr>
 				</c:forEach>
 			</table>
+			<a href="<c:url value='/toAdmin'/>">返回</a>
 		</fieldset>
 	</form>
 </body>
