@@ -132,6 +132,11 @@ form {
 						onblur="" value="男">男 <input type="radio" name="sex"
 						id="sex_g" onblur="" value="女">女 <span id="idsp3"></span>
 				</div>
+				<div>
+					<label>E-mail:</label> <input type="email" name="mail" id="mail"
+						onblur=""> <span id="idsp7"></span><br />
+				</div>
+				<br>
 <!-- 				<div> -->
 <!-- 					<label>生日:</label> <input type="date" name="date" id="date" -->
 <!-- 						onblur=""> <span id="idsp4"></span><br /> -->
@@ -147,11 +152,7 @@ form {
 <!-- 					<span id="idsp6"></span><br /> -->
 <!-- 				</div> -->
 <!-- 				<br /> -->
-				<div>
-					<label>E-mail:</label> <input type="email" name="mail" id="mail"
-						onblur=""> <span id="idsp7"></span><br />
-				</div>
-				<br>
+				
 <!-- 				<div> -->
 <!-- 					<label>頭像:</label> <input type="file" name="pic" id="pic" onblur=""> -->
 <!-- 					<span id="idsp7"></span><br /> -->

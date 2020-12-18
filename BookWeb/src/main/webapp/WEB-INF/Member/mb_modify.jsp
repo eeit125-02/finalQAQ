@@ -91,13 +91,11 @@ span {
 	font-size: 10px;
 }
 
-.a4 {
-	margin-bottom: 25px;
-}
-
 .a5 {
 	margin-bottom: 25px;
 }
+
+
 
 .bd-placeholder-img {
 	font-size: 1. 125rem;
@@ -118,73 +116,60 @@ span {
 	<!-- header -->
 
 	<div class="container media">
-					<form action="<c:url value='/Update'/>" method="post">
+			<form:form method="POST" modelAttribute="MemberBean" enctype="multipart/form-data">
 			<fieldset>
 				<legend>會員個資</legend>
 				<div class="a2">
 					<label>帳號:</label>
 					<p>${account}</p>
 				</div>
-				<div class="a3">
-					<label>密碼:</label> <input type="password" name="pwd" id="pwd" 
-						value="" size="12" onblur="Checkpwd()" > <span id="idsp1"></span><br />
-					<p style="color: gray;">(1.不可空白，2.至少6個字且必須包含英文字母、數字)</p>
+				<div class="a5">
+					<label>性別:</label> 
+					<form:radiobutton value="男" path="mb_Sex" />男 
+					<form:radiobutton value="女" path="mb_Sex" />女
+					 <span id="idsp3"></span>
 				</div>
-				<div class="a4">
-					<label>確認密碼:</label> <input type="password" name="pwd1" id="pwd1"
-						value="" size="12" onblur="Checkpwd1()"> <span id="idsp9"></span><br />
+				<div class="a6">
+					<label>生日:</label> <form:input type="date" path="mb_Birthday"/> 
+					<span id="idsp4"></span><br />
 				</div>
-<!-- 				<div class="a1"> -->
-<!-- 					<label>姓名:</label> <input type="text" id="name" name="name" -->
-<!-- 						size="12" value="" > -->
-<!-- 				</div> -->
-<!-- 				<br> -->
-<!-- 				<div class="a5"> -->
-<!-- 					<label>性別:</label> <input type="radio" name="sex" id="sex_m" -->
-<!-- 						onblur="" value="男">男 <input type="radio" name="sex" -->
-<!-- 						id="sex_g" onblur="" value="女">女 <span id="idsp3"></span> -->
-<!-- 				</div> -->
-<!-- 				<div class="a6"> -->
-<!-- 					<label>生日:</label> <input type="date" name="date" id="date" -->
-<!-- 						onblur="" readonly> <span id="idsp4"></span><br /> -->
-<!-- 				</div> -->
-<!-- 				<br /> -->
-<!-- 				<div class="a7"> -->
-<!-- 					<label>地址:</label> <input type="text" name="address" id="address" -->
-<!-- 						onblur=""> <span id="idsp5"></span><br /> -->
-<!-- 				</div> -->
-<!-- 				<br /> -->
-<!-- 				<div class="a8"> -->
-<!-- 					<label>電話:</label> <input type="text" name="tel" id="tel" onblur=""> -->
-<!-- 					<span id="idsp6"></span><br /> -->
-<!-- 				</div> -->
-<!-- 				<br /> -->
-<!-- 				<div class="a9"> -->
-<!-- 					<label>E-mail:</label> <input type="email" name="mail" id="mail" -->
-<!-- 						onblur=""> <span id="idsp7"></span><br /> -->
-<!-- 				</div> -->
-<!-- 				<br /> -->
-<!-- 				<div class="a10"> -->
-<!-- 					<label>喜好類型:</label><br /> <input type="checkbox" name="type" -->
-<!-- 						id="type1" value="中">XX <input type="checkbox" name="type" -->
-<!-- 						id="type2" value="新">XX <input type="checkbox" name="type" -->
-<!-- 						id="type3" value="七">XX <input type="checkbox" name="type" -->
-<!-- 						id="type4" value="七">XX <input type="checkbox" name="type" -->
-<!-- 						id="type5" value="八">XX<br> <input type="checkbox" -->
-<!-- 						name="type" id="type6" value="九">XX <input type="checkbox" -->
-<!-- 						name="type" id="type7" value="十">XX <input type="checkbox" -->
-<!-- 						name="type" id="type8" value="十1">XX <input -->
-<!-- 						type="checkbox" name="type" id="type9" value="二">XX <span -->
-<!-- 						id="idsp8"></span><br /> -->
-<!-- 				</div> -->
-<!-- 				<br> -->
+				<br />
+				<div class="a7">
+					<label>地址:</label> 
+					<form:input type="text" id="address" path="mb_Address" /> <span id="idsp5"></span><br />
+				</div>
+				<br />
+				<div class="a8">
+					<label>電話:</label> <form:input type="text" id="tel" path="mb_Tel" />
+					<span id="idsp6"></span><br />
+				</div>
+				<br />
+				<div class="a9">
+					<label>E-mail:</label> 
+					<form:input type="email" id="mail" path="mb_Mail" /> 
+					<span id="idsp7"></span><br />
+				</div>
+				<br />
+				<div class="a10">
+					<label>喜好類型:</label><br /> 
+					<form:checkbox  id="type1" value="文學創作" path="mb_type" />文學創作 
+					<form:checkbox  id="type2" value="圖文漫畫" path="mb_type" />圖文漫畫 
+					<form:checkbox  id="type3" value="商業/理財" path="mb_type" />商業/理財<br> 
+					<form:checkbox  id="type4" value="人文/社會" path="mb_type" />人文/社會 
+					<form:checkbox  id="type5" value="藝術/生活" path="mb_type"/>藝術/生活
+					<form:checkbox  id="type6" value="旅遊/飲食" path="mb_type"/>旅遊/飲食 <br>
+					<form:checkbox  id="type7" value="親子/童書" path="mb_type"/>親子/童書 
+					<form:checkbox  id="type8" value="學習/考用" path="mb_type"/>學習/考用 
+					<form:checkbox  id="type9" value="醫療/科學" path="mb_type"/>醫療/科學
+					<span id="idsp8"></span><br />
+				</div>
+				<br>
 				<div class="a11">
-					<button type="submit" name="Update">送出</button>
+					<button type="submit">送出</button>
 					<button type="reset">清除</button>
 				</div>
-
 			</fieldset>
-		</form>
+		</form:form>
 	</div>
 	<!-- footer -->
 	<footer class="container py-5" id="bookWebFooter"></footer>
@@ -227,4 +212,7 @@ span {
 	</script>
 </body>
 
+</html>
+
+</body>
 </html>
