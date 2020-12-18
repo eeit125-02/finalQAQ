@@ -17,5 +17,7 @@ public interface MemberService {
 	boolean deleteMember(int id);
 
 	boolean update(MemberBean mb);
+	
+	boolean checkAccount(String account);
 
 }

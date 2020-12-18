@@ -18,4 +18,6 @@ public interface MemberDao {
 
 	boolean delete(int id);
 
+	boolean checkAccount(String account);
+
 }
