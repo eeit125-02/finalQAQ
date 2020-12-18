@@ -80,9 +80,13 @@ p {
 			<form action="<c:url value='/mb_inf' />" method="post">
 				<button type="submit" name="mb_inf">會員資訊</button>
 			</form>
-			<form action="<c:url value='/Modify' />" method="post">
+			<form action="<c:url value='/MbUpdate' />">
 				<button type="submit" name="Modify">會員修改</button>
 			</form>
+			<form action="<c:url value='/Modify' />" method="post">
+				<button type="submit" name="Modify">密碼修改</button>
+			</form>
+			
 		</div>
 		<a href="<c:url value='/toLogin' />">登出</a>
 	</fieldset>
