@@ -1,15 +1,16 @@
 package com.web.book.controller;
 
-import java.sql.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.web.book.model.BookBean;
 import com.web.book.model.Book_COLLECTBean;
@@ -59,7 +60,6 @@ public class SearchBookController {
 		model.addAttribute("collectresult", result);
 		return "SearchBook/Collect";
 	}
-
 		
 	// 刪除收藏項目
 	@SuppressWarnings("unused")
@@ -74,10 +74,9 @@ public class SearchBookController {
 		return "SearchBook/Collect";
 	}
 
-	
 	// 在單獨頁面加入收藏
 	@SuppressWarnings("unused")
-	@GetMapping("/pagecollect")
+	@PostMapping("/pagecollect")
 	public String gotoPageCollect(Model model, @RequestParam(value = "pagecollect") Integer bk_id) {
 		int mb_id = 5;
 		int result2 = searchService.savebc(bk_id, mb_id);
@@ -91,48 +90,27 @@ public class SearchBookController {
 	
 	// 前往修改書籍頁面
 	@GetMapping("/updatebook")
-	public String gotoUpdate(Model model, @RequestParam(value = "update") Integer bk_id) {
+	public String gotoUpdate(Model model, 
+			@RequestParam(value = "update",required=false) Integer bk_id) {
 		BookBean result = searchService.getBook(bk_id);
-		model.addAttribute("bookresult", result);
+		model.addAttribute("pageresult", result);
 		return "SearchBook/Update";
 	}
-
 	
 	// 最終更新頁面
-	@SuppressWarnings("unused")
-	@PostMapping("/confirmupdate")
+	@PostMapping("/updatebook")
 	public String gotoUpdateFin(Model model, 
-			@RequestParam(value = "id") Integer bk_ID,
-			@RequestParam(value = "bookname") String bk_Name,
-			@RequestParam(value = "bookauthor") String bk_Author, 
-			@RequestParam(value = "bookpublish") String bk_Publish, 
-			@RequestParam(value = "bookdate") Date bk_Date,			
-			@RequestParam(value = "bookcontent") String bk_Content
-			) {
-		//暫未設值
-		String bk_BookType=null;
-		String bk_Translator=null;
-		String bk_ISBN=null;
-		String bk_Pic=null;
-		String bk_Language=null;
-		Integer bk_Price=null;
-		String bk_Publisher_Place=null;
-		Integer bk_Page=null;
-		BookBean result=new BookBean(bk_ID, bk_Name, bk_BookType, bk_Author, bk_Translator, bk_Publish, bk_ISBN, 
-				bk_Date, bk_Pic, bk_Language, bk_Price, bk_Page, bk_Publisher_Place, bk_Content);
-		int count= searchService.updatebk(result);
+			@ModelAttribute("pageresult")BookBean result,
+			@RequestParam(value="bk_ID",required=false) Integer bk_ID,
+			RedirectAttributes attr) {
+		attr.addAttribute("page",bk_ID);
+		searchService.updatebk(result);
+		return "redirect:/bookpage";
+	}
 
-		//導回原本頁面（抓不到？）
-				BookBean result1 = searchService.getBook(bk_ID);
-				model.addAttribute("pageresult", result1);
-				return "SearchBook/Page";
-		}
-	
-	
-	//導覽列點選轉到漂流瓶的第一個頁面
+	//點選轉到漂流瓶的第一個頁面
 	@RequestMapping(value = "SearchBook/Search")
-	public String serchPage(Model model) {
-		
+	public String serchPage(Model model) {	
 		return "SearchBook/Search";
 	}
 }
