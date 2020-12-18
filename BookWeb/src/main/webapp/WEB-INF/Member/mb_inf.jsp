@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 	<%@ taglib uri="http://www.springframework.org/tags" prefix="c" %>
+	<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -104,7 +105,6 @@ span {
 <!-- header -->
 	<header class="container blog-header py-3" id="bookWebheader"></header>
 	<!-- header -->
-
 	<div class="container media">
 		<fieldset>
 			<legend>會員資料</legend>
@@ -154,7 +154,6 @@ span {
 	<!-- footer -->
 	<footer class="container py-5" id="bookWebFooter"></footer>
 	<!-- footer -->
-	
 	<script>
 	$(document).ready(function() {
 		$("#bookWebheader").load("<c:url value='/header'/>");

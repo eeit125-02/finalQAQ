@@ -1,11 +1,7 @@
 package com.web.book.controller;
 
-import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,7 +18,6 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import com.web.book.model.MemberBean;
 import com.web.book.service.MemberService;
 
-@SessionAttributes("login")
 @Controller
 public class Login {
 
@@ -33,43 +28,42 @@ public class Login {
 
 	MemberBean checkMember;
 
-	//註冊資料
+	// 註冊資料
 	@PostMapping("/registe")
 	public String Registe(Model model, @RequestParam(value = "account") String mb_Account,
-			@RequestParam(value = "pwd") String mb_Password,@RequestParam(value="sex") String mb_Sex,
-			 @RequestParam(value = "name") String mb_Name,
-			@RequestParam(value = "mail") String mb_Mail) {
+			@RequestParam(value = "pwd") String mb_Password, @RequestParam(value = "sex") String mb_Sex,
+			@RequestParam(value = "name") String mb_Name, @RequestParam(value = "mail") String mb_Mail) {
 		Timestamp ts = new Timestamp(System.currentTimeMillis());
 //		String type = "";
 //		for (int i = 0; i < mb_Type.length; i++) {
 //			type += mb_Type[i] + " ";
 //		}
 //		String MB_type = type;
-		MemberBean reg_member = new MemberBean(0, mb_Account, mb_Password, mb_Sex, null, mb_Name, mb_Mail,
-				null, null, ts, 0, null, null);
+		MemberBean reg_member = new MemberBean(0, mb_Account, mb_Password, mb_Sex, null, mb_Name, mb_Mail, null, null,
+				ts, 0, null, null);
 		System.out.println(reg_member);
 		checkMember = reg_member;
 		model.addAttribute("reg_member", reg_member);
 		return "Member/confirm";
 	}
 
-	//註冊資料確認後送至資料庫
+	// 註冊資料確認後送至資料庫
 //	@PostMapping("/upDateBookReport/{mb_Account}/{mb_Password}/{mb_Name}/{mb_Sex}/{mb_Birthday}/{mb_Address}/{mb_Tel}/{mb_Mail}/{mb_type}")
 	@PostMapping("/confirm")
-	public String Confirm() {	
+	public String Confirm() {
 		ms.insertMember(checkMember);
-		return "Member/login";		
+		return "Member/login";
 	}
-	
-	//重複帳號確認
+
+	// 重複帳號確認
 	@PostMapping("/toRegiste/checkAccount/{mb_Account}")
 	@ResponseBody
 	public boolean checkAccount(@PathVariable("mb_Account") String account) {
 		System.out.println(account);
 		boolean check = ms.checkAccount(account);
-		return check;	
+		return check;
 	}
-	
+
 	// 會員登入
 	@PostMapping("/login")
 	public String login(Model model, @RequestParam(value = "account") String account,
@@ -87,34 +81,59 @@ public class Login {
 		}
 		return "Member/city";
 	}
-	
+
 	// 會員資料
 	@PostMapping("/mb_inf")
 	public String Mb_inf(Model model) {
+		MemberBean memberbean = new MemberBean();
+		model.addAttribute("MemberBean", memberbean);
 		MemberBean select = ms.select(Account);
 		System.out.println(select);
 		model.addAttribute("login", select);
 		return "Member/mb_inf";
 	}
 
-	// 會員修改介面
+	// 會員修改
+	@GetMapping("/MbUpdate")
+	public String toUpdate(Model model) {
+		MemberBean memberbean = new MemberBean();
+		model.addAttribute("account", Account);
+		model.addAttribute("MemberBean", memberbean);
+		return "Member/mb_modify";
+	}
+	// 會員修改
+	@PostMapping("/MbUpdate")
+	public String Update(Model model,@ModelAttribute("MemberBean") MemberBean MB) {
+		System.out.println(MB);
+		MemberBean mb_inf = ms.select(Account);
+		mb_inf.setMb_Sex(MB.getMb_Sex());
+		mb_inf.setMb_Birthday(MB.getMb_Birthday());
+		mb_inf.setMb_Address(MB.getMb_Address());
+		mb_inf.setMb_Tel(MB.getMb_Tel());
+		mb_inf.setMb_Mail(MB.getMb_Mail());
+		mb_inf.setMb_type(MB.getMb_type());
+		boolean update = ms.update(mb_inf);
+		if (update) {
+			System.out.println(mb_inf);
+			model.addAttribute("login", mb_inf);
+		}
+		return "Member/mb_inf";
+	}
+
+	// 密碼修改介面
 	@PostMapping("/Modify")
 	public String Modify(Model model) {
 		model.addAttribute("account", Account);
 		return "Member/Modify";
 	}
 
-	// 會員修改
+	// 密碼更新
 	@PostMapping("/Update")
-	public String Update(Model model, @RequestParam(value = "pwd") String pwd) {
+	public String Update(Model model, @RequestParam("pwd") String pwd) {
 		MemberBean mb_inf = ms.select(Account);
-		System.out.println(mb_inf);
 		mb_inf.setMb_Password(pwd);
-		boolean update = ms.update(mb_inf);
-		if (update) {
-			model.addAttribute("login", mb_inf);
-		}
-		return "Member/mb_inf";
+		ms.update(mb_inf);
+		return "Member/city";
 	}
 
 	// 管理員(會員資料)
@@ -142,7 +161,8 @@ public class Login {
 			return "Member/adminupdate";
 		}
 	}
-	//管理員更新
+
+	// 管理員更新
 	@PostMapping(value = "/adminupdate")
 	public String toadminupdate(Model model, @RequestParam(value = "pwd") String mb_Password,
 			@RequestParam(value = "name") String mb_Name, @RequestParam(value = "mail") String mb_Mail,
@@ -160,19 +180,19 @@ public class Login {
 		return "Member/adminModify";
 	}
 
-	//管理員介面
+	// 管理員介面
 	@RequestMapping(value = "/toAdmin")
 	public String toadmin(Model model) {
 		return "Member/admin";
 	}
 
-	//登入介面
+	// 登入介面
 	@RequestMapping(value = "/toLogin")
 	public String tologin(Model model) {
 		return "Member/login";
 	}
 
-	//註冊介面
+	// 註冊介面
 	@RequestMapping(value = "/toRegiste")
 	public String toregiste(Model model) {
 		return "Member/registe";
