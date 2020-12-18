@@ -20,6 +20,7 @@ public interface ActDao {
 
 	// 刪除活動
 	int deleteAct(Integer act_ID);
+	
 
 //	// 會員的報名活動清單
 //	List<ActJoinBean> getJoinRecords(Integer mb_ID);
