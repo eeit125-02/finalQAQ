@@ -26,11 +26,16 @@ public class BookReportController {
 	BookReportService bookReportService;
 	
 	@GetMapping("" )
-	public String memberBookReport (Model model) {
+	public String homeBookReport (Model model) {
 		return "BookReport/BookReport";
 	}
 	
-	@PostMapping("/getBookReportList")
+	@GetMapping("/EditBookReport" )
+	public String memberBookReport (Model model) {
+		return "BookReport/EditBookReport";
+	}
+	
+	@PostMapping("/EditBookReport/getBookReportList")
 	@ResponseBody
 	public List<Map<String, Object>> bookReportList() {
 		
@@ -50,14 +55,14 @@ public class BookReportController {
 	    return book;   
 	}
 	
-	@PostMapping("/deleteBookReport/{br_ID}")
+	@PostMapping("/EditBookReport/deleteBookReport/{br_ID}")
 	@ResponseBody
 	public String deleteBookReport( @PathVariable("br_ID") Integer br_ID ) {
 		bookReportService.deleteBookReport(br_ID);
 		return "true";
 	}
 	
-	@PostMapping("/getBookReport/{br_ID}")
+	@PostMapping("/EditBookReport/getBookReport/{br_ID}")
 	@ResponseBody
 	public Map<String, Object> getBookReport( @PathVariable("br_ID") Integer br_ID ) {
 		BookReportBean bookReport =  bookReportService.getBookReport(br_ID);
@@ -73,7 +78,7 @@ public class BookReportController {
 		return data;
 	}
 	
-	@GetMapping("/upDateBookReport")
+	@GetMapping("/EditBookReport/upDateBookReport")
 	@ResponseBody
 	public String upDateBookReport(
 			@RequestParam(value = "br_ID", required = true) Integer br_ID, 
