@@ -37,9 +37,7 @@ legend {
 </head>
 
 <body>
-	<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
-	<form action="./delete" method="post">
+	<form action="<c:url value='/delete' />" method="post">
 		<fieldset>
 			<legend>會員清單</legend>
 			<table border="1" width="100%">
@@ -78,11 +76,6 @@ legend {
 				</c:forEach>
 			</table>
 		</fieldset>
-		<script>
-
-		</script>
-		
-
 	</form>
 </body>
 
