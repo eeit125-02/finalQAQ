@@ -130,23 +130,23 @@ span {
 					 <span id="idsp3"></span>
 				</div>
 				<div class="a6">
-					<label>生日:</label> <form:input type="date" path="mb_Birthday"/> 
+					<label>生日:</label> <form:input type="date" path="mb_Birthday" value="${mb_inf.mb_Birthday}"/> 
 					<span id="idsp4"></span><br />
 				</div>
 				<br />
 				<div class="a7">
 					<label>地址:</label> 
-					<form:input type="text" id="address" path="mb_Address" /> <span id="idsp5"></span><br />
+					<form:input type="text" id="address" value="${mb_inf.mb_Address}" path="mb_Address" /> <span id="idsp5"></span><br />
 				</div>
 				<br />
 				<div class="a8">
-					<label>電話:</label> <form:input type="text" id="tel" path="mb_Tel" />
+					<label>電話:</label> <form:input type="text" id="tel" value="${mb_inf.mb_Tel}" path="mb_Tel" />
 					<span id="idsp6"></span><br />
 				</div>
 				<br />
 				<div class="a9">
 					<label>E-mail:</label> 
-					<form:input type="email" id="mail" path="mb_Mail" /> 
+					<form:input type="email" id="mail" path="mb_Mail" value="${mb_inf.mb_Mail}"/> 
 					<span id="idsp7"></span><br />
 				</div>
 				<br />
