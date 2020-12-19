@@ -97,6 +97,8 @@ public class Login {
 	@GetMapping("/MbUpdate")
 	public String toUpdate(Model model) {
 		MemberBean memberbean = new MemberBean();
+		MemberBean mb_inf = ms.select(Account);
+		model.addAttribute("mb_inf",mb_inf);
 		model.addAttribute("account", Account);
 		model.addAttribute("MemberBean", memberbean);
 		return "Member/mb_modify";
