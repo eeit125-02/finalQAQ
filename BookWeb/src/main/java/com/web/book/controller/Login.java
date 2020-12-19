@@ -3,6 +3,10 @@ package com.web.book.controller;
 import java.sql.Timestamp;
 import java.util.List;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -66,20 +70,26 @@ public class Login {
 
 	// 會員登入
 	@PostMapping("/login")
-	public String login(Model model, @RequestParam(value = "account") String account,
+	public String login(Model model, HttpServletResponse response,
+			@RequestParam(value = "account") String account,
 			@RequestParam(value = "pwd") String pwd) {
 		boolean mb = ms.Login(account, pwd);
 		if (mb) {
 			Account = account;
+			MemberBean loginMember = ms.select(Account);
+			Cookie cookie = new Cookie("loginMb_ID", String.valueOf(loginMember.getMb_ID()));
+			cookie.setMaxAge(60);
+			response.addCookie(cookie);
 			if (account.equals("a123456") && pwd.equals("a123456")) {
 				List<MemberBean> memberall = ms.adminselect();
 				model.addAttribute("admin", memberall);
 				return "Member/admin";
+			}else {
+				return "Member/city";
 			}
 		} else {
 			return "Member/login";
 		}
-		return "Member/city";
 	}
 
 	// 會員資料

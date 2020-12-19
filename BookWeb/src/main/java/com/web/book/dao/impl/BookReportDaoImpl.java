@@ -71,13 +71,13 @@ public class BookReportDaoImpl implements BookReportDao {
 	}
 
 	@Override
-	public void insertBookReport(int mb_ID, int bk_ID, int br_Score, String br_Content) {
+	public void insertBookReport(Integer mb_ID, Integer bk_ID, String br_Name, Integer br_Score, String br_Content) {
 		
 		Session session = fatory.getCurrentSession();
 		MemberBean member = session.load(MemberBean.class, mb_ID);
 		BookBean book = session.load(BookBean.class, bk_ID);
 		Date date =  new Date();
-		BookReportBean bookReport = new BookReportBean(null, br_Score, br_Content, date, book, member);
+		BookReportBean bookReport = new BookReportBean(br_Score, mb_ID, br_Score, br_Content, date, bk_ID, br_Score, book, member);
 		session.save(bookReport);
 		
 	}

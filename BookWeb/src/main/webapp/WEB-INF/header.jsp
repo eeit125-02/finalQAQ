@@ -4,12 +4,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/jQuery/jquery-3.5.1.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/jQuery/jquery.cookie.js"></script>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script>
-	
-</script>
+
 </head>
 <body>
 	
@@ -19,7 +18,7 @@
 			<a class="blog-header-logo text-dark" href="//localhost:8080/BookWeb">圖書資訊網</a>
 		</div>
 		<div class="col-4 d-flex justify-content-end align-items-center">
-			<a class="btn btn-sm btn-outline-secondary" href="//localhost:8080/BookWeb/toLogin">登入</a>
+			<a id="login" class="btn btn-sm btn-outline-secondary" href="//localhost:8080/BookWeb/toLogin">登入</a>
 		</div>
 	</div>
 
@@ -41,5 +40,15 @@
 
 		</nav>
 	</div>
+	<script>
+		/* $.cookie('name', 'value') */
+		var mb_ID = $.cookie('loginMb_ID');
+		if ( typeof(mb_ID) != "undefined"){
+			$("#login").html("登出")
+		}else{
+			console.log("null")
+		};
+		
+	</script>
 </body>
 </html>

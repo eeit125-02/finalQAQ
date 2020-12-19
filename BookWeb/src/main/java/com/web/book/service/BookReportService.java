@@ -16,5 +16,5 @@ public interface BookReportService {
 	
 	void upDateBookReportData(Integer br_ID, Integer br_Score, String br_Content );
 	
-	void insertBookReport(int mb_ID, int bk_ID, int br_Score, String br_Content);
+	void insertBookReport(Integer mb_ID, Integer bk_ID, String br_Name, Integer br_Score, String br_Content);
 }
