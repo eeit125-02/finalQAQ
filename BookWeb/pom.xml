@@ -12,7 +12,7 @@
 		<maven.compiler.targer>1.8</maven.compiler.targer>
 		<spring.version>5.2.11.RELEASE</spring.version>
 		<hibernate.version>5.4.10.Final</hibernate.version>
-		
+
 	</properties>
 
 
@@ -137,7 +137,14 @@
 			<artifactId>jackson-databind</artifactId>
 			<version>2.11.2</version>
 		</dependency>
-		
+
+		<dependency>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
+			<version>2.8.5</version>
+		</dependency>
+
+
 		<dependency>
 			<groupId>commons-fileupload</groupId>
 			<artifactId>commons-fileupload</artifactId>
@@ -149,8 +156,8 @@
 			<artifactId>commons-io</artifactId>
 			<version>1.3.2</version>
 		</dependency>
-		
-		
+
+
 
 	</dependencies>
 

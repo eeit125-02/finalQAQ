@@ -11,7 +11,8 @@
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
 	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
 	crossorigin="anonymous">
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/jQuery/jquery-3.5.1.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/jQuery/jquery.cookie.js"></script>
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
 	integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
@@ -203,10 +204,13 @@
 	<!-- footer -->
 
 	<script>
+		
+		var mb_ID = $.cookie('loginMb_ID');
+		console.log(mb_ID);
 	
 		$("#bookWebheader").load("//localhost:8080/BookWeb/header");
        	$("#bookWebFooter").load("//localhost:8080/BookWeb/footer");
-  
+  		
         $(document).ready(function(){
         	loadBookReportList();
         });

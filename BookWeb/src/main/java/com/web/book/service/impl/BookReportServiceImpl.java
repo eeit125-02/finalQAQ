@@ -50,9 +50,9 @@ public class BookReportServiceImpl implements BookReportService {
 	}
 
 	@Override
-	public void insertBookReport(int mb_ID, int bk_ID, int br_Score, String br_Content) {
+	public void insertBookReport(Integer mb_ID, Integer bk_ID, String br_Name, Integer br_Score, String br_Content) {
 
-		bookReportDao.insertBookReport(mb_ID, bk_ID, br_Score, br_Content);
+		bookReportDao.insertBookReport(mb_ID, bk_ID, br_Name, br_Score, br_Content);
 		
 	}
 

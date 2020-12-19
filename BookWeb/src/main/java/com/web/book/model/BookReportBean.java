@@ -19,6 +19,7 @@ public class BookReportBean {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer br_ID;
+	private Integer br_Name;
 	private Integer br_Score;
 	private String br_Content;
 	private Date br_DateTime;
@@ -37,18 +38,18 @@ public class BookReportBean {
 		super();
 	}
 
-	public BookReportBean(Integer br_ID, Integer br_Score, String br_Content, Date br_DateTime, BookBean book,
-			MemberBean member) {
+	public BookReportBean(Integer br_ID, Integer br_Name, Integer br_Score, String br_Content, Date br_DateTime,
+			Integer br_ClickNumber, Integer br_CollectionNumber, BookBean book, MemberBean member) {
 		super();
 		this.br_ID = br_ID;
+		this.br_Name = br_Name;
 		this.br_Score = br_Score;
 		this.br_Content = br_Content;
 		this.br_DateTime = br_DateTime;
+		this.br_ClickNumber = br_ClickNumber;
+		this.br_CollectionNumber = br_CollectionNumber;
 		this.book = book;
 		this.member = member;
-		this.br_ClickNumber = 0;
-		this.br_CollectionNumber = 0;
-		
 	}
 
 	public Integer getBr_ID() {
@@ -57,6 +58,14 @@ public class BookReportBean {
 
 	public void setBr_ID(Integer br_ID) {
 		this.br_ID = br_ID;
+	}
+
+	public Integer getBr_Name() {
+		return br_Name;
+	}
+
+	public void setBr_Name(Integer br_Name) {
+		this.br_Name = br_Name;
 	}
 
 	public Integer getBr_Score() {

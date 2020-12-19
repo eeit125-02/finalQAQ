@@ -6,7 +6,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/jQuery/jquery-3.5.1.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/jQuery/jquery.cookie.js"></script>
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
 	integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
@@ -54,51 +55,30 @@
 
 			<div class="col-md-8">
 				<h1 class="my-4">
-					Page Heading <small>Secondary Text</small>
+					  <small>分類</small>
 				</h1>
 
-				<div class="card mb-3">
-					<div class="row g-0">
+				<div id="searchList">
 					
-						<img src="http://placehold.it/200x200" alt="...">
-						
-						<div class="col-md-8">
-							<div class="card-body">
-								<h5 class="card-title">Card title</h5>
-								<p class="card-text">This is a wider card with supporting
-									text below as a natural lead-in to additional content. This
-									content is a little bit longer.</p>
-								<p class="card-text">
-									<small class="text-muted">Last updated 3 mins ago</small>
-								</p>
-							</div>
-						</div>
-					</div>
 				</div>
-				<!-- Blog Post -->
-				<div class="card mb-4">
-					<img class="card-img-left" src="http://placehold.it/750x300"
-						alt="Card image cap">
-					<div class="card-body">
-						<h2 class="card-title">Post Title</h2>
-						<p class="card-text">Lorem ipsum dolor sit amet, consectetur
-							adipisicing elit. Reiciendis aliquid atque, nulla? Quos cum ex
-							quis soluta, a laboriosam. Dicta expedita corporis animi vero
-							voluptate voluptatibus possimus, veniam magni quis!</p>
-						<a href="#" class="btn btn-primary">Read More →</a>
-					</div>
-					<div class="card-footer text-muted">
-						Posted on January 1, 2020 by <a href="#">Start Bootstrap</a>
-					</div>
-				</div>
-
+				
 
 				<!-- Pagination -->
-				<ul class="pagination justify-content-center mb-4">
-					<li class="page-item"><a class="page-link" href="#">←
-							Older</a></li>
-					<li class="page-item disabled"><a class="page-link" href="#">Newer→</a></li>
-				</ul>
+				  <ul class="pagination justify-content-center mb-4">
+				    <li class="page-item">
+				      <a class="page-link" href="#" aria-label="Previous">
+				        <span aria-hidden="true">&laquo;</span>
+				      </a>
+				    </li>
+				    <li class="page-item "><a class="page-link" href="#">1</a></li>
+				    <li class="page-item active"><a class="page-link" href="#">2</a></li>
+				    <li class="page-item"><a class="page-link" href="#">3</a></li>
+				    <li class="page-item">
+				      <a class="page-link" href="#" aria-label="Next">
+				        <span aria-hidden="true">&raquo;</span>
+				      </a>
+				    </li>
+				  </ul>
 
 			</div>
 
@@ -110,9 +90,8 @@
 					<h5 class="card-header">Search</h5>
 					<div class="card-body">
 						<div class="input-group">
-							<input type="text" class="form-control"
-								placeholder="Search for..."> <span
-								class="input-group-append">
+							<input type="text" class="form-control" placeholder="Search for..."> 
+							<span class="input-group-append">
 								<button class="btn btn-secondary" type="button">Go!</button>
 							</span>
 						</div>
@@ -121,21 +100,21 @@
 
 				<!-- Categories Widget -->
 				<div class="card my-4">
-					<h5 class="card-header">Categories</h5>
+					<h5 class="card-header">分類</h5>
 					<div class="card-body">
 						<div class="row">
 							<div class="col-lg-6">
 								<ul class="list-unstyled mb-0">
-									<li><a href="#">Web Design</a></li>
-									<li><a href="#">HTML</a></li>
-									<li><a href="#">Freebies</a></li>
+									<li><a href="#">文學</a></li>
+									<li><a href="#">教育</a></li>
+									<li><a href="#">家庭</a></li>
 								</ul>
 							</div>
 							<div class="col-lg-6">
 								<ul class="list-unstyled mb-0">
-									<li><a href="#">JavaScript</a></li>
-									<li><a href="#">CSS</a></li>
-									<li><a href="#">Tutorials</a></li>
+									<li><a href="#">廚房</a></li>
+									<li><a href="#">學習</a></li>
+									<li><a href="#">政府</a></li>
 								</ul>
 							</div>
 						</div>
@@ -161,48 +140,43 @@
 	<!-- footer -->
 
 	<script>
+		var mb_ID = $.cookie('loginMb_ID');
+		console.log(mb_ID);
 		function loadBookReportList() {
+			$.ajax({
+				async : false,
+				cache : false,
+				type : 'POST',
+				url : location.href + "/getBookReportList",
+				dataType : "json",
+				contentType : "application/json;charset=utf-8",
+				error : function() {
+					alert('123 ');
+				},
+				success : function(data) {
 
-			$
-					.ajax({
-						async : false,
-						cache : false,
-						type : 'POST',
-						url : location.href + "/getBookReportList",
-						dataType : "json",
-						contentType : "application/json;charset=utf-8",
-						error : function() {
-							alert('123 ');
-						},
-						success : function(data) {
-
-							var insertData = "<div class=\"col-md-8\">";
-							for (let i = 0; i < data.length; i++) {
-								insertData += "<div class=\"card mb-4\">"
-										+ "<img class=\"card-img-top\" src=\""+ data[i].bk_Pic +"alt=\"Card image cap\">"
-										+ "<div class=\"card-body\">"
-										+ "<h2 class=\"card-title\">"
-										+ data[i].br_Name
-										+ "</h2>"
-										+ "<p class=\"card-text\">"
-										+ data[i].br_Content
-										+ "</p>"
-										+ "<a href=\" URL "+ data[i].br_ +"\" class=\"btn btn-primary\">Read More →</a>"
-										+ "</div>"
-										+ "<div class=\"card-footer text-muted\">"
-										+ "Posted on January 1, 2020 by<a href=\" URL "+ data[i].mb_ID +"\">"
-										+ data[i].mb_Name + "</a>" + "</div>"
-										+ "</div>"
-							}
-
-							insertData += "<ul class=\"pagination justify-content-center mb-4\">"
-									+ "<ul class=\"pagination justify-content-center mb-4\">"
-									+ "<li class=\"page-item\"><a class=\"page-link\" href=\""+ URL +"\">←Older</a></li>"
-									+ "<li class=\"page-item disabled\"><a class=\"page-link\" href=\""+ URL +"\">Newer→</a></li>"
-									+ "</ul>" + "</div>"
-							$('#bookReportList').html(insertData);
-						}
-					});
+					var insertData = "";
+					for (let i = 0; i < data.length; i++) {
+						insertData += "<div class=\"card mb-4\">"
+								   += "<div class=\"row g-0\">"
+								   += "<img src=\""+ data[i].br_Pic+ "\">"
+								   += "<div class=\"col-md-8\">"
+								   += "<div class=\"card-body\">"
+								   += "<h5 class=\"card-title\">"+ data[i].br_name+ "</h5>"
+								   += "<p class=\"card-text\">"+ data[i].br_Content.replace(/<br>/g,"\n")+ "</p>"
+								   += "<div class=\"d-flex justify-content-between align-items-center\">"
+								   += "<div class=\"d-flex justify-content-between align-items-center\">"
+								   += "<a href=\""+br_ID+"\">(閱讀全文)</a>"
+								   += "<small class=\"text-muted\">創建日期：<br>\""+ data[i].br_DateTime+ "\"</small>"
+								   += "</div>"
+								   += "</div>"
+								   += "</div>"
+								   += "</div>"
+								   += "</div>"
+					}
+					$('#bookReportList').html(insertData);
+				}
+			});
 		};
 	</script>
 
