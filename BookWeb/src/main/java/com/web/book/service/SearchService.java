@@ -3,7 +3,7 @@ package com.web.book.service;
 import java.util.List;
 
 import com.web.book.model.BookBean;
-import com.web.book.model.Book_COLLECTBean;
+import com.web.book.model.BookCollectBean;
 
 public interface SearchService {
 
@@ -14,7 +14,7 @@ public interface SearchService {
 	BookBean getBook(int id);
 
 	// 會員收藏清單
-	List<Book_COLLECTBean> gotoCollect(int id);
+	List<BookCollectBean> gotoCollect(int id);
 
 	// 刪除收藏項目
 	int delete(int bcid);

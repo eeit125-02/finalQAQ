@@ -8,7 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.web.book.dao.SearchBookDAO;
 import com.web.book.model.BookBean;
-import com.web.book.model.Book_COLLECTBean;
+import com.web.book.model.BookCollectBean;
 import com.web.book.service.SearchService;
 
 	@Transactional
@@ -33,7 +33,7 @@ import com.web.book.service.SearchService;
 		
 		// 會員收藏清單
 		@Override
-		public List<Book_COLLECTBean> gotoCollect(int id) {
+		public List<BookCollectBean> gotoCollect(int id) {
 			return searchBookDAO.getCollect(id);	
 		}
 		

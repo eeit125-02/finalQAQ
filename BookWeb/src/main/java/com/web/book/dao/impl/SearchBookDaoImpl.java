@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository;
 
 import com.web.book.dao.SearchBookDAO;
 import com.web.book.model.BookBean;
-import com.web.book.model.Book_COLLECTBean;
+import com.web.book.model.BookCollectBean;
 import com.web.book.model.MemberBean;
 
 @Repository
@@ -47,12 +47,12 @@ public class SearchBookDaoImpl implements SearchBookDAO {
 	// 會員收藏清單
 	@Override
 	@SuppressWarnings("unchecked")
-	public List<Book_COLLECTBean> getCollect(int MB_ID) {
-		List<Book_COLLECTBean> list = new ArrayList<>();
+	public List<BookCollectBean> getCollect(int MB_ID) {
+		List<BookCollectBean> list = new ArrayList<>();
 		String hql = "From Book_COLLECTBean bc Where bc.member = :mbid";
 		Session session = factory.getCurrentSession();
-		Book_COLLECTBean bc=session.load(Book_COLLECTBean.class, MB_ID);
-		Query<Book_COLLECTBean> query = session.createQuery(hql);
+		BookCollectBean bc=session.load(BookCollectBean.class, MB_ID);
+		Query<BookCollectBean> query = session.createQuery(hql);
 		list = query.setParameter("mbid", bc).getResultList();
 		return list;
 	}	
@@ -62,7 +62,7 @@ public class SearchBookDaoImpl implements SearchBookDAO {
 	public int deletebc(int bcid) {
 		int count = 0;
 		Session session = factory.getCurrentSession();
-		Book_COLLECTBean result = session.load(Book_COLLECTBean.class, bcid);		
+		BookCollectBean result = session.load(BookCollectBean.class, bcid);		
 		session.delete(result);
 		count++;
 		return count;
@@ -77,7 +77,7 @@ public class SearchBookDaoImpl implements SearchBookDAO {
 		java.sql.Date sqlDate = java.sql.Date.valueOf(d);
 		MemberBean member = session.get(MemberBean.class, mb_id);
 		BookBean book = session.get(BookBean.class, bk_id);
-		Book_COLLECTBean bkc=new Book_COLLECTBean(1, sqlDate, null, book, member);
+		BookCollectBean bkc=new BookCollectBean(1, sqlDate, null, book, member);
 		session.save(bkc);
 		count++;
 		return count;

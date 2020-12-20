@@ -3,7 +3,7 @@ package com.web.book.dao;
 import java.util.List;
 
 import com.web.book.model.BookBean;
-import com.web.book.model.Book_COLLECTBean;
+import com.web.book.model.BookCollectBean;
 
 
 public interface SearchBookDAO {
@@ -16,7 +16,7 @@ public interface SearchBookDAO {
 	BookBean getBook(int id);
 
 	// 會員收藏清單
-	List<Book_COLLECTBean> getCollect(int MB_ID);
+	List<BookCollectBean> getCollect(int MB_ID);
 
 	// 刪除收藏項目
 	int deletebc(int bcid);

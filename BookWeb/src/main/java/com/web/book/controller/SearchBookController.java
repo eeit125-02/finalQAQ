@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.web.book.model.BookBean;
-import com.web.book.model.Book_COLLECTBean;
+import com.web.book.model.BookCollectBean;
 import com.web.book.service.SearchService;
 
 @Controller
@@ -56,7 +56,7 @@ public class SearchBookController {
 	@GetMapping("/collectlist")
 	public String gotoList(Model model, @RequestParam(value = "list") Integer mb_id) {
 		mb_id = 5;
-		List<Book_COLLECTBean> result = searchService.gotoCollect(mb_id);
+		List<BookCollectBean> result = searchService.gotoCollect(mb_id);
 		model.addAttribute("collectresult", result);
 		return "SearchBook/Collect";
 	}
@@ -69,7 +69,7 @@ public class SearchBookController {
 		
 		//導回原本頁面（抓不到）
 		int mb_id=5; //先寫死
-		List<Book_COLLECTBean> result = searchService.gotoCollect(mb_id);
+		List<BookCollectBean> result = searchService.gotoCollect(mb_id);
 		model.addAttribute("collectresult", result);
 		return "SearchBook/Collect";
 	}

@@ -6,6 +6,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -28,6 +30,11 @@ public class BookBean {
 	private Integer bk_Page;
 	private String bk_Publisher_Place;
 	private String bk_Content;
+	
+//	@OneToMany(mappedBy = "book")
+//	@JoinColumn(name="bt_ID")
+////	@JoinColumn(name="ty_ID", referencedColumnName="bt_ID")
+//	private BookTypeBean booktype;
 
 	public BookBean() {
 		super();
@@ -51,6 +58,7 @@ public class BookBean {
 		this.bk_Page = bk_Page;
 		this.bk_Publisher_Place = bk_Publisher_Place;
 		this.bk_Content = bk_Content;
+//		this.booktype = booktype;
 	}
 
 	public Integer getBk_ID() {
@@ -165,39 +173,12 @@ public class BookBean {
 		this.bk_Content = bk_Content;
 	}
 
-	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("BookBean [bk_ID=");
-		builder.append(bk_ID);
-		builder.append(", bk_Name=");
-		builder.append(bk_Name);
-		builder.append(", bk_BookType=");
-		builder.append(bk_BookType);
-		builder.append(", bk_Author=");
-		builder.append(bk_Author);
-		builder.append(", bk_Translator=");
-		builder.append(bk_Translator);
-		builder.append(", bk_Publish=");
-		builder.append(bk_Publish);
-		builder.append(", bk_ISBN=");
-		builder.append(bk_ISBN);
-		builder.append(", bk_Date=");
-		builder.append(bk_Date);
-		builder.append(", bk_Pic=");
-		builder.append(bk_Pic);
-		builder.append(", bk_Language=");
-		builder.append(bk_Language);
-		builder.append(", bk_Price=");
-		builder.append(bk_Price);
-		builder.append(", bk_Page=");
-		builder.append(bk_Page);
-		builder.append(", bk_Publisher_Place=");
-		builder.append(bk_Publisher_Place);
-		builder.append(", bk_Content=");
-		builder.append(bk_Content);
-		builder.append("]");
-		return builder.toString();
-	}
+//	public BookTypeBean getBooktype() {
+//		return booktype;
+//	}
+//
+//	public void setBooktype(BookTypeBean booktype) {
+//		this.booktype = booktype;
+//	}
 
 }

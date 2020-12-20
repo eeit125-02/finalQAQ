@@ -12,7 +12,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="Book_Collect")
-public class Book_COLLECTBean {
+public class BookCollectBean {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	Integer bc_ID;
@@ -29,11 +29,11 @@ public class Book_COLLECTBean {
 	@JoinColumn(name = "mb_ID")
 	private MemberBean member;
 
-	public Book_COLLECTBean() {
+	public BookCollectBean() {
 		super();
 	}
 
-	public Book_COLLECTBean(Integer bc_ID, Date bc_Time, String bc_Tag, BookBean book, MemberBean member) {
+	public BookCollectBean(Integer bc_ID, Date bc_Time, String bc_Tag, BookBean book, MemberBean member) {
 		super();
 		this.bc_ID = bc_ID;
 		this.bc_Time = bc_Time;
