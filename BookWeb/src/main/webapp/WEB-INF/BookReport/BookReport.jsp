@@ -55,7 +55,7 @@
 
 			<div class="col-md-8">
 				<h1 class="my-4">
-					  <small>分類</small>
+					  搜尋結果：<small>分類</small>
 				</h1>
 
 				<div id="searchList">
@@ -157,22 +157,21 @@
 
 					var insertData = "";
 					for (let i = 0; i < data.length; i++) {
-						insertData += "<div class=\"card mb-4\">"
-								   += "<div class=\"row g-0\">"
-								   += "<img src=\""+ data[i].br_Pic+ "\">"
-								   += "<div class=\"col-md-8\">"
-								   += "<div class=\"card-body\">"
-								   += "<h5 class=\"card-title\">"+ data[i].br_name+ "</h5>"
-								   += "<p class=\"card-text\">"+ data[i].br_Content.replace(/<br>/g,"\n")+ "</p>"
-								   += "<div class=\"d-flex justify-content-between align-items-center\">"
-								   += "<div class=\"d-flex justify-content-between align-items-center\">"
-								   += "<a href=\""+br_ID+"\">(閱讀全文)</a>"
-								   += "<small class=\"text-muted\">創建日期：<br>\""+ data[i].br_DateTime+ "\"</small>"
-								   += "</div>"
-								   += "</div>"
-								   += "</div>"
-								   += "</div>"
-								   += "</div>"
+						insertData +=	"<div class=\"card mb-4\">"
+								    + 	"<div class=\"row g-0\">"
+								    + 	"<img src=\""+ data[i].br_Pic+ "\">"
+								    + 	"<div class=\"col-md-8\">"
+								    + 	"<div class=\"card-body\">"
+								    + 	"<h5 class=\"card-title\">"+ data[i].br_name+ "</h5>"
+								    + 	"<p class=\"card-text\">"+ data[i].br_Content.replace(/<br>/g,"\n")+ "</p>"
+								    + 	"<div class=\"d-flex justify-content-between align-items-center\">"
+								    + 	"<a href=\""+br_ID+"\">(閱讀全文)</a>"
+								    + 	"<small class=\"text-muted\">創建日期：<br>\""+ data[i].br_DateTime+ "\"</small>"
+								    + 	"</div>"
+								    + 	"</div>"
+								    + 	"</div>"
+								    + 	"</div>"
+								    + 	"</div>"
 					}
 					$('#bookReportList').html(insertData);
 				}
