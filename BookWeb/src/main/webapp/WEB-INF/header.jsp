@@ -19,7 +19,12 @@
 			<a class="blog-header-logo text-dark" href="//localhost:8080/BookWeb">圖書資訊網</a>
 		</div>
 		<div class="col-4 d-flex justify-content-end align-items-center">
+<<<<<<< Updated upstream
 			<a class="btn btn-sm btn-outline-secondary" href="//localhost:8080/BookWeb/toLogin">登入</a>
+=======
+			<a id="login" class="btn btn-sm btn-outline-secondary" href="//localhost:8080/BookWeb/toLogin">登入</a>
+		<a id="logout" class="btn btn-sm btn-outline-secondary" href="//localhost:8080/BookWeb/toLogin" type="">登出</a>
+>>>>>>> Stashed changes
 		</div>
 	</div>
 
@@ -41,5 +46,25 @@
 
 		</nav>
 	</div>
+<<<<<<< Updated upstream
+=======
+	<script>
+		/* $.cookie('name', 'value') */
+		
+		var mb_ID = $.cookie('loginMb_ID');
+		var mb_Account = $.cookie('loginMb_Account');
+		if ( typeof(mb_ID) != "undefined"){
+			$("#login").html(mb_Account)
+		}else{
+			$('#logout').hide()
+		};
+		
+		$('#logout').click(function(){
+			 $.cookie("loginMb_ID", null);
+			 $("#login").html("登入")
+		})
+		
+	</script>
+>>>>>>> Stashed changes
 </body>
 </html>

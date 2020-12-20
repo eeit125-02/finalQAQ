@@ -71,6 +71,15 @@ public class Login {
 		boolean mb = ms.Login(account, pwd);
 		if (mb) {
 			Account = account;
+<<<<<<< Updated upstream
+=======
+			MemberBean loginMember = ms.select(Account);
+			Cookie cookie = new Cookie("loginMb_ID", String.valueOf(loginMember.getMb_ID()));
+			Cookie cookie1 = new Cookie("loginMb_Account", String.valueOf(loginMember.getMb_Account()));
+			cookie.setMaxAge(60);
+			response.addCookie(cookie);
+			response.addCookie(cookie1);
+>>>>>>> Stashed changes
 			if (account.equals("a123456") && pwd.equals("a123456")) {
 				List<MemberBean> memberall = ms.adminselect();
 				model.addAttribute("admin", memberall);

@@ -126,6 +126,7 @@ form{
 		$("#bookWebheader").load("<c:url value='/header'/>");
         $("#bookWebFooter").load("<c:url value='/footer'/>");
 	});
+	
 </script>
 </body>
 </html>
