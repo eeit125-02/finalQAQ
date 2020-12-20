@@ -96,6 +96,9 @@
 							<li class="nav-item"><a class="nav-link active"
 								id="novel_latest-tab" data-toggle="tab" href="#novel_latest"
 								role="tab">最新貼文</a></li>
+							<li class="nav-item"><a class="nav-link active"
+								id="novel_hot-tab" data-toggle="tab" href="#novel_hot"
+								role="tab">熱門貼文</a></li>
 						</ul>
 						<br>
 
@@ -103,7 +106,7 @@
 						<div class="tab-content" id="novelTabContent">
 							<!-- content of rule tab -->
 							<div class="tab-pane fade" id="novel_rule" role="tabpanel">
-								<h1>請當有禮貌的小朋友</h1>
+								<h1>板規內容</h1>
 							</div>
 
 							<!-- content of latest post tab -->
@@ -158,8 +161,13 @@
 									</div>
 									<br>
 								</c:forEach>
-
 							</div>
+
+								<!-- content of hot post tab -->
+								<div class="tab-pane fade" id="novel_hot" role="tabpanel">
+									<h1>討論度最高貼文排序</h1>
+								</div>
+								
 						</div>
 					</div>
 					<!-- =====================================================member page===================================================== -->
@@ -167,7 +175,7 @@
 						<h3>[會員名稱] 的個人頁面</h3>
 						<br>
 
-						<!-- member page top tab -->
+						<!-- member page top button -->
 						<ul class="nav nav-pills mb-3 justify-content-center"
 							id="pills-tab" role="tablist" style="text-align: center;">
 							<li class="nav-item"><a class="nav-link active"
@@ -291,7 +299,41 @@
 
 					<!-- =====================================================manager page===================================================== -->
 					<div class="tab-pane fade" id="list-manager" role="tabpanel">
-						管理員專區</div>
+
+						<!-- manager page top button  -->
+						<ul class="nav nav-pills mb-3 justify-content-center"
+							id="pills-tab" role="tablist" style="text-align: center;">
+							<li class="nav-item"><a class="nav-link active"
+								id="pills-edit_rule-tab" data-toggle="pill"
+								href="#pills-edit_rule" role="tab">修改板規</a></li>
+							<li class="nav-item"><a class="nav-link"
+								id="pills-manage_post" data-toggle="pill"
+								href="#pills-manage_post" role="tab">管理貼文</a></li>
+						</ul>
+						<div class="tab-content" id="pills-tabContent">
+
+							<!-- edit rule -->
+							<div class="tab-pane fade show active" id="pills-edit_rule"
+								role="tabpanel">
+								<h5>上次修改時間 [time] </h5>
+								修改板規區域
+							</div>
+
+							<!-- search & delete post -->
+							<div class="tab-pane fade" id="pills-manage_post" role="tabpanel">
+								<form class="form-inline" action='search_keyword' method="post">
+									<input class="form-control mr-sm-2" type="search"
+										placeholder="請輸入關鍵字­" name="keyword">
+									<button class="btn btn-outline-primary my-2 my-sm-0"
+										type="submit" id="search_post">Search</button>
+								</form>
+								貼文顯示區域
+							</div>
+
+						</div>
+
+
+					</div>
 				</div>
 			</div>
 		</div>
