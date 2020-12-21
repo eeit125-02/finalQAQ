@@ -4,7 +4,6 @@ import java.sql.Timestamp;
 import java.util.List;
 
 import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +16,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.web.book.model.MemberBean;
 import com.web.book.service.MemberService;
@@ -79,8 +77,8 @@ public class Login {
 			MemberBean loginMember = ms.select(Account);
 			Cookie memId = new Cookie("loginMb_ID", String.valueOf(loginMember.getMb_ID()));
 			Cookie memAccount = new Cookie("loginMb_Account", loginMember.getMb_Account());
-			memId.setMaxAge(60);
-			memAccount.setMaxAge(60);
+			memId.setMaxAge(20);
+			memAccount.setMaxAge(20);
 			response.addCookie(memId);
 			response.addCookie(memAccount);
 			model.addAttribute("Account",Account);

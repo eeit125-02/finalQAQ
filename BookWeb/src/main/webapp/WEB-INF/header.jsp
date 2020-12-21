@@ -18,9 +18,9 @@
 			<a class="blog-header-logo text-dark" href="//localhost:8080/BookWeb">圖書資訊網</a>
 		</div>
 		<div class="col-4 d-flex justify-content-end align-items-center">
-			<a id="login" class="btn btn-sm btn-outline-secondary" href="//localhost:8080/BookWeb/toLogin">登入</a>
-			<a id="City" class="btn btn-sm btn-outline-secondary" href="//localhost:8080/BookWeb/toCity">會員中心</a>
-		<a id="logout" class="btn btn-sm btn-outline-secondary" href="//localhost:8080/BookWeb/toLogin">登出</a>
+			<a id="login" class="" href="//localhost:8080/BookWeb/toLogin">登入</a>
+			<a id="City" class="" href="//localhost:8080/BookWeb/toCity">會員中心</a><p>&nbsp;</p>
+		<a id="logout" class="" href="//localhost:8080/BookWeb/toLogin">登出</a>
 		</div>
 	</div>
 
@@ -44,10 +44,9 @@
 	</div>
 	<script>
 		/* $.cookie('name', 'value') */
-		var mb_Account = null;
 		var mb_ID = $.cookie('loginMb_ID');
 		var mb_Account = $.cookie('loginMb_Account');
-		if ( mb_Account == "null" ){
+		if ( mb_ID == 0 ){
 			$("#logout").hide()
 			$("#City").hide()
 		}else{
@@ -55,7 +54,7 @@
 		};
 		
 		$("#logout").click(function(){
-			 $.cookie("loginMb_ID","0");
+			 $.cookie("loginMb_ID", 0);
 			 $.cookie("loginMb_Account", null);
 		})
 	</script>
