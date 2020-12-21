@@ -58,17 +58,5 @@ public class BookTypeBean {
 		this.type = type;
 	}
 
-	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("BookTypeBean [bt_ID=");
-		builder.append(bt_ID);
-		builder.append(", book=");
-		builder.append(book);
-		builder.append(", type=");
-		builder.append(type);
-		builder.append("]");
-		return builder.toString();
-	}
 
 }

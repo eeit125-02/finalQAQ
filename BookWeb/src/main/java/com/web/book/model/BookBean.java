@@ -31,10 +31,6 @@ public class BookBean {
 	private String bk_Publisher_Place;
 	private String bk_Content;
 	
-//	@OneToMany(mappedBy = "book")
-//	@JoinColumn(name="bt_ID")
-////	@JoinColumn(name="ty_ID", referencedColumnName="bt_ID")
-//	private BookTypeBean booktype;
 
 	public BookBean() {
 		super();
@@ -58,7 +54,6 @@ public class BookBean {
 		this.bk_Page = bk_Page;
 		this.bk_Publisher_Place = bk_Publisher_Place;
 		this.bk_Content = bk_Content;
-//		this.booktype = booktype;
 	}
 
 	public Integer getBk_ID() {
@@ -172,13 +167,4 @@ public class BookBean {
 	public void setBk_Content(String bk_Content) {
 		this.bk_Content = bk_Content;
 	}
-
-//	public BookTypeBean getBooktype() {
-//		return booktype;
-//	}
-//
-//	public void setBooktype(BookTypeBean booktype) {
-//		this.booktype = booktype;
-//	}
-
 }

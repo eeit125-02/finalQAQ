@@ -7,7 +7,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="Rule")
+@Table(name="Rules")
 public class RuleBean {
 	
 	@Id
@@ -15,7 +15,9 @@ public class RuleBean {
 	String rule_content;
 	Timestamp rule_time;
 	
-	public RuleBean() {	}
+	public RuleBean() {
+		super();
+	}
 
 	public RuleBean(Integer rule_id, String rule_content, Timestamp rule_time) {
 		super();

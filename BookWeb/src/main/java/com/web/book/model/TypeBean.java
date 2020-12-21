@@ -7,7 +7,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="Type")
+@Table(name="Types")
 public class TypeBean {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
