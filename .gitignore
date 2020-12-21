@@ -5,3 +5,5 @@ BookWeb/.classpath
 BookWeb/.settings/
 BookWeb/.project
 /Servers/
+/.sonarlint/
+BookWeb/.project
