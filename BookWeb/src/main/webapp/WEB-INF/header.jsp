@@ -19,6 +19,8 @@
 		</div>
 		<div class="col-4 d-flex justify-content-end align-items-center">
 			<a id="login" class="btn btn-sm btn-outline-secondary" href="//localhost:8080/BookWeb/toLogin">登入</a>
+			<a id="City" class="btn btn-sm btn-outline-secondary" href="//localhost:8080/BookWeb/toCity">會員中心</a>
+		<a id="logout" class="btn btn-sm btn-outline-secondary" href="//localhost:8080/BookWeb/toLogin">登出</a>
 		</div>
 	</div>
 
@@ -42,13 +44,20 @@
 	</div>
 	<script>
 		/* $.cookie('name', 'value') */
+		var mb_Account = null;
 		var mb_ID = $.cookie('loginMb_ID');
-		if ( typeof(mb_ID) != "undefined"){
-			$("#login").html("登出")
+		var mb_Account = $.cookie('loginMb_Account');
+		if ( mb_Account == "null" ){
+			$("#logout").hide()
+			$("#City").hide()
 		}else{
-			console.log("null")
+			$("#login").hide()
 		};
 		
+		$("#logout").click(function(){
+			 $.cookie("loginMb_ID","0");
+			 $.cookie("loginMb_Account", null);
+		})
 	</script>
 </body>
 </html>

@@ -78,11 +78,12 @@ public class Login {
 			Account = account;
 			MemberBean loginMember = ms.select(Account);
 			Cookie memId = new Cookie("loginMb_ID", String.valueOf(loginMember.getMb_ID()));
-			Cookie memName = new Cookie("loginMb_Name", loginMember.getMb_Account());
+			Cookie memAccount = new Cookie("loginMb_Account", loginMember.getMb_Account());
 			memId.setMaxAge(60);
-			memName.setMaxAge(60);
+			memAccount.setMaxAge(60);
 			response.addCookie(memId);
-			response.addCookie(memName);
+			response.addCookie(memAccount);
+			model.addAttribute("Account",Account);
 			if (account.equals("a123456") && pwd.equals("a123456")) {
 				List<MemberBean> memberall = ms.adminselect();
 				model.addAttribute("admin", memberall);
