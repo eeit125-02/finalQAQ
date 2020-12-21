@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%
-	request.setCharacterEncoding("UTF-8");
+request.setCharacterEncoding("UTF-8");
 response.setContentType("text/html;charset=UTF-8");
 response.setHeader("Cache-Control", "no-cache"); // HTTP 1.1
 response.setHeader("Pragma", "no-cache"); // HTTP 1.0
@@ -46,7 +46,7 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 <script>
 	$(document).ready(function() {
 		$("#bookWebheader").load("//localhost:8080/BookWeb/header");
-       	$("#bookWebFooter").load("//localhost:8080/BookWeb/footer");
+		$("#bookWebFooter").load("//localhost:8080/BookWeb/footer");
 
 	});
 </script>
@@ -70,19 +70,18 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 		<br>
 		<hr>
 		<br>
-				<form action="<c:url value='/searchbook' />" method="get">
-		<h3>輸入關鍵字：</h3>
-		<div class="form-inline">
-			<input class="form-control mr-sm-2" name="name" value=""
-				type="search" placeholder="Search" aria-label="Search"> 
-				<button
-					class="btn btn-outline-success my-2 my-sm-0" type="submit">查詢</button>
-		</div>
+		<form action="<c:url value='/searchbook' />" method="get">
+			<h3>輸入關鍵字：</h3>
+			<div class="form-inline">
+				<input class="form-control mr-sm-2" name="name" value=""
+					type="search" placeholder="Search" aria-label="Search">
+				<button class="btn btn-outline-success my-2 my-sm-0" type="submit">查詢</button>
+			</div>
 
-		<br>
-		<hr>
+			<br>
+			<hr>
 
-				</form>
+		</form>
 
 
 

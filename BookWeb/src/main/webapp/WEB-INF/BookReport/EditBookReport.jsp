@@ -212,13 +212,13 @@
 
 	<script>
 	
-		var mb_ID = $.cookie('loginMb_ID');
-		var mb_Name = $.cookie('loginMb_Name')
+		/* var mb_ID = $.cookie('Mb_ID');
+		var mb_Name = $.cookie('Mb_Name')
 		if ( typeof(mb_ID) != "undefined"){
 			console.log("success Login")
 		}else{
 			window.location.href = "http://localhost:8080/BookWeb/toLogin";
-		};
+		}; */
 
 		$("#bookWebheader").load("//localhost:8080/BookWeb/header");
 		$("#bookWebFooter").load("//localhost:8080/BookWeb/footer");

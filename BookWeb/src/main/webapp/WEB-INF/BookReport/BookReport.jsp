@@ -34,10 +34,7 @@
 </style>
 
 <script>
-	$(document).ready(function() {
-		$("#bookWebheader").load("<c:url value='/header'/>");
-		$("#bookWebFooter").load("<c:url value='/footer'/>");
-	});
+	
 </script>
 <title>Insert title here</title>
 </head>
@@ -140,8 +137,9 @@
 	<!-- footer -->
 
 	<script>
-		var mb_ID = $.cookie('loginMb_ID');
-		console.log(mb_ID);
+		
+		$("#bookWebheader").load("//localhost:8080/BookWeb/header");
+		$("#bookWebFooter").load("//localhost:8080/BookWeb/footer");
 		function loadBookReportList() {
 			$.ajax({
 				async : false,

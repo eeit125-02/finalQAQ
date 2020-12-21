@@ -33,9 +33,9 @@ public class ActBean {
 	@Transient
 	private MultipartFile file;
 	
-	@ManyToOne
-	@JoinColumn(name = "mb_ID")
-	private MemberBean member;
+//	@ManyToOne
+//	@JoinColumn(name = "mb_ID")
+//	private MemberBean member;
 	
 	public ActBean(Integer mb_ID, Integer act_ID, String act_Image, String act_Name, String act_Theme, String act_Date,
 			String act_Loc, String act_Intro, String act_Guest, String act_Pax, String act_Rule, String act_Tag,
