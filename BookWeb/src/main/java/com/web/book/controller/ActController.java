@@ -18,8 +18,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.web.book.model.ActBean;
+import com.web.book.model.CommandBean;
+import com.web.book.model.PostBean;
 import com.web.book.service.ActService;
-
 
 @Controller
 public class ActController {
@@ -40,8 +41,8 @@ public class ActController {
 		model.addAttribute("allacts", actlist);
 		return "Activity/showActs";
 	}
-	
-	//測試商品頁用的 還要修改
+
+	// 測試商品頁用的 還要修改
 	@GetMapping("/products")
 	public String list(Model model) {
 		List<ActBean> list = actService.getAllActs();
@@ -49,6 +50,15 @@ public class ActController {
 		return "Activity/products";
 	}
 
+//	// 搜尋關鍵字
+//	@PostMapping("Discussion/search_keyword")
+//	public String showSearchResult(Model model, @RequestParam("keyword") String keyword) {
+//		List<ActBean> actlist = actService.getAllActs();
+//		model.addAttribute("allacts", actlist);
+//		List<CommandBean> command_list = actService.getAllCommand();
+//		model.addAttribute("allCommand", command_list);
+//		return "/Discussion/search_result";
+//	}
 
 	// 顯示新增活動頁面
 	@GetMapping("/showCreateForm")
@@ -60,12 +70,10 @@ public class ActController {
 
 	// 新增成功後redirect所有活動紀錄
 	@PostMapping("/showCreateForm")
-	public String createAct(Model model, 
-			@ModelAttribute("ab") ActBean ab,@RequestParam(value="file",required=false) MultipartFile  file
-			) throws IOException {
-		
-		
-		//儲存資料庫的路徑
+	public String createAct(Model model, @ModelAttribute("ab") ActBean ab,
+			@RequestParam(value = "file", required = false) MultipartFile file) throws IOException {
+
+		// 儲存資料庫的路徑
 //		  String sqlPath = null; 
 //		  //定義檔案儲存的本地路徑
 //	      String localPath="C:\\File\\";
@@ -88,19 +96,15 @@ public class ActController {
 //	      sqlPath = "/images/"+filename;
 //	      System.out.println(sqlPath);
 //	      ab.setact_Image(sqlPath);
-	      actService.createAct(ab);
-	      model.addAttribute("ab", ab);
-	      return "redirect:/showActs";
-	
-		
+		actService.createAct(ab);
+		model.addAttribute("ab", ab);
+		return "redirect:/showActs";
+
 	}
-	
 
 	// 顯示修改活動頁面
 	@GetMapping("/showUpdateForm")
-	public String showUpdateForm(
-			Model model, 
-			@RequestParam(value="act_ID",required=false) Integer act_ID) {
+	public String showUpdateForm(Model model, @RequestParam(value = "act_ID", required = false) Integer act_ID) {
 		ActBean ab = actService.getAct(act_ID);
 		model.addAttribute("ab", ab);
 		return "Activity/updateAct";
@@ -108,10 +112,8 @@ public class ActController {
 
 	// 修改成功後redirect所有活動紀錄
 	@PostMapping("/showUpdateForm")
-	public String updateAct(
-			Model model, 
-			@ModelAttribute("ab")ActBean ab,
-	@RequestParam(value="act_ID",required=false) Integer act_ID) {
+	public String updateAct(Model model, @ModelAttribute("ab") ActBean ab,
+			@RequestParam(value = "act_ID", required = false) Integer act_ID) {
 		actService.updateAct(ab);
 		return "redirect:/showActs";
 
@@ -123,6 +125,5 @@ public class ActController {
 		actService.deleteAct(act_ID);
 		return "redirect:/showActs";
 	}
-	
-	
+
 }
