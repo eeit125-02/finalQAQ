@@ -53,7 +53,7 @@
 			<div class="col-2 text-center">
 
 				<!-- ====================================================sidebar==================================================== -->
-				<h2>書適論壇</h2>
+				<h2>書適論壇</h2>
 				<br>
 				<div class="list-group" id="list-tab" role="tablist">
 					<a class="list-group-item list-group-item-action active"
@@ -78,10 +78,11 @@
 						role="tabpanel">
 						<!-- search keyword -->
 						<nav class="navbar navbar-light bg-light justify-content-between">
-							<a class="navbar-brand">搜尋貼文關鍵字­</a>
-							<form class="form-inline" action='search_keyword' method="post">
+							<a class="navbar-brand">搜尋貼文關鍵字</a>
+							<form class="form-inline"
+								action='search_keyword' method="post">
 								<input class="form-control mr-sm-2" type="search"
-									placeholder="請輸入關鍵字­" name="keyword">
+									placeholder="請輸入關鍵字" name="keyword">
 								<button class="btn btn-outline-primary my-2 my-sm-0"
 									type="submit" id="search_keyword">Search</button>
 							</form>
@@ -96,9 +97,8 @@
 							<li class="nav-item"><a class="nav-link active"
 								id="novel_latest-tab" data-toggle="tab" href="#novel_latest"
 								role="tab">最新貼文</a></li>
-							<li class="nav-item"><a class="nav-link active"
-								id="novel_hot-tab" data-toggle="tab" href="#novel_hot"
-								role="tab">熱門貼文</a></li>
+							<li class="nav-item"><a class="nav-link" id="novel_hot-tab"
+								data-toggle="tab" href="#novel_hot" role="tab">熱門貼文</a></li>
 						</ul>
 						<br>
 
@@ -163,11 +163,11 @@
 								</c:forEach>
 							</div>
 
-								<!-- content of hot post tab -->
-								<div class="tab-pane fade" id="novel_hot" role="tabpanel">
-									<h1>討論度最高貼文排序</h1>
-								</div>
-								
+							<!-- content of hot post tab -->
+							<div class="tab-pane fade" id="novel_hot" role="tabpanel">
+								<h1>討論度最高貼文排序</h1>
+							</div>
+
 						</div>
 					</div>
 					<!-- =====================================================member page===================================================== -->
@@ -306,8 +306,9 @@
 							<li class="nav-item"><a class="nav-link active"
 								id="pills-edit_rule-tab" data-toggle="pill"
 								href="#pills-edit_rule" role="tab">修改板規</a></li>
+
 							<li class="nav-item"><a class="nav-link"
-								id="pills-manage_post" data-toggle="pill"
+								id="pills-manage_post-tab" data-toggle="pill"
 								href="#pills-manage_post" role="tab">管理貼文</a></li>
 						</ul>
 						<div class="tab-content" id="pills-tabContent">
@@ -315,25 +316,29 @@
 							<!-- edit rule -->
 							<div class="tab-pane fade show active" id="pills-edit_rule"
 								role="tabpanel">
-								<h5>上次修改時間 [time] </h5>
+								<h5>上次修改時間 [time]</h5>
 								修改板規區域
 							</div>
 
 							<!-- search & delete post -->
 							<div class="tab-pane fade" id="pills-manage_post" role="tabpanel">
-								<form class="form-inline" action='search_keyword' method="post">
-									<input class="form-control mr-sm-2" type="search"
-										placeholder="請輸入關鍵字­" name="keyword">
-									<button class="btn btn-outline-primary my-2 my-sm-0"
-										type="submit" id="search_post">Search</button>
-								</form>
-								貼文顯示區域
+
+								<div>
+<%-- 									<form class="form-inline" action='search_keyword' method="post"> --%>
+<!-- 										<input class="form-control mr-sm-2" type="search" -->
+<!-- 											placeholder="請輸入關鍵字"  name="keyword"> -->
+<!-- 										<button class="btn btn-outline-primary my-2 my-sm-0" -->
+<!-- 											type="submit" id="search_post">Search</button> -->
+<%-- 									</form> --%>
+								</div>
+
+								<h5>貼文顯示區域</h5>
 							</div>
 
 						</div>
 
-
 					</div>
+
 				</div>
 			</div>
 		</div>
