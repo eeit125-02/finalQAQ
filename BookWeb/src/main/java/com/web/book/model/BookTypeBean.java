@@ -20,18 +20,18 @@ public class BookTypeBean {
 	private BookBean book;
 	
 	@ManyToOne
-	@JoinColumn(name = "ty_ID")
-	private TypeBean type;
+	@JoinColumn(name = "sty_ID")
+	private SearchTypeBean searchtype;
 
 	public BookTypeBean() {
 		super();
 	}
 
-	public BookTypeBean(Integer bt_ID, BookBean book, TypeBean type) {
+	public BookTypeBean(Integer bt_ID, BookBean book, SearchTypeBean searchtype) {
 		super();
 		this.bt_ID = bt_ID;
 		this.book = book;
-		this.type = type;
+		this.searchtype = searchtype;
 	}
 
 	public Integer getBt_ID() {
@@ -50,13 +50,12 @@ public class BookTypeBean {
 		this.book = book;
 	}
 
-	public TypeBean getType() {
-		return type;
+	public SearchTypeBean getSearchtype() {
+		return searchtype;
 	}
 
-	public void setType(TypeBean type) {
-		this.type = type;
+	public void setSearchtype(SearchTypeBean searchtype) {
+		this.searchtype = searchtype;
 	}
-
 
 }

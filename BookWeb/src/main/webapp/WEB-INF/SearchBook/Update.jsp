@@ -30,10 +30,10 @@
 	crossorigin="anonymous">
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/bottle.css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/book_message2.css">
+<!-- <link rel="stylesheet" -->
+<%-- 	href="${pageContext.request.contextPath}/css/bottle.css"> --%>
+<!-- <link rel="stylesheet" -->
+<%-- 	href="${pageContext.request.contextPath}/css/book_message2.css"> --%>
 <style>
 .bd-placeholder-img {
 	font-size: 1. 125rem;
@@ -44,6 +44,13 @@
 	.bd-placeholder-img-lg {
 		font-size: 3.5rem;
 	}
+}
+.check{
+	text-align: center;
+}
+.back{
+    margin: auto;
+    width: 815px;
 }
 </style>
 
@@ -64,89 +71,131 @@
 
 	<!-- body -->
 	<div class="container">
-		<label id="test"></label>
+<!-- 		<label id="test"></label> -->
 
 		<!-- 內容開始 -->
-
-		<br>
-		<hr>
-		<br>
-
-		<div class="row">
-		<div class="col-sm-1"></div>
-
-		<div class="col-sm-11">
-				
 		<form:form method="POST" modelAttribute="pageresult">
 
 			<div class="back">
-<%-- 			<form action="<c:url value='confirmupdate' />" method="POST"> --%>
-			<h2 class="title">更新書目資訊：</h2>
-			<hr>
-			<br>
-			<form:hidden path="bk_ID" />
-			<form:hidden path="bk_BookType" />
-			<form:hidden path="bk_Translator" />
-			<form:hidden path="bk_ISBN" />
-			<form:hidden path="bk_Pic" />
-			<form:hidden path="bk_Language" />
-			<form:hidden path="bk_Price" />
-			<form:hidden path="bk_Page" />
-			<form:hidden path="bk_Publisher_Place" />
-			<tr>
-				<td><form:label path="bk_Name">書名：</form:label></td>
-				<td><form:input path="bk_Name" /></td>
-			</tr>
-							
-			<tr>
-				<td><form:label path="bk_Author">作者：</form:label></td>
-				<td><form:input path="bk_Author" /></td>
-			</tr>
-			
-			<tr>
-				<td><form:label path="bk_Publish">出版社：</form:label></td>
-				<td><form:input path="bk_Publish" /></td>
-			</tr>
-			
-			<tr>
-				<td><form:label path="bk_Date">出版日期：</form:label></td>
-				<td><form:input path="bk_Date" /></td>
-			</tr>
-				
-<%-- 			<input type="hidden" name="id"value="${bookresult.bk_ID}">  --%>
-<%-- 			<span>書名：</sapn><input type="text" name="bookname" value="${bookresult.bk_Name}"><br><br> --%>
-<%-- 			<span>作者：</sapn><input type="text" name="bookauthor" value="${bookresult.bk_Author}"><br> <br>  --%>
-<%-- 			<span>出版社：</sapn><input type="text" name="bookpublish" value="${bookresult.bk_Publish}"><br><br>  --%>
-<%-- 			<span>出版日期：</sapn><input type="text" name="bookdate" value="${bookresult.bk_Date}"><br> <br> --%>
-			<figure>
-			<span>內容簡介：</span>
-				<div class="context">
-				
-				<tr>
-					<td><form:label path="bk_Content">內容簡介：</form:label></td>
-					<td><form:input path="bk_Content" /></td>
-				</tr>
-				
-<!-- 				<textarea cols="100" rows="8" name="bookcontent"> -->
-<%-- 				${bookresult.bk_Content} --%>
-<!-- 				</textarea> -->
-				</div>
-			</figure>
-		</div>
-		
-		<div class="check">
-		<button type="submit" name="confirm" 
-			class="btn btn-outline-danger btn-sm" value="">確認修改</button>
-		</div>
-		
-		</form:form>
-<!-- 		</form> -->
-		</div>
-		</div>
+				<h2 class="check">更新書目資訊</h2>
+				<hr>
 
-		<!-- 內容結束 -->
+				<form:hidden path="bk_ID" />
+				<form:hidden path="bk_BookType" />
+				<form:hidden path="bk_Price" />
+				<form>
+
+					<div class="form-group">
+						<form:label path="bk_Name">書名</form:label>
+						<form:input path="bk_Name" class="form-control" placeholder="必填" />
+						<!--     <label for="inputAddress">書名</label> -->
+						<!--     <input type="text" class="form-control" id="inputAddress" placeholder="必填"> -->
+					</div>
+
+					<div class="form-row">
+						<div class="form-group col-md-6">
+							<form:label path="bk_Author">作者</form:label>
+							<form:input path="bk_Author" class="form-control"
+								placeholder="必填" />
+							<!--       <label for="inputEmail4">作者</label> -->
+							<!--       <input type="email" class="form-control" id="inputEmail4" placeholder="必填"> -->
+						</div>
+
+						<div class="form-group col-md-6">
+							<form:label path="bk_Translator">譯者</form:label>
+							<form:input path="bk_Translator" class="form-control"
+								placeholder="必填" />
+							<!--       <label for="inputPassword4">譯者</label> -->
+							<!--       <input type="password" class="form-control" id="inputPassword4"> -->
+						</div>
+					</div>
+
+					<div class="form-row">
+						<div class="form-group col-md-6">
+							<form:label path="bk_Publish">出版社</form:label>
+							<form:input path="bk_Publish" class="form-control"
+								placeholder="必填" />
+							<!--       <label for="inputEmail4">出版社</label> -->
+							<!--       <input type="email" class="form-control" id="inputEmail4" placeholder="必填"> -->
+						</div>
+
+						<div class="form-group col-md-6">
+							<form:label path="bk_Date">出版日期</form:label>
+							<form:input path="bk_Date" class="form-control" type="date" />
+							<!--       <label for="inputPassword4">出版日期</label> -->
+							<!--       <input type="password" class="form-control" id="inputPassword4" placeholder="必填"> -->
+						</div>
+					</div>
+
+
+					<div class="form-row">
+						<div class="form-group col-md-6">
+							<form:label path="bk_Publisher_Place">出版地</form:label>
+							<form:input path="bk_Publisher_Place" class="form-control" />
+							<!--       <label for="inputEmail4">出版地</label> -->
+							<!--       <input type="email" class="form-control" id="inputEmail4"> -->
+						</div>
+
+						<div class="form-group col-md-6">
+							<form:label path="bk_Pic">封面圖片</form:label>
+							<form:input path="bk_Pic" class="form-control" type="file" />
+							<!--     <label for="exampleFormControlFile1">封面圖片</label> -->
+							<!--     <input type="file" class="form-control-file" id="exampleFormControlFile1"> -->
+						</div>
+					</div>
+
+
+					<div class="form-row">
+						<div class="form-group col-md-5">
+							<form:label path="bk_ISBN">ISBN</form:label>
+							<form:input path="bk_ISBN" class="form-control" placeholder="必填" />
+							<!--       <label for="inputCity">ISBN</label> -->
+							<!--       <input type="text" class="form-control" id="inputCity" placeholder="必填"> -->
+						</div>
+
+						<div class="form-group col-md-5">
+							<form:label path="bk_Language">語言</form:label>
+							<form:input path="bk_Language" class="form-control"
+								placeholder="必填" />
+							<%-- 	    <form:checkboxes path="bk_Language" /> --%>
+							<!--       <label for="inputState">語言</label> -->
+							<!--       <select id="inputState" class="form-control"> -->
+							<!--         <option selected>繁體中文</option> -->
+							<!--         <option>簡體中文</option> -->
+							<!--         <option>英文</option> -->
+							<!--         <option>日文</option> -->
+							<!--         <option>德文</option> -->
+							<!--         <option>法文</option> -->
+							<!--       </select> -->
+						</div>
+
+						<div class="form-group col-md-2">
+							<form:label path="bk_Page">頁數</form:label>
+							<form:input path="bk_Page" class="form-control" />
+							<!--       <label for="inputZip">頁數</label> -->
+							<!--       <input type="text" class="form-control" id="inputZip"> -->
+						</div>
+
+					</div>
+					<form:label path="bk_Content">內容簡介</form:label>
+					<form:textarea path="bk_Content" class="form-control" rows="6" />
+					<!--     <div class="form-group"> -->
+					<!--     <label for="exampleFormControlTextarea1">內容簡介</label> -->
+					<!--     <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea> -->
+				</form>
+			</div>
+		</form:form>
+			<br>
+		<div class="check">
+			<button type="submit" class="btn btn-outline-danger btn-sm">確認修改</button>
+		</div>
 
 	</div>
+
+
+
+	<!-- 內容結束 -->
+
 	<!-- body -->
 
 	<!-- footer -->
