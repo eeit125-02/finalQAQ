@@ -21,11 +21,14 @@ public class BookStoreDaoImpl implements BookStoreDao {
 	
 	// 商品頁面搜尋
 	@Override
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public List<BookBean> searchBookStore() {
 		Session session = factory.getCurrentSession();
 		String hql = "FROM BookBean";
-		return session.createQuery(hql).getResultList();
+		Query query = session.createQuery(hql);
+		query.setFirstResult(0);
+		query.setMaxResults(40);
+		return query.getResultList();
 	}
 	
 	// 單一商品詳細資料
