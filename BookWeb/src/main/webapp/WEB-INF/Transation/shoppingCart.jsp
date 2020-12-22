@@ -49,44 +49,7 @@
 	<div class="container media">
 		<!-- body -->
 
-
-
-		<jsp:useBean id="bookdetail" class="com.web.book.model.BookBean" scope="request" />
-		<form action="<c:url value='shopping' />" method="POST">
-			<div>
-				<label for="url"></label> <img alt="xx" width="200px" height="300px"
-					src="<jsp:getProperty name="bookdetail" property="bk_Pic" />">
-			</div>
-			<div>
-				<label for="bk_Name">書名</label>
-				<jsp:getProperty name="bookdetail" property="bk_Name" />
-			</div>
-			<div>
-				<label for="bk_Author">作者</label>
-				<jsp:getProperty name="bookdetail" property="bk_Author" />
-			</div>
-			<div>
-				<label for="bk_Publish">出版社</label>
-				<jsp:getProperty name="bookdetail" property="bk_Publish" />
-			</div>
-			<div>
-				<label for="bk_Content">描述: </label>
-				<jsp:getProperty name="bookdetail" property="bk_Content" />
-			</div>
-
-			<div>
-				<input type="submit" value="直接購買" name="goToCart">
-			</div>
-			<div>
-				<input type="submit" value="放入購物車" name="addCart">
-			</div>
-		</form>
-		
-		
-		<form action="<c:url value='/Transation/storeMain' />" method="get">
-			<button type="submit" name="">返回</button>
-			<br>
-		</form>
+		<h1>我是測試頁</h1>
 
 
 
