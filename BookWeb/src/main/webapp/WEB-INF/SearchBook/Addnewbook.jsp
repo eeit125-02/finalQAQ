@@ -30,7 +30,6 @@
 	crossorigin="anonymous">
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-
 <style>
 .bd-placeholder-img {
 	font-size: 1. 125rem;
@@ -71,13 +70,13 @@
 <!-- 		<label id="test"></label> -->
 
 		<!-- 內容開始 -->
-		<form:form method="POST" modelAttribute="pageresult">
+		<form:form method="POST" modelAttribute="newonebook">
 
 			<div class="back">
-				<h2 class="check">更新書目資訊</h2>
+				<h2 class="check">新增書目資訊</h2>
 				<hr>
 
-				<form:hidden path="bk_ID" />
+				<form:hidden path="bk_ID" name="page"/>
 				<form:hidden path="bk_BookType" />
 				<form:hidden path="bk_Price" />
 
@@ -162,7 +161,7 @@
 		
 			<br>
 		<div class="check">
-			<button type="submit" class="btn btn-outline-danger btn-sm">確認修改</button>
+			<button type="submit" class="btn btn-outline-danger btn-sm">確認新增</button>
 		</div>
 		</form:form>
 	</div>

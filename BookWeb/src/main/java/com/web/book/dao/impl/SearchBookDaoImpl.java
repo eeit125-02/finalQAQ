@@ -85,12 +85,12 @@ public class SearchBookDaoImpl implements SearchBookDAO {
 
 	// 新增書本
 	@Override
-	public int savebk(BookBean bkc) {
+	public BookBean savebk(BookBean bkc) {
 		int count = 0;
 		Session session = factory.getCurrentSession();
 		session.save(bkc);
 		count++;
-		return count;
+		return bkc;
 	}
 
 	// 修改書本

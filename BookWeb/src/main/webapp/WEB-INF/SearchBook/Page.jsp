@@ -95,7 +95,7 @@
 
 		<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<!-- 第一列（搜尋首頁＆收藏清單） -->
+<!-- 第一列（搜尋首頁＆收藏清單&新增書籍） -->
 		<br>
 		<hr>
 		<div class="collectindex">
@@ -104,8 +104,9 @@
 				method="get">
 				<button type="submit" name="list" class="btn btn-outline-dark"
 					value="5">收藏清單</button>
+				<!-- value=會員ID -->
 			</form>
-			<!-- value=會員ID -->
+			<a class="btn btn-outline-dark" href="<c:url value='/addnewbook' />" role="button">新增書籍</a>			
 		</div>
 		<br> <br>
 

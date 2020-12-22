@@ -72,16 +72,17 @@
 		<br>
 		<hr>
 		<div class="collectindex">
-			<a class="btn btn-outline-dark"
-				href="<c:url value='SearchBook/Search' />" role="button">搜尋首頁</a>
-			<form name=a3 class=a3 action="<c:url value='/collectlist' />"
-				method="get">
-				<button type="submit" name="list" class="btn btn-outline-dark"
-					value="5">收藏清單</button>
+			<a class="btn btn-outline-dark" href="<c:url value='SearchBook/Search' />" role="button">搜尋首頁</a>
+			
+			<form name=a3 class=a3 action="<c:url value='/collectlist' />" method="get">
+				<button type="submit" name="list" class="btn btn-outline-dark"value="5">收藏清單</button>
 			</form>
 			<!-- value=會員ID -->
+				
+			<a class="btn btn-outline-dark" href="<c:url value='/addnewbook' />" role="button">新增書籍</a>			
 		</div>
 		<br> <br>
+
 
 		<h3>搜尋結果：</h3>
 

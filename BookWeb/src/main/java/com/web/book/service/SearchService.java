@@ -23,7 +23,7 @@ public interface SearchService {
 	int savebc(int bk_ID, int mb_ID);
 
 	// 新增書本
-	int savebk(BookBean bkc);
+	BookBean savebk(BookBean bkc);
 
 	// 修改書本
 	int updatebk(BookBean mb);

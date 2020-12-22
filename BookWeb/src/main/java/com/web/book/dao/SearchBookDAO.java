@@ -25,7 +25,7 @@ public interface SearchBookDAO {
 	int savebc(int bk_id, int mb_id);
 
 	// 新增書本
-	int savebk(BookBean bkc);
+	BookBean savebk(BookBean bkc);
 
 	// 修改書本
 	int updatebk(BookBean mb);

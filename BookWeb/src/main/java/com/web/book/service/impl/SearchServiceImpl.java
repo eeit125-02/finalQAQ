@@ -51,7 +51,7 @@ import com.web.book.service.SearchService;
 
 		// 新增書本
 		@Override
-		public int savebk(BookBean bkc) {
+		public BookBean savebk(BookBean bkc) {
 			return searchBookDAO.savebk(bkc);
 		}
 

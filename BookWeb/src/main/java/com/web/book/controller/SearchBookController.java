@@ -88,6 +88,24 @@ public class SearchBookController {
 	}
 	
 	
+	// 前往新增書籍頁面
+	@GetMapping("/addnewbook")
+	public String gotoAddnewbook(Model model) {
+		BookBean result = new BookBean();
+		model.addAttribute("newonebook", result);
+		return "SearchBook/Addnewbook";
+	}
+	
+	// 最終新增頁面
+	@PostMapping("/addnewbook")
+	public String gotoAddnewbookFin(Model model, 
+			@ModelAttribute("newonebook")BookBean result,
+			RedirectAttributes attr) {
+		BookBean finalresult=searchService.savebk(result);
+		attr.addAttribute("page",finalresult.getBk_ID());
+		return "redirect:/bookpage";
+	}
+	
 	// 前往修改書籍頁面
 	@GetMapping("/updatebook")
 	public String gotoUpdate(Model model, 
@@ -106,7 +124,6 @@ public class SearchBookController {
 		attr.addAttribute("page",bk_ID);
 		searchService.updatebk(result);
 		return "redirect:/bookpage";
-//		return "SearchBook/Page";
 	}
 
 	//點選轉到漂流瓶的第一個頁面
