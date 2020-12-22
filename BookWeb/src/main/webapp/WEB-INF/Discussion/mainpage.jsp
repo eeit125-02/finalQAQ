@@ -316,7 +316,7 @@
 							<!-- edit rule -->
 							<div class="tab-pane fade show active" id="pills-edit_rule"
 								role="tabpanel">
-								<h5>上次修改時間 [time]</h5>
+								<h5>上次修改時間 [time]</h5><hr>
 								修改板規區域
 							</div>
 
@@ -324,13 +324,13 @@
 							<div class="tab-pane fade" id="pills-manage_post" role="tabpanel">
 
 								<div>
-<%-- 									<form class="form-inline" action='search_keyword' method="post"> --%>
-<!-- 										<input class="form-control mr-sm-2" type="search" -->
-<!-- 											placeholder="請輸入關鍵字"  name="keyword"> -->
-<!-- 										<button class="btn btn-outline-primary my-2 my-sm-0" -->
-<!-- 											type="submit" id="search_post">Search</button> -->
-<%-- 									</form> --%>
-								</div>
+									<form class="form-inline justify-content-center" action='search_keyword' method="post">
+										<input class="form-control" type="search"
+											placeholder="請輸入關鍵字"  name="keyword" style="margin-right:10px">
+										<button class="btn btn-outline-primary my-2 my-sm-0"
+											type="submit" id="search_post">Search</button>
+									</form>
+								</div><br>
 
 								<h5>貼文顯示區域</h5>
 							</div>
