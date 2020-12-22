@@ -76,7 +76,7 @@ public class SearchBookController {
 
 	// 在單獨頁面加入收藏
 	@SuppressWarnings("unused")
-	@PostMapping("/pagecollect")
+	@GetMapping("/pagecollect")
 	public String gotoPageCollect(Model model, @RequestParam(value = "pagecollect") Integer bk_id) {
 		int mb_id = 5;
 		int result2 = searchService.savebc(bk_id, mb_id);
@@ -106,6 +106,7 @@ public class SearchBookController {
 		attr.addAttribute("page",bk_ID);
 		searchService.updatebk(result);
 		return "redirect:/bookpage";
+//		return "SearchBook/Page";
 	}
 
 	//點選轉到漂流瓶的第一個頁面

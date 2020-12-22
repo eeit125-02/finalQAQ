@@ -20,11 +20,16 @@
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
 	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
 	crossorigin="anonymous">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/bottle.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/book_message2.css">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+	crossorigin="anonymous">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/css/bottle.css">
 <style>
 .bd-placeholder-img {
 	font-size: 1. 125rem;
@@ -36,12 +41,43 @@
 		font-size: 3.5rem;
 	}
 }
+
+.a3 {
+	margin: 0px;
+	display: inline
+}
+
+.collectindex {
+	float: right;
+}
+.s-corner {
+   text-align: center;
+   width: auto;
+   height: 400px;
+   box-shadow: 0px 0px 10px #95CACA;
+   background: linear-gradient(#95CACA,#95CACA) left top,
+   linear-gradient(#95CACA,#95CACA) left bottom,
+   linear-gradient(#95CACA,#95CACA) right top,
+   linear-gradient(#95CACA,#95CACA) right bottom;
+   background-size: 4px 4px;
+   background-repeat: no-repeat;
+   float: auto;
+}
+.col-sm-3 {
+    text-align: center;
+}
+#border{
+  border: 10px solid transparent;
+  padding: 35px;
+  border-image: url("${pageContext.request.contextPath}/image/border-image.png") 30 round;
+}
 </style>
+
 
 <script>
 	$(document).ready(function() {
 		$("#bookWebheader").load("//localhost:8080/BookWeb/header");
-       	$("#bookWebFooter").load("//localhost:8080/BookWeb/footer");
+		$("#bookWebFooter").load("//localhost:8080/BookWeb/footer");
 
 	});
 </script>
@@ -55,107 +91,114 @@
 
 	<!-- body -->
 	<div class="container">
-		<label id="test"></label>
-
 		<!-- 		內容開始 -->
 
 		<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-
+<!-- 第一列（搜尋首頁＆收藏清單） -->
 		<br>
 		<hr>
-		<br>
-		<div class="collect">
-			<a class="btn btn-outline-dark" href="Search.jsp" role="button">搜尋首頁</a><br>
-			<br> 			
-			<form name=a3 action="<c:url value='/collectlist' />" method="get"><button type="submit" name="list"
-					class="btn btn-outline-dark" value="5">收藏清單</button></form>
+		<div class="collectindex">
+			<a class="btn btn-outline-dark" href="<c:url value='SearchBook/Search' />" role="button">搜尋首頁</a>
+			<form name=a3 class=a3 action="<c:url value='/collectlist' />"
+				method="get">
+				<button type="submit" name="list" class="btn btn-outline-dark"
+					value="5">收藏清單</button>
+			</form>
 			<!-- value=會員ID -->
 		</div>
+		<br> <br>
+
+
+<!-- 左直行（圖片＆按鈕列） -->
 
 		<div class="row">
-			<div class="col-sm-5">
-
+			<div class="col-sm-5" style="margin:0 auto;">
+			
+		<!-- 封面 -->
 				<p class="s-corner">
 					<img class="mainpic" alt="" src="${pageresult.bk_Pic}" height="390">
 				</p>
-				<div class="detail">
-					<h6>詳細資訊：</h6>
-					<p>
-						ISBN：${pageresult.bk_ISBN}<br> 頁數：${pageresult.bk_Page}<br>
-					</p>
+		<!-- 收藏＆修改&心得&二手書按鈕 -->
+				<div class="row"> 
+				<div class="col-sm-3"><form name=a1 action="<c:url value='/pagecollect' />" method="get">
+<!-- 							<img alt="點選收藏" -->
+<%-- 								src="${pageContext.request.contextPath}/image/heartred.png" --%>
+<!-- 								id="heart" width="25px"> -->
+							<button type="submit" name="pagecollect"
+								class="btn btn-outline-info btn-sm"
+								value="${pageresult.bk_ID}">收藏本書</button>
+						</form></div>
+				<div class="col-sm-3"><form name=a2 action="<c:url value='/updatebook' />" method="get">
+							<button type="submit" name="update"
+								class="btn btn-outline-info btn-sm" value="${pageresult.bk_ID}">修改書訊</button>
+						</form></div>
+				
+				<div class="col-sm-3"><button type="submit" name="" class="btn btn-outline-info btn-sm">撰寫心得</button></div>
+				<div class="col-sm-3"><button type="submit" name="" class="btn btn-outline-info btn-sm">尋找二手書</button></div>
 
 				</div>
-
-				<div class="detail">
-					<h6>相關書評連結：</h6>
-					<ul>
-						<li>連結1</li>
-						<li>連結2</li>
-						<li>連結3</li>
-
-					</ul>
-				</div>
-
-
-
 			</div>
+			
+			
+			
+<!-- 右直行（書訊各欄目） -->
 			<div class="col-sm-7">
 
 				<div class="back">
-					<h2 class="title">${pageresult.bk_Name}</h2>
+		<!--書名 -->
+					<h2 class="title" align="center">${pageresult.bk_Name}</h2>
 					<hr>
 					<br>
-					<h5>作者：${pageresult.bk_Author}</h5>
-					<h5>出版社：${pageresult.bk_Publish}</h5>
-					<h5>出版日期：${pageresult.bk_Date}</h5>
-					<br>
-					<figure>
-						<h5>內容簡介：</h5>
-						<p>${pageresult.bk_Content}</p>
-					</figure>
-
-					<div class="collect">
-						<form name=a1 action="<c:url value='/pagecollect' />" method="get">
-						<img alt="點選收藏" src="${pageContext.request.contextPath}/image/heartred.png" id="heart" width="25px">
-						<button type="submit" name="pagecollect"
-								class="btn btn-outline-danger btn-sm"
-								value="${pageresult.bk_ID}">收藏本書</button></form> 
-						
-						<form name=a2 action="<c:url value='/updatebook' />" method="get">
-						<button type="submit" name="update" class="btn btn-outline-info btn-sm"
-								value="${pageresult.bk_ID}">修改書訊</button></form>
-
+		<!-- 作者＆譯者 -->
+					<div class="row" style="margin-bottom:15px"> 
+					<div class="col-sm-1"></div>
+					<div class="col-sm-5">作者：${pageresult.bk_Author}</div>
+					<div class="col-sm-6">譯者：${pageresult.bk_Translator}</div>
 					</div>
-
-
-				</div>
-
-
-
-
-				<div class="detail">
-					<h6>二手拍賣連結：</h6>
-					<ul>
-						<li>連結1</li>
-						<li>連結2</li>
-						<li>連結3</li>
-					</ul>
-					<div class="follow">
-						＊有二手書時通知我 <img alt="加入追蹤" src="${pageContext.request.contextPath}/image/heartwhite.png" id="heart"
-							width="25px">
+		<!-- 出版社＆出版地 -->
+					<div class="row" style="margin-bottom:15px"> 
+					<div class="col-sm-1"></div>
+					<div class="col-sm-5">出版社：${pageresult.bk_Publish}</div>
+					<div class="col-sm-6">${pageresult.bk_Publisher_Place}</div>
+					</div>					
+		<!-- 出版社＆出版地 -->
+					<div class="row" style="margin-bottom:15px"> 
+					<div class="col-sm-1"></div>
+					<div class="col-sm-5">出版日期：${pageresult.bk_Date}</div>
+					<div class="col-sm-6">語言：${pageresult.bk_Language}</div>
+					</div>						
+		<!-- ISBN＆頁數 -->
+					<div class="row" style="margin-bottom:15px"> 
+					<div class="col-sm-1"></div>
+					<div class="col-sm-5">ISBN：${pageresult.bk_ISBN}</div>
+					<div class="col-sm-6">頁數：${pageresult.bk_Page}</div>
 					</div>
-
+		<!-- 類型（未完成） -->
+					<div class="row"> 
+					<div class="col-sm-1"></div>
+					<div class="col-sm-11" style="background-color:#FFFF00;">類型：（還沒做）</div>
+					</div>					
 				</div>
-
-
 			</div>
 		</div>
 
-	</div>
+		
+		<br>
+		<br>
+		
+	<!-- 內容簡介 -->
+				<div class="row"> 
+					<div class="col-sm-12" id="border">
+					<h5 align="center">內容簡介</h5>
+					<hr>
+						<p>
+						${pageresult.bk_Content}
+						</p>
+					</div>
+				</div>
 
-
-
+</div>
 
 	<!-- 		內容結束 -->
 

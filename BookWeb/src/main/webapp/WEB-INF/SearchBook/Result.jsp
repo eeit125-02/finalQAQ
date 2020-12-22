@@ -23,7 +23,8 @@
 	crossorigin="anonymous">
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/bottle.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/css/bottle.css">
 <style>
 .bd-placeholder-img {
 	font-size: 1. 125rem;
@@ -36,12 +37,20 @@
 	}
 }
 
+.a3 {
+	margin: 0px;
+	display: inline
+}
+
+.collectindex {
+	float: right;
+}
 </style>
 
 <script>
 	$(document).ready(function() {
 		$("#bookWebheader").load("//localhost:8080/BookWeb/header");
-       	$("#bookWebFooter").load("//localhost:8080/BookWeb/footer");
+		$("#bookWebFooter").load("//localhost:8080/BookWeb/footer");
 
 	});
 </script>
@@ -55,24 +64,24 @@
 
 	<!-- body -->
 	<div class="container">
-		<label id="test"></label>
-
 
 		<!-- 內容開始 -->
-
 
 		<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 		<br>
 		<hr>
-		<br> <br>
-
-		<div class="collect">
-			<a class="btn btn-outline-dark" href="<c:url value='SearchBook/Search' />" role="button">搜尋首頁</a>
-			<form name=a3 action="<c:url value='/collectlist' />" method="get"><button type="submit" name="list"
-					class="btn btn-outline-dark" value="5">收藏清單</button></form>
+		<div class="collectindex">
+			<a class="btn btn-outline-dark"
+				href="<c:url value='SearchBook/Search' />" role="button">搜尋首頁</a>
+			<form name=a3 class=a3 action="<c:url value='/collectlist' />"
+				method="get">
+				<button type="submit" name="list" class="btn btn-outline-dark"
+					value="5">收藏清單</button>
+			</form>
 			<!-- value=會員ID -->
 		</div>
+		<br> <br>
 
 		<h3>搜尋結果：</h3>
 
@@ -85,8 +94,10 @@
 				<img class="itemcov" alt="" src="${row.getBk_Pic()}" height="190">
 
 				<h3>
-					<form name=a1 action="<c:url value='/bookpage' />" method="get"><button type="submit" name="page"
-							class="btn btn-link btn-lg" value="${row.getBk_ID()}">${row.getBk_Name()}</button></form>
+					<form name=a1 action="<c:url value='/bookpage' />" method="get">
+						<button type="submit" name="page" class="btn btn-link btn-lg"
+							value="${row.getBk_ID()}">${row.getBk_Name()}</button>
+					</form>
 				</h3>
 
 				作者：${row.getBk_Author()}<br> 出版社：${row.getBk_Publish()}
@@ -97,10 +108,14 @@
 
 
 				<div class="collect">
-					<form name=a2 action="<c:url value='/resultcollect' />" method="get">
-					<img alt="點選收藏" src="${pageContext.request.contextPath}/image/heartred.png" id="Img/heart" width="25px">
-					<button type="submit" name="collect"
-							class="btn btn-outline-danger btn-sm" value="${row.getBk_ID()}">收藏本書</button></form>
+					<form name=a2 action="<c:url value='/resultcollect' />"
+						method="get">
+						<img alt="點選收藏"
+							src="${pageContext.request.contextPath}/image/heartred.png"
+							id="Img/heart" width="25px">
+						<button type="submit" name="collect"
+							class="btn btn-outline-danger btn-sm" value="${row.getBk_ID()}">收藏本書</button>
+					</form>
 				</div>
 			</div>
 

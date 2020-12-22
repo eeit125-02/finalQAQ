@@ -83,13 +83,10 @@
 				<form:hidden path="bk_ID" />
 				<form:hidden path="bk_BookType" />
 				<form:hidden path="bk_Price" />
-				<form>
 
 					<div class="form-group">
 						<form:label path="bk_Name">書名</form:label>
 						<form:input path="bk_Name" class="form-control" placeholder="必填" />
-						<!--     <label for="inputAddress">書名</label> -->
-						<!--     <input type="text" class="form-control" id="inputAddress" placeholder="必填"> -->
 					</div>
 
 					<div class="form-row">
@@ -97,16 +94,12 @@
 							<form:label path="bk_Author">作者</form:label>
 							<form:input path="bk_Author" class="form-control"
 								placeholder="必填" />
-							<!--       <label for="inputEmail4">作者</label> -->
-							<!--       <input type="email" class="form-control" id="inputEmail4" placeholder="必填"> -->
 						</div>
 
 						<div class="form-group col-md-6">
 							<form:label path="bk_Translator">譯者</form:label>
 							<form:input path="bk_Translator" class="form-control"
 								placeholder="必填" />
-							<!--       <label for="inputPassword4">譯者</label> -->
-							<!--       <input type="password" class="form-control" id="inputPassword4"> -->
 						</div>
 					</div>
 
@@ -115,15 +108,11 @@
 							<form:label path="bk_Publish">出版社</form:label>
 							<form:input path="bk_Publish" class="form-control"
 								placeholder="必填" />
-							<!--       <label for="inputEmail4">出版社</label> -->
-							<!--       <input type="email" class="form-control" id="inputEmail4" placeholder="必填"> -->
 						</div>
 
 						<div class="form-group col-md-6">
 							<form:label path="bk_Date">出版日期</form:label>
 							<form:input path="bk_Date" class="form-control" type="date" />
-							<!--       <label for="inputPassword4">出版日期</label> -->
-							<!--       <input type="password" class="form-control" id="inputPassword4" placeholder="必填"> -->
 						</div>
 					</div>
 
@@ -132,15 +121,12 @@
 						<div class="form-group col-md-6">
 							<form:label path="bk_Publisher_Place">出版地</form:label>
 							<form:input path="bk_Publisher_Place" class="form-control" />
-							<!--       <label for="inputEmail4">出版地</label> -->
-							<!--       <input type="email" class="form-control" id="inputEmail4"> -->
 						</div>
 
 						<div class="form-group col-md-6">
-							<form:label path="bk_Pic">封面圖片</form:label>
-							<form:input path="bk_Pic" class="form-control" type="file" />
-							<!--     <label for="exampleFormControlFile1">封面圖片</label> -->
-							<!--     <input type="file" class="form-control-file" id="exampleFormControlFile1"> -->
+							<form:label path="">封面圖片</form:label>
+							<form:input path="" class="form-control" type="file" />
+							<form:hidden path="bk_Pic" />
 						</div>
 					</div>
 
@@ -149,8 +135,6 @@
 						<div class="form-group col-md-5">
 							<form:label path="bk_ISBN">ISBN</form:label>
 							<form:input path="bk_ISBN" class="form-control" placeholder="必填" />
-							<!--       <label for="inputCity">ISBN</label> -->
-							<!--       <input type="text" class="form-control" id="inputCity" placeholder="必填"> -->
 						</div>
 
 						<div class="form-group col-md-5">
@@ -172,27 +156,19 @@
 						<div class="form-group col-md-2">
 							<form:label path="bk_Page">頁數</form:label>
 							<form:input path="bk_Page" class="form-control" />
-							<!--       <label for="inputZip">頁數</label> -->
-							<!--       <input type="text" class="form-control" id="inputZip"> -->
 						</div>
 
 					</div>
 					<form:label path="bk_Content">內容簡介</form:label>
 					<form:textarea path="bk_Content" class="form-control" rows="6" />
-					<!--     <div class="form-group"> -->
-					<!--     <label for="exampleFormControlTextarea1">內容簡介</label> -->
-					<!--     <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea> -->
-				</form>
 			</div>
-		</form:form>
+		
 			<br>
 		<div class="check">
 			<button type="submit" class="btn btn-outline-danger btn-sm">確認修改</button>
 		</div>
-
+		</form:form>
 	</div>
-
-
 
 	<!-- 內容結束 -->
 

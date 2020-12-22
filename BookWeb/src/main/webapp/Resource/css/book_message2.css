@@ -3,46 +3,6 @@
     float: right;
 }
 
-.s-corner {
-    /* border:2px solid blue; */
-    text-align: center;
-   width: 400px;
-   height: 400px;
-   box-shadow: 0px 0px 10px plum;
-   background: linear-gradient(#00bfff,#00bfff) left top,
-   linear-gradient(#96c6d6,#d58ceb) left bottom,
-   linear-gradient(#7ca0ee,#00bfff) right top,
-   linear-gradient(#00bfff,#00bfff) right bottom;
-   background-size: 4px 4px;
-   background-repeat: no-repeat;
-   float: auto;
-}
-
-.detail{
-    float: left;
-    width: 400px;
-    height: auto;
-    padding: 10px;
-    border: 2px dotted lightgray;
-    color: lightslategrey;
-    font-size: smaller;
-}
-
-.title{
-    text-align: center;
-}
-
-.back{
-    float: left;
-    /* width: 600px; */
-    /* height: 400px; */
-    /* background-image: url("blue.png"); */
-    /* border:2px dotted rosybrown; */
-    display:inline;
-    padding: 30px;
-    padding-left: 50px;
-}
-
  .collect{
     font-size: large;
     font-weight:bold;

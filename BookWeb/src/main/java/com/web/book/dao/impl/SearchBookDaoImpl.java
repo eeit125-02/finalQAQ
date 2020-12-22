@@ -49,7 +49,7 @@ public class SearchBookDaoImpl implements SearchBookDAO {
 	@SuppressWarnings("unchecked")
 	public List<BookCollectBean> getCollect(int MB_ID) {
 		List<BookCollectBean> list = new ArrayList<>();
-		String hql = "From Book_COLLECTBean bc Where bc.member = :mbid";
+		String hql = "From BookCollectBean bc Where bc.member = :mbid";
 		Session session = factory.getCurrentSession();
 		BookCollectBean bc=session.load(BookCollectBean.class, MB_ID);
 		Query<BookCollectBean> query = session.createQuery(hql);
