@@ -8,6 +8,7 @@ import java.util.UUID;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,6 +17,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.web.book.model.ActBean;
 import com.web.book.model.CommandBean;
@@ -67,19 +70,54 @@ public class ActController {
 		model.addAttribute("actbean", ab);
 		return "Activity/ActForm";
 	}
-
-	// 新增成功後redirect所有活動紀錄
+	
+	
+	//新增活動
 	@PostMapping("/showCreateForm")
-	public String createAct(Model model, @ModelAttribute("ab") ActBean ab,
-			@RequestParam(value = "file", required = false) MultipartFile file) throws IOException {
+	public String createAct(
+	Model model,
+	@ModelAttribute("actbean") ActBean ab,
+	@RequestParam(value="file",required=false) CommonsMultipartFile file,
+	HttpServletRequest request,
+	RedirectAttributes attr)throws Exception {
 
-		// 儲存資料庫的路徑
+//	String name =UUID.randomUUID().toString().replaceAll("-", "");//使用UUID給圖片重新命名，並去掉四個“-”
+	String name = ab.getact_Name();
+	System.out.println(name);
+	String ext = FilenameUtils.getExtension(file.getOriginalFilename());//獲取檔案的副檔名
+	String filePath = "C:\\Users\\Student\\Documents\\GitHub\\finalQAQ\\BookWeb\\src\\main\\webapp\\Resource\\act_Images";//設定圖片上傳路徑
+	System.out.println(request.getContextPath());
+	System.out.println(filePath);
+	File imagePath = new File(filePath);
+	File fileImage = new File(filePath+"/"+name + "." + ext);
+	if (!imagePath .exists() && !imagePath .isDirectory())
+	{
+	System.out.println(filePath);
+	imagePath.mkdir();
+	}
+	file.transferTo(fileImage);//把圖片儲存路徑儲存到資料庫
+	//重定向到查詢所有使用者的Controller，測試圖片回顯
+	ab.setact_Image(name + "." + ext);
+	actService.createAct(ab);
+	model.addAttribute("name", name);
+
+	return "redirect:/showActs";
+	}
+
+	
+
+//	// 新增成功後redirect所有活動紀錄
+//	@PostMapping("/showCreateForm")
+//	public String createAct(Model model, @ModelAttribute("ab") ActBean ab,
+//			@RequestParam(value = "file", required = false) MultipartFile file) throws IOException {
+//
+////		 儲存資料庫的路徑
 //		  String sqlPath = null; 
 //		  //定義檔案儲存的本地路徑
 //	      String localPath="C:\\File\\";
 //	      //定義 檔名
 //	      String filename=null;  
-//	      if(!ab.getfile().isEmpty()){  
+//	      if(ab.getfile().isEmpty()){  
 //
 //	          String uuid = UUID.randomUUID().toString().replaceAll("-","");  
 //	          //獲得檔案型別(可以判斷如果不是圖片,禁止上傳)  
@@ -96,11 +134,11 @@ public class ActController {
 //	      sqlPath = "/images/"+filename;
 //	      System.out.println(sqlPath);
 //	      ab.setact_Image(sqlPath);
-		actService.createAct(ab);
-		model.addAttribute("ab", ab);
-		return "redirect:/showActs";
-
-	}
+//		actService.createAct(ab);
+//		model.addAttribute("ab", ab);
+//		return "redirect:/showActs";
+//
+//	}
 
 	// 顯示修改活動頁面
 	@GetMapping("/showUpdateForm")

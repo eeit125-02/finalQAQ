@@ -149,6 +149,10 @@ span {
 					<form:input type="email" id="mail" path="mb_Mail" value="${mb_inf.mb_Mail}"/> 
 					<span id="idsp7"></span><br />
 				</div>
+				<div> 
+					<label>頭像:</label> <input type="file" name="pic" id="pic" onblur=""> 
+					<span id="idsp7"></span><br /> 
+				</div>
 				<br />
 				<div class="a10">
 					<label>喜好類型:</label><br /> 

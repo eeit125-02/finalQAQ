@@ -30,8 +30,8 @@ public class ActBean {
 	private String act_Rule;
 	private String act_Tag;
 	private String act_Place;
-	@Transient
-	private MultipartFile file;
+//	@Transient
+//	private MultipartFile file;
 	
 //	@ManyToOne
 //	@JoinColumn(name = "mb_ID")
@@ -39,7 +39,7 @@ public class ActBean {
 	
 	public ActBean(Integer mb_ID, Integer act_ID, String act_Image, String act_Name, String act_Theme, String act_Date,
 			String act_Loc, String act_Intro, String act_Guest, String act_Pax, String act_Rule, String act_Tag,
-			String act_Place, MultipartFile file) {
+			String act_Place) {
 		super();
 		this.mb_ID = mb_ID;
 		this.act_ID = act_ID;
@@ -54,7 +54,7 @@ public class ActBean {
 		this.act_Rule = act_Rule;
 		this.act_Tag = act_Tag;
 		this.act_Place = act_Place;
-		this.file = file;
+//		this.file = file;
 	}
 
 
@@ -199,12 +199,6 @@ public class ActBean {
 		return builder.toString();
 	}
 
-	public MultipartFile getfile() {
-		return file;
-	}
-
-	public void setfile(MultipartFile file) {
-		this.file = file;
-	}
+//	                                        
 
 }
