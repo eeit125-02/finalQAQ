@@ -85,7 +85,7 @@ public class ActController {
 	String name = ab.getact_Name();
 	System.out.println(name);
 	String ext = FilenameUtils.getExtension(file.getOriginalFilename());//獲取檔案的副檔名
-	String filePath = "C:\\Users\\Student\\Documents\\GitHub\\finalQAQ\\BookWeb\\src\\main\\webapp\\Resource\\act_Images";//設定圖片上傳路徑
+	String filePath = "C:\\Users\\Student\\Documents\\GitHub\\finalQAQ\\BookWeb\\src\\main\\webapp\\Resource\\image";//設定圖片上傳路徑
 	System.out.println(request.getContextPath());
 	System.out.println(filePath);
 	File imagePath = new File(filePath);

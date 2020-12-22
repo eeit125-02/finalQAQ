@@ -21,7 +21,7 @@
 //	
 //	MemberBean checkMember;
 //
-//	//註冊資料
+	//註冊資料
 //	@PostMapping("/registe")
 //	public String Registe(Model model, @RequestParam(value = "account") String mb_Account,
 //			@RequestParam(value = "pwd") String mb_Password, @RequestParam(value = "sex") String mb_Sex,
