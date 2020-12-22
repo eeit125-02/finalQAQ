@@ -67,10 +67,10 @@
 					<td><form:input path="mb_ID" /></td>
 				</tr>
 
-<!-- 				<tr> -->
-<%-- 					<td><form:label path="act_Image">活動圖片:</form:label></td> --%>
-<%-- 					<td><form:input path="act_Image" type="file" /></td> --%>
-<!-- 				</tr> -->
+				<tr>
+					<td><form:label path="act_Image">活動圖片:</form:label></td>
+					<td><input name="file" type="file" /></td>
+				</tr>
 
 				<tr>
 					<td><form:label path="act_Name">活動名稱:</form:label></td>
@@ -78,7 +78,8 @@
 				</tr>
 
 				<tr>
-					<td><form:label path="act_Theme">活動主題:</form:label></td>
+					<td><label>活動主題:</label></td>
+					<td></td>
 					<td><form:input path="act_Theme" /></td>
 				</tr>
 
@@ -88,8 +89,42 @@
 				</tr>
 
 				<tr>
-					<td><form:label path="act_Loc">活動地點:</form:label></td>
-					<td><form:input path="act_Loc" /></td>
+					<td><label>活動地點:</label></td>
+					<td><select name="act_Loc">
+					<option value="City">縣市</option>
+                                <option value="TPH">新北市</option>
+                                <option value="TPE">台北市</option>
+                                <option value="TYC">桃園市</option>
+                                <option value="HSH">新竹縣</option>
+                                <option value="HSC">新竹市</option>
+                                <option value="MAC">苗栗市</option>
+                                <option value="MAL">苗栗縣</option>
+                                <option value="TXG">台中市</option>
+                                <option value="CWH">彰化縣</option>
+                                <option value="CWS">彰化市</option>
+                                <option value="NTC">南投市</option>
+                                <option value="NTO">南投縣</option>
+                                <option value="YLH">雲林縣</option>
+                                <option value="CHY">嘉義縣</option>
+                                <option value="CYI">嘉義市</option>
+                                <option value="TNN">台南市</option>
+                                <option value="KHH">高雄市</option>
+                                <option value="IUH">屏東縣</option>
+                                <option value="PTS">屏東市</option>
+                                <option value="ILN">宜蘭縣</option>
+                                <option value="ILC">宜蘭市</option>
+                                <option value="HWA">花蓮縣</option>
+                                <option value="HWC">花蓮市</option>
+                                <option value="TTC">台東市</option>
+                                <option value="TTT">台東縣</option>
+                                <option value="PEH">澎湖縣</option>
+                                <option value="GNI">綠島</option>
+                                <option value="KYD">蘭嶼</option>
+                                <option value="KMN">金門縣</option>
+                                <option value="MZW">馬祖</option>
+                                <option value="LNN">連江縣</option>
+					</select>
+					</td>
 				</tr>
 
 				<tr>

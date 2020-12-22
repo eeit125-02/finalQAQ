@@ -157,7 +157,7 @@
                         <label><input type="checkbox" name="location" value="MZW">馬祖</label><br>
                         <label><input type="checkbox" name="location" value="LNN">連江縣</label><br>
                     </div><br>
-                    <li class=list>類別:</li>
+                    <li class=list>活動主題:</li>
                     <div class="st1">
                         <label for=" " class="t1"></label>
                         <label>
