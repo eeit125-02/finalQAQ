@@ -257,6 +257,7 @@ form {
 			}
 		})
 
+		
 		$('#send').click(function() {
 			if (a1 != true && a2 != true && a3 != true) {
 				alert("未填寫正確")	;

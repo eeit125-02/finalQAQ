@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%
-response.setContentType("text/html;charset=UTF-8");
+	response.setContentType("text/html;charset=UTF-8");
 response.setHeader("Cache-Control", "no-cache"); // HTTP 1.1
 response.setHeader("Pragma", "no-cache"); // HTTP 1.0
 response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
@@ -26,26 +26,30 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
 	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
 	crossorigin="anonymous">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/css/member.css">
 <!-- link rel="stylesheet" href="login.css"> -->
 <style>
-@import url(https://fonts.googleapis.com/earlyaccess/cwtexyen.css);
-body{
-    font-family: "cwTeXYen", sans-serif;
-    font-weight: 800;
-    line-height: 2;
-    font-size: 18px;
-}
+/* @import url(https://fonts.googleapis.com/earlyaccess/cwtexyen.css); */
+/* body{ */
+/*     font-family: "cwTeXYen", sans-serif; */
+/*     font-weight: 800; */
+/*     line-height: 2; */
+/*     font-size: 18px; */
+/* } */
 fieldset {
-    border-radius: 25px;
-    padding: 20px;
-    margin: auto;
-    background-color: #F3F3FA;
-    width: 400px
+	border-radius: 25px;
+	padding: 20px;
+	margin: auto;
+	background-color: #F3F3FA;
+	width: 400px
 }
+
 legend {
-    text-align: center;
-    font-size: 30px;
+	text-align: center;
+	font-size: 30px;
 }
+
 p {
 	margin-top: 5px;
 	font-size: 10px
@@ -55,7 +59,7 @@ div {
 	text-align: center;
 }
 
-.login button{
+.login button {
 	margin: auto;
 	margin-top: 20px;
 	font-size: large;
@@ -67,11 +71,10 @@ div {
 
 span {
 	font-size: 16px;
-	
 }
 
-form{
-	margin:auto;
+form {
+	margin: auto;
 }
 
 .bd-placeholder-img {
@@ -87,68 +90,137 @@ form{
 </style>
 </head>
 <body>
-<!-- header -->
+	<!-- header -->
 	<header class="container blog-header py-3" id="bookWebheader"></header>
 	<!-- header -->
 
 	<div class="container media">
-	<form action="<c:url value='/login' />" method="post">
-		<fieldset>
-			<legend>會員登入</legend>
-			<div>
-				<label>帳號:</label> <input type="text" name="account" id="account"
-					 size="12">
-			</div>
-			<div>
-				<label>密碼:</label> <input type="password" name="pwd" id="pwd"
-					 size="12" >
-			</div>
-			<div class="login">
-				<span id="sp" style="color:red"></span><br>
-				<button type="button" id="send">登入</button>
-			</div>
-			<div>
-				<a href="password.html">忘記密碼?</a> <a href="account.html">忘記帳號?</a>
-			</div>
-			<hr>
-			<div>
-				<a href="<c:url value='/toRegiste' />" style="text-decoration: none">新帳號註冊</a>
-			</div>
-			
-		</fieldset>
-	</form>
+		<form action="<c:url value='/login' />" method="post">
+			<fieldset>
+				<legend>會員登入</legend>
+				<div>
+					<label>帳號:</label> <input type="text" name="account" id="account"
+						size="12">
+				</div>
+				<div>
+					<label>密碼:</label> 
+					<input type="password" name="pwd" id="pwd" size="12">
+				</div>
+				<div style="inline-block">
+				<label for="inputCode">驗證碼：</label> 
+				<input type="text" id="inputCode" />
+				
+				
+				<span id="text_show"></span>	
+				<input id="Button1" type="button" value="確定" />
+			    </div>
+			    <div align="center" style="padding:10px 150px;">
+			    <div id="checkCode"></div>
+                </div>
+                <span id="sp" style="color: red"></span>
+				<div class="login" align="center" style="padding:10px 11px;">
+					<button type="button" id="send">登入</button>
+				</div>
+				<div>
+					<a href="password.html">忘記密碼?</a> <a href="account.html">忘記帳號?</a>
+				</div>
+				<div>
+					<a href="<c:url value='/toRegiste' />"
+						style="text-decoration: none">新帳號註冊</a>
+				</div>
+
+			</fieldset>
+		</form>
 	</div>
 
 	<!-- footer -->
 	<footer class="container py-5" id="bookWebFooter"></footer>
 	<!-- footer -->
-	
+
 	<script>
-	$(document).ready(function() {
-		$("#bookWebheader").load("<c:url value='/header'/>");
-        $("#bookWebFooter").load("<c:url value='/footer'/>");
-	});
-	
-	$('#send').click(function(){
-	let mb_Account = $('#account').val();
-	let mb_Password = $('#pwd').val();
-	let sp = document.getElementById("sp")
-	let editURL = location.href + "/checklogin/" + mb_Account + "/" + mb_Password;
-	$.ajax({
-		async : false,
-		type : 'POST',
-		url : editURL,
-		dataType : "json",
-		contentType : "application/json;charset=utf-8",
-		success : function(data) {
-			if (data) {
-				$('form').submit(); 
-			}else{
-				sp.innerHTML="帳號或密碼錯誤"
+		var code;
+		function createCode() {
+			code = "";
+			var codeLength = 6; //驗證碼的長度
+			var checkCode = document.getElementById("checkCode");
+			var codeChars = new Array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 'a', 'b',
+					'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n',
+					'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
+					'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L',
+					'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X',
+					'Y', 'Z');
+			for (var index = 0; index < codeLength; index++) {
+				var charNum = Math.floor(Math.random() * 52);
+				code += codeChars[charNum];
+			}
+			if (checkCode) {
+				checkCode.className = "code";
+				checkCode.innerHTML = code;
 			}
 		}
-	});
-	})
-</script>
+		let a = false;
+		function validateCode() {
+			var inputCode = document.getElementById("inputCode").value;
+			var textShow = document.getElementById("text_show")
+			if (inputCode.length <= 0) {
+				textShow.innerHTML = "請輸入驗證碼";
+				textShow.style.color = "red";
+			} else if (inputCode.toUpperCase() != code.toUpperCase()) {
+				textShow.innerHTML = "您輸入的驗證碼有誤";
+				textShow.style.color = "red";
+				createCode();
+			} else {
+				textShow.innerHTML = "驗證碼正確";
+				textShow.style.color = "green";
+				a = true;
+			}
+		}
+		function checkCode() {
+			var btn = document.getElementById("Button1");
+			btn.onclick = function() {
+				validateCode();
+			}
+		}
+		window.onload = function() {
+			checkCode();
+			createCode();
+			document.getElementById("checkCode").onclick = function() {
+				createCode()
+			}
+			linkbt.onclick = function() {
+				createCode()
+			}
+			inputCode.onclick = function() {
+				validateCode();
+			}
+		}
+		$(document).ready(function() {
+			$("#bookWebheader").load("<c:url value='/header'/>");
+			$("#bookWebFooter").load("<c:url value='/footer'/>");
+		});
+
+		$('#send').click(
+				function() {
+					let mb_Account = $('#account').val();
+					let mb_Password = $('#pwd').val();
+					let sp = document.getElementById("sp")
+					let editURL = location.href + "/checklogin/" + mb_Account
+							+ "/" + mb_Password;
+					$.ajax({
+						async : false,
+						type : 'POST',
+						url : editURL,
+						dataType : "json",
+						contentType : "application/json;charset=utf-8",
+						success : function(data) {
+							if (data && a) {
+								$('form').submit();
+							} else {
+								sp.innerHTML = "輸入錯誤"
+							}
+						}
+					});
+				})
+	</script>
 </body>
 </html>
