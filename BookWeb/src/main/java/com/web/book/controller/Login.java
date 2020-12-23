@@ -67,7 +67,6 @@ public class Login {
 	@PostMapping("/toRegiste/checkAccount/{mb_Account}")
 	@ResponseBody
 	public boolean checkAccount(@PathVariable("mb_Account") String account) {
-		System.out.println(account);
 		boolean check = ms.checkAccount(account);
 		return check;
 	}
