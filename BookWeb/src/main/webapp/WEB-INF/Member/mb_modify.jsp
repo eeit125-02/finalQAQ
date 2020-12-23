@@ -120,14 +120,7 @@ span {
 			<fieldset>
 				<legend>會員個資</legend>
 				<div class="a2">
-					<label>帳號:</label>
-					<p>${account}</p>
-				</div>
-				<div class="a5">
-					<label>性別:</label> 
-					<form:radiobutton value="男" path="mb_Sex" />男 
-					<form:radiobutton value="女" path="mb_Sex" />女
-					 <span id="idsp3"></span>
+					<label>帳號:</label>&nbsp;&nbsp;<inline>${account}</inline>
 				</div>
 				<div class="a6">
 					<label>生日:</label> <form:input type="date" path="mb_Birthday" value="${mb_inf.mb_Birthday}"/> 
@@ -150,13 +143,14 @@ span {
 					<span id="idsp7"></span><br />
 				</div>
 				<div> 
-					<label>頭像:</label> <input type="file" name="pic" id="pic" onblur=""> 
+					<label>頭像:</label> 
+					<input type="file" name="file" value="${mb_inf.mb_pic}"/>
 					<span id="idsp7"></span><br /> 
 				</div>
 				<br />
 				<div class="a10">
 					<label>喜好類型:</label><br /> 
-					<form:checkbox  id="type1" value="文學創作" path="mb_type" />文學創作 
+					<form:checkbox  id="type1" value="文學創作 " path="mb_type" />文學創作 
 					<form:checkbox  id="type2" value="圖文漫畫" path="mb_type" />圖文漫畫 
 					<form:checkbox  id="type3" value="商業/理財" path="mb_type" />商業/理財<br> 
 					<form:checkbox  id="type4" value="人文/社會" path="mb_type" />人文/社會 

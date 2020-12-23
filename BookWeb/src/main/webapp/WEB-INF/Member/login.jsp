@@ -96,14 +96,14 @@ form{
 			<legend>會員登入</legend>
 			<div>
 				<label>帳號:</label> <input type="text" name="account" id="account"
-					 size="12" onblur="">
+					 size="12">
 			</div>
 			<div>
 				<label>密碼:</label> <input type="password" name="pwd" id="pwd"
 					 size="12" >
 			</div>
 			<div class="login">
-				<button type="submit" style="text-decoration: none" name="submit">登入</button>
+				<button type="button" id="send">登入</button>
 			</div>
 			<div>
 				<a href="password.html">忘記密碼?</a> <a href="account.html">忘記帳號?</a>
@@ -127,6 +127,26 @@ form{
         $("#bookWebFooter").load("<c:url value='/footer'/>");
 	});
 	
+	$('#send').click(function(){
+	let mb_Account = $('#account').val();
+	let mb_Password = $('#pwd').val();
+	let sp = document.getElementById("sp")
+	let editURL = location.href + "/checklogin/" + mb_Account + "/" + mb_Password;
+	$.ajax({
+		async : false,
+		type : 'POST',
+		url : editURL,
+		dataType : "json",
+		contentType : "application/json;charset=utf-8",
+		success : function(data) {
+			if (data) {
+				$('form').submit(); 
+			}else{
+				alert("帳號或密碼錯誤");
+			}
+		}
+	});
+	})
 </script>
 </body>
 </html>

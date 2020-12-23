@@ -1,11 +1,15 @@
 package com.web.book.controller;
 
+import java.io.File;
 import java.sql.Timestamp;
 import java.util.List;
+import java.util.UUID;
 
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,6 +20,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.web.book.model.MemberBean;
 import com.web.book.service.MemberService;
@@ -65,7 +71,15 @@ public class Login {
 		boolean check = ms.checkAccount(account);
 		return check;
 	}
-
+	//檢查登入
+	@PostMapping("/toLogin/checklogin/{mb_Account}/{mb_Password}")
+	@ResponseBody
+	public boolean checklogin(@PathVariable("mb_Account") String account,
+							  @PathVariable("mb_Password") String pwd) {
+		boolean check = ms.Login(account,pwd);
+		System.out.println("-----------------");
+		return check;
+	}	
 	// 會員登入
 	@PostMapping("/login")
 	public String login(Model model, HttpServletResponse response,
@@ -117,10 +131,32 @@ public class Login {
 	}
 	// 會員修改
 	@PostMapping("/MbUpdate")
-	public String Update(Model model,@ModelAttribute("MemberBean") MemberBean MB) {
-		System.out.println(MB);
+	public String Update(Model model,
+						@ModelAttribute("MemberBean") MemberBean MB,
+						@RequestParam(value="file",required=false) CommonsMultipartFile file,
+						HttpServletRequest request,
+						RedirectAttributes attr)throws Exception {
+		System.out.println("--------------------------------------");
 		MemberBean mb_inf = ms.select(Account);
-		mb_inf.setMb_Sex(MB.getMb_Sex());
+//		String name =UUID.randomUUID().toString().replaceAll("-", "");//使用UUID給圖片重新命名，並去掉四個“-”
+		String name = mb_inf.getMb_Account();
+		System.out.println(name);
+		//獲取檔案的副檔名
+		String ext = FilenameUtils.getExtension(file.getOriginalFilename());
+		//設定圖片上傳路徑
+		String filePath = "C:\\Users\\Student\\Documents\\GitHub\\finalQAQ\\BookWeb\\src\\main\\webapp\\Resource\\image";
+		System.out.println(request.getContextPath());
+		System.out.println(filePath);
+		File imagePath = new File(filePath);
+		File fileImage = new File(filePath+"/"+name + "." + ext);
+		if (!imagePath .exists() && !imagePath .isDirectory())
+		{
+		System.out.println(filePath);
+		imagePath.mkdir();
+		}
+		file.transferTo(fileImage);//把圖片儲存路徑儲存到資料庫
+		//重定向到查詢所有使用者的Controller，測試圖片回顯 
+		mb_inf.setMb_pic(name + "." + ext);
 		mb_inf.setMb_Birthday(MB.getMb_Birthday());
 		mb_inf.setMb_Address(MB.getMb_Address());
 		mb_inf.setMb_Tel(MB.getMb_Tel());

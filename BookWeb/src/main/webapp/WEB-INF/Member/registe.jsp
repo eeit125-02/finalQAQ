@@ -104,23 +104,23 @@ form {
 	<div class="container media">
 		<br>
 
-		<form action="<c:url value='/registe' />" method="post" id='aaaaa'>
+		<form action="<c:url value='/registe' />" method="post">
 			<fieldset>
 				<legend>會員註冊</legend>
 				<div>
 					<label>帳號:</label> <input type="text" name="account" id="account"
-						value="" size="12" onblur="Checkaccount()"> <span
+						value="" size="12" > <span
 						id="idsp2"></span><br />
 					<p style="color: gray;">(1.不可空白 2.至少6個字且必須包含英文字母、數字)</p>
 				</div>
 				<div>
 					<label>密碼:</label> <input type="password" name="pwd" id="pwd"
-						value="" size="12" onblur="Checkpwd()"> <span id="idsp1"></span><br />
+						value="" size="12" > <span id="idsp1"></span><br />
 					<p style="color: gray;">(1.不可空白，2.至少6個字且必須包含英文字母、數字)</p>
 				</div>
 				<div class="space">
 					<label>確認密碼:</label> <input type="password" name="pwd1" id="pwd1"
-						value="" size="12" onblur="Checkpwd1()"> <span id="idsp9"></span><br />
+						value="" size="12" > <span id="idsp9"></span><br />
 				</div>
 				<div>
 					<label>姓名:</label> <input type="text" id="name" name="name"
@@ -173,7 +173,7 @@ form {
 <!-- 				</div> -->
 				<br>
 				<div class="send">
-					<button name="submit" id="submit">送出</button>
+					<button type="button" id="send">送出</button>
 					<button type="reset">清除</button>
 				</div>
 			</fieldset>
@@ -257,13 +257,12 @@ form {
 			}
 		})
 
-		$('#submit').click(function() {
+		$('#send').click(function() {
 			if (a1 != true && a2 != true && a3 != true) {
 				alert("未填寫正確")	;
-			}else {
+			} else {
 				$('form').submit();
 			}
-			
 		})
 		
 	</script>

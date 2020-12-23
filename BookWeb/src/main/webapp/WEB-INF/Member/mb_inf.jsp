@@ -63,7 +63,8 @@ input {
 }
 
 div {
-	margin-left: 50px;
+	float : center;
+	margin-left: 150px;
 }
 
 .a11 button {
@@ -108,6 +109,7 @@ span {
 	<div class="container media">
 		<fieldset>
 			<legend>會員資料</legend>
+			<img src="${pageContext.request.contextPath}/image/${login.mb_pic}" style="width:140px; height: 150px; float: left"/>
 			<div class="a2">
 				<label>帳號:</label>
 				<p>${login.mb_Account}</p>
