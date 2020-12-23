@@ -7,11 +7,8 @@
 <html>
 <head>
 <meta charset="utf-8">
+
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
-	integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
-	crossorigin="anonymous"></script>
 <script
 	src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
 	integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
@@ -20,6 +17,26 @@
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
 	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
 	crossorigin="anonymous">
+
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
+	integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
+	crossorigin="anonymous"></script>
+
+
+<script
+	src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js"
+	referrerpolicy="origin"></script>
+
+<script>
+	tinymce.init({
+		selector : 'textarea#editor',
+		menubar : false
+	});
+</script>
+
+
+
 <style>
 .bd-placeholder-img {
 	font-size: 1. 125rem;
@@ -79,8 +96,7 @@
 						<!-- search keyword -->
 						<nav class="navbar navbar-light bg-light justify-content-between">
 							<a class="navbar-brand">搜尋貼文關鍵字</a>
-							<form class="form-inline"
-								action='search_keyword' method="post">
+							<form class="form-inline" action='search_keyword' method="post">
 								<input class="form-control mr-sm-2" type="search"
 									placeholder="請輸入關鍵字" name="keyword">
 								<button class="btn btn-outline-primary my-2 my-sm-0"
@@ -316,21 +332,36 @@
 							<!-- edit rule -->
 							<div class="tab-pane fade show active" id="pills-edit_rule"
 								role="tabpanel">
-								<h5>上次修改時間 [time]</h5><hr>
-								修改板規區域
+								
+
+
+									<div class=" justify-content-center">
+											<label>上次修改時間 [time]</label>
+											<div class="form-group">
+												<textarea id="editor" name="rule_content" style="height:50000">[上次版規內容]</textarea>
+											</div>
+											<button type="submit" class="btn btn-primary">送出版規</button>
+										</div>
+
+								<script>
+									tinymce.init({selector : '#editor'});
+								</script>
+
 							</div>
 
 							<!-- search & delete post -->
 							<div class="tab-pane fade" id="pills-manage_post" role="tabpanel">
 
 								<div>
-									<form class="form-inline justify-content-center" action='search_keyword' method="post">
-										<input class="form-control" type="search"
-											placeholder="請輸入關鍵字"  name="keyword" style="margin-right:10px">
+									<form class="form-inline justify-content-center"
+										action='search_keyword' method="post">
+										<input class="form-control" type="search" placeholder="請輸入關鍵字"
+											name="keyword" style="margin-right: 10px">
 										<button class="btn btn-outline-primary my-2 my-sm-0"
 											type="submit" id="search_post">Search</button>
 									</form>
-								</div><br>
+								</div>
+								<br>
 
 								<h5>貼文顯示區域</h5>
 							</div>
