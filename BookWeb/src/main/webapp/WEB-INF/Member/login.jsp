@@ -66,7 +66,8 @@ div {
 }
 
 span {
-	font-size: 50px;
+	font-size: 16px;
+	
 }
 
 form{
@@ -103,6 +104,7 @@ form{
 					 size="12" >
 			</div>
 			<div class="login">
+				<span id="sp" style="color:red"></span><br>
 				<button type="button" id="send">登入</button>
 			</div>
 			<div>
@@ -142,7 +144,7 @@ form{
 			if (data) {
 				$('form').submit(); 
 			}else{
-				alert("帳號或密碼錯誤");
+				sp.innerHTML="帳號或密碼錯誤"
 			}
 		}
 	});
