@@ -28,7 +28,7 @@ public class StoreController {
 		return "/Transation/storeMain";
 	}
 	
-	@PostMapping("/detail")
+	@GetMapping("/detail")
 	public String detail(Model model,
 			@RequestParam(value = "selectbk") Integer bk_ID
 			) {

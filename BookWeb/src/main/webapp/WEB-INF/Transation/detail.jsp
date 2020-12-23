@@ -52,7 +52,7 @@
 
 
 		<jsp:useBean id="bookdetail" class="com.web.book.model.BookBean" scope="request" />
-		<form action="<c:url value='shopping' />" method="POST">
+		<form action="<c:url value='shopping' />" method="get">
 			<div>
 				<label for="url"></label> <img alt="xx" width="200px" height="300px"
 					src="<jsp:getProperty name="bookdetail" property="bk_Pic" />">
@@ -75,11 +75,13 @@
 			</div>
 
 			<div>
-				<input type="submit" value="直接購買" name="goToCart">
+				<button type="submit" value="${bookdetail.bk_ID}" name="goToCart">直接購買</button><br>
+				
 			</div>
 			<div>
-				<input type="submit" value="放入購物車" name="addCart">
+				<button type="submit" value="${bookdetail.bk_ID}" name="addCart">放入購物車</button>
 			</div>
+			${same}
 		</form>
 		
 		

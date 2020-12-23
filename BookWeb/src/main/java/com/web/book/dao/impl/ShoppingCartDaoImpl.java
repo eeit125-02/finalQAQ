@@ -37,12 +37,21 @@ public class ShoppingCartDaoImpl implements ShoppingCartDao {
 	//查詢所有購物車資料
 	@Override
 	@SuppressWarnings("unchecked")
-	public List<ShoppingCartBean> searchCart() {
+	public List<ShoppingCartBean> searchCart(Integer bb_ID) {
 		Session session = factory.getCurrentSession();
-		String hql = "FROM ShoppingCartBean";
-		List<ShoppingCartBean> list = session.createQuery(hql).getResultList();
+		String hql = "FROM ShoppingCartBean a where a.member = :member";
+		MemberBean member = session.load(MemberBean.class, bb_ID);
+		List<ShoppingCartBean> list = session.createQuery(hql).setParameter("member", member).getResultList();
 		return list;
 	}
+	//查詢是否有這筆購物車資料
+//	public void checkCart(Integer bk_ID, Integer bb_ID) {
+//		Session session = factory.getCurrentSession();
+//		String hql = "FROM ShoppingCartBean a where a.book = :book and a.member = :member";
+//		BookBean book = session.get(BookBean.class, bk_ID);
+//		MemberBean member = session.get(MemberBean.class, bb_ID);
+//		session.createQuery(hql).setParameter("book", book).setParameter("member", member).getSingleResult();
+//	}
 	//修改一筆購物車資料
 	@Override
 	public void updateCart(Integer cart_ID, Integer cart_Num) {

@@ -28,8 +28,8 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 	}
 
 	@Override
-	public List<ShoppingCartBean> searchCart() {
-		return dao.searchCart();
+	public List<ShoppingCartBean> searchCart(Integer bb_ID) {
+		return dao.searchCart(bb_ID);
 	}
 
 	@Override

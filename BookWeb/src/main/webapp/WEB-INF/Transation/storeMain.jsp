@@ -46,15 +46,16 @@
 	<header class="container blog-header py-3" id="bookWebheader"></header>
 	<!-- header -->
 
+	<!-- body -->
+	<a href="<c:url value='/shopping' />"><img alt="wtf..." src="${pageContext.request.contextPath}/image/shoppingCart.png" width="50"></a>
 	<div class="container media">
-		<!-- body -->
-
+		<span>${same}</span>
 		<form action="<c:url value='/myStore'/>" method="post">
 			<button type="submit" name="">我的清單</button>
-			<br>
 		</form>
-			<br>
-		<form action="<c:url value='/detail'/>" method="post">
+	</div>
+	<div class="container media">
+		<form action="<c:url value='/detail'/>" method="get">
 			<table border="2" width="70%">
 				<tr>
 					<th>&nbsp;</th>
