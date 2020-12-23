@@ -42,24 +42,22 @@ public class ActController {
 	public String actlist(Model model) {
 		List<ActBean> actlist = actService.getAllActs();
 		model.addAttribute("allacts", actlist);
-		return "Activity/showActs";
+		return "Activity/ActHomepage";
 	}
 
-	// 測試商品頁用的 還要修改
-	@GetMapping("/products")
-	public String list(Model model) {
-		List<ActBean> list = actService.getAllActs();
-		model.addAttribute("products", list);
-		return "Activity/products";
-	}
+//	// 測試商品頁用的 還要修改
+//	@GetMapping("/products")
+//	public String list(Model model) {
+//		List<ActBean> list = actService.getAllActs();
+//		model.addAttribute("products", list);
+//		return "Activity/products";
+//	}
 
-//	// 搜尋關鍵字
+////	搜尋關鍵字
 //	@PostMapping("Discussion/search_keyword")
 //	public String showSearchResult(Model model, @RequestParam("keyword") String keyword) {
 //		List<ActBean> actlist = actService.getAllActs();
 //		model.addAttribute("allacts", actlist);
-//		List<CommandBean> command_list = actService.getAllCommand();
-//		model.addAttribute("allCommand", command_list);
 //		return "/Discussion/search_result";
 //	}
 
@@ -93,7 +91,7 @@ public class ActController {
 	if (!imagePath .exists() && !imagePath .isDirectory())
 	{
 	System.out.println(filePath);
-	imagePath.mkdir();
+	imagePath.mkdir();                                                                                                         
 	}
 	file.transferTo(fileImage);//把圖片儲存路徑儲存到資料庫
 	//重定向到查詢所有使用者的Controller，測試圖片回顯
@@ -101,7 +99,7 @@ public class ActController {
 	actService.createAct(ab);
 	model.addAttribute("name", name);
 
-	return "redirect:/showActs";
+	return "redirect:/ActHomepage";
 	}
 
 	
