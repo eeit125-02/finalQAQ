@@ -164,7 +164,7 @@
 			<input type='reset'  value='還原' />
 			<br>
 			<br>
-			<a href='${pageContext.request.contextPath}/showActs'>回到活動管理</a>
+			<a href='${pageContext.request.contextPath}/ActHomepage'>回到活動管理</a>
 		</form:form>
 
 	</div>

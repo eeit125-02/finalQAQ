@@ -1,8 +1,13 @@
-
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <!DOCTYPE html>
-<html lang="en">
-
+<html>
 <head>
+<meta charset="UTF-8">
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <title>Fun Tribe</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -10,6 +15,25 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
+	integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
+	crossorigin="anonymous"></script>
+<script
+	src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+	integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+	crossorigin="anonymous"></script>
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+	crossorigin="anonymous">
+	<script>
+	$(document).ready(function() {
+		$("#bookWebheader").load("//localhost:8080/BookWeb/header");
+       	$("#bookWebFooter").load("//localhost:8080/BookWeb/footer");
+
+	});
+</script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Anton&family=Dancing+Script:wght@700&family=Great+Vibes&family=Lobster&family=Monoton&family=Poiret+One&display=swap');
         
@@ -61,6 +85,22 @@
         .list{
             font-size: 20px;
         }
+        .bd-placeholder-img {
+	font-size: 1. 125rem;
+	text-anchor: middle;
+}
+
+@media ( min-width : 768px) {
+	.bd-placeholder-img-lg {
+		font-size: 3.5rem;
+	}
+}
+
+td{
+width:100px;
+border:solid 1px;
+text-align:center;
+}
     </style>
 </head>
 
@@ -124,7 +164,7 @@
                     <li class=list>地區:</li>
                     <div class="st1">
                         <label for=" " class="t1"></label>
-                        <label><form:checkbox path="act_Loc" value="KLU" />基隆市</label><br>
+                        <label><input type="checkbox" name="location" value="KLU">基隆市</label><br>
                         <label><input type="checkbox" name="location" value="TPH">新北市</label><br>
                         <label><input type="checkbox" name="location" value="TPE">台北市</label><br>
                         <label><input type="checkbox" name="location" value="TYC">桃園市</label><br>
@@ -157,7 +197,7 @@
                         <label><input type="checkbox" name="location" value="MZW">馬祖</label><br>
                         <label><input type="checkbox" name="location" value="LNN">連江縣</label><br>
                     </div><br>
-                    <li class=list>活動主題:</li>
+                    <li class=list>類別:</li>
                     <div class="st1">
                         <label for=" " class="t1"></label>
                         <label>
@@ -181,59 +221,61 @@
                     </div>
                 </ul>
             </nav>
-            <div class="col-sm-3">
-                <h2>哈利波特讀書會</h2>
-                <h5>Title description, Dec 7, 2020</h5>
-                <img src="Images/Book Covers.jpg" width="300px" height="400px">
-                <p>Some text..</p>
-                <p>Sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do
-                    eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                    exercitation ullamco.</p>
+            <c:forEach var='act' items='${allacts}'>
+            <div class="col-sm-6 col-md-3" style="width: 360px; height: 360px">        
+                <h2>${act.act_Name}</h2>
+                <h5>${act.act_Theme}</h5>
+                <h5>${act.act_Date}</h5>
+                <img src="${pageContext.request.contextPath}/image/${act.act_Image}" style="width:300px; height: 400px;"/>
+                <p>${act.act_Theme}</p>
+                <p>${act.act_Intro}</p>
                     <br>
-                <h2>咖啡廳推薦</h2>
-                <h5>Title description, Dec 7, 2020</h5>
-                <img src="Images/Coffee shopppp.jpeg" width="300px" height="400px">
-                <p>Some text..</p>
-                <p>Sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do
-                    eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                    exercitation ullamco.</p>
-                <br>
+<!--                 <h2>咖啡廳推薦</h2> -->
+<!--                 <h5>Title description, Dec 7, 2020</h5> -->
+<!--                 <img src="Images/Coffee shopppp.jpeg" width="300px" height="400px"> -->
+<!--                 <p>Some text..</p> -->
+<!--                 <p>Sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do -->
+<!--                     eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud -->
+<!--                     exercitation ullamco.</p> -->
+<!--                 <br> -->
                 
             </div>
-            <div class="col-sm-3">
-                <h2>野餐讀書會</h2>
-                <h5>Title description, Dec 7, 2020</h5>
-                <img src="Images//picnic.jpg" width="300px" height="400px">
-                <p>Some text..</p>
-                <p>Sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do
-                    eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                    exercitation ullamco.</p>
-                <br>
-                <h2>公益捐書會</h2>
-                <h5>Title description, Sep 2, 2017</h5>
-                <img src="Images/Charity.jpeg" width="300px" height="400px">
-                <p>Some text..</p>
-                <p>Sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do
-                    eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                    exercitation ullamco.</p>
-            </div>
-            <div class="col-sm-3">
-                <h2>青年講座</h2>
-                <h5>Title description, Dec 7, 2020</h5>
-                <img src="Images/125466.jpg" width="300px" height="400px">
-                <p>Some text..</p>
-                <p>Sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do
-                    eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                    exercitation ullamco.</p>
-                <br>
-                <h2>好書交換</h2>
-                <h5>Title description, Sep 2, 2017</h5>
-                <img src="Images/Desert Librarian.jpg" width="300px" height="400px">
-                <p>Some text..</p>
-                <p>Sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do
-                    eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                    exercitation ullamco.</p>
-            </div>
+<!--             <div class="col-sm-3"> -->
+<!--                 <h2>野餐讀書會</h2> -->
+<!--                 <h5>Title description, Dec 7, 2020</h5> -->
+<!--                 <img src="Images//picnic.jpg" width="300px" height="400px"> -->
+<!--                 <p>Some text..</p> -->
+<!--                 <p>Sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do -->
+<!--                     eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud -->
+<!--                     exercitation ullamco.</p> -->
+<!--                 <br> -->
+<!--                 <h2>公益捐書會</h2> -->
+<!--                 <h5>Title description, Sep 2, 2017</h5> -->
+<!--                 <img src="Images/Charity.jpeg" width="300px" height="400px"> -->
+<!--                 <p>Some text..</p> -->
+<!--                 <p>Sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do -->
+<!--                     eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud -->
+<!--                     exercitation ullamco.</p> -->
+<!--             </div> -->
+<!--             <div class="col-sm-3"> -->
+<!--                 <h2>青年講座</h2> -->
+<!--                 <h5>Title description, Dec 7, 2020</h5> -->
+<!--                 <img src="Images/125466.jpg" width="300px" height="400px"> -->
+<!--                 <p>Some text..</p> -->
+<!--                 <p>Sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do -->
+<!--                     eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud -->
+<!--                     exercitation ullamco.</p> -->
+<!--                 <br> -->
+<!--                 <h2>好書交換</h2> -->
+<!--                 <h5>Title description, Sep 2, 2017</h5> -->
+<!--                 <img src="Images/Desert Librarian.jpg" width="300px" height="400px"> -->
+<!--                 <p>Some text..</p> -->
+<!--                 <p>Sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do -->
+<!--                     eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud -->
+<!--                     exercitation ullamco.</p> -->
+<!--             </div> -->
+            </c:forEach>
+            <button><a href='showCreateForm' >新增活動</a></button>
         </div>
     </div>
 
@@ -259,5 +301,6 @@
     </div>
 
 </body>
+
 
 </html>

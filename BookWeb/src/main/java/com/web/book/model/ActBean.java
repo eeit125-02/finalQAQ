@@ -7,9 +7,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.Transient;
-
-import org.springframework.web.multipart.MultipartFile;
 
 @Entity
 @Table(name = "ACT_Records123")
@@ -30,8 +27,7 @@ public class ActBean {
 	private String act_Rule;
 	private String act_Tag;
 	private String act_Place;
-//	@Transient
-//	private MultipartFile file;
+
 	
 //	@ManyToOne
 //	@JoinColumn(name = "mb_ID")
@@ -54,7 +50,7 @@ public class ActBean {
 		this.act_Rule = act_Rule;
 		this.act_Tag = act_Tag;
 		this.act_Place = act_Place;
-//		this.file = file;
+
 	}
 
 
