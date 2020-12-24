@@ -59,6 +59,11 @@ div {
 	text-align: center;
 }
 
+#a1{
+	text-align:left;
+	margin-left:100px;
+}
+
 .login button {
 	margin: auto;
 	margin-top: 20px;
@@ -106,20 +111,19 @@ form {
 					<label>密碼:</label> 
 					<input type="password" name="pwd" id="pwd" size="12">
 				</div>
-				<div style="inline-block">
+				<div id="a1">
 				<label for="inputCode">驗證碼：</label> 
-				<input type="text" id="inputCode" />
-				
-				
-				<span id="text_show"></span>	
-				<input id="Button1" type="button" value="確定" />
+				<input type="text" id="inputCode" maxlength="6" onblur="checkCode()"/>
+				<span id="text_show" style="text-font:10px"></span>	
 			    </div>
-			    <div align="center" style="padding:10px 150px;">
-			    <div id="checkCode"></div>
+			    <div align="center" style="padding:1px 150px;">
+			    <div id="checkCode"></div><br>
                 </div>
-                <span id="sp" style="color: red"></span>
-				<div class="login" align="center" style="padding:10px 11px;">
-					<button type="button" id="send">登入</button>
+				<div class="login" align="center">
+					<button type="button" id="send" style="margin:5px">登入</button>
+				</div>
+				<div>
+				<span id="sp" style="color: red"></span>
 				</div>
 				<div>
 					<a href="password.html">忘記密碼?</a> <a href="account.html">忘記帳號?</a>
@@ -163,26 +167,23 @@ form {
 			var inputCode = document.getElementById("inputCode").value;
 			var textShow = document.getElementById("text_show")
 			if (inputCode.length <= 0) {
-				textShow.innerHTML = "請輸入驗證碼";
+				textShow.innerHTML = "輸入驗證碼";
 				textShow.style.color = "red";
 			} else if (inputCode.toUpperCase() != code.toUpperCase()) {
-				textShow.innerHTML = "您輸入的驗證碼有誤";
+				textShow.innerHTML = "驗證碼有誤";
 				textShow.style.color = "red";
 				createCode();
 			} else {
-				textShow.innerHTML = "驗證碼正確";
+				textShow.innerHTML = "正確";
 				textShow.style.color = "green";
 				a = true;
 			}
 		}
-		function checkCode() {
-			var btn = document.getElementById("Button1");
-			btn.onclick = function() {
+		function checkCode() {		
 				validateCode();
-			}
 		}
 		window.onload = function() {
-			checkCode();
+// 			checkCode();
 			createCode();
 			document.getElementById("checkCode").onclick = function() {
 				createCode()
