@@ -4,6 +4,8 @@ import java.io.File;
 import java.sql.Timestamp;
 import java.util.List;
 import java.util.UUID;
+import java.io.IOException;
+import java.util.concurrent.ExecutionException;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -22,11 +24,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.web.book.model.MemberBean;
+import com.web.book.service.GlobalService;
 import com.web.book.service.MemberService;
 
 @Controller
+@SessionAttributes(value = {"loginUser"})
 public class Login {
 
 	@Autowired
@@ -83,18 +88,21 @@ public class Login {
 	@PostMapping("/login")
 	public String login(Model model, HttpServletResponse response,
 			@RequestParam(value = "account") String account,
-			@RequestParam(value = "pwd") String pwd) {
+			@RequestParam(value = "pwd") String pwd) throws IOException, InterruptedException, ExecutionException {
 		boolean mb = ms.Login(account, pwd);
+		
 		if (mb) {
 			Account = account;
+			
 			MemberBean loginMember = ms.select(Account);
-//			Cookie memId = new Cookie("Mb_ID", String.valueOf(loginMember.getMb_ID()));
-//			Cookie memAccount = new Cookie("Mb_Account", loginMember.getMb_Account());
-//			memId.setMaxAge(60);
-//			memAccount.setMaxAge(60);
-//			response.addCookie(memId);
-//			response.addCookie(memAccount);
-			model.addAttribute("Account",Account);
+			GlobalService.setLoginMember(loginMember);
+			
+			String sessionId = GlobalService.createSessionID(String.valueOf(loginMember.getMb_ID()), loginMember.getMb_Name(), loginMember.getMb_Account());
+			Cookie memId = new Cookie("Member_ID", sessionId);
+			memId.setMaxAge(120);
+			response.addCookie(memId);
+			
+			model.addAttribute("Account",Account); 
 			if (account.equals("a123456") && pwd.equals("a123456")) {
 				List<MemberBean> memberall = ms.adminselect();
 				model.addAttribute("admin", memberall);
@@ -105,6 +113,7 @@ public class Login {
 		} else {
 			return "Member/login";
 		}
+		
 	}
 
 	// 會員資料

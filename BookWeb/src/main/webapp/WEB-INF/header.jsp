@@ -42,26 +42,25 @@
 
 		</nav>
 	</div>
+	
 	<script>
 		
-		var mb_ID = $.cookie('Mb_ID');
-		var mb_Account = $.cookie('Mb_Account');
 		
-		if (typeof(mb_ID) != "undefined"){
-			console.log($.cookie('Mb_ID'))
-			if($.cookie('Mb_ID') != 0){				
-				$('#loginButton').html("<a href=\"//localhost:8080/BookWeb/toCity\">會員中心</a><p>&nbsp;</p>"
-						+ "<a id=\"logout\" href=\"//localhost:8080/BookWeb/toLogin\">登出</a>");
-				$("#logout").click(function(){
-					//$.cookie('Mb_ID',0);
-				});
-			}else{
-				$('#loginButton').html("<a id=\"login\" href=\"//localhost:8080/BookWeb/toLogin\">登入</a>");
-			}
+		
+		
+		if (typeof($.cookie('Member_ID')) != "undefined"){
+			$('#loginButton').html("<a href=\"//localhost:8080/BookWeb/toCity\">會員中心</a><p>&nbsp;</p>"
+					+ "<a id=\"logout\" href=\"//localhost:8080/BookWeb/toLogin\">登出</a>");
+			$("#logout").click(function(){
+				$.removeCookie('Member_ID', { path: '/BookWeb' });
+			});
 		}else{
+			console.log("log")
 			$('#loginButton').html("<a id=\"login\" href=\"//localhost:8080/BookWeb/toLogin\">登入</a>");
 			
 		};
+		
+		
 		
 		
 	</script>

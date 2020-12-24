@@ -9,17 +9,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.web.book.model.BookReportBean;
+import com.web.book.model.MemberBean;
 import com.web.book.service.BookReportService;
 
 @Controller
 @RequestMapping("/BookReport")
+@SessionAttributes(value = {"loginUser"})
 public class BookReportController {
 	
 	@Autowired
@@ -37,11 +41,10 @@ public class BookReportController {
 	
 	@PostMapping("/EditBookReport/getBookReportList")
 	@ResponseBody
-	public List<Map<String, Object>> bookReportList() {
-		
+	public List<Map<String, Object>> bookReportList(@ModelAttribute("loginUser") MemberBean loginUser){
+		System.out.println(loginUser.getMb_ID());
 		List<Map<String, Object>> book = new ArrayList<>();
 		List<BookReportBean> memberBookReport = bookReportService.bookReportMemberAllList(5);
-		
 		for (BookReportBean bookReportBean : memberBookReport) {
 			Map<String, Object> data = new HashMap<>();
 			data.put("br_ID", bookReportBean.getBr_ID());
