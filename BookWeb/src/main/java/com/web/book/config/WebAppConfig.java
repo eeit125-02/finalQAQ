@@ -16,7 +16,8 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 	"com.web.book.config", 
 	"com.web.book.controller", 
 	"com.web.book.dao.impl", 
-	"com.web.book.service.impl"
+	"com.web.book.service.impl",
+	"com.web.book.service"
 	})
 public class WebAppConfig implements WebMvcConfigurer {
 	

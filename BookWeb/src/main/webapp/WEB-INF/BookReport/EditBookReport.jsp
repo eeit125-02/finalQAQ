@@ -219,15 +219,13 @@
 		}else{
 			window.location.href = "http://localhost:8080/BookWeb/toLogin";
 		}; */
-
+	
+		
 		$("#bookWebheader").load("//localhost:8080/BookWeb/header");
 		$("#bookWebFooter").load("//localhost:8080/BookWeb/footer");
-		
-		$('#memberName').html('名稱：'+mb_Name)
-		
-		console.log(mb_ID);
 
 		$(document).ready(function() {
+			
 			loadBookReportList();
 		});
 
@@ -287,7 +285,6 @@
 					alert('123 ');
 				},
 				success : function(data) {
-
 					var insertData = "<div class=\"row\">";
 					for (let i = 0; i < data.length; i++) {
 						insertData += "<div class=\"col-md-4\">"
