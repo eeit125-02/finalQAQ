@@ -68,8 +68,8 @@
 	<!-- header -->
 
 	<!-- body -->
-	<div class="container media">
-		<br>
+	<div class="container">
+
 
 
 	<p>&nbsp;</p>
@@ -161,10 +161,10 @@
 	</div>
 
 
+	
+</body>
 	<!-- footer -->
 	<footer class="container py-5" id="bookWebFooter"></footer>
 	<!-- footer -->
-	
-</body>
 
 </html>
