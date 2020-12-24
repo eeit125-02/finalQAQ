@@ -11,10 +11,10 @@
     <title>Fun Tribe</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<!--     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"> -->
+<!--     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
+<!--     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script> -->
+<!--     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script> -->
     <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
 	integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
@@ -42,22 +42,22 @@
             background: #aaa;
         }
 
-        .h {
-            color: #156f99;
-            text-align: center;
-            font-family: 'Monoton', cursive;
-            font-size: 100px;
-            margin-top: 40px;
-        }
-        .hh{
-            color: #156f99;
-            text-align: center;
-            font-family: 'Noto Serif TC', serif;
-            font-weight: bolder;
-            font-size: 30px;
-            line-height: 50px;
-            margin-bottom: 50px;
-        }
+/*         .h { */
+/*             color: #156f99; */
+/*             text-align: center; */
+/*             font-family: 'Monoton', cursive; */
+/*             font-size: 100px; */
+/*             margin-top: 40px; */
+/*         } */
+/*         .hh{ */
+/*             color: #156f99; */
+/*             text-align: center; */
+/*             font-family: 'Noto Serif TC', serif; */
+/*             font-weight: bolder; */
+/*             font-size: 30px; */
+/*             line-height: 50px; */
+/*             margin-bottom: 50px; */
+/*         } */
 
         p {
             color: #293241;
@@ -71,11 +71,11 @@
             font-family: 'Noto Serif TC', serif;
         }
 
-        .nav {
-            background-color: #156f99;
-            font-family: 'Noto Serif TC', serif;
-            border-bottom: 5px white;
-        }
+/*         .nav { */
+/*             background-color: #156f99; */
+/*             font-family: 'Noto Serif TC', serif; */
+/*             border-bottom: 5px white; */
+/*         } */
 
         .menu {
             margin-top: 10px;
@@ -105,35 +105,91 @@ text-align:center;
 </head>
 
 <body>
-    <div class="d1">
-        <h1 class="h">Fun Tribe</h1>
-        <div class="hh">共樂聚落</div>
-    </div>
 
-    <nav class="navbar navbar-expand-sm  navbar-dark nav">
-        <a class="navbar-brand" href="#">查詢活動</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse " id="collapsibleNavbar">
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link" href="#">發佈活動</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">修改活動</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">刪除活動</a>
-                </li>
-            </ul>
+<!-- header -->
+	<header class="container blog-header py-3" id="bookWebheader"></header>
+	<!-- header -->
+
+	<div class="container media">
+	<!-- body -->
+	
+	<div class="row">
+		<br>
+
+<!--     <div class="d1"> -->
+<!--         <h1 class="h">Fun Tribe</h1> -->
+<!--         <div class="hh">共樂聚落</div> -->
+<!--     </div> -->
+
+<!--     <nav class="navbar navbar-expand-sm  navbar-dark nav"> -->
+<!--         <a class="navbar-brand" href="#">查詢活動</a> -->
+<!--         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar"> -->
+<!--             <span class="navbar-toggler-icon"></span> -->
+<!--         </button> -->
+<!--         <div class="collapse navbar-collapse " id="collapsibleNavbar"> -->
+<!--             <ul class="navbar-nav"> -->
+<!--                 <li class="nav-item"> -->
+<!--                     <a class="nav-link" href="#">發佈活動</a> -->
+<!--                 </li> -->
+<!--                 <li class="nav-item"> -->
+<!--                     <a class="nav-link" href="#">修改活動</a> -->
+<!--                 </li> -->
+<!--                 <li class="nav-item"> -->
+<!--                     <a class="nav-link" href="#">刪除活動</a> -->
+<!--                 </li> -->
+<!--             </ul> -->
+<!--         </div> -->
+<!--     </nav> -->
+
+ <main>
+        <!--? Hero Area Start-->
+        <div class="slider-area hero-bg1 hero-overly">
+            <div class="single-slider hero-overly  slider-height1 d-flex align-items-center">
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-xl-10 col-lg-10">
+                            <!-- Hero Caption -->
+                            <div class="hero__caption pt-100">
+                                <h1>Explore Australia</h1>
+                                <p>Let's uncover the best places to eat, drink, and shop nearest to you.</p>
+                            </div>
+                            <!--Hero form -->
+                            <form action="#" class="search-box mb-100">
+                                <div class="input-form">
+                                    <input type="text" placeholder="What are you finding?">
+                                </div>
+                                <div class="select-form">
+                                    <div class="select-itms">
+                                        <select name="select" id="select1">
+                                            <option value="">In where?</option>
+                                            <option value="">Catagories One</option>
+                                            <option value="">Catagories Two</option>
+                                            <option value="">Catagories Three</option>
+                                            <option value="">Catagories Four</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="search-form">
+                                    <a href="#"><i class="ti-search"></i> Search</a>
+                                </div>	
+                            </form>	
+                            <!-- hero category1 img -->
+                            <div class="category-img text-center">
+                                <a href="listing.html"> <img src="assets/img/gallery/hero_category1.png" alt=""></a>
+                                <a href="listing.html"> <img src="assets/img/gallery/hero_category2.png" alt=""></a>
+                                <a href="listing.html"> <img src="assets/img/gallery/hero_category3.png" alt=""></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-    </nav>
+        <!--Hero Area End-->
 
 
     <div style="margin-top:30px">
         <div class="row">
-            <nav class="col-sm-2-3">
+            <nav class="col-3">
                 <ul class="menu">
                     <h5>查詢條件:</h5><br>
                     <li class=list>時間:</li>
@@ -221,15 +277,19 @@ text-align:center;
                     </div>
                 </ul>
             </nav>
-            <c:forEach var='act' items='${allacts}'>
-            <div class="col-sm-6 col-md-3" style="width: 360px; height: 360px">        
-                <h2>${act.act_Name}</h2>
-                <h5>${act.act_Theme}</h5>
-                <h5>${act.act_Date}</h5>
-                <img src="${pageContext.request.contextPath}/image/${act.act_Image}" style="width:300px; height: 400px;"/>
-                <p>${act.act_Theme}</p>
-                <p>${act.act_Intro}</p>
-                    <br>
+            
+            
+<!--              <section class="container"> -->
+<!--         <div class="row"> -->
+<%--             <c:forEach var='act' items='${allacts}'> --%>
+<!--             <div class="col-6,col-md-3 " style="width: 360px; height: 360px">         -->
+<%--                 <h2>${act.act_Name}</h2> --%>
+<%--                 <h5>${act.act_Theme}</h5> --%>
+<%--                 <h5>${act.act_Date}</h5> --%>
+<%--                 <img src="${pageContext.request.contextPath}/image/${act.act_Image}" style="width:250px; height: 300px;"/> --%>
+<%--                 <p>${act.act_Theme}</p> --%>
+<%--                 <p>${act.act_Intro}</p> --%>
+<!--                 <br> -->
 <!--                 <h2>咖啡廳推薦</h2> -->
 <!--                 <h5>Title description, Dec 7, 2020</h5> -->
 <!--                 <img src="Images/Coffee shopppp.jpeg" width="300px" height="400px"> -->
@@ -239,68 +299,55 @@ text-align:center;
 <!--                     exercitation ullamco.</p> -->
 <!--                 <br> -->
                 
+<!--             </div> -->
+            
+            
+             <hr style="height:1px;border:none;color:#333;background-color:#333;">
+    <section class="container">
+        <div class="row">
+          <c:forEach var='act' items='${allacts}'>
+            <div class="col-2" style="width: 360px; height: 360px">
+                <div class="thumbnail" style="width: 320px; height: 340px">
+                        <p>
+                            <b style='font-size: 25px;'>${act.act_Name}</b>
+                        </p>
+                	<img src="${pageContext.request.contextPath}/image/${act.act_Image}" style="width:250px; height: 300px;"/>
+                    <div class="caption">
+                        <p>${act.act_Theme}</p>
+                        <p>${act.act_Date}</p>
+                        <p>${act.act_Intro}</p>
+<!--                         <p> -->
+<%--                         	<a href="<spring:url value='/product?id=${product.bookId}' />" --%>
+<!--     							class="btn btn-primary"> -->
+<!--     							<span class="glyphicon-info-sigh glyphicon"></span>詳細資料 -->
+<!--  							</a> -->
+
+<%-- 							<a href="<spring:url value='product.json?id=${product.bookId}' />"    --%>
+<!-- 								class="btn btn-primary">  -->
+<!-- 								<span class="glyphicon-info-sigh glyphicon"></span>JSON -->
+<!-- 							</a> -->
+<!--                         </p> -->
+                    </div>
+                </div>
             </div>
-<!--             <div class="col-sm-3"> -->
-<!--                 <h2>野餐讀書會</h2> -->
-<!--                 <h5>Title description, Dec 7, 2020</h5> -->
-<!--                 <img src="Images//picnic.jpg" width="300px" height="400px"> -->
-<!--                 <p>Some text..</p> -->
-<!--                 <p>Sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do -->
-<!--                     eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud -->
-<!--                     exercitation ullamco.</p> -->
-<!--                 <br> -->
-<!--                 <h2>公益捐書會</h2> -->
-<!--                 <h5>Title description, Sep 2, 2017</h5> -->
-<!--                 <img src="Images/Charity.jpeg" width="300px" height="400px"> -->
-<!--                 <p>Some text..</p> -->
-<!--                 <p>Sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do -->
-<!--                     eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud -->
-<!--                     exercitation ullamco.</p> -->
-<!--             </div> -->
-<!--             <div class="col-sm-3"> -->
-<!--                 <h2>青年講座</h2> -->
-<!--                 <h5>Title description, Dec 7, 2020</h5> -->
-<!--                 <img src="Images/125466.jpg" width="300px" height="400px"> -->
-<!--                 <p>Some text..</p> -->
-<!--                 <p>Sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do -->
-<!--                     eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud -->
-<!--                     exercitation ullamco.</p> -->
-<!--                 <br> -->
-<!--                 <h2>好書交換</h2> -->
-<!--                 <h5>Title description, Sep 2, 2017</h5> -->
-<!--                 <img src="Images/Desert Librarian.jpg" width="300px" height="400px"> -->
-<!--                 <p>Some text..</p> -->
-<!--                 <p>Sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do -->
-<!--                     eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud -->
-<!--                     exercitation ullamco.</p> -->
-<!--             </div> -->
-            </c:forEach>
+          </c:forEach>
+        </div>
+    </section>
+
+                </div>
+    <!-- footer -->
+	<footer class="container py-5" id="bookWebFooter"></footer>
+	<!-- footer -->
+
+         
             <button><a href='showCreateForm' >新增活動</a></button>
         </div>
     </div>
+    <br>
 
-    <div class="jumbotron text-center" style="margin-bottom:0">
-        <p>Footer</p>
-        <h3>Some Links</h3>
-                <p>Lorem ipsum dolor sit ame.</p>
-                <ul class="nav nav-pills flex-column">
-                    <li class="nav-item">
-                        <a class="nav-link active" href="#">Active</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Link</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Link</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link disabled" href="#">Disabled</a>
-                    </li>
-                </ul>
-                <hr class="d-sm-none">
-    </div>
 
 </body>
+    
 
 
 </html>
