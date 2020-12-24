@@ -47,10 +47,11 @@ legend {
 
 div {
 	text-align: center;
-	margin: 30px;
-	margin-bottom: 10px;
+	margin: 10px;
 }
-
+form{
+	margin-bottom:10px;
+}
 p {
 	text-align: center;
 	margin-top: 0px;
@@ -78,15 +79,14 @@ p {
 		<legend>會員中心</legend>
 		<div>
 			<form action="<c:url value='/mb_inf' />" method="post">
-				<button type="submit" name="mb_inf">會員資訊</button>
+				<button type="submit" name="mb_inf" class="btn btn-outline-secondary">會員資訊</button>
 			</form>
 			<form action="<c:url value='/MbUpdate' />">
-				<button type="submit" name="Modify">會員修改</button>
+				<button type="submit" name="Modify" class="btn btn-outline-secondary">會員修改</button>
 			</form>
 			<form action="<c:url value='/Modify' />" method="post">
-				<button type="submit" name="Modify">密碼修改</button>
+				<button type="submit" name="Modify" class="btn btn-outline-secondary">密碼修改</button>
 			</form>
-			
 		</div>
 		<a href="<c:url value='/toLogin' />">登出</a>
 	</fieldset>

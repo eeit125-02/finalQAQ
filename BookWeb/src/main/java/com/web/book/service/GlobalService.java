@@ -51,7 +51,7 @@ public class GlobalService {
 		return sessionValue;
 	}
 	
-	public static String createSessionID(String id, String name, String acount) throws IOException, InterruptedException, ExecutionException {
+	public static String createSessionID(String id, String name, String account) throws IOException, InterruptedException, ExecutionException {
 		
 		FirebaseService firebase = new FirebaseService();
 		
@@ -66,7 +66,7 @@ public class GlobalService {
 		Map<String, Object> sessionValue = new HashMap<>();
 		sessionValue.put("id", id);
 		sessionValue.put("name", name);	
-		sessionValue.put("account", acount);
+		sessionValue.put("account", account);
 		ApiFuture<DocumentReference> addedDocRef = firebase.getFirestore().collection("SessionID").add(sessionValue);
 		
 		return addedDocRef.get().getId();
