@@ -29,13 +29,13 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
 	crossorigin="anonymous">
 <style>
-@import url(https://fonts.googleapis.com/earlyaccess/cwtexyen.css);
-body {
-	font-family: "cwTeXYen", sans-serif;
-	font-weight: 800;
-	line-height: 2;
-	font-size: 18px;
-}
+/* @import url(https://fonts.googleapis.com/earlyaccess/cwtexyen.css); */
+/* body { */
+/* 	font-family: "cwTeXYen", sans-serif; */
+/* 	font-weight: 800; */
+/* 	line-height: 2; */
+/* 	font-size: 18px; */
+/* } */
 
 fieldset {
 	border-radius: 25px;

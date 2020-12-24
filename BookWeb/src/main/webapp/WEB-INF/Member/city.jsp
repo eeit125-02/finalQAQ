@@ -23,14 +23,14 @@
 	crossorigin="anonymous">
 <link rel="stylesheet" href="import.css">
 <style>
-@import url(https://fonts.googleapis.com/earlyaccess/cwtexyen.css);
+/* @import url(https://fonts.googleapis.com/earlyaccess/cwtexyen.css); */
 
-body {
-	font-family: "cwTeXYen", sans-serif;
-	font-weight: 800;
-	line-height: 2;
-	font-size: 18px;
-}
+/* body { */
+/* 	font-family: "cwTeXYen", sans-serif; */
+/* 	font-weight: 800; */
+/* 	line-height: 2; */
+/* 	font-size: 18px; */
+/* } */
 
 fieldset {
 	border-radius: 25px;

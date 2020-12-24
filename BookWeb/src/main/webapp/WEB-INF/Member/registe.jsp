@@ -29,14 +29,14 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
 	crossorigin="anonymous">
 <style>
-@import url(https://fonts.googleapis.com/earlyaccess/cwtexyen.css);
+/* @import url(https://fonts.googleapis.com/earlyaccess/cwtexyen.css); */
 
-body {
-	font-family: "cwTeXYen", sans-serif;
-	font-weight: 800;
-	line-height: 2;
-	font-size: 18px;
-}
+/* body { */
+/* 	font-family: "cwTeXYen", sans-serif; */
+/* 	font-weight: 800; */
+/* 	line-height: 2; */
+/* 	font-size: 18px; */
+/* } */
 
 fieldset {
 	border-radius: 25px;
@@ -109,18 +109,17 @@ form {
 				<legend>會員註冊</legend>
 				<div>
 					<label>帳號:</label> <input type="text" name="account" id="account"
-						value="" size="12" > <span
-						id="idsp2"></span><br />
+						value="" size="12"> <span id="idsp2"></span><br />
 					<p style="color: gray;">(1.不可空白 2.至少6個字且必須包含英文字母、數字)</p>
 				</div>
 				<div>
 					<label>密碼:</label> <input type="password" name="pwd" id="pwd"
-						value="" size="12" > <span id="idsp1"></span><br />
+						value="" size="12"> <span id="idsp1"></span><br />
 					<p style="color: gray;">(1.不可空白，2.至少6個字且必須包含英文字母、數字)</p>
 				</div>
 				<div class="space">
 					<label>確認密碼:</label> <input type="password" name="pwd1" id="pwd1"
-						value="" size="12" > <span id="idsp9"></span><br />
+						value="" size="12"> <span id="idsp9"></span><br />
 				</div>
 				<div>
 					<label>姓名:</label> <input type="text" id="name" name="name"
@@ -137,40 +136,40 @@ form {
 						onblur=""> <span id="idsp7"></span><br />
 				</div>
 				<br>
-<!-- 				<div> -->
-<!-- 					<label>生日:</label> <input type="date" name="date" id="date" -->
-<!-- 						onblur=""> <span id="idsp4"></span><br /> -->
-<!-- 				</div> -->
-<!-- 				<br /> -->
-<!-- 				<div> -->
-<!-- 					<label>地址:</label> <input type="text" name="address" id="address" -->
-<!-- 						onblur=""> <span id="idsp5"></span><br /> -->
-<!-- 				</div> -->
-<!-- 				<br /> -->
-<!-- 				<div> -->
-<!-- 					<label>電話:</label> <input type="text" name="tel" id="tel" onblur=""> -->
-<!-- 					<span id="idsp6"></span><br /> -->
-<!-- 				</div> -->
-<!-- 				<br /> -->
-				
-<!-- 				<div> -->
-<!-- 					<label>頭像:</label> <input type="file" name="pic" id="pic" onblur=""> -->
-<!-- 					<span id="idsp7"></span><br /> -->
-<!-- 				</div> -->
-<!-- 				<br /> -->
-<!-- 				<div> -->
-<!-- 					<label>喜好類型:</label><br /> <input type="checkbox" name="type" -->
-<!-- 						id="type1" value="中">XX <input type="checkbox" name="type" -->
-<!-- 						id="type2" value="新">XX <input type="checkbox" name="type" -->
-<!-- 						id="type3" value="七">XX <input type="checkbox" name="type" -->
-<!-- 						id="type4" value="七">XX <input type="checkbox" name="type" -->
-<!-- 						id="type5" value="八">XX<br> <input type="checkbox" -->
-<!-- 						name="type" id="type6" value="九">XX <input type="checkbox" -->
-<!-- 						name="type" id="type7" value="十">XX <input type="checkbox" -->
-<!-- 						name="type" id="type8" value="十1">XX <input -->
-<!-- 						type="checkbox" name="type" id="type9" value="二">XX <span -->
-<!-- 						id="idsp8"></span><br /> -->
-<!-- 				</div> -->
+				<!-- 				<div> -->
+				<!-- 					<label>生日:</label> <input type="date" name="date" id="date" -->
+				<!-- 						onblur=""> <span id="idsp4"></span><br /> -->
+				<!-- 				</div> -->
+				<!-- 				<br /> -->
+				<!-- 				<div> -->
+				<!-- 					<label>地址:</label> <input type="text" name="address" id="address" -->
+				<!-- 						onblur=""> <span id="idsp5"></span><br /> -->
+				<!-- 				</div> -->
+				<!-- 				<br /> -->
+				<!-- 				<div> -->
+				<!-- 					<label>電話:</label> <input type="text" name="tel" id="tel" onblur=""> -->
+				<!-- 					<span id="idsp6"></span><br /> -->
+				<!-- 				</div> -->
+				<!-- 				<br /> -->
+
+				<!-- 				<div> -->
+				<!-- 					<label>頭像:</label> <input type="file" name="pic" id="pic" onblur=""> -->
+				<!-- 					<span id="idsp7"></span><br /> -->
+				<!-- 				</div> -->
+				<!-- 				<br /> -->
+				<!-- 				<div> -->
+				<!-- 					<label>喜好類型:</label><br /> <input type="checkbox" name="type" -->
+				<!-- 						id="type1" value="中">XX <input type="checkbox" name="type" -->
+				<!-- 						id="type2" value="新">XX <input type="checkbox" name="type" -->
+				<!-- 						id="type3" value="七">XX <input type="checkbox" name="type" -->
+				<!-- 						id="type4" value="七">XX <input type="checkbox" name="type" -->
+				<!-- 						id="type5" value="八">XX<br> <input type="checkbox" -->
+				<!-- 						name="type" id="type6" value="九">XX <input type="checkbox" -->
+				<!-- 						name="type" id="type7" value="十">XX <input type="checkbox" -->
+				<!-- 						name="type" id="type8" value="十1">XX <input -->
+				<!-- 						type="checkbox" name="type" id="type9" value="二">XX <span -->
+				<!-- 						id="idsp8"></span><br /> -->
+				<!-- 				</div> -->
 				<br>
 				<div class="send">
 					<button type="button" id="send">送出</button>
@@ -184,7 +183,7 @@ form {
 	<footer class="container py-5" id="bookWebFooter"></footer>
 	<!-- footer -->
 
-	<script >
+	<script>
 		$(document).ready(function() {
 			$("#bookWebheader").load("<c:url value='/header'/>");
 			$("#bookWebFooter").load("<c:url value='/footer'/>");
@@ -193,7 +192,6 @@ form {
 		let a1 = false;
 		let a2 = false;
 		let a3 = false;
-
 		$('#account').blur(function() {
 			console.log("test");
 			let account = document.getElementById("account").value
@@ -218,9 +216,9 @@ form {
 				success : function(data) {
 					if (data) {
 						sp.innerHTML = "帳號已存在"
-					}else {
-						sp.innerHTML ="帳號可使用"
-							a1 = true;
+					} else {
+						sp.innerHTML = "帳號可使用"
+						a1 = true;
 					}
 				}
 			});
@@ -256,16 +254,13 @@ form {
 				sp.innerHTML = "錯誤"
 			}
 		})
-
-		
 		$('#send').click(function() {
 			if (a1 != true && a2 != true && a3 != true) {
-				alert("未填寫正確")	;
+				alert("未填寫正確");
 			} else {
 				$('form').submit();
 			}
 		})
-		
 	</script>
 
 </body>

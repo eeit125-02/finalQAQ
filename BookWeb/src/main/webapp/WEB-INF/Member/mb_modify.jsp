@@ -29,14 +29,14 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 	crossorigin="anonymous">
 <!-- <link rel="stylesheet" href="import.css">   -->
 <style>
-@import url(https://fonts.googleapis.com/earlyaccess/cwtexyen.css);
+/* @import url(https://fonts.googleapis.com/earlyaccess/cwtexyen.css); */
 
-body {
-	font-family: "cwTeXYen", sans-serif;
-	font-weight: 800;
-	line-height: 2;
-	font-size: 18px;
-}
+/* body { */
+/* 	font-family: "cwTeXYen", sans-serif; */
+/* 	font-weight: 800; */
+/* 	line-height: 2; */
+/* 	font-size: 18px; */
+/* } */
 
 fieldset {
 	border-radius: 25px;
@@ -205,8 +205,21 @@ span {
 				sp.innerHTML = "正確"
 			} else
 				sp.innerHTML = "錯誤"
-
 		}
+		$('#tel').blur(function() {
+			var i, j, strTemp;
+			var sp = document.getElementById("idsp6")
+			var TEL = $('#tel').val();
+			strTemp = "0123456789-()# ";
+			for (i = 0; i < TEL.length; i++) {
+				j = strTemp.indexOf(TEL.charAt(i));
+				if (j == -1) {
+					sp.innerHTML="字元不合法"
+					//說明有字元不合法    
+				}
+			}
+			//說明合法    
+		})
 	</script>
 </body>
 

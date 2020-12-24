@@ -59,9 +59,9 @@ div {
 	text-align: center;
 }
 
-#a1{
-	text-align:left;
-	margin-left:100px;
+#a1 {
+	text-align: left;
+	margin-left: 100px;
 }
 
 .login button {
@@ -108,22 +108,23 @@ form {
 						size="12">
 				</div>
 				<div>
-					<label>密碼:</label> 
-					<input type="password" name="pwd" id="pwd" size="12">
+					<label>密碼:</label> <input type="password" name="pwd" id="pwd"
+						size="12">
 				</div>
 				<div id="a1">
-				<label for="inputCode">驗證碼：</label> 
-				<input type="text" id="inputCode" maxlength="6" onblur="checkCode()"/>
-				<span id="text_show" style="text-font:10px"></span>	
-			    </div>
-			    <div align="center" style="padding:1px 150px;">
-			    <div id="checkCode"></div><br>
-                </div>
+					<label for="inputCode">驗證碼：</label> <input type="text"
+						id="inputCode" maxlength="7" onblur="checkCode()"
+						autocomplete="off" /> <span id="text_show" style="text-font: 10px"></span>
+				</div>
+				<div align="center" style="padding: 1px 150px;">
+					<div id="checkCode"></div>
+					<br>
+				</div>
 				<div class="login" align="center">
-					<button type="button" id="send" style="margin:5px">登入</button>
+					<button type="button" id="send" style="margin: 5px">登入</button>
 				</div>
 				<div>
-				<span id="sp" style="color: red"></span>
+					<span id="sp" style="color: red"></span>
 				</div>
 				<div>
 					<a href="password.html">忘記密碼?</a> <a href="account.html">忘記帳號?</a>
@@ -142,6 +143,11 @@ form {
 	<!-- footer -->
 
 	<script>
+		$(document).ready(function() {
+			$("#bookWebheader").load("<c:url value='/header'/>");
+			$("#bookWebFooter").load("<c:url value='/footer'/>");
+		});
+
 		var code;
 		function createCode() {
 			code = "";
@@ -172,18 +178,19 @@ form {
 			} else if (inputCode.toUpperCase() != code.toUpperCase()) {
 				textShow.innerHTML = "驗證碼有誤";
 				textShow.style.color = "red";
-				createCode();
+				// 				createCode();
 			} else {
 				textShow.innerHTML = "正確";
 				textShow.style.color = "green";
 				a = true;
 			}
 		}
-		function checkCode() {		
-				validateCode();
-		}
+		$('#inputCode').keyup(function() {
+			validateCode();
+		})
+
 		window.onload = function() {
-// 			checkCode();
+			// 			checkCode();
 			createCode();
 			document.getElementById("checkCode").onclick = function() {
 				createCode()
@@ -195,16 +202,14 @@ form {
 				validateCode();
 			}
 		}
-		$(document).ready(function() {
-			$("#bookWebheader").load("<c:url value='/header'/>");
-			$("#bookWebFooter").load("<c:url value='/footer'/>");
-		});
-
 		$('#send').click(
 				function() {
 					let mb_Account = $('#account').val();
 					let mb_Password = $('#pwd').val();
 					let sp = document.getElementById("sp")
+					if(mb_Account=="" || mb_Password==""){
+						sp.innerHTML="輸入錯誤"
+					}
 					let editURL = location.href + "/checklogin/" + mb_Account
 							+ "/" + mb_Password;
 					$.ajax({
@@ -222,6 +227,13 @@ form {
 						}
 					});
 				})
+
+		$(document).keypress(function(event) {
+			var keynum = (event.keyCode ? event.keyCode : event.which);
+			if (keynum == '13') {
+				$("#send").click();
+			}
+		})
 	</script>
 </body>
 </html>
