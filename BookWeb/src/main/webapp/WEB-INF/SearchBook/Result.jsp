@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -85,41 +86,66 @@
 
 
 		<h3>搜尋結果：</h3>
-
-
+		
 		<br>
-
+		<br>
 		<c:forEach items="${searchresult}" var="row">
 
-			<div class="book">
+		<div class="row">
+<!--圖片 -->
+			<div class="col-sm-2">			
 				<img class="itemcov" alt="" src="${row.getBk_Pic()}" height="190">
-
+			</div>
+			
+			<div class="col-sm-10">
 				<h3>
 					<form name=a1 action="<c:url value='/bookpage' />" method="get">
-						<button type="submit" name="page" class="btn btn-link btn-lg"
+						<button type="submit" name="page" id="sb" class="btn btn-link btn-lg"
 							value="${row.getBk_ID()}">${row.getBk_Name()}</button>
 					</form>
 				</h3>
-
-				作者：${row.getBk_Author()}<br> 出版社：${row.getBk_Publish()}
-				${row.getBk_ID()} <br> 出版日期：${row.getBk_Date()} <br>
-
-
-				<p class="ellipsis">${row.getBk_Content()}</p>
-
-
+				｜ 作者：${row.getBk_Author()} ｜  出版社：${row.getBk_Publish()} ${row.getBk_ID()} ｜  出版日期：${row.getBk_Date()}｜ <br>
+				<p class="ellipsis"style="padding-top:15px">${row.getBk_Content()}</p>
 				<div class="collect">
-					<form name=a2 action="<c:url value='/resultcollect' />"
-						method="get">
+<%-- 					<form name=a2 action="<c:url value='/resultcollect' />" --%>
+<!-- 						method="get"> -->
 						<img alt="點選收藏"
 							src="${pageContext.request.contextPath}/image/heartred.png"
 							id="Img/heart" width="25px">
-						<button type="submit" name="collect"
+						<button id="gocollect" type="submit" name="collect" onclick="a${row.getBk_ID()}();"
 							class="btn btn-outline-danger btn-sm" value="${row.getBk_ID()}">收藏本書</button>
-					</form>
+<!-- 					</form> -->
 				</div>
+						<br>
+						<hr>
 			</div>
+		</div>
+	<script >
 
+// 		$('#gocollect').click(function() {
+		function a${row.getBk_ID()}() {
+			console.log("test");
+			let bk_ID = ${row.getBk_ID()}
+			console.log(bk_ID);
+			let editURL = "searchbook/resultcollect/"+bk_ID;
+			
+			console.log(editURL)
+			$.ajax({
+				async : false,
+				type : 'GET',
+				url : editURL,
+				dataType : "json",
+				contentType : "application/json;charset=utf-8",
+				success : function(data) {
+					if (data) {
+						alert('成功加入收藏 ');
+					}else {
+						alert('加入失敗 ');
+					}
+				}
+			});
+		}
+	</script>
 		</c:forEach>
 
 	</div>
@@ -131,6 +157,7 @@
 	<!-- footer -->
 	<footer class="container py-5" id="bookWebFooter"></footer>
 	<!-- footer -->
+	
 
 
 </body>

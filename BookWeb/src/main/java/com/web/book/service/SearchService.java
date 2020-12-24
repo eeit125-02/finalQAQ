@@ -17,15 +17,20 @@ public interface SearchService {
 	List<BookCollectBean> gotoCollect(int id);
 
 	// 刪除收藏項目
-	int delete(int bcid);
+	boolean delete(int bcid);
 
 	// 新增收藏項目
-	int savebc(int bk_ID, int mb_ID);
+	boolean savebc(int bk_ID, int mb_ID);
 
 	// 新增書本
 	BookBean savebk(BookBean bkc);
 
 	// 修改書本
 	int updatebk(BookBean mb);
+
+	//查詢書籍作者
+	List<BookBean> searchBookAuthor(String name);
+	//查詢書籍出版社
+	List<BookBean> searchBookPublish(String name);
 
 }

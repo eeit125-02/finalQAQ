@@ -62,43 +62,123 @@
 
 
 
-			<br>
-			<hr>
-			<br>
+			<br><hr><br>
 			<div class="collect">
 				<a class="btn btn-outline-dark" href="<c:url value='SearchBook/Search' />" role="button">搜尋首頁</a>
 			</div>
 			<br>
 			<h3>收藏清單：</h3>
-			<br>
-		<c:forEach items="${collectresult}" var="row">
-
-			<div class="book">
-				<img class="itemcov" alt="" src="${row.getBook().getBk_Pic()}"
-					height="190">
-
-				<form name=a1 action="<c:url value='/bookpage' />" method="get"><button type="submit" name="page"
-							class="btn btn-link" value="${row.getBook().getBk_ID()}"><h3>
-							${row.getBook().getBk_Name()}</h3></button></form>
-
-				作者：${row.getBook().getBk_Author()}<br>
-				出版社：${row.getBook().getBk_Publish()} ${row.getBook().getBk_ID()} <br>
-				出版日期：${row.getBook().getBk_Date()} <br>
-
-				<p class="ellipsis">${row.getBook().getBk_Content()}</p>
-
-				<div class="collect">
-					<form name=a1 action="<c:url value='/deletecollect' />" method="get">
-					<button type="submit" name="deletebc"
-							class="btn btn-outline-danger btn-sm" value="${row.getBc_ID()}">取消收藏</button></form>
-				</div>
-
+			<br><br>
+			
+<c:forEach items="${collectresult}" var="row">
+		<div class="row">
+<!--圖片 -->
+			<div class="col-sm-2">			
+				<img class="itemcov" alt="" src="${row.getBook().getBk_Pic()}" height="190">
 			</div>
-		</c:forEach>
+<!--書名&作者&出版社&簡介-->
+			<div class="col-sm-10">
+				<h3>
+					<form name=a1 action="<c:url value='/bookpage' />" method="get">
+					<button type="submit" name="page"class="btn btn-link btn-lg" value="${row.getBook().getBk_ID()}">
+							${row.getBook().getBk_Name()}</button></form>
+				</h3>
+<!-- 				<img alt="書籍資訊" -->
+<%-- 							src="${pageContext.request.contextPath}/image/book.png"width="30px"> 作者：${row.getBook().getBk_Author()} ${row.getBc_ID()} --%>
+<!-- 				<img alt="書籍資訊" -->
+<%-- 							src="${pageContext.request.contextPath}/image/book.png"width="30px"> 出版社：${row.getBook().getBk_Publish()} ${row.getBook().getBk_ID()} --%>
+<!-- 				<img alt="書籍資訊" -->
+<%-- 							src="${pageContext.request.contextPath}/image/book.png"width="30px"> 出版日期：${row.getBook().getBk_Date()} <br> --%>
+							
+				｜ 作者：${row.getBook().getBk_Author()} ${row.getBc_ID()}｜  出版社：${row.getBook().getBk_Publish()} ｜  出版日期：${row.getBook().getBk_Date()}｜ <br>				
+				<p class="ellipsis"style="padding-top:15px">${row.getBook().getBk_Content()}</p>
 
+
+		<div class="" id="bookcollectlist">
+		
+		
+		</div>
+
+
+<!-- 取消收藏按鈕 -->
+				<div class="collect">
+					<button type="submit" name="deletebc"
+							class="btn btn-outline-danger btn-sm"  onclick="a${row.getBc_ID()}();"value="${row.getBc_ID()}">取消收藏</button>
+				</div>
+			<br><hr>
+			</div>
+		</div>
+		
+		
+			<script >
+
+			
+// 		$('#gocollect').click(function() {
+		function a${row.getBc_ID()}() {
+			console.log("test");
+			let bc_ID = ${row.getBc_ID()};
+			console.log(bc_ID);
+			let editURL = "collectlist/deletecollect/"+bc_ID;
+			console.log(editURL);
+			$.ajax({
+				async : true,
+				type : 'GET',
+				url : editURL,
+				dataType : "json",
+				contentType : "application/json;charset=utf-8",
+				success : function(data) {
+					if (data) {
+						alert('刪除成功 ');
+						loadBookCollectList();
+					}else {
+						alert('刪除失敗 ');
+					}
+				}
+			});
+		}
+	</script>
+</c:forEach>
+
+<script>
+// 			$(document).ready(function() {
+// 				loadBookCollectList();
+// 			});			
+			
+			function loadBookCollectList() {
+				let mb_ID=5;
+				$.ajax({
+					async : false,
+					cache : false,
+					type : 'POST',
+					url : "collectlist/getBookCollectList/"+mb_ID;
+					dataType : "json",
+					contentType : "application/json;charset=utf-8",
+					error : function() {
+						alert('123 ');
+					},
+					success : function(data) {
+						var insertData = "<div class="" id=\"bookcollectlist\">";
+						for (let i = 0; i < data.length; i++) {
+							insertData += "<h3>"+
+								+"<form name=a1 action=\"<c:url value='/bookpage' />\" method=\"get\">"
+								+"<button type=\"submit\" name=\"page\"class=\"btn btn-link btn-lg\" value=\""
+								+data[i].bk_ID+"\">"+data[i].bk_ID+"</button></form>"
+								+"</h3>"
+								+"｜ 作者："+data[i].bk_Author
+								+" ｜  出版社："+data[i].bk_Publish
+								+"｜  出版日期："+data[i].bk_Date
+								+"<br>"
+								+"<p class=\"ellipsis\"style=\"padding-top:15px\">"
+								+data[i].bk_Content
+								+"</p>"				
+					}
+					insertData += "</div>"
+					$('#bookcollectlist').html(insertData);
+					}
+				});
+			}
+			</script>
 	</div>
-
-
 
 	<!-- 內容結束 -->
 

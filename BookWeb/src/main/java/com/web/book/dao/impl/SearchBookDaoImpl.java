@@ -31,6 +31,28 @@ public class SearchBookDaoImpl implements SearchBookDAO {
 		Query<BookBean> query = session.createQuery(hql);
 		return query.setParameter("searchkw","%"+ name +"%").getResultList();
 	}
+	
+	// 查詢書籍作者
+	// 缺一個判斷list=0就顯示查無此書的判斷式
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<BookBean> searchBookAuthor(String name) {
+		Session session = factory.getCurrentSession();
+		String hql = "FROM BookBean b WHERE b.bk_Author like :searchkw";
+		Query<BookBean> query = session.createQuery(hql);
+		return query.setParameter("searchkw","%"+ name +"%").getResultList();
+	}
+	
+	// 查詢書籍出版社
+	// 缺一個判斷list=0就顯示查無此書的判斷式
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<BookBean> searchBookPublish(String name) {
+		Session session = factory.getCurrentSession();
+		String hql = "FROM BookBean b WHERE b.bk_Publish like :searchkw";
+		Query<BookBean> query = session.createQuery(hql);
+		return query.setParameter("searchkw","%"+ name +"%").getResultList();
+	}
 
 	// 取得單一本書的詳細資訊
 	@Override
@@ -59,18 +81,23 @@ public class SearchBookDaoImpl implements SearchBookDAO {
 	
 	// 刪除收藏項目
 	@Override
-	public int deletebc(int bcid) {
+	public boolean deletebc(int bcid) {
 		int count = 0;
+		boolean result2=false;
 		Session session = factory.getCurrentSession();
 		BookCollectBean result = session.load(BookCollectBean.class, bcid);		
 		session.delete(result);
 		count++;
-		return count;
+		if(count>0) {
+			result2=true;
+		}
+		return result2;
 	}
 
 	// 新增收藏項目
 	@Override
-	public int savebc(int bk_id, int mb_id) {
+	public boolean savebc(int bk_id, int mb_id) {
+		boolean result=false;
 		int count = 0;
 		Session session = factory.getCurrentSession();
 		LocalDate d = LocalDate.now();
@@ -80,7 +107,10 @@ public class SearchBookDaoImpl implements SearchBookDAO {
 		BookCollectBean bkc=new BookCollectBean(1, sqlDate, null, book, member);
 		session.save(bkc);
 		count++;
-		return count;
+		if(count>0) {
+			result=true;
+		}
+		return result;
 	}
 
 	// 新增書本

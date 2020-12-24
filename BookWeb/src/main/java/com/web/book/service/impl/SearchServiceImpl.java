@@ -25,6 +25,17 @@ import com.web.book.service.SearchService;
 			return searchBookDAO.searchBook(name);	
 		}
 		
+		//查詢書籍作者
+		@Override
+		public List<BookBean> searchBookAuthor(String name){
+			return searchBookDAO.searchBookAuthor(name);	
+		}
+		//查詢書籍出版社
+		@Override
+		public List<BookBean> searchBookPublish(String name){
+			return searchBookDAO.searchBookPublish(name);	
+		}				
+				
 		//取得單一本書的詳細資訊
 		@Override
 		public BookBean getBook(int id) {
@@ -39,13 +50,13 @@ import com.web.book.service.SearchService;
 		
 		// 刪除收藏項目
 		@Override
-		public int delete(int bcid) {
+		public boolean delete(int bcid) {
 			return searchBookDAO.deletebc(bcid);
 		}
 		
 		// 新增收藏項目
 		@Override
-		public int savebc(int bk_ID, int mb_ID) {
+		public boolean savebc(int bk_ID, int mb_ID) {
 			return searchBookDAO.savebc(bk_ID, mb_ID);
 		}
 
