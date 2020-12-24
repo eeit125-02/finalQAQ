@@ -172,10 +172,12 @@ form {
 		function validateCode() {
 			var inputCode = document.getElementById("inputCode").value;
 			var textShow = document.getElementById("text_show")
+			console.log(inputCode);
+			console.log(code);
 			if (inputCode.length <= 0) {
 				textShow.innerHTML = "輸入驗證碼";
 				textShow.style.color = "red";
-			} else if (inputCode.toUpperCase() != code.toUpperCase()) {
+			} else if (inputCode != code) {
 				textShow.innerHTML = "驗證碼有誤";
 				textShow.style.color = "red";
 				// 				createCode();
@@ -206,9 +208,10 @@ form {
 				function() {
 					let mb_Account = $('#account').val();
 					let mb_Password = $('#pwd').val();
-					let sp = document.getElementById("sp")
+					let sp = $("#sp");
+					console.log(sp)
 					if(mb_Account=="" || mb_Password==""){
-						sp.innerHTML="輸入錯誤"
+						sp.text("輸入錯誤");
 					}
 					let editURL = location.href + "/checklogin/" + mb_Account
 							+ "/" + mb_Password;
