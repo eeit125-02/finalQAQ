@@ -14,6 +14,7 @@ import org.springframework.stereotype.Repository;
 import com.web.book.dao.DiscussionDao;
 import com.web.book.model.CommandBean;
 import com.web.book.model.PostBean;
+import com.web.book.model.RuleBean;
 
 @Repository
 public class DiscussionDaoImpl implements DiscussionDao {
@@ -71,6 +72,15 @@ public class DiscussionDaoImpl implements DiscussionDao {
 		Session session = factory.getCurrentSession();
 		PostBean pb = (PostBean) session.get(PostBean.class, delete_post_id);
 		session.delete(pb);		
+	}
+
+	@Override
+	public RuleBean updateRule(String rule_content, Timestamp edittime) {
+		Session session = factory.getCurrentSession();
+		RuleBean rb = (RuleBean) session.get(RuleBean.class, 1);
+		rb.setRule_content(rule_content);
+		rb.setRule_time(edittime);
+		return null;
 	}
 
 }

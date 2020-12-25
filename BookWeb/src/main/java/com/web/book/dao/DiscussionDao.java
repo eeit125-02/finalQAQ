@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.web.book.model.CommandBean;
 import com.web.book.model.PostBean;
+import com.web.book.model.RuleBean;
 
 public interface DiscussionDao {
 	
@@ -21,4 +22,6 @@ public interface DiscussionDao {
 			String edit_post_content, Timestamp edit_post_time);
 	//刪除貼文
 	void deletPost(Integer delete_post_id);
+	//修改板規
+	RuleBean updateRule(String rule_content, Timestamp edittime);
 }

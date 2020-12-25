@@ -340,11 +340,22 @@
 											<div class="form-group">
 												<textarea id="editor" name="rule_content" style="height:50000">[上次版規內容]</textarea>
 											</div>
-											<button type="submit" class="btn btn-primary">送出版規</button>
+											<button type="submit" class="btn btn-primary" id="send_rule" name="send_rule">送出版規</button>
 										</div>
 
 								<script>
 									tinymce.init({selector : '#editor'});
+									$('#send_rule').click(
+										$.ajax({
+											async:true,
+											type:'POST',
+											url:location.href +'edit_rule'
+											data:{"rule_content":$('#editor').val()},
+											dataType:"json",
+											contentType : "application/json;charset=utf-8",
+											success:function(data){}
+										})		
+									)
 								</script>
 
 							</div>

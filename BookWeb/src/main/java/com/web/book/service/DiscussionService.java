@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.web.book.model.CommandBean;
 import com.web.book.model.PostBean;
+import com.web.book.model.RuleBean;
 
 public interface DiscussionService {
 	
@@ -22,5 +23,8 @@ public interface DiscussionService {
 	void editPost(Integer edit_post_id,  String edit_post_title,
 			String edit_post_content, Timestamp edit_post_time);
 	//刪除貼文
-		void deletPost(Integer delete_post_id);
+	void deletPost(Integer delete_post_id);
+	//修改板規
+	RuleBean updateRule(String rule_content, Timestamp edittime);
+	
 }

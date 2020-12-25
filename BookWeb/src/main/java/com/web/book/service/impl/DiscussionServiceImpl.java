@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.web.book.dao.DiscussionDao;
 import com.web.book.model.CommandBean;
 import com.web.book.model.PostBean;
+import com.web.book.model.RuleBean;
 import com.web.book.service.DiscussionService;
 
 
@@ -57,6 +58,13 @@ public class DiscussionServiceImpl implements DiscussionService {
 	public void deletPost(Integer delete_post_id) {
 		discussionDao.deletPost(delete_post_id);		
 	}
+
+	@Override
+	public RuleBean updateRule(String rule_content, Timestamp edittime) {
+		return discussionDao.updateRule(rule_content, edittime);
+	}
+	
+	
 
 
 }
