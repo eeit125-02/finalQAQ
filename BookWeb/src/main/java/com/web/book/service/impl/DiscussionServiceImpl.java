@@ -45,6 +45,12 @@ public class DiscussionServiceImpl implements DiscussionService {
 		return discussionDao.getAllCommand();
 	}
 
+	//列出版規
+	@Override
+	public List<RuleBean> getRule() {
+		return discussionDao.getRule();
+	}
+	
 	//修改貼文
 	@Override
 	public void editPost(Integer edit_post_id,  String edit_post_title,
@@ -59,12 +65,10 @@ public class DiscussionServiceImpl implements DiscussionService {
 		discussionDao.deletPost(delete_post_id);		
 	}
 
+	//修改版規
 	@Override
-	public RuleBean updateRule(String rule_content, Timestamp edittime) {
-		return discussionDao.updateRule(rule_content, edittime);
+	public RuleBean updateRule(RuleBean rb) {
+		return discussionDao.updateRule(rb);
 	}
-	
-	
-
 
 }

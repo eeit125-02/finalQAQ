@@ -17,23 +17,10 @@
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
 	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
 	crossorigin="anonymous">
-
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
 	integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
 	crossorigin="anonymous"></script>
-
-
-<script
-	src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js"
-	referrerpolicy="origin"></script>
-
-<script>
-	tinymce.init({
-		selector : 'textarea#editor',
-		menubar : false
-	});
-</script>
 
 
 
@@ -61,7 +48,7 @@
 
 <body>
 	<!-- header -->
-	<header class="container blog-header py-3" id="bookWebheader"></header>
+<!-- 	<header class="container blog-header py-3" id="bookWebheader"></header> -->
 	<!-- header -->
 
 	<div class="container-fluid" style="margin: 20px 0px">
@@ -122,7 +109,9 @@
 						<div class="tab-content" id="novelTabContent">
 							<!-- content of rule tab -->
 							<div class="tab-pane fade" id="novel_rule" role="tabpanel">
-								<h1>板規內容</h1>
+								<h1 id="show_rule">
+									<c:forEach var="rule" items="${rule}">${rule.rule_content}</c:forEach>
+								</h1>
 							</div>
 
 							<!-- content of latest post tab -->
@@ -336,26 +325,51 @@
 
 
 									<div class=" justify-content-center">
-											<label>上次修改時間 [time]</label>
-											<div class="form-group">
-												<textarea id="editor" name="rule_content" style="height:50000">[上次版規內容]</textarea>
-											</div>
-											<button type="submit" class="btn btn-primary" id="send_rule" name="send_rule">送出版規</button>
-										</div>
+									
+									<div
+									style="border: #ADADAD 2px solid; border-radius: 5px; text-align: left; padding: 10px; margin: 0px 10px; padding-top: 20px">
 
+										<div class="form-group row">
+											<label for="last_edit_time" class="col-2 text-center h5">上次修改時間</label>
+											<div class="col-9">
+												<p id="last_edit_time" class='h5'>
+													<c:forEach var="rule" items="${rule}">${rule.rule_time}</c:forEach>
+												</p>
+											</div>
+										</div>
+										
+										<div class="form-group row">
+											<label for="rule_content" class="col-2 text-center h5">版規內容</label>
+											<div class="col-9">
+												<textarea class="form-control" id="rule_content"
+													name="rule_content" rows="6" ><c:forEach var="rule" items="${rule}">${rule.rule_content}</c:forEach></textarea>
+											</div>
+										</div>
+										
+										<div class="text-center">
+											<button type="submit" class="btn btn-primary" id="send_rule">送出版規</button>
+										</div>
+									
+								</div>
+							</div>
+							
+							
 								<script>
-									tinymce.init({selector : '#editor'});
-									$('#send_rule').click(
-										$.ajax({
-											async:true,
-											type:'POST',
-											url:location.href +'edit_rule'
-											data:{"rule_content":$('#editor').val()},
-											dataType:"json",
-											contentType : "application/json;charset=utf-8",
-											success:function(data){}
-										})		
-									)
+								$('#send_rule').click(function(){
+									console.log($('#rule_content').val())
+									$.ajax({
+										url  : '<c:url value="/Discussion/edit_rule"/>',
+										type : 'POST',
+				                        data : { rule_content : $("#rule_content").val()},
+				                        dataType: "json",
+				                        success:function(rb){
+											$('#last_edit_time').html(rb.rule_time) //取得的時間格式怪怪!!!
+				                        	$('#show_rule').html(rb.rule_content)
+				                        }
+									})
+								})
+								
+
 								</script>
 
 							</div>

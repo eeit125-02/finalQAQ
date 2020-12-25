@@ -55,6 +55,15 @@ public class DiscussionDaoImpl implements DiscussionDao {
 		return session.createQuery(hql).getResultList();
 	}
 
+	//列出版規
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<RuleBean> getRule() {
+		String hql="From RuleBean";
+		Session session = factory.getCurrentSession();
+		return session.createQuery(hql).getResultList();
+	}
+	
 	//修改貼文
 	@Override
 	public void editPost(Integer edit_post_id,  String edit_post_title,
@@ -75,12 +84,12 @@ public class DiscussionDaoImpl implements DiscussionDao {
 	}
 
 	@Override
-	public RuleBean updateRule(String rule_content, Timestamp edittime) {
+	public RuleBean updateRule(RuleBean rb) {
 		Session session = factory.getCurrentSession();
-		RuleBean rb = (RuleBean) session.get(RuleBean.class, 1);
-		rb.setRule_content(rule_content);
-		rb.setRule_time(edittime);
-		return null;
+		session.saveOrUpdate(rb);
+		return rb;
 	}
+
+
 
 }

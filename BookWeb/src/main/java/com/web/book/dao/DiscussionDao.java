@@ -17,11 +17,13 @@ public interface DiscussionDao {
 	List<PostBean> getAllPost();
 	//依時間排序列出所有留言
 	List<CommandBean> getAllCommand();
+	//列出貼文內容
+	List<RuleBean> getRule();
 	//修改貼文
 	void editPost(Integer edit_post_id,  String edit_post_title,
 			String edit_post_content, Timestamp edit_post_time);
 	//刪除貼文
 	void deletPost(Integer delete_post_id);
 	//修改板規
-	RuleBean updateRule(String rule_content, Timestamp edittime);
+	RuleBean updateRule(RuleBean rb);
 }

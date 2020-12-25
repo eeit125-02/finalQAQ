@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.web.book.model.CommandBean;
 import com.web.book.model.PostBean;
+import com.web.book.model.RuleBean;
 import com.web.book.service.DiscussionService;
 
 @Controller
@@ -29,6 +30,8 @@ public class DiscussionController {
 		model.addAttribute("allPost", post_list);
 		List<CommandBean> command_list = discussionService.getAllCommand();
 		model.addAttribute("allCommand", command_list);
+		List<RuleBean> rule_content = discussionService.getRule();
+		model.addAttribute("rule",  rule_content);
 		return "Discussion/mainpage"; 
 	}
 	
