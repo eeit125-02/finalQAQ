@@ -2,6 +2,7 @@ package com.web.book.controller;
 
 import java.util.List;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,6 +16,7 @@ import com.web.book.model.ShoppingCartBean;
 import com.web.book.service.BookStoreService;
 import com.web.book.service.ShoppingCartService;
 
+
 @Controller
 @SessionAttributes(value = "list")
 public class ShoppingCartController {
@@ -25,20 +27,26 @@ public class ShoppingCartController {
 	@Autowired
 	BookStoreService bsService;
 
+	
 	@GetMapping("shopping")
 	public String addCart(Model model,
 			@RequestParam(value = "goToCart", defaultValue = "0") Integer bk_ID,
 			@RequestParam(value = "addCart", defaultValue = "0") Integer bk_ID2
 			) {
+		Integer tatolMoney = 0;
 // 先搜尋購物車內容
-		List<ShoppingCartBean> listCart = scService.searchCart(1);
+		List<ShoppingCartBean> listCart = scService.searchCart(13);
 // 判斷按哪種按鈕 bk_ID:直接購買
 		if (bk_ID != 0 && bk_ID2 == 0) {
 // 如果listCart沒內容新增		
 			if (listCart.size() == 0) {
-				scService.addToCart(1, 100, bk_ID, 1);
-				listCart = scService.searchCart(1);
+				scService.addToCart(1, 100, bk_ID, 13);
+				listCart = scService.searchCart(13);
 				model.addAttribute("list", listCart);
+				for (ShoppingCartBean shoppingCartBean : listCart) {
+					tatolMoney += shoppingCartBean.getCart_Num()*shoppingCartBean.getCart_Price();
+				}
+				model.addAttribute("totalCart", tatolMoney);
 				return "Transation/shoppingCart";
 // 有內容判斷購物車裡是否已經有那本書，有就跳轉回去原頁面
 			} else {
@@ -51,18 +59,26 @@ public class ShoppingCartController {
 					}
 				}
 // 沒有內容新增
-				scService.addToCart(1, 100, bk_ID, 1);
-				listCart = scService.searchCart(1);
+				scService.addToCart(1, 100, bk_ID, 13);
+				listCart = scService.searchCart(13);
 				model.addAttribute("list", listCart);
+				for (ShoppingCartBean shoppingCartBean : listCart) {
+					tatolMoney += shoppingCartBean.getCart_Num()*shoppingCartBean.getCart_Price();
+				}
+				model.addAttribute("totalCart", tatolMoney);
 				return "Transation/shoppingCart";
 			}
 // 判斷按哪種按鈕 bk_ID2:放入購物車
 		} else if (bk_ID == 0 && bk_ID2 != 0) {
 // 如果listCart沒內容新增	
 			if (listCart.size() == 0) {
-				scService.addToCart(1, 100, bk_ID2, 1);
-				listCart = scService.searchCart(1);
+				scService.addToCart(1, 100, bk_ID2, 13);
+				listCart = scService.searchCart(13);
 				model.addAttribute("list", listCart);
+				for (ShoppingCartBean shoppingCartBean : listCart) {
+					tatolMoney += shoppingCartBean.getCart_Num()*shoppingCartBean.getCart_Price();
+				}
+				model.addAttribute("totalCart", tatolMoney);
 				return "Transation/shoppingCart";
 			}
 // 有內容判斷購物車裡是否已經有那本書，有就跳轉回去原頁面
@@ -75,14 +91,39 @@ public class ShoppingCartController {
 				}
 			}
 // 沒有內容新增
-			scService.addToCart(1, 100, bk_ID2, 1);
-			listCart = scService.searchCart(1);
+			scService.addToCart(1, 100, bk_ID2, 13);
+			listCart = scService.searchCart(13);
 			model.addAttribute("list", listCart);
+			for (ShoppingCartBean shoppingCartBean : listCart) {
+				tatolMoney += shoppingCartBean.getCart_Num()*shoppingCartBean.getCart_Price();
+			}
+			model.addAttribute("totalCart", tatolMoney);
 			return "Transation/shoppingCart";
 		} else {
 			model.addAttribute("list", listCart);
+			for (ShoppingCartBean shoppingCartBean : listCart) {
+				tatolMoney += shoppingCartBean.getCart_Num()*shoppingCartBean.getCart_Price();
+			}
+			model.addAttribute("totalCart", tatolMoney);
 			return "Transation/shoppingCart";
 		}
 	}
-
+	
+	@PostMapping("updateCart.do")
+	public String updateOrDelete(
+			@RequestParam String cmd,
+			@RequestParam (value = "cart_ID", required = false) Integer cart_ID,
+			@RequestParam (value = "cart_Num", required = false) Integer cart_Num,
+			Model model
+			) {
+		if (cmd.equalsIgnoreCase("DEL")) {
+	        scService.deleteCart(cart_ID); // 刪除購物車內的某項商品
+		    return "redirect:/shopping";
+		} else if (cmd.equalsIgnoreCase("MOD")) {
+			scService.updateCart(cart_ID, cart_Num);   // 修改某項商品的數項
+		    return "redirect:/shopping";
+		} else {
+			return "redirect:/shopping";
+		}
+	}
 }

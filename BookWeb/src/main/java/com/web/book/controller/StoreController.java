@@ -39,7 +39,7 @@ public class StoreController {
 	
 	@PostMapping("/myStore")
 	public String myStore(Model model) {
-		Integer mb_ID = 1;
+		Integer mb_ID = 13;
 		List<BookStoreBean> list = bookStoreService.searchMemberStore(mb_ID);
 		model.addAttribute("myBookList", list);
 		return "/Transation/myStore";
@@ -56,7 +56,7 @@ public class StoreController {
 			return "/Transation/myUpdateStore";
 		} else {
 			bookStoreService.deleteBookStore(bks_ID);
-			Integer mb_ID = 1;
+			Integer mb_ID = 13;
 			List<BookStoreBean> list = bookStoreService.searchMemberStore(mb_ID);
 			model.addAttribute("myBookList", list);
 			return "/Transation/myStore";
@@ -73,7 +73,7 @@ public class StoreController {
 		System.out.println("2."+ bs_Price);
 		System.out.println("3."+ bs_Num);
 		bookStoreService.updateBookStore(bks_ID,bs_Num, bs_Price);
-		Integer mb_ID = 1;
+		Integer mb_ID = 13;
 		List<BookStoreBean> list = bookStoreService.searchMemberStore(mb_ID);
 		model.addAttribute("myBookList", list);
 		return "/Transation/myStore";
@@ -99,8 +99,8 @@ public class StoreController {
 		String a = request.getParameter("setbk");
 		bookStoreService.addBookName(Integer.parseInt(request.getParameter(a + "qty")),
 				Integer.parseInt(request.getParameter(a + "price")),
-				Integer.parseInt(request.getParameter("setbk")), 1);
-		Integer mb_ID = 1;
+				Integer.parseInt(request.getParameter("setbk")), 13);
+		Integer mb_ID = 13;
 		List<BookStoreBean> list = bookStoreService.searchMemberStore(mb_ID);
 		model.addAttribute("myBookList", list);
 		return "/Transation/myStore";

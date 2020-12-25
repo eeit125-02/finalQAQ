@@ -59,6 +59,9 @@
 			<button type="submit" name="">返回</button>
 			<br>
 		</form>
+	</div>
+	<br>
+	<div class="container media">
 		<form action="<c:url value='/updateOrDelete'/>" method="post">
 			<table border="2" width="100%">
 				<tr>
@@ -88,7 +91,7 @@
 			</table>
 		</form>
 
-<%-- <input type="hidden" name="BK_ID" value="${table.bks_ID}"/> --%>
+		<%-- <input type="hidden" name="BK_ID" value="${table.bks_ID}"/> --%>
 
 		<!-- body -->
 	</div>

@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
+<%@ page import="java.util.List"%>
+<%@ page import="com.web.book.model.BookBean"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -47,41 +48,67 @@
 	<!-- header -->
 
 	<!-- body -->
-	<!-- 	購物車圖片 -->
-	<div class="container media" style='position:absolute;right:0px;'>
-		<a href="<c:url value='/shopping' />"><img alt="wtf..."
-			src="${pageContext.request.contextPath}/image/shoppingCart.png"
-			width="50"></a>
+	<div class="container media">
+		<h1>請從藏書庫中搜尋書名或者按此<a href="">新增</a>一本書</h1>
 	</div>
 	<br>
 	<div class="container media">
-		<span style="color: red;">${same}</span>
-		<form action="<c:url value='/myStore'/>" method="post">
-			<button type="submit" name="">我的清單</button>
+
+
+		<form action="<c:url value='/searchBookName'/>" method="post">
+			<div>
+				<input class="search-bar" type="text" name="searchbk" id="search"
+					placeholder="輸入名稱">
+				<button class="search-btn">搜尋</button>
+
+			</div>
 		</form>
 	</div>
 	<br>
 	<div class="container media">
-		<form action="<c:url value='/detail'/>" method="get">
-			<table border="1" width="130%">
+		<%
+			if (request.getParameter("searchbk") != null) {
+		%>
+		<p>
+			<%!List<BookBean> list;%>
+			<%!BookBean data;%>
+			<%
+				data = new BookBean();
+			list = (List) request.getAttribute("bookName");
+			%>
+		
+		<form action="<c:url value='/addBook'/>" method="post">
+			<%
+				for (BookBean data : list) {
+			%>
+			<table border="1" width="100%">
 				<tr>
-					<th>&nbsp;</th>
-					<th>編號</th>
-					<th>名字</th>
-					<th>作者</th>
+					<th width="70">編號</th>
+					<th width="320">書名</th>
+					<th width="60">作者</th>
+					<th width="60">出版社</th>
+					<th width="40">二手價</th>
+					<th width="110">數量</th>
+					<th width="110">&nbsp;</th>
 				</tr>
-				<c:forEach var="table" items="${bookstore}" begin="0" end="20">
-					<tr>
-						<th><button type="submit" value="${table.bk_ID}"
-								name="selectbk">檢視</button></th>
-						<td><img alt="XX" src="<c:out value="${table.bk_Pic}"/>"
-							width="50px" height="50px"></td>
-						<td><c:out value="${table.bk_Name}" /></td>
-						<td><c:out value="${table.bk_Author}" /></td>
-					</tr>
-				</c:forEach>
+				<tr height='16'>
+					<td><%=data.getBk_ID()%></td>
+					<td><%=data.getBk_Name()%></td>
+					<td><%=data.getBk_Author()%></td>
+					<td><%=data.getBk_Publish()%></td>
+					<td><INPUT TYPE="TEXT" NAME="<%=data.getBk_ID()%>price"></td>
+					<td><INPUT TYPE="TEXT" NAME="<%=data.getBk_ID()%>qty"></td>
+					<td><button type="submit" value=<%=data.getBk_ID()%>
+							name="setbk">刊登</button></td>
+				</tr>
 			</table>
+			<%
+				}
+			%>
 		</form>
+		<%
+			}
+		%>
 
 
 

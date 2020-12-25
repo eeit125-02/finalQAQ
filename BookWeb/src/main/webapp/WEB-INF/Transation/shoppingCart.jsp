@@ -42,7 +42,7 @@
 	
 	function confirmDelete(n) {
 		if (confirm("確定刪除此項商品 ? ") ) {
-			document.forms[0].action="<c:url value='UpdateItem.do?cmd=DEL&bookId=" + n +"' />" ;
+			document.forms[0].action="<c:url value='updateCart.do?cmd=DEL&cart_ID=" + n +"' />" ;
 			document.forms[0].method="POST";
 			document.forms[0].submit();
 		} else {
@@ -66,7 +66,7 @@
 			return ; 
 		}
 		if (confirm("確定將此商品的數量由" + qty + " 改為 " + newQty + " ? ") ) {
-			document.forms[0].action="<c:url value='UpdateItem.do?cmd=MOD&bookId=" + key + "&newQty=" + newQty +"' />" ;
+			document.forms[0].action="<c:url value='updateCart.do?cmd=MOD&cart_ID=" + key + "&cart_Num=" + newQty +"' />" ;
 			document.forms[0].method="POST";
 			document.forms[0].submit();
 		} else {
@@ -87,13 +87,6 @@
 			return false;
 		}
 		if (confirm("再次確認訂單內容 ? ") ) {
-			return true;
-		} else {
-			return false;
-		}
-	}
-	function Abort() {
-		if (confirm("確定放棄購物 ? ") ) {
 			return true;
 		} else {
 			return false;
@@ -145,6 +138,7 @@
 							<th width="110">修改</th>
 						</tr>
 <c:forEach varStatus="vs" var="v"	items="${list}">
+
 							<tr height='16'>
 								<td>${v.book.bk_Name}</td>
 								<td style="text-align: center;">${fn:substring(v.book.bk_Author, 0, 3)}</td>
@@ -160,22 +154,16 @@
 								<td style="text-align: right;"><fmt:formatNumber
 										value="${v.cart_Price * v.cart_Num}"
 										pattern="#,###,###" />元</td>
-								<td><Input type="button" name="update" value="修改"
-									onclick="modify(${anEntry.key}, ${anEntry.value.quantity}, ${vs.index})">
-									<Input type="button" name="delete" value="刪除"
-									onclick="confirmDelete(${anEntry.key})"></td>
+								<td><button type="submit" name="updateCart" value="${v.cart_ID}"
+								onclick="modify(${v.cart_ID}, ${v.cart_Num}, ${vs.index})"
+								>修改</button>
+									<button type="submit" name="deleteCart" value="${v.cart_ID}"
+									onclick="confirmDelete(${v.cart_ID})">刪除</button></td>
 							</tr>
 						</c:forEach>
-						<tr height='16'>
-							<td colspan='5' align='right'>合計金額：</td>
-							<td align='right'><fmt:formatNumber value="${subtotal}"
-									pattern="#,###,###" />元</td>
-							<td align='right'>&nbsp;</td>
-						</tr>
 						<tr>
 							<td colspan='5' align='right'>總計金額：</td>
-							<td align='right'><fmt:formatNumber
-									value="${subtotal + VAT }" pattern="#,###,###" />元</td>
+							<td align='right'> ${totalCart} 元</td>
 							<td align='right'>&nbsp;</td>
 						</tr>
 					</table>
@@ -186,15 +174,15 @@
 				<td>
 					<table border='1'>
 						<tr>
-							<td width="265" align='center'><a
-								href="<c:url value='../_03_listBooks/DisplayPageProducts?pageNo=${pageNo}' />">繼續購物</a>
+							<td width="400" align='center'><a
+								href='<c:url value="/Transation/storeMain" />'>繼續購物</a>
 							</td>
-							<td width="265" align='center'><a
-								href="<c:url value='checkout' />"
-								onClick="return Checkout(${subtotal});">再次確認</a></td>
-							<td width="265" align='center'><a
-								href="<c:url value='abort' />" onClick="return Abort();">放棄購物---</a>
-							</td>
+							<td width="400" align='center'>
+<%-- 							<a href="<c:url value='checkout' />" --%>
+<%-- 								onClick="return Checkout(${subtotal});"> --%>
+								結帳
+<!-- 								</a> -->
+								</td>
 						</tr>
 					</table>
 				</td>
