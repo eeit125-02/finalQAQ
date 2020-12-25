@@ -42,6 +42,10 @@
        	$("#bookWebFooter").load("//localhost:8080/BookWeb/footer");
 
 	});
+	
+	$(document).ready(function() {
+		loadBookCollectList();
+	});		
 </script>
 <title>Insert title here</title>
 </head>
@@ -57,12 +61,9 @@
 
 		<!-- 內容開始 -->
 
-
 		<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-
-
-			<br><hr><br>
+			<br><hr>
 			<div class="collect">
 				<a class="btn btn-outline-dark" href="<c:url value='SearchBook/Search' />" role="button">搜尋首頁</a>
 			</div>
@@ -70,79 +71,45 @@
 			<h3>收藏清單：</h3>
 			<br><br>
 			
-<c:forEach items="${collectresult}" var="row">
-		<div class="row">
-<!--圖片 -->
-			<div class="col-sm-2">			
-				<img class="itemcov" alt="" src="${row.getBook().getBk_Pic()}" height="190">
-			</div>
-<!--書名&作者&出版社&簡介-->
-			<div class="col-sm-10">
-				<h3>
-					<form name=a1 action="<c:url value='/bookpage' />" method="get">
-					<button type="submit" name="page"class="btn btn-link btn-lg" value="${row.getBook().getBk_ID()}">
-							${row.getBook().getBk_Name()}</button></form>
-				</h3>
-<!-- 				<img alt="書籍資訊" -->
-<%-- 							src="${pageContext.request.contextPath}/image/book.png"width="30px"> 作者：${row.getBook().getBk_Author()} ${row.getBc_ID()} --%>
-<!-- 				<img alt="書籍資訊" -->
-<%-- 							src="${pageContext.request.contextPath}/image/book.png"width="30px"> 出版社：${row.getBook().getBk_Publish()} ${row.getBook().getBk_ID()} --%>
-<!-- 				<img alt="書籍資訊" -->
-<%-- 							src="${pageContext.request.contextPath}/image/book.png"width="30px"> 出版日期：${row.getBook().getBk_Date()} <br> --%>
-							
-				｜ 作者：${row.getBook().getBk_Author()} ${row.getBc_ID()}｜  出版社：${row.getBook().getBk_Publish()} ｜  出版日期：${row.getBook().getBk_Date()}｜ <br>				
-				<p class="ellipsis"style="padding-top:15px">${row.getBook().getBk_Content()}</p>
+		<div class="bookcollectlist" id="bookcollectlist">
 
-
-		<div class="" id="bookcollectlist">
-		
-		
 		</div>
 
+	</div>
 
 <!-- 取消收藏按鈕 -->
-				<div class="collect">
-					<button type="submit" name="deletebc"
-							class="btn btn-outline-danger btn-sm"  onclick="a${row.getBc_ID()}();"value="${row.getBc_ID()}">取消收藏</button>
-				</div>
-			<br><hr>
-			</div>
-		</div>
+<!-- 				<div class="collect"> -->
+<!-- 					<button type="submit" name="deletebc" -->
+<%-- 							class="btn btn-outline-danger btn-sm"  onclick="a${row.getBc_ID()}();"value="${row.getBc_ID()}">取消收藏</button> --%>
+<!-- 				</div> -->
+<!-- 			<br><hr> -->
 		
-		
-			<script >
-
 			
-// 		$('#gocollect').click(function() {
-		function a${row.getBc_ID()}() {
-			console.log("test");
-			let bc_ID = ${row.getBc_ID()};
-			console.log(bc_ID);
-			let editURL = "collectlist/deletecollect/"+bc_ID;
-			console.log(editURL);
-			$.ajax({
-				async : true,
-				type : 'GET',
-				url : editURL,
-				dataType : "json",
-				contentType : "application/json;charset=utf-8",
-				success : function(data) {
-					if (data) {
-						alert('刪除成功 ');
-						loadBookCollectList();
-					}else {
-						alert('刪除失敗 ');
-					}
-				}
-			});
-		}
-	</script>
-</c:forEach>
+<!-- // // 		$('#gocollect').click(function() { -->
+<%-- // 		function a${row.getBc_ID()}() { --%>
+<!-- // 			console.log("test"); -->
+<%-- // 			let bc_ID = ${row.getBc_ID()}; --%>
+<!-- // 			console.log(bc_ID); -->
+<!-- // 			let editURL = "collectlist/deletecollect/"+bc_ID; -->
+<!-- // 			console.log(editURL); -->
+<!-- // 			$.ajax({ -->
+<!-- // 				async : true, -->
+<!-- // 				type : 'GET', -->
+<!-- // 				url : editURL, -->
+<!-- // 				dataType : "json", -->
+<!-- // 				contentType : "application/json;charset=utf-8", -->
+<!-- // 				success : function(data) { -->
+<!-- // 					if (data) { -->
+<!-- // 						alert('刪除成功 '); -->
+<!-- // 						loadBookCollectList(); -->
+<!-- // 					}else { -->
+<!-- // 						alert('刪除失敗 '); -->
+<!-- // 					} -->
+<!-- // 				} -->
+<!-- // 			}); -->
+<!-- // 		} -->
 
 <script>
-// 			$(document).ready(function() {
-// 				loadBookCollectList();
-// 			});			
 			
 			function loadBookCollectList() {
 				let mb_ID=5;
@@ -150,19 +117,27 @@
 					async : false,
 					cache : false,
 					type : 'POST',
-					url : "collectlist/getBookCollectList/"+mb_ID;
+					url : "collectlist/getBookCollectList/"+mb_ID,
 					dataType : "json",
 					contentType : "application/json;charset=utf-8",
 					error : function() {
 						alert('123 ');
 					},
 					success : function(data) {
-						var insertData = "<div class="" id=\"bookcollectlist\">";
+						var insertData = "<div>";
 						for (let i = 0; i < data.length; i++) {
-							insertData += "<h3>"+
+					console.log(data[i].bk_Author);
+							insertData += "<div class=\"row\">"
+								+"<div class=\"col-sm-2\">"
+								+"<img class=\"itemcov\" alt=\"\" src=\""
+								+data[i].bk_Pic
+								+"\" height=\"190\">"
+								+"</div>"
+								+"<div class=\"col-sm-10\">"
+								+"<h3>"
 								+"<form name=a1 action=\"<c:url value='/bookpage' />\" method=\"get\">"
 								+"<button type=\"submit\" name=\"page\"class=\"btn btn-link btn-lg\" value=\""
-								+data[i].bk_ID+"\">"+data[i].bk_ID+"</button></form>"
+								+data[i].bk_ID+"\">"+data[i].bk_Name+"</button></form>"
 								+"</h3>"
 								+"｜ 作者："+data[i].bk_Author
 								+" ｜  出版社："+data[i].bk_Publish
@@ -170,15 +145,51 @@
 								+"<br>"
 								+"<p class=\"ellipsis\"style=\"padding-top:15px\">"
 								+data[i].bk_Content
-								+"</p>"				
+								+"</p>"	
+								+"</div>"
+								+"</div>"
+								
+								+"<div class=\"collect\">"
+								+"<button type=\"submit\" name=\"deletebc\" id=\"deletebc\" class=\"btn btn-outline-danger btn-sm\" onclick=\"deletebc();\"value=\""
+								+data[i].bc_ID
+								+"\">取消收藏</button>"
+								+"</div>"
+								+"<br>"
+								+"<hr>"
 					}
 					insertData += "</div>"
-					$('#bookcollectlist').html(insertData);
+					console.log(insertData);
+					$("#bookcollectlist").html(insertData);	
 					}
 				});
 			}
+			
+			
+			
+			function deletebc(){
+				console.log("test");
+				let bc_ID = document.getElementById("deletebc").value;
+				let editURL = "collectlist/deletecollect/"+bc_ID;
+				console.log(editURL);
+				$.ajax({
+				async : true,
+				type : 'GET',
+				url : editURL,
+				dataType : "json",
+				contentType : "application/json;charset=utf-8",
+				success : function(data) { 
+					if (data) { 
+					alert('刪除成功 ');
+					loadBookCollectList();
+					}else {
+					alert('刪除失敗 ');
+					} 
+				} 
+			});
+			
+		}
+			
 			</script>
-	</div>
 
 	<!-- 內容結束 -->
 
@@ -187,7 +198,6 @@
 	<!-- footer -->
 	<footer class="container py-5" id="bookWebFooter"></footer>
 	<!-- footer -->
-
 
 </body>
 </html>

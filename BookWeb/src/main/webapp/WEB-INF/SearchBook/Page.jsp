@@ -178,8 +178,12 @@
 		<!-- 類型（未完成） -->
 					<div class="row"> 
 					<div class="col-sm-1"></div>
-					<div class="col-sm-11" style="background-color:#FFFF00;">類型：（還沒做）</div>
-					</div>					
+					<div class="col-sm-11">類型：
+		<c:forEach items="${pageresulttype}" var="row">					
+					<a href="#" class="badge badge-info" style="font-size:1em">${row.getSearchtype().getSty_Name()}</a>
+		</c:forEach>										
+					</div>
+					</div>
 				</div>
 			</div>
 		</div>

@@ -13,6 +13,7 @@ import org.springframework.stereotype.Repository;
 import com.web.book.dao.SearchBookDAO;
 import com.web.book.model.BookBean;
 import com.web.book.model.BookCollectBean;
+import com.web.book.model.BookTypeBean;
 import com.web.book.model.MemberBean;
 
 @Repository
@@ -64,6 +65,17 @@ public class SearchBookDaoImpl implements SearchBookDAO {
 		Query<BookBean> query = session.createQuery(hql);
 		result = query.setParameter("bkid", id).getSingleResult();
 		return result;
+	}
+	
+	//取得單一本書的類型
+	@Override
+	@SuppressWarnings("unchecked")
+	public List<BookTypeBean> getBookType(int id) {
+		String hql = "FROM BookTypeBean b WHERE b.book = :bkid";
+		Session session = factory.getCurrentSession();
+		BookTypeBean bt=session.load(BookTypeBean.class, id);
+		Query<BookTypeBean> query = session.createQuery(hql);
+		return query.setParameter("bkid", bt).getResultList();
 	}
 
 	// 會員收藏清單

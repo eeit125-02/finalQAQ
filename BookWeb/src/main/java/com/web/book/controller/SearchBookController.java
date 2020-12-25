@@ -19,7 +19,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.web.book.model.BookBean;
 import com.web.book.model.BookCollectBean;
-import com.web.book.model.BookReportBean;
+import com.web.book.model.BookTypeBean;
 import com.web.book.service.SearchService;
 
 @Controller
@@ -61,33 +61,43 @@ public class SearchBookController {
 		boolean result2 = searchService.savebc(bk_id, mb_id);
 		return result2;
 	}
+	
 
-	// 取得單一本書的詳細資訊
+	// 取得單一本書的詳細資訊(含類型)
 	@GetMapping("/bookpage")
 	public String gotoPage(Model model, @RequestParam(value = "page") Integer bk_id) {
 		BookBean result = searchService.getBook(bk_id);
 		model.addAttribute("pageresult", result);
+		List<BookTypeBean> result2=searchService.getBookType(bk_id);
+		model.addAttribute("pageresulttype", result2);		
 		return "SearchBook/Page";
 	}
 
-	// 會員收藏清單
+	
+//	// 會員收藏清單(原版本)
+//	@GetMapping("/collectlist")
+//	public String gotoList(Model model, @RequestParam(value = "list") Integer mb_id) {
+//		mb_id = 5;
+//		List<BookCollectBean> result = searchService.gotoCollect(mb_id);
+//		model.addAttribute("collectresult", result);
+//		return "SearchBook/Collect";
+//	}
+	// 會員收藏清單(純導向)
 	@GetMapping("/collectlist")
-	public String gotoList(Model model, @RequestParam(value = "list") Integer mb_id) {
-		mb_id = 5;
-		List<BookCollectBean> result = searchService.gotoCollect(mb_id);
-		model.addAttribute("collectresult", result);
+	public String gotoList(Model model) {
 		return "SearchBook/Collect";
 	}
-		
+	// 導出收藏清單
 	@PostMapping("/collectlist/getBookCollectList/{mb_ID}")
 	@ResponseBody
 	public List<Map<String, Object>> gotoList(@PathVariable("mb_ID") Integer mb_id) {
 		mb_id = 5;		
 		List<Map<String, Object>> book = new ArrayList<>();
 		List<BookCollectBean> result = searchService.gotoCollect(mb_id);
-		
+		System.out.println(mb_id);
 		for (BookCollectBean bookCollectBean : result) {
 			Map<String, Object> data = new HashMap<>();
+			data.put("bc_ID", bookCollectBean.getBc_ID());
 			data.put("bk_ID", bookCollectBean.getBook().getBk_ID());
 			data.put("bk_Name", bookCollectBean.getBook().getBk_Name());
 			data.put("bk_Author", bookCollectBean.getBook().getBk_Author());
@@ -127,8 +137,7 @@ public class SearchBookController {
 	public String gotoPageCollect(Model model, @RequestParam(value = "pagecollect") Integer bk_id) {
 		int mb_id = 5;
 		boolean result2 = searchService.savebc(bk_id, mb_id);
-		
-		//導回原本頁面（抓不到？）
+		//導回原本頁面
 		BookBean result = searchService.getBook(bk_id);
 		model.addAttribute("pageresult", result);
 		return "SearchBook/Page";
