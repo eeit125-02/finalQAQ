@@ -215,20 +215,36 @@ form {
 					}
 					let editURL = location.href + "/checklogin/" + mb_Account
 							+ "/" + mb_Password;
+					let editURL1 = location.href + "/checkColume/" + mb_Account;
 					$.ajax({
 						async : false,
 						type : 'POST',
-						url : editURL,
+						url : editURL1,
 						dataType : "json",
 						contentType : "application/json;charset=utf-8",
-						success : function(data) {
-							if (data && a) {
-								$('form').submit();
+						success : function(Colume) {
+							if (Colume) {
+								console.log(Colume)
+								$.ajax({
+									async : false,
+									type : 'POST',
+									url : editURL,
+									dataType : "json",
+									contentType : "application/json;charset=utf-8",
+									success : function(data) {
+										console.log(data)
+										if (data && a) {
+											$('form').submit();
+										} else {
+											sp.text("輸入錯誤");
+										}
+									}
+								});
 							} else {
-								sp.innerHTML = "輸入錯誤"
+								sp.text( "已被停權");
 							}
 						}
-					});
+					});					
 				})
 
 		$(document).keypress(function(event) {

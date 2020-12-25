@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
@@ -31,7 +32,7 @@ import com.web.book.service.GlobalService;
 import com.web.book.service.MemberService;
 
 @Controller
-@SessionAttributes(value = {"loginUser"})
+@SessionAttributes(value = { "loginUser" })
 public class Login {
 
 	@Autowired
@@ -55,6 +56,7 @@ public class Login {
 		MemberBean reg_member = new MemberBean(0, mb_Account, mb_Password, mb_Sex, null, mb_Name, mb_Mail, null, null,
 				ts, 0, null, null);
 		System.out.println(reg_member);
+		reg_member.setCheckColume(true);
 		checkMember = reg_member;
 		model.addAttribute("reg_member", reg_member);
 		return "Member/confirm";
@@ -75,45 +77,54 @@ public class Login {
 		boolean check = ms.checkAccount(account);
 		return check;
 	}
-	//檢查登入
+
+	// 檢查登入
 	@PostMapping("/toLogin/checklogin/{mb_Account}/{mb_Password}")
 	@ResponseBody
-	public boolean checklogin(@PathVariable("mb_Account") String account,
-							  @PathVariable("mb_Password") String pwd) {
-		boolean check = ms.Login(account,pwd);
-		System.out.println("-----------------");
+	public boolean checklogin(@PathVariable("mb_Account") String account, @PathVariable("mb_Password") String pwd) {
+		boolean check = ms.Login(account, pwd);
 		return check;
-	}	
+	}
+
+	// 檢查是否停權
+	@RequestMapping(value={"/toLogin/checkColume/{mb_Account}","/adminall/checkColume/{mb_Account}"},method=RequestMethod.POST)
+	@ResponseBody
+	public boolean checkColume(@PathVariable("mb_Account") String account) {
+		boolean check = ms.checkColume(account);
+		System.out.println(check);
+		return check;
+	}
+	
 	// 會員登入
 	@PostMapping("/login")
-	public String login(Model model, HttpServletResponse response,
-			@RequestParam(value = "account") String account,
+	public String login(Model model, HttpServletResponse response, @RequestParam(value = "account") String account,
 			@RequestParam(value = "pwd") String pwd) throws IOException, InterruptedException, ExecutionException {
 		boolean mb = ms.Login(account, pwd);
-		
+
 		if (mb) {
 			Account = account;
-			
+
 			MemberBean loginMember = ms.select(Account);
 			GlobalService.setLoginMember(loginMember);
-			
-			String sessionId = GlobalService.createSessionID(String.valueOf(loginMember.getMb_ID()), loginMember.getMb_Name(), loginMember.getMb_Account());
+
+			String sessionId = GlobalService.createSessionID(String.valueOf(loginMember.getMb_ID()),
+					loginMember.getMb_Name(), loginMember.getMb_Account());
 			Cookie memId = new Cookie("Member_ID", sessionId);
 			memId.setMaxAge(120);
 			response.addCookie(memId);
-			
-			model.addAttribute("Account",Account); 
+
+			model.addAttribute("Account", Account);
 			if (account.equals("a123456") && pwd.equals("a123456")) {
 				List<MemberBean> memberall = ms.adminselect();
 				model.addAttribute("admin", memberall);
 				return "Member/admin";
-			}else {
+			} else {
 				return "Member/city";
 			}
 		} else {
 			return "Member/login";
 		}
-		
+
 	}
 
 	// 會員資料
@@ -132,38 +143,36 @@ public class Login {
 	public String toUpdate(Model model) {
 		MemberBean memberbean = new MemberBean();
 		MemberBean mb_inf = ms.select(Account);
-		model.addAttribute("mb_inf",mb_inf);
+		model.addAttribute("mb_inf", mb_inf);
 		model.addAttribute("account", Account);
 		model.addAttribute("MemberBean", memberbean);
 		return "Member/mb_modify";
 	}
+
 	// 會員修改
 	@PostMapping("/MbUpdate")
-	public String Update(Model model,
-						@ModelAttribute("MemberBean") MemberBean MB,
-						@RequestParam(value="file",required=false) CommonsMultipartFile file,
-						HttpServletRequest request,
-						RedirectAttributes attr)throws Exception {
+	public String Update(Model model, @ModelAttribute("MemberBean") MemberBean MB,
+			@RequestParam(value = "file", required = false) CommonsMultipartFile file, HttpServletRequest request,
+			RedirectAttributes attr) throws Exception {
 		System.out.println("--------------------------------------");
 		MemberBean mb_inf = ms.select(Account);
 //		String name =UUID.randomUUID().toString().replaceAll("-", "");//使用UUID給圖片重新命名，並去掉四個“-”
 		String name = mb_inf.getMb_Account();
 		System.out.println(name);
-		//獲取檔案的副檔名
+		// 獲取檔案的副檔名
 		String ext = FilenameUtils.getExtension(file.getOriginalFilename());
-		//設定圖片上傳路徑
+		// 設定圖片上傳路徑
 		String filePath = "C:\\Users\\Student\\Documents\\GitHub\\finalQAQ\\BookWeb\\src\\main\\webapp\\Resource\\image";
 		System.out.println(request.getContextPath());
 		System.out.println(filePath);
 		File imagePath = new File(filePath);
-		File fileImage = new File(filePath+"/"+name + "." + ext);
-		if (!imagePath .exists() && !imagePath .isDirectory())
-		{
-		System.out.println(filePath);
-		imagePath.mkdir();
+		File fileImage = new File(filePath + "/" + name + "." + ext);
+		if (!imagePath.exists() && !imagePath.isDirectory()) {
+			System.out.println(filePath);
+			imagePath.mkdir();
 		}
-		file.transferTo(fileImage);//把圖片儲存路徑儲存到資料庫
-		//重定向到查詢所有使用者的Controller，測試圖片回顯 
+		file.transferTo(fileImage);// 把圖片儲存路徑儲存到資料庫
+		// 重定向到查詢所有使用者的Controller，測試圖片回顯
 		mb_inf.setMb_pic(name + "." + ext);
 		mb_inf.setMb_Birthday(MB.getMb_Birthday());
 		mb_inf.setMb_Address(MB.getMb_Address());
