@@ -82,7 +82,7 @@ p {
 		<fieldset>
 			<legend>會員中心</legend>
 			<div>
-				<button type="submit" name="inf">會員資訊</button>
+				<button type="submit" name="inf" class="btn btn-outline-secondary">會員資訊</button>
 			</div>
 			<a href="<c:url value='/toLogin' />">登出</a>
 		</fieldset>

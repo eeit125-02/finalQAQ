@@ -48,13 +48,16 @@ fieldset {
 	background-color: #F3F3FA;
 	width: 1100px
 }
-.a tr,td,th{
+.a tr,.a td,.a th{
 	text-align:center;
- 	border:1px solid black;
+ 	border:5px solid white;
 	border-radius:20px;
 }
 form{
 	margin:auto
+}
+button{
+	margin-right:10px;
 }
 legend {
 	text-align: center;
@@ -94,9 +97,9 @@ legend {
 						<td>${u.getMb_Password()}</td>
 						<td>${u.getMb_Name()}</td>
 						<td>${u.getMb_Date()}</td>
-						<td><button type="submit" name="delete"
+						<td><button type="submit" name="delete" class="btn btn-outline-secondary"
 								value="${u.getMb_ID()}" onclick="confirmChoice( )">刪除
-				<button type="submit" name="update"
+				<button type="submit" name="update" class="btn btn-outline-secondary"
 								value="${u.getMb_Account()}" onclick="confirmChoice( )">修改</td>
 					</tr>
 				</c:forEach>

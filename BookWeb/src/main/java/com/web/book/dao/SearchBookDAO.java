@@ -19,15 +19,20 @@ public interface SearchBookDAO {
 	List<BookCollectBean> getCollect(int MB_ID);
 
 	// 刪除收藏項目
-	int deletebc(int bcid);
+	boolean deletebc(int bcid);
 
 	// 新增收藏項目
-	int savebc(int bk_id, int mb_id);
+	boolean savebc(int bk_id, int mb_id);
 
 	// 新增書本
 	BookBean savebk(BookBean bkc);
 
 	// 修改書本
 	int updatebk(BookBean mb);
+
+	//查詢書籍作者
+	List<BookBean> searchBookAuthor(String name);
+	//查詢書籍出版社
+	List<BookBean> searchBookPublish(String name);
 
 }
