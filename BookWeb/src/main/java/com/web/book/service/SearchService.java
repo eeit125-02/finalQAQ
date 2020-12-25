@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.web.book.model.BookBean;
 import com.web.book.model.BookCollectBean;
+import com.web.book.model.BookTypeBean;
 
 public interface SearchService {
 
@@ -12,6 +13,9 @@ public interface SearchService {
 
 	//取得單一本書的詳細資訊
 	BookBean getBook(int id);
+
+	//取得單一本書的類型
+	List<BookTypeBean> getBookType(int id);
 
 	// 會員收藏清單
 	List<BookCollectBean> gotoCollect(int id);
@@ -32,5 +36,6 @@ public interface SearchService {
 	List<BookBean> searchBookAuthor(String name);
 	//查詢書籍出版社
 	List<BookBean> searchBookPublish(String name);
+
 
 }

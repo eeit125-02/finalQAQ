@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.web.book.dao.SearchBookDAO;
 import com.web.book.model.BookBean;
 import com.web.book.model.BookCollectBean;
+import com.web.book.model.BookTypeBean;
 import com.web.book.service.SearchService;
 
 	@Transactional
@@ -42,6 +43,12 @@ import com.web.book.service.SearchService;
 			return searchBookDAO.getBook(id);	
 		}
 		
+		//取得單一本書的詳細資訊
+		@Override
+		public List<BookTypeBean> getBookType(int id) {
+			return searchBookDAO.getBookType(id);	
+		}
+				
 		// 會員收藏清單
 		@Override
 		public List<BookCollectBean> gotoCollect(int id) {
