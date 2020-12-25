@@ -9,7 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.Table; 
 
 @Entity
-@Table(name="Members")
+@Table(name="Members1")
 public class MemberBean {
 
 	@Id
@@ -27,7 +27,17 @@ public class MemberBean {
 	private Integer mb_Lv;
 	private String mb_type;
 	private String mb_pic;
+	private boolean checkColume;
+
 	
+	public boolean isCheckColume() {
+		return checkColume;
+	}
+
+	public void setCheckColume(boolean checkColume) {
+		this.checkColume = checkColume;
+	}
+
 	public MemberBean() {
 		super();
 	}

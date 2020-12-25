@@ -20,4 +20,6 @@ public interface MemberDao {
 
 	boolean checkAccount(String account);
 
+	boolean checkColume(String account);
+
 }

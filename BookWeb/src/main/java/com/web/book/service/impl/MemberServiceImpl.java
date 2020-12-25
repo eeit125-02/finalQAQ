@@ -54,5 +54,10 @@ public class MemberServiceImpl implements MemberService {
 	public boolean update(MemberBean mb) {
 		return dao.update(mb);
 	}
-
+	
+	@Override
+	public boolean checkColume(String account) {
+		return dao.checkColume(account);
+	}
+	
 }
