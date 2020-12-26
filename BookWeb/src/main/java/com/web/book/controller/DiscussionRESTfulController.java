@@ -26,7 +26,7 @@ public class DiscussionRESTfulController {
 		Timestamp d = new Timestamp(System.currentTimeMillis()); 
 		rb.setRule_id(1);
 		rb.setRule_content(rule_Content);
-		rb.setRule_time(d);
+		rb.setRule_time(d.toString());
 		discussionService.updateRule(rb);
 		return rb;
 	}

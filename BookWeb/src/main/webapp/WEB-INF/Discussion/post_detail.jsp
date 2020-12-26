@@ -34,7 +34,7 @@
 		<div class="row">
 			<!-- side area -->
 			<div class="col-2 text-center">
-				<h2>書適論壇</h2>
+				<h2>書適論壇</h2>
 			</div>
 
 			<div class="col-10" style='text-align: center;'>
