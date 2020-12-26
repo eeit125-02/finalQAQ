@@ -22,4 +22,6 @@ public interface MemberDao {
 
 	boolean checkColume(String account);
 
+	void change(String account);
+
 }

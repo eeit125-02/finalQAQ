@@ -87,7 +87,7 @@ public class Login {
 	}
 
 	// 檢查是否停權
-	@RequestMapping(value={"/toLogin/checkColume/{mb_Account}","/adminall/checkColume/{mb_Account}"},method=RequestMethod.POST)
+	@PostMapping("/toLogin/checkColume/{mb_Account}")
 	@ResponseBody
 	public boolean checkColume(@PathVariable("mb_Account") String account) {
 		boolean check = ms.checkColume(account);
@@ -100,13 +100,10 @@ public class Login {
 	public String login(Model model, HttpServletResponse response, @RequestParam(value = "account") String account,
 			@RequestParam(value = "pwd") String pwd) throws IOException, InterruptedException, ExecutionException {
 		boolean mb = ms.Login(account, pwd);
-
 		if (mb) {
 			Account = account;
-
 			MemberBean loginMember = ms.select(Account);
 			GlobalService.setLoginMember(loginMember);
-
 			String sessionId = GlobalService.createSessionID(String.valueOf(loginMember.getMb_ID()),
 					loginMember.getMb_Name(), loginMember.getMb_Account());
 			Cookie memId = new Cookie("Member_ID", sessionId);
@@ -247,6 +244,12 @@ public class Login {
 		return "Member/adminModify";
 	}
 
+	//管理員權限
+	@PostMapping("/adminall/change")
+	@ResponseBody
+	public void change(@PathVariable("account") String account) {
+		ms.change(account);
+	}
 	// 管理員介面
 	@RequestMapping(value = "/toAdmin")
 	public String toadmin(Model model) {

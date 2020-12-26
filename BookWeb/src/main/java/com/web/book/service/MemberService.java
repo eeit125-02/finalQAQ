@@ -22,4 +22,6 @@ public interface MemberService {
 
 	boolean checkColume(String account);
 
+	void change(String account);
+
 }
