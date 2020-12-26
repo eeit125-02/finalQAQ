@@ -54,7 +54,6 @@
 		}else{
 			console.log("log")
 			$('#loginButton').html("<a id=\"login\" href=\"//localhost:8080/BookWeb/toLogin\">登入</a>");
-			
 		};
 				
 	</script>

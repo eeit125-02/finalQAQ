@@ -88,13 +88,17 @@ public class MemberDaoImpl implements MemberDao {
 		Query<MemberBean> query = session.createQuery(hql);
 		MemberBean mb =query.setParameter("account", account).getSingleResult();
 		System.out.println(mb.isCheckColume());
-		if(mb.isCheckColume() != true) {
-		return false;
-		}else {
-		return true;
-		}
+		return mb.isCheckColume();
 	}
 
+	@Override
+	public void change(String account) {
+		String hql = "FROM MemberBean WHERE mb_Account=:account";
+		Session session = factory.getCurrentSession();
+		Query<MemberBean> query = session.createQuery(hql);
+		MemberBean mb =query.setParameter("account", account).getSingleResult();
+		mb.setCheckColume(!mb.isCheckColume());
+	}
 	
 	@Override
 	public boolean delete(int id) {
