@@ -23,23 +23,26 @@ public class CommandBean implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	Integer command_id;	
 	String command_content;
-	Integer mb_id;
 	Timestamp command_time;
 	
 	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="FK_PostBean_post_id") 	
     private PostBean postBean;
 	
+	@ManyToOne(cascade=CascadeType.ALL)
+	@JoinColumn(name="FK_mb_id")
+	private MemberBean memberbean;
+	
 	public CommandBean() {}
 
-	public CommandBean(Integer command_id, String command_content, Integer mb_id,
-			Timestamp command_time, PostBean postBean) {
+	public CommandBean(Integer command_id, String command_content, Timestamp command_time, PostBean postBean,
+			MemberBean memberbean) {
 		super();
 		this.command_id = command_id;
 		this.command_content = command_content;
-		this.mb_id = mb_id;
 		this.command_time = command_time;
 		this.postBean = postBean;
+		this.memberbean = memberbean;
 	}
 
 	public Integer getCommand_id() {
@@ -58,14 +61,6 @@ public class CommandBean implements Serializable{
 		this.command_content = command_content;
 	}
 
-	public Integer getMb_id() {
-		return mb_id;
-	}
-
-	public void setMb_id(Integer mb_id) {
-		this.mb_id = mb_id;
-	}
-
 	public Timestamp getCommand_time() {
 		return command_time;
 	}
@@ -81,6 +76,13 @@ public class CommandBean implements Serializable{
 	public void setPostBean(PostBean postBean) {
 		this.postBean = postBean;
 	}
-	
+
+	public MemberBean getMemberbean() {
+		return memberbean;
+	}
+
+	public void setMemberbean(MemberBean memberbean) {
+		this.memberbean = memberbean;
+	}	
 
 }

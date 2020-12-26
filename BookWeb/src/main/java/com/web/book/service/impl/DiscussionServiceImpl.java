@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.web.book.dao.DiscussionDao;
 import com.web.book.model.CommandBean;
+import com.web.book.model.MemberBean;
 import com.web.book.model.PostBean;
 import com.web.book.model.RuleBean;
 import com.web.book.service.DiscussionService;
@@ -51,6 +52,12 @@ public class DiscussionServiceImpl implements DiscussionService {
 		return discussionDao.getRule();
 	}
 	
+	//抓取資料會員
+	@Override
+	public List<MemberBean> getAllMember() {
+		return discussionDao.getAllMember();
+	}
+	
 	//修改貼文
 	@Override
 	public void editPost(Integer edit_post_id,  String edit_post_title,
@@ -76,5 +83,13 @@ public class DiscussionServiceImpl implements DiscussionService {
 	public PostBean getPostBeanById(Integer pb_ID) {
 		return discussionDao.getPostBeanById(pb_ID);
 	}
+
+	//用ID取出Member資料
+	@Override
+	public MemberBean getMemberBeanById(Integer mb_ID) {
+		return discussionDao.getMemberBeanById(mb_ID);
+	}
+
+
 
 }

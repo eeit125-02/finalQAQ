@@ -10,6 +10,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -24,23 +26,26 @@ public class PostBean implements Serializable{
 	Integer post_id;
 	String post_title;
 	String post_content;
-	Integer mb_id;
 	Timestamp post_time;
 	
 	@OneToMany(mappedBy="postBean", cascade=CascadeType.ALL)
 	private Set<CommandBean> commands=new LinkedHashSet<>( );
+	
+	@ManyToOne(cascade=CascadeType.ALL)
+	@JoinColumn(name="FK_mb_id")
+	private MemberBean memberbean;
 
 	public PostBean() {}
-
-	public PostBean(Integer post_id, String post_title, String post_content, Integer mb_id, Timestamp post_time,
-			Set<CommandBean> commands) {
+	
+	public PostBean(Integer post_id, String post_title, String post_content, Timestamp post_time,
+			Set<CommandBean> commands, MemberBean memberbean) {
 		super();
 		this.post_id = post_id;
 		this.post_title = post_title;
 		this.post_content = post_content;
-		this.mb_id = mb_id;
 		this.post_time = post_time;
 		this.commands = commands;
+		this.memberbean = memberbean;
 	}
 
 	public Integer getPost_id() {
@@ -67,14 +72,6 @@ public class PostBean implements Serializable{
 		this.post_content = post_content;
 	}
 
-	public Integer getMb_id() {
-		return mb_id;
-	}
-
-	public void setMb_id(Integer mb_id) {
-		this.mb_id = mb_id;
-	}
-
 	public Timestamp getPost_time() {
 		return post_time;
 	}
@@ -90,7 +87,13 @@ public class PostBean implements Serializable{
 	public void setCommands(Set<CommandBean> commands) {
 		this.commands = commands;
 	}
-	
-	
-	
+
+	public MemberBean getMemberbean() {
+		return memberbean;
+	}
+
+	public void setMemberbean(MemberBean memberbean) {
+		this.memberbean = memberbean;
+	}
+		
 }
