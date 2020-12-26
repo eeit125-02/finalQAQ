@@ -8,49 +8,52 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.web.book.dao.ActDao;
+import com.web.book.dao.ActJoinDao;
 import com.web.book.model.ActBean;
+import com.web.book.model.ActJoinBean;
+import com.web.book.service.ActJoinService;
 import com.web.book.service.ActService;
 
 @Service
 @Transactional
-public class ActServiceImpl implements ActService {
+public class ActJoinServiceImpl implements ActJoinService {
 
 	@Autowired
-	ActDao actDao;
+	ActJoinDao actjoinDao;
 
 	// 查詢所有活動
 	@Override
-	public List<ActBean> getAllActs() {
-		return actDao.getAllActs();
+	public List<ActJoinBean> getAllJoins() {
+		return actjoinDao.getAllJoins();
 	}
 
-	@Override
-	public List<ActBean> searchKeyword(String keyword) {
-		return actDao.searchKeyword(keyword);
-	}
+//	@Override
+//	public List<ActJoinBean> searchJoinKeyword(String keyword) {
+//		return actjoinDao.searchJoinKeyword(keyword);
+//	}
 	
 	// 依活動ID查詢活動
 	@Override
-	public ActBean getAct(Integer act_ID) {
-		return actDao.getAct(act_ID);
+	public ActJoinBean getActJoin(Integer join_ID) {
+		return actjoinDao.getActJoin(join_ID);
 	}
 
 	// 新增活動
 	@Override
-	public int createAct(ActBean actbean) {
-		return actDao.createAct(actbean);
+	public int createActJoin(ActJoinBean ajb) {
+		return actjoinDao.createActJoin(ajb);
 	}
 
 	// 修改活動
 	@Override
-	public int updateAct(ActBean ab) {
-		return actDao.updateAct(ab);
+	public int updateActJoin(ActJoinBean ajb) {
+		return actjoinDao.updateActJoin(ajb);
 	}
 
 	// 刪除活動
 	@Override
-	public int deleteAct(Integer act_ID) {
-		return actDao.deleteAct(act_ID);
+	public int deleteActJoin(Integer join_ID) {
+		return actjoinDao.deleteActJoin(join_ID);
 	}
 
 

@@ -6,8 +6,11 @@ import com.web.book.model.ActBean;
 
 public interface ActService {	
 
-	//查詢所有活動資料
+	        //查詢所有活動資料
 			List<ActBean> getAllActs();
+			
+			//查詢活動關鍵字
+			List<ActBean> searchKeyword(String keyword);
 			
 			//經由活動ID查詢單筆資料
 			ActBean getAct(Integer act_ID);

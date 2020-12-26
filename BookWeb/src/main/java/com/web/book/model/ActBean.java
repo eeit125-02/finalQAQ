@@ -12,7 +12,6 @@ import javax.persistence.Table;
 @Table(name = "ACT_Records123")
 public class ActBean {
 
-	private Integer mb_ID;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer act_ID;
@@ -20,6 +19,8 @@ public class ActBean {
 	private String act_Name;
 	private String act_Theme;
 	private String act_Date;
+//	private String act_EndDate;
+	private String act_Time;
 	private String act_Loc;
 	private String act_Intro;
 	private String act_Guest;
@@ -29,15 +30,14 @@ public class ActBean {
 	private String act_Place;
 
 	
-//	@ManyToOne
-//	@JoinColumn(name = "mb_ID")
-//	private MemberBean member;
+	@ManyToOne
+	@JoinColumn(name = "mb_ID")
+	private MemberBean member;
 	
-	public ActBean(Integer mb_ID, Integer act_ID, String act_Image, String act_Name, String act_Theme, String act_Date,
+	public ActBean(Integer act_ID, String act_Image, String act_Name, String act_Theme, String act_Date,
 			String act_Loc, String act_Intro, String act_Guest, String act_Pax, String act_Rule, String act_Tag,
-			String act_Place) {
+			String act_Place,MemberBean member) {
 		super();
-		this.mb_ID = mb_ID;
 		this.act_ID = act_ID;
 		this.act_Image = act_Image;
 		this.act_Name = act_Name;
@@ -50,20 +50,16 @@ public class ActBean {
 		this.act_Rule = act_Rule;
 		this.act_Tag = act_Tag;
 		this.act_Place = act_Place;
+		this.member = member;
 
 	}
+
+
+
 
 
 	public ActBean() {
 		super();
-	}
-
-	public Integer getmb_ID() {
-		return mb_ID;
-	}
-
-	public void setmb_ID(Integer mb_ID) {
-		this.mb_ID = mb_ID;
 	}
 
 	public Integer getact_ID() {
@@ -162,12 +158,14 @@ public class ActBean {
 		this.act_Place = act_Place;
 	}
 
+
+
+
+
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("ActBean [mb_ID=");
-		builder.append(mb_ID);
-		builder.append(", act_ID=");
+		builder.append("ActBean [act_ID=");
 		builder.append(act_ID);
 		builder.append(", act_Image=");
 		builder.append(act_Image);
@@ -191,10 +189,28 @@ public class ActBean {
 		builder.append(act_Tag);
 		builder.append(", act_Place=");
 		builder.append(act_Place);
+		builder.append(", member=");
+		builder.append(member);
 		builder.append("]");
 		return builder.toString();
 	}
 
-//	                                        
+
+
+
+
+	public String getact_Time() {
+		return act_Time;
+	}
+
+
+
+
+
+	public void setact_Time(String act_Time) {
+		this.act_Time = act_Time;
+	}
+
+	    
 
 }
