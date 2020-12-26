@@ -41,40 +41,57 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 /* 	line-height: 2; */
 /* 	font-size: 16px; */
 /* } */
-/* .btn-box { */
-/* 	display: inline-block; */
-/* 	vertical-align: middle; */
-/* 	width: 40px; */
-/* 	height: 20px; */
-/* 	border-radius: 100px; */
-/* 	background-color: #ccc; */
-/* 	box-shadow: 0px 3px 0px rgba(0, 0, 0, .13) inset; */
-/* } */
+.switch {
+position: relative;
+display: inline-block;
+width: 50px;
+height: 24px;
+}
 
-/* .btn-box .btn { */
-/* 	display: inline-block; */
-/* 	width: 20px; */
-/* 	height: 20px; */
-/* 	border-radius: 50%; */
-/* 	background-color: #fff; */
-/* 	margin-left: 0; /*動畫從ml為0開始*/ */
-/* 	transition: .5s; */
-/* 	box-shadow: 1px 2px 5px rgba(0, 0, 0, .3); */
-/* } */
+.switch input {
+opacity: 0;
+width: 0;
+height: 0;
+}
 
-/* .checkbox { */
-/* 	position: absolute; */
-/* 	opacity: 0; */
-/* } */
+.slider {
+position: absolute;
+cursor: pointer;
+top: 0;
+left: 0;
+right: 0;
+bottom: 0;
+background-color: #ccc;
+-webkit-transition: .4s;
+transition: .4s;
+border-radius: 34px;
+}
 
-/* .checkbox:checked+.btn-box { */
-/* 	background-color: #8f8; */
-/* } */
+.slider:before {
+/* 未開顏色 */
+position: absolute;
+content: "";
+height: 20px;
+width: 20px;
+left: 2px;
+top: 2px;
+background-color: white;
+-webkit-transition: .4s;
+transition: .4s;
+border-radius: 50%;
+}
 
-.checkbox:checked+.btn-box .btn { 
-	margin-left: 20px; 
- } 
+input:checked + .slider {
+/* 以開顏色 */
+background-color: purple;
+}
 
+input:checked + .slider:before {
+/* 按鈕顏色 */
+-webkit-transform: translateX(26px);
+-ms-transform: translateX(26px);
+transform: translateX(26px);
+}
 fieldset {
 	border-radius: 25px;
 	padding: 20px;
@@ -134,7 +151,6 @@ legend {
 					</tr>
 					<c:forEach items="${memberall}" var="u">
 						<tr>
-					<input type="hidden" id="${u.getMb_Account()}" value="${u.getMb_Account()}"/>
 							<td>${u.getMb_Account()}</td>
 							<td>${u.getMb_Password()}</td>
 							<td>${u.getMb_Name()}</td>
@@ -146,15 +162,16 @@ legend {
 									<button type="submit" name="update"
 										class="btn btn-outline-secondary" value="${u.getMb_Account()}"
 										onclick="confirmChoice( )">修改</td>
-							<td>
-								<button type="button" id="colume">狀態</button>
-								<span id="a50"></span>
-								</td>
+										
+							<td><label class="switch"> <input type="checkbox">
+									<span id="ball" class="slider" check="${u.checkColume}"></span>
+							</label>
+							</td>
 						</tr>
 					</c:forEach>
-				
+
 				</table>
-				
+
 				<a href="<c:url value='/toAdmin'/>">返回</a>
 			</fieldset>
 		</form>
@@ -169,22 +186,27 @@ legend {
 			$("#bookWebFooter").load("<c:url value='/footer'/>");
 		});
 		
-		$("#colume").click(function(){
-			let mb_Account = $("#"+${u.getMb_Account()}).val();
-			let sp = $("#a50");
-			let editURL = location.href + "/checkColume/" + mb_Account;
+		window.onload = function() {
+
+		}
+		
+		$("#ball").click(function(){
+			let s = $(this);
+			let editURL = location.href + "/change/";
 			$.ajax({
 				async : false,
 				type : 'POST',
 				url : editURL,
+				data:{
+					'account':s.parent().parent().parent().children('td').eq(0).html()
+				},
 				dataType : "json",
 				contentType : "application/json;charset=utf-8",
-				success : function(abc) {
-					console.log(abc)
-					if (abc == true) {
-						sp.text("正常");
+				success : function() {
+					if (s.attr("check") == "true") {
+						s.attr("check","false");
 					} else {
-						sp.text("停權");
+						s.attr("check","true");
 					}
 				}
 			});	

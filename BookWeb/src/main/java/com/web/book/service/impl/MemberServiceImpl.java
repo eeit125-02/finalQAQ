@@ -60,4 +60,9 @@ public class MemberServiceImpl implements MemberService {
 		return dao.checkColume(account);
 	}
 	
+	@Override
+	public void change(String account) {
+		dao.change(account);
+		}
+	
 }
