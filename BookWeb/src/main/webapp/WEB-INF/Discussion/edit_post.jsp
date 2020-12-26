@@ -50,7 +50,7 @@
 		<div class="row">
 			<!-- side area -->
 			<div class="col-2 text-center">
-				<h2>書適論壇</h2>
+				<h2>書適論壇</h2>
 			</div>
 
 			<div class="col-10" style='text-align: center;'>
@@ -92,3 +92,44 @@
 	<!-- footer -->
 </body>
 </html>
+
+<!-- 借放 -->
+<%-- 								<c:forEach var="stored_post" items="${allPost}"> --%>
+<!-- 									<div -->
+<!-- 										style="border: #ADADAD 2px solid; border-radius: 5px; text-align: left; padding: 10px; margin: 0px 10px"> -->
+<%-- 										<p>[member] ${stored_post.post_time}</p> --%>
+<%-- 										<h3>${stored_post.post_title}</h3> --%>
+<%-- 										<p>${stored_post.post_content}</p> --%>
+
+<%-- 										<form:form method='post' action='add_command' --%>
+<%-- 											modelAttribute="commandBean"> --%>
+<!-- 											<div class="input-group mb-3"> -->
+<%-- 												<form:input type="text" class="form-control" --%>
+<%-- 													id="command_input" path="command_content" --%>
+<%-- 													placeholder="請輸入留言" /> --%>
+<%-- 												<form:hidden path="command_time" /> --%>
+<%-- 												<form:hidden path="mb_id" /> --%>
+<%-- 												<form:hidden path="postBean.post_id" --%>
+<%-- 													value="${stored_post.post_id}" /> --%>
+<!-- 												<div class="input-group-append"> -->
+<!-- 													<button class="btn btn-outline-secondary" id="command_btn" -->
+<!-- 														type="submit">留言</button> -->
+<!-- 												</div> -->
+<!-- 											</div> -->
+<%-- 										</form:form> --%>
+
+<%-- 										<c:forEach var="stored_command" items="${allCommand}"> --%>
+<%-- 											<c:set var="pi" value="${stored_post.post_id}" /> --%>
+<%-- 											<c:set var="ci" value="${stored_command.postBean.post_id}" /> --%>
+<%-- 											<c:if test="${pi==ci}"> --%>
+<!-- 												<div -->
+<!-- 													style="background-color: #C4E1FF; margin: 10px; padding: 5px; border-radius: 10px;"> -->
+<%-- 													<p>[member] ${stored_command.command_time}</p> --%>
+<%-- 													<p>${stored_command.command_content}</p> --%>
+<!-- 												</div> -->
+<%-- 											</c:if> --%>
+<%-- 										</c:forEach> --%>
+
+<!-- 									</div> -->
+<!-- 									<br> -->
+<%-- 								</c:forEach> --%>

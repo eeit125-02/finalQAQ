@@ -13,13 +13,13 @@ public class RuleBean {
 	@Id
 	Integer rule_id = 1;
 	String rule_content;
-	Timestamp rule_time;
+	String rule_time;
 	
 	public RuleBean() {
 		super();
 	}
 
-	public RuleBean(Integer rule_id, String rule_content, Timestamp rule_time) {
+	public RuleBean(Integer rule_id, String rule_content,String rule_time) {
 		super();
 		this.rule_id = rule_id;
 		this.rule_content = rule_content;
@@ -42,11 +42,11 @@ public class RuleBean {
 		this.rule_content = rule_content;
 	}
 
-	public Timestamp getRule_time() {
+	public String getRule_time() {
 		return rule_time;
 	}
 
-	public void setRule_time(Timestamp rule_time) {
+	public void setRule_time(String rule_time) {
 		this.rule_time = rule_time;
 	}
 	
