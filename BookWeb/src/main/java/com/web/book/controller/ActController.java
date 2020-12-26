@@ -17,6 +17,7 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.web.book.model.ActBean;
+import com.web.book.service.ActJoinService;
 import com.web.book.service.ActService;
 
 @Controller
@@ -26,6 +27,9 @@ public class ActController {
 	
 	@Autowired
 	ActService actService;
+	
+	@Autowired
+	ActJoinService actjoinService;
 
 	@Autowired
 	ServletContext context;
@@ -39,7 +43,7 @@ public class ActController {
 	}
 
 
-//	搜尋關鍵字
+    // 搜尋關鍵字
 	@GetMapping("Discussion/search_keyword")
 	public String showSearchResult(Model model, @RequestParam(value = "keyword") String keyword) {
 		List<ActBean> actlist = actService.getAllActs();
@@ -57,7 +61,7 @@ public class ActController {
 	}
 	
 	
-	//新增活動
+	// 新增活動
 	@PostMapping("/showCreateForm")
 	public String createAct(
 	Model model,
@@ -113,5 +117,6 @@ public class ActController {
 		actService.deleteAct(act_ID);
 		return "redirect:/showActs";
 	}
+
 
 }

@@ -15,16 +15,17 @@ public class ActJoinDaoImpl implements ActJoinDao {
 	@Autowired
 	SessionFactory factory;
 
-	//查詢所有活動
+	//查詢所有報名表
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<ActJoinBean> getAllJoins() {
 		Session session = factory.getCurrentSession();
 		String hql = "FROM ActJoinBean";
-		List<ActJoinBean> list = session.createQuery(hql).getResultList();
-		return list;
+		List<ActJoinBean> actjoinlist = session.createQuery(hql).getResultList();
+		return actjoinlist;
 	}
 	
+	//查詢單一報名紀錄
 	public ActJoinBean getActJoin(Integer join_ID) {
 		ActJoinBean ajb = null;
 		Session session = factory.getCurrentSession();
@@ -51,7 +52,7 @@ public class ActJoinDaoImpl implements ActJoinDao {
 //		return list;
 //	}
 	
-	//新增活動		
+	//新增報名		
 	@Override
 	public int createActJoin(ActJoinBean ajb) {
 		int count = 0;
@@ -61,7 +62,7 @@ public class ActJoinDaoImpl implements ActJoinDao {
 		return count;
 	}
 
-	//修改活動
+	//修改報名
 	@Override
 	public int updateActJoin(ActJoinBean ajb) {
 		int count = 0;
@@ -72,7 +73,7 @@ public class ActJoinDaoImpl implements ActJoinDao {
 		return count;
 	}
 
-	//刪除活動
+	//刪除報名
 	@Override
 	public int deleteActJoin(Integer join_ID) {
 		int count = 0;

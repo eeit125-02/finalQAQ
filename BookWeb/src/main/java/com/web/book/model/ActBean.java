@@ -211,6 +211,22 @@ public class ActBean {
 		this.act_Time = act_Time;
 	}
 
-	    
+
+
+
+
+	public MemberBean getMember() {
+		return member;
+	}
+
+
+
+
+
+	public void setMember(MemberBean member) {
+		this.member = member;
+	}
+
+	
 
 }

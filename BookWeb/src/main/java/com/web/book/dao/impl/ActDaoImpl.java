@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import com.web.book.dao.ActDao;
 import com.web.book.model.ActBean;
-import com.web.book.model.BookBean;
 
 
 @Repository

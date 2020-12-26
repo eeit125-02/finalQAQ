@@ -1,6 +1,8 @@
 package com.web.book.model;
 
 import java.io.Serializable;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -22,11 +24,11 @@ public class ActJoinBean implements Serializable {
 	private Integer join_Pax;
 	
 	
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name="act_ID")
 	private ActBean act;
 	
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name="mb_ID")
 	private MemberBean member;
 
