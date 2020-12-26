@@ -9,6 +9,42 @@
 	href='${pageContext.request.contextPath}/css/style.css' />
 <meta charset="UTF-8">
 
+
+<link rel="stylesheet"
+	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script>
+	$(function() {
+		var dateFormat = "mm/dd/yy", from = $("#from").datepicker({
+			defaultDate : "+1w",
+			changeMonth : true,
+			numberOfMonths : 3
+		}).on("change", function() {
+			to.datepicker("option", "minDate", getDate(this));
+		}), to = $("#to").datepicker({
+			defaultDate : "+1w",
+			changeMonth : true,
+			numberOfMonths : 3
+		}).on("change", function() {
+			from.datepicker("option", "maxDate", getDate(this));
+		});
+
+		function getDate(element) {
+			var date;
+			try {
+				date = $.datepicker.parseDate(dateFormat, element.value);
+			} catch (error) {
+				date = null;
+			}
+
+			return date;
+		}
+	});
+</script>
+
+
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
@@ -85,17 +121,27 @@
 					</tr>
 
 					<tr>
-						<td><form:label path="act_Date">活動時間:</form:label></td>
-						<td><form:input type="datetime-local" path="act_Date" /></td>
+						<td><form:label for="from" path="act_Date">活動時間:</form:label></td>
+						<td><label for="from">From</label>
+						<input type="text" id="from" name="from">
+						<label for="to">to</label>
+						<input type="text" id="to" name="to"></td>
+
+
+						
+
+
 					</tr>
 
 					<tr>
-						<td><label>活動地點:</label></td>
-						<td><select id="縣市1"></select> <select id="鄉鎮市區1"><input type="textarea"/></select></td>
-
-
-<!-- 						<td><input type="button" onclick="show()" value="Show" /></td> -->
+						<td><form:label path="act_Loc">活動地點:</form:label></td>
+						<td><form:select path="act_Loc" id="縣市1"></form:select> <form:select
+								id="鄉鎮市區1" path="act_Loc"></form:select></td>
+						<td><form:input path="act_Loc"></form:input></td>
 					</tr>
+
+
+					<!-- 						<td><input type="button" onclick="show()" value="Show" /></td> -->
 
 					<!-- 						<td><select name="act_Loc"> -->
 					<!-- 								<option value="City">縣市</option> -->
@@ -131,14 +177,10 @@
 					<!-- 								<option value="MZW">馬祖</option> -->
 					<!-- 								<option value="LNN">連江縣</option> -->
 					<!-- 						</select></td> -->
-					<tr>
-						<td><label>活動主題:</label></td>
-						<td><form:input path="act_Theme" /></td>
-					</tr>
 
 					<tr>
 						<td><form:label path="act_Intro">活動簡介:</form:label></td>
-						<td><form:input path="act_Intro" /></td>
+						<td><form:input type="textarea" path="act_Intro" /></td>
 					</tr>
 
 					<tr>
@@ -153,7 +195,7 @@
 
 					<tr>
 						<td><form:label path="act_Rule">活動規則:</form:label></td>
-						<td><form:input path="act_Rule" /></td>
+						<td><form:input type="textarea" path="act_Rule" /></td>
 					</tr>
 
 					<tr>

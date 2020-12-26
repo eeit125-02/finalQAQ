@@ -10,6 +10,7 @@
 <!-- <link rel="stylesheet" -->
 <!--     href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"> -->
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+ 
     <title>Fun Tribe</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -97,11 +98,11 @@
                             </div>
                             <!--Hero form -->
                             <form action="#" class="search-box mb-100">
-                                <div class="input-form">
+                                <div class="input-form form-inline">
                                     <input type="text" placeholder="What are you finding?">
                                 </div>
-                                <div class="select-form">
-                                    <div class="select-itms">
+                                <div class="select-form form-inline">
+                                    <div class="select-itms form-inline">
                                         <select name="select" id="select1">
                                             <option value="">In where?</option>
                                             <option value="">Catagories One</option>
@@ -112,7 +113,7 @@
                                     </div>
                                 </div>
                                 <div class="search-form">
-                                    <a href="#"><i class="ti-search"></i> Search</a>
+                                    <button class="btn btn-outline-info"><a href="#"><i class="ti-search"></i> Search</a></button>
                                 </div>	
                             </form>	
                             <!-- hero category1 img -->
@@ -263,6 +264,7 @@
                         <p>${act.act_Date}</p>
                         <p>${act.act_Loc}</p>
                         <p>${act.act_Intro}</p>
+                        <hr>
                         <p><button class="btn btn-outline-info"><a href="<c:url value='/showUpdateForm'/>?act_ID=${act.act_ID}"/>編輯</a></button>
 						<button class="btn btn-outline-info"><a href="<c:url value='deleteAct'/>?act_ID=${act.act_ID}">刪除</a></button></p>
                         
@@ -290,7 +292,7 @@
                 </div>
 
          
-            <button><a href='showCreateForm' >新增活動</a></button>
+            <button class="btn btn-outline-info"><a href='showCreateForm' >新增活動</a></button>
         </div>
 
     <br>

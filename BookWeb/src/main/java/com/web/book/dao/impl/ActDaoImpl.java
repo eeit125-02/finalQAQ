@@ -3,10 +3,12 @@ package com.web.book.dao.impl;
 import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import com.web.book.dao.ActDao;
 import com.web.book.model.ActBean;
+import com.web.book.model.BookBean;
 
 
 @Repository
@@ -85,6 +87,16 @@ public class ActDaoImpl implements ActDao {
 		count++;
 
 		return count;
+	}
+
+	//查詢活動關鍵字
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<ActBean> searchKeyword(String keyword) {
+		Session session = factory.getCurrentSession();
+		String hql = "FROM ActBean ab WHERE ab.act_Name like :searchkw";
+		Query<ActBean> query = session.createQuery(hql);
+		return query.setParameter("searchkw","%"+ keyword +"%").getResultList();
 	}
 
 }

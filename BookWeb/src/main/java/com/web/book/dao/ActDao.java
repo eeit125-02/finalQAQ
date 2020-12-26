@@ -9,6 +9,9 @@ public interface ActDao {
 	// 查詢所有活動紀錄
 	List<ActBean> getAllActs();
 
+	//查詢活動關鍵字
+	List<ActBean> searchKeyword(String keyword);
+
 	// 經由活動ID查詢單筆資料
 	ActBean getAct(Integer act_ID);
 
@@ -20,6 +23,7 @@ public interface ActDao {
 
 	// 刪除活動
 	int deleteAct(Integer act_ID);
+
 	
 
 //	// 會員的報名活動清單
