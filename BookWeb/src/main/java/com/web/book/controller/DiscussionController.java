@@ -65,7 +65,11 @@ public class DiscussionController {
 	
 	//會員新增留言
 	@PostMapping("Discussion/add_command")
-	public String processAddNewCommand(@ModelAttribute("commandBean")CommandBean cb) {
+	public String processAddNewCommand(
+			@ModelAttribute("commandBean")CommandBean cb,
+			@RequestParam(value="postBean.post_id") Integer pb_ID) {
+		PostBean pb = discussionService.getPostBeanById(pb_ID);
+		cb.setPostBean(pb);
 		discussionService.addCommand(cb);
 		return "redirect:/Discussion/mainpage";
 	}

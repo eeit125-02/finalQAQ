@@ -71,4 +71,10 @@ public class DiscussionServiceImpl implements DiscussionService {
 		return discussionDao.updateRule(rb);
 	}
 
+	//用ID取出Post資料
+	@Override
+	public PostBean getPostBeanById(Integer pb_ID) {
+		return discussionDao.getPostBeanById(pb_ID);
+	}
+
 }

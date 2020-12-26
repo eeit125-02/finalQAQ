@@ -83,11 +83,20 @@ public class DiscussionDaoImpl implements DiscussionDao {
 		session.delete(pb);		
 	}
 
+	//修改版規
 	@Override
 	public RuleBean updateRule(RuleBean rb) {
 		Session session = factory.getCurrentSession();
 		session.saveOrUpdate(rb);
 		return rb;
+	}
+
+	//用ID取出Post資料
+	@Override
+	public PostBean getPostBeanById(Integer pb_ID) {
+		Session session = factory.getCurrentSession();
+		PostBean pb = (PostBean) session.get(PostBean.class, pb_ID);
+		return pb;
 	}
 
 

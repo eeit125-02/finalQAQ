@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -48,7 +49,7 @@
 
 <body>
 	<!-- header -->
-<!-- 	<header class="container blog-header py-3" id="bookWebheader"></header> -->
+	<header class="container blog-header py-3" id="bookWebheader"></header>
 	<!-- header -->
 
 	<div class="container-fluid" style="margin: 20px 0px">
@@ -118,54 +119,40 @@
 							<div class="tab-pane fade show active" id="novel_latest"
 								role="tabpanel">
 
-								<!-- post and command -->
-								<c:forEach var="stored_post" items="${allPost}">
-									<div
-										style="border: #ADADAD 2px solid; border-radius: 5px; text-align: left; padding: 10px; margin: 0px 10px">
-										<p>[member] ${stored_post.post_time}</p>
-										<h3>${stored_post.post_title}</h3>
-										<p>${stored_post.post_content}</p>
-
-										<form:form method='post' action='add_command'
-											modelAttribute="commandBean">
-											<div class="input-group mb-3">
-												<form:input type="text" class="form-control"
-													id="command_input" path="command_content"
-													placeholder="請輸入留言" />
-												<form:hidden path="command_time" />
-												<form:hidden path="mb_id" />
-												<form:hidden path="postBean.post_id"
-													value="${stored_post.post_id}" />
-												<form:hidden path="postBean.post_title"
-													value="${stored_post.post_title}" />
-												<form:hidden path="postBean.post_content"
-													value="${stored_post.post_content}" />
-												<form:hidden path="postBean.mb_id"
-													value="${stored_post.mb_id}" />
-												<form:hidden path="postBean.post_time"
-													value="${stored_post.post_time}" />
-												<div class="input-group-append">
-													<button class="btn btn-outline-secondary" id="command_btn"
-														type="submit">留言</button>
-												</div>
-											</div>
-										</form:form>
-
-										<c:forEach var="stored_command" items="${allCommand}">
-											<c:set var="pi" value="${stored_post.post_id}" />
-											<c:set var="ci" value="${stored_command.postBean.post_id}" />
-											<c:if test="${pi==ci}">
-												<div
-													style="background-color: #C4E1FF; margin: 10px; padding: 5px; border-radius: 10px;">
-													<p>[member] ${stored_command.command_time}</p>
-													<p>${stored_command.command_content}</p>
-												</div>
-											</c:if>
+								<!-- post and command table -->
+								<table class="table table-hover">
+									<thead>
+										<tr class="table-primary">
+											<th scope="col" style="width: 50%; text-align:left; vertical-align:middle">貼文標題</th>
+											<th scope="col" style="width: 15%; vertical-align:middle">貼文時間</th>
+											<th scope="col" style="width: 15%; vertical-align:middle">貼文作者</th>
+											<th scope="col" style="width: 10%; vertical-align:middle">留言數</th>
+											<th scope="col" style="width: 10%; vertical-align:middle">查看貼文</th>
+										</tr>
+									</thead>
+									<tbody>
+										<c:forEach var="stored_post" items="${allPost}">
+											<tr>
+												<td style="text-align:left; vertical-align:middle">${stored_post.post_title}</td>
+												<td style="vertical-align:middle">${stored_post.post_time}</td>
+												<td style="vertical-align:middle">[member]</td>
+												<td style="vertical-align:middle">
+													<c:set var="command_qty" value="${0}" /> 
+													<c:forEach var="stored_command" items="${allCommand}">
+														<c:set var="pi" value="${stored_post.post_id}" />
+														<c:set var="ci" value="${stored_command.postBean.post_id}" />
+														<c:if test="${pi==ci}">
+															<c:set var="command_qty" value="${command_qty+1}" />
+														</c:if>
+													</c:forEach>
+													${command_qty}
+												</td>
+												<td style="vertical-align:middle">[button]</td>
+											</tr>
 										</c:forEach>
-
-									</div>
-									<br>
-								</c:forEach>
+									</tbody>
+								</table>
+				
 							</div>
 
 							<!-- content of hot post tab -->
@@ -266,16 +253,8 @@
 													placeholder="請輸入留言" />
 												<form:hidden path="command_time" />
 												<form:hidden path="mb_id" />
-												<form:hidden path="postBean.post_id"
+												<form:hidden path="postBean.post_id" name="post_id"
 													value="${stored_post.post_id}" />
-												<form:hidden path="postBean.post_title"
-													value="${stored_post.post_title}" />
-												<form:hidden path="postBean.post_content"
-													value="${stored_post.post_content}" />
-												<form:hidden path="postBean.mb_id"
-													value="${stored_post.mb_id}" />
-												<form:hidden path="postBean.post_time"
-													value="${stored_post.post_time}" />
 												<div class="input-group-append">
 													<button class="btn btn-outline-secondary" id="command_btn"
 														type="submit">留言</button>
@@ -321,13 +300,13 @@
 							<!-- edit rule -->
 							<div class="tab-pane fade show active" id="pills-edit_rule"
 								role="tabpanel">
-								
 
 
-									<div class=" justify-content-center">
-									
+
+								<div class=" justify-content-center">
+
 									<div
-									style="border: #ADADAD 2px solid; border-radius: 5px; text-align: left; padding: 10px; margin: 0px 10px; padding-top: 20px">
+										style="border: #ADADAD 2px solid; border-radius: 5px; text-align: left; padding: 10px; margin: 0px 10px; padding-top: 20px">
 
 										<div class="form-group row">
 											<label for="last_edit_time" class="col-2 text-center h5">上次修改時間</label>
@@ -337,39 +316,51 @@
 												</p>
 											</div>
 										</div>
-										
+
 										<div class="form-group row">
 											<label for="rule_content" class="col-2 text-center h5">版規內容</label>
 											<div class="col-9">
 												<textarea class="form-control" id="rule_content"
-													name="rule_content" rows="6" ><c:forEach var="rule" items="${rule}">${rule.rule_content}</c:forEach></textarea>
+													name="rule_content" rows="6"><c:forEach
+														var="rule" items="${rule}">${rule.rule_content}</c:forEach></textarea>
 											</div>
 										</div>
-										
+
 										<div class="text-center">
 											<button type="submit" class="btn btn-primary" id="send_rule">送出版規</button>
 										</div>
-									
-								</div>
-							</div>
-							
-							
-								<script>
-								$('#send_rule').click(function(){
-									console.log($('#rule_content').val())
-									$.ajax({
-										url  : '<c:url value="/Discussion/edit_rule"/>',
-										type : 'POST',
-				                        data : { rule_content : $("#rule_content").val()},
-				                        dataType: "json",
-				                        success:function(rb){
-											$('#last_edit_time').html(rb.rule_time) //取得的時間格式怪怪!!!
-				                        	$('#show_rule').html(rb.rule_content)
-				                        }
-									})
-								})
-								
 
+									</div>
+								</div>
+
+
+								<script>
+									$('#send_rule')
+											.click(
+													function() {
+														$
+																.ajax({
+																	url : '<c:url value="/Discussion/edit_rule"/>',
+																	type : 'POST',
+																	data : {
+																		rule_content : $(
+																				"#rule_content")
+																				.val()
+																	},
+																	dataType : "json",
+																	success : function(
+																			rb) {
+																		$(
+																				'#last_edit_time')
+																				.html(
+																						rb.rule_time)
+																		$(
+																				'#show_rule')
+																				.html(
+																						rb.rule_content)
+																	}
+																})
+													})
 								</script>
 
 							</div>
