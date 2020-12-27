@@ -182,26 +182,27 @@ legend {
 
 	<script>
 		$(document).ready(function() {
+			console.log("SSS")
 			$("#bookWebheader").load("<c:url value='/header'/>");
 			$("#bookWebFooter").load("<c:url value='/footer'/>");
+			already();
 		});
 		
-		window.onload = function() {
-
-		}
-		
-		$("#ball").click(function(){
+		function already(){
+		console.log("AAA")
+		$(".slider").each(function(){
+			if($(this).attr("check") == "true"){
+				$(this).click();
+			}
+		$(this).click(function(){
 			let s = $(this);
-			let editURL = location.href + "/change/";
+			let c = s.parent().parent().parent().children('td').eq(0).html();
+			console.log(c);
 			$.ajax({
-				async : false,
 				type : 'POST',
-				url : editURL,
+				url : "adminchange",
 				data:{
-					'account':s.parent().parent().parent().children('td').eq(0).html()
-				},
-				dataType : "json",
-				contentType : "application/json;charset=utf-8",
+					'ac':c },
 				success : function() {
 					if (s.attr("check") == "true") {
 						s.attr("check","false");
@@ -211,6 +212,8 @@ legend {
 				}
 			});	
 		})
+		})
+		}
 	</script>
 </body>
 
