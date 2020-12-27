@@ -267,7 +267,7 @@
                         <hr>
                         <p><button class="btn btn-outline-info"><a href="<c:url value='/showUpdateForm'/>?act_ID=${act.act_ID}"/>編輯</a></button>
 						<button class="btn btn-outline-info"><a href="<c:url value='deleteAct'/>?act_ID=${act.act_ID}">刪除</a></button>
-						<button class="btn btn-outline-info"><a href="<c:url value='/showJoinForm'/>?mb_Account=${act.act_ID}">報名</a></button></p>
+						<button class="btn btn-outline-info"><a href="<c:url value='/showJoinForm'/>?act_ID=${act.act_ID}">報名</a></button></p>
                         
 <!--                         <p> -->
 <%--                         	<a href="<spring:url value='/product?id=${product.bookId}' />" --%>

@@ -81,8 +81,7 @@
 			<form:form method="POST" modelAttribute="ab">
 
 				<form:hidden path="act_ID" value="活動編號"/>
-				<form:hidden path="mb_ID" />
-				<form:input path="mb_ID" />
+				<form:hidden path="member.mb_Account" value="會員帳號"/>
 				<input type="hidden" name="finalDecision" value="">
 				<Table>
 				

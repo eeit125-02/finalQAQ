@@ -43,16 +43,16 @@
 <meta charset="UTF-8">
 <title>MVC</title>
 <script type="text/javascript">
-	function confirmDelete(act_Name) {
-		var result = confirm("確定刪除此筆報名記錄(活動名稱:" + act_Name + ")?");
+	function confirmDelete(mb_Account) {
+		var result = confirm("確定刪除此筆報名記錄(帳號:" + mb_Account + ")?");
 		if (result) {
 			document.forms[0].finalDecision.value = "DELETE";
 			return true;
 		}
 		return false;
 	}
-	function confirmUpdate(act_Name) {
-		var result = confirm("確定送出此筆報名記錄(活動名稱:" + act_Name + ")?");
+	function confirmUpdate(mb_Account) {
+		var result = confirm("確定送出此筆報名記錄(帳號:" + mb_Account + ")?");
 		if (result) {
 			document.forms[0].finalDecision.value = "UPDATE";
 			return true;
@@ -78,17 +78,12 @@
 		<H1 class='center'>更新活動資料</H1>
 		<hr>
 		<p>
-			<form:form method="POST" modelAttribute="ajb">
+			<form:form method="POST" modelAttribute="updateajb">
 
-				<form:hidden path="act.act_ID" value="活動編號"/>
-				<form:hidden path="member.mb_ID" />
+				<input type="hidden" name="join_ID" value="${ajb.join_ID}"/>
+				<input type="hidden" name="mb_Account" value="${ajb.mb_Account}"/>
 				<input type="hidden" name="finalDecision" value="">
 				<Table>
-				
-					<tr>
-						<td><form:label path="member.mb_Account">會員帳號:</form:label></td>
-<%-- 						<td><form:input path="member.mb_Account" /></td> --%>
-					</tr>	
 					
 					<tr>
 						<td><form:label path="act.act_Name">活動名稱:</form:label></td>
@@ -99,8 +94,8 @@
 						<td><form:label path="member.mb_Name">會員名稱:</form:label></td>
 					</tr>
 <tr>
-						<td><form:label path="member.mb_email">email:</form:label></td>
-						<td><form:input path="member.mb_email"/></td>
+						<td><form:label path="member.mb_Mail">email:</form:label></td>
+						<td><form:input path="member.mb_Mail"/></td>
 					</tr>
 
 					<tr>

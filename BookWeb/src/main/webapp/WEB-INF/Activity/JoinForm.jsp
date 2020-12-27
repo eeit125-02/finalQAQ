@@ -67,37 +67,38 @@
 		<hr>
 		<div class="center">
 			<H1>新增報名資料</H1>
-			<form:form method="POST" modelAttribute="ajb"
-				enctype="multipart/form-data">
+			<form:form method="POST" modelAttribute="ajb" enctype="multipart/form-data">
 
 				<table>
+
 					<tr>
-						<td><form:label path="member.mb_Account">會員帳號:</form:label></td>
-<%-- 						<td><form:input path="member.mb_Account" /></td> --%>
-					</tr>	
-					
-					<tr>
-						<td><form:label path="act.act_Name">活動名稱:</form:label></td>
-						
+						<td><label>會員帳號:${member.mb_Account}</label></td>
+						<td><input type="hidden" name="mb_Account" value="${member.mb_Account}" /></td>
+					</tr>
+
+                    <tr>
+						<td><label>活動名稱:${act.act_Name}</label></td>
+						<td><input type="hidden" name="act_Name" value="${act.act_Name}" /></td>
+					</tr>
+
+                    <tr>
+						<td><label>會員名稱:${member.mb_Name}</label></td>
+						<td><input type="hidden" name="mb_Name" value="${member.mb_Name}" /></td>
 					</tr>
 
 					<tr>
-						<td><form:label path="member.mb_Name">會員名稱:</form:label></td>
-					</tr>
-
-					<tr>
-						<td><form:label path="member.mb_email">email:</form:label></td>
-						<td><form:input path="member.mb_email"/></td>
+						<td><form:label path="member.mb_Mail">email:</form:label></td>
+						<td><form:input path="member.mb_Mail" /></td>
 					</tr>
 
 					<tr>
 						<td><form:label path="member.mb_Tel">聯絡電話:</form:label></td>
-						<td><form:input path="member.mb_Tel"/></td>
+						<td><form:input path="member.mb_Tel" /></td>
 					</tr>
 
 
 					<tr>
-						<td><form:label path="join_Pax">活動人數:</form:label></td>
+						<td><form:label path="join_Pax">報名人數:</form:label></td>
 						<td><form:input path="join_Pax" /></td>
 					</tr>
 
@@ -108,7 +109,7 @@
 				<input type='reset' value='還原' />
 				<br>
 				<br>
-				<a href='${pageContext.request.contextPath}/ActHomepage'>繼續探索活動</a>
+				<a href='ActHomepage'>繼續探索活動</a>
 			</form:form>
 
 
@@ -118,7 +119,5 @@
 		<!-- footer -->
 		<footer class="container py-5" id="bookWebFooter"></footer>
 		<!-- footer -->
-
-		
 </body>
 </html>
