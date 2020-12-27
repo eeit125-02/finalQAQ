@@ -1,10 +1,9 @@
 package com.web.book.controller;
 
 import java.io.File;
+import java.io.IOException;
 import java.sql.Timestamp;
 import java.util.List;
-import java.util.UUID;
-import java.io.IOException;
 import java.util.concurrent.ExecutionException;
 
 import javax.servlet.http.Cookie;
@@ -22,9 +21,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.web.book.model.MemberBean;
 import com.web.book.service.GlobalService;
@@ -157,6 +156,8 @@ public class Login {
 		System.out.println(filePath);
 		File imagePath = new File(filePath);
 		File fileImage = new File(filePath+"/"+name + "." + ext);
+		
+		//GlobalService.creatImgInFirebase("/Users/hsin/Downloads/cyan_bg_.jpg", mb_inf.getMb_Account());
 		if (!imagePath .exists() && !imagePath .isDirectory())
 		{
 		System.out.println(filePath);
