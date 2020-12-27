@@ -2,8 +2,6 @@ package com.web.book.service;
 
 import java.io.IOException;
 import java.net.URL;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,7 +15,6 @@ import com.google.cloud.firestore.DocumentReference;
 import com.google.cloud.firestore.DocumentSnapshot;
 import com.google.cloud.firestore.QueryDocumentSnapshot;
 import com.google.cloud.firestore.QuerySnapshot;
-import com.google.cloud.storage.Blob;
 import com.google.cloud.storage.BlobId;
 import com.google.cloud.storage.BlobInfo;
 import com.google.cloud.storage.Storage;
@@ -80,7 +77,7 @@ public class GlobalService {
 		Map<String, Object> sessionValue = new HashMap<>();
 		sessionValue.put("id", id);
 		sessionValue.put("name", name);	
-		sessionValue.put("account", acount);
+		sessionValue.put("account", account);
 		ApiFuture<DocumentReference> addedDocRef = firebase.getFirestore().collection(SESSION_ID).add(sessionValue);
 		
 		return addedDocRef.get().getId();
