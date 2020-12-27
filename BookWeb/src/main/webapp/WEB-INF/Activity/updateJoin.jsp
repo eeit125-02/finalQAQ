@@ -1,21 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<!DOCTYPE HTML>
 <html>
 <head>
-<link rel='stylesheet'
-	href='${pageContext.request.contextPath}/css/style.css' />
-<meta charset="UTF-8">
-
-
-<link rel="stylesheet"
-	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<link rel="stylesheet" href="/resources/demos/style.css">
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
@@ -41,17 +31,36 @@
 	}
 }
 </style>
-
 <script>
 	$(document).ready(function() {
 		$("#bookWebheader").load("//localhost:8080/BookWeb/header");
-		$("#bookWebFooter").load("//localhost:8080/BookWeb/footer");
+       	$("#bookWebFooter").load("//localhost:8080/BookWeb/footer");
 
 	});
 </script>
-<title>新增活動資料</title>
+<link rel='stylesheet'
+	href='${pageContext.request.contextPath}/css/style.css' type="text/css" />
+<meta charset="UTF-8">
+<title>MVC</title>
+<script type="text/javascript">
+	function confirmDelete(act_Name) {
+		var result = confirm("確定刪除此筆報名記錄(活動名稱:" + act_Name + ")?");
+		if (result) {
+			document.forms[0].finalDecision.value = "DELETE";
+			return true;
+		}
+		return false;
+	}
+	function confirmUpdate(act_Name) {
+		var result = confirm("確定送出此筆報名記錄(活動名稱:" + act_Name + ")?");
+		if (result) {
+			document.forms[0].finalDecision.value = "UPDATE";
+			return true;
+		}
+		return false;
+	}
+</script>
 </head>
-
 <body>
 
 	<!-- header -->
@@ -60,17 +69,22 @@
 
 	<!-- body -->
 	<div class="container">
-		<br>
 
 
-		<p>&nbsp;</p>
+
+	<p>&nbsp;</p>
+	<hr>
+	<div class='center'>
+		<H1 class='center'>更新活動資料</H1>
 		<hr>
-		<div class="center">
-			<H1>新增報名資料</H1>
-			<form:form method="POST" modelAttribute="ajb"
-				enctype="multipart/form-data">
+		<p>
+			<form:form method="POST" modelAttribute="ajb">
 
-				<table>
+				<form:hidden path="act.act_ID" value="活動編號"/>
+				<form:hidden path="member.mb_ID" />
+				<input type="hidden" name="finalDecision" value="">
+				<Table>
+				
 					<tr>
 						<td><form:label path="member.mb_Account">會員帳號:</form:label></td>
 <%-- 						<td><form:input path="member.mb_Account" /></td> --%>
@@ -84,8 +98,7 @@
 					<tr>
 						<td><form:label path="member.mb_Name">會員名稱:</form:label></td>
 					</tr>
-
-					<tr>
+<tr>
 						<td><form:label path="member.mb_email">email:</form:label></td>
 						<td><form:input path="member.mb_email"/></td>
 					</tr>
@@ -95,30 +108,29 @@
 						<td><form:input path="member.mb_Tel"/></td>
 					</tr>
 
-
-					<tr>
-						<td><form:label path="join_Pax">活動人數:</form:label></td>
-						<td><form:input path="join_Pax" /></td>
-					</tr>
-
-				</table>
-
-
-				<input type='submit' value='提交' />
-				<input type='reset' value='還原' />
-				<br>
-				<br>
-				<a href='${pageContext.request.contextPath}/ActHomepage'>繼續探索活動</a>
+					<TR>
+						<TD colspan="2" align="center">
+						
+						<input type="submit" value="更新" name='updateBtn'onclick="return confirmUpdate('${ajb.join_ID}');"/> 
+						<input type="submit" value="刪除" name='deleteBtn'onclick="return confirmDelete('${ajb.join_ID}');"/>
+						</TD>
+					</TR>
+				</Table>
+				<c:if test="${not empty requestScope.modify}">
+					<c:remove var="act" scope="request" />
+				</c:if>
 			</form:form>
 
+			<p /><small>&lt;&lt;<a href='${pageContext.request.contextPath}/ActHomepage'>回到探索活動</a>&gt;&gt;
+			</small>
 
-		</div>
-		<!-- body -->
+	</div>
 
-		<!-- footer -->
-		<footer class="container py-5" id="bookWebFooter"></footer>
-		<!-- footer -->
 
-		
+	
 </body>
+	<!-- footer -->
+	<footer class="container py-5" id="bookWebFooter"></footer>
+	<!-- footer -->
+
 </html>
