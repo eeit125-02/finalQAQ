@@ -88,7 +88,6 @@ p {
 				<button type="submit" name="Modify" class="btn btn-outline-secondary">密碼修改</button>
 			</form>
 		</div>
-		<a href="<c:url value='/toLogin' />">登出</a>
 	</fieldset>
 	</div>
 

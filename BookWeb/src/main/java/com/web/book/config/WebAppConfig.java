@@ -41,8 +41,6 @@ public class WebAppConfig implements WebMvcConfigurer {
 		registry.addResourceHandler("/js/**")
 				.addResourceLocations("/Resource/js/");
 	}
-	
-
 
 	@Bean
 	public CommonsMultipartResolver multipartResolver() {

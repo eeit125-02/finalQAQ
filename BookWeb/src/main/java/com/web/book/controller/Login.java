@@ -67,7 +67,7 @@ public class Login {
 	@PostMapping("/confirm")
 	public String Confirm() {
 		ms.insertMember(checkMember);
-		return "Member/login";
+		return "redirect:toLogin";
 	}
 
 	// 重複帳號確認
@@ -151,7 +151,7 @@ public class Login {
 	public String Update(Model model, @ModelAttribute("MemberBean") MemberBean MB,
 			@RequestParam(value = "file", required = false) CommonsMultipartFile file, HttpServletRequest request,
 			RedirectAttributes attr) throws Exception {
-		System.out.println("--------------------------------------");
+		
 		MemberBean mb_inf = ms.select(Account);
 //		String name =UUID.randomUUID().toString().replaceAll("-", "");//使用UUID給圖片重新命名，並去掉四個“-”
 		String name = mb_inf.getMb_Account();
@@ -170,6 +170,7 @@ public class Login {
 		}
 		file.transferTo(fileImage);// 把圖片儲存路徑儲存到資料庫
 		// 重定向到查詢所有使用者的Controller，測試圖片回顯
+		
 		mb_inf.setMb_pic(name + "." + ext);
 		mb_inf.setMb_Birthday(MB.getMb_Birthday());
 		mb_inf.setMb_Address(MB.getMb_Address());
@@ -227,7 +228,7 @@ public class Login {
 	}
 
 	// 管理員更新
-	@PostMapping(value = "/adminupdate")
+	@PostMapping("/adminupdate")
 	public String toadminupdate(Model model, @RequestParam(value = "pwd") String mb_Password,
 			@RequestParam(value = "name") String mb_Name, @RequestParam(value = "mail") String mb_Mail,
 			@RequestParam(value = "tel") String mb_Tel, @RequestParam(value = "address") String mb_Address,
@@ -245,25 +246,25 @@ public class Login {
 	}
 
 	//管理員權限
-	@PostMapping("/adminall/change")
-	@ResponseBody
-	public void change(@PathVariable("account") String account) {
-		ms.change(account);
+	@PostMapping("/adminchange")
+	public @ResponseBody void change(@RequestParam(value = "ac", required=false) String ac) {
+		System.out.println(ac);
+		ms.change(ac);
 	}
 	// 管理員介面
-	@RequestMapping(value = "/toAdmin")
+	@GetMapping("/toAdmin")
 	public String toadmin(Model model) {
 		return "Member/admin";
 	}
 
 	// 登入介面
-	@RequestMapping(value = "/toLogin")
+	@GetMapping("/toLogin")
 	public String tologin(Model model) {
 		return "Member/login";
 	}
 
 	// 註冊介面
-	@RequestMapping(value = "/toRegiste")
+	@GetMapping("/toRegiste")
 	public String toregiste(Model model) {
 		return "Member/registe";
 	}

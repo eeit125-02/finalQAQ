@@ -131,45 +131,14 @@ form {
 						onblur="" value="男">男 <input type="radio" name="sex"
 						id="sex_g" onblur="" value="女">女 <span id="idsp3"></span>
 				</div>
+<!-- 				<div > -->
+<!-- 					<label>生日:</label> <input type="date" id="birthday"/>  -->
+<!-- 				</div> -->
+				<br />
 				<div>
 					<label>E-mail:</label> <input type="email" name="mail" id="mail"
 						onblur=""> <span id="idsp7"></span><br />
 				</div>
-				<br>
-				<!-- 				<div> -->
-				<!-- 					<label>生日:</label> <input type="date" name="date" id="date" -->
-				<!-- 						onblur=""> <span id="idsp4"></span><br /> -->
-				<!-- 				</div> -->
-				<!-- 				<br /> -->
-				<!-- 				<div> -->
-				<!-- 					<label>地址:</label> <input type="text" name="address" id="address" -->
-				<!-- 						onblur=""> <span id="idsp5"></span><br /> -->
-				<!-- 				</div> -->
-				<!-- 				<br /> -->
-				<!-- 				<div> -->
-				<!-- 					<label>電話:</label> <input type="text" name="tel" id="tel" onblur=""> -->
-				<!-- 					<span id="idsp6"></span><br /> -->
-				<!-- 				</div> -->
-				<!-- 				<br /> -->
-
-				<!-- 				<div> -->
-				<!-- 					<label>頭像:</label> <input type="file" name="pic" id="pic" onblur=""> -->
-				<!-- 					<span id="idsp7"></span><br /> -->
-				<!-- 				</div> -->
-				<!-- 				<br /> -->
-				<!-- 				<div> -->
-				<!-- 					<label>喜好類型:</label><br /> <input type="checkbox" name="type" -->
-				<!-- 						id="type1" value="中">XX <input type="checkbox" name="type" -->
-				<!-- 						id="type2" value="新">XX <input type="checkbox" name="type" -->
-				<!-- 						id="type3" value="七">XX <input type="checkbox" name="type" -->
-				<!-- 						id="type4" value="七">XX <input type="checkbox" name="type" -->
-				<!-- 						id="type5" value="八">XX<br> <input type="checkbox" -->
-				<!-- 						name="type" id="type6" value="九">XX <input type="checkbox" -->
-				<!-- 						name="type" id="type7" value="十">XX <input type="checkbox" -->
-				<!-- 						name="type" id="type8" value="十1">XX <input -->
-				<!-- 						type="checkbox" name="type" id="type9" value="二">XX <span -->
-				<!-- 						id="idsp8"></span><br /> -->
-				<!-- 				</div> -->
 				<br>
 				<div class="send">
 					<button type="button" id="send">送出</button>
@@ -188,24 +157,22 @@ form {
 			$("#bookWebheader").load("<c:url value='/header'/>");
 			$("#bookWebFooter").load("<c:url value='/footer'/>");
 		});
-
 		let a1 = false;
 		let a2 = false;
 		let a3 = false;
 		$('#account').blur(function() {
 			console.log("test");
-			let account = document.getElementById("account").value
-			let accountlen = account.length;
+			let mb_Account = $('#account').val();
+			let mb_Accountlen = mb_Account.length;
 			let sp = document.getElementById("idsp2")
 			var rex1 = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]+$/
-			if (account == "") {
+			if (mb_Account == "") {
 				sp.innerHTML = "不可為空白"
-			} else if (rex1.test(account) && accountlen >= 6) {
+			} else if (rex1.test(mb_Account) && mb_Accountlen >= 6) {
 				sp.innerHTML = ""
 			} else {
 				sp.innerHTML = "格式錯誤"
 			}
-			let mb_Account = $('#account').val();
 			let editURL = location.href + "/checkAccount/" + mb_Account;
 			$.ajax({
 				async : false,
@@ -253,7 +220,7 @@ form {
 			} else {
 				sp.innerHTML = "錯誤"
 			}
-		})
+		})		
 		$('#send').click(function() {
 			if (a1 != true && a2 != true && a3 != true) {
 				alert("未填寫正確");
@@ -262,7 +229,5 @@ form {
 			}
 		})
 	</script>
-
 </body>
-
 </html>
