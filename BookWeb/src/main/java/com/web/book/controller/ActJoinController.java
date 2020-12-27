@@ -9,9 +9,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
 import com.web.book.model.ActJoinBean;
-import com.web.book.model.MemberBean;
 import com.web.book.service.ActJoinService;
+import com.web.book.service.ActService;
 import com.web.book.service.MemberService;
 
 @Controller
@@ -26,17 +27,19 @@ public class ActJoinController {
 	MemberService memberService;
 
 	@Autowired
+	ActService actService;
+
+	@Autowired
 	ServletContext context;
 
 	// 顯示所有報名紀錄
-	@GetMapping("/showJoin")
+	@GetMapping("/showJoins")
 	public String actjoinlist(
-			Model model
-			
+			Model model			
 			) {
 		List<ActJoinBean> actjoinlist = actjoinService.getAllJoins();
 		model.addAttribute("alljoinacts", actjoinlist);
-		return "Activity/JoinHomepage";
+		return "Activity/showJoins";
 	}
 
 //	搜尋關鍵字
@@ -51,13 +54,12 @@ public class ActJoinController {
 	@GetMapping("/showJoinForm")
 	public String showCreateForm(
 			Model model
-			,@RequestParam("mb_Account")String mb_Account
-
+			,@RequestParam("act_ID")Integer act_ID
 			) {
-		MemberBean mb = memberService.select(mb_Account);
+		String act_Name = actService.getAct(act_ID).getact_Name();
+		model.addAttribute("act_Name="+act_Name);
+		model.addAttribute("act_ID", act_ID);
 		ActJoinBean ajb = new ActJoinBean();
-		ajb.setMember(mb);
-		System.out.println(ajb);
 		model.addAttribute("ajb", ajb);
 		return "Activity/JoinForm";
 	}
@@ -67,36 +69,43 @@ public class ActJoinController {
 	public String createActJoin(
 			Model model
 			, @ModelAttribute("ajb") ActJoinBean ajb
+			, @RequestParam("act_ID") Integer act_ID
+			, @RequestParam("mb_Account")String mb_Account
 			)throws Exception {
 		model.addAttribute("ajb", ajb);
 		actjoinService.createActJoin(ajb);
-		return "redirect:/JoinHomepage";
+		return "redirect:/showJoins";
 	}
 
 	// 顯示修改報名資料頁面
-	@GetMapping("/showUpdateForm")
+	@GetMapping("/showJoinUpdateForm")
 	public String showUpdateForm(
 			Model model
 			, @RequestParam(value = "join_ID", required = false) Integer join_ID
 			) {
 		ActJoinBean ajb = actjoinService.getActJoin(join_ID);
 		model.addAttribute("ajb", ajb);
-		return "Activity/updateAct";
+		return "Activity/updateJoin";
 	}
 
 	// 修改成功後redirect所有報名紀錄
-	@PostMapping("/showUpdateForm")
-	public String updateAct(Model model, @ModelAttribute("ajb") ActJoinBean ajb,
-			@RequestParam(value = "join_ID", required = false) Integer join_ID) {
+	@PostMapping("/showJoinUpdateForm")
+	public String updateActJoin(
+			Model model
+			, @ModelAttribute("updateajb") ActJoinBean ajb
+			, @RequestParam(value = "join_ID", required = false) Integer join_ID
+			) {
 		actjoinService.updateActJoin(ajb);
-		return "redirect:/showActs";
+		return "redirect:/showJoins";
 	}
 
 	// 刪除活動後redirect所有報名紀錄
-	@GetMapping("/deleteAct")
-	public String deleteAct(@RequestParam("join_ID") Integer join_ID) {
+	@GetMapping("/deleteJoin")
+	public String deleteActJoin(
+			@RequestParam(value = "join_ID", required = false) Integer join_ID
+			) {
 		actjoinService.deleteActJoin(join_ID);
-		return "redirect:/showActs";
+		return "redirect:/showJoins";
 	}
 
 }

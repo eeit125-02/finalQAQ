@@ -150,7 +150,7 @@ span {
 				<br />
 				<div class="a10">
 					<label>喜好類型:</label><br /> 
-					<form:checkbox  id="type1" value="文學創作 " path="mb_type" />文學創作 
+					<form:checkbox  id="type1" value="文學創作 " path="mb_type" checked="checked"/>文學創作 
 					<form:checkbox  id="type2" value="圖文漫畫" path="mb_type" />圖文漫畫 
 					<form:checkbox  id="type3" value="商業/理財" path="mb_type" />商業/理財<br> 
 					<form:checkbox  id="type4" value="人文/社會" path="mb_type" />人文/社會 
@@ -210,20 +210,18 @@ span {
 			var i, j, strTemp;
 			var sp = document.getElementById("idsp6")
 			var TEL = $('#tel').val();
-			strTemp = "0123456789-()# ";
+			strTemp = "0123456789-()#";
 			for (i = 0; i < TEL.length; i++) {
 				j = strTemp.indexOf(TEL.charAt(i));
 				if (j == -1) {
 					sp.innerHTML="字元不合法"
 					//說明有字元不合法    
+				}else{
+					sp.innerHTML=""
 				}
 			}
 			//說明合法    
 		})
 	</script>
-</body>
-
-</html>
-
 </body>
 </html>
