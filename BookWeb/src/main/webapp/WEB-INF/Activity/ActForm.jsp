@@ -10,8 +10,7 @@
 <meta charset="UTF-8">
 
 
-<link rel="stylesheet"
-	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <link rel="stylesheet" href="/resources/demos/style.css">
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
@@ -46,6 +45,7 @@
 
 
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
 	integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
@@ -101,8 +101,8 @@
 
 				<table>
 					<tr>
-						<td><form:label path="mb_ID">會員帳號:</form:label></td>
-						<td><form:input path="mb_ID" /></td>
+						<td><form:label path="member.mb_Account">會員帳號:</form:label></td>
+						<td><form:hidden path="member.mb_Account" /></td>
 					</tr>
 
 					<tr>
@@ -122,13 +122,11 @@
 
 					<tr>
 						<td><form:label for="from" path="act_Date">活動時間:</form:label></td>
-						<td><label for="from">From</label>
-						<input type="text" id="from" name="from">
-						<label for="to">to</label>
-						<input type="text" id="to" name="to"></td>
-
-
 						
+						<td><form:input type="text" id="from" name="from" path="act_Date"/> 
+						<form:label for="to" path="act_Date">to</form:label> 
+						<form:input type="text" id="to" name="to" path="act_Date"/>
+						</td>
 
 
 					</tr>
@@ -136,8 +134,8 @@
 					<tr>
 						<td><form:label path="act_Loc">活動地點:</form:label></td>
 						<td><form:select path="act_Loc" id="縣市1"></form:select> <form:select
-								id="鄉鎮市區1" path="act_Loc"></form:select></td>
-						<td><form:input path="act_Loc"></form:input></td>
+								id="鄉鎮市區1" path="act_Loc"></form:select><form:input path="act_Loc"></form:input></td>
+
 					</tr>
 
 
