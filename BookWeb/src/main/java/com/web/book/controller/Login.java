@@ -1,9 +1,11 @@
 package com.web.book.controller;
 
 import java.io.File;
-import java.io.IOException;
+import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.List;
+import java.util.UUID;
+import java.io.IOException;
 import java.util.concurrent.ExecutionException;
 
 import javax.servlet.http.Cookie;
@@ -18,11 +20,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.web.book.model.MemberBean;
 import com.web.book.service.GlobalService;
@@ -43,14 +47,14 @@ public class Login {
 	@PostMapping("/registe")
 	public String Registe(Model model, @RequestParam(value = "account") String mb_Account,
 			@RequestParam(value = "pwd") String mb_Password, @RequestParam(value = "sex") String mb_Sex,
-			@RequestParam(value = "name") String mb_Name, @RequestParam(value = "mail") String mb_Mail) {
+			@RequestParam(value = "name") String mb_Name,@RequestParam(value = "birthday") Date mb_Birthday, @RequestParam(value = "mail") String mb_Mail) {
 		Timestamp ts = new Timestamp(System.currentTimeMillis());
 //		String type = "";
 //		for (int i = 0; i < mb_Type.length; i++) {
 //			type += mb_Type[i] + " ";
 //		}
 //		String MB_type = type;
-		MemberBean reg_member = new MemberBean(0, mb_Account, mb_Password, mb_Sex, null, mb_Name, mb_Mail, null, null,
+		MemberBean reg_member = new MemberBean(0, mb_Account, mb_Password, mb_Sex, mb_Birthday, mb_Name, mb_Mail, null, null,
 				ts, 0, null, null);
 		System.out.println(reg_member);
 		reg_member.setCheckColume(true);
@@ -149,10 +153,6 @@ public class Login {
 			@RequestParam(value = "file", required = false) CommonsMultipartFile file, HttpServletRequest request,
 			RedirectAttributes attr) throws Exception {
 		
-		//圖片上傳用
-		//GlobalService.saveImage("member", file, "member_ID");
-		//
-		
 		MemberBean mb_inf = ms.select(Account);
 //		String name =UUID.randomUUID().toString().replaceAll("-", "");//使用UUID給圖片重新命名，並去掉四個“-”
 		String name = mb_inf.getMb_Account();
@@ -164,14 +164,10 @@ public class Login {
 		System.out.println(request.getContextPath());
 		System.out.println(filePath);
 		File imagePath = new File(filePath);
-		File fileImage = new File(filePath+"/"+name + "." + ext);
-		
-		//GlobalService.creatImgInFirebase("member", file.getInputStream(), mb_inf.getMb_Account(), filePath);
-		
-		if (!imagePath .exists() && !imagePath .isDirectory())
-		{
-		System.out.println(filePath);
-		imagePath.mkdir();
+		File fileImage = new File(filePath + "/" + name + "." + ext);
+		if (!imagePath.exists() && !imagePath.isDirectory()) {
+			System.out.println(filePath);
+			imagePath.mkdir();
 		}
 		file.transferTo(fileImage);// 把圖片儲存路徑儲存到資料庫
 		// 重定向到查詢所有使用者的Controller，測試圖片回顯

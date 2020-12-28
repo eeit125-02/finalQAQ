@@ -125,10 +125,10 @@ span {
 				<label>性別:</label>
 				<h3 id="mb_Sex">${reg_member.mb_Sex}</h3>
 			</div>
-<!-- 			<div> -->
-<!-- 				<label>生日:</label> -->
-<%-- 				<h3 id="mb_Birthday">${reg_member.mb_Birthday}</h3> --%>
-<!-- 			</div> -->
+			<div>
+				<label>生日:</label>
+				<h3 id="mb_Birthday">${reg_member.mb_Birthday}</h3>
+			</div>
 <!-- 			<br /> -->
 <!-- 			<div> -->
 <!-- 				<label>地址:</label> -->
@@ -176,30 +176,5 @@ span {
 		$("#bookWebheader").load("<c:url value='/header'/>");
         $("#bookWebFooter").load("<c:url value='/footer'/>");
 	});	
-	// $('#submit1').click(function(){
-	// 	let mb_Account = $('#mb_Account').html();
-	// 	let mb_Password = $('#mb_Password').html();
-	// 	let mb_Name = $('#mb_Name').html();
-	// 	console.log(mb_Name);
-	// 	let mb_Sex = $('#mb_Sex').html();
-	// 	let mb_Birthday = $('#mb_Birthday').html();
-	// 	let mb_mb_Address = $('#mb_Address').html();
-	// 	let mb_mb_Tel = $('#mb_Tel').html();
-	// 	let mb_Mail = $('#mb_Mail').html();
-	// 	let mb_type = $('#mb_type').html();
-	// 	let editURL = location.href + "/upDateBookReport/"+mb_Account+"/"+mb_Password+"/"+ mb_Name+"/"+mb_Sex+"/"+mb_Birthday+"/"+mb_Address+"/"+mb_Tel+"/"+mb_Mail+"/"+mb_type;
-	// 	$.ajax({
-	// 		async : false,
-	// 		type : 'POST',
-	// 		url : editURL,
-	// 		dataType : "json",
-	// 		contentType : "application/json;charset=utf-8",
-	// 		success : function(data) {
-	// 			if(data){
-	// 				console.log(data);
-	// 			}
-	// 		}
-	// 	});
-	// });
 </script>
 </html>
