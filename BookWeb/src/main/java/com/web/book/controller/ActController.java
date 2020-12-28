@@ -90,7 +90,7 @@ public class ActController {
 	actService.createAct(ab);
 	model.addAttribute("name", name);
 
-	return "redirect:/ActHomepage";
+	return "redirect:/showActs";
 	}
 
 
