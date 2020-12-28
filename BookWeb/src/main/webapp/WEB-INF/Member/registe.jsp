@@ -128,12 +128,12 @@ form {
 				<br>
 				<div class="space">
 					<label>性別:</label> <input type="radio" name="sex" id="sex_m"
-						onblur="" value="男">男 <input type="radio" name="sex"
+						onblur="" value="男" checked="checked">男 <input type="radio" name="sex"
 						id="sex_g" onblur="" value="女">女 <span id="idsp3"></span>
 				</div>
-<!-- 				<div > -->
-<!-- 					<label>生日:</label> <input type="date" id="birthday"/>  -->
-<!-- 				</div> -->
+				<div >
+					<label>生日:</label> <input type="date" name="birthday" id="birthday"/> 
+				</div>
 				<br />
 				<div>
 					<label>E-mail:</label> <input type="email" name="mail" id="mail"
@@ -160,9 +160,10 @@ form {
 		let a1 = false;
 		let a2 = false;
 		let a3 = false;
+		
 		$('#account').blur(function() {
 			console.log("test");
-			let mb_Account = $('#account').val();
+			var mb_Account = $('#account').val();
 			let mb_Accountlen = mb_Account.length;
 			let sp = document.getElementById("idsp2")
 			var rex1 = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]+$/
@@ -211,7 +212,7 @@ form {
 		})
 
 		$('#pwd1').blur(function() {
-			let pwd = document.getElementById("pwd").value
+			var pwd = document.getElementById("pwd").value
 			let pwd1 = document.getElementById("pwd1").value
 			sp = document.getElementById("idsp9")
 			if (pwd == pwd1 && pwd1 != "") {
@@ -221,8 +222,22 @@ form {
 				sp.innerHTML = "錯誤"
 			}
 		})		
+// 		$('#mail').blur(function(){
+// 			var email = $('#mail').val();
+// 			if(!email.matches("^\\w @(\\w \\.) \\w $")){
+// 				var sp = document.getElementById("idsp7")
+// 				sp.innerHTML = "正確"
+// 		        console.log("123");
+// 		    }
+// 		})
+		
 		$('#send').click(function() {
-			if (a1 != true && a2 != true && a3 != true) {
+			var mb_Account = $('#account').val();
+			var pwd = $('#pwd').val();
+			var b = $('#birthday').val();
+			var mail = $('#mail').val();
+			var name = $('#name').val();
+			if (name == "" || mail == "" || mb_Account == "" || pwd =="" || a1 != true || a2 != true || a3 != true || b == "") {
 				alert("未填寫正確");
 			} else {
 				$('form').submit();

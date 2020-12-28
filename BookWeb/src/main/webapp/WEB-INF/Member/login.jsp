@@ -113,8 +113,9 @@ form {
 				</div>
 				<div id="a1">
 					<label for="inputCode">驗證碼：</label> <input type="text"
-						id="inputCode" maxlength="7" onblur="checkCode()"
-						autocomplete="off" /> <span id="text_show" style="text-font: 10px"></span>
+						id="inputCode" maxlength="7" 
+						autocomplete="off" /> <span id="text_show"
+						style="text-font: 10px"></span>
 				</div>
 				<div align="center" style="padding: 1px 150px;">
 					<div id="checkCode"></div>
@@ -126,6 +127,13 @@ form {
 				<div>
 					<span id="sp" style="color: red"></span>
 				</div>
+				<!--用戶一鍵Google登入或綁定Google帳戶時使用↓-->
+				<button type="button" id="btnSignIn">Google登入</button>
+				<!--用戶解除Google帳戶綁定時使用↓-->
+				<button type="button" id="btnDisconnect">斷連Google App</button>
+				<hr />
+				<!--顯示結果↓-->
+				<div id="content"></div>
 				<div>
 					<a href="password.html">忘記密碼?</a> <a href="account.html">忘記帳號?</a>
 				</div>
@@ -141,6 +149,99 @@ form {
 	<!-- footer -->
 	<footer class="container py-5" id="bookWebFooter"></footer>
 	<!-- footer -->
+	 <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <!--CLIENT_ID請自己改成從 後端組態檔讀取，例如：ASP.net的Web.config-->
+    <script type="text/javascript">
+        let CLIENT_ID = "396111240196-ccf0tvsk8a723kppjblafocbfnmnbvbr.apps.googleusercontent.com";
+        //let API_KEY = '';//Javascript SDK無須 API 金鑰
+        // Array of API discovery doc URLs for APIs
+        let DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/people/v1/rest"];
+
+    </script>
+    <!--執行Google API必須的.js，callback function名稱請自訂 -->
+    <!--↓https://apis.google.com/js/platform.js 或 https://apis.google.com/js/api.js 兩者網址都行得通 這裡採用跟官網寫法一樣-->
+    <script async defer src="https://apis.google.com/js/api.js"
+            onload="this.onload=function(){};GoogleClientInit()"
+            onreadystatechange="if (this.readyState === 'complete') this.onload()">
+    </script>
+
+    <!--以下請另外放置到 *.js檔案-->
+    <script type="text/javascript">
+        //jQuery處理button click event 當畫面DOM都載入時....
+        $(function () {
+            $("#btnSignIn").on("click", function () {
+                $("#content").html("");//清空顯示結果
+                GoogleLogin();//Google 登入
+            });
+            $("#btnDisconnect").on("click", function () {
+                Google_disconnect();//和Google App斷連
+            });
+        });
+
+        function GoogleClientInit() {
+            //官網範例寫client:auth2，但本人實測由於待會要呼叫gapi.client.init而不是gapi.auth2.init，所以給client即可
+            gapi.load('client', function () {
+                gapi.client.init({
+                    //client_id 和 scope 兩者參數必填
+                    clientId: CLIENT_ID,
+                    //scope列表參考：https://developers.google.com/people/api/rest/v1/people/get
+                    //"profile"是簡寫，要用完整scope名稱也可以
+                    scope: "profile",//"https://www.googleapis.com/auth/userinfo.profile",
+                    discoveryDocs: DISCOVERY_DOCS
+                });
+
+
+            });//end gapi.load
+        }//end GoogleClientInit function
+
+
+        function GoogleLogin() {
+            let auth2 = gapi.auth2.getAuthInstance();//取得GoogleAuth物件
+            auth2.signIn().then(function (GoogleUser) {
+                console.log("Google登入成功");
+                let user_id = GoogleUser.getId();//取得user id，不過要發送至Server端的話，為了資安請使用id_token，本人另一篇文章有範例：https://dotblogs.com.tw/shadow/2019/01/31/113026
+                console.log(`user_id:${user_id}`);
+                let AuthResponse = GoogleUser.getAuthResponse(true) ;//true會回傳包含access token ，false則不會
+                let id_token = AuthResponse.id_token;//取得id_token
+                //people.get方法參考：https://developers.google.com/people/api/rest/v1/people/get
+                gapi.client.people.people.get({
+                    'resourceName': 'people/me',
+                    //通常你會想要知道的用戶個資↓
+                    'personFields': 'names,phoneNumbers,emailAddresses,addresses,residences,genders,birthdays,occupations',
+                }).then(function (res) {
+
+                        //success
+                        let str = JSON.stringify(res.result);//將物件列化成string，方便顯示結果在畫面上
+                        //顯示授權你網站存取的用戶個資
+                        document.getElementById('content').innerHTML = str;
+                        //↑通常metadata標記primary:true的個資就是你該抓的資料
+
+                        //請再自行Parse JSON，可以將JSON字串丟到線上parse工具查看：http://json.parser.online.fr/
+
+
+                        //最終，取得用戶個資後看要填在畫面表單上或是透過Ajax儲存到資料庫(記得是傳id_token給你的Web Server而不是明碼的user_id喔)，本範例就不贅述，請自行努力XD
+
+
+                });
+
+            },
+                function (error) {
+                    console.log("Google登入失敗");
+                    console.log(error);
+                });
+
+        }//end function GoogleLogin
+
+
+
+        function Google_disconnect() {
+            let auth2 = gapi.auth2.getAuthInstance(); //取得GoogleAuth物件
+
+            auth2.disconnect().then(function () {
+                console.log('User disconnect.');
+            });
+        }
+    </script>
 
 	<script>
 		$(document).ready(function() {
@@ -197,55 +298,60 @@ form {
 			document.getElementById("checkCode").onclick = function() {
 				createCode()
 			}
-			linkbt.onclick = function() {
-				createCode()
-			}
 			inputCode.onclick = function() {
 				validateCode();
 			}
 		}
-		$('#send').click(
-				function() {
-					let mb_Account = $('#account').val();
-					let mb_Password = $('#pwd').val();
-					let sp = $("#sp");
-					console.log(sp)
-					if(mb_Account=="" || mb_Password==""){
-						sp.text("輸入錯誤");
-					}
-					let editURL = location.href + "/checklogin/" + mb_Account
-							+ "/" + mb_Password;
-					let editURL1 = location.href + "/checkColume/" + mb_Account;
-					$.ajax({
-						async : false,
-						type : 'POST',
-						url : editURL1,
-						dataType : "json",
-						contentType : "application/json;charset=utf-8",
-						success : function(Colume) {
-							if (Colume) {
-								console.log(Colume)
-								$.ajax({
-									async : false,
-									type : 'POST',
-									url : editURL,
-									dataType : "json",
-									contentType : "application/json;charset=utf-8",
-									success : function(data) {
-										console.log(data)
-										if (data && a) {
-											$('form').submit();
-										} else {
-											sp.text("輸入錯誤");
-										}
-									}
-								});
-							} else {
-								sp.text( "已被停權");
+		$('#send')
+				.click(
+						function() {
+							let mb_Account = $('#account').val();
+							let mb_Password = $('#pwd').val();
+							let sp = $("#sp");
+							console.log(sp)
+							if (mb_Account == "" || mb_Password == "") {
+								sp.text("輸入錯誤");
 							}
-						}
-					});					
-				})
+							let editURL = location.href + "/checklogin/"
+									+ mb_Account + "/" + mb_Password;
+							let editURL1 = location.href + "/checkColume/"
+									+ mb_Account;
+							$
+									.ajax({
+										async : false,
+										type : 'POST',
+										url : editURL1,
+										dataType : "json",
+										contentType : "application/json;charset=utf-8",
+										success : function(Colume) {
+											if (Colume) {
+												console.log(Colume)
+												$
+														.ajax({
+															async : false,
+															type : 'POST',
+															url : editURL,
+															dataType : "json",
+															contentType : "application/json;charset=utf-8",
+															success : function(
+																	data) {
+																console
+																		.log(data)
+																if (data && a) {
+																	$('form')
+																			.submit();
+																} else {
+																	sp
+																			.text("輸入錯誤");
+																}
+															}
+														});
+											} else {
+												sp.text("已被停權");
+											}
+										}
+									});
+						})
 
 		$(document).keypress(function(event) {
 			var keynum = (event.keyCode ? event.keyCode : event.which);

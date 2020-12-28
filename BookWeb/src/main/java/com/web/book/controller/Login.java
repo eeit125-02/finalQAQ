@@ -1,6 +1,7 @@
 package com.web.book.controller;
 
 import java.io.File;
+import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.List;
 import java.util.UUID;
@@ -46,14 +47,14 @@ public class Login {
 	@PostMapping("/registe")
 	public String Registe(Model model, @RequestParam(value = "account") String mb_Account,
 			@RequestParam(value = "pwd") String mb_Password, @RequestParam(value = "sex") String mb_Sex,
-			@RequestParam(value = "name") String mb_Name, @RequestParam(value = "mail") String mb_Mail) {
+			@RequestParam(value = "name") String mb_Name,@RequestParam(value = "birthday") Date mb_Birthday, @RequestParam(value = "mail") String mb_Mail) {
 		Timestamp ts = new Timestamp(System.currentTimeMillis());
 //		String type = "";
 //		for (int i = 0; i < mb_Type.length; i++) {
 //			type += mb_Type[i] + " ";
 //		}
 //		String MB_type = type;
-		MemberBean reg_member = new MemberBean(0, mb_Account, mb_Password, mb_Sex, null, mb_Name, mb_Mail, null, null,
+		MemberBean reg_member = new MemberBean(0, mb_Account, mb_Password, mb_Sex, mb_Birthday, mb_Name, mb_Mail, null, null,
 				ts, 0, null, null);
 		System.out.println(reg_member);
 		reg_member.setCheckColume(true);
