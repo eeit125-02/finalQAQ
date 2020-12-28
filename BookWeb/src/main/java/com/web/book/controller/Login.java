@@ -154,6 +154,8 @@ public class Login {
 			RedirectAttributes attr) throws Exception {
 		
 		MemberBean mb_inf = ms.select(Account);
+		System.out.println(GlobalService.saveImage("member", file, mb_inf.getMb_Account()));
+		
 //		String name =UUID.randomUUID().toString().replaceAll("-", "");//使用UUID給圖片重新命名，並去掉四個“-”
 		String name = mb_inf.getMb_Account();
 		System.out.println(name);
