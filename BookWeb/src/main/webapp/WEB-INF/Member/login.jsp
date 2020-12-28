@@ -213,7 +213,10 @@ form {
                         //success
                         let str = JSON.stringify(res.result);//將物件列化成string，方便顯示結果在畫面上
                         //顯示授權你網站存取的用戶個資
-                        document.getElementById('content').innerHTML = str;
+                        console.log(res)
+                        console.log(res.result.names[0].displayName)
+                        console.log(res.result.emailAddresses[0].value)
+                        document.getElementById('content').innerHTML = res.result.names[0].displayName;
                         //↑通常metadata標記primary:true的個資就是你該抓的資料
 
                         //請再自行Parse JSON，可以將JSON字串丟到線上parse工具查看：http://json.parser.online.fr/
