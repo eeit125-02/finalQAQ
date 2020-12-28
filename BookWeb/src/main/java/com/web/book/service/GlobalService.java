@@ -1,23 +1,19 @@
 package com.web.book.service;
 
 import java.io.IOException;
-import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
-import java.util.concurrent.TimeUnit;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import com.google.api.core.ApiFuture;
 import com.google.cloud.firestore.DocumentReference;
 import com.google.cloud.firestore.DocumentSnapshot;
 import com.google.cloud.firestore.QueryDocumentSnapshot;
 import com.google.cloud.firestore.QuerySnapshot;
-import com.google.cloud.storage.BlobId;
-import com.google.cloud.storage.BlobInfo;
-import com.google.cloud.storage.Storage;
 import com.web.book.model.MemberBean;
 
 public class GlobalService {	
@@ -83,20 +79,18 @@ public class GlobalService {
 		return addedDocRef.get().getId();
 	}
 	
-	public static String creatImgInFirebase(String filePath, String name, byte[] aa) throws IOException {
+	public static String saveImage(String firebasePath, CommonsMultipartFile image, String name) throws IOException {
 		
+		String header = "https://firebasestorage.googleapis.com/v0/b/bookweb-50d11.appspot.com/o/";
+		String middle = "%2F";
+		String footer = "?alt=media";
+		
+		//上傳圖片
 		FirebaseService firebase = new FirebaseService();
-		Storage storage = firebase.getStorage().bucket().getStorage();
-		BlobId blobId = BlobId.of("bookweb-50d11.appspot.com", "member/"+name+".jpg");
-	    BlobInfo blobInfo = BlobInfo.newBuilder(blobId).build();
-	   //Blob image =  storage.create(blobInfo, Files.readAllBytes(Paths.get(filePath)));
-	    
-	    //Blob image = storage.create(blobInfo, aa, Files.readAllBytes(Paths.get(filePath)));
-	    URL url = storage.signUrl(blobInfo, 15, TimeUnit.MINUTES, Storage.SignUrlOption.withV4Signature());
-	    System.out.println(url.toString());
-	    //storage.create(blobInfo, filePath, "image/jpg");
+		String bloString = firebasePath + "/" + name;
+		firebase.getStorage().bucket().create(bloString, image.getBytes(), image.getContentType());
 		
-		return null;
+		return header+ firebasePath+ middle+ name+ footer;
 	}
 	
 

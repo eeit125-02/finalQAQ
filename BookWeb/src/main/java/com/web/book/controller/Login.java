@@ -18,8 +18,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
@@ -151,6 +149,10 @@ public class Login {
 			@RequestParam(value = "file", required = false) CommonsMultipartFile file, HttpServletRequest request,
 			RedirectAttributes attr) throws Exception {
 		
+		//圖片上傳用
+		//GlobalService.saveImage("member", file, "member_ID");
+		//
+		
 		MemberBean mb_inf = ms.select(Account);
 //		String name =UUID.randomUUID().toString().replaceAll("-", "");//使用UUID給圖片重新命名，並去掉四個“-”
 		String name = mb_inf.getMb_Account();
@@ -164,7 +166,8 @@ public class Login {
 		File imagePath = new File(filePath);
 		File fileImage = new File(filePath+"/"+name + "." + ext);
 		
-		//GlobalService.creatImgInFirebase("/Users/hsin/Downloads/cyan_bg_.jpg", mb_inf.getMb_Account());
+		//GlobalService.creatImgInFirebase("member", file.getInputStream(), mb_inf.getMb_Account(), filePath);
+		
 		if (!imagePath .exists() && !imagePath .isDirectory())
 		{
 		System.out.println(filePath);
