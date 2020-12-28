@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.web.book.model.CommandBean;
+import com.web.book.model.MemberBean;
 import com.web.book.model.PostBean;
 import com.web.book.model.RuleBean;
 import com.web.book.service.DiscussionService;
@@ -32,6 +33,8 @@ public class DiscussionController {
 		model.addAttribute("allCommand", command_list);
 		List<RuleBean> rule_content = discussionService.getRule();
 		model.addAttribute("rule",  rule_content);
+		List<MemberBean> member_list = discussionService.getAllMember();
+		model.addAttribute("member_info", member_list);
 		return "Discussion/mainpage"; 
 	}
 	
@@ -39,7 +42,6 @@ public class DiscussionController {
 	@ModelAttribute
 	public void post_inf(Model model) {
 		PostBean pb = new PostBean();
-		pb.setMb_id(null);
 		Timestamp d = new Timestamp(System.currentTimeMillis());  
 		pb.setPost_time(d);
 		model.addAttribute("postBean",pb);
@@ -49,7 +51,6 @@ public class DiscussionController {
 	@ModelAttribute
 	public void command_info(Model model) {
 		CommandBean cb = new CommandBean();
-		cb.setMb_id(null);
 		Timestamp d = new Timestamp(System.currentTimeMillis());  
 		cb.setCommand_time(d);
 		model.addAttribute("commandBean",cb);
@@ -59,6 +60,8 @@ public class DiscussionController {
 	//會員新增貼文
 	@PostMapping("Discussion/add_post")
 	public String processAddNewPost(@ModelAttribute("postBean")PostBean pb) {
+		MemberBean mb = discussionService.getMemberBeanById(13); //先寫死
+		pb.setMemberbean(mb);
 		discussionService.addPost(pb);
 		return "redirect:/Discussion/mainpage";
 	}
@@ -68,6 +71,8 @@ public class DiscussionController {
 	public String processAddNewCommand(
 			@ModelAttribute("commandBean")CommandBean cb,
 			@RequestParam(value="postBean.post_id") Integer pb_ID) {
+		MemberBean mb = discussionService.getMemberBeanById(11); //先寫死
+		cb.setMemberbean(mb);
 		PostBean pb = discussionService.getPostBeanById(pb_ID);
 		cb.setPostBean(pb);
 		discussionService.addCommand(cb);

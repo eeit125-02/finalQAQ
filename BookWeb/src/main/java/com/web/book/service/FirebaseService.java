@@ -8,6 +8,7 @@ import com.google.cloud.firestore.Firestore;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
 import com.google.firebase.cloud.FirestoreClient;
+import com.google.firebase.cloud.StorageClient;
 
 public class FirebaseService {
 	
@@ -17,15 +18,20 @@ public class FirebaseService {
 		GoogleCredentials credentials = GoogleCredentials.fromStream(serviceAccount);
 		FirebaseOptions options = FirebaseOptions.builder()
 								    .setCredentials(credentials)
+								    .setStorageBucket("bookweb-50d11.appspot.com")
 								    .build();
 		
 		if(FirebaseApp.getApps().isEmpty()){			
-			FirebaseApp.initializeApp(options);			
+			FirebaseApp.initializeApp(options);
 		}
 		
 	}
 
 	public Firestore getFirestore() {
 		return FirestoreClient.getFirestore();
+	}
+	
+	public StorageClient getStorage() {
+		return StorageClient.getInstance();
 	}
 }

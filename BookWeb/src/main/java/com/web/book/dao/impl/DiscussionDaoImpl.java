@@ -13,6 +13,7 @@ import org.springframework.stereotype.Repository;
 
 import com.web.book.dao.DiscussionDao;
 import com.web.book.model.CommandBean;
+import com.web.book.model.MemberBean;
 import com.web.book.model.PostBean;
 import com.web.book.model.RuleBean;
 
@@ -64,6 +65,14 @@ public class DiscussionDaoImpl implements DiscussionDao {
 		return session.createQuery(hql).getResultList();
 	}
 	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<MemberBean> getAllMember() {
+		String hql="From MemberBean";
+		Session session = factory.getCurrentSession();
+		return session.createQuery(hql).getResultList();
+	}
+	
 	//修改貼文
 	@Override
 	public void editPost(Integer edit_post_id,  String edit_post_title,
@@ -98,6 +107,16 @@ public class DiscussionDaoImpl implements DiscussionDao {
 		PostBean pb = (PostBean) session.get(PostBean.class, pb_ID);
 		return pb;
 	}
+
+	//用ID取出Member資料
+	@Override
+	public MemberBean getMemberBeanById(Integer mb_ID) {
+		Session session = factory.getCurrentSession();
+		MemberBean mb = (MemberBean) session.get(MemberBean.class, mb_ID);
+		return mb;
+	}
+
+
 
 
 

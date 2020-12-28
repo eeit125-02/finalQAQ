@@ -123,36 +123,37 @@
 								<table class="table table-hover">
 									<thead>
 										<tr class="table-primary">
-											<th scope="col" style="width: 50%; text-align:left; vertical-align:middle">貼文標題</th>
-											<th scope="col" style="width: 15%; vertical-align:middle">貼文時間</th>
-											<th scope="col" style="width: 15%; vertical-align:middle">貼文作者</th>
-											<th scope="col" style="width: 10%; vertical-align:middle">留言數</th>
-											<th scope="col" style="width: 10%; vertical-align:middle">查看貼文</th>
+											<th scope="col"
+												style="width: 50%; text-align: left; vertical-align: middle">貼文標題</th>
+											<th scope="col" style="width: 15%; vertical-align: middle">貼文時間</th>
+											<th scope="col" style="width: 15%; vertical-align: middle">貼文作者</th>
+											<th scope="col" style="width: 10%; vertical-align: middle">留言數</th>
+											<th scope="col" style="width: 10%; vertical-align: middle">查看貼文</th>
 										</tr>
 									</thead>
 									<tbody>
 										<c:forEach var="stored_post" items="${allPost}">
 											<tr>
-												<td style="text-align:left; vertical-align:middle">${stored_post.post_title}</td>
-												<td style="vertical-align:middle">${stored_post.post_time}</td>
-												<td style="vertical-align:middle">[member]</td>
-												<td style="vertical-align:middle">
+												<td style="text-align: left; vertical-align: middle">${stored_post.post_title}</td>
+												<td style="vertical-align: middle">${stored_post.post_time}</td>
+												<td style="vertical-align: middle">${stored_post.memberbean.mb_Name}</td>
+												<td style="vertical-align: middle">
 													<c:set var="command_qty" value="${0}" /> 
-													<c:forEach var="stored_command" items="${allCommand}">
-														<c:set var="pi" value="${stored_post.post_id}" />
-														<c:set var="ci" value="${stored_command.postBean.post_id}" />
-														<c:if test="${pi==ci}">
-															<c:set var="command_qty" value="${command_qty+1}" />
-														</c:if>
-													</c:forEach>
+														<c:forEach var="stored_command" items="${allCommand}">
+															<c:set var="pi" value="${stored_post.post_id}" />
+															<c:set var="ci" value="${stored_command.postBean.post_id}" />
+															<c:if test="${pi==ci}"> 
+																<c:set var="command_qty" value="${command_qty+1}" />
+															</c:if>
+														</c:forEach> 
 													${command_qty}
 												</td>
-												<td style="vertical-align:middle">[button]</td>
+												<td style="vertical-align: middle">[button]</td>
 											</tr>
 										</c:forEach>
 									</tbody>
 								</table>
-				
+
 							</div>
 
 							<!-- content of hot post tab -->
@@ -204,7 +205,6 @@
 											</div>
 										</div>
 										<form:hidden path="post_time" />
-										<form:hidden path="mb_id" />
 										<div class="text-center">
 											<button type="submit" class="btn btn-primary">送出貼文</button>
 										</div>
@@ -241,7 +241,7 @@
 												type="submit">修改</button>
 										</form>
 
-										<p>[member] ${stored_post.post_time}</p>
+										<p>${stored_post.memberbean.mb_Name} ${stored_post.post_time}</p>
 										<h3>${stored_post.post_title}</h3>
 										<p>${stored_post.post_content}</p>
 
@@ -252,7 +252,6 @@
 													id="command_input" path="command_content"
 													placeholder="請輸入留言" />
 												<form:hidden path="command_time" />
-												<form:hidden path="mb_id" />
 												<form:hidden path="postBean.post_id" name="post_id"
 													value="${stored_post.post_id}" />
 												<div class="input-group-append">
@@ -268,7 +267,7 @@
 											<c:if test="${pi==ci}">
 												<div
 													style="background-color: #C4E1FF; margin: 10px; padding: 5px; border-radius: 10px;">
-													<p>[member] ${stored_command.command_time}</p>
+													<p>${stored_command.memberbean.mb_Name} ${stored_command.command_time}</p>
 													<p>${stored_command.command_content}</p>
 												</div>
 											</c:if>
@@ -335,32 +334,18 @@
 
 
 								<script>
-									$('#send_rule')
-											.click(
-													function() {
-														$
-																.ajax({
-																	url : '<c:url value="/Discussion/edit_rule"/>',
-																	type : 'POST',
-																	data : {
-																		rule_content : $(
-																				"#rule_content")
-																				.val()
-																	},
-																	dataType : "json",
-																	success : function(
-																			rb) {
-																		$(
-																				'#last_edit_time')
-																				.html(
-																						rb.rule_time)
-																		$(
-																				'#show_rule')
-																				.html(
-																						rb.rule_content)
-																	}
-																})
-													})
+									$('#send_rule').click(function() {
+										$.ajax({
+											url : '<c:url value="/Discussion/edit_rule"/>',
+											type : 'POST',
+											data : {rule_content : $("#rule_content").val()},
+											dataType : "json",
+											success : function(rb) {
+												$('#last_edit_time').html(rb.rule_time)
+												$('#show_rule').html(rb.rule_content)
+											}
+										})
+									})
 								</script>
 
 							</div>

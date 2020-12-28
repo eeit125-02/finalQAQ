@@ -42,9 +42,8 @@ public class BookReportController {
 	@PostMapping("/EditBookReport/getBookReportList")
 	@ResponseBody
 	public List<Map<String, Object>> bookReportList(@ModelAttribute("loginUser") MemberBean loginUser){
-		System.out.println(loginUser.getMb_ID());
 		List<Map<String, Object>> book = new ArrayList<>();
-		List<BookReportBean> memberBookReport = bookReportService.bookReportMemberAllList(5);
+		List<BookReportBean> memberBookReport = bookReportService.bookReportMemberAllList(loginUser.getMb_ID());
 		for (BookReportBean bookReportBean : memberBookReport) {
 			Map<String, Object> data = new HashMap<>();
 			data.put("br_ID", bookReportBean.getBr_ID());

@@ -1,5 +1,6 @@
 package com.web.book.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -30,8 +31,8 @@ public class ActBean {
 	private String act_Place;
 
 	
-	@ManyToOne
-	@JoinColumn(name = "mb_ID")
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn
 	private MemberBean member;
 	
 	public ActBean(Integer act_ID, String act_Image, String act_Name, String act_Theme, String act_Date,

@@ -33,7 +33,12 @@ public class SearchBookController {
 	@GetMapping("/searchbook")
 	public String gotoSearch(Model model, @RequestParam(value = "name") String name) {
 		List<BookBean> result = searchService.searchBook(name);
+		int count=result.size();
 		model.addAttribute("searchresult", result);
+		model.addAttribute("searchresultnumber", count);
+		if(count==0) {
+			model.addAttribute("searchresultzero", "很抱歉，查無資料");			
+		}
 		return "SearchBook/Result";
 	}
 	
@@ -41,7 +46,9 @@ public class SearchBookController {
 	@GetMapping("/searchbookauthor")
 	public String gotoSearchAuthor(Model model, @RequestParam(value = "author") String name) {
 		List<BookBean> result = searchService.searchBookAuthor(name);
+		int count=result.size();
 		model.addAttribute("searchresult", result);
+		model.addAttribute("searchresultnumber", count);
 		return "SearchBook/Result";
 	}
 	
@@ -49,15 +56,16 @@ public class SearchBookController {
 	@GetMapping("/searchbookpublish")
 	public String gotoSearchPublish(Model model, @RequestParam(value = "publish") String name) {
 		List<BookBean> result = searchService.searchBookPublish(name);
+		int count=result.size();
 		model.addAttribute("searchresult", result);
+		model.addAttribute("searchresultnumber", count);
 		return "SearchBook/Result";
 	}
 
 	// 在查詢結果頁加入收藏
 	@GetMapping("/searchbook/resultcollect/{bk_ID}")
 	public @ResponseBody boolean gotoCollect(@PathVariable("bk_ID") Integer bk_id) {
-		System.out.println(bk_id);
-		int mb_id = 5;
+		int mb_id = 13;
 		boolean result2 = searchService.savebc(bk_id, mb_id);
 		return result2;
 	}
@@ -91,7 +99,7 @@ public class SearchBookController {
 	@PostMapping("/collectlist/getBookCollectList/{mb_ID}")
 	@ResponseBody
 	public List<Map<String, Object>> gotoList(@PathVariable("mb_ID") Integer mb_id) {
-		mb_id = 5;		
+		mb_id = 13;		
 		List<Map<String, Object>> book = new ArrayList<>();
 		List<BookCollectBean> result = searchService.gotoCollect(mb_id);
 		System.out.println(mb_id);
@@ -124,22 +132,17 @@ public class SearchBookController {
 	public @ResponseBody boolean gotoDelete(@PathVariable("bc_ID") Integer bc_id) {
 		boolean result2 = searchService.delete(bc_id);
 		return result2;
-//		//導回原本頁面（抓不到）
-//		int mb_id=5; //先寫死
-//		List<BookCollectBean> result = searchService.gotoCollect(mb_id);
-//		model.addAttribute("collectresult", result);
-//		return "SearchBook/Collect";
 	}
 
 	// 在單獨頁面加入收藏
-	@SuppressWarnings("unused")
 	@GetMapping("/pagecollect")
 	public String gotoPageCollect(Model model, @RequestParam(value = "pagecollect") Integer bk_id) {
-		int mb_id = 5;
+		int mb_id = 13;
 		boolean result2 = searchService.savebc(bk_id, mb_id);
 		//導回原本頁面
 		BookBean result = searchService.getBook(bk_id);
 		model.addAttribute("pageresult", result);
+		model.addAttribute("pageresult2", result2);
 		return "SearchBook/Page";
 	}
 	

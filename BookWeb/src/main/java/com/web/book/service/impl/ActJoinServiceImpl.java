@@ -23,11 +23,6 @@ public class ActJoinServiceImpl implements ActJoinService {
 	public List<ActJoinBean> getAllJoins() {
 		return actjoinDao.getAllJoins();
 	}
-
-//	@Override
-//	public List<ActJoinBean> searchJoinKeyword(String keyword) {
-//		return actjoinDao.searchJoinKeyword(keyword);
-//	}
 	
 	// 依活動ID查詢活動
 	@Override

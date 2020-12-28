@@ -2,6 +2,7 @@ package com.web.book.controller;
 
 import java.io.File;
 import java.util.List;
+
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 
@@ -69,7 +70,12 @@ public class ActController {
 	@RequestParam(value="file",required=false) CommonsMultipartFile file,
 	HttpServletRequest request,
 	RedirectAttributes attr)throws Exception {
-
+		
+	//圖片上傳用
+	//GlobalService.saveImage("active", file, "member_ID");
+	//
+		
+		
 //	String name =UUID.randomUUID().toString().replaceAll("-", "");//使用UUID給圖片重新命名，並去掉四個“-”
 	String name = ab.getact_Name();
 	System.out.println(name);
@@ -79,6 +85,7 @@ public class ActController {
 	System.out.println(filePath);
 	File imagePath = new File(filePath);
 	File fileImage = new File(filePath+"/"+name + "." + ext);
+	
 	if (!imagePath .exists() && !imagePath .isDirectory())
 	{
 	System.out.println(filePath);

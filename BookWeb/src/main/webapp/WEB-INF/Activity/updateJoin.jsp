@@ -43,16 +43,16 @@
 <meta charset="UTF-8">
 <title>MVC</title>
 <script type="text/javascript">
-	function confirmDelete(act_Name) {
-		var result = confirm("確定刪除此筆記錄(活動名稱:" + act_Name + ")?");
+	function confirmDelete(mb_Account) {
+		var result = confirm("確定刪除此筆報名記錄(帳號:" + mb_Account + ")?");
 		if (result) {
 			document.forms[0].finalDecision.value = "DELETE";
 			return true;
 		}
 		return false;
 	}
-	function confirmUpdate(act_Name) {
-		var result = confirm("確定送出此筆記錄(活動名稱:" + act_Name + ")?");
+	function confirmUpdate(mb_Account) {
+		var result = confirm("確定送出此筆報名記錄(帳號:" + mb_Account + ")?");
 		if (result) {
 			document.forms[0].finalDecision.value = "UPDATE";
 			return true;
@@ -78,74 +78,36 @@
 		<H1 class='center'>更新活動資料</H1>
 		<hr>
 		<p>
-			<form:form method="POST" modelAttribute="ab">
+			<form:form method="POST" modelAttribute="updateajb">
 
-				<form:hidden path="act_ID" value="活動編號"/>
-				<form:hidden path="member.mb_Account" value="會員帳號"/>
+				<input type="hidden" name="join_ID" value="${ajb.join_ID}"/>
+				<input type="hidden" name="mb_Account" value="${ajb.mb_Account}"/>
 				<input type="hidden" name="finalDecision" value="">
 				<Table>
-				
-				<tr>
-					<td><form:label path="act_Image">活動圖片:</form:label></td>
-					<td><form:input path="act_Image" /></td>
-				</tr>
-				
-				<tr>
-					<td><form:label path="act_Name">活動名稱:</form:label></td>
-					<td><form:input path="act_Name" /></td>
-				</tr>
-
-					<tr>
-					<td><form:label path="act_Theme">活動主題:</form:label></td>
-					<td><form:input path="act_Theme" /></td>
-				</tr>
-				
 					
-				<tr>
-					<td><form:label path="act_Date">活動時間:</form:label></td>
-					<td><form:input type="datetime-local" path="act_Date" /></td>
-				</tr>
-				
-				<tr>
-					<td><form:label path="act_Loc">活動地點:</form:label></td>
-					<td><form:input path="act_Loc" /></td>
-				</tr>
+					<tr>
+						<td><form:label path="act.act_Name">活動名稱:</form:label></td>
+						
+					</tr>
 
 					<tr>
-					<td><form:label path="act_Intro">活動簡介:</form:label></td>
-					<td><form:input path="act_Intro" /></td>
-				</tr>
+						<td><form:label path="member.mb_Name">會員名稱:</form:label></td>
+					</tr>
+<tr>
+						<td><form:label path="member.mb_Mail">email:</form:label></td>
+						<td><form:input path="member.mb_Mail"/></td>
+					</tr>
 
 					<tr>
-					<td><form:label path="act_Guest">活動嘉賓:</form:label></td>
-					<td><form:input path="act_Guest" /></td>
-				</tr>
-
-					<tr>
-					<td><form:label path="act_Pax">活動人數:</form:label></td>
-					<td><form:input path="act_Pax" /></td>
-				</tr>
-				
-					<tr>
-					<td><form:label path="act_Rule">活動規則:</form:label></td>
-					<td><form:input path="act_Rule" /></td>
-				</tr>
-
-					<tr>
-					<td><form:label path="act_Tag">活動標籤:</form:label></td>
-					<td><form:input type="textarea" path="act_Tag" /></td>
-				</tr>
-
-				<tr>
-					<td><form:label path="act_Place">活動場所:</form:label></td>
-					<td><form:input path="act_Place" /></td>
-				</tr>
+						<td><form:label path="member.mb_Tel">聯絡電話:</form:label></td>
+						<td><form:input path="member.mb_Tel"/></td>
+					</tr>
 
 					<TR>
 						<TD colspan="2" align="center">
 						
-						<input type="submit" value="更新" name='updateBtn'onclick="return confirmUpdate('${ab.act_ID}');"/> 
-						<input type="submit" value="刪除" name='deleteBtn'onclick="return confirmDelete('${ab.act_Name}');"/>
+						<input type="submit" value="更新" name='updateBtn'onclick="return confirmUpdate('${ajb.join_ID}');"/> 
+						<input type="submit" value="刪除" name='deleteBtn'onclick="return confirmDelete('${ajb.join_ID}');"/>
 						</TD>
 					</TR>
 				</Table>
@@ -154,7 +116,7 @@
 				</c:if>
 			</form:form>
 
-			<p /><small>&lt;&lt;<a href="showActs">回上一頁</a>&gt;&gt;
+			<p /><small>&lt;&lt;<a href='${pageContext.request.contextPath}/ActHomepage'>回到探索活動</a>&gt;&gt;
 			</small>
 
 	</div>

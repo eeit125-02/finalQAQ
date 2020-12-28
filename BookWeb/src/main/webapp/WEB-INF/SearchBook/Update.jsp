@@ -83,33 +83,32 @@
 
 					<div class="form-group">
 						<form:label path="bk_Name">書名</form:label>
-						<form:input path="bk_Name" class="form-control" placeholder="必填" />
+						<form:input path="bk_Name" class="form-control" placeholder="必填"  required="required"/>
 					</div>
 
 					<div class="form-row">
 						<div class="form-group col-md-6">
 							<form:label path="bk_Author">作者</form:label>
 							<form:input path="bk_Author" class="form-control"
-								placeholder="必填" />
+								placeholder="必填"  required="required"/>
 						</div>
 
 						<div class="form-group col-md-6">
 							<form:label path="bk_Translator">譯者</form:label>
-							<form:input path="bk_Translator" class="form-control"
-								placeholder="必填" />
+							<form:input path="bk_Translator" class="form-control" />
 						</div>
 					</div>
 
 					<div class="form-row">
 						<div class="form-group col-md-6">
 							<form:label path="bk_Publish">出版社</form:label>
-							<form:input path="bk_Publish" class="form-control"
+							<form:input path="bk_Publish" class="form-control" required="required"
 								placeholder="必填" />
 						</div>
 
 						<div class="form-group col-md-6">
 							<form:label path="bk_Date">出版日期</form:label>
-							<form:input path="bk_Date" class="form-control" type="date" />
+							<form:input path="bk_Date" class="form-control" type="date" required="required"/>
 						</div>
 					</div>
 
@@ -131,13 +130,14 @@
 					<div class="form-row">
 						<div class="form-group col-md-5">
 							<form:label path="bk_ISBN">ISBN</form:label>
-							<form:input path="bk_ISBN" class="form-control" placeholder="必填" />
+							<form:input path="bk_ISBN" class="form-control" placeholder="必填，請輸入數字組合"  required="required"
+							onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}" 
+							onafterpaste="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}"/>
 						</div>
 
 						<div class="form-group col-md-5">
 							<form:label path="bk_Language">語言</form:label>
-							<form:input path="bk_Language" class="form-control"
-								placeholder="必填" />
+							<form:input path="bk_Language" class="form-control"/>
 							<%-- 	    <form:checkboxes path="bk_Language" /> --%>
 							<!--       <label for="inputState">語言</label> -->
 							<!--       <select id="inputState" class="form-control"> -->
@@ -152,7 +152,9 @@
 
 						<div class="form-group col-md-2">
 							<form:label path="bk_Page">頁數</form:label>
-							<form:input path="bk_Page" class="form-control" />
+							<form:input path="bk_Page" class="form-control"  placeholder="請輸入正整數"  
+							onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}" 
+							onafterpaste="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}"/>
 						</div>
 
 					</div>
