@@ -9,40 +9,15 @@
 	href='${pageContext.request.contextPath}/css/style.css' />
 <meta charset="UTF-8">
 
-
-<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet"
+	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <link rel="stylesheet" href="/resources/demos/style.css">
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<script>
-	$(function() {
-		var dateFormat = "mm/dd/yy", from = $("#from").datepicker({
-			defaultDate : "+1w",
-			changeMonth : true,
-			numberOfMonths : 3
-		}).on("change", function() {
-			to.datepicker("option", "minDate", getDate(this));
-		}), to = $("#to").datepicker({
-			defaultDate : "+1w",
-			changeMonth : true,
-			numberOfMonths : 3
-		}).on("change", function() {
-			from.datepicker("option", "maxDate", getDate(this));
-		});
 
-		function getDate(element) {
-			var date;
-			try {
-				date = $.datepicker.parseDate(dateFormat, element.value);
-			} catch (error) {
-				date = null;
-			}
-
-			return date;
-		}
-	});
-</script>
-
+<script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"
+	integrity="sha256-eGE6blurk5sHj+rmkfsGYeKyZx3M4bG+ZlFyA7Kns7E="
+	crossorigin="anonymous"></script>
 
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 
@@ -68,6 +43,10 @@
 	.bd-placeholder-img-lg {
 		font-size: 3.5rem;
 	}
+}
+
+.tb1 {
+	border: 1px solid background-color:pink
 }
 </style>
 
@@ -99,121 +78,125 @@
 			<form:form method="POST" modelAttribute="actbean"
 				enctype="multipart/form-data">
 
-				<table>
-					<tr>
-						<td><form:label path="member.mb_Account">會員帳號:</form:label></td>
-						<td><form:hidden path="member.mb_Account" /></td>
-					</tr>
+				<fieldset>
+<!-- 					<legend>活動創建表單</legend> -->
+						<div>
+							<form:label path="member.mb_Account">會員帳號:</form:label>
+							<form:hidden path="member.mb_Account" />
+					</div>
 
-					<tr>
-						<td><form:label path="act_Image">活動圖片:</form:label></td>
-						<td><input name="file" type="file" /></td>
-					</tr>
+						<div>
+							<form:label path="act_Image">活動圖片:</form:label>
+							<input name="file" type="file" />
+</div>
 
-					<tr>
-						<td><form:label path="act_Name">活動名稱:</form:label></td>
-						<td><form:input path="act_Name" /></td>
-					</tr>
+						<div>
+							<form:label path="act_Name">活動名稱:</form:label>
+							<form:input path="act_Name" />
+						</div>
 
-					<tr>
-						<td><label>活動主題:</label></td>
-						<td><form:input path="act_Theme" /></td>
-					</tr>
+						<div>
+							<label>活動主題:</label>
+							<form:input path="act_Theme" />
+						</div>
 
-					<tr>
-						<td><form:label for="from" path="act_Date">活動時間:</form:label></td>
 						
-						<td><form:input type="text" id="from" name="from" path="act_Date"/> 
-						<form:label for="to" path="act_Date">to</form:label> 
-						<form:input type="text" id="to" name="to" path="act_Date"/>
-						</td>
+							<!-- 						<td><label for="from" path="act_Date">活動時間:</label></td> -->
+							<!-- 						<td> -->
+							<!-- 						<input type="text" id="from" name="from"/>  -->
+							<!-- 						<label for="to">to</label>  -->
+							<!-- 						<input type="text" id="to" name="to" /> -->
+							<!-- 						</td> -->
+							<div>
+							<label>活動日期:</label>
+							<label for="from">From</label> 
+							<input type="text" id="from" name="from"> 
+							<label for="to">to</label> 
+							<input type="text" id="to" name="to">
+						</div>
+
+						<div>
+							<form:label path="act_Loc">活動地點:</form:label>
+							<form:select path="act_Loc" id="縣市1"></form:select> 
+							<form:select id="鄉鎮市區1" path="act_Loc"></form:select> 
+							<form:input path="act_Loc"></form:input>
+
+						</div>
 
 
-					</tr>
+						<!-- 						<td><input type="button" onclick="show()" value="Show" /></td> -->
 
-					<tr>
-						<td><form:label path="act_Loc">活動地點:</form:label></td>
-						<td><form:select path="act_Loc" id="縣市1"></form:select> <form:select
-								id="鄉鎮市區1" path="act_Loc"></form:select><form:input path="act_Loc"></form:input></td>
+						<!-- 						<td><select name="act_Loc"> -->
+						<!-- 								<option value="City">縣市</option> -->
+						<!-- 								<option value="新北市">新北市</option> -->
+						<!-- 								<option value="台北市">台北市</option> -->
+						<!-- 								<option value="桃園市">桃園市</option> -->
+						<!-- 								<option value="新竹縣">新竹縣</option> -->
+						<!-- 								<option value="新竹市">新竹市</option> -->
+						<!-- 								<option value="苗栗市">苗栗市</option> -->
+						<!-- 								<option value="苗栗縣">苗栗縣</option> -->
+						<!-- 								<option value="台中市">台中市</option> -->
+						<!-- 								<option value="彰化縣">彰化縣</option> -->
+						<!-- 								<option value="彰化市">彰化市</option> -->
+						<!-- 								<option value="南投市">南投市</option> -->
+						<!-- 								<option value="南投縣">南投縣</option> -->
+						<!-- 								<option value="雲林縣">雲林縣</option> -->
+						<!-- 								<option value="嘉義縣">嘉義縣</option> -->
+						<!-- 								<option value="嘉義市">嘉義市</option> -->
+						<!-- 								<option value="台南市">台南市</option> -->
+						<!-- 								<option value="高雄市">高雄市</option> -->
+						<!-- 								<option value="屏東縣">屏東縣</option> -->
+						<!-- 								<option value="屏東市">屏東市</option> -->
+						<!-- 								<option value="宜蘭縣">宜蘭縣</option> -->
+						<!-- 								<option value="ILC">宜蘭市</option> -->
+						<!-- 								<option value="HWA">花蓮縣</option> -->
+						<!-- 								<option value="HWC">花蓮市</option> -->
+						<!-- 								<option value="TTC">台東市</option> -->
+						<!-- 								<option value="TTT">台東縣</option> -->
+						<!-- 								<option value="PEH">澎湖縣</option> -->
+						<!-- 								<option value="GNI">綠島</option> -->
+						<!-- 								<option value="KYD">蘭嶼</option> -->
+						<!-- 								<option value="KMN">金門縣</option> -->
+						<!-- 								<option value="MZW">馬祖</option> -->
+						<!-- 								<option value="LNN">連江縣</option> -->
+						<!-- 						</select></td> -->
 
-					</tr>
+						<div>
+							<form:label path="act_Intro">活動簡介:</form:label>
+							<form:textarea path="act_Intro" rows="5" cols="30" />
+						</div>
 
+						<div>
+							<form:label path="act_Guest">活動嘉賓:</form:label>
+							<form:input path="act_Guest" />
+						</div>
 
-					<!-- 						<td><input type="button" onclick="show()" value="Show" /></td> -->
+						<div>
+							<form:label path="act_Pax">活動人數:</form:label>
+							<form:input path="act_Pax" />
+						</div>
 
-					<!-- 						<td><select name="act_Loc"> -->
-					<!-- 								<option value="City">縣市</option> -->
-					<!-- 								<option value="新北市">新北市</option> -->
-					<!-- 								<option value="台北市">台北市</option> -->
-					<!-- 								<option value="桃園市">桃園市</option> -->
-					<!-- 								<option value="新竹縣">新竹縣</option> -->
-					<!-- 								<option value="新竹市">新竹市</option> -->
-					<!-- 								<option value="苗栗市">苗栗市</option> -->
-					<!-- 								<option value="苗栗縣">苗栗縣</option> -->
-					<!-- 								<option value="台中市">台中市</option> -->
-					<!-- 								<option value="彰化縣">彰化縣</option> -->
-					<!-- 								<option value="彰化市">彰化市</option> -->
-					<!-- 								<option value="南投市">南投市</option> -->
-					<!-- 								<option value="南投縣">南投縣</option> -->
-					<!-- 								<option value="雲林縣">雲林縣</option> -->
-					<!-- 								<option value="嘉義縣">嘉義縣</option> -->
-					<!-- 								<option value="嘉義市">嘉義市</option> -->
-					<!-- 								<option value="台南市">台南市</option> -->
-					<!-- 								<option value="高雄市">高雄市</option> -->
-					<!-- 								<option value="屏東縣">屏東縣</option> -->
-					<!-- 								<option value="屏東市">屏東市</option> -->
-					<!-- 								<option value="宜蘭縣">宜蘭縣</option> -->
-					<!-- 								<option value="ILC">宜蘭市</option> -->
-					<!-- 								<option value="HWA">花蓮縣</option> -->
-					<!-- 								<option value="HWC">花蓮市</option> -->
-					<!-- 								<option value="TTC">台東市</option> -->
-					<!-- 								<option value="TTT">台東縣</option> -->
-					<!-- 								<option value="PEH">澎湖縣</option> -->
-					<!-- 								<option value="GNI">綠島</option> -->
-					<!-- 								<option value="KYD">蘭嶼</option> -->
-					<!-- 								<option value="KMN">金門縣</option> -->
-					<!-- 								<option value="MZW">馬祖</option> -->
-					<!-- 								<option value="LNN">連江縣</option> -->
-					<!-- 						</select></td> -->
+						<div>
+							<form:label path="act_Rule">活動規則:</form:label>
+							<form:input type="textarea" path="act_Rule" />
+						</div>
 
-					<tr>
-						<td><form:label path="act_Intro">活動簡介:</form:label></td>
-						<td><form:input type="textarea" path="act_Intro" /></td>
-					</tr>
+						<div>
+							<form:label path="act_Tag">活動標籤:</form:label>
+							<form:input path="act_Tag" />
+						</div>
 
-					<tr>
-						<td><form:label path="act_Guest">活動嘉賓:</form:label></td>
-						<td><form:input path="act_Guest" /></td>
-					</tr>
+						<div>
+							<form:label path="act_Place">活動場所:</form:label>
+							<form:input path="act_Place" />
+						</div>
 
-					<tr>
-						<td><form:label path="act_Pax">活動人數:</form:label></td>
-						<td><form:input path="act_Pax" /></td>
-					</tr>
-
-					<tr>
-						<td><form:label path="act_Rule">活動規則:</form:label></td>
-						<td><form:input type="textarea" path="act_Rule" /></td>
-					</tr>
-
-					<tr>
-						<td><form:label path="act_Tag">活動標籤:</form:label></td>
-						<td><form:input path="act_Tag" /></td>
-					</tr>
-
-					<tr>
-						<td><form:label path="act_Place">活動場所:</form:label></td>
-						<td><form:input path="act_Place" /></td>
-					</tr>
-
-				</table>
+					</fieldset>>
 
 
-				<input type='submit' value='提交' />
-				<input type='reset' value='還原' />
-				<br>
-				<br>
-				<a href='${pageContext.request.contextPath}/ActHomepage'>回到活動管理</a>
+					<input type='submit' value='提交' /> <input type='reset' value='還原' />
+					<br> <br> <a
+						href='${pageContext.request.contextPath}/ActHomepage'>回到活動管理</a>
 			</form:form>
 
 
@@ -223,6 +206,38 @@
 		<!-- footer -->
 		<footer class="container py-5" id="bookWebFooter"></footer>
 		<!-- footer -->
+
+
+		<script>
+			$(function() {
+				var dateFormat = "mm/dd/yy", from = $("#from").datepicker({
+					defaultDate : "+1w",
+					changeMonth : true,
+					numberOfMonths : 3
+				}).on("change", function() {
+					to.datepicker("option", "minDate", getDate(this));
+				}), to = $("#to").datepicker({
+					defaultDate : "+1w",
+					changeMonth : true,
+					numberOfMonths : 3
+				}).on("change", function() {
+					from.datepicker("option", "maxDate", getDate(this));
+				});
+
+				function getDate(element) {
+					var date;
+					try {
+						date = $.datepicker
+								.parseDate(dateFormat, element.value);
+					} catch (error) {
+						date = null;
+					}
+
+					return date;
+				}
+			});
+		</script>
+
 
 
 		<script type="text/javascript">
