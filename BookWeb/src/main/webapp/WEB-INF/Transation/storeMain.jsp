@@ -66,7 +66,7 @@
 			<table border="1" width="130%">
 				<tr>
 					<th>&nbsp;</th>
-					<th>編號</th>
+					<th>圖片</th>
 					<th>名字</th>
 					<th>作者</th>
 				</tr>

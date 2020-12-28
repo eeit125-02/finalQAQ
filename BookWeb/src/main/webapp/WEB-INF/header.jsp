@@ -27,7 +27,7 @@
 	<div class="nav-scroller py-1 mb-2">
 		<nav class="nav d-flex justify-content-between">
 			<a class="p-2 text-muted" href="//localhost:8080/BookWeb/SearchBook/Search">圖書漂流瓶</a> 
-			<a class="p-2 text-muted" href="//localhost:8080/BookWeb/Transation/storeMain">二手書交易系統</a> 
+			<a class="p-2 text-muted" href="//localhost:8080/BookWeb/Transation/storeMain">二手書圖</a> 
 			<a class="p-2 text-muted" href='<c:url value="/showActs"/>'>共樂聚落</a> 
 			<a class="p-2 text-muted" href='<c:url value="/Discussion/mainpage"/>'>書適論壇</a>
 			<a class="nav-link dropdown-toggle text-muted" href="#"

@@ -58,7 +58,7 @@
 				TYPE="TEXT" NAME="qty" value="${bookStore.bs_Num}"><BR>
 			<button type="submit" name="updatebk" value="${bookStore.bks_ID}">確定修改</button>
 		</FORM>
-		<FORM ACTION="<c:url value='/myStore'/>">
+		<FORM ACTION="<c:url value='myStore'/>" method="post">
 			<button type="submit" name="">返回</button>
 		</FORM>
 

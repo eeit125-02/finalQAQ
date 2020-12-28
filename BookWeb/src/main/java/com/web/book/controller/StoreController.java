@@ -81,7 +81,7 @@ public class StoreController {
 	
 	@PostMapping("/addMyBook")
 	public String qaq(Model model) {
-		return "/Transation/addMyBookStore";
+		return "/Transation/addMyStore";
 	}
 	
 	@PostMapping("/searchBookName")
@@ -90,7 +90,7 @@ public class StoreController {
 			) {
 		List<BookBean> list = bookStoreService.searchBookName(bk_Name);
 		model.addAttribute("bookName", list);
-		return "/Transation/addMyBookStore";
+		return "/Transation/addMyStore";
 	}
 	
 	@PostMapping("/addBook")
