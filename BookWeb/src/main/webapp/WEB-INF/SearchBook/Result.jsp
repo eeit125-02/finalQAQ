@@ -85,18 +85,22 @@
 		<br> <br>
 
 
-		<h3>搜尋結果：</h3>
+		<h3>搜尋結果：（總共 ${searchresultnumber} 筆）</h3>
 		
 		<br>
 		<br>
+		
+		<div><h4>　　　　　　${searchresultzero}</h4></div>
+		
 		<c:forEach items="${searchresult}" var="row">
-
+		
 		<div class="row">
 <!--圖片 -->
 			<div class="col-sm-2">			
 				<img class="itemcov" alt="" src="${row.getBk_Pic()}" height="190">
 			</div>
 			
+<!-- 書名+作者+出版社+出版日期 -->
 			<div class="col-sm-10">
 				<h3>
 					<form name=a1 action="<c:url value='/bookpage' />" method="get">
@@ -140,7 +144,7 @@
 					if (data) {
 						alert('成功加入收藏 ');
 					}else {
-						alert('加入失敗 ');
+						alert('加入失敗，本書已在您的收藏清單 ');
 					}
 				}
 			});

@@ -80,6 +80,20 @@
 		$("#bookWebFooter").load("//localhost:8080/BookWeb/footer");
 
 	});
+	
+// 	// 顯示結果
+// 	function checkresult(){
+// 		var v=${pageresult2};
+// 		console.log(v);
+		
+// 		if(v){	
+// 			alert('加入成功');
+// 		}else{
+// 			alert('加入失敗');			
+// 		}
+		
+// 	}
+	
 </script>
 <title>Insert title here</title>
 </head>
@@ -110,7 +124,6 @@
 		</div>
 		<br> <br>
 
-
 <!-- 左直行（圖片＆按鈕列） -->
 
 		<div class="row">
@@ -126,7 +139,7 @@
 <!-- 							<img alt="點選收藏" -->
 <%-- 								src="${pageContext.request.contextPath}/image/heartred.png" --%>
 <!-- 								id="heart" width="25px"> -->
-							<button type="submit" name="pagecollect"
+							<button type="submit" name="pagecollect" onclick="checkresult()"
 								class="btn btn-outline-info btn-sm"
 								value="${pageresult.bk_ID}">收藏本書</button>
 						</form></div>

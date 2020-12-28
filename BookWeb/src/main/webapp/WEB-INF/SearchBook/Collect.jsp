@@ -77,42 +77,11 @@
 
 	</div>
 
-<!-- 取消收藏按鈕 -->
-<!-- 				<div class="collect"> -->
-<!-- 					<button type="submit" name="deletebc" -->
-<%-- 							class="btn btn-outline-danger btn-sm"  onclick="a${row.getBc_ID()}();"value="${row.getBc_ID()}">取消收藏</button> --%>
-<!-- 				</div> -->
-<!-- 			<br><hr> -->
-		
-			
-<!-- // // 		$('#gocollect').click(function() { -->
-<%-- // 		function a${row.getBc_ID()}() { --%>
-<!-- // 			console.log("test"); -->
-<%-- // 			let bc_ID = ${row.getBc_ID()}; --%>
-<!-- // 			console.log(bc_ID); -->
-<!-- // 			let editURL = "collectlist/deletecollect/"+bc_ID; -->
-<!-- // 			console.log(editURL); -->
-<!-- // 			$.ajax({ -->
-<!-- // 				async : true, -->
-<!-- // 				type : 'GET', -->
-<!-- // 				url : editURL, -->
-<!-- // 				dataType : "json", -->
-<!-- // 				contentType : "application/json;charset=utf-8", -->
-<!-- // 				success : function(data) { -->
-<!-- // 					if (data) { -->
-<!-- // 						alert('刪除成功 '); -->
-<!-- // 						loadBookCollectList(); -->
-<!-- // 					}else { -->
-<!-- // 						alert('刪除失敗 '); -->
-<!-- // 					} -->
-<!-- // 				} -->
-<!-- // 			}); -->
-<!-- // 		} -->
 
 <script>
 			
 			function loadBookCollectList() {
-				let mb_ID=5;
+				let mb_ID=13;
 				$.ajax({
 					async : false,
 					cache : false,
@@ -126,7 +95,6 @@
 					success : function(data) {
 						var insertData = "<div>";
 						for (let i = 0; i < data.length; i++) {
-					console.log(data[i].bk_Author);
 							insertData += "<div class=\"row\">"
 								+"<div class=\"col-sm-2\">"
 								+"<img class=\"itemcov\" alt=\"\" src=\""
@@ -140,6 +108,7 @@
 								+data[i].bk_ID+"\">"+data[i].bk_Name+"</button></form>"
 								+"</h3>"
 								+"｜ 作者："+data[i].bk_Author
+								+data[i].bc_ID
 								+" ｜  出版社："+data[i].bk_Publish
 								+"｜  出版日期："+data[i].bk_Date
 								+"<br>"
@@ -148,9 +117,8 @@
 								+"</p>"	
 								+"</div>"
 								+"</div>"
-								
 								+"<div class=\"collect\">"
-								+"<button type=\"submit\" name=\"deletebc\" id=\"deletebc\" class=\"btn btn-outline-danger btn-sm\" onclick=\"deletebc();\"value=\""
+								+"<button type=\"submit\" class=\"btn btn-outline-danger btn-sm\" onclick=\"deletebc(" + data[i].bc_ID + ");\"value=\""
 								+data[i].bc_ID
 								+"\">取消收藏</button>"
 								+"</div>"
@@ -158,7 +126,6 @@
 								+"<hr>"
 					}
 					insertData += "</div>"
-					console.log(insertData);
 					$("#bookcollectlist").html(insertData);	
 					}
 				});
@@ -166,11 +133,10 @@
 			
 			
 			
-			function deletebc(){
-				console.log("test");
-				let bc_ID = document.getElementById("deletebc").value;
-				let editURL = "collectlist/deletecollect/"+bc_ID;
-				console.log(editURL);
+			function deletebc(i){
+				let bc_ID = i;
+				console.log(i);
+				let editURL = "collectlist/deletecollect/"+i;
 				$.ajax({
 				async : true,
 				type : 'GET',

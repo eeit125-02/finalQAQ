@@ -107,21 +107,30 @@ public class SearchBookDaoImpl implements SearchBookDAO {
 	}
 
 	// 新增收藏項目
+	@SuppressWarnings("unchecked")
 	@Override
 	public boolean savebc(int bk_id, int mb_id) {
 		boolean result=false;
-		int count = 0;
+//		int count = 0;
 		Session session = factory.getCurrentSession();
 		LocalDate d = LocalDate.now();
 		java.sql.Date sqlDate = java.sql.Date.valueOf(d);
 		MemberBean member = session.get(MemberBean.class, mb_id);
 		BookBean book = session.get(BookBean.class, bk_id);
-		BookCollectBean bkc=new BookCollectBean(1, sqlDate, null, book, member);
-		session.save(bkc);
-		count++;
-		if(count>0) {
+		
+		String hql = "From BookCollectBean bc Where bc.member = :mbid AND bc.book = :bkid";
+		Query<BookCollectBean> query = session.createQuery(hql);
+		List<BookCollectBean>list = query.setParameter("mbid", member).setParameter("bkid", book).getResultList();
+		System.out.println(list.size());
+		if(list.size()==0) {
 			result=true;
-		}
+			BookCollectBean bkc=new BookCollectBean(1, sqlDate, null, book, member);
+			session.save(bkc);
+		}		
+//		count++;
+//		if(count>0) {
+//			result=true;
+//		}
 		return result;
 	}
 
