@@ -45,7 +45,7 @@
 	
 	<script>
 		if (typeof($.cookie('Member_ID')) != "undefined"){
-				$('#loginButton').html("<a href=\"//localhost:8080/BookWeb/toCity\">會員中心</a><p>&nbsp;</p>"
+				$('#loginButton').html("<a href=\"//localhost:8080/BookWeb/toAdmin\">會員中心</a><p>&nbsp;</p>"
 						+ "<a id=\"logout\" href=\"//localhost:8080/BookWeb/toLogin\">登出</a>");
 				$("#logout").click(function(){
 					$.removeCookie('Member_ID', { path: '/BookWeb' });
