@@ -84,8 +84,8 @@ p {
 			<form action="<c:url value='/MbUpdate' />">
 				<button type="submit" name="Modify" class="btn btn-outline-secondary">會員修改</button>
 			</form>
-			<form action="<c:url value='/Modify' />" method="post">
-				<button type="submit" name="Modify" class="btn btn-outline-secondary">密碼修改</button>
+			<form action="<c:url value='/Modify' />" method="post" >
+				<button type="submit" name="pwdModify" class="btn btn-outline-secondary">密碼修改</button>
 			</form>
 			
 			<form name=a3 class=a3 action="<c:url value='/collectlist' />" method="get">
