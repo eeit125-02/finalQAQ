@@ -34,6 +34,10 @@
 
 	});
 </script>
+
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDWIiCwzdTb9GmpcVV2ulFDGmVube4SI3Y&callback=initMap" async defer></script>
+
 <style>
 p {
 	color: #293241;
@@ -252,12 +256,11 @@ td {
 				<section>
 					<div>
 						<div class="container" style="text-align: center">
-							<h1>活動清單</h1>
+							<h1 >活動清單</h1>
 						</div>
 					</div>
 				</section>
-				<hr
-					style="height: 1px; border: none; color: #333; background-color: #333;">
+				<hr style="height: 1px; border: none; color: #333; background-color: #333;">
 				<section class="container">
 					<div class="row">
 						<c:forEach var='act' items='${allacts}'>
@@ -268,13 +271,15 @@ td {
 									</p>
 									<p>
 										<img src="${act.act_Image}"
-											style="width: 200px; height: 250px;" />
+											style="width: 300px; height: 380px;" />
 									</p>
 									<div class="caption">
 										<p>${act.act_Theme}</p>
 										<p>${act.act_Date}</p>
 										<p>${act.act_Loc}</p>
 										<p>${act.act_Intro}</p>
+																				
+										
 										<hr>
 										<p>
 <%-- 										<button class="btn btn-outline-info"><a href="<c:url value='/showUpdateForm'/>?act_ID=${act.act_ID}" />詳細資料</a></button> --%>
@@ -290,13 +295,42 @@ td {
 												<div class="modal-content">
 													<div class="modal-header">
 														<button type="button" class="close" data-dismiss="modal">&times;</button>
-														<h4 class="modal-title">詳細資料</h4>
+														<h4 class="modal-title" style="text-align:center">詳細資料</h4>
 													</div>
 													<div class="modal-body">
 														<p>${act.act_Theme}</p>
 										                <p>${act.act_Date}</p>
 										                <p>${act.act_Loc}</p>
 										                <p>${act.act_Intro}</p>
+										                <!--GoogleMap的東東 -->
+										<div id="map" style="width: 400px; height: 500px" ></div>
+										                
+										                
+<script>
+var map, geocoder;
+
+function initMap() {
+  geocoder = new google.maps.Geocoder();
+  map = new google.maps.Map(document.getElementById('map'), {
+    zoom: 17
+  });
+
+var address = '${act.act_Loc}';
+  geocoder.geocode( { 'address': address}, function(results, status) {
+    if (status == 'OK') {
+      map.setCenter(results[0].geometry.location);
+      var marker = new google.maps.Marker({
+          map: map,
+          position: results[0].geometry.location
+      });
+    } else {
+      console.log(status);
+    }
+  });
+}
+</script>	
+
+									                
 													</div>
 													<div class="modal-footer">
 													
@@ -307,7 +341,7 @@ td {
 											</div>
 										</div>
 										
-										
+										<p>
 										<button class="btn btn-outline-info"><a href="<c:url value='/showUpdateForm'/>?act_ID=${act.act_ID}" />編輯</a></button>
 										<button class="btn btn-outline-info"><a href="<c:url value='deleteAct'/>?act_ID=${act.act_ID}">刪除</a></button>
 										<button class="btn btn-outline-info"><a href="<c:url value='/showJoinForm'/>?act_ID=${act.act_ID}">報名</a></button>
