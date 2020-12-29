@@ -78,16 +78,18 @@
 		<H1 class='center'>更新活動資料</H1>
 		<hr>
 		<p>
-			<form:form method="POST" modelAttribute="ab">
+			<form:form method="POST" modelAttribute="ab" enctype="multipart/form-data">
 
-				<form:hidden path="act_ID" value="活動編號"/>
-				<form:hidden path="member.mb_Account" value="會員帳號"/>
+<div>
+<!-- 				<label>會員帳號:</label> -->
+<%-- 				<span>${mb_account}</span> --%>
 				<input type="hidden" name="finalDecision" value="">
+</div>				
 				<Table>
 				
 				<tr>
 					<td><form:label path="act_Image">活動圖片:</form:label></td>
-					<td><form:input path="act_Image" /></td>
+					<td><input name="file" type="file"/></td>
 				</tr>
 				
 				<tr>

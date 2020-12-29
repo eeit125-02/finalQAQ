@@ -7,17 +7,8 @@
 <head>
 <link rel='stylesheet'
 	href='${pageContext.request.contextPath}/css/style.css' />
+
 <meta charset="UTF-8">
-
-<link rel="stylesheet"
-	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<link rel="stylesheet" href="/resources/demos/style.css">
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-
-<script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"
-	integrity="sha256-eGE6blurk5sHj+rmkfsGYeKyZx3M4bG+ZlFyA7Kns7E="
-	crossorigin="anonymous"></script>
 
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 
@@ -79,124 +70,79 @@
 				enctype="multipart/form-data">
 
 				<fieldset>
-<!-- 					<legend>活動創建表單</legend> -->
-						<div>
-							<form:label path="member.mb_Account">會員帳號:</form:label>
-							<form:hidden path="member.mb_Account" />
+					<!-- 					<legend>活動創建表單</legend> -->
+					<div>
+						<label>會員帳號:</label>
+						<span>${mb_account}</span>
 					</div>
 
-						<div>
-							<form:label path="act_Image">活動圖片:</form:label>
-							<input name="file" type="file" />
-</div>
+					<div>
+						<form:label path="act_Image">活動圖片:</form:label>
+						<input name="file" type="file" />
+					</div>
 
-						<div>
-							<form:label path="act_Name">活動名稱:</form:label>
-							<form:input path="act_Name" />
-						</div>
+					<div>
+						<form:label path="act_Name">活動名稱:</form:label>
+						<form:input path="act_Name" />
+					</div>
 
-						<div>
-							<label>活動主題:</label>
-							<form:input path="act_Theme" />
-						</div>
+					<div>
+						<label>活動主題:</label>
+						<form:input path="act_Theme" />
+					</div>
 
-						
-							<!-- 						<td><label for="from" path="act_Date">活動時間:</label></td> -->
-							<!-- 						<td> -->
-							<!-- 						<input type="text" id="from" name="from"/>  -->
-							<!-- 						<label for="to">to</label>  -->
-							<!-- 						<input type="text" id="to" name="to" /> -->
-							<!-- 						</td> -->
-							<div>
-							<label>活動日期:</label>
-							<label for="from">From</label> 
-							<input type="text" id="from" name="from"> 
-							<label for="to">to</label> 
-							<input type="text" id="to" name="to">
-						</div>
+					<div>
+						<label>活動日期:</label>  
+						<input type="datetime-local" id="from" name="from" placeholder="開始時間"> 
+						<label for="to">至</label>
+						<input type="datetime-local" id="to" name="to" placeholder="結束時間">
+					</div>
 
-						<div>
-							<form:label path="act_Loc">活動地點:</form:label>
-							<form:select path="act_Loc" id="縣市1"></form:select> 
-							<form:select id="鄉鎮市區1" path="act_Loc"></form:select> 
-							<form:input path="act_Loc"></form:input>
+					<div>
+						<form:label path="act_Loc">活動地點:</form:label>
+						<form:select path="act_Loc" id="縣市1"></form:select>
+						<form:select id="鄉鎮市區1" path="act_Loc"></form:select>
+						<form:input path="act_Loc"></form:input>
 
-						</div>
+					</div>
 
+					<div>
+						<form:label path="act_Guest" >活動嘉賓:</form:label>
+						<form:input path="act_Guest" />
+					</div>
 
-						<!-- 						<td><input type="button" onclick="show()" value="Show" /></td> -->
+					<div>
+						<form:label path="act_Pax">活動人數:</form:label>
+						<form:input path="act_Pax" />
+					</div>
 
-						<!-- 						<td><select name="act_Loc"> -->
-						<!-- 								<option value="City">縣市</option> -->
-						<!-- 								<option value="新北市">新北市</option> -->
-						<!-- 								<option value="台北市">台北市</option> -->
-						<!-- 								<option value="桃園市">桃園市</option> -->
-						<!-- 								<option value="新竹縣">新竹縣</option> -->
-						<!-- 								<option value="新竹市">新竹市</option> -->
-						<!-- 								<option value="苗栗市">苗栗市</option> -->
-						<!-- 								<option value="苗栗縣">苗栗縣</option> -->
-						<!-- 								<option value="台中市">台中市</option> -->
-						<!-- 								<option value="彰化縣">彰化縣</option> -->
-						<!-- 								<option value="彰化市">彰化市</option> -->
-						<!-- 								<option value="南投市">南投市</option> -->
-						<!-- 								<option value="南投縣">南投縣</option> -->
-						<!-- 								<option value="雲林縣">雲林縣</option> -->
-						<!-- 								<option value="嘉義縣">嘉義縣</option> -->
-						<!-- 								<option value="嘉義市">嘉義市</option> -->
-						<!-- 								<option value="台南市">台南市</option> -->
-						<!-- 								<option value="高雄市">高雄市</option> -->
-						<!-- 								<option value="屏東縣">屏東縣</option> -->
-						<!-- 								<option value="屏東市">屏東市</option> -->
-						<!-- 								<option value="宜蘭縣">宜蘭縣</option> -->
-						<!-- 								<option value="ILC">宜蘭市</option> -->
-						<!-- 								<option value="HWA">花蓮縣</option> -->
-						<!-- 								<option value="HWC">花蓮市</option> -->
-						<!-- 								<option value="TTC">台東市</option> -->
-						<!-- 								<option value="TTT">台東縣</option> -->
-						<!-- 								<option value="PEH">澎湖縣</option> -->
-						<!-- 								<option value="GNI">綠島</option> -->
-						<!-- 								<option value="KYD">蘭嶼</option> -->
-						<!-- 								<option value="KMN">金門縣</option> -->
-						<!-- 								<option value="MZW">馬祖</option> -->
-						<!-- 								<option value="LNN">連江縣</option> -->
-						<!-- 						</select></td> -->
+					<div>
+						<form:label path="act_Rule">活動規則:</form:label>
+						<form:input type="textarea" path="act_Rule" />
+					</div>
 
-						<div>
-							<form:label path="act_Intro">活動簡介:</form:label>
-							<form:textarea path="act_Intro" rows="5" cols="30" />
-						</div>
+					<div>
+						<form:label path="act_Tag">活動標籤:</form:label>
+						<form:input path="act_Tag" />
+					</div>
 
-						<div>
-							<form:label path="act_Guest">活動嘉賓:</form:label>
-							<form:input path="act_Guest" />
-						</div>
+					<div>
+						<form:label path="act_Place">活動場所:</form:label>
+						<form:input path="act_Place" />
+					</div>
 
-						<div>
-							<form:label path="act_Pax">活動人數:</form:label>
-							<form:input path="act_Pax" />
-						</div>
-
-						<div>
-							<form:label path="act_Rule">活動規則:</form:label>
-							<form:input type="textarea" path="act_Rule" />
-						</div>
-
-						<div>
-							<form:label path="act_Tag">活動標籤:</form:label>
-							<form:input path="act_Tag" />
-						</div>
-
-						<div>
-							<form:label path="act_Place">活動場所:</form:label>
-							<form:input path="act_Place" />
-						</div>
-
-					</fieldset>>
+					<div>
+						<form:label path="act_Intro">活動簡介:</form:label>
+						<form:textarea path="act_Intro" rows="5" cols="30" />
+					</div>
+				</fieldset>>
 
 
-					<input type='submit' value='提交' /> <input type='reset' value='還原' />
-					<br> <br> <a
-						href='${pageContext.request.contextPath}/ActHomepage'>回到活動管理</a>
+					<input type='submit' value='提交' />
+				<input type='reset' value='還原' />
+				<br>
+				<br>
+				<a href='${pageContext.request.contextPath}/ActHomepage'>回到活動管理</a>
 			</form:form>
 
 

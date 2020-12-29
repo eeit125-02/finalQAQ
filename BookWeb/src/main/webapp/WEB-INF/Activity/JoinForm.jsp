@@ -72,18 +72,18 @@
 				<table>
 
 					<tr>
-						<td><label>會員帳號:${member.mb_Account}</label></td>
-						<td><input type="hidden" name="mb_Account" value="${member.mb_Account}" /></td>
+						<td><label>會員帳號:${mb_account}</label></td>
+<%-- 						<td><input type="hidden" name="mb_Account" value="${member.mb_Account}" /></td> --%>
 					</tr>
 
                     <tr>
 						<td><label>活動名稱:${act.act_Name}</label></td>
-						<td><input type="hidden" name="act_Name" value="${act.act_Name}" /></td>
+<%-- 						<td><input type="hidden" name="act_Name" value="${act.act_Name}" /></td> --%>
 					</tr>
 
                     <tr>
-						<td><label>會員名稱:${member.mb_Name}</label></td>
-						<td><input type="hidden" name="mb_Name" value="${member.mb_Name}" /></td>
+						<td><label>會員名稱:${mb_Name}</label></td>
+<%-- 						<td><input type="hidden" name="mb_Name" value="${member.mb_Name}" /></td> --%>
 					</tr>
 
 					<tr>
