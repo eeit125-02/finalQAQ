@@ -74,7 +74,6 @@ public class MemberDaoImpl implements MemberDao {
 		List<MemberBean> dep = new ArrayList<MemberBean>();
 		String hql = "FROM MemberBean";
 		Session session = factory.getCurrentSession();
-
 		Query<MemberBean> query = session.createQuery(hql);
 		dep = query.getResultList();
 

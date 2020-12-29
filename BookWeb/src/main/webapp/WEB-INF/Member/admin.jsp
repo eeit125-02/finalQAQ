@@ -84,7 +84,7 @@ p {
 			<div>
 				<button type="submit" name="inf" class="btn btn-outline-secondary">會員資訊</button>
 			</div>
-			<a href="<c:url value='/toLogin' />">登出</a>
+			<a href="<c:url value='/toLogin' />" id="logout">登出</a>
 		</fieldset>
 	</form>
 	
@@ -95,8 +95,12 @@ p {
 	<!-- footer -->
 	<script>
 	$(document).ready(function() {
-		$("#bookWebheader").load("<c:url value='/header'/>");
+		$("#bookWebheader").load("<c:url value='/adminheader'/>");
         $("#bookWebFooter").load("<c:url value='/footer'/>");
+	});	
+	$("#logout").click(function(){
+		$.removeCookie('Member_ID', { path: '/BookWeb' });
+		$.removeCookie('Member_ID', { path: '/BookWeb/toLogin' });
 	});
 </script>
 </body>

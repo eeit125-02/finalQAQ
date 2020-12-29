@@ -108,7 +108,7 @@ form {
 					<br>
 				</div>
 				<div class="login" align="center">
-					<button id="send" style="margin: 5px">登入</button>
+					<button  id="send" style="margin: 5px">登入</button>
 				</div>
 				<div>
 					<span id="sp" style="color: red"></span>
@@ -130,7 +130,7 @@ form {
 			</fieldset>
 		</form>	
 	</div>
-	<form action="<c:url value='/tothird'/>" id="fm"></form>
+	<form action="<c:url value='/toCity'/>" id="fm"></form>
 	<!-- footer -->
 	<footer class="container py-5" id="bookWebFooter"></footer>
 	<!-- footer -->
@@ -181,7 +181,6 @@ form {
 
 		let googlename;
 		let googlemail;
-		var editURLgoogle = location.href + "/google";
 		function GoogleLogin() {
 			let auth2 = gapi.auth2.getAuthInstance();//取得GoogleAuth物件
 			auth2
@@ -222,15 +221,17 @@ form {
 
 													//請再自行Parse JSON，可以將JSON字串丟到線上parse工具查看：http://json.parser.online.fr/
 													//最終，取得用戶個資後看要填在畫面表單上或是透過Ajax儲存到資料庫(記得是傳id_token給你的Web Server而不是明碼的user_id喔)，本範例就不贅述，請自行努力XD
+													var login = 'login'
 													$.ajax({
 																type : 'POST',
-																url : editURLgoogle,
+																url : login,
 																data : {
-																	'account' : googlemail,
-																	'name' : googlename
+																	'email' : googlemail,
+ 																	'name' : googlename
 																},
+																dataType : "json",
 																success:function() {
-																	console.log()
+																	console.log("123456")
 																	//註冊成功頁面跳轉，
 																	var fm = $("#fm");
 																	fm.submit();
@@ -266,7 +267,7 @@ form {
 			var codeLength = 6; //驗證碼的長度
 			var checkCode = document.getElementById("checkCode");
 			var codeChars = new Array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 'a', 'b',
-					'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n',
+					'c', 'd', 'e', 'f', 'g', 'h', 'j', 'k', 'l', 'm', 'n',
 					'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
 					'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L',
 					'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X',
@@ -280,7 +281,7 @@ form {
 				checkCode.innerHTML = code;
 			}
 		}
-		let a = false;
+		var a = false;
 		function validateCode() {
 			var inputCode = document.getElementById("inputCode").value;
 			var textShow = document.getElementById("text_show")
@@ -320,7 +321,7 @@ form {
 							let mb_Password = $('#pwd').val();
 							let sp = $("#sp");
 							console.log(sp)
-							if (mb_Account == "" || mb_Password == "") {
+							if (mb_Account == "" || mb_Password == "" || inputCode == "") {
 								sp.text("輸入錯誤");
 							}
 							let editURL = location.href + "/checklogin/"
@@ -337,8 +338,7 @@ form {
 										success : function(Colume) {
 											if (Colume) {
 												console.log(Colume)
-												$
-														.ajax({
+												$.ajax({
 															async : false,
 															type : 'POST',
 															url : editURL,
@@ -346,13 +346,12 @@ form {
 															contentType : "application/json;charset=utf-8",
 															success : function(
 																	data) {
-																console
-																		.log(data)
-																if (data && a) {
-																	$('#send').submit();
+																console.log(data)
+																console.log("--------")
+																if (data && a) {console.log("--------")
+																	$('#login').submit();
 																} else {
-																	sp
-																			.text("輸入錯誤");
+																	sp.text("輸入錯誤");
 																}
 															}
 														});
