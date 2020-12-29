@@ -30,8 +30,8 @@ public class DiscussionServiceImpl implements DiscussionService {
 	
 	//會員新增留言
 	@Override
-	public void addCommand(CommandBean new_command) {
-		discussionDao.addCommand(new_command);		
+	public CommandBean addCommand(CommandBean new_command) {
+		return discussionDao.addCommand(new_command);		
 	}
 	
 	//依時間排序列出所有貼文
@@ -88,6 +88,12 @@ public class DiscussionServiceImpl implements DiscussionService {
 	@Override
 	public MemberBean getMemberBeanById(Integer mb_ID) {
 		return discussionDao.getMemberBeanById(mb_ID);
+	}
+
+	//用post id取出command資料
+	@Override
+	public List<CommandBean> getCommandBeanByPostId(Integer pb_ID) {
+		return discussionDao.getCommandBeanByPostId(pb_ID);
 	}
 
 
