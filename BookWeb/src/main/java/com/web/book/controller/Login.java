@@ -1,10 +1,8 @@
 package com.web.book.controller;
 
-import java.io.File;
 import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.List;
-import java.util.UUID;
 import java.io.IOException;
 import java.util.concurrent.ExecutionException;
 
@@ -12,7 +10,6 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,8 +17,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
@@ -71,6 +66,28 @@ public class Login {
 		return "redirect:toLogin";
 	}
 
+	// google資料匯入資料庫
+	@PostMapping("/toLogin/google")
+	public String Google(Model model,HttpServletResponse response,@RequestParam(value="account") String account,
+						 @RequestParam(value="name") String name) throws IOException, InterruptedException, ExecutionException {
+		Account = account;
+		MemberBean loginMember = ms.select(Account);
+		if(loginMember == null) {			
+			model.addAttribute(account);
+			loginMember.setMb_Account(account);
+			loginMember.setMb_Name(name);
+			ms.insertMember(loginMember);
+			model.addAttribute(account);
+		}
+		GlobalService.setLoginMember(loginMember);
+		String sessionId = GlobalService.createSessionID(String.valueOf(loginMember.getMb_ID()),
+				loginMember.getMb_Name(), loginMember.getMb_Account());
+		Cookie memId = new Cookie("Member_ID", sessionId);
+		memId.setMaxAge(120);
+		response.addCookie(memId);
+		return "Member/third-party-city";
+	}
+	
 	// 重複帳號確認
 	@PostMapping("/toRegiste/checkAccount/{mb_Account}")
 	@ResponseBody
@@ -157,24 +174,24 @@ public class Login {
 		System.out.println(GlobalService.saveImage("member", file, mb_inf.getMb_Account()));
 		
 //		String name =UUID.randomUUID().toString().replaceAll("-", "");//使用UUID給圖片重新命名，並去掉四個“-”
-		String name = mb_inf.getMb_Account();
-		System.out.println(name);
-		// 獲取檔案的副檔名
-		String ext = FilenameUtils.getExtension(file.getOriginalFilename());
-		// 設定圖片上傳路徑
-		String filePath = "C:\\Users\\Student\\Documents\\GitHub\\finalQAQ\\BookWeb\\src\\main\\webapp\\Resource\\image";
-		System.out.println(request.getContextPath());
-		System.out.println(filePath);
-		File imagePath = new File(filePath);
-		File fileImage = new File(filePath + "/" + name + "." + ext);
-		if (!imagePath.exists() && !imagePath.isDirectory()) {
-			System.out.println(filePath);
-			imagePath.mkdir();
-		}
-		file.transferTo(fileImage);// 把圖片儲存路徑儲存到資料庫
+//		String name = mb_inf.getMb_Account();
+//		System.out.println(name);
+//		// 獲取檔案的副檔名
+//		String ext = FilenameUtils.getExtension(file.getOriginalFilename());
+//		// 設定圖片上傳路徑
+//		String filePath = "C:\\Users\\Student\\Documents\\GitHub\\finalQAQ\\BookWeb\\src\\main\\webapp\\Resource\\image";
+//		System.out.println(request.getContextPath());
+//		System.out.println(filePath);
+//		File imagePath = new File(filePath);
+//		File fileImage = new File(filePath + "/" + name + "." + ext);
+//		if (!imagePath.exists() && !imagePath.isDirectory()) {
+//			System.out.println(filePath);
+//			imagePath.mkdir();
+//		}
+//		file.transferTo(fileImage);// 把圖片儲存路徑儲存到資料庫
 		// 重定向到查詢所有使用者的Controller，測試圖片回顯
 		
-		mb_inf.setMb_pic(name + "." + ext);
+		mb_inf.setMb_pic(GlobalService.saveImage("member", file, mb_inf.getMb_Account()));
 		mb_inf.setMb_Birthday(MB.getMb_Birthday());
 		mb_inf.setMb_Address(MB.getMb_Address());
 		mb_inf.setMb_Tel(MB.getMb_Tel());
@@ -277,4 +294,10 @@ public class Login {
 	public String tocity(Model model) {
 		return "Member/city";
 	}
+	
+	// 三方認證介面
+	@GetMapping("/tothird")
+	public String tothird(Model model) {
+		return "Member/third-party-city";
+		}
 }
