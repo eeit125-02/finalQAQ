@@ -15,58 +15,178 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.web.book.model.BookBean;
 import com.web.book.model.BookCollectBean;
 import com.web.book.model.BookTypeBean;
+import com.web.book.model.MemberBean;
 import com.web.book.service.SearchService;
 
 @Controller
+@SessionAttributes(value = {"loginUser"})
 public class SearchBookController {
 	String name = null;
 
 	@Autowired
 	SearchService searchService;
+	
+//	@GetMapping("/searchbook/{bookname1}{bookname2}{bookname3}/{nowpage}")
+	@GetMapping("/searchbook/{nowpage}")
+	public String Search(
+			Model model
+			,@RequestParam(value = "bookname1", required=false) String bookname
+			,@RequestParam(value = "bookname3", required=false) String publishname
+			,@RequestParam(value = "bookname2", required=false) String authorname
+//			,@PathVariable(value = "bookname1", required=false) String bookname
+//			,@PathVariable(value = "bookname3", required=false) String publishname
+//			,@PathVariable(value = "bookname2", required=false) String authorname
+			,@PathVariable(value = "nowpage") Integer nowpage
+			) {
+		List<BookBean> result = new ArrayList<BookBean>();
+		int count=1;
+		
+		System.out.println(bookname);
+		System.out.println(publishname);
+		System.out.println(authorname);
+		System.out.println(nowpage);
+		
+		
+		if(!bookname.isEmpty()) {
+//			if(bookname!=null) {
+			result = searchService.searchBook(bookname);			
+			count=result.size(); //資料總筆數
+			System.out.println(bookname+"!!!");
+		}else if(!authorname.isEmpty()) {
+//			}else if(authorname!=null) {
+			result = searchService.searchBookAuthor(authorname);			
+			count=result.size(); //資料總筆數
+			System.out.println(authorname+"???");
+		}else if(!publishname.isEmpty()) {
+//			}else if(publishname!=null) {
+			result = searchService.searchBookPublish(publishname);			
+			count=result.size(); //資料總筆數
+			System.out.println(publishname+"~~~");
+		}else{
+			
+		}
+		
+		model.addAttribute("searchresult", result);
+		model.addAttribute("searchresultnumber", count);
 
+		int page=nowpage; //當前頁
+		int perpage=10; //每頁筆數
+		int totalPages = count % perpage == 0 ? count / perpage : count / perpage+ 1; //總頁數
+		
+		Integer lastnum = count%perpage;
+		if(nowpage==totalPages && lastnum != 0) {
+			perpage = lastnum; 
+		}
+		
+		//本頁起始使用者序號
+		int beginIndex = (page - 1) * perpage;
+		//本頁末尾使用者序號的下一個
+		int endIndex = beginIndex + perpage;
+		model.addAttribute("count", count);
+		model.addAttribute("perpage", perpage);
+		model.addAttribute("totalPages", totalPages);
+		model.addAttribute("beginIndex", beginIndex);
+		model.addAttribute("endIndex", endIndex);
+		model.addAttribute("page", page);
+//		model.addAttribute("bookname", name);
+		model.addAttribute("bookname1", bookname);
+		model.addAttribute("bookname2", authorname);
+		model.addAttribute("bookname3", publishname);
+		return "SearchBook/Result";
+	}
+	
+	
 	// 查詢書籍關鍵字
 	@GetMapping("/searchbook")
-	public String gotoSearch(Model model, @RequestParam(value = "name") String name) {
-		List<BookBean> result = searchService.searchBook(name);
-		int count=result.size();
+	public String gotoSearch(
+			Model model
+			, @RequestParam(value = "name", required=false) String bookname
+			, @RequestParam(value = "author", required=false) String authorname
+			, @RequestParam(value = "publish", required=false) String publishname
+			) {
+		
+		List<BookBean> result = new ArrayList<BookBean>();
+		int count=1;
+		
+		if(bookname!=null) {
+			result = searchService.searchBook(bookname);			
+			count=result.size(); //資料總筆數
+		}else if(authorname!=null) {
+			result = searchService.searchBookAuthor(authorname);			
+			count=result.size(); //資料總筆數
+		}else if(publishname!=null) {
+			result = searchService.searchBookPublish(publishname);			
+			count=result.size(); //資料總筆數
+		}else{
+			
+		}
+		
 		model.addAttribute("searchresult", result);
 		model.addAttribute("searchresultnumber", count);
 		if(count==0) {
 			model.addAttribute("searchresultzero", "很抱歉，查無資料");			
 		}
+		
+		int page=1; //第一頁???
+		int perpage=10; //每頁筆數
+		int totalPages = count % perpage == 0 ? count / perpage : count / perpage+ 1;//總頁數
+		
+		Integer lastnum = count%perpage;
+		if(page==totalPages && lastnum != 0) {
+			perpage = lastnum; 
+		}
+		//本頁起始使用者序號
+		int beginIndex = (page - 1) * perpage;
+		//本頁末尾使用者序號的下一個
+		int endIndex = beginIndex + perpage;
+		model.addAttribute("count", count);
+		model.addAttribute("perpage", perpage);
+		model.addAttribute("totalPages", totalPages);
+		model.addAttribute("beginIndex", beginIndex);
+		model.addAttribute("endIndex", endIndex);
+		model.addAttribute("page", page);
+		model.addAttribute("bookname1", bookname);
+		model.addAttribute("bookname2", authorname);
+		model.addAttribute("bookname3", publishname);
+		
 		return "SearchBook/Result";
 	}
 	
-	// 查詢書籍作者
-	@GetMapping("/searchbookauthor")
-	public String gotoSearchAuthor(Model model, @RequestParam(value = "author") String name) {
-		List<BookBean> result = searchService.searchBookAuthor(name);
-		int count=result.size();
-		model.addAttribute("searchresult", result);
-		model.addAttribute("searchresultnumber", count);
-		return "SearchBook/Result";
-	}
-	
-	// 查詢書籍出版社
-	@GetMapping("/searchbookpublish")
-	public String gotoSearchPublish(Model model, @RequestParam(value = "publish") String name) {
-		List<BookBean> result = searchService.searchBookPublish(name);
-		int count=result.size();
-		model.addAttribute("searchresult", result);
-		model.addAttribute("searchresultnumber", count);
-		return "SearchBook/Result";
-	}
+//	// 查詢書籍作者
+//	@GetMapping("/searchbookauthor")
+//	public String gotoSearchAuthor(Model model, @RequestParam(value = "author") String name) {
+//		List<BookBean> result = searchService.searchBookAuthor(name);
+//		int count=result.size();
+//		model.addAttribute("searchresult", result);
+//		model.addAttribute("searchresultnumber", count);
+//		if(count==0) {
+//			model.addAttribute("searchresultzero", "很抱歉，查無資料");}	
+//		return "SearchBook/Result";
+//	}
+//	
+//	// 查詢書籍出版社
+//	@GetMapping("/searchbookpublish")
+//	public String gotoSearchPublish(Model model, @RequestParam(value = "publish") String name) {
+//		List<BookBean> result = searchService.searchBookPublish(name);
+//		int count=result.size();
+//		model.addAttribute("searchresult", result);
+//		model.addAttribute("searchresultnumber", count);
+//		if(count==0) {
+//			model.addAttribute("searchresultzero", "很抱歉，查無資料");}	
+//		return "SearchBook/Result";
+//	}
 
 	// 在查詢結果頁加入收藏
 	@GetMapping("/searchbook/resultcollect/{bk_ID}")
-	public @ResponseBody boolean gotoCollect(@PathVariable("bk_ID") Integer bk_id) {
-		int mb_id = 13;
-		boolean result2 = searchService.savebc(bk_id, mb_id);
+	public @ResponseBody boolean gotoCollect(@PathVariable("bk_ID") Integer bk_id, @ModelAttribute("loginUser") MemberBean loginUser) {
+//		int mb_id = 13;
+		boolean result2 = searchService.savebc(bk_id, loginUser.getMb_ID());
 		return result2;
 	}
 	
@@ -96,13 +216,12 @@ public class SearchBookController {
 		return "SearchBook/Collect";
 	}
 	// 導出收藏清單
-	@PostMapping("/collectlist/getBookCollectList/{mb_ID}")
+	@PostMapping("/collectlist/getBookCollectList")
 	@ResponseBody
-	public List<Map<String, Object>> gotoList(@PathVariable("mb_ID") Integer mb_id) {
-		mb_id = 13;		
+	public List<Map<String, Object>> gotoList(@ModelAttribute("loginUser") MemberBean loginUser) {	
 		List<Map<String, Object>> book = new ArrayList<>();
-		List<BookCollectBean> result = searchService.gotoCollect(mb_id);
-		System.out.println(mb_id);
+		List<BookCollectBean> result = searchService.gotoCollect(loginUser.getMb_ID());
+		System.out.println(loginUser.getMb_ID());
 		for (BookCollectBean bookCollectBean : result) {
 			Map<String, Object> data = new HashMap<>();
 			data.put("bc_ID", bookCollectBean.getBc_ID());
@@ -120,13 +239,6 @@ public class SearchBookController {
 	
 	
 	
-	
-	
-	
-	
-	
-	
-	
 	// 刪除收藏項目
 	@GetMapping("/collectlist/deletecollect/{bc_ID}")
 	public @ResponseBody boolean gotoDelete(@PathVariable("bc_ID") Integer bc_id) {
@@ -136,9 +248,8 @@ public class SearchBookController {
 
 	// 在單獨頁面加入收藏
 	@GetMapping("/pagecollect")
-	public String gotoPageCollect(Model model, @RequestParam(value = "pagecollect") Integer bk_id) {
-		int mb_id = 13;
-		boolean result2 = searchService.savebc(bk_id, mb_id);
+	public String gotoPageCollect(Model model, @RequestParam(value = "pagecollect") Integer bk_id, @ModelAttribute("loginUser") MemberBean loginUser) {
+		boolean result2 = searchService.savebc(bk_id, loginUser.getMb_ID());
 		//導回原本頁面
 		BookBean result = searchService.getBook(bk_id);
 		model.addAttribute("pageresult", result);

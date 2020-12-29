@@ -87,6 +87,10 @@ p {
 			<form action="<c:url value='/Modify' />" method="post">
 				<button type="submit" name="Modify" class="btn btn-outline-secondary">密碼修改</button>
 			</form>
+			
+			<form name=a3 class=a3 action="<c:url value='/collectlist' />" method="get">
+				<button type="submit" name="list" class="btn btn-outline-dark">收藏清單</button>
+			</form>
 		</div>
 	</fieldset>
 	</div>

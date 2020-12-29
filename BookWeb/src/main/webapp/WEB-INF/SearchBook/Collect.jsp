@@ -81,12 +81,11 @@
 <script>
 			
 			function loadBookCollectList() {
-				let mb_ID=13;
 				$.ajax({
 					async : false,
 					cache : false,
 					type : 'POST',
-					url : "collectlist/getBookCollectList/"+mb_ID,
+					url : "collectlist/getBookCollectList/",
 					dataType : "json",
 					contentType : "application/json;charset=utf-8",
 					error : function() {
