@@ -32,9 +32,10 @@ public class DiscussionDaoImpl implements DiscussionDao {
 	
 	//會員新增留言
 	@Override
-	public void addCommand(CommandBean new_command) {
+	public CommandBean addCommand(CommandBean new_command) {
 		Session session = factory.getCurrentSession();
 		session.save(new_command);		
+		return new_command;
 	}
 
 	
@@ -114,6 +115,15 @@ public class DiscussionDaoImpl implements DiscussionDao {
 		Session session = factory.getCurrentSession();
 		MemberBean mb = (MemberBean) session.get(MemberBean.class, mb_ID);
 		return mb;
+	}
+
+	//用post id取出command資料
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<CommandBean> getCommandBeanByPostId(Integer pb_ID) {
+		String hql="FROM CommandBean c WHERE FK_PostBean_post_id=:pb_ID ORDER BY c.command_time DESC";
+		Session session = factory.getCurrentSession();
+		return session.createQuery(hql).setParameter("pb_ID", pb_ID).getResultList();
 	}
 
 

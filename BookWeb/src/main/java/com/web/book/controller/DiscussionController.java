@@ -89,6 +89,17 @@ public class DiscussionController {
 		return "/Discussion/edit_post";
 	}
 	
+	//帶參數前往詳細貼文頁面
+	@PostMapping("Discussion/show_detail")
+	public String showDetailPage(Model model,
+			@RequestParam("post_detail_id") Integer post_detail_id) {
+		PostBean pb = discussionService.getPostBeanById(post_detail_id);
+		model.addAttribute("PostBean", pb);
+		List<CommandBean> command_detail= discussionService.getCommandBeanByPostId(post_detail_id);
+		model.addAttribute("CommandBean", command_detail);
+		return "/Discussion/post_detail";
+	}
+	
 	//修改貼文
 	@PostMapping("Discussion/edit_post")
 	public String processPostEdit(Model model,

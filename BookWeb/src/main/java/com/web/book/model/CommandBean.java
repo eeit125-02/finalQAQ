@@ -25,11 +25,11 @@ public class CommandBean implements Serializable{
 	String command_content;
 	Timestamp command_time;
 	
-	@ManyToOne(cascade=CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn(name="FK_PostBean_post_id") 	
     private PostBean postBean;
 	
-	@ManyToOne(cascade=CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn(name="FK_mb_id")
 	private MemberBean memberbean;
 	

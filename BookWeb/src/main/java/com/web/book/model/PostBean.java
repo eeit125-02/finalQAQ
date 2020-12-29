@@ -28,10 +28,10 @@ public class PostBean implements Serializable{
 	String post_content;
 	Timestamp post_time;
 	
-	@OneToMany(mappedBy="postBean", cascade=CascadeType.ALL)
+	@OneToMany(mappedBy="postBean", orphanRemoval=true)
 	private Set<CommandBean> commands=new LinkedHashSet<>( );
 	
-	@ManyToOne(cascade=CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn(name="FK_mb_id")
 	private MemberBean memberbean;
 

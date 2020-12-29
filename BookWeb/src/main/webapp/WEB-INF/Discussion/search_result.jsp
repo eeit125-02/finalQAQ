@@ -79,7 +79,7 @@
 					
 					<div
 						style="border: #ADADAD 2px solid; border-radius: 5px; text-align: left; padding: 10px; margin: 0px 10px">
-						<p>[member] ${stored_post.post_time}</p>
+						<p>${stored_post.memberbean.mb_Name} ${stored_post.post_time}</p>
 						<h3>${stored_post.post_title}</h3>
 						<p>${stored_post.post_content}</p>
 
@@ -89,16 +89,8 @@
 								<form:input type="text" class="form-control" id="command_input"
 									path="command_content" placeholder="請輸入留言" />
 								<form:hidden path="command_time" />
-								<form:hidden path="mb_id" />
 								<form:hidden path="postBean.post_id"
 									value="${stored_post.post_id}" />
-								<form:hidden path="postBean.post_title"
-									value="${stored_post.post_title}" />
-								<form:hidden path="postBean.post_content"
-									value="${stored_post.post_content}" />
-								<form:hidden path="postBean.mb_id" value="${stored_post.mb_id}" />
-								<form:hidden path="postBean.post_time"
-									value="${stored_post.post_time}" />
 								<div class="input-group-append">
 									<button class="btn btn-outline-secondary" id="command_btn"
 										type="submit">留言</button>
@@ -112,7 +104,7 @@
 							<c:if test="${pi==ci}">
 								<div
 									style="background-color: #C4E1FF; margin: 10px; padding: 5px; border-radius: 10px;">
-									<p>[member] ${stored_command.command_time}</p>
+									<p>${stored_command.memberbean.mb_Name} ${stored_command.command_time}</p>
 									<p>${stored_command.command_content}</p>
 								</div>
 							</c:if>
