@@ -178,10 +178,10 @@
 								href='<c:url value="/Transation/storeMain" />'>繼續購物</a>
 							</td>
 							<td width="400" align='center'>
-<%-- 							<a href="<c:url value='checkout' />" --%>
-<%-- 								onClick="return Checkout(${subtotal});"> --%>
+							<a href="<c:url value='/checkout' />"
+								onClick="return Checkout(${subtotal});">
 								結帳
-<!-- 								</a> -->
+								</a>
 								</td>
 						</tr>
 					</table>

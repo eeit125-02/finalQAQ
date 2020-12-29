@@ -49,7 +49,7 @@
 
 	<!-- body -->
 	<div class="container media">
-		<h1>請從藏書庫中搜尋書名或者按此<a href="">新增</a>一本書</h1>
+		<h1>請從藏書庫中搜尋書名或者按此<a href="<c:url value='addMyBookA'/>">新增</a>一本書</h1>
 	</div>
 	<br>
 	<div class="container media">
