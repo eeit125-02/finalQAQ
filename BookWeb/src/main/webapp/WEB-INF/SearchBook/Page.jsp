@@ -148,7 +148,7 @@
 								class="btn btn-outline-info btn-sm" value="${pageresult.bk_ID}">修改書訊</button>
 						</form></div>
 				
-				<div class="col-sm-3"><button type="submit" name="" class="btn btn-outline-info btn-sm">撰寫心得</button></div>
+				<div class="col-sm-3"><button type="button" id="addBookReport" value="${pageresult.bk_ID}" class="btn btn-outline-info btn-sm">撰寫心得</button></div>
 				<div class="col-sm-3"><button type="submit" name="" class="btn btn-outline-info btn-sm">尋找二手書</button></div>
 
 				</div>
@@ -225,7 +225,12 @@
 	<!-- footer -->
 	<footer class="container py-5" id="bookWebFooter"></footer>
 	<!-- footer -->
-
+	<script>
+		$('#addBookReport').click(function(){
+			console.log($(this).val());
+			window.location.href = "http://localhost:8080/BookWeb/BookReport/addBookReprot/"+$(this).val();
+		});
+	</script>
 
 </body>
 </html>

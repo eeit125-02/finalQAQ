@@ -29,7 +29,15 @@ public class BookReportController {
 	@Autowired
 	BookReportService bookReportService;
 	
-	@GetMapping("" )
+	Integer bookId;
+	MemberBean loginUser;
+	
+	@ModelAttribute
+	public void setLoginUser(Model model) {
+		loginUser = (MemberBean) model.getAttribute("loginUser");
+	}
+	
+	@GetMapping("")
 	public String homeBookReport (Model model) {
 		return "BookReport/BookReport";
 	}
@@ -41,7 +49,7 @@ public class BookReportController {
 	
 	@PostMapping("/EditBookReport/getBookReportList")
 	@ResponseBody
-	public List<Map<String, Object>> bookReportList(@ModelAttribute("loginUser") MemberBean loginUser){
+	public List<Map<String, Object>> bookReportList(){
 		List<Map<String, Object>> book = new ArrayList<>();
 		List<BookReportBean> memberBookReport = bookReportService.bookReportMemberAllList(loginUser.getMb_ID());
 		for (BookReportBean bookReportBean : memberBookReport) {
@@ -54,6 +62,7 @@ public class BookReportController {
 			data.put("bk_Pic", bookReportBean.getBook().getBk_Pic());
 			book.add(data);
 		}
+		
 	    return book;   
 	}
 	
@@ -91,5 +100,15 @@ public class BookReportController {
 		
 		return "true";
 	}
+	
+	@GetMapping("/addBookReport/{bk_Id}")
+	public String addBookReport( @PathVariable("bk_ID") Integer bk_ID) {
+		bookId = bk_ID;
+		return "addBookReport";
+	}
+	
+//	@PostMapping("/addBookReport/")
+//	@ResponseBody
+//	public String 
 	
 }

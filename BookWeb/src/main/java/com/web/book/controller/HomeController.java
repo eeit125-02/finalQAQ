@@ -38,12 +38,13 @@ public class HomeController {
 	public String header( Model model, HttpServletRequest request,
 			@CookieValue(value = "Member_ID", required=false) String memberId) throws InterruptedException, ExecutionException, IOException {
 		
-		//GlobalService.creatImgInFirebase("111", "2222");
 		if (memberId != null && Boolean.FALSE.equals(sessioIsLoad)) {
 			sessioIsLoad = true;
 			Map<String,String> user = GlobalService.getSession(memberId);
 			model.addAttribute("loginUser", ms.select(user.get("account")));
 			model.addAttribute("sessionLoad",false);
+		}else {
+			sessioIsLoad = false;
 		}
 		
 		return "header";

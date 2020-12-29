@@ -156,6 +156,7 @@
 							<h5 class="mt-0" id="bk_Name">書名：</h5>
 							<p class="mt-0" id="bk_Author">作者：</p>
 							<p class="mt-0" id="bk_Publish">出版社：</p>
+							
 							評分：<select id="br_Score">
 								<option>1</option>
 								<option>2</option>

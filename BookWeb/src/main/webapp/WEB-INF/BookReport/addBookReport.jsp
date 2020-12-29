@@ -44,21 +44,20 @@
 				class="w-25 p-3" alt="...">
 			<div class="media-body">
 				<h5 class="mt-0">
-					書名：<%=request.getAttribute("bkName")%>>
+					書名：
 				</h5>
 				<p class="mt-0">
-					作者：<%=request.getAttribute("bkWriter")%></p>
+					作者：</p>
 				<p class="mt-0">
-					出版社：<%=request.getAttribute("bkPublish")%></p>
+					出版社：</p>
 				<p class="mt-0">
-					評分：<%=request.getAttribute("brScore")%>分
+					評分：分
 				</p>
 			</div>
 		</div>
 		<label for="message-text" class="col-form-label">心得:</label>
-		<textarea class="form-control" style="height: 350px;" readonly><%=request.getAttribute("brContent")%></textarea>
+		<textarea class="form-control" style="height: 350px;" readonly></textarea>
 		<br>
-		<!--<button type="submit" class="btn btn-secondary btn-lg btn-block">返回</button>-->
 	</div>
 	
 	<!-- footer -->

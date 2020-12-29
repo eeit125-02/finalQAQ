@@ -1,11 +1,10 @@
 package com.web.book.controller;
 
 import java.io.File;
+import java.io.IOException;
 import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.List;
-import java.util.UUID;
-import java.io.IOException;
 import java.util.concurrent.ExecutionException;
 
 import javax.servlet.http.Cookie;
@@ -20,13 +19,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.web.book.model.MemberBean;
 import com.web.book.service.GlobalService;
@@ -108,7 +105,7 @@ public class Login {
 			String sessionId = GlobalService.createSessionID(String.valueOf(loginMember.getMb_ID()),
 					loginMember.getMb_Name(), loginMember.getMb_Account());
 			Cookie memId = new Cookie("Member_ID", sessionId);
-			memId.setMaxAge(120);
+			memId.setMaxAge(7*24*60*60);
 			response.addCookie(memId);
 
 			model.addAttribute("Account", Account);
