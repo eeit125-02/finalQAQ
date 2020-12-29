@@ -89,7 +89,7 @@
 				
 				<tr>
 					<td><form:label path="act_Image">活動圖片:</form:label></td>
-					<td><input name="file" type="file"/></td>
+					<td><form:input name="file" type="file" path="act_Image"/></td>
 				</tr>
 				
 				<tr>
