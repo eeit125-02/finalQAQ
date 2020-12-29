@@ -183,7 +183,7 @@ legend {
 	<script>
 		$(document).ready(function() {
 			console.log("SSS")
-			$("#bookWebheader").load("<c:url value='/adminheader'/>");
+			$("#bookWebheader").load("<c:url value='/header'/>");
 			$("#bookWebFooter").load("<c:url value='/footer'/>");
 			already();
 		});

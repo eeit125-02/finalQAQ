@@ -175,7 +175,7 @@ margin:auto
 	<script>
 	
 	$(document).ready(function() {
-		$("#bookWebheader").load("<c:url value='/adminheader'/>");
+		$("#bookWebheader").load("<c:url value='/header'/>");
         $("#bookWebFooter").load("<c:url value='/footer'/>");
 	});	
 
