@@ -108,7 +108,7 @@ public class Login {
 			String sessionId = GlobalService.createSessionID(String.valueOf(loginMember.getMb_ID()),
 					loginMember.getMb_Name(), loginMember.getMb_Account());
 			Cookie memId = new Cookie("Member_ID", sessionId);
-			memId.setMaxAge(120);
+			memId.setMaxAge(600);
 			response.addCookie(memId);
 
 			model.addAttribute("Account", Account);

@@ -96,7 +96,7 @@ text-align:center;
 							<%-- 				<td><a href='/FindActServlet?key=${act.ACT_Name}'></a></td> --%>
 							<td>${act.mb_ID}</td>
 							<td>${act.act_ID}</td>
-							<td><img src="${pageContext.request.contextPath}/image/${act.act_Image}" style="width:100px; height: 100px;"/></td>
+							<td><image xlink:href="${act.act_Image}" style="width:100px; height: 100px;"/></td>
 							<td>${act.act_Name}</td>
 							<td>${act.act_Theme}</td>
 							<td>${act.act_Date}</td>
