@@ -117,7 +117,7 @@ public class StoreController {
 	@PostMapping("/addMyBookB")
 	public String addMyBookB(
 			Model model,
-//			@ModelAttribute("newBook") BookBean book,
+			@ModelAttribute("newBook") BookBean book,
 			@RequestParam("price") Integer qwe,
 			@RequestParam("qty") Integer asd
 			) {
