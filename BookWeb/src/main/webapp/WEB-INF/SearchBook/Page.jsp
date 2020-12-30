@@ -227,8 +227,11 @@
 	<!-- footer -->
 	<script>
 		$('#addBookReport').click(function(){
-			console.log($(this).val());
-			window.location.href = "http://localhost:8080/BookWeb/BookReport/addBookReprot/"+$(this).val();
+			console.log($(this).val())
+			var form = $("<form method='post'></form>");
+			form.attr({"action":"//localhost:8080/BookWeb/BookReport/addBookReport/"+ $(this).val()});
+			$(document.body).append(form);
+			form.submit();
 		});
 	</script>
 

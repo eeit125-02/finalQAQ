@@ -17,9 +17,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import com.web.book.model.BookBean;
 import com.web.book.model.BookReportBean;
 import com.web.book.model.MemberBean;
 import com.web.book.service.BookReportService;
+import com.web.book.service.SearchService;
 
 @Controller
 @RequestMapping("/BookReport")
@@ -28,6 +30,9 @@ public class BookReportController {
 	
 	@Autowired
 	BookReportService bookReportService;
+	
+	@Autowired
+	SearchService searchService;
 	
 	Integer bookId;
 	MemberBean loginUser;
@@ -89,7 +94,7 @@ public class BookReportController {
 		return data;
 	}
 	
-	@GetMapping("/EditBookReport/upDateBookReport")
+	@PostMapping("/EditBookReport/upDateBookReport")
 	@ResponseBody
 	public String upDateBookReport(
 			@RequestParam(value = "br_ID", required = true) Integer br_ID, 
@@ -101,14 +106,26 @@ public class BookReportController {
 		return "true";
 	}
 	
-	@GetMapping("/addBookReport/{bk_Id}")
+	@PostMapping("/addBookReport/{bk_ID}")
 	public String addBookReport( @PathVariable("bk_ID") Integer bk_ID) {
 		bookId = bk_ID;
-		return "addBookReport";
+		return "BookReport/addBookReport";
 	}
 	
-//	@PostMapping("/addBookReport/")
-//	@ResponseBody
-//	public String 
+	
+	@PostMapping("/addBookReport/bookInfo")
+	@ResponseBody
+	public Map<String, Object> gotoPage(Model model, @RequestParam(value = "page") Integer bk_id) {
+		BookBean result = searchService.getBook(bk_id);
+		Map<String, Object> info = new HashMap<>();
+		info.put("bk_Name", result.getBk_Name());
+		info.put("bk_Author", result.getBk_Author());
+		info.put("bk_Pic", result.getBk_Pic());
+		info.put("bk_Translator", result.getBk_Translator());
+		info.put("userAccount", loginUser.getMb_Account());
+		return info;
+	}
+	
+	
 	
 }
