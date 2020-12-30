@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -106,5 +107,23 @@ public class StoreController {
 		return "/Transation/myStore";
 	}
 	
+	@GetMapping("/addMyBookA")
+	public String addMyBookA(Model model) {
+		BookBean book = new BookBean();
+		model.addAttribute("newBook", book);
+		return "/Transation/addMyBook";
+	}
+	
+	@PostMapping("/addMyBookB")
+	public String addMyBookB(
+			Model model,
+			@ModelAttribute("newBook") BookBean book,
+			@RequestParam("price") Integer qwe,
+			@RequestParam("qty") Integer asd
+			) {
+		System.out.println(qwe);
+		System.out.println(asd);
+		return "/Transation/myStore";
+	}
 	
 }

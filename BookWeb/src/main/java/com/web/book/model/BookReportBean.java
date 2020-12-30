@@ -2,7 +2,6 @@ package com.web.book.model;
 
 import java.util.Date;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -27,11 +26,11 @@ public class BookReportBean {
 	private Integer br_ClickNumber;
 	private Integer br_CollectionNumber;
 	
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn(name = "bk_ID")
 	private BookBean book;
 	
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn(name = "mb_ID")
 	private MemberBean member;
 	

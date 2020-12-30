@@ -237,19 +237,17 @@
 		$('#editButton').click(
 				function() {
 					var editData = {
-						"br_ID" : $(this).val(),
-						"br_Score" : $('#br_Score').val(),
-						"br_Content" : $('#br_Content').val().replace(
-								/\n|\r\n/g, "<br>")
+						br_ID : $(this).val(),
+						br_Score : $('#br_Score').val(),
+						br_Content : $('#br_Content').val().replace(/\n|\r\n/g, "<br>")
 					};
-					let editURL = location.href + "/upDateBookReport";
+					var editURL = location.href + "/upDateBookReport";
 					$.ajax({
 						async : true,
-						type : 'GET',
+						type : 'POST',
 						url : editURL,
 						data : editData,
 						dataType : "json",
-						contentType : "application/json;charset=utf-8",
 						success : function(data) {
 							if (data) {
 								loadBookReportList();
@@ -265,7 +263,6 @@
 				type : 'POST',
 				url : deleteURL,
 				dataType : "json",
-				contentType : "application/json;charset=utf-8",
 				success : function(data) {
 					if (data) {
 						loadBookReportList();

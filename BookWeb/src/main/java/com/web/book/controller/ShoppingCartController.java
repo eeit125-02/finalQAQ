@@ -126,4 +126,10 @@ public class ShoppingCartController {
 			return "redirect:/shopping";
 		}
 	}
+	
+	@GetMapping("checkout")
+	public String checkoutTest(Model model) {
+		return "Transation/bkCheckout";
+	}
+	
 }

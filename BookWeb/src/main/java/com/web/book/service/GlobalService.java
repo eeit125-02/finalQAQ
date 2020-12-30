@@ -14,11 +14,8 @@ import com.google.cloud.firestore.DocumentReference;
 import com.google.cloud.firestore.DocumentSnapshot;
 import com.google.cloud.firestore.QueryDocumentSnapshot;
 import com.google.cloud.firestore.QuerySnapshot;
-import com.web.book.model.MemberBean;
 
 public class GlobalService {	
-	
-	static MemberBean loginMember;
 	
 	public static final String SYSTEM_NAME ="";
 	
@@ -27,14 +24,6 @@ public class GlobalService {
 	
 	private GlobalService() {
 		
-	}
-	
-	public static MemberBean getLoginMember() {
-		return loginMember;
-	}
-
-	public static void setLoginMember(MemberBean loginMember) {
-		GlobalService.loginMember = loginMember;
 	}
 
 	public static String getMemberEncoder (String passwordString) {

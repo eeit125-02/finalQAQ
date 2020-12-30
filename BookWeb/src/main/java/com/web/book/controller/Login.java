@@ -1,9 +1,9 @@
 package com.web.book.controller;
 
+import java.io.IOException;
 import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.List;
-import java.io.IOException;
 import java.util.concurrent.ExecutionException;
 
 import javax.servlet.http.Cookie;
@@ -19,9 +19,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.web.book.model.MemberBean;
 import com.web.book.service.GlobalService;
@@ -35,9 +35,8 @@ public class Login {
 	MemberService ms;
 
 	String Account;
-
+	String logincheck;
 	MemberBean checkMember;
-
 	// 註冊資料
 	@PostMapping("/registe")
 	public String Registe(Model model, @RequestParam(value = "account") String mb_Account,
@@ -104,6 +103,7 @@ public class Login {
 	@ResponseBody
 	public boolean checklogin(@PathVariable("mb_Account") String account, @PathVariable("mb_Password") String pwd) {
 		boolean check = ms.Login(account, pwd);
+		System.out.println(check);
 		return check;
 	}
 
@@ -115,66 +115,65 @@ public class Login {
 		System.out.println(check);
 		return check;
 	}
-	
-	// 會員登入
-	@PostMapping("/login")
-	public String login(Model model, HttpServletResponse response, 
-			@RequestParam(value = "account",required = false) String account,
-			@RequestParam(value = "name",required = false) String name,
-			@RequestParam(value = "email",required = false) String email,
-			@RequestParam(value = "pwd",required = false) String pwd) throws IOException, InterruptedException, ExecutionException {
-		System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAA");
-		boolean mb = false; 
-		if(account != null && pwd != null) {
-		mb = ms.Login(account, pwd);
-		}
-		System.out.println("1");
-		if ("a123456".equals(account) && "a123456".equals(pwd)) {
-			System.out.println("1");
-			Account = account;
+	// 三方認證介面
+		@PostMapping("/tothird")
+		public @ResponseBody boolean tothird(Model model,
+				@RequestParam(value = "name",required = false) String name,
+				@RequestParam(value = "email",required = false) String email,
+				HttpServletResponse response) throws IOException, InterruptedException, ExecutionException {
+			Account = email;
+			boolean check = ms.checkColume(Account);
+			if(check==false) {		
+			return false;
+			}
 			MemberBean loginMember = ms.select(Account);
-			GlobalService.setLoginMember(loginMember);
+				if(loginMember == null) {			
+					model.addAttribute(Account);
+					loginMember.setMb_Account(Account);
+					loginMember.setMb_Name(name);
+					ms.insertMember(loginMember);
+			}
 			String sessionId = GlobalService.createSessionID(String.valueOf(loginMember.getMb_ID()),
 					loginMember.getMb_Name(), loginMember.getMb_Account());
 			Cookie memId = new Cookie("Member_ID", sessionId);
 			memId.setMaxAge(120);
 			response.addCookie(memId);
-			List<MemberBean> memberall = ms.adminselect();
-			model.addAttribute("adminaccount", Account);
-			model.addAttribute("admin", memberall);
-			return "Member/admin";
-		}else if (mb) {
-			System.out.println("2");
+			logincheck = "c" ;
+			return true;
+		}
+	// 會員登入
+	@PostMapping("/login")
+	public String login(Model model, HttpServletResponse response, 
+			@RequestParam(value = "account",required = false) String account,
+			@RequestParam(value = "pwd",required = false) String pwd) throws IOException, InterruptedException, ExecutionException {
+		boolean mb = ms.Login(account, pwd);
+		if (mb) {
+			if("a123456".equals(account) && "a123456".equals(pwd)) {
+				Account = account;
+				MemberBean loginMember = ms.select(Account);
+				List<MemberBean> memberall = ms.adminselect();
+				model.addAttribute("adminaccount", Account);
+				model.addAttribute("admin", memberall);
+				String sessionId = GlobalService.createSessionID(String.valueOf(loginMember.getMb_ID()),
+						loginMember.getMb_Name(), loginMember.getMb_Account());
+				Cookie memId = new Cookie("Member_ID", sessionId);
+				memId.setMaxAge(120);
+				response.addCookie(memId);
+				logincheck = "a" ;	
+			}else {
 			Account = account;
 			MemberBean loginMember = ms.select(Account);
-			GlobalService.setLoginMember(loginMember);
 			String sessionId = GlobalService.createSessionID(String.valueOf(loginMember.getMb_ID()),
 					loginMember.getMb_Name(), loginMember.getMb_Account());
 			Cookie memId = new Cookie("Member_ID", sessionId);
 			memId.setMaxAge(120);
 			response.addCookie(memId);
 			model.addAttribute("Account", Account);
-			return "Member/city";
-			}else if(mb==false && name !=null) {
-				System.out.println("111111111111111111111111111111111111");
-				Account = name;
-				MemberBean loginMember = ms.select(Account);
-				if(loginMember == null) {			
-					model.addAttribute(Account);
-					loginMember.setMb_Account(Account);
-					loginMember.setMb_Name(name);
-					ms.insertMember(loginMember);
-				}
-				GlobalService.setLoginMember(loginMember);
-				String sessionId = GlobalService.createSessionID(String.valueOf(loginMember.getMb_ID()),
-						loginMember.getMb_Name(), loginMember.getMb_Account());
-				Cookie memId = new Cookie("Member_ID", sessionId);
-				memId.setMaxAge(120);
-				response.addCookie(memId);
-				System.out.println("222222222222222222222222222222222");
-				return "Member/city";
-				}
-				return "redirect:toLogin";
+			logincheck = "b" ;
+			}
+			return "redirect:toCity";
+		}
+		return "Member/login";
 				}
 	// 會員資料
 	@PostMapping("/mb_inf")
@@ -302,7 +301,6 @@ public class Login {
 	//管理員權限
 	@PostMapping("/adminchange")
 	public @ResponseBody void change(@RequestParam(value = "ac", required=false) String ac) {
-		System.out.println(ac);
 		ms.change(ac);
 	}
 	// 管理員介面
@@ -326,19 +324,13 @@ public class Login {
 	// 會員介面
 	@GetMapping("/toCity")
 	public String tocity(Model model) {
+		System.out.println(logincheck);
+		if(logincheck.equals("c")) {
+			return "Member/third";
+		}else if(logincheck.equals("a")) {
+			return "Member/admin";
+		}
 		return "Member/city";
 	}
 	
-	// 三方認證介面
-	@GetMapping("/tothird")
-	public String tothird(Model model,HttpServletResponse response) throws IOException, InterruptedException, ExecutionException {
-		MemberBean loginMember = ms.select(Account);
-		GlobalService.setLoginMember(loginMember);
-		String sessionId = GlobalService.createSessionID(String.valueOf(loginMember.getMb_ID()),
-				loginMember.getMb_Name(), loginMember.getMb_Account());
-		Cookie memId = new Cookie("Member_ID", sessionId);
-		memId.setMaxAge(120);
-		response.addCookie(memId);
-		return "Member/third";
-	}
 }
