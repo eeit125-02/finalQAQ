@@ -46,6 +46,7 @@
 .collectindex {
 	float: right;
 }
+
 </style>
 
 <script>
@@ -86,25 +87,19 @@
 
 
 		<h3>搜尋結果：（總共 ${searchresultnumber} 筆）</h3>
-		
-		<br>
+			<h6>頁數：${page}／${totalPages}</h6>
+			
 		<br>
 		
 		<div><h4>　　　　　　${searchresultzero}</h4></div>
 		
-		
-<p>使用者總數:${count}</p>
-<p>每頁使用者數:${perpage}</p>
-<p>總頁數:${totalPages}</p>
-<p>當前頁:${page}</p>
 <c:set var="totalUsers" value="${count}"/>
 <c:set var="usersPerPage" value="${perpage}"/>
 <c:set var="totalPages" value="${totalPages}"/>
 <c:set var="beginIndex" value="${beginIndex}"/>
 <c:set var="endIndex" value="${endIndex}"/>
 <c:set var="page" value="${page}"/>
-<c:set var="currentPageUsers" value="${searchresult.subList(beginIndex,endIndex)}"/>
-		
+<c:set var="currentPageUsers" value="${searchresult.subList(beginIndex,endIndex)}"/>	
 		
 		<c:forEach items="${currentPageUsers}" var="row">
 		
@@ -166,64 +161,60 @@
 		}
 	</script>
 		</c:forEach>
-<nav>
+
+<div class="d-flex justify-content-center">
+<nav aria-label="Page navigation example">
 <ul class="pagination">
 
-<%-- <c:url value='/searchbook/${bookname2}${bookname1}${bookname3}/1'/> --%>
 	<c:url value="/searchbook/1" var="firstpage">
 		<c:param name="bookname1" value="${bookname1}"></c:param>
 		<c:param name="bookname2" value="${bookname2}"></c:param>
 		<c:param name="bookname3" value="${bookname3}"></c:param>		
 	</c:url>
 	
-<%-- <li><a href="<c:url value="/searchbook/${bookname2}${bookname1}${bookname3}/${page-1>1?page-1:1}"/>">&laquo;</a></li> --%>
 	<c:url value="/searchbook/${page-1>1?page-1:1}" var="frontpage">
 		<c:param name="bookname1" value="${bookname1}"></c:param>
 		<c:param name="bookname2" value="${bookname2}"></c:param>
 		<c:param name="bookname3" value="${bookname3}"></c:param>		
 	</c:url>	
 	
-<%-- <a href="<c:url value="/searchbook/${bookname2}${bookname1}${bookname3}/${loop.index}"/>">${loop.index}</a> --%>
+<li class="page-item"><a href="${firstpage}" class="page-link">首頁</a></li>
+<li class="page-item"><a href="${frontpage}" class="page-link">&laquo;</a></li>
+	
+<c:forEach begin="1" end="${totalPages}" varStatus="loop">
+<c:set var="active" value="${loop.index==page?'active':''}"/>
 	<c:url value="/searchbook/${loop.index}" var="middlepage">
 		<c:param name="bookname1" value="${bookname1}"></c:param>
 		<c:param name="bookname2" value="${bookname2}"></c:param>
 		<c:param name="bookname3" value="${bookname3}"></c:param>		
 	</c:url>
 
-<%-- <a href="<c:url value="/searchbook/${bookname2}${bookname1}${bookname3}/${page+1<totalPages?page+1:totalPages}"/>">&raquo;</a> --%>
 	<c:url value="/searchbook/${page+1<totalPages?page+1:totalPages}" var="nextpage">
 		<c:param name="bookname1" value="${bookname1}"></c:param>
 		<c:param name="bookname2" value="${bookname2}"></c:param>
 		<c:param name="bookname3" value="${bookname3}"></c:param>		
 	</c:url>
 	
-<%-- <li><a href="<c:url value="/searchbook/${bookname2}${bookname1}${bookname3}/${totalPages}"/>">尾頁</a></li> --%>
 	<c:url value="/searchbook/${totalPages}" var="finalpage">
 		<c:param name="bookname1" value="${bookname1}"></c:param>
 		<c:param name="bookname2" value="${bookname2}"></c:param>
 		<c:param name="bookname3" value="${bookname3}"></c:param>		
 	</c:url>
 
-<li><a href="${firstpage}">首頁</a></li>
-<li><a href="${frontpage}">&laquo;</a></li>
-
-<c:forEach begin="1" end="${totalPages}" varStatus="loop">
-<c:set var="active" value="${loop.index==page?'active':''}"/>
-<li class="${active}">
-<a href="${middlepage}">${loop.index}</a>
+<li class="page-item ${active}">
+<a href="${middlepage}" class="page-link">${loop.index}</a>
 </li>
 </c:forEach>
 
-<li>
-<a href="${nextpage}">&raquo;</a>
+<li class="page-item">
+<a href="${nextpage}" class="page-link">&raquo;</a>
 </li>
-<li><a href="${finalpage}">尾頁</a></li>
+<li class="page-item"><a href="${finalpage}" class="page-link">尾頁</a></li>
 </ul>
 </nav>
-		
+</div>	
 
-
-	</div>
+</div>
 
 	<!-- 內容結束 -->
 

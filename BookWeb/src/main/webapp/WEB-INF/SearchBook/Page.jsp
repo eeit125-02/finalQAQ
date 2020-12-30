@@ -211,7 +211,10 @@
 					<h5 align="center">內容簡介</h5>
 					<hr>
 						<p>
+<!-- 						<textarea style="border-style:none;"rows='20' cols='150' id="t1"> -->
+						<textarea style="border-style:none;"rows='20' cols='150' id="t1">
 						${pageresult.bk_Content}
+						</textarea>
 						</p>
 					</div>
 				</div>
@@ -227,9 +230,13 @@
 	<!-- footer -->
 	<script>
 		$('#addBookReport').click(function(){
-			console.log($(this).val());
-			window.location.href = "http://localhost:8080/BookWeb/BookReport/addBookReprot/"+$(this).val();
-		});
+			console.log($(this).val())
+			var form = $("<form method='post'></form>");
+			form.attr({"action":"//localhost:8080/BookWeb/BookReport/addBookReport/"+ $(this).val()});
+			$(document.body).append(form);
+			form.submit();
+			});
+
 	</script>
 
 </body>

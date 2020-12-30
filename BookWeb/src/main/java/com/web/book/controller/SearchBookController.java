@@ -1,9 +1,12 @@
 package com.web.book.controller;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,12 +19,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.web.book.model.BookBean;
 import com.web.book.model.BookCollectBean;
 import com.web.book.model.BookTypeBean;
 import com.web.book.model.MemberBean;
+import com.web.book.service.GlobalService;
 import com.web.book.service.SearchService;
 
 @Controller
@@ -39,32 +44,19 @@ public class SearchBookController {
 			,@RequestParam(value = "bookname1", required=false) String bookname
 			,@RequestParam(value = "bookname3", required=false) String publishname
 			,@RequestParam(value = "bookname2", required=false) String authorname
-//			,@PathVariable(value = "bookname1", required=false) String bookname
-//			,@PathVariable(value = "bookname3", required=false) String publishname
-//			,@PathVariable(value = "bookname2", required=false) String authorname
 			,@PathVariable(value = "nowpage") Integer nowpage
 			) {
 		List<BookBean> result = new ArrayList<BookBean>();
 		int count=1;
-		
-		System.out.println(bookname);
-		System.out.println(publishname);
-		System.out.println(authorname);
-		System.out.println(nowpage);
-		
-		
 		if(!bookname.isEmpty()) {
-//			if(bookname!=null) {
 			result = searchService.searchBook(bookname);			
 			count=result.size(); //資料總筆數
 			System.out.println(bookname+"!!!");
 		}else if(!authorname.isEmpty()) {
-//			}else if(authorname!=null) {
 			result = searchService.searchBookAuthor(authorname);			
 			count=result.size(); //資料總筆數
 			System.out.println(authorname+"???");
 		}else if(!publishname.isEmpty()) {
-//			}else if(publishname!=null) {
 			result = searchService.searchBookPublish(publishname);			
 			count=result.size(); //資料總筆數
 			System.out.println(publishname+"~~~");
@@ -94,7 +86,6 @@ public class SearchBookController {
 		model.addAttribute("beginIndex", beginIndex);
 		model.addAttribute("endIndex", endIndex);
 		model.addAttribute("page", page);
-//		model.addAttribute("bookname", name);
 		model.addAttribute("bookname1", bookname);
 		model.addAttribute("bookname2", authorname);
 		model.addAttribute("bookname3", publishname);
@@ -131,9 +122,9 @@ public class SearchBookController {
 		model.addAttribute("searchresultnumber", count);
 		if(count==0) {
 			model.addAttribute("searchresultzero", "很抱歉，查無資料");			
-		}
+		}else {
 		
-		int page=1; //第一頁???
+		int page=1; //第一頁
 		int perpage=10; //每頁筆數
 		int totalPages = count % perpage == 0 ? count / perpage : count / perpage+ 1;//總頁數
 		
@@ -154,7 +145,7 @@ public class SearchBookController {
 		model.addAttribute("bookname1", bookname);
 		model.addAttribute("bookname2", authorname);
 		model.addAttribute("bookname3", publishname);
-		
+		}
 		return "SearchBook/Result";
 	}
 	
@@ -270,7 +261,12 @@ public class SearchBookController {
 	@PostMapping("/addnewbook")
 	public String gotoAddnewbookFin(Model model, 
 			@ModelAttribute("newonebook")BookBean result,
-			RedirectAttributes attr) {
+			@RequestParam(value = "file", required = false) CommonsMultipartFile file, HttpServletRequest request,
+			RedirectAttributes attr) throws Exception {
+		// 圖片上傳用
+		String test =GlobalService.saveImage("booksearch", file, result.getBk_Name());
+		System.out.println(test);
+		result.setBk_Pic(GlobalService.saveImage("booksearch", file, result.getBk_Name()));
 		BookBean finalresult=searchService.savebk(result);
 		attr.addAttribute("page",finalresult.getBk_ID());
 		return "redirect:/bookpage";

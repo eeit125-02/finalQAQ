@@ -74,7 +74,7 @@ span{
 <!-- 		<label id="test"></label> -->
 
 		<!-- 內容開始 -->
-		<form:form method="POST" modelAttribute="newonebook" id="form">
+		<form:form method="POST" modelAttribute="newonebook" id="form" enctype="multipart/form-data">
 
 			<div class="back">
 				<h2 class="check">新增書目資訊</h2>
@@ -123,9 +123,10 @@ span{
 						</div>
 
 						<div class="form-group col-md-6">
-							<form:label path="">封面圖片</form:label><span id="idsp7">　</span><br />
-							<form:input path="" class="form-control" type="file" />
-							<form:hidden path="bk_Pic" />
+							<form:label path="bk_Pic">封面圖片</form:label><span id="idsp7">　</span><br />
+							<input class="form-control" name="file" type="file" />
+<%-- 							<form:input path="bk_Pic" class="form-control" name="file" type="file" /> --%>
+<%-- 							<form:hidden path="bk_Pic" /> --%>
 						</div>
 					</div>
 
@@ -155,9 +156,10 @@ span{
 
 						<div class="form-group col-md-2">
 							<form:label path="bk_Page">頁數</form:label><span id="idsp10">　</span><br />
-							<form:input path="bk_Page" id="bk_Page" class="form-control" placeholder="請輸入正整數"  
-							onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}" 
-							onafterpaste="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}"/>
+							<form:input path="bk_Page" type="number" id="bk_Page" class="form-control" placeholder="請輸入整數"  />
+<%-- 							onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}"  --%>
+<%-- 							onafterpaste="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}" --%>
+							
 						</div>
 
 					</div>
