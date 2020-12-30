@@ -78,23 +78,25 @@ p {
 	<fieldset>
 		<legend>會員中心</legend>
 		<div>
+			<form action="<c:url value='/adminall' />" method="post">
+				<button type="submit" id="admin" name="admin" class="btn btn-outline-secondary">會員資訊</button>
+			</form>
 			<form action="<c:url value='/mb_inf' />" method="post">
-				<button type="submit" name="mb_inf" class="btn btn-outline-secondary">會員資訊</button>
+				<button type="submit" id="inf" name="mb_inf" class="btn btn-outline-secondary">會員資訊</button>
 			</form>
 			<form action="<c:url value='/MbUpdate' />">
-				<button type="submit" name="Modify" class="btn btn-outline-secondary">會員修改</button>
+				<button type="submit" id="Modify" name="Modify" class="btn btn-outline-secondary">會員修改</button>
 			</form>
 			<form action="<c:url value='/Modify' />" method="post" >
-				<button type="submit" name="pwdModify" class="btn btn-outline-secondary">密碼修改</button>
+				<button type="submit" id="pwdModify" name="pwdModify" class="btn btn-outline-secondary">密碼修改</button>
 			</form>
-			
 			<form name=a3 class=a3 action="<c:url value='/collectlist' />" method="get">
 				<button type="submit" name="list" class="btn btn-outline-dark">收藏清單</button>
 			</form>
 		</div>
 	</fieldset>
 	</div>
-
+	<input id="test" type="hidden" value="${third}">
 	<!-- footer -->
 	<footer class="container py-5" id="bookWebFooter"></footer>
 	<!-- footer -->
@@ -103,6 +105,17 @@ p {
 	$(document).ready(function() {
 		$("#bookWebheader").load("<c:url value='/header'/>");
         $("#bookWebFooter").load("<c:url value='/footer'/>");
+        var check = $("#test").val();
+        if(check=="third"){
+			$("#pwdModify").hide();
+			$("#admin").hide();
+		}else if(check=="admin"){
+			$("#pwdModify").hide();
+			$("#Modify").hide();
+			$("#inf").hide();
+		}else{
+			$("#admin").hide();
+		}
 	});
 </script>
 </body>

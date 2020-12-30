@@ -145,13 +145,13 @@ form {
 					<button type="reset">清除</button>
 				</div>
 			</fieldset>
+	<input type="hidden" name="file"  value="https://firebasestorage.googleapis.com/v0/b/bookweb-50d11.appspot.com/o/member%2Fa123456?alt=media"/>
 		</form>
 
 	</div>
 	<!-- footer -->
 	<footer class="container py-5" id="bookWebFooter"></footer>
 	<!-- footer -->
-
 	<script>
 		$(document).ready(function() {
 			$("#bookWebheader").load("<c:url value='/header'/>");

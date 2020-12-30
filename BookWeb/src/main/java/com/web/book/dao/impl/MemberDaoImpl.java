@@ -30,7 +30,6 @@ public class MemberDaoImpl implements MemberDao {
 		boolean result = false;
 		String hql = "FROM MemberBean WHERE mb_Account =:account and mb_Password =:pwd";
 		Session session = factory.getCurrentSession();
-
 		Query<MemberBean> query = session.createQuery(hql);
 		List<MemberBean> list = query.setParameter("account", account).setParameter("pwd", pwd).getResultList();
 		if (list.size() > 0) {

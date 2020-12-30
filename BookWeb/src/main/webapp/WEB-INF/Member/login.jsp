@@ -87,7 +87,7 @@ form {
 	<!-- header -->
 
 	<div class="container media" id="ab1">
-		<form action="<c:url value='/login' />" method="post" id="login">
+		<form action="<c:url value='/login' />" method="post" id="login1">
 			<fieldset>
 				<legend>會員登入</legend>
 				<div>
@@ -108,18 +108,18 @@ form {
 					<br>
 				</div>
 				<div class="login" align="center">
-					<button id="login123" style="margin: 5px">登入</button>
+					<button type="button" id="login123" style="margin: 5px">登入</button>
 				</div>
 				<div>
 					<span id="sp" style="color: red"></span>
 				</div>
+<!-- 				<div class="row"> -->
+<!-- 					<div class="col-md-3"> -->
 				<!--用戶一鍵Google登入或綁定Google帳戶時使用↓-->
-				<button type="button" id="btnSignIn">Google登入</button>
-				<!--用戶解除Google帳戶綁定時使用↓-->
-				<button type="button" id="btnDisconnect">斷連Google App</button>
+				<button class="btn btn-outline-dark" type="button"  id="btnSignIn" style="text-transform:none ;background-color: white;">Google登入
+				<img width="20px" style="margin-bottom:3px; margin-right:5px" alt="Google sign-in" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/512px-Google_%22G%22_Logo.svg.png" />
+				</button>
 				<hr />
-				<!--顯示結果↓-->
-				<div id="content"></div>
 				<div>
 					<a href="password.html">忘記密碼?</a> <a href="account.html">忘記帳號?</a>
 				</div>
@@ -128,13 +128,13 @@ form {
 						style="text-decoration: none">新帳號註冊</a>
 				</div>
 			</fieldset>
+		<input type="hidden" id="file" name="file" value="https://firebasestorage.googleapis.com/v0/b/bookweb-50d11.appspot.com/o/member%2Fa123456?alt=media"/>
 		</form>	
 	</div>
 	<form action="<c:url value='/toCity'/>" id="fm"></form>
 	<!-- footer -->
 	<footer class="container py-5" id="bookWebFooter"></footer>
 	<!-- footer -->
-	
 	<script>
 		$(document).ready(function() {
 			$("#bookWebheader").load("<c:url value='/header'/>");
@@ -229,7 +229,7 @@ form {
 																console.log("--------");
 																if (data && a) {
 																	console.log("--------")
-																	$('#login123').submit();
+																	$('#login1').submit();
 																} else {
 																	sp.text("輸入錯誤");
 																}
@@ -293,8 +293,8 @@ form {
 			});//end gapi.load
 		}//end GoogleClientInit function
 		var sp = $("#sp");
-		let googlename;
-		let googlemail;
+		var googlename;
+		var googlemail;
 		function GoogleLogin() {
 			let auth2 = gapi.auth2.getAuthInstance();//取得GoogleAuth物件
 			auth2.signIn().then(function(GoogleUser) {
@@ -324,30 +324,28 @@ form {
 															.log(res.result.names[0].displayName)
 													console
 															.log(res.result.emailAddresses[0].value)
-													document
-															.getElementById('content').innerHTML = res.result.names[0].displayName;
 													//↑通常metadata標記primary:true的個資就是你該抓的資料
 													googlename = res.result.names[0].displayName;
 													googlemail = res.result.emailAddresses[0].value;
-
+													var pic = $("#pic").val();	
+													console.log(pic);
 													//請再自行Parse JSON，可以將JSON字串丟到線上parse工具查看：http://json.parser.online.fr/
 													//最終，取得用戶個資後看要填在畫面表單上或是透過Ajax儲存到資料庫(記得是傳id_token給你的Web Server而不是明碼的user_id喔)，本範例就不贅述，請自行努力XD
 													var login = 'tothird'
 													$.ajax({
 																type : 'POST',
 																url : login,
-																data : {
-																	'email' : googlemail,
- 																	'name' : googlename
+																data : {'file' : pic,'email' : googlemail,'name' : googlename
 																},
 																dataType : "json",
 																success:function(data) {
+																	console.log(pic);
 																	if(data){
 																	//註冊成功頁面跳轉，
 																	alert("成功")
 																	$('#fm').submit();
 																	}else{
-																		sp.text("已被停權");
+																		alert("已被停權");
 																	}
 																	}
 															});
