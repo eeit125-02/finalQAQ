@@ -54,10 +54,10 @@
 	<!-- header -->
 
 	<div class="container">
-		<h1>我又是測試頁 &gt;.&lt;&quot;</h1>
+<!-- 		<h1>我又是測試頁 &gt;.&lt;&quot;</h1> -->
 		<!-- body -->
 		<c:url var="tempUrl"  value="addMyBookB" />
-		<form:form method="POST" modelAttribute="newBook" id="form" action="${tempUrl}" >
+		<form:form method="POST" modelAttribute="newBook" id="form" action="${tempUrl}" enctype="multipart/form-data">
 			<div class="row">
 				<div class="form-group col-sm-12">
 					<form:label path="bk_Name" for="exampleFormControlInput1">書名</form:label>
@@ -81,7 +81,7 @@
 			<div class="row">
 				<div class="form-group col-sm-6">
 					<form:label path="bk_Pic" for="exampleFormControlFile1">封面照片</form:label> 
-					<form:input path="bk_Pic" type="file" class="form-control" id="exampleFormControlFile1" />
+					<input type="file" class="form-control" id="exampleFormControlFile1" name="file" />
 				</div>
 				<div class="form-group col-sm-6">
 					<form:label path="bk_Date" for="exampleFormControlFile1">出版日期</form:label> <form:input

@@ -40,21 +40,32 @@
 </script>
 <title>Insert title here</title>
 </head>
-<body>
+<body style="background: #EBFFEB;">
 
 	<!-- header -->
 	<header class="container blog-header py-3" id="bookWebheader"></header>
 	<!-- header -->
 
+	<!-- body -->
 	<div class="container media">
-		<!-- body -->
 
-<h1> 我又是測試頁  &gt;.&lt;&quot;  </h1>
+		<h1>
+			我又是測試頁 &gt;.&lt;&quot;<BR> 親愛的會員 QAQ 您好： <BR> <FONT
+				COLOR='RED'>二手書圖</FONT><BR> 感謝您的訂購<BR> 期待您再度光臨
+		</h1>
+		<BR>
+
+
 
 
 
 	</div>
-		<!-- body -->
+	
+	
+	
+	
+
+	<!-- body -->
 
 	<!-- footer -->
 	<footer class="container py-5" id="bookWebFooter"></footer>
