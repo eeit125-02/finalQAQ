@@ -25,6 +25,8 @@
 
 
 
+
+
 <style>
 .bd-placeholder-img {
 	font-size: 1. 125rem;
@@ -36,6 +38,15 @@
 		font-size: 3.5rem;
 	}
 }
+
+
+	.show_part_text{
+	    overflow : hidden;
+	    text-overflow: ellipsis;
+	    white-space:nowrap;
+	}
+
+
 </style>
 
 <script>
@@ -255,9 +266,11 @@
 												type="submit">修改</button>
 										</form>
 
-										<p>${stored_post.memberbean.mb_Name} ${stored_post.post_time}</p>
+										<p>${stored_post.memberbean.mb_Name} <br>${stored_post.post_time}</p>
 										<h3>${stored_post.post_title}</h3>
-										<p>${stored_post.post_content}</p>
+										<div class="show_part_text">${stored_post.post_content}</div>
+										<button type="button" class="btn btn-link" id="show_complete_post">顯示全文</button>
+										
 
 										<form:form method='post' action='add_command'
 											modelAttribute="commandBean">
