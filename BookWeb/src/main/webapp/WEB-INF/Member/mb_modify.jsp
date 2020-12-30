@@ -177,6 +177,8 @@ span {
 		$(document).ready(function() {
 			$("#bookWebheader").load("<c:url value='/header'/>");
 			$("#bookWebFooter").load("<c:url value='/footer'/>");
+		console.log($('.file').val());
+		
 		});
 
 		function Checkpwd() {
