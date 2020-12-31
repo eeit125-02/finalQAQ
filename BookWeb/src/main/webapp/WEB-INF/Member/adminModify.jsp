@@ -92,7 +92,7 @@ input:checked + .slider:before {
 -ms-transform: translateX(26px);
 transform: translateX(26px);
 }
-fieldset {
+#admin {
 	border-radius: 25px;
 	padding: 20px;
 	margin: auto;
@@ -132,13 +132,10 @@ legend {
 </style>
 </head>
 <body>
-	<!-- header -->
-	<header class="container blog-header py-3" id="bookWebheader"></header>
-	<!-- header -->
 	<div class="container media">
 		<br>
 		<form action="<c:url value='/delete' />" method="post">
-			<fieldset>
+			<fieldset id="admin">
 				<legend>會員清單</legend>
 				<table class="a" width="100%">
 					<tr>
@@ -176,15 +173,9 @@ legend {
 			</fieldset>
 		</form>
 	</div>
-	<!-- footer -->
-	<footer class="container py-5" id="bookWebFooter"></footer>
-	<!-- footer -->
 
 	<script>
 		$(document).ready(function() {
-			console.log("SSS")
-			$("#bookWebheader").load("<c:url value='/header'/>");
-			$("#bookWebFooter").load("<c:url value='/footer'/>");
 			already();
 		});
 		

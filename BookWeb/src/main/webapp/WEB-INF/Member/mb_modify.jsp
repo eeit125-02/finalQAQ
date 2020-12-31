@@ -27,76 +27,19 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
 	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
 	crossorigin="anonymous">
-<!-- <link rel="stylesheet" href="import.css">   -->
 <style>
-/* @import url(https://fonts.googleapis.com/earlyaccess/cwtexyen.css); */
-
-/* body { */
-/* 	font-family: "cwTeXYen", sans-serif; */
-/* 	font-weight: 800; */
-/* 	line-height: 2; */
-/* 	font-size: 18px; */
-/* } */
-
-fieldset {
+#mb_modify {
 	border-radius: 25px;
 	padding: 20px;
 	margin: auto;
-	background-color: #F3F3FA;
-	width: 400px
-}
-
-legend {
-	text-align: center;
-	font-size: 30px;
+/* 	background-color: #F3F3FA; */
+	height: 900px;
+	width: 600px;
 }
 
 p {
-	margin-top: 5px;
-	font-size: 10px
+	border: solid 1px border-radius:10px
 }
-
-form {
-	margin: auto;
-}
-
-input {
-	border-top: white;
-	border-left: white;
-	border-right: white;
-	border-bottom: 1px solid gray;
-}
-
-.a2 input, .a1 input, .a5 input, .a6 input {
-	background-color: rgb(206, 203, 203);
-}
-
-div {
-	margin-left: 50px;
-}
-
-.a11 {
-	text-align: center;
-}
-
-.a11 input {
-	font-size: 16px;
-	text-align: center;
-	border: 1px solid rgb(206, 203, 203);
-	background-color: rgb(233, 162, 115);
-	border-radius: 15px;
-}
-
-span {
-	font-size: 10px;
-}
-
-.a5 {
-	margin-bottom: 25px;
-}
-
-
-
 .bd-placeholder-img {
 	font-size: 1. 125rem;
 	text-anchor: middle;
@@ -111,13 +54,9 @@ span {
 </head>
 
 <body>
-	<!-- header -->
-	<header class="container blog-header py-3" id="bookWebheader"></header>
-	<!-- header -->
-
 	<div class="container media">
 			<form:form method="POST" modelAttribute="MemberBean" enctype="multipart/form-data">
-			<fieldset>
+			<fieldset id="mb_modify">
 				<legend>會員個資</legend>
 				<div class="a2">
 					<label>帳號:</label>&nbsp;&nbsp;<inline>${account}</inline>
@@ -169,17 +108,8 @@ span {
 			</fieldset>
 		</form:form>
 	</div>
-	<!-- footer -->
-	<footer class="container py-5" id="bookWebFooter"></footer>
-	<!-- footer -->
 
 	<script>
-		$(document).ready(function() {
-			$("#bookWebheader").load("<c:url value='/header'/>");
-			$("#bookWebFooter").load("<c:url value='/footer'/>");
-		console.log($('.file').val());
-		
-		});
 
 		function Checkpwd() {
 			let pwd = document.getElementById("pwd").value

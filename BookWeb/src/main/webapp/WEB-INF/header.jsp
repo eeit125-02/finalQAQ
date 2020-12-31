@@ -53,7 +53,11 @@
 			console.log("log")
 			$('#loginButton').html("<a id=\"login\" href=\"//localhost:8080/BookWeb/toLogin\">登入</a>");
 		};
-				
+// 		$(document).ready(function() {
+// 			if(typeof($.cookie('Member_ID')) == "undefined"){
+// 				window.location.href="//localhost:8080/BookWeb/toLogin";
+// 			}
+// 		})
 	</script>
 </body>
 </html>

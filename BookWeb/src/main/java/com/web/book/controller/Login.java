@@ -35,7 +35,7 @@ public class Login {
 	MemberService ms;
 
 	String Account;
-	String logincheck;
+	String logincheck =null;
 	MemberBean checkMember;
 	// 註冊資料
 	@PostMapping("/registe")
@@ -116,7 +116,7 @@ public class Login {
 				String sessionId = GlobalService.createSessionID(String.valueOf(loginMember.getMb_ID()),
 					loginMember.getMb_Name(), loginMember.getMb_Account());
 			Cookie memId = new Cookie("Member_ID", sessionId);
-			memId.setMaxAge(120);
+			memId.setMaxAge(1200);
 			response.addCookie(memId);
 			logincheck = "c" ;
 			return true;
@@ -137,7 +137,7 @@ public class Login {
 				String sessionId = GlobalService.createSessionID(String.valueOf(loginMember.getMb_ID()),
 						loginMember.getMb_Name(), loginMember.getMb_Account());
 				Cookie memId = new Cookie("Member_ID", sessionId);
-				memId.setMaxAge(120);
+				memId.setMaxAge(1200);
 				response.addCookie(memId);
 				logincheck = "a" ;	
 			}else {
@@ -146,7 +146,7 @@ public class Login {
 			String sessionId = GlobalService.createSessionID(String.valueOf(loginMember.getMb_ID()),
 					loginMember.getMb_Name(), loginMember.getMb_Account());
 			Cookie memId = new Cookie("Member_ID", sessionId);
-			memId.setMaxAge(120);
+			memId.setMaxAge(1200);
 			response.addCookie(memId);
 			model.addAttribute("Account", Account);
 			logincheck = "b" ;
@@ -195,11 +195,11 @@ public class Login {
 			System.out.println(mb_inf);
 			model.addAttribute("login", mb_inf);
 		}
-		return "Member/mb_inf";
+		return "redirect:toCity";
 	}
 
 	// 密碼修改介面
-	@PostMapping("/Modify")
+	@GetMapping("/Modify")
 	public String Modify(Model model) {
 		model.addAttribute("account", Account);
 		return "Member/Modify";
@@ -211,16 +211,14 @@ public class Login {
 		MemberBean mb_inf = ms.select(Account);
 		mb_inf.setMb_Password(pwd);
 		ms.update(mb_inf);
-		return "Member/city";
+		return "redirect:toCity";
 	}
 
 	// 管理員(會員資料)
-	@PostMapping("/adminall")
+	@GetMapping("/adminall")
 	public String Memberall(Model model) {
 		List<MemberBean> inf = ms.adminselect();
-		if (inf != null) {
 			model.addAttribute("memberall", inf);
-		}
 		return "Member/adminModify";
 	}
 
@@ -290,9 +288,13 @@ public class Login {
 			return "Member/city";
 		}else if(logincheck.equals("a")) {
 			model.addAttribute("third","admin");
-			return "Member/admin";
+			return "Member/city";
+		}else if(logincheck.equals("b")) {
+			model.addAttribute("common","common");
+			return "Member/city";
+		}else {
+			return "Member/login";
 		}
-		return "Member/city";
 	}
 	
 }
