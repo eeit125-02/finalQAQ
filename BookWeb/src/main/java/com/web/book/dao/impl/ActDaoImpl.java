@@ -77,7 +77,7 @@ public class ActDaoImpl implements ActDao {
 	@Override
 	public List<ActBean> searchKeyword(String keyword) {
 		Session session = factory.getCurrentSession();
-		String hql = "FROM ActBean ab WHERE ab.act_Name like :searchkw";
+		String hql = "FROM ActBean WHERE act_Name like :searchkw";
 		Query<ActBean> query = session.createQuery(hql);
 		return query.setParameter("searchkw","%"+ keyword +"%").getResultList();
 	}

@@ -35,7 +35,7 @@ public class ActBean {
 	@JoinColumn
 	private MemberBean member;
 	
-	public ActBean(Integer act_ID, String act_Image, String act_Name, String act_Theme, String act_Date,
+	public ActBean(Integer act_ID, String act_Image, String act_Name, String act_Theme, String act_Date,String act_Time,
 			String act_Loc, String act_Intro, String act_Guest, String act_Pax, String act_Rule, String act_Tag,
 			String act_Place,MemberBean member) {
 		super();
@@ -43,6 +43,7 @@ public class ActBean {
 		this.act_Image = act_Image;
 		this.act_Name = act_Name;
 		this.act_Theme = act_Theme;
+		this.act_Time = act_Time;
 		this.act_Date = act_Date;
 		this.act_Loc = act_Loc;
 		this.act_Intro = act_Intro;

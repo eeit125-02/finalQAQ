@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -49,11 +50,11 @@ public class ActController {
 	}
 
 	// 搜尋關鍵字
-	@GetMapping("Discussion/search_keyword")
-	public String showSearchResult(Model model, @RequestParam(value = "keyword") String keyword) {
-		List<ActBean> actlist = actService.getAllActs();
-		model.addAttribute("allacts", actlist);
-		return "/Discussion/search_result";
+	@GetMapping("/searchkeyword")
+	@ResponseBody
+	public List<ActBean> showSearchResult(Model model, @RequestParam(value = "keyword") String keyword) {
+		List<ActBean> actlist = actService.searchKeyword(keyword);
+		return actlist;
 	}
 
 	// 顯示新增活動頁面
