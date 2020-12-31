@@ -71,7 +71,7 @@
 <!-- 		<label id="test"></label> -->
 
 		<!-- 內容開始 -->
-		<form:form method="POST" modelAttribute="pageresult">
+		<form:form method="POST" modelAttribute="pageresult" enctype="multipart/form-data">
 
 			<div class="back">
 				<h2 class="check">更新書目資訊</h2>
@@ -120,9 +120,10 @@
 						</div>
 
 						<div class="form-group col-md-6">
-							<form:label path="">封面圖片</form:label>
-							<form:input path="" class="form-control" type="file" />
-							<form:hidden path="bk_Pic" />
+							<form:label path="bk_Pic">封面圖片</form:label>
+							<input class="form-control" name="file" type="file" />
+<%-- 							<form:input path="" class="form-control" type="file" /> --%>
+<%-- 							<form:hidden path="bk_Pic" /> --%>
 						</div>
 					</div>
 

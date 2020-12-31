@@ -36,6 +36,8 @@ public interface SearchService {
 	List<BookBean> searchBookAuthor(String name);
 	//查詢書籍出版社
 	List<BookBean> searchBookPublish(String name);
+	//查詢書籍類型
+	List<BookTypeBean> searchBookType(List<Integer> reslist);
 
 
 }

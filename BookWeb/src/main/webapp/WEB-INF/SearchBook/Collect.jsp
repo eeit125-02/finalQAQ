@@ -89,7 +89,8 @@
 					dataType : "json",
 					contentType : "application/json;charset=utf-8",
 					error : function() {
-						alert('123 ');
+						alert('請先登入');
+						window.location("Member/toLogin");
 					},
 					success : function(data) {
 						var insertData = "<div>";
@@ -98,7 +99,7 @@
 								+"<div class=\"col-sm-2\">"
 								+"<img class=\"itemcov\" alt=\"\" src=\""
 								+data[i].bk_Pic
-								+"\" height=\"190\">"
+								+"\" width=\"150\">"
 								+"</div>"
 								+"<div class=\"col-sm-10\">"
 								+"<h3>"

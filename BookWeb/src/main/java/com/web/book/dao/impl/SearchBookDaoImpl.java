@@ -16,6 +16,8 @@ import com.web.book.model.BookCollectBean;
 import com.web.book.model.BookTypeBean;
 import com.web.book.model.MemberBean;
 
+import net.bytebuddy.asm.Advice.Return;
+
 @Repository
 public class SearchBookDaoImpl implements SearchBookDAO {
 
@@ -23,7 +25,6 @@ public class SearchBookDaoImpl implements SearchBookDAO {
 	SessionFactory factory;
 
 	// 查詢書籍關鍵字
-	// 缺一個判斷list=0就顯示查無此書的判斷式
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<BookBean> searchBook(String name) {
@@ -34,7 +35,6 @@ public class SearchBookDaoImpl implements SearchBookDAO {
 	}
 	
 	// 查詢書籍作者
-	// 缺一個判斷list=0就顯示查無此書的判斷式
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<BookBean> searchBookAuthor(String name) {
@@ -45,7 +45,6 @@ public class SearchBookDaoImpl implements SearchBookDAO {
 	}
 	
 	// 查詢書籍出版社
-	// 缺一個判斷list=0就顯示查無此書的判斷式
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<BookBean> searchBookPublish(String name) {
@@ -54,6 +53,28 @@ public class SearchBookDaoImpl implements SearchBookDAO {
 		Query<BookBean> query = session.createQuery(hql);
 		return query.setParameter("searchkw","%"+ name +"%").getResultList();
 	}
+	
+	
+	//查詢書籍類型
+	@SuppressWarnings({ "unchecked" })
+	@Override
+	public List<BookTypeBean> searchBookType(List<Integer> reslist) {
+		Session session = factory.getCurrentSession();
+		List<BookTypeBean> res1=new ArrayList<BookTypeBean>();
+		ArrayList<BookTypeBean> res=new ArrayList<BookTypeBean>();
+		
+		for(Integer typeid :reslist) {
+			System.out.println(typeid);
+			String hql = "SELECT book FROM BookTypeBean WHERE sty_ID= :styid";
+			BookTypeBean bt=session.load(BookTypeBean.class, typeid);
+			Query<BookTypeBean> query = session.createQuery(hql);
+			res1 = query.setParameter("styid", bt).getResultList();
+			System.out.println(res1);
+			res.addAll(res1);
+		}	
+		return res;		
+	}
+
 
 	// 取得單一本書的詳細資訊
 	@Override
@@ -111,7 +132,6 @@ public class SearchBookDaoImpl implements SearchBookDAO {
 	@Override
 	public boolean savebc(int bk_id, int mb_id) {
 		boolean result=false;
-//		int count = 0;
 		Session session = factory.getCurrentSession();
 		LocalDate d = LocalDate.now();
 		java.sql.Date sqlDate = java.sql.Date.valueOf(d);
@@ -127,14 +147,11 @@ public class SearchBookDaoImpl implements SearchBookDAO {
 			BookCollectBean bkc=new BookCollectBean(1, sqlDate, null, book, member);
 			session.save(bkc);
 		}		
-//		count++;
-//		if(count>0) {
-//			result=true;
-//		}
 		return result;
 	}
 
 	// 新增書本
+	@SuppressWarnings("unused")
 	@Override
 	public BookBean savebk(BookBean bkc) {
 		int count = 0;

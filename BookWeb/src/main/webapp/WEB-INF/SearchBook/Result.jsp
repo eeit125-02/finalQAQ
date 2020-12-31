@@ -87,8 +87,15 @@
 
 
 		<h3>搜尋結果：（總共 ${searchresultnumber} 筆）</h3>
-			<h6>頁數：${page}／${totalPages}</h6>
-			
+		
+						<c:if test='${empty count}'>
+						<h6></h6>				
+						</c:if>
+												
+						<c:if test='${not empty count}'>
+						<h6>頁數：${page}／${totalPages}</h6>
+						</c:if>		
+							
 		<br>
 		
 		<div><h4>　　　　　　${searchresultzero}</h4></div>
@@ -102,11 +109,13 @@
 <c:set var="currentPageUsers" value="${searchresult.subList(beginIndex,endIndex)}"/>	
 		
 		<c:forEach items="${currentPageUsers}" var="row">
+<%-- 		<c:forEach items="${searchresulttype}" var="row1"> --%>
 		
 		<div class="row">
 <!--圖片 -->
 			<div class="col-sm-2">			
-				<img class="itemcov" alt="" src="${row.getBk_Pic()}" height="190">
+<%-- 				<img class="itemcov" alt="" src="${row.getBk_Pic()}" height="190"> --%>
+				<img class="itemcov" alt="" src="${row.getBk_Pic()}" width="150">
 			</div>
 			
 <!-- 書名+作者+出版社+出版日期 -->
@@ -119,14 +128,19 @@
 				</h3>
 				｜ 作者：${row.getBk_Author()} ｜  出版社：${row.getBk_Publish()} ${row.getBk_ID()} ｜  出版日期：${row.getBk_Date()}｜ <br>
 				<p class="ellipsis"style="padding-top:15px">${row.getBk_Content()}</p>
-				<div class="collect">
+				
+<!-- 收藏按鈕 -->
+				<div class="collect" id="collect">
 <%-- 					<form name=a2 action="<c:url value='/resultcollect' />" --%>
 <!-- 						method="get"> -->
-						<img alt="點選收藏"
-							src="${pageContext.request.contextPath}/image/heartred.png"
-							id="Img/heart" width="25px">
+<!-- 						<img alt="點選收藏" -->
+<%-- 							src="${pageContext.request.contextPath}/image/heartred.png" --%>
+<!-- 							id="Img/heart" width="25px"> -->
 						<button id="gocollect" type="submit" name="collect" onclick="a${row.getBk_ID()}();"
-							class="btn btn-outline-danger btn-sm" value="${row.getBk_ID()}">收藏本書</button>
+							class="btn btn-outline-danger btn-sm" value="${row.getBk_ID()}">
+							<img alt="收藏"
+							src="${pageContext.request.contextPath}/image/heartred.png"
+							id="Img/heart" width="25px"> 加入收藏</button>
 <!-- 					</form> -->
 				</div>
 						<br>
@@ -136,14 +150,13 @@
 		
 	<script >
 
-// 		$('#gocollect').click(function() {
+//點擊加入收藏
 		function a${row.getBk_ID()}() {
 			console.log("test");
 			let bk_ID = ${row.getBk_ID()}
 			console.log(bk_ID);
 			let editURL = "searchbook/resultcollect/"+bk_ID;
 			
-			console.log(editURL)
 			$.ajax({
 				async : false,
 				type : 'GET',
@@ -161,8 +174,15 @@
 		}
 	</script>
 		</c:forEach>
-
+<%-- 		</c:forEach> --%>
 <div class="d-flex justify-content-center">
+
+						<c:if test='${empty count}'>
+						<nav></nav>				
+						</c:if>
+												
+						<c:if test='${not empty count}'>
+						
 <nav aria-label="Page navigation example">
 <ul class="pagination">
 
@@ -212,11 +232,78 @@
 <li class="page-item"><a href="${finalpage}" class="page-link">尾頁</a></li>
 </ul>
 </nav>
+						</c:if>		
+						
+						
+						
+						
+						<c:if test='${empty count1}'>
+						<nav></nav>				
+						</c:if>
+												
+						<c:if test='${not empty count1}'>
+						
+<nav aria-label="Page navigation example">
+<ul class="pagination">
+
+	<c:url value="/searchtype/1" var="firstpage">
+		<c:param name="reslist" value="${reslist}"></c:param>	
+	</c:url>
+	
+	<c:url value="/searchtype/${page-1>1?page-1:1}" var="frontpage">
+		<c:param name="reslist" value="${reslist}"></c:param>	
+	</c:url>	
+	
+<li class="page-item"><a href="${firstpage}" class="page-link">首頁</a></li>
+<li class="page-item"><a href="${frontpage}" class="page-link">&laquo;</a></li>
+	
+<c:forEach begin="1" end="${totalPages}" varStatus="loop">
+<c:set var="active" value="${loop.index==page?'active':''}"/>
+	<c:url value="/searchtype/${loop.index}" var="middlepage">
+		<c:param name="reslist" value="${reslist}"></c:param>	
+	</c:url>
+
+	<c:url value="/searchtype/${page+1<totalPages?page+1:totalPages}" var="nextpage">
+		<c:param name="reslist" value="${reslist}"></c:param>	
+	</c:url>
+	
+	<c:url value="/searchtype/${totalPages}" var="finalpage">
+		<c:param name="reslist" value="${reslist}"></c:param>	
+	</c:url>
+
+<li class="page-item ${active}">
+<a href="${middlepage}" class="page-link">${loop.index}</a>
+</li>
+</c:forEach>
+
+<li class="page-item">
+<a href="${nextpage}" class="page-link">&raquo;</a>
+</li>
+<li class="page-item"><a href="${finalpage}" class="page-link">尾頁</a></li>
+</ul>
+</nav>
+						</c:if>								
+						
+						
+						
+						
+						
+						
+						
+						
+						
 </div>	
 
 </div>
 
 	<!-- 內容結束 -->
+	
+	
+			<c:forEach items="${searchresulttype}" var="row1">
+				${row1.getBk_ID()}<br>
+				${row1.getBk_Name()}
+	
+			</c:forEach>
 
 	<!-- body -->
 
