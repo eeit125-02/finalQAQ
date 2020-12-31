@@ -37,7 +37,7 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 /* 	font-size: 18px; */
 /* } */
 
-fieldset {
+#adminupdate {
 	border-radius: 25px;
 	padding: 20px;
 	background-color:#F3F3FA;
@@ -98,13 +98,10 @@ margin:auto
 </head>
 <body>
 
-	<!-- header -->
-	<header class="container blog-header py-3" id="bookWebheader"></header>
-	<!-- header -->
 <div class="container media"><br>
 	
 		<form action="<c:url value='/adminupdate' />" method="post">
-			<fieldset>
+			<fieldset id="adminupdate">
 				<legend>會員修改</legend>
 				<input name="account" value="${member.mb_Account}" type="hidden">
 				<div>
@@ -168,18 +165,6 @@ margin:auto
 		</form>
 
 	</div>
-	<!-- footer -->
-	<footer class="container py-5" id="bookWebFooter"></footer>
-	<!-- footer -->
-
-	<script>
-	
-	$(document).ready(function() {
-		$("#bookWebheader").load("<c:url value='/header'/>");
-        $("#bookWebFooter").load("<c:url value='/footer'/>");
-	});	
-
-	</script>
 
 </body>
 

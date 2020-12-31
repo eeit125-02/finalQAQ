@@ -29,16 +29,8 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 	crossorigin="anonymous">
 <!-- <link rel="stylesheet" href="import.css">   -->
 <style>
-@import url(https://fonts.googleapis.com/earlyaccess/cwtexyen.css);
 
-body {
-	font-family: "cwTeXYen", sans-serif;
-	font-weight: 800;
-	line-height: 2;
-	font-size: 18px;
-}
-
-fieldset {
+#mbpwd {
 	border-radius: 25px;
 	padding: 20px;
 	margin: auto;
@@ -113,13 +105,9 @@ span {
 </head>
 
 <body>
-	<!-- header -->
-	<header class="container blog-header py-3" id="bookWebheader"></header>
-	<!-- header -->
-
 	<div class="container media">
 					<form action="<c:url value='/Update'/>" method="post">
-			<fieldset>
+			<fieldset id="mb_pwd">
 				<legend>會員個資</legend>
 				<div class="a2">
 					<label>帳號:</label>
@@ -186,15 +174,7 @@ span {
 			</fieldset>
 		</form>
 	</div>
-	<!-- footer -->
-	<footer class="container py-5" id="bookWebFooter"></footer>
-	<!-- footer -->
-
 	<script>
-		$(document).ready(function() {
-			$("#bookWebheader").load("<c:url value='/header'/>");
-			$("#bookWebFooter").load("<c:url value='/footer'/>");
-		});
 
 		function Checkpwd() {
 			let pwd = document.getElementById("pwd").value
