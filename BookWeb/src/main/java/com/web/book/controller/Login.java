@@ -133,7 +133,7 @@ public class Login {
 					loginMember.setMb_Name(name);
 					ms.insertMember(loginMember);
 			}
-			GlobalService.setLoginMember(loginMember);
+			//GlobalService.setLoginMember(loginMember);
 			String sessionId = GlobalService.createSessionID(String.valueOf(loginMember.getMb_ID()),
 					loginMember.getMb_Name(), loginMember.getMb_Account());
 			Cookie memId = new Cookie("Member_ID", sessionId);
