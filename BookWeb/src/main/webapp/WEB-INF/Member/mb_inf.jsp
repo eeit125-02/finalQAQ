@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	<%@ taglib uri="http://www.springframework.org/tags" prefix="c" %>
-	<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="c"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -32,63 +32,59 @@
 /* 	line-height: 2; */
 /* 	font-size: 18px; */
 /* } */
-
 fieldset {
 	border-radius: 25px;
 	padding: 20px;
 	margin: auto;
-	background-color: #F3F3FA;
-	width: 400px
+/* 	background-color: #F3F3FA; */
+	height: 900px;
+	width: 600px;
 }
 
-legend {
-	text-align: center;
-	font-size: 30px;
-}
 
-p {
-	margin-top: 5px;
-	font-size: 10px
-}
+/* legend { */
+/* 	text-align: center; */
+/* 	font-size: 30px; */
+/* } */
 
-input {
-	border-top: white;
-	border-left: white;
-	border-right: white;
-	border-bottom: 1px solid gray;
-}
+/* p { */
+/* 	margin-top: 5px; */
+/* 	font-size: 10px */
+/* } */
 
-.a2 input, .a1 input, .a5 input, .a6 input {
-	background-color: rgb(206, 203, 203);
-}
+/* input { */
+/* 	border-top: white; */
+/* 	border-left: white; */
+/* 	border-right: white; */
+/* 	border-bottom: 1px solid gray; */
+/* } */
 
-div {
-	float : center;
-	margin-left: 150px;
-}
+/* .a2 input, .a1 input, .a5 input, .a6 input { */
+/* 	background-color: rgb(206, 203, 203); */
+/* } */
 
-.a11 button {
-	font-size: 16px;
-	text-align: center;
-}
+/* div { */
+/* 	float : center; */
+/* 	margin-left: 150px; */
+/* } */
 
-.a11 {
-	margin: 0px;
-	text-align: center;
-}
+/* .a11 button { */
+/* 	font-size: 16px; */
+/* 	text-align: center; */
+/* } */
 
-span {
-	font-size: 10px;
-}
+/* .a11 { */
+/* 	margin: 0px; */
+/* 	text-align: center; */
+/* } */
 
-.a4 {
-	margin-bottom: 25px;
-}
+/* .a4 { */
+/* 	margin-bottom: 25px; */
+/* } */
 
-.a5 {
-	margin-bottom: 25px;
-}
-
+/* .a5 { */
+/* 	margin-bottom: 25px; */
+/* } */
 .bd-placeholder-img {
 	font-size: 1. 125rem;
 	text-anchor: middle;
@@ -99,68 +95,152 @@ span {
 		font-size: 3.5rem;
 	}
 }
+
+p {
+	border: solid 1px border-radius:10px
+}
+
+.tr1{
+background-color:#68b0ab
+
+}
+
+.tr2{
+background-color:#e0ece4
+}
+
 </style>
 </head>
 
 <body>
-<!-- header -->
+	<!-- header -->
 	<header class="container blog-header py-3" id="bookWebheader"></header>
 	<!-- header -->
 	<div class="container media">
-		<fieldset>
+
+
+
+		<fieldset id="mb_inf1">
+
 			<legend>會員資料</legend>
-			<img src="${login.mb_pic}" style="width:140px; height: 150px; float: left"/>
-			<div class="a2">
-				<label>帳號:</label>
-				<p>${login.mb_Account}</p>
-			</div>
-			<div class="a3">
-				<label>密碼:</label>
-				<p>${login.mb_Password}</p>
-			</div>
-			<div class="a1">
-				<label>姓名:</label>
-				<p>${login.mb_Name}</p>
-			</div>
-			<div class="a5">
-				<label>性別:</label>
-				<p>${login.mb_Sex}</p>
-			</div>
-			<div class="a6">
-				<label>生日:</label>
-				<p>${login.mb_Birthday}</p>
-			</div>
-			<div class="a7">
-				<label>地址:</label>
-				<p>${login.mb_Address}</p>
-			</div>
+			<form>
+<!-- 				<fieldset style="background-color:white; width:550px; height:700px"> -->
+				<div >
+					<img src="${login.mb_pic}" style="width: 200px; height: 200px; text-align:center; border-radius: 50%;" />
+				</div>
+				<br>
 
-			<div class="a8">
-				<label>電話:</label>
-				<p>${login.mb_Tel}</p>
-			</div>
+				<table class="table" >
+					<tr class="tr1">
+						<th scope="col" >帳號</th>
+						<th scope="col" >密碼</th>
+					</tr>
+					<tr class="table-light">
+						<td>${login.mb_Account}</td>
+						<td>${login.mb_Password}</td>
+					</tr>
 
-			<div class="a9">
-				<label>E-mail:</label>
-				<p>${login.mb_Mail}</p>
-			</div>
+					<tr class="tr2">
+						<th scope="col">姓名</th>
+						<th scope="col">性別</th>
+					</tr>
+					<tr class="table-light">
+						<td>${login.mb_Name}</td>
+						<td>${login.mb_Sex}</td>
+					</tr>
 
-			<div class="a10">
-				<label>喜好類型:</label><br />
-				<p>${login.mb_type}</p>
-			</div>
-			<br>
+					<tr class="tr2">
+						<th scope="col">生日</th>
+						<th scope="col">電話</th>
+					</tr>
+					<tr class="table-light">
+						<td>${login.mb_Birthday}</td>
+						<td>${login.mb_Tel}</td>
+					</tr>
+
+					<tr class="tr2">
+						<th colspan="2">Email</th>
+					</tr>
+					<tr class="table-light">
+						<td colspan="2">${login.mb_Mail}</td>
+					</tr>
+
+					<tr class="tr2">
+						<th colspan="2">地址</th>
+					</tr>
+					<tr  class="table-light">
+						<td colspan="2">${login.mb_Address}</td>
+					</tr>
+
+					<tr class="tr2">
+						<th colspan="2">喜好類型</th>
+					</tr>
+					<tr  class="table-light">
+						<td colspan="2">${login.mb_type}</td>
+					</tr>
+
+				</table>
+
+
+
+
+			</form>
 		</fieldset>
-			</div>
-	<!-- footer -->
-	<footer class="container py-5" id="bookWebFooter"></footer>
-	<!-- footer -->
+
+
+
+
+
+
+
+			<!-- 			<div class="a2"> -->
+			<!-- 				<label>帳號:</label> -->
+			<%-- 				<p>${login.mb_Account}</p> --%>
+			<!-- 			</div> -->
+			<!-- 			<div class="a3"> -->
+			<!-- 				<label>密碼:</label> -->
+			<%-- 				<p>${login.mb_Password}</p> --%>
+			<!-- 			</div> -->
+			<!-- 			<div class="a1"> -->
+			<!-- 				<label>姓名:</label> -->
+			<%-- 				<p>${login.mb_Name}</p> --%>
+			<!-- 			</div> -->
+			<!-- 			<div class="a5"> -->
+			<!-- 				<label>性別:</label> -->
+			<%-- 				<p>${login.mb_Sex}</p> --%>
+			<!-- 			</div> -->
+			<!-- 			<div class="a6"> -->
+			<!-- 				<label>生日:</label> -->
+			<%-- 				<p>${login.mb_Birthday}</p> --%>
+			<!-- 			</div> -->
+			<!-- 			<div class="a7"> -->
+			<!-- 				<label>地址:</label> -->
+			<%-- 				<p>${login.mb_Address}</p> --%>
+			<!-- 			</div> -->
+
+			<!-- 			<div class="a8"> -->
+			<!-- 				<label>電話:</label> -->
+			<%-- 				<p>${login.mb_Tel}</p> --%>
+			<!-- 			</div> -->
+
+			<!-- 			<div class="a9"> -->
+			<!-- 				<label>E-mail:</label> -->
+			<%-- 				<p>${login.mb_Mail}</p> --%>
+			<!-- 			</div> -->
+
+			<!-- 			<div class="a10"> -->
+			<!-- 				<label>喜好類型:</label><br /> -->
+			<%-- 				<p>${login.mb_type}</p> --%>
+			<!-- 			</div> -->
+			<br>
+	</div>
+
 	<script>
-	$(document).ready(function() {
-		$("#bookWebheader").load("<c:url value='/header'/>");
-        $("#bookWebFooter").load("<c:url value='/footer'/>");
-	});
-</script>
+		$(document).ready(function() {
+			$("#bookWebheader").load("<c:url value='/header'/>");
+
+		});
+	</script>
 </body>
 
 </html>
