@@ -22,11 +22,11 @@ public class ActJoinBean {
 	
 	
 	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn
+	@JoinColumn(name="act_ID")
 	private ActBean act;
 	
 	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn
+	@JoinColumn(name="mb_ID")
 	private MemberBean member;
 
 	

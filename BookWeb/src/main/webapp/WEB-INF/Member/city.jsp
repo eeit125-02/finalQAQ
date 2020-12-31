@@ -21,7 +21,6 @@
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
 	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
 	crossorigin="anonymous">
-<link rel="stylesheet" href="import.css">
 <style>
 /* @import url(https://fonts.googleapis.com/earlyaccess/cwtexyen.css); */
 
@@ -32,14 +31,23 @@
 /* 	font-size: 18px; */
 /* } */
 
-fieldset {
+
+#mb_id1 { 
+ 	border-radius: 25px; 
+ 	padding: 20px; 
+ 	margin: auto; 
+ 	background-color: #F3F3FA; 
+ 	height:2000px;
+ 	width: 1000px ;
+ } 
+#city {
 	border-radius: 25px;
 	padding: 20px;
-	margin: auto;
 	background-color: #F3F3FA;
-	width: 400px
+	height:400px;
+	width: 200px;
 }
-
+ 
 legend {
 	text-align: center;
 	font-size: 30px;
@@ -75,15 +83,16 @@ p {
 	<!-- header -->
 
 	<div class="container media">
-	<fieldset>
+	<fieldset id="city">
 		<legend>會員中心</legend>
 		<div>
 			<form action="<c:url value='/adminall' />" method="post">
 				<button type="submit" id="admin" name="admin" class="btn btn-outline-secondary">會員資訊</button>
 			</form>
-			<form action="<c:url value='/mb_inf' />" method="post">
-				<button type="submit" id="inf" name="mb_inf" class="btn btn-outline-secondary">會員資訊</button>
-			</form>
+<%-- 			<form action="<c:url value='/mb_inf' />" method="post"> --%>
+				<div><button type="submit" id="inf" name="mb_inf" class="btn btn-outline-secondary">會員資訊</button>
+				</div>
+<!-- 			</form> -->
 			<form action="<c:url value='/MbUpdate' />">
 				<button type="submit" id="Modify" name="Modify" class="btn btn-outline-secondary">會員修改</button>
 			</form>
@@ -95,6 +104,7 @@ p {
 			</form>
 		</div>
 	</fieldset>
+		<div id="change123" style="width:1000px"></div>
 	</div>
 	<input id="test" type="hidden" value="${third}">
 	<!-- footer -->
@@ -116,6 +126,9 @@ p {
 		}else{
 			$("#admin").hide();
 		}
+	 $("#inf").click(function(){
+		$('#change123').load("/BookWeb/mb_inf") 
+	 })
 	});
 </script>
 </body>

@@ -156,7 +156,7 @@ public class Login {
 		return "Member/login";
 				}
 	// 會員資料
-	@PostMapping("/mb_inf")
+	@GetMapping("/mb_inf")
 	public String Mb_inf(Model model) {
 		MemberBean memberbean = new MemberBean();
 		model.addAttribute("MemberBean", memberbean);
@@ -164,6 +164,7 @@ public class Login {
 		System.out.println(select);
 		System.out.println(select.getMb_pic());
 		model.addAttribute("login", select);
+		System.out.println("abc");
 		return "Member/mb_inf";
 	}
 
