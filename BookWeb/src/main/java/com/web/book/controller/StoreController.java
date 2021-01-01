@@ -31,8 +31,8 @@ public class StoreController {
 //  最終呈現首頁製作中
 	@GetMapping("qaqTest")
 	public String qaqmainPage(Model model) {
-//		List<BookBean> list = bookStoreService.searchBookStore();
-//		model.addAttribute("bookstore", list);
+		List<BookBean> list = bookStoreService.searchBookStore();
+		model.addAttribute("store", list);
 		return "/Transation/qaqMain";
 	}
 

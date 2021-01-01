@@ -47,7 +47,9 @@
 	<!-- header -->
 
 	<!-- body -->
-	<div style="text-align:center"><h2>二手書圖</h2></div>
+	<div style="text-align: center">
+		<h2>二手書圖</h2>
+	</div>
 	<!-- 搜尋商品欄	 start -->
 	<form class="bs-example bs-example-form" role="form">
 		<div class="row">
@@ -63,19 +65,45 @@
 					</span>
 				</div>
 			</div>
-			<div class="col-lg-4"></div>
 		</div>
 	</form>
+	<br>
 	<!-- 搜尋商品欄	end -->
+	<!-- 	版面置中 -->
+	<div class="container">
+	<!-- 	版面置中 -->
+		<div class="row">
+	<c:forEach items="${store}" var="v">
+			<div class="card col-sm-3" style="width: 18rem;">
+				<img src="<c:url value=" ${v.bk_Pic} " />" 
+				class="card-img-top" alt="..." style="height: 18rem;">
+				<div class="card-body">
+				<a href="#" >${v.bk_Name }</a>
+					<br>
+					<span class="card-text">作者: ${ v.bk_Author }</span>
+					<br>
+					<span class="card-text">出版社: ${ v.bk_Publish }</span>
+					<br>
+					<span class="card-text">出版日: ${ v.bk_Date }</span>
+					<br>
+					<span class="card-text">價錢: ${ v.bk_Price }</span>
+					<br>
+					<a href="#" >簡介&#149;比價 $ 最小 ~ 最大   共 $ 項</a>
+				</div>
+			</div>
+	</c:forEach>
+			
+		</div>
+	<!-- 	版面置中 -->
+	</div>
+	<!-- 	版面置中 -->
 
 
 
-	
 	<!-- body -->
 
 	<!-- footer -->
 	<footer class="container py-5" id="bookWebFooter"></footer>
 	<!-- footer -->
-
 </body>
 </html>
