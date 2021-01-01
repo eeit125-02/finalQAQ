@@ -39,14 +39,20 @@
 	}
 }
 
+.hide_content {
+	display: none;
+}
 
-	.show_part_text{
-	    overflow : hidden;
-	    text-overflow: ellipsis;
-	    white-space:nowrap;
-	}
+.show_part_text {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
 
-
+.show_all_text {
+	white-space: pre-line;
+	overflow: inherit;
+}
 </style>
 
 <script>
@@ -148,32 +154,28 @@
 												<td style="text-align: left; vertical-align: middle">${stored_post.post_title}</td>
 												<td style="vertical-align: middle">${stored_post.post_time}</td>
 												<td style="vertical-align: middle">${stored_post.memberbean.mb_Name}</td>
-												<td style="vertical-align: middle">
-													<c:set var="command_qty" value="${0}" /> 
-														<c:forEach var="stored_command" items="${allCommand}">
-															<c:set var="pi" value="${stored_post.post_id}" />
-															<c:set var="ci" value="${stored_command.postBean.post_id}" />
-															<c:if test="${pi==ci}"> 
-																<c:set var="command_qty" value="${command_qty+1}" />
-															</c:if>
-														</c:forEach> 
-														<!-- 	引用icon -->
-														<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chat" viewBox="0 0 16 16">
-  															<path d="M2.678 11.894a1 1 0 0 1 .287.801 10.97 10.97 0 0 1-.398 2c1.395-.323 2.247-.697 2.634-.893a1 1 0 0 1 .71-.074A8.06 8.06 0 0 0 8 14c3.996 0 7-2.807 7-6 0-3.192-3.004-6-7-6S1 4.808 1 8c0 1.468.617 2.83 1.678 3.894zm-.493 3.905a21.682 21.682 0 0 1-.713.129c-.2.032-.352-.176-.273-.362a9.68 9.68 0 0 0 .244-.637l.003-.01c.248-.72.45-1.548.524-2.319C.743 11.37 0 9.76 0 8c0-3.866 3.582-7 8-7s8 3.134 8 7-3.582 7-8 7a9.06 9.06 0 0 1-2.347-.306c-.52.263-1.639.742-3.468 1.105z"/>
-														</svg>
-														<i class="bi bi-chat"></i>	
-													${command_qty}
-												</td>
-												<td style="vertical-align: middle">
-												
-												<c:url value="show_detail" var="show_detail">
-													<c:param name="post_detail_id" value=" ${stored_post.post_id}" />
-												</c:url>
-												<form action="${show_detail}" method="post">
-													<button type="submit" class="btn btn-link">Go</button>
-												</form>
-												
-												</td>
+												<td style="vertical-align: middle"><c:set
+														var="command_qty" value="${0}" /> <c:forEach
+														var="stored_command" items="${allCommand}">
+														<c:set var="pi" value="${stored_post.post_id}" />
+														<c:set var="ci" value="${stored_command.postBean.post_id}" />
+														<c:if test="${pi==ci}">
+															<c:set var="command_qty" value="${command_qty+1}" />
+														</c:if>
+													</c:forEach> <!-- 	引用icon --> <svg xmlns="http://www.w3.org/2000/svg"
+														width="16" height="16" fill="currentColor"
+														class="bi bi-chat" viewBox="0 0 16 16">
+  															<path
+															d="M2.678 11.894a1 1 0 0 1 .287.801 10.97 10.97 0 0 1-.398 2c1.395-.323 2.247-.697 2.634-.893a1 1 0 0 1 .71-.074A8.06 8.06 0 0 0 8 14c3.996 0 7-2.807 7-6 0-3.192-3.004-6-7-6S1 4.808 1 8c0 1.468.617 2.83 1.678 3.894zm-.493 3.905a21.682 21.682 0 0 1-.713.129c-.2.032-.352-.176-.273-.362a9.68 9.68 0 0 0 .244-.637l.003-.01c.248-.72.45-1.548.524-2.319C.743 11.37 0 9.76 0 8c0-3.866 3.582-7 8-7s8 3.134 8 7-3.582 7-8 7a9.06 9.06 0 0 1-2.347-.306c-.52.263-1.639.742-3.468 1.105z" />
+														</svg> <i class="bi bi-chat"></i> ${command_qty}</td>
+												<td style="vertical-align: middle"><c:url
+														value="show_detail" var="show_detail">
+														<c:param name="post_detail_id"
+															value=" ${stored_post.post_id}" />
+													</c:url>
+													<form action="${show_detail}" method="post">
+														<button type="submit" class="btn btn-link">Go</button>
+													</form></td>
 											</tr>
 										</c:forEach>
 									</tbody>
@@ -266,39 +268,88 @@
 												type="submit">修改</button>
 										</form>
 
-										<p>${stored_post.memberbean.mb_Name} <br>${stored_post.post_time}</p>
+										<p>${stored_post.memberbean.mb_Name}
+											<br>${stored_post.post_time}</p>
 										<h3>${stored_post.post_title}</h3>
-										<div class="show_part_text">${stored_post.post_content}</div>
-										<button type="button" class="btn btn-link" id="show_complete_post">顯示全文</button>
-										
 
-										<form:form method='post' action='add_command'
-											modelAttribute="commandBean">
-											<div class="input-group mb-3">
-												<form:input type="text" class="form-control"
-													id="command_input" path="command_content"
-													placeholder="請輸入留言" />
-												<form:hidden path="command_time" />
-												<form:hidden path="postBean.post_id" name="post_id"
-													value="${stored_post.post_id}" />
-												<div class="input-group-append">
-													<button class="btn btn-outline-secondary" id="command_btn"
-														type="submit">留言</button>
+
+
+										<button class="btn btn-link" type="button"
+											data-toggle="collapse"
+											data-target="#show_complete_post${stored_post.post_id}">
+											顯示、收攏貼文</button>
+										<button class="btn btn-link" type="button"
+											data-toggle="collapse"
+											data-target="#show_complete_command${stored_post.post_id}">
+											顯示、收攏留言</button>
+
+										<!-- show complete post -->
+										<div class="collapse"
+											id="show_complete_post${stored_post.post_id}">
+											<div class="card card-body" style="border-style: none">
+												${stored_post.post_content}</div>
+										</div>
+										<!-- show complete command -->
+										<div class="collapse"
+											id="show_complete_command${stored_post.post_id}">
+											<div class="card card-body" style="border-style: none">
+
+												
+													<div class="input-group mb-3">
+														<input type="text" class="form-control"
+															id="command_input${stored_post.post_id}"
+															placeholder="請輸入留言" />
+															<input type="hidden" name="post_id" id="post_id" value="${stored_post.post_id}" />
+														<div class="input-group-append">
+															<button class="btn btn-outline-secondary"
+																id="command_btn${stored_post.post_id}" type="submit">留言</button>
+														</div>
+													</div>
+												
+												<div id="show_command${stored_post.post_id}">
+												<c:forEach var="stored_command" items="${allCommand}">
+													<c:set var="pi" value="${stored_post.post_id}" />
+													<c:set var="ci" value="${stored_command.postBean.post_id}" />
+													<c:if test="${pi==ci}">
+														<div
+															style="background-color: #C4E1FF; margin: 10px; padding: 5px; border-radius: 10px;">
+															<p>${stored_command.memberbean.mb_Name}<br>
+																${stored_command.command_time}</p>
+															<p>${stored_command.command_content}</p>
+														</div>
+													</c:if>
+												</c:forEach>
 												</div>
+
+							<script>
+									$('#command_btn${stored_post.post_id}').click(function() {
+										$.ajax({
+											url : '<c:url value="/Dsicussion/add_command_ajax"/>',
+											type : 'POST',
+											data : {
+												new_command : $("#command_input${stored_post.post_id}").val(),
+												post_id:$("#post_id").val()
+												},
+											dataType : "json",
+											success : function(new_cb) {
+		
+												$( "#show_command${stored_post.post_id}" ).prepend( 
+														'<div style="background-color: #C4E1FF; margin: 10px; padding: 5px; border-radius: 10px;">'+
+														'<p>'+ new_cb.mb_name +'<br>'+ new_cb.cb_time+'</p>'+
+														'<p>'+ new_cb.cb_content+'</p>'+
+														'</div>' );
+											}
+										})
+											$('#command_input${stored_post.post_id}').val("");
+											$('#command_input${stored_post.post_id}').attr("placeholder","請輸入留言");
+									})
+								</script>
+
+
+
 											</div>
-										</form:form>
+										</div>
 
-										<c:forEach var="stored_command" items="${allCommand}">
-											<c:set var="pi" value="${stored_post.post_id}" />
-											<c:set var="ci" value="${stored_command.postBean.post_id}" />
-											<c:if test="${pi==ci}">
-												<div
-													style="background-color: #C4E1FF; margin: 10px; padding: 5px; border-radius: 10px;">
-													<p>${stored_command.memberbean.mb_Name} ${stored_command.command_time}</p>
-													<p>${stored_command.command_content}</p>
-												</div>
-											</c:if>
-										</c:forEach>
 									</div>
 									<br>
 								</c:forEach>
@@ -361,18 +412,32 @@
 
 
 								<script>
-									$('#send_rule').click(function() {
-										$.ajax({
-											url : '<c:url value="/Discussion/edit_rule"/>',
-											type : 'POST',
-											data : {rule_content : $("#rule_content").val()},
-											dataType : "json",
-											success : function(rb) {
-												$('#last_edit_time').html(rb.rule_time)
-												$('#show_rule').html(rb.rule_content)
-											}
-										})
-									})
+									$('#send_rule')
+											.click(
+													function() {
+														$
+																.ajax({
+																	url : '<c:url value="/Discussion/edit_rule"/>',
+																	type : 'POST',
+																	data : {
+																		rule_content : $(
+																				"#rule_content")
+																				.val()
+																	},
+																	dataType : "json",
+																	success : function(
+																			rb) {
+																		$(
+																				'#last_edit_time')
+																				.html(
+																						rb.rule_time)
+																		$(
+																				'#show_rule')
+																				.html(
+																						rb.rule_content)
+																	}
+																})
+													})
 								</script>
 
 							</div>
