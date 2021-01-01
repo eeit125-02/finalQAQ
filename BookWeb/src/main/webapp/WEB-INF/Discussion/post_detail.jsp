@@ -59,7 +59,7 @@
 
 				<div
 					style="border: #ADADAD 2px solid; border-radius: 5px; text-align: left; padding: 10px; margin: 0px 10px">
-					<p>${PostBean.memberbean.mb_Name}${PostBean.post_time}</p>
+					<p>${PostBean.memberbean.mb_Name}<br>${PostBean.post_time}</p>
 					<h3>${PostBean.post_title}</h3>
 					<p>${PostBean.post_content}</p>
 

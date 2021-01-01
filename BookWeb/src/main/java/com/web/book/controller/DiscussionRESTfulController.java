@@ -24,6 +24,7 @@ public class DiscussionRESTfulController {
 	@Autowired
 	DiscussionService discussionService;	
 	
+	//板規內容修改
 	@PostMapping("/Discussion/edit_rule")
 	@ResponseBody
 	public RuleBean updateRule(Model model,
@@ -37,6 +38,7 @@ public class DiscussionRESTfulController {
 		return rb;
 	}
 	
+	//新增留言
 	@PostMapping("/Dsicussion/add_command_ajax")
 	@ResponseBody
 	public Map<String,Object> addCommandAjax(Model model,
@@ -57,5 +59,6 @@ public class DiscussionRESTfulController {
 		 new_cb.put("cb_content", cb.getCommand_content());
 		return new_cb;
 	}
+	
 
 }
