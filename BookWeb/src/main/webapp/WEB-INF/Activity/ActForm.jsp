@@ -68,35 +68,130 @@
 			<H1>新增活動資料</H1>
 			<form:form method="POST" modelAttribute="actbean"
 				enctype="multipart/form-data">
+				<hr>
+				<br>
 
 				<fieldset>
 					<!-- 					<legend>活動創建表單</legend> -->
-					<div>
-						<label>會員帳號:</label>
-						<span>${mb_account}</span>
-					</div>
 
-					<div>
-						<form:label path="act_Image">活動圖片:</form:label>
-						<input name="file" type="file" />
-					</div>
+					<form>
+						<div>
+							<input type="hidden" class="form-control" value="${mb_account}" />
+						</div>
+						<div class="form-row">
+							<div class="form-group col-md-6">
+								<label for="inputPassword4">活動名稱:</label>
+								<form:input path="act_Name" class="form-control"
+									placeholder="必填" />
+							</div>
+							<div class="form-group col-md-6">
+								<label for="inputPassword4">活動主題:</label>
+								<form:input path="act_Theme" class="form-control"
+									placeholder="必填" />
+							</div>
+						</div>
+						<div class="form-row">
+							<div class="form-group col-md-6">
+								<label for="inputPassword4">活動嘉賓:</label>
+								<form:input path="act_Guest" class="form-control" placeholder="" />
 
-					<div>
-						<form:label path="act_Name">活動名稱:</form:label>
-						<form:input path="act_Name" />
-					</div>
+							</div>
+							<div class="form-group col-md-6">
+								<label for="inputPassword4">活動圖片:</label> <input name="file"
+									type="file" class="form-control" />
+							</div>
+						</div>
 
-					<div>
-						<label>活動主題:</label>
-						<form:input path="act_Theme" />
-					</div>
+						<div class="form-row">
+							<div class="form-group col-md-6">
+								<label>活動日期:</label>
+								<form:input type="date" class="form-control" path="act_Date" />
+							</div>
 
-					<div>
-						<label>活動日期:</label>  
-						<input type="datetime-local" id="from" name="from" placeholder="開始時間"> 
-						<label for="to">至</label>
-						<input type="datetime-local" id="to" name="to" placeholder="結束時間">
-					</div>
+							<div class="form-group col-md-6">
+								<label for="inputPassword4">活動時間:</label>
+								<form:input type="time" class="form-control" path="act_Time" />
+							</div>
+						</div>
+
+
+						<div class="form-row">
+						<div class="form-group col-md-6">
+							<label>活動地點:</label>
+							<form:select path="act_Loc" id="縣市1" class="form-control"></form:select>
+							</div>
+							<div class="form-group col-md-6">
+							<form:label path="act_Loc">活動地點:</form:label>
+							<form:select id="鄉鎮市區1" path="act_Loc" class="form-control"></form:select>
+							</div>
+							<form:input path="act_Loc" class="form-control"></form:input>
+						</div>
+
+
+						<div class="form-group">
+							<label for="inputAddress">Address</label> <input type="text"
+								class="form-control" id="inputAddress"
+								placeholder="1234 Main St">
+						</div>
+						<div class="form-group">
+							<label for="inputAddress2">Address 2</label> <input type="text"
+								class="form-control" id="inputAddress2"
+								placeholder="Apartment, studio, or floor">
+						</div>
+						<div class="form-row">
+							<div class="form-group col-md-6">
+								<label for="inputCity">City</label> <input type="text"
+									class="form-control" id="inputCity">
+							</div>
+							<div class="form-group col-md-4">
+								<label for="inputState">State</label> <select id="inputState"
+									class="form-control">
+									<option selected>Choose...</option>
+									<option>...</option>
+								</select>
+							</div>
+							<div class="form-group col-md-2">
+								<label for="inputZip">Zip</label> <input type="text"
+									class="form-control" id="inputZip">
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="form-check">
+								<input class="form-check-input" type="checkbox" id="gridCheck">
+								<label class="form-check-label" for="gridCheck"> Check
+									me out </label>
+							</div>
+						</div>
+						<button type="submit" class="btn btn-primary">Sign in</button>
+					</form>
+
+
+					<!-- 					<div> -->
+					<!-- 						<label>會員帳號:</label> -->
+					<%-- 						<span>${mb_account}</span> --%>
+					<!-- 					</div> -->
+
+					<!-- 					<div> -->
+					<%-- 						<form:label path="act_Image">活動圖片:</form:label> --%>
+					<!-- 						<input name="file" type="file" /> -->
+					<!-- 					</div> -->
+
+					<!-- 					<div> -->
+					<%-- 						<form:label path="act_Name">活動名稱:</form:label> --%>
+					<%-- 						<form:input path="act_Name" /> --%>
+					<!-- 					</div> -->
+
+					<!-- 					<div> -->
+					<!-- 						<label>活動主題:</label> -->
+					<%-- 						<form:input path="act_Theme" /> --%>
+					<!-- 					</div> -->
+
+					<!-- 					<div> -->
+					<!-- 						<label>活動日期:</label>   -->
+					<!-- 						<input type="datetime-local" id="from" name="from" placeholder="開始時間">  -->
+					<!-- 						<label for="to">至</label> -->
+					<!-- 						<input type="datetime-local" id="to" name="to" placeholder="結束時間"> -->
+					<!-- 					</div> -->
 
 					<div>
 						<form:label path="act_Loc">活動地點:</form:label>
@@ -107,7 +202,7 @@
 					</div>
 
 					<div>
-						<form:label path="act_Guest" >活動嘉賓:</form:label>
+						<form:label path="act_Guest">活動嘉賓:</form:label>
 						<form:input path="act_Guest" />
 					</div>
 
@@ -153,36 +248,6 @@
 		<footer class="container py-5" id="bookWebFooter"></footer>
 		<!-- footer -->
 
-
-		<script>
-			$(function() {
-				var dateFormat = "mm/dd/yy", from = $("#from").datepicker({
-					defaultDate : "+1w",
-					changeMonth : true,
-					numberOfMonths : 3
-				}).on("change", function() {
-					to.datepicker("option", "minDate", getDate(this));
-				}), to = $("#to").datepicker({
-					defaultDate : "+1w",
-					changeMonth : true,
-					numberOfMonths : 3
-				}).on("change", function() {
-					from.datepicker("option", "maxDate", getDate(this));
-				});
-
-				function getDate(element) {
-					var date;
-					try {
-						date = $.datepicker
-								.parseDate(dateFormat, element.value);
-					} catch (error) {
-						date = null;
-					}
-
-					return date;
-				}
-			});
-		</script>
 
 
 

@@ -56,7 +56,7 @@
 	<br>
 	<div class="container media">
 		<span style="color: red;">${same}</span>
-		<form action="<c:url value='/myStore'/>" method="post">
+		<form action="<c:url value='/myStore'/>" method="get">
 			<button type="submit" name="">我的清單</button>
 		</form>
 	</div>

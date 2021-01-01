@@ -35,21 +35,18 @@ public class Login {
 	MemberService ms;
 
 	String Account;
-	String logincheck;
+	String logincheck =null;
 	MemberBean checkMember;
 	// 註冊資料
 	@PostMapping("/registe")
 	public String Registe(Model model, @RequestParam(value = "account") String mb_Account,
 			@RequestParam(value = "pwd") String mb_Password, @RequestParam(value = "sex") String mb_Sex,
-			@RequestParam(value = "name") String mb_Name,@RequestParam(value = "birthday") Date mb_Birthday, @RequestParam(value = "mail") String mb_Mail) {
+			@RequestParam(value = "name") String mb_Name,@RequestParam(value = "birthday") Date mb_Birthday,
+			@RequestParam(value = "mail") String mb_Mail,@RequestParam(value = "file",required = false) String file) {
+		System.out.println(file);
 		Timestamp ts = new Timestamp(System.currentTimeMillis());
-//		String type = "";
-//		for (int i = 0; i < mb_Type.length; i++) {
-//			type += mb_Type[i] + " ";
-//		}
-//		String MB_type = type;
 		MemberBean reg_member = new MemberBean(0, mb_Account, mb_Password, mb_Sex, mb_Birthday, mb_Name, mb_Mail, null, null,
-				ts, 0, null, null);
+				ts, 0, null, file);
 		System.out.println(reg_member);
 		reg_member.setCheckColume(true);
 		checkMember = reg_member;
@@ -58,38 +55,12 @@ public class Login {
 	}
 
 	// 註冊資料確認後送至資料庫
-//	@PostMapping("/upDateBookReport/{mb_Account}/{mb_Password}/{mb_Name}/{mb_Sex}/{mb_Birthday}/{mb_Address}/{mb_Tel}/{mb_Mail}/{mb_type}")
 	@PostMapping("/confirm")
 	public String Confirm() {
 		ms.insertMember(checkMember);
 		return "redirect:toLogin";
 	}
 
-	// google資料匯入資料庫
-//	@PostMapping("/toLogin/google")
-//	@ResponseBody
-//	public String Google(Model model,HttpServletResponse response,@RequestParam(value="account") String account,
-//						 @RequestParam(value="name", required = false) String name) throws IOException, InterruptedException, ExecutionException {
-//		Account = account;
-//		System.out.println(name);
-//		MemberBean loginMember = ms.select(Account);
-//		if(loginMember == null) {			
-//			model.addAttribute(account);
-//			loginMember.setMb_Account(account);
-//			loginMember.setMb_Name(name);
-//			ms.insertMember(loginMember);
-//			model.addAttribute(account);
-//		}
-//		GlobalService.setLoginMember(loginMember);
-//		String sessionId = GlobalService.createSessionID(String.valueOf(loginMember.getMb_ID()),
-//				loginMember.getMb_Name(), loginMember.getMb_Account());
-//		Cookie memId = new Cookie("Member_ID", sessionId);
-//		memId.setMaxAge(120);
-//		response.addCookie(memId);
-//		System.out.println("--------------------");
-//		return "Member/third";
-//	}
-//	
 	// 重複帳號確認
 	@PostMapping("/toRegiste/checkAccount/{mb_Account}")
 	@ResponseBody
@@ -120,23 +91,32 @@ public class Login {
 		public @ResponseBody boolean tothird(Model model,
 				@RequestParam(value = "name",required = false) String name,
 				@RequestParam(value = "email",required = false) String email,
+				@RequestParam(value = "file", required = false) String file,
 				HttpServletResponse response) throws IOException, InterruptedException, ExecutionException {
+			System.out.println(file);
 			Account = email;
-			boolean check = ms.checkColume(Account);
-			if(check==false) {		
-			return false;
-			}
-			MemberBean loginMember = ms.select(Account);
-				if(loginMember == null) {			
-					model.addAttribute(Account);
+			boolean check = ms.checkAccount(Account);
+				if(check==false) {			
+					MemberBean loginMember = new MemberBean();
+					Timestamp ts = new Timestamp(System.currentTimeMillis());
+					loginMember.setMb_pic(file);
+					loginMember.setCheckColume(true);
+					loginMember.setMb_Birthday(new Date(0));
+					loginMember.setMb_Date(ts);
 					loginMember.setMb_Account(Account);
 					loginMember.setMb_Name(name);
 					ms.insertMember(loginMember);
+					model.addAttribute(Account);
 			}
-			String sessionId = GlobalService.createSessionID(String.valueOf(loginMember.getMb_ID()),
+				boolean verification = ms.checkColume(Account);
+				if(verification==false) {
+					return false;
+				}
+				MemberBean loginMember = ms.select(Account);
+				String sessionId = GlobalService.createSessionID(String.valueOf(loginMember.getMb_ID()),
 					loginMember.getMb_Name(), loginMember.getMb_Account());
 			Cookie memId = new Cookie("Member_ID", sessionId);
-			memId.setMaxAge(120);
+			memId.setMaxAge(1200);
 			response.addCookie(memId);
 			logincheck = "c" ;
 			return true;
@@ -157,7 +137,7 @@ public class Login {
 				String sessionId = GlobalService.createSessionID(String.valueOf(loginMember.getMb_ID()),
 						loginMember.getMb_Name(), loginMember.getMb_Account());
 				Cookie memId = new Cookie("Member_ID", sessionId);
-				memId.setMaxAge(120);
+				memId.setMaxAge(1200);
 				response.addCookie(memId);
 				logincheck = "a" ;	
 			}else {
@@ -166,7 +146,7 @@ public class Login {
 			String sessionId = GlobalService.createSessionID(String.valueOf(loginMember.getMb_ID()),
 					loginMember.getMb_Name(), loginMember.getMb_Account());
 			Cookie memId = new Cookie("Member_ID", sessionId);
-			memId.setMaxAge(120);
+			memId.setMaxAge(1200);
 			response.addCookie(memId);
 			model.addAttribute("Account", Account);
 			logincheck = "b" ;
@@ -176,13 +156,15 @@ public class Login {
 		return "Member/login";
 				}
 	// 會員資料
-	@PostMapping("/mb_inf")
+	@GetMapping("/mb_inf")
 	public String Mb_inf(Model model) {
 		MemberBean memberbean = new MemberBean();
 		model.addAttribute("MemberBean", memberbean);
 		MemberBean select = ms.select(Account);
 		System.out.println(select);
+		System.out.println(select.getMb_pic());
 		model.addAttribute("login", select);
+		System.out.println("abc");
 		return "Member/mb_inf";
 	}
 
@@ -200,30 +182,8 @@ public class Login {
 	// 會員修改
 	@PostMapping("/MbUpdate")
 	public String Update(Model model, @ModelAttribute("MemberBean") MemberBean MB,
-			@RequestParam(value = "file", required = false) CommonsMultipartFile file, HttpServletRequest request,
-			RedirectAttributes attr) throws Exception {
-		
+			@RequestParam(value = "file", required = false) CommonsMultipartFile file) throws Exception {		
 		MemberBean mb_inf = ms.select(Account);
-		System.out.println(GlobalService.saveImage("member", file, mb_inf.getMb_Account()));
-		
-//		String name =UUID.randomUUID().toString().replaceAll("-", "");//使用UUID給圖片重新命名，並去掉四個“-”
-//		String name = mb_inf.getMb_Account();
-//		System.out.println(name);
-//		// 獲取檔案的副檔名
-//		String ext = FilenameUtils.getExtension(file.getOriginalFilename());
-//		// 設定圖片上傳路徑
-//		String filePath = "C:\\Users\\Student\\Documents\\GitHub\\finalQAQ\\BookWeb\\src\\main\\webapp\\Resource\\image";
-//		System.out.println(request.getContextPath());
-//		System.out.println(filePath);
-//		File imagePath = new File(filePath);
-//		File fileImage = new File(filePath + "/" + name + "." + ext);
-//		if (!imagePath.exists() && !imagePath.isDirectory()) {
-//			System.out.println(filePath);
-//			imagePath.mkdir();
-//		}
-//		file.transferTo(fileImage);// 把圖片儲存路徑儲存到資料庫
-		// 重定向到查詢所有使用者的Controller，測試圖片回顯
-		
 		mb_inf.setMb_pic(GlobalService.saveImage("member", file, mb_inf.getMb_Account()));
 		mb_inf.setMb_Birthday(MB.getMb_Birthday());
 		mb_inf.setMb_Address(MB.getMb_Address());
@@ -235,11 +195,11 @@ public class Login {
 			System.out.println(mb_inf);
 			model.addAttribute("login", mb_inf);
 		}
-		return "Member/mb_inf";
+		return "redirect:toCity";
 	}
 
 	// 密碼修改介面
-	@PostMapping("/Modify")
+	@GetMapping("/Modify")
 	public String Modify(Model model) {
 		model.addAttribute("account", Account);
 		return "Member/Modify";
@@ -251,16 +211,14 @@ public class Login {
 		MemberBean mb_inf = ms.select(Account);
 		mb_inf.setMb_Password(pwd);
 		ms.update(mb_inf);
-		return "Member/city";
+		return "redirect:toCity";
 	}
 
 	// 管理員(會員資料)
-	@PostMapping("/adminall")
+	@GetMapping("/adminall")
 	public String Memberall(Model model) {
 		List<MemberBean> inf = ms.adminselect();
-		if (inf != null) {
 			model.addAttribute("memberall", inf);
-		}
 		return "Member/adminModify";
 	}
 
@@ -326,11 +284,17 @@ public class Login {
 	public String tocity(Model model) {
 		System.out.println(logincheck);
 		if(logincheck.equals("c")) {
-			return "Member/third";
+			model.addAttribute("third","third");
+			return "Member/city";
 		}else if(logincheck.equals("a")) {
-			return "Member/admin";
+			model.addAttribute("third","admin");
+			return "Member/city";
+		}else if(logincheck.equals("b")) {
+			model.addAttribute("common","common");
+			return "Member/city";
+		}else {
+			return "Member/login";
 		}
-		return "Member/city";
 	}
 	
 }

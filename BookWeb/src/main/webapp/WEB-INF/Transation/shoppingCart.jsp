@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"  %>
-<%@ taglib prefix="fn"  uri="http://java.sun.com/jsp/jstl/functions"  %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 <!DOCTYPE html>
 <html>
@@ -112,7 +112,8 @@
 					<table style="width: 820px">
 						<tr height='40'>
 							<td width="270">&nbsp;</td>
-							<td width="280" align='center'><FONT size='+2'>某 會 員 的 購 物 車</FONT></td>
+							<td width="280" align='center'><FONT size='+2'>某 會 員
+									的 購 物 車</FONT></td>
 							<td width="270" align='right'></td>
 						</tr>
 						<tr height='18'>
@@ -137,33 +138,31 @@
 							<th width="110">小計</th>
 							<th width="110">修改</th>
 						</tr>
-<c:forEach varStatus="vs" var="v"	items="${list}">
+						<c:forEach varStatus="vs" var="v" items="${list}">
 
 							<tr height='16'>
 								<td>${v.book.bk_Name}</td>
 								<td style="text-align: center;">${fn:substring(v.book.bk_Author, 0, 3)}</td>
 								<td style="text-align: center;">${fn:substring(v.book.bk_Publish, 0, 2)}</td>
 								<td style="text-align: right;"><fmt:formatNumber
-										value="${v.cart_Price }"
-										pattern="#,###" />元</td>
+										value="${v.cart_Price }" pattern="#,###" />元</td>
 								<td style="text-align: right;"><Input
 									id="newQty${vs.index}" style="width: 28px; text-align: right"
 									name="newQty" type="text"
-									value="<fmt:formatNumber value="${v.cart_Num}" />"
-									name="qty" onkeypress="return isNumberKey(event)" /></td>
+									value="<fmt:formatNumber value="${v.cart_Num}" />" name="qty"
+									onkeypress="return isNumberKey(event)" /></td>
 								<td style="text-align: right;"><fmt:formatNumber
-										value="${v.cart_Price * v.cart_Num}"
-										pattern="#,###,###" />元</td>
-								<td><button type="submit" name="updateCart" value="${v.cart_ID}"
-								onclick="modify(${v.cart_ID}, ${v.cart_Num}, ${vs.index})"
-								>修改</button>
+										value="${v.cart_Price * v.cart_Num}" pattern="#,###,###" />元</td>
+								<td><button type="submit" name="updateCart"
+										value="${v.cart_ID}"
+										onclick="modify(${v.cart_ID}, ${v.cart_Num}, ${vs.index})">修改</button>
 									<button type="submit" name="deleteCart" value="${v.cart_ID}"
-									onclick="confirmDelete(${v.cart_ID})">刪除</button></td>
+										onclick="confirmDelete(${v.cart_ID})">刪除</button></td>
 							</tr>
 						</c:forEach>
 						<tr>
 							<td colspan='5' align='right'>總計金額：</td>
-							<td align='right'> ${totalCart} 元</td>
+							<td align='right'>${totalCart} 元</td>
 							<td align='right'>&nbsp;</td>
 						</tr>
 					</table>
@@ -175,14 +174,16 @@
 					<table border='1'>
 						<tr>
 							<td width="400" align='center'><a
-								href='<c:url value="/Transation/storeMain" />'>繼續購物</a>
-							</td>
+								href='<c:url value="/Transation/storeMain" />'>繼續購物</a></td>
 							<td width="400" align='center'>
-							<a href="<c:url value='/checkout' />"
-								onClick="return Checkout(${subtotal});">
-								結帳
-								</a>
-								</td>
+								<%-- 							<a href="<c:url value='/checkout' />" --%> <%-- 								onClick="return Checkout(${subtotal});"> --%>
+								<!-- 								結帳 --> <!-- 								</a> -->
+
+								<button type="button" class="btn btn-primary"
+									data-toggle="modal" data-target="#exampleModal"
+									data-whatever="@mdo">結帳</button>
+
+							</td>
 						</tr>
 					</table>
 				</td>
@@ -199,10 +200,51 @@
 			<input type="hidden" name="a" />
 		</form>
 
-		<!-- 內容 -->
-
-		<!-- body -->
 	</div>
+	<!-- 內容 -->
+
+
+
+<!-- 結帳後的資訊 -->
+	<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+		aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<form action="<c:url value='checkout'/>" method="get">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">請輸入您的資訊</h5>
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<div class="form-group">
+							<label for="recipient-name" class="col-form-label">收件人:</label> <input
+								name="bko_Name" type="text" class="form-control" id="recipient-name">
+						</div>
+						<div class="form-group">
+							<label for="message-text" class="col-form-label">電話:</label> <input
+								name="bko_Cel" type="tel" class="form-control" id="recipient-name">
+						</div>
+						<div class="form-group">
+							<label for="message-text" class="col-form-label">送貨地址:</label>
+							<textarea name="bko_Add" class="form-control" id="recipient-name"></textarea>
+						</div>
+					</div>
+<%-- 					${sessionScope.list} --%>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary"
+							data-dismiss="modal">取消</button>
+						<button type="submit" class="btn btn-primary">確認</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+<!-- 結帳後的資訊 -->
+
+	<!-- body -->
 
 	<!-- footer -->
 	<footer class="container py-5" id="bookWebFooter"></footer>

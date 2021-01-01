@@ -41,10 +41,7 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 		font-size: 3.5rem;
 	}
 }
-.btn btn-outline-secondary{
-/* 	margin: 20px; */
-/* 	padding: 10px; */
-}
+
 </style>
 
 <script>
@@ -113,39 +110,57 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 		<br>
 
 <!-- 類別查詢 -->
-		<h3>選擇書籍類別：</h3>
-		<br>
 
+<form action="<c:url value='/searchtype' />" method="get">
+
+<div class="row">
+	<div class="col-sm-3">
+		<h3>選擇書籍類別：</h3>
+	</div>
+	<div class="col-sm-9">
+		<button class="btn btn-outline-success my-2 my-sm-0" type="submit">查詢</button>
+	</div>
+</div>
+<br>
+
+
+<input type="checkbox" name="22" value="100" id="checkallb2"/>文學創作
+<input type="checkbox" name="22" value="200" checked /> 詩
+<input type="checkbox" name="22" value="300" /> 散文
 
 <!-- 第一行類別（文學創作＆圖文漫畫＆人文社會） -->
 		<div class="row">
 			<div class="col-sm-4">
 				<div class="btn-group-toggle" data-toggle="buttons">
-					<button type="button" class="btn btn-link btn-lg" style="background-color:#DAB1D5;color:#3C3C3C">文學創作</button>
+					<p  class="btn btn-link btn-lg"  style="background-color:#DAB1D5;color:#3C3C3C" >
+						<input type="checkbox" name="b" value="1" id="checkallb"/>文學創作
+					</p>
+<!-- 					<button type="button" class="btn btn-link btn-lg" style="background-color:#DAB1D5;color:#3C3C3C"  -->
+<!-- 						value="1">文學創作</button> -->
 					<br> <br>
-					<p class="btn btn-outline-secondary">
-						<input type="checkbox" name="c" value="" /> 詩
+					<p class="btn btn-outline-secondary"style="margin:3px">
+						<input type="checkbox" name="b" value="2" /> 詩
 					</p>
-					<p class="btn btn-outline-secondary">
-						<input type="checkbox" name="c" value="" /> 散文
+					<p class="btn btn-outline-secondary"style="margin:3px">
+						<input type="checkbox" name="b" value="3" /> 散文
 					</p>
-					<p class="btn btn-outline-secondary">
-						<input type="checkbox" name="c" value="" /> 戀愛/言情 小說
+					<p class="btn btn-outline-secondary"style="margin:3px">
+						<input type="checkbox" name="b" value="4" /> 戀愛/言情 小說
 					</p>
-					<p class="btn btn-outline-secondary">
-						<input type="checkbox" name="c" value="" /> 武俠/歷史 小說
+					<p class="btn btn-outline-secondary"style="margin:3px">
+						<input type="checkbox" name="b" value="5" /> 武俠/歷史 小說
 					</p>
-					<p class="btn btn-outline-secondary">
-						<input type="checkbox" name="c" value="" /> 推理/驚悚 小說
+					<p class="btn btn-outline-secondary"style="margin:3px">
+						<input type="checkbox" name="b" value="6" /> 推理/驚悚 小說
 					</p>
-					<p class="btn btn-outline-secondary">
-						<input type="checkbox" name="c" value="" /> 科幻/奇幻 小說
+					<p class="btn btn-outline-secondary"style="margin:3px">
+						<input type="checkbox" name="b" value="7" /> 科幻/奇幻 小說
 					</p>
-					<p class="btn btn-outline-secondary">
-						<input type="checkbox" name="c" value="" /> 溫馨/療癒 小說
+					<p class="btn btn-outline-secondary"style="margin:3px">
+						<input type="checkbox" name="b" value="8" /> 溫馨/療癒 小說
 					</p>
-					<p class="btn btn-outline-secondary">
-						<input type="checkbox" name="c" value="" /> 翻譯文學
+					<p class="btn btn-outline-secondary"style="margin:3px">
+						<input type="checkbox" name="b" value="9" /> 翻譯文學
 					</p>
 				</div>
 			</div>
@@ -155,28 +170,28 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 
 			<div class="col-sm-4">
 				<div class="btn-group-toggle" data-toggle="buttons">
-					<button type="button" class="btn btn-link btn-lg" style="background-color:#B3D9D9;color:#3C3C3C">圖文漫畫</button>
+					<button type="button" class="btn btn-link btn-lg" style="background-color:#B3D9D9;color:#3C3C3C"value="10">圖文漫畫</button>
 					<br> <br>
 					<p class="btn btn-outline-secondary">
-						<input type="checkbox" name="b" value="" /> 插畫集
+						<input type="checkbox" name="b" value="11" /> 插畫集
 					</p>
 					<p class="btn btn-outline-secondary">
-						<input type="checkbox" name="b" value="" /> 各式圖鑑
+						<input type="checkbox" name="b" value="12" /> 各式圖鑑
 					</p>
 					<p class="btn btn-outline-secondary">
-						<input type="checkbox" name="b" value="" /> 戀愛/言情 漫畫
+						<input type="checkbox" name="b" value="13" /> 戀愛/言情 漫畫
 					</p>
 					<p class="btn btn-outline-secondary">
-						<input type="checkbox" name="b" value="" /> 科幻/奇幻 漫畫
+						<input type="checkbox" name="b" value="14" /> 科幻/奇幻 漫畫
 					</p>
 					<p class="btn btn-outline-secondary">
-						<input type="checkbox" name="b" value="" /> 戰鬥/冒險 漫畫
+						<input type="checkbox" name="b" value="15" /> 戰鬥/冒險 漫畫
 					</p>
 					<p class="btn btn-outline-secondary">
-						<input type="checkbox" name="b" value="" /> 推理/驚悚 漫畫
+						<input type="checkbox" name="b" value="16" /> 推理/驚悚 漫畫
 					</p>
 					<p class="btn btn-outline-secondary">
-						<input type="checkbox" name="b" value="" /> 運動/競技 漫畫
+						<input type="checkbox" name="b" value="17" /> 其它 漫畫
 					</p>
 				</div>
 			</div>
@@ -186,31 +201,31 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 
 			<div class="col-sm-4">
 				<div class="btn-group-toggle" data-toggle="buttons">
-					<button type="button" class="btn btn-link btn-lg" style="background-color:#D6D6AD;color:#3C3C3C">人文/社會</button>
+					<button type="button" class="btn btn-link btn-lg" style="background-color:#D6D6AD;color:#3C3C3C"value="28">人文/社會</button>
 					 <br> <br>
 					<p class="btn btn-outline-secondary">
-						<input type="checkbox" name="b" value="" /> 政治/軍事
+						<input type="checkbox" name="b" value="29" /> 政治/軍事
 					</p>
 					<p class="btn btn-outline-secondary">
-						<input type="checkbox" name="b" value="" /> 歷史/地理
+						<input type="checkbox" name="b" value="30" /> 歷史/地理
 					</p>
 					<p class="btn btn-outline-secondary">
-						<input type="checkbox" name="b" value="" /> 宗教/哲學
+						<input type="checkbox" name="b" value="31" /> 宗教/哲學
 					</p>
 					<p class="btn btn-outline-secondary">
-						<input type="checkbox" name="b" value="" /> 法律/心理
+						<input type="checkbox" name="b" value="32" /> 法律/心理
 					</p>
 					<p class="btn btn-outline-secondary">
-						<input type="checkbox" name="b" value="" /> 社會/文化
+						<input type="checkbox" name="b" value="33" /> 社會/文化
 					</p>
 					<p class="btn btn-outline-secondary">
-						<input type="checkbox" name="b" value="" /> 兩性/家庭
+						<input type="checkbox" name="b" value="34" /> 兩性/家庭
 					</p>
 					<p class="btn btn-outline-secondary">
-						<input type="checkbox" name="b" value="" /> 報導/傳播
+						<input type="checkbox" name="b" value="35" /> 報導/傳播
 					</p>
 					<p class="btn btn-outline-secondary">
-						<input type="checkbox" name="b" value="" /> 國際趨勢
+						<input type="checkbox" name="b" value="36" /> 國際趨勢
 					</p>
 				</div>
 			</div>
@@ -222,99 +237,99 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 		<div class="row">
 			<div class="col-sm-4">
 				<div class="btn-group-toggle" data-toggle="buttons">
-					<button type="button" class="btn btn-link btn-lg" style="background-color:#E1C4C4;color:#3C3C3C">商業/理財</button>
+					<button type="button" class="btn btn-link btn-lg" style="background-color:#E1C4C4;color:#3C3C3C"value="18">商業/理財</button>
 					 <br> <br>
 					<p class="btn btn-outline-secondary">
-						<input type="checkbox" name="b" value="" /> 創業
+						<input type="checkbox" name="b" value="19" /> 創業
 					</p>
 					<p class="btn btn-outline-secondary">
-						<input type="checkbox" name="b" value="" /> 會計
+						<input type="checkbox" name="b" value="20" /> 會計
 					</p>
 					<p class="btn btn-outline-secondary">
-						<input type="checkbox" name="b" value="" /> 經濟學
+						<input type="checkbox" name="b" value="21" /> 經濟學
 					</p>
 					<p class="btn btn-outline-secondary">
-						<input type="checkbox" name="b" value="" /> 管理學
+						<input type="checkbox" name="b" value="22" /> 管理學
 					</p>
 					<p class="btn btn-outline-secondary">
-						<input type="checkbox" name="b" value="" /> 財務金融
+						<input type="checkbox" name="b" value="23" /> 財務金融
 					</p>
 					<p class="btn btn-outline-secondary">
-						<input type="checkbox" name="b" value="" /> 投資理財
+						<input type="checkbox" name="b" value="24" /> 投資理財
 					</p>
 					<p class="btn btn-outline-secondary">
-						<input type="checkbox" name="b" value="" /> 企業經營
+						<input type="checkbox" name="b" value="25" /> 企業經營
 					</p>
 					<p class="btn btn-outline-secondary">
-						<input type="checkbox" name="b" value="" /> 市場行銷
+						<input type="checkbox" name="b" value="26" /> 市場行銷
 					</p>
 					<p class="btn btn-outline-secondary">
-						<input type="checkbox" name="b" value="" /> 人際/職場
+						<input type="checkbox" name="b" value="27" /> 人際/職場
 					</p>
 				</div>
 			</div>
 			
 			<div class="col-sm-4">
 				<div class="btn-group-toggle" data-toggle="buttons">
-					<button type="button" class="btn btn-link btn-lg" style="background-color:#ACD6FF;color:#3C3C3C">藝術/生活</button>
+					<button type="button" class="btn btn-link btn-lg" style="background-color:#ACD6FF;color:#3C3C3C"value="37">藝術/生活</button>
 					 <br> <br>
 					<p class="btn btn-outline-secondary">
-						<input type="checkbox" name="b" value="" /> 美術/設計
+						<input type="checkbox" name="b" value="38" /> 美術/設計
 					</p>
 					<p class="btn btn-outline-secondary">
-						<input type="checkbox" name="b" value="" /> 建築/攝影
+						<input type="checkbox" name="b" value="39" /> 建築/攝影
 					</p>
 					<p class="btn btn-outline-secondary">
-						<input type="checkbox" name="b" value="" /> 勵志/成長
+						<input type="checkbox" name="b" value="40" /> 勵志/成長
 					</p>
 					<p class="btn btn-outline-secondary">
-						<input type="checkbox" name="b" value="" /> 運動/戶外活動
+						<input type="checkbox" name="b" value="41" /> 運動/戶外活動
 					</p>
 					<p class="btn btn-outline-secondary">
-						<input type="checkbox" name="b" value="" /> 音樂/電影
+						<input type="checkbox" name="b" value="42" /> 音樂/電影
 					</p>
 					<p class="btn btn-outline-secondary">
-						<input type="checkbox" name="b" value="" /> 居家生活
+						<input type="checkbox" name="b" value="43" /> 居家生活
 					</p>
 					<p class="btn btn-outline-secondary">
-						<input type="checkbox" name="b" value="" /> 美妝服飾
+						<input type="checkbox" name="b" value="44" /> 美妝服飾
 					</p>
 					<p class="btn btn-outline-secondary">
-						<input type="checkbox" name="b" value="" /> 收藏嗜好
+						<input type="checkbox" name="b" value="45" /> 收藏嗜好
 					</p>
 					<p class="btn btn-outline-secondary">
-						<input type="checkbox" name="b" value="" /> 命理占卜
+						<input type="checkbox" name="b" value="46" /> 命理占卜
 					</p>
 				</div>
 			</div>
 			
 			<div class="col-sm-4">
 				<div class="btn-group-toggle" data-toggle="buttons">
-					<button type="button" class="btn btn-link btn-lg" style="background-color:#FFB5B5;color:#3C3C3C">旅遊/飲食</button>
+					<button type="button" class="btn btn-link btn-lg" style="background-color:#FFB5B5;color:#3C3C3C"value="47">旅遊/飲食</button>
 					 <br> <br>
 					<p class="btn btn-outline-secondary">
-						<input type="checkbox" name="b" value="" /> 台灣旅遊
+						<input type="checkbox" name="b" value="48" /> 台灣旅遊
 					</p>
 					<p class="btn btn-outline-secondary">
-						<input type="checkbox" name="b" value="" /> 日本旅遊
+						<input type="checkbox" name="b" value="49" /> 日本旅遊
 					</p>
 					<p class="btn btn-outline-secondary">
-						<input type="checkbox" name="b" value="" /> 韓國旅遊
+						<input type="checkbox" name="b" value="50" /> 韓國旅遊
 					</p>
 					<p class="btn btn-outline-secondary">
-						<input type="checkbox" name="b" value="" /> 美洲旅遊
+						<input type="checkbox" name="b" value="51" /> 美洲旅遊
 					</p>
 					<p class="btn btn-outline-secondary">
-						<input type="checkbox" name="b" value="" /> 歐洲旅遊
+						<input type="checkbox" name="b" value="52" /> 歐洲旅遊
 					</p>
 					<p class="btn btn-outline-secondary">
-						<input type="checkbox" name="b" value="" /> 中國旅遊
+						<input type="checkbox" name="b" value="53" /> 中國旅遊
 					</p>
 					<p class="btn btn-outline-secondary">
-						<input type="checkbox" name="b" value="" /> 其它海外旅遊
+						<input type="checkbox" name="b" value="54" /> 其它海外旅遊
 					</p>
 					<p class="btn btn-outline-secondary">
-						<input type="checkbox" name="b" value="" /> 飲食烹調
+						<input type="checkbox" name="b" value="55" /> 飲食烹調
 					</p>
 				</div>
 			</div>			
@@ -325,88 +340,95 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 		<div class="row">				
 		<div class="col-sm-4">		
 				<div class="btn-group-toggle" data-toggle="buttons">
-					<button type="button" class="btn btn-link btn-lg" style="background-color:#FFDCB9;color:#3C3C3C">親子/童書</button>
+					<button type="button" class="btn btn-link btn-lg" style="background-color:#FFDCB9;color:#3C3C3C"value="57">親子/童書</button>
 					 <br> <br>
 					<p class="btn btn-outline-secondary">
-						<input type="checkbox" name="b" value="" /> 繪本
+						<input type="checkbox" name="b" value="58" /> 繪本
 					</p>
 					<p class="btn btn-outline-secondary">
-						<input type="checkbox" name="b" value="" /> 兒童文學
+						<input type="checkbox" name="b" value="59" /> 兒童文學
 					</p>
 					<p class="btn btn-outline-secondary">
-						<input type="checkbox" name="b" value="" /> 懷孕/育兒
+						<input type="checkbox" name="b" value="60" /> 懷孕/育兒
 					</p>
 					<p class="btn btn-outline-secondary">
-						<input type="checkbox" name="b" value="" /> 成長教養
+						<input type="checkbox" name="b" value="61" /> 成長教養
 					</p>
 				</div>
 		</div>
 		<div class="col-sm-4">		
 				<div class="btn-group-toggle" data-toggle="buttons">
-					<button type="button" class="btn btn-link btn-lg" style="background-color:#BEBEBE;color:#3C3C3C">學習/考用</button>
+					<button type="button" class="btn btn-link btn-lg" style="background-color:#BEBEBE;color:#3C3C3C"value="63">學習/考用</button>
 					 <br> <br>
 					<p class="btn btn-outline-secondary">
-						<input type="checkbox" name="b" value="" /> 語言學習
+						<input type="checkbox" name="b" value="64" /> 語言學習
 					</p>
 					<p class="btn btn-outline-secondary">
-						<input type="checkbox" name="b" value="" /> 公職考試
+						<input type="checkbox" name="b" value="65" /> 公職考試
 					</p>
 					<p class="btn btn-outline-secondary">
-						<input type="checkbox" name="b" value="" /> 升學考試
+						<input type="checkbox" name="b" value="66" /> 升學考試
 					</p>
 					<p class="btn btn-outline-secondary">
-						<input type="checkbox" name="b" value="" /> 技能檢定
+						<input type="checkbox" name="b" value="67" /> 技能檢定
 					</p>
 					<p class="btn btn-outline-secondary">
-						<input type="checkbox" name="b" value="" /> 電腦資訊
+						<input type="checkbox" name="b" value="68" /> 電腦資訊
 					</p>
 					<p class="btn btn-outline-secondary">
-						<input type="checkbox" name="b" value="" /> 工具書
+						<input type="checkbox" name="b" value="69" /> 工具書
 					</p>
 				</div>
 		</div>
 		<div class="col-sm-4">		
 				<div class="btn-group-toggle" data-toggle="buttons">
-					<button type="button" class="btn btn-link btn-lg" style="background-color:#FFD9EC;color:#3C3C3C">醫療/科學</button>
+					<button type="button" class="btn btn-link btn-lg" style="background-color:#FFD9EC;color:#3C3C3C"value="70">醫療/科學</button>
 					 <br> <br>
 					<p class="btn btn-outline-secondary">
-						<input type="checkbox" name="b" value="" /> 日常保健
+						<input type="checkbox" name="b" value="71" /> 日常保健
 					</p>
 					<p class="btn btn-outline-secondary">
-						<input type="checkbox" name="b" value="" /> 身心養生
+						<input type="checkbox" name="b" value="73" /> 身心養生
 					</p>
 					<p class="btn btn-outline-secondary">
-						<input type="checkbox" name="b" value="" /> 疾病醫療
+						<input type="checkbox" name="b" value="74" /> 疾病醫療
 					</p>
 					<p class="btn btn-outline-secondary">
-						<input type="checkbox" name="b" value="" /> 應用科學
+						<input type="checkbox" name="b" value="76" /> 應用科學
 					</p>
 					<p class="btn btn-outline-secondary">
-						<input type="checkbox" name="b" value="" /> 自然生物
+						<input type="checkbox" name="b" value="77" /> 自然生物
 					</p>
 					<p class="btn btn-outline-secondary">
-						<input type="checkbox" name="b" value="" /> 數理化學
+						<input type="checkbox" name="b" value="78" /> 數理化學
 					</p>
 				</div>
 		</div>
 	</div>
 
+</form>
 
-
-
-	<script type="text/javascript">
-		function check_all(obj, cName) {
-			var checkboxs = document.getElementsByName(cName);
-			for (var i = 0; i < checkboxs.length; i++) {
-				checkboxs[i].checked = obj.checked;
-			}
-		}
-	</script>
 
 
 	<!-- 	內容結束 -->
 
+<script>
 
+
+ $(document).ready(function(){
+  $("#checkallb2").click(function(){
+   if($("#checkallb2").prop("checked")){//如果全選按鈕有被選擇的話（被選擇是true）
+    $("input[name='22']").each(function(){
+     $(this).prop("checked",true);//把所有的核取方框的property都變成勾選
+    })
+   }else{
+    $("input[name='22']").each(function(){
+     $(this).prop("checked",false);//把所有的核方框的property都取消勾選
+    })
+   }
+  })
+ })
+</script>  
 
 
 	</div>

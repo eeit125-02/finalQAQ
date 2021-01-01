@@ -109,18 +109,23 @@
 
 		<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<!-- 第一列（搜尋首頁＆收藏清單&新增書籍） -->
+<!-- 第一列（搜尋首頁＆收藏清單&新增書籍&修改書籍） -->
 		<br>
 		<hr>
 		<div class="collectindex">
+
 			<a class="btn btn-outline-dark" href="<c:url value='SearchBook/Search' />" role="button">搜尋首頁</a>
-			<form name=a3 class=a3 action="<c:url value='/collectlist' />"
-				method="get">
-				<button type="submit" name="list" class="btn btn-outline-dark"
-					value="5">收藏清單</button>
-				<!-- value=會員ID -->
+
+			<form name=a3 class=a3 action="<c:url value='/collectlist' />" method="get">
+				<button type="submit" name="list" class="btn btn-outline-dark">收藏清單</button>
 			</form>
+
 			<a class="btn btn-outline-dark" href="<c:url value='/addnewbook' />" role="button">新增書籍</a>			
+
+			<form name=a2 class=a3 action="<c:url value='/updatebook' />" method="get">
+				<button type="submit" name="update" class="btn btn-outline-dark" value="${pageresult.bk_ID}">修改書訊</button>
+			</form>		
+
 		</div>
 		<br> <br>
 
@@ -131,26 +136,23 @@
 			
 		<!-- 封面 -->
 				<p class="s-corner">
+<%-- 					<img class="mainpic" alt="" src="${pageresult.bk_Pic}" width="390"> --%>
 					<img class="mainpic" alt="" src="${pageresult.bk_Pic}" height="390">
 				</p>
-		<!-- 收藏＆修改&心得&二手書按鈕 -->
+		<!-- 收藏＆通報&心得&二手書按鈕 -->
 				<div class="row"> 
-				<div class="col-sm-3"><form name=a1 action="<c:url value='/pagecollect' />" method="get">
+				<div class="col-sm-3">
+						<form name=a1 action="<c:url value='/pagecollect' />" method="get">
 <!-- 							<img alt="點選收藏" -->
 <%-- 								src="${pageContext.request.contextPath}/image/heartred.png" --%>
 <!-- 								id="heart" width="25px"> -->
-							<button type="submit" name="pagecollect" onclick="checkresult()"
-								class="btn btn-outline-info btn-sm"
+							<button type="submit" name="pagecollect" class="btn btn-outline-info btn-sm"
 								value="${pageresult.bk_ID}">收藏本書</button>
-						</form></div>
-				<div class="col-sm-3"><form name=a2 action="<c:url value='/updatebook' />" method="get">
-							<button type="submit" name="update"
-								class="btn btn-outline-info btn-sm" value="${pageresult.bk_ID}">修改書訊</button>
-						</form></div>
-				
+						</form>
+				</div>
+				<div class="col-sm-3"><button type="submit" name="" class="btn btn-outline-info btn-sm">通報錯誤</button></div>
 				<div class="col-sm-3"><button type="button" id="addBookReport" value="${pageresult.bk_ID}" class="btn btn-outline-info btn-sm">撰寫心得</button></div>
 				<div class="col-sm-3"><button type="submit" name="" class="btn btn-outline-info btn-sm">尋找二手書</button></div>
-
 				</div>
 			</div>
 			
@@ -168,27 +170,62 @@
 					<div class="row" style="margin-bottom:15px"> 
 					<div class="col-sm-1"></div>
 					<div class="col-sm-5">作者：${pageresult.bk_Author}</div>
-					<div class="col-sm-6">譯者：${pageresult.bk_Translator}</div>
+					
+						<c:if test='${empty pageresult.bk_Translator}'>
+						<div class="col-sm-6"> </div>					
+						</c:if>
+												
+						<c:if test='${not empty pageresult.bk_Translator}'>
+						<div class="col-sm-6">譯者：${pageresult.bk_Translator}</div>
+						</c:if>
+
 					</div>
 		<!-- 出版社＆出版地 -->
 					<div class="row" style="margin-bottom:15px"> 
 					<div class="col-sm-1"></div>
 					<div class="col-sm-5">出版社：${pageresult.bk_Publish}</div>
-					<div class="col-sm-6">${pageresult.bk_Publisher_Place}</div>
+					
+						<c:if test='${empty pageresult.bk_Publisher_Place}'>
+						<div class="col-sm-6"> </div>					
+						</c:if>
+						
+						<c:if test='${not empty pageresult.bk_Publisher_Place}'>
+						<div class="col-sm-6">${pageresult.bk_Publisher_Place}</div>
+						</c:if>					
+
 					</div>					
-		<!-- 出版社＆出版地 -->
+
+		<!-- 出版日＆語言 -->
 					<div class="row" style="margin-bottom:15px"> 
 					<div class="col-sm-1"></div>
 					<div class="col-sm-5">出版日期：${pageresult.bk_Date}</div>
-					<div class="col-sm-6">語言：${pageresult.bk_Language}</div>
-					</div>						
+					
+						<c:if test='${empty pageresult.bk_Language}'>
+						<div class="col-sm-6"> </div>					
+						</c:if>
+						
+						<c:if test='${not empty pageresult.bk_Language}'>
+						<div class="col-sm-6">語言：${pageresult.bk_Language}</div>
+						</c:if>	
+					
+					</div>
+											
 		<!-- ISBN＆頁數 -->
 					<div class="row" style="margin-bottom:15px"> 
 					<div class="col-sm-1"></div>
 					<div class="col-sm-5">ISBN：${pageresult.bk_ISBN}</div>
-					<div class="col-sm-6">頁數：${pageresult.bk_Page}</div>
+					
+						<c:if test='${empty pageresult.bk_Page}'>
+						<div class="col-sm-6"> </div>					
+						</c:if>
+						
+						<c:if test='${not empty pageresult.bk_Page}'>
+						<div class="col-sm-6">頁數：${pageresult.bk_Page}</div>
+						</c:if>	
+					
 					</div>
-		<!-- 類型（未完成） -->
+					
+		<!-- 類型 -->
 					<div class="row"> 
 					<div class="col-sm-1"></div>
 					<div class="col-sm-11">類型：

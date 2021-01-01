@@ -61,11 +61,11 @@ p {
 	text-anchor: middle;
 }
 
-@media ( min-width : 768px) {
-	.bd-placeholder-img-lg {
-		font-size: 3.5rem;
-	}
-}
+ @media ( min-width : 768px) { 
+ 	.bd-placeholder-img-lg { 
+ 		font-size: 3.5rem; 
+ 	} 
+ } 
 
 td {
 	width: 100px;
@@ -81,7 +81,7 @@ td {
 	<header class="container blog-header py-3" id="bookWebheader"></header>
 	<!-- header -->
 
-	<div class="container media">
+	<div class="container media" >
 		<!-- body -->
 
 		<div class="row">
@@ -103,7 +103,7 @@ td {
 									<!--Hero form -->
 									<form action="#" class="search-box mb-100">
 										<div class="input-form form-inline">
-											<input type="text" placeholder="What are you finding?">
+											<input type="text" id="enter1" placeholder="What are you finding?">
 										</div>
 										<div class="select-form form-inline">
 											<div class="select-itms form-inline">
@@ -117,8 +117,8 @@ td {
 											</div>
 										</div>
 										<div class="search-form">
-											<button class="btn btn-outline-info">
-												<a href="#"><i class="ti-search"></i> Search</a>
+											<button class="btn btn-outline-info" id="search">
+												<a href="#" ><i class="ti-search"></i> Search</a>
 											</button>
 										</div>
 									</form>
@@ -138,121 +138,6 @@ td {
 				</div>
 				<!--Hero Area End-->
 
-
-				<!--     <div style="margin-top:30px"> -->
-				<!--         <div class="row"> -->
-				<!--             <nav class="col-3"> -->
-				<!--                 <ul class="menu"> -->
-				<!--                     <h5>查詢條件:</h5><br> -->
-				<!--                     <li class=list>時間:</li> -->
-				<!--                     <div class="st1"> -->
-				<!--                         <label for=" " class="t1"></label><br> -->
-				<!--                         <label> -->
-				<!--                             <input type="checkbox" name="Date" value="all">全部 -->
-				<!--                         </label><br> -->
-				<!--                         <label> -->
-				<!--                             <input type="checkbox" name="Date" value="today">今天 -->
-				<!--                         </label><br> -->
-				<!--                         <label> -->
-				<!--                             <input type="checkbox" name="Date" value="tomorrow">明天 -->
-				<!--                         </label><br> -->
-				<!--                         <label> -->
-				<!--                             <input type="checkbox" name="Date" value="thiswk">本週 -->
-				<!--                         </label><br> -->
-				<!--                         <label> -->
-				<!--                             <input type="checkbox" name="Date" value="thiswknd">本週末 -->
-				<!--                         </label><br> -->
-				<!--                         <label> -->
-				<!--                             <input type="checkbox" name="Date" value="nextwk">下週 -->
-				<!--                         </label><br> -->
-				<!--                         <label>選擇日期 -->
-				<!--                             <input type="date" name="Date"> -->
-				<!--                         </label><br> -->
-				<!--                     </div><br> -->
-				<!--                     <li class=list>地區:</li> -->
-				<!--                     <div class="st1"> -->
-				<!--                         <label for=" " class="t1"></label> -->
-				<!--                         <label><input type="checkbox" name="location" value="KLU">基隆市</label><br> -->
-				<!--                         <label><input type="checkbox" name="location" value="TPH">新北市</label><br> -->
-				<!--                         <label><input type="checkbox" name="location" value="TPE">台北市</label><br> -->
-				<!--                         <label><input type="checkbox" name="location" value="TYC">桃園市</label><br> -->
-				<!--                         <label><input type="checkbox" name="location" value="HSH">新竹縣</label><br> -->
-				<!--                         <label><input type="checkbox" name="location" value="HSC">新竹市</label><br> -->
-				<!--                         <label><input type="checkbox" name="location" value="MAC">苗栗市</label><br> -->
-				<!--                         <label><input type="checkbox" name="location" value="MAL">苗栗縣</label><br> -->
-				<!--                         <label><input type="checkbox" name="location" value="TXG">台中市</label><br> -->
-				<!--                         <label><input type="checkbox" name="location" value="CWH">彰化縣</label><br> -->
-				<!--                         <label><input type="checkbox" name="location" value="CWS">彰化市</label><br> -->
-				<!--                         <label><input type="checkbox" name="location" value="NTC">南投市</label><br> -->
-				<!--                         <label><input type="checkbox" name="location" value="NTO">南投縣</label><br> -->
-				<!--                         <label><input type="checkbox" name="location" value="YLH">雲林縣</label><br> -->
-				<!--                         <label><input type="checkbox" name="location" value="CHY">嘉義縣</label><br> -->
-				<!--                         <label><input type="checkbox" name="location" value="CYI">嘉義市</label><br> -->
-				<!--                         <label><input type="checkbox" name="location" value="TNN">台南市</label><br> -->
-				<!--                         <label><input type="checkbox" name="location" value="KHH">高雄市</label><br> -->
-				<!--                         <label><input type="checkbox" name="location" value="IUH">屏東縣</label><br> -->
-				<!--                         <label><input type="checkbox" name="location" value="PTS">屏東市</label><br> -->
-				<!--                         <label><input type="checkbox" name="location" value="ILN">宜蘭縣</label><br> -->
-				<!--                         <label><input type="checkbox" name="location" value="ILC">宜蘭市</label><br> -->
-				<!--                         <label><input type="checkbox" name="location" value="HWA">花蓮縣</label><br> -->
-				<!--                         <label><input type="checkbox" name="location" value="HWC">花蓮市</label><br> -->
-				<!--                         <label><input type="checkbox" name="location" value="TTC">台東市</label><br> -->
-				<!--                         <label><input type="checkbox" name="location" value="TTT">台東縣</label><br> -->
-				<!--                         <label><input type="checkbox" name="location" value="PEH">澎湖縣</label><br> -->
-				<!--                         <label><input type="checkbox" name="location" value="GNI">綠島</label><br> -->
-				<!--                         <label><input type="checkbox" name="location" value="KYD">蘭嶼</label><br> -->
-				<!--                         <label><input type="checkbox" name="location" value="KMN">金門縣</label><br> -->
-				<!--                         <label><input type="checkbox" name="location" value="MZW">馬祖</label><br> -->
-				<!--                         <label><input type="checkbox" name="location" value="LNN">連江縣</label><br> -->
-				<!--                     </div><br> -->
-				<!--                     <li class=list>類別:</li> -->
-				<!--                     <div class="st1"> -->
-				<!--                         <label for=" " class="t1"></label> -->
-				<!--                         <label> -->
-				<!--                             <input type="checkbox" name="hobby" value="sport">書展 -->
-				<!--                         </label><br> -->
-				<!--                         <label> -->
-				<!--                             <input type="checkbox" name="hobby" value="music">講座 -->
-				<!--                         </label><br> -->
-				<!--                         <label> -->
-				<!--                             <input type="checkbox" name="hobby" value="movie">公益 -->
-				<!--                         </label><br> -->
-				<!--                         <label> -->
-				<!--                             <input type="checkbox" name="hobby" value="travel">換書 -->
-				<!--                         </label><br> -->
-				<!--                         <label> -->
-				<!--                             <input type="checkbox" name="hobby" value="travel">簽書會 -->
-				<!--                         </label><br> -->
-				<!--                         <label> -->
-				<!--                             <input type="checkbox" name="hobby" value="travel">精選咖啡廳 -->
-				<!--                         </label><br> -->
-				<!--                     </div> -->
-				<!--                 </ul> -->
-				<!--             </nav> -->
-
-
-				<!--              <section class="container"> -->
-				<!--         <div class="row"> -->
-				<%--             <c:forEach var='act' items='${allacts}'> --%>
-				<!--             <div class="col-6,col-md-3 " style="width: 360px; height: 360px">         -->
-				<%--                 <h2>${act.act_Name}</h2> --%>
-				<%--                 <h5>${act.act_Theme}</h5> --%>
-				<%--                 <h5>${act.act_Date}</h5> --%>
-				<%--                 <img src="${pageContext.request.contextPath}/image/${act.act_Image}" style="width:250px; height: 300px;"/> --%>
-				<%--                 <p>${act.act_Theme}</p> --%>
-				<%--                 <p>${act.act_Intro}</p> --%>
-				<!--                 <br> -->
-				<!--                 <h2>咖啡廳推薦</h2> -->
-				<!--                 <h5>Title description, Dec 7, 2020</h5> -->
-				<!--                 <img src="Images/Coffee shopppp.jpeg" width="300px" height="400px"> -->
-				<!--                 <p>Some text..</p> -->
-				<!--                 <p>Sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do -->
-				<!--                     eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud -->
-				<!--                     exercitation ullamco.</p> -->
-				<!--                 <br> -->
-
-				<!--             </div> -->
-
 				<section>
 					<div>
 						<div class="container" style="text-align: center">
@@ -261,125 +146,207 @@ td {
 					</div>
 				</section>
 				<hr style="height: 1px; border: none; color: #333; background-color: #333;">
-				<section class="container">
-					<div class="row">
+				<section class="container" style="width:1100px">
+					<div class="row" id="change">
 						<c:forEach var='act' items='${allacts}'>
 							<div class="col-6,col-md-3" style="width: 350px; height: 1000px">
 								<div class="thumbnail" style="width: 320px; height: 1000px">
 									<p>
 										<b style='font-size: 25px;'>${act.act_Name}</b>
 									</p>
-									<p>
-										<img src="${act.act_Image}"
-											style="width: 300px; height: 380px;" />
-									</p>
+									<div>
+									<input type ="image" src="${act.act_Image}" data-toggle="modal" data-target="#exampleModalCenter${act.act_Name}" style="width: 300px; height: 380px;">
+										<div class="modal fade" id="exampleModalCenter${act.act_Name}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  										<div class="modal-dialog modal-dialog-centered" role="document">
+   										 <div class="modal-content">
+    									  <div class="modal-header">
+<!--     									  //標頭 -->
+      										  <h5 class="modal-title" id="#exampleModalCenter${act.act_Name}">${act.act_Name}</h5>
+       											 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+     											     <span aria-hidden="true">&times;</span>
+     												   </button>
+     														 </div>
+<!--      									//彈跳視窗內容 -->
+     										 <div class="modal-body">
+     										 <p>${act.act_Theme}</p>
+										<p>${act.act_Date}</p>
+										<p>${act.act_Loc}</p>
+										<p>${act.act_Intro}</p>			
+										<hr>
+      										</div>
+<!--       										//頁尾 -->
+     									 <div class="modal-footer">
+        									<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      										  <button type="button" class="btn btn-primary">報名</button>
+     										    </div>
+  											  </div>
+ 											 </div>
+											</div>				
+									</div>
 									<div class="caption">
 										<p>${act.act_Theme}</p>
 										<p>${act.act_Date}</p>
 										<p>${act.act_Loc}</p>
-										<p>${act.act_Intro}</p>
-																				
-										
+										<p>${act.act_Intro}</p>			
 										<hr>
 										<p>
-<%-- 										<button class="btn btn-outline-info"><a href="<c:url value='/showUpdateForm'/>?act_ID=${act.act_ID}" />詳細資料</a></button> --%>
 										
 										<!-- Trigger the modal with a button -->
-										<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal${act.act_ID}">詳細資料</button>
-
-										<!-- Modal -->
-										<div id="myModal${act.act_ID}" class="modal fade" role="dialog">
-											<div class="modal-dialog">
-
-												<!-- Modal content-->
-												<div class="modal-content">
-													<div class="modal-header">
-														<button type="button" class="close" data-dismiss="modal">&times;</button>
-														<h4 class="modal-title" style="text-align:center">詳細資料</h4>
-													</div>
-													<div class="modal-body">
-														<p>${act.act_Theme}</p>
-										                <p>${act.act_Date}</p>
-										                <p>${act.act_Loc}</p>
-										                <p>${act.act_Intro}</p>
-										                <!--GoogleMap的東東 -->
-										<div id="map" style="width: 400px; height: 500px" ></div>
-										                
-										                
-<script>
-var map, geocoder;
-
-function initMap() {
-  geocoder = new google.maps.Geocoder();
-  map = new google.maps.Map(document.getElementById('map'), {
-    zoom: 17
-  });
-
-var address = '${act.act_Loc}';
-  geocoder.geocode( { 'address': address}, function(results, status) {
-    if (status == 'OK') {
-      map.setCenter(results[0].geometry.location);
-      var marker = new google.maps.Marker({
-          map: map,
-          position: results[0].geometry.location
-      });
-    } else {
-      console.log(status);
-    }
-  });
-}
-</script>	
-
-									                
-													</div>
-													<div class="modal-footer">
-													
-														<button type="button" class="btn btn-default" data-dismiss="modal">關閉視窗</button>
-													</div>
-												</div>
-
-											</div>
-										</div>
-										
+										<button type="button" class="btn btn-info btn-lg" id = "myModal"  value="${act.act_Loc}" data-toggle="modal" data-target="#myModal1">詳細資料</button>
+										<!-- Modal -->												
 										<p>
 										<button class="btn btn-outline-info"><a href="<c:url value='/showUpdateForm'/>?act_ID=${act.act_ID}" />編輯</a></button>
 										<button class="btn btn-outline-info"><a href="<c:url value='deleteAct'/>?act_ID=${act.act_ID}">刪除</a></button>
-										<button class="btn btn-outline-info"><a href="<c:url value='/showJoinForm'/>?act_ID=${act.act_ID}">報名</a></button>
+<%-- 										<button class="btn btn-outline-info"><a href="<c:url value='/showJoinForm'/>?act_ID=${act.act_ID}">報名</a></button> --%>
 										</p>
 										
-										
-
-										<!--                         <p> -->
-										<%--                         	<a href="<spring:url value='/product?id=${product.bookId}' />" --%>
-										<!--     							class="btn btn-primary"> -->
-										<!--     							<span class="glyphicon-info-sigh glyphicon"></span>詳細資料 -->
-										<!--  							</a> -->
-
-										<%-- 							<a href="<spring:url value='product.json?id=${product.bookId}' />"    --%>
-										<!-- 								class="btn btn-primary">  -->
-										<!-- 								<span class="glyphicon-info-sigh glyphicon"></span>JSON -->
-										<!-- 							</a> -->
-										<!--                         </p> -->
 									</div>
 								</div>
 							</div>
-						</c:forEach>
+						</c:forEach>				
 					</div>
 				</section>
-
-
-				<footer class="container py-5" id="bookWebFooter"></footer>
-				<!-- footer -->
+				<div id="myModal1" class="modal" role="dialog">
+					<div class="modal-dialog modal-dialog-centered">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h4 class="modal-title" style="text-align:center" align="left">詳細資料</h4>
+								<button type="button" class="close" data-dismiss="modal">&times;</button>
+							</div>
+							<div class="modal-body">
+				                <div id="map" style="width: 465px; height: 500px"></div>
+							</div>
+							<div class="modal-footer">
+							
+								<button type="button" class="btn btn-outline-info" data-dismiss="modal">關閉視窗</button>
+								<button type="button" class="btn btn-outline-info"><a href="<c:url value='/showJoinForm'/>?act_ID=${act.act_ID}">報名</a></button>
+							</div>
+						</div>
+					</div>
+				</div>
 		</div>
 
 
-		<button class="btn btn-outline-info">
-			<a href='showCreateForm'>新增活動</a>
-		</button>
+		<button class="btn btn-outline-info"><a href='showCreateForm'>新增活動</a></button>
 	</div>
 
 	<br>
+				<footer class="container py-5" id="bookWebFooter"></footer>
+<script>
 
+var map, geocoder;
+var mapId="";
+
+$('button').click(function(){
+	mapId = $(this).val();
+	console.log(mapId);
+	
+	console.log("wwww"+mapId);
+	  geocoder = new google.maps.Geocoder();
+	  map = new google.maps.Map(document.getElementById('map'), {
+	    zoom: 17
+	  });
+	
+	var address = mapId;
+	  geocoder.geocode( { 'address': address},
+			  function(results, status) {
+	    if (status == 'OK') {
+	      map.setCenter(results[0].geometry.location);
+	      var marker = new google.maps.Marker({
+	          map: map,
+	          position: results[0].geometry.location
+	      });
+	    } else {
+	      console.log(status);
+	    }
+	  });
+})
+	
+	
+	$('#search').click(function(){
+	var keyword=$('#enter1').val();
+		$.ajax({
+			async : false,
+			cache : false,
+			url : "searchkeyword",
+			data : {'keyword' : keyword},
+			dataType : "json",
+			contentType : "application/json;charset=utf-8",
+			error : function() {
+				alert('123 ');
+			},
+			success : function(data) {
+				console.log(data)
+				var insertData = "";
+				if(data != null){
+				for (let i = 0; i < data.length; i++) {
+					insertData += "<div class='col-6,col-md-3' style='width: 350px; height: 1000px'>"
+								+"<div class='thumbnail' style='width: 320px; height: 1000px'>"
+									+"<p>"
+										+"<b style='font-size: 25px;'>"+data[i].act_Name+"</b>"
+									+"</p>"
+									+"<div>"
+									+"<input type ='image' src='"+data[i].act_Image+"' data-toggle='modal' data-target='#exampleModalCenter"+data[i].act_Name+"' style='width: 300px; height: 380px;'>"
+										+"<div class='modal fade' id='exampleModalCenter"+data[i].act_Name+"' tabindex=''-1' role='dialog' aria-labelledby='exampleModalCenterTitle' aria-hidden='true'>"
+  										+"<div class='modal-dialog modal-dialog-centered' role='document'>"
+   										+ "<div class='modal-content'>"
+    									 + "<div class='modal-header'>"
+      										 + "<h5 class='modal-title' id='#exampleModalCenter"+data[i].act_Name+"'>"+data[i].act_Name+"</h5>"
+       											+ "<button type='button' class='close' data-dismiss='modal' aria-label='Close'>"
+     											  +  "<span aria-hidden='true'>&times;</span>"
+     												  + "</button>"
+     														+ "</div>"
+     										+"<div class='modal-body'>"
+     										 +"<p>"+data[i].act_Theme+"</p>"
+										+"<p>"+data[i].act_Date+"</p>"
+										+"<p>"+data[i].act_Loc+"</p>"
+										+"<p>"+data[i].act_Intro+"</p>"			
+										+"<hr>"
+      										+"</div>"
+     									 +"<div class='modal-footer'>"
+        									+"<button type='button' class='btn btn-secondary' data-dismiss='modal'>Close</button>"
+      										  +"<button type='button' class='btn btn-primary'>報名</button>"
+     										   +"</div>"
+  											  +"</div>"
+ 											 +"</div>"
+											+"</div>"				
+									+"</div>"
+									+"<div class='caption'>"
+									 +"<p>"+data[i].act_Theme+"</p>"
+										+"<p>"+data[i].act_Date+"</p>"
+										+"<p>"+data[i].act_Loc+"</p>"
+										+"<p>"+data[i].act_Intro+"</p>"					
+										+"<hr>"
+										+"<p>"
+										+"<button type='button' class='btn btn-info btn-lg' id = 'myModal'  value='"+data[i].act_Loc+"' data-toggle='modal' data-target=''#myModal1'>詳細資料</button>"											
+										+"<p>"
+										+"<button class='btn btn-outline-info'><a href=\"<c:url value='/showUpdateForm'/>?act_ID="+data[i].act_ID+"\" />編輯</a></button>"
+										+"<button class='btn btn-outline-info'><a href=\"<c:url value='deleteAct'/>?act_ID="+data[i].act_ID+"\">刪除</a></button>"
+										+"</p>"				
+									+"</div>"
+								+"</div>"
+							+"</div>"
+					+"</div>"
+				}
+				$('#change').html(insertData);
+				}else{
+					$('#change').html(insertData);
+				}
+			}
+		});
+	})
+					
+	
+	/* function initMap() {
+		console.log("wwww"+mapId);
+	  geocoder = new google.maps.Geocoder();
+	  map = new google.maps.Map(document.getElementById('map'), {
+	    zoom: 17
+	  });
+	
+	
+	} */
+</script>
 
 </body>
 

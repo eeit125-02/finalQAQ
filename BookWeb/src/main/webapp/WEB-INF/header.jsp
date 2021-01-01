@@ -11,17 +11,15 @@
 
 </head>
 <body>
+		<div id="loginButton" style="float:right">
+		</div>
 	
 	<div class="row flex-nowrap justify-content-between align-items-center">
 
-		<div class="col-4 text-center">
-			<a class="blog-header-logo text-dark" href="//localhost:8080/BookWeb">圖書資訊網</a>
-		</div>
-		<div id="loginButton" class="col-4 d-flex justify-content-end align-items-center">
+		<a class="blog-header-logo text-dark" href="//localhost:8080/BookWeb">
+		<img alt="LOGO" src="${pageContext.request.contextPath}/image/logo1.png" id="Img/logo">
+			</a>
 			
-			
-			
-		</div>
 	</div>
 
 	<div class="nav-scroller py-1 mb-2">
@@ -55,7 +53,11 @@
 			console.log("log")
 			$('#loginButton').html("<a id=\"login\" href=\"//localhost:8080/BookWeb/toLogin\">登入</a>");
 		};
-				
+// 		$(document).ready(function() {
+// 			if(typeof($.cookie('Member_ID')) == "undefined"){
+// 				window.location.href="//localhost:8080/BookWeb/toLogin";
+// 			}
+// 		})
 	</script>
 </body>
 </html>

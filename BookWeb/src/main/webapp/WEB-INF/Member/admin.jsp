@@ -80,7 +80,7 @@ p {
 
 	<form action="<c:url value='/adminall' />" method="post">
 		<fieldset>
-			<legend>會員中心</legend>
+			<legend>管理員中心</legend>
 			<div>
 				<button type="submit" name="inf" class="btn btn-outline-secondary">會員資訊</button>
 			</div>

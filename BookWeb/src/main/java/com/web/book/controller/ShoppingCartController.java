@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
@@ -128,7 +129,21 @@ public class ShoppingCartController {
 	}
 	
 	@GetMapping("checkout")
-	public String checkoutTest(Model model) {
+	public String checkoutTest(Model model,
+			@RequestParam String bko_Name,
+			@RequestParam String bko_Add,
+			@RequestParam String bko_Cel,
+			@ModelAttribute List<ShoppingCartBean> list
+			) {
+		System.out.println(list);
+//		Integer qoq = 0;
+//		for (ShoppingCartBean shoppingCartBean : list) {
+//			qoq += shoppingCartBean.getCart_Num()*shoppingCartBean.getCart_Price();
+//		}
+//		System.out.println(qoq);
+		System.out.println(bko_Name);
+		System.out.println(bko_Add);
+		System.out.println(bko_Cel);
 		return "Transation/bkCheckout";
 	}
 	

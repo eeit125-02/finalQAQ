@@ -35,7 +35,14 @@ import com.web.book.service.SearchService;
 		@Override
 		public List<BookBean> searchBookPublish(String name){
 			return searchBookDAO.searchBookPublish(name);	
-		}				
+		}		
+		
+		//查詢書籍類型
+		@Override
+		public List<BookTypeBean> searchBookType(List<Integer> reslist){
+			return searchBookDAO.searchBookType(reslist);
+		}
+		
 				
 		//取得單一本書的詳細資訊
 		@Override

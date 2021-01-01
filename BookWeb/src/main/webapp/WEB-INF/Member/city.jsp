@@ -3,7 +3,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -21,36 +20,23 @@
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
 	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
 	crossorigin="anonymous">
-<link rel="stylesheet" href="import.css">
 <style>
-/* @import url(https://fonts.googleapis.com/earlyaccess/cwtexyen.css); */
-
-/* body { */
-/* 	font-family: "cwTeXYen", sans-serif; */
-/* 	font-weight: 800; */
-/* 	line-height: 2; */
-/* 	font-size: 18px; */
-/* } */
-
-fieldset {
+#city {
 	border-radius: 25px;
 	padding: 20px;
-	margin: auto;
 	background-color: #F3F3FA;
-	width: 400px
+	height:400px;
+	width: 200px;
+	float:left;
 }
-
+ 
 legend {
 	text-align: center;
-	font-size: 30px;
 }
 
 div {
 	text-align: center;
 	margin: 10px;
-}
-form{
-	margin-bottom:10px;
 }
 p {
 	text-align: center;
@@ -73,36 +59,58 @@ p {
 <!-- header -->
 	<header class="container blog-header py-3" id="bookWebheader"></header>
 	<!-- header -->
-
-	<div class="container media">
-	<fieldset>
+	<div class="container media" style="width:1500px; margin-left:400px" >
+	<fieldset id="city">
 		<legend>會員中心</legend>
 		<div>
-			<form action="<c:url value='/mb_inf' />" method="post">
-				<button type="submit" name="mb_inf" class="btn btn-outline-secondary">會員資訊</button>
-			</form>
-			<form action="<c:url value='/MbUpdate' />">
-				<button type="submit" name="Modify" class="btn btn-outline-secondary">會員修改</button>
-			</form>
-			<form action="<c:url value='/Modify' />" method="post" >
-				<button type="submit" name="pwdModify" class="btn btn-outline-secondary">密碼修改</button>
-			</form>
-			
+				<div><button  id="admin1" name="admin" class="btn btn-outline-secondary">會員資訊</button>
+				</div>
+				<div><button  id="inf" name="mb_inf" class="btn btn-outline-secondary">會員資訊</button>
+				</div>
+				<button  id="Modify" name="Modify" class="btn btn-outline-secondary">會員修改</button>
+				<div>
+				<button  id="pwdModify" name="pwdModify" class="btn btn-outline-secondary">密碼修改</button>
+				</div>
 			<form name=a3 class=a3 action="<c:url value='/collectlist' />" method="get">
-				<button type="submit" name="list" class="btn btn-outline-dark">收藏清單</button>
+				<div>
+				<button type="submit" name="list" class="btn btn-outline-secondary">收藏清單</button>
+				</div>
 			</form>
 		</div>
 	</fieldset>
+		<div id="change123" style="width:900px;margin-left:20px ">顯示頁面</div>
 	</div>
-
+	<input id="test" type="hidden" value="${third}">
 	<!-- footer -->
 	<footer class="container py-5" id="bookWebFooter"></footer>
 	<!-- footer -->
-	
 	<script>
 	$(document).ready(function() {
 		$("#bookWebheader").load("<c:url value='/header'/>");
         $("#bookWebFooter").load("<c:url value='/footer'/>");
+        var check = $("#test").val();
+        if(check=="third"){
+			$("#pwdModify").hide();
+			$("#admin1").hide();
+		}else if(check=="admin"){
+			$("#pwdModify").hide();
+			$("#Modify").hide();
+			$("#inf").hide();
+		}else{
+			$("#admin1").hide();
+		}
+	 $("#inf").click(function(){
+		$('#change123').load("/BookWeb/mb_inf") 
+	 })
+	  $("#Modify").click(function(){
+		$('#change123').load("/BookWeb/MbUpdate") 
+	 })
+	   $("#pwdModify").click(function(){
+		$('#change123').load("/BookWeb/Modify") 
+	 })
+	 $("#admin1").click(function(){
+		$('#change123').load("/BookWeb/adminall") 
+	 })
 	});
 </script>
 </body>

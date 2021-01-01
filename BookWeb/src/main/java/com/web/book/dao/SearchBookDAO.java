@@ -39,5 +39,7 @@ public interface SearchBookDAO {
 	//查詢書籍出版社
 	List<BookBean> searchBookPublish(String name);
 
+	List<BookTypeBean> searchBookType(List<Integer> reslist);
+
 
 }
