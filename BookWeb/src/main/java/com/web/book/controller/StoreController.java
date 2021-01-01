@@ -28,6 +28,14 @@ public class StoreController {
 	@Autowired
 	SearchService searchService;
 
+//  最終呈現首頁製作中
+	@GetMapping("qaqTest")
+	public String qaqmainPage(Model model) {
+//		List<BookBean> list = bookStoreService.searchBookStore();
+//		model.addAttribute("bookstore", list);
+		return "/Transation/qaqMain";
+	}
+
 	@GetMapping("/Transation/storeMain")
 	public String mainPage(Model model) {
 		List<BookBean> list = bookStoreService.searchBookStore();

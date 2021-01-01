@@ -47,48 +47,31 @@
 	<!-- header -->
 
 	<!-- body -->
+	<div style="text-align:center"><h2>二手書圖</h2></div>
+	<!-- 搜尋商品欄	 start -->
+	<form class="bs-example bs-example-form" role="form">
+		<div class="row">
+			<div class="col-lg-4"></div>
+			<div class="col-lg-4">
+				<div class="input-group">
+					<input type="text" class="form-control"> <span
+						class="input-group-btn">
+						<button type="button" class="btn btn-outline-secondary">
+							<img alt="圖勒?" src='<c:url value="image/qaqsearch.png" />'
+								width="20px" height="20px">
+						</button>
+					</span>
+				</div>
+			</div>
+			<div class="col-lg-4"></div>
+		</div>
+	</form>
+	<!-- 搜尋商品欄	end -->
+
+
+
 	
-	<br>
-	<div class="container media">
-		<form action="<c:url value='/qaqTest'/>" method="get">
-			<button type="submit" name="">QAQ</button>
-		</form>
-	</div>
-	<br>
-	<br>
-	<div class="container media">
-		<span style="color: red;">${same}</span>
-		<form action="<c:url value='/myStore'/>" method="get">
-			<button type="submit" name="">我的清單</button>
-		</form>
-	</div>
-	<br>
-	<div class="container media">
-		<form action="<c:url value='/detail'/>" method="get">
-			<table border="1" width="130%">
-				<tr>
-					<th>&nbsp;</th>
-					<th>圖片</th>
-					<th>名字</th>
-					<th>作者</th>
-				</tr>
-				<c:forEach var="table" items="${bookstore}" begin="0" end="20">
-					<tr>
-						<th><button type="submit" value="${table.bk_ID}"
-								name="selectbk">檢視</button></th>
-						<td><img alt="XX" src="<c:out value="${table.bk_Pic}"/>"
-							width="50px" height="50px"></td>
-						<td><c:out value="${table.bk_Name}" /></td>
-						<td><c:out value="${table.bk_Author}" /></td>
-					</tr>
-				</c:forEach>
-			</table>
-		</form>
-
-
-
-		<!-- body -->
-	</div>
+	<!-- body -->
 
 	<!-- footer -->
 	<footer class="container py-5" id="bookWebFooter"></footer>

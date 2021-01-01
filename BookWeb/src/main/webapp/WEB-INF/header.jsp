@@ -16,9 +16,9 @@
 	
 	<div class="row flex-nowrap justify-content-between align-items-center">
 
-		<a class="blog-header-logo text-dark" href="//localhost:8080/BookWeb">
-		<img alt="LOGO" src="${pageContext.request.contextPath}/image/logo1.png" id="Img/logo">
-			</a>
+<!-- 		<a class="blog-header-logo text-dark" href="//localhost:8080/BookWeb"> -->
+<%-- 		<img alt="LOGO" src="${pageContext.request.contextPath}/image/logo1.png" id="Img/logo"> --%>
+<!-- 			</a> -->
 			
 	</div>
 
