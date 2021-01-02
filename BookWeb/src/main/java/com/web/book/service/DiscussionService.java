@@ -24,6 +24,8 @@ public interface DiscussionService {
 	List<CommandBean> getCommandBeanByPostId(Integer pb_ID);
 	//依時間排序列出所有貼文
 	List<PostBean> getAllPost();
+	//依熱門度排序所有貼文
+	List<PostBean> getAllPostByHot();
 	//依時間排序列出所有留言
 	List<CommandBean> getAllCommand();
 	//列出貼文內容
