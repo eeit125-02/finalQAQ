@@ -39,5 +39,6 @@ public interface DiscussionService {
 	void deletPost(Integer delete_post_id);
 	//修改板規
 	RuleBean updateRule(RuleBean rb);
-	
+	//查詢貼文關鍵字
+	List<PostBean> getPostByKeyword(String keyword);
 }

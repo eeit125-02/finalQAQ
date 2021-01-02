@@ -103,6 +103,12 @@ public class DiscussionServiceImpl implements DiscussionService {
 		return discussionDao.getCommandBeanByPostId(pb_ID);
 	}
 
+	//查詢貼文關鍵字
+	@Override
+	public List<PostBean> getPostByKeyword(String keyword) {
+		return discussionDao.getPostByKeyword(keyword);
+	}
+
 
 
 

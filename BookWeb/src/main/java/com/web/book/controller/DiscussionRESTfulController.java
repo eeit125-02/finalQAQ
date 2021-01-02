@@ -60,5 +60,15 @@ public class DiscussionRESTfulController {
 		return new_cb;
 	}
 	
+	//查詢貼文關鍵字
+	@PostMapping("/Discussion/search_keyword_manager")
+	@ResponseBody
+	public List<PostBean> searchPostKeyword(Model model,
+			@RequestParam(value="keyword") String keyword
+			) {
+		List<PostBean> pb = discussionService.getPostByKeyword(keyword);
+		return pb;
+	}
+	
 
 }

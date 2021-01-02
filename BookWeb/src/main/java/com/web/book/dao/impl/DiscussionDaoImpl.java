@@ -137,6 +137,15 @@ public class DiscussionDaoImpl implements DiscussionDao {
 		return session.createQuery(hql).setParameter("pb_ID", pb_ID).getResultList();
 	}
 
+	//查詢貼文關鍵字
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<PostBean> getPostByKeyword(String keyword) {
+		String hql="FROM PostBean p WHERE p.post_content, p.post_title LIKE %:keyword%";
+		Session session = factory.getCurrentSession();
+		return session.createQuery(hql).setParameter("keyword", keyword).getResultList();
+	}
+
 
 
 
