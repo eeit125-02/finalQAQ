@@ -64,15 +64,21 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 		<label id="test"></label>
 
 		<!-- 		內容開始 -->
-		<br>
-		<hr>
-		<br>
+		
+							<ul class="nav nav-tabs" id="novelTab" role="tablist">
+							<li class="nav-item"><a class="nav-link" id="novel_rule-tab"
+								data-toggle="tab" href="" role="tab">單項查詢</a></li>
+							<li class="nav-item"><a class="nav-link active"
+								id="novel_latest-tab" data-toggle="tab" href=""
+								role="tab">進階查詢</a></li>
+						</ul>
+		<br><br>
 
 <!-- 三種關鍵字查詢（書名＆作者＆出版社） -->
 <div class="row">
 	<div class="col-sm-4">		
 		<form action="<c:url value='/searchbook' />" method="get">
-			<h3>輸入書名關鍵字：</h3>
+			<h4>輸入書名關鍵字：</h4>
 			<div class="form-inline">
 				<input class="form-control mr-sm-2" name="name" value=""
 					type="search" placeholder="Search" aria-label="Search">
@@ -83,7 +89,7 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 			
 	<div class="col-sm-4">		
 		<form action="<c:url value='/searchbook' />" method="get">
-			<h3>輸入作者關鍵字：</h3>
+			<h4>輸入作者關鍵字：</h4>
 			<div class="form-inline">
 				<input class="form-control mr-sm-2" name="author" value=""
 					type="search" placeholder="Search" aria-label="Search">
@@ -94,7 +100,7 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 			
 	<div class="col-sm-4">		
 		<form action="<c:url value='/searchbook' />" method="get">
-			<h3>輸入出版社關鍵字：</h3>
+			<h4>輸入出版社關鍵字：</h4>
 			<div class="form-inline">
 				<input class="form-control mr-sm-2" name="publish" value=""
 					type="search" placeholder="Search" aria-label="Search">
@@ -103,25 +109,18 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 		</form>
 	</div>					
 </div>
-
-
-					<ul class="nav nav-tabs" id="novelTab" role="tablist">
-							<li class="nav-item"><a class="nav-link" id="novel_rule-tab"
-								data-toggle="tab" href="" role="tab">單項查詢</a></li>
-							<li class="nav-item"><a class="nav-link active"
-								id="novel_latest-tab" data-toggle="tab" href=""
-								role="tab">進階查詢</a></li>
-					</ul>
+		<br>
+		<hr>
 
 <!-- 類別查詢 -->
 
 <form action="<c:url value='/searchtype' />" method="get">
 
 
-		<h3 style="display:inline;">選擇書籍類別：</h3>
+		<h4 style="display:inline;">選擇書籍類別：</h4>
 		<button class="btn btn-outline-success my-2 my-sm-0" type="submit">查詢</button>
 <br>
-
+<br>
 
 <!-- <input type="checkbox" name="22" value="100" id="checkallb2"/>文學創作 -->
 <!-- <input type="checkbox" name="22" value="200" checked /> 詩 -->
