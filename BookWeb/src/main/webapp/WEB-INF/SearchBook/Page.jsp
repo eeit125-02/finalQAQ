@@ -267,13 +267,29 @@
 	<!-- footer -->
 	<script>
 		$('#addBookReport').click(function(){
-			console.log($(this).val())
-			var form = $("<form method='post'></form>");
-			form.attr({"action":"//localhost:8080/BookWeb/BookReport/addBookReport/"+ $(this).val()});
-			$(document.body).append(form);
-			form.submit();
-			});
-
+			var check = {
+						bk_ID : $('#addBookReport').val()
+				};
+			$.ajax({
+				async : false,
+				type : 'POST',
+				url : 'http://localhost:8080/BookWeb/BookReport/checkBookReport',
+				data : check,
+				dataType : 'json',
+				success : function(data){
+					if (data){
+						let form = $("<form method='post'></form>");
+						form.attr({"action":"//localhost:8080/BookWeb/BookReport/addBookReport/"+ $('#addBookReport').val()});
+						$(document.body).append(form);
+						form.submit();
+					}
+					else{
+						window.alert("以撰寫過心得")
+					}
+				}
+			})
+			
+		});
 	</script>
 
 </body>
