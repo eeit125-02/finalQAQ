@@ -118,7 +118,8 @@
 							<li class="nav-item"><a class="nav-link active"
 								id="novel_latest-tab" data-toggle="tab" href="#novel_latest"
 								role="tab">最新貼文</a></li>
-							<li class="nav-item"><a class="nav-link" id="novel_hot-tab"
+							<!-- hql有問題 -->
+							<li style="display:none" class="nav-item"><a class="nav-link" id="novel_hot-tab"
 								data-toggle="tab" href="#novel_hot" role="tab">熱門貼文</a></li>
 						</ul>
 						<br>
@@ -372,12 +373,8 @@
 												</div>
 
 												<script>
-													$(
-															'#command_btn${stored_post.post_id}')
-															.click(
-																	function() {
-																		$
-																				.ajax({
+													$('#command_btn${stored_post.post_id}').click(function() {
+																		$.ajax({
 																					url : '<c:url value="/Dsicussion/add_command_ajax"/>',
 																					type : 'POST',
 																					data : {
@@ -515,8 +512,9 @@
 
 							<!-- search & delete post -->
 							<div class="tab-pane fade" id="pills-manage_post" role="tabpanel">
-
-								<div class="form-inline justify-content-center">
+								
+								<!-- 搜尋的hql有問題 -->
+								<div style="display:none" class="form-inline justify-content-center">
 										<input class="form-control" type="search" placeholder="請輸入關鍵字"
 											name="keyword_manager" id="keyword_manager" style="margin-right: 10px">
 										<button class="btn btn-outline-primary my-2 my-sm-0"
@@ -525,15 +523,16 @@
 								<br>
 								
 								<script>
-									$('search_post_manager').click(function(){
+									$('#search_post_manager').click(function(){
+										console.log('success1')
 										$.ajax({
 											url : '<c:url value="/Discussion/search_keyword_manager"/>',
 											type : 'POST',
 											data : {keyword : $("#keyword_manager").val()},
 											dataType : "json",
 											success:function(pb){
-												console.log('success')
-												$('show_post_manager').html(
+												console.log(pb)
+												$('#show_post_manager').html(
 														"<c:forEach var='stored_post' items='" + pb + "'>"+ pb.post_id+"</c:forEach>")
 											}
 										})

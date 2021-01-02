@@ -1,5 +1,6 @@
 package com.web.book.controller;
 
+import java.io.UnsupportedEncodingException;
 import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.List;
@@ -60,12 +61,13 @@ public class DiscussionRESTfulController {
 		return new_cb;
 	}
 	
+	//hql有問題！！
 	//查詢貼文關鍵字
 	@PostMapping("/Discussion/search_keyword_manager")
 	@ResponseBody
 	public List<PostBean> searchPostKeyword(Model model,
 			@RequestParam(value="keyword") String keyword
-			) {
+			) throws UnsupportedEncodingException {
 		List<PostBean> pb = discussionService.getPostByKeyword(keyword);
 		return pb;
 	}
