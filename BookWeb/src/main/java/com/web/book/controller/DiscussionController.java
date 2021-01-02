@@ -29,6 +29,9 @@ public class DiscussionController {
 	public String Discussionmain(Model model) {
 		List<PostBean> post_list = discussionService.getAllPost();
 		model.addAttribute("allPost", post_list);
+//		hql有問題，待解決
+//		List<PostBean> post_list_hot = discussionService.getAllPostByHot();
+//		model.addAttribute("hotPost", post_list_hot);
 		List<CommandBean> command_list = discussionService.getAllCommand();
 		model.addAttribute("allCommand", command_list);
 		List<RuleBean> rule_content = discussionService.getRule();

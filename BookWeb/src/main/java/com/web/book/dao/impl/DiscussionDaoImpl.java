@@ -47,6 +47,17 @@ public class DiscussionDaoImpl implements DiscussionDao {
 		Session session = factory.getCurrentSession();
 		return session.createQuery(hql).getResultList();
 	}
+	
+	//依熱門度排序所有貼文
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<PostBean> getAllPostByHot() {
+		//有問題!!!
+		String hql="SELECT p, COUNT(c.FK_PostBean_post_id) hot FROM PostBean p, CommandBean c WHERE p.post_id=c.FK_PostBean_post_id"
+				+ " ORDER BY hot";
+		Session session = factory.getCurrentSession();
+		return session.createQuery(hql).getResultList();
+	}
 
 	//依時間排序列出所有留言
 	@SuppressWarnings({ "unchecked"})
@@ -125,6 +136,8 @@ public class DiscussionDaoImpl implements DiscussionDao {
 		Session session = factory.getCurrentSession();
 		return session.createQuery(hql).setParameter("pb_ID", pb_ID).getResultList();
 	}
+
+
 
 
 
