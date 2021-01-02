@@ -21,6 +21,7 @@
 			</a>
 			
 	</div>
+	
 
 	<div class="nav-scroller py-1 mb-2">
 		<nav class="nav d-flex justify-content-between">
@@ -43,7 +44,7 @@
 	
 	<script>
 		if (typeof($.cookie('Member_ID')) != "undefined"){
-				$('#loginButton').html("<a href=\"//localhost:8080/BookWeb/toCity\">會員中心</a><p>&nbsp;</p>"
+				$('#loginButton').html("<a href=\"//localhost:8080/BookWeb/toCity\">會員中心</a>&nbsp;"
 						+ "<a id=\"logout\" href=\"//localhost:8080/BookWeb/toLogin\">登出</a>");
 				$("#logout").click(function(){
 					$.removeCookie('Member_ID', { path: '/BookWeb' });
