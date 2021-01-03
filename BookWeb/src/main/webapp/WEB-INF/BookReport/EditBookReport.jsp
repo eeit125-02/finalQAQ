@@ -54,9 +54,10 @@
 	<div class="container media">
 		<!-- <img src="..." class="align-self-start mr-3" alt="..."> -->
 		<div class="media-body">
-			<h4 class="mt-0 text-muted" id="memberName"></h4>
-			<h5 class="mt-0 text-muted">履歷名稱</h5>
-			<p style="height: 100px;">簡介</p>
+			<h2 class="mt-0" id="memberName">閱讀履歷管理</h4>
+			<h5 class="mt-0 text-muted"></h5>
+			<hr>
+			<!-- <p style="height: 100px;">簡介</p> -->
 		</div>
 	</div>
 	<!-- 版主介紹 -->
@@ -234,27 +235,26 @@
 			deleteReport($(this).val());
 		});
 
-		$('#editButton').click(
-				function() {
-					var editData = {
-						br_ID : $(this).val(),
-						br_Score : $('#br_Score').val(),
-						br_Content : $('#br_Content').val().replace(/\n|\r\n/g, "<br>")
-					};
-					var editURL = location.href + "/upDateBookReport";
-					$.ajax({
-						async : true,
-						type : 'POST',
-						url : editURL,
-						data : editData,
-						dataType : "json",
-						success : function(data) {
-							if (data) {
-								loadBookReportList();
-							}
-						}
-					});
-				});
+		$('#editButton').click(function() {
+			var editData = {
+				br_ID : $(this).val(),
+				br_Score : $('#br_Score').val(),
+				br_Content : $('#br_Content').val().replace(/\n|\r\n/g, "<br>")
+			};
+			var editURL = location.href + "/upDateBookReport";
+			$.ajax({
+				async : true,
+				type : 'POST',
+				url : editURL,
+				data : editData,
+				dataType : "json",
+				success : function(data) {
+					if (data) {
+						loadBookReportList();
+					}
+				}
+			});
+		});
 
 		function deleteReport(br_ID) {
 			var deleteURL = location.href + "/deleteBookReport/" + br_ID;
@@ -320,35 +320,37 @@
 					$('#bookReportList').html(insertData);
 				}
 			});
-			$('.btn-outline-secondary').click(
-					function() {
-						if ($(this).attr("id") == 'delete') {
-							$('#deleteSecond').val($(this).val());
-						}
-						if ($(this).attr("id") == 'edit') {
-							$('#editButton').val($(this).val());
-							let getBookReportURL = location.href
-									+ "/getBookReport/" + $(this).val();
-							$.ajax({
-								async : false,
-								type : 'POST',
-								url : getBookReportURL,
-								dataType : "json",
-								contentType : "application/json;charset=utf-8",
-								success : function(data) {
-									$('#bk_Name').html(data.bk_Name);
-									$('#bk_Author')
-											.html("作者：" + data.bk_Author);
-									$('#bk_Publish').html(
-											"出版社：" + data.bk_Publish);
-									$('#bk_Pic').attr('src', data.bk_Pic);
-									$('#br_Content').val(
-											data.br_Content.replace(/<br>/g,
-													"\n"));
-								}
-							});
+			$('.btn-outline-secondary').click(function() {
+				if ($(this).attr("id") == 'delete') {
+					$('#deleteSecond').val($(this).val());
+				}
+				if ($(this).attr("id") == 'edit') {
+					$('#editButton').val($(this).val());
+					let getBookReportURL = location.href
+							+ "/getBookReport/" + $(this).val();
+					$.ajax({
+						async : false,
+						type : 'POST',
+						url : getBookReportURL,
+						dataType : "json",
+						contentType : "application/json;charset=utf-8",
+						success : function(data) {
+							$('#bk_Name').html(data.bk_Name);
+							$('#bk_Author')
+									.html("作者：" + data.bk_Author);
+							$('#bk_Publish').html(
+									"出版社：" + data.bk_Publish);
+							$('#bk_Pic').attr('src', data.bk_Pic);
+							$('#br_Content').val(
+									data.br_Content.replace(/<br>/g,
+											"\n"));
 						}
 					});
+				}
+				if($(this).attr("id") == 'view'){
+					window.location.href = "http://localhost:8080/BookWeb/BookReport/"+$(this).val();
+				}
+			});
 		};
 	</script>
 </body>

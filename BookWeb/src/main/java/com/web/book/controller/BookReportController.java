@@ -42,8 +42,8 @@ public class BookReportController {
 		loginUser = (MemberBean) model.getAttribute("loginUser");
 	}
 	
-	@GetMapping("")
-	public String homeBookReport (Model model) {
+	@GetMapping("/{br_ID}")
+	public String homeBookReport (@PathVariable("br_ID") Integer br_ID) {
 		return "BookReport/BookReport";
 	}
 	
@@ -135,9 +135,10 @@ public class BookReportController {
 	public Boolean addBookReport(
 			@RequestParam(value = "bk_ID", required = true) Integer bk_ID,
 			@RequestParam(value = "br_Score", required = true) Integer br_Score,
-			@RequestParam(value = "br_Content", required = true) String br_Content){
+			@RequestParam(value = "br_Content", required = true) String br_Content,
+			@RequestParam(value = "br_Name", required = true) String br_Name){
 		
-		bookReportService.insertBookReport(loginUser.getMb_ID(), bk_ID, br_Content, br_Score, br_Content);
+		bookReportService.insertBookReport(loginUser.getMb_ID(), bk_ID, br_Name, br_Score, br_Content);
 		return true;
 	}
 	
@@ -154,5 +155,23 @@ public class BookReportController {
 		return true;
 	}
 	
+	@PostMapping("/viewBookReport/{br_ID}")
+	@ResponseBody
+	public Map<String,Object> viewBookReport(@PathVariable("br_ID") Integer br_ID) {
+		BookReportBean bookRepor =  bookReportService.getBookReport(br_ID);
+		Map<String,Object> data = new HashMap<>();
+		data.put("br_DateTime", bookRepor.getBr_DateTime());
+		data.put("br_Content", bookRepor.getBr_Content());
+		data.put("br_Score", bookRepor.getBr_Score());
+		data.put("br_Name", bookRepor.getBr_Name());
+		data.put("bk_Name", bookRepor.getBook().getBk_Name());
+		data.put("bk_Author", bookRepor.getBook().getBk_Author());
+		data.put("bk_Pic", bookRepor.getBook().getBk_Pic());
+		data.put("bk_Translator", bookRepor.getBook().getBk_Translator());
+		data.put("bk_Publish", bookRepor.getBook().getBk_Publish());
+		data.put("userAccount", loginUser.getMb_Account());
+	
+		return data;
+	}
 	
 }
