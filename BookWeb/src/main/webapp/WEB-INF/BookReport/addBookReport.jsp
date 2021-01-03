@@ -56,7 +56,7 @@
 					</div>
 					<div class="form-group">
 						<label>閱讀標題：</label> 
-						<input type="text" class="form-control" id="exampleFormControlInput1">
+						<input type="text" class="form-control" id="brTitle">
 					</div>
 					
 					<div class="form-inline">
@@ -116,7 +116,8 @@
 			var addData = {
 						bk_ID : window.location.href.split("/").pop(),
 						br_Score : brScore,
-						br_Content : $('#brContent').val().replace(/\n|\r\n/g, "<br>")
+						br_Content : $('#brContent').val().replace(/\n|\r\n/g, "<br>"),
+						br_Name : $('#brTitle').val()
 				};
 			$.ajax({
 				async : false,
