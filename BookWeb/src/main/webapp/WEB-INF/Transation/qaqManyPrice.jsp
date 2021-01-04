@@ -50,57 +50,9 @@
 	<div style="text-align: center">
 		<h2>二手書圖</h2>
 	</div>
-	<!-- 搜尋商品欄	 start -->
-	<form class="bs-example bs-example-form" role="form">
-		<div class="row">
-			<div class="col-lg-4"></div>
-			<div class="col-lg-4">
-				<div class="input-group">
-					<input type="text" class="form-control"> <span
-						class="input-group-btn">
-						<button type="button" class="btn btn-outline-secondary">
-							<img alt="圖勒?" src='<c:url value="image/qaqsearch.png" />'
-								width="20px" height="20px">
-						</button>
-					</span>
-				</div>
-			</div>
-		</div>
-	</form>
-	<br>
-	<!-- 搜尋商品欄	end -->
-	<!-- 	版面置中 -->
 	<div class="container">
-	<!-- 	版面置中 -->
-		<div class="row">
-	<c:forEach items="${store}" var="v">
-			<div class="card col-sm-3" style="width: 18rem;">
-				<a href="">
-				<img src="<c:url value=" ${v.book.bk_Pic} " />" 
-				class="card-img-top" alt="..." style="height: 18rem;">
-				</a>
-				<div class="card-body">
-				<a href="#" >${v.book.bk_Name }</a>
-					<br>
-					<span class="card-text">作者: ${ v.book.bk_Author }</span>
-					<br>
-					<span class="card-text">出版社: ${ v.book.bk_Publish }</span>
-					<br>
-					<span class="card-text">出版日: ${ v.book.bk_Date }</span>
-					<br>
-					<span class="card-text">價錢: ${ v.book.bk_Price }</span>
-					<br>
-					<a href="<c:url value='/qaqManyPrice'/>" >簡介&#149;比價 $ </a>
-				</div>
-			</div>
-	</c:forEach>
-			
-		</div>
-	<!-- 	版面置中 -->
+	<h1>我又是測試頁 &gt;.&lt;&quot;</h1>
 	</div>
-	<!-- 	版面置中 -->
-
-
 
 	<!-- body -->
 

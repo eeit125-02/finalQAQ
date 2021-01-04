@@ -58,6 +58,11 @@ public class BookStoreServiceImpl implements BookStoreService {
 		dao.deleteBookStore(bks_ID);
 	}
 
+	@Override
+	public void boobqaq() {
+		dao.boobqaq();
+	}
+
 	
 
 }

@@ -30,5 +30,8 @@ public interface BookStoreDao {
 
 	// 刪除會員賣場資料
 	void deleteBookStore(Integer bks_ID);
+	
+	//灌庫存值給商店
+	void boobqaq();
 
 }
