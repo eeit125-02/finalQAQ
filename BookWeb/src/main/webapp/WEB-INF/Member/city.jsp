@@ -75,6 +75,7 @@ p {
 				<div>
 				<button type="submit" name="list" class="btn btn-outline-secondary">收藏清單</button>
 				</div>
+			
 			</form>
 		</div>
 	</fieldset>
