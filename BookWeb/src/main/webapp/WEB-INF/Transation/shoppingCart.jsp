@@ -201,6 +201,7 @@
 		</form>
 
 	</div>
+<%-- 	${sessionScope.list} --%>
 	<!-- 內容 -->
 
 
@@ -238,6 +239,8 @@
 							data-dismiss="modal">取消</button>
 						<button type="submit" class="btn btn-primary">確認</button>
 					</div>
+					${totalCart}
+<%-- 					${sessionScope.list} --%>
 				</form>
 			</div>
 		</div>

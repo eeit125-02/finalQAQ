@@ -133,7 +133,7 @@ public class ShoppingCartController {
 			@RequestParam String bko_Name,
 			@RequestParam String bko_Add,
 			@RequestParam String bko_Cel,
-			@ModelAttribute List<ShoppingCartBean> list
+			@ModelAttribute("list") List<ShoppingCartBean> list
 			) {
 		System.out.println(list);
 //		Integer qoq = 0;

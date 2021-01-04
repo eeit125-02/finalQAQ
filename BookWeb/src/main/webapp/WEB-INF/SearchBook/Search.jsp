@@ -64,15 +64,21 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 		<label id="test"></label>
 
 		<!-- 		內容開始 -->
-		<br>
-		<hr>
-		<br>
+		
+							<ul class="nav nav-tabs" id="novelTab" role="tablist">
+							<li class="nav-item"><a class="nav-link" id="novel_rule-tab"
+								data-toggle="tab" href="" role="tab">單項查詢</a></li>
+							<li class="nav-item"><a class="nav-link active"
+								id="novel_latest-tab" data-toggle="tab" href=""
+								role="tab">進階查詢</a></li>
+						</ul>
+		<br><br>
 
 <!-- 三種關鍵字查詢（書名＆作者＆出版社） -->
 <div class="row">
 	<div class="col-sm-4">		
 		<form action="<c:url value='/searchbook' />" method="get">
-			<h3>輸入書名關鍵字：</h3>
+			<h4>輸入書名關鍵字：</h4>
 			<div class="form-inline">
 				<input class="form-control mr-sm-2" name="name" value=""
 					type="search" placeholder="Search" aria-label="Search">
@@ -83,7 +89,7 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 			
 	<div class="col-sm-4">		
 		<form action="<c:url value='/searchbook' />" method="get">
-			<h3>輸入作者關鍵字：</h3>
+			<h4>輸入作者關鍵字：</h4>
 			<div class="form-inline">
 				<input class="form-control mr-sm-2" name="author" value=""
 					type="search" placeholder="Search" aria-label="Search">
@@ -94,7 +100,7 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 			
 	<div class="col-sm-4">		
 		<form action="<c:url value='/searchbook' />" method="get">
-			<h3>輸入出版社關鍵字：</h3>
+			<h4>輸入出版社關鍵字：</h4>
 			<div class="form-inline">
 				<input class="form-control mr-sm-2" name="publish" value=""
 					type="search" placeholder="Search" aria-label="Search">
@@ -103,30 +109,22 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 		</form>
 	</div>					
 </div>
-
-
 		<br>
 		<hr>
-		<br>
 
 <!-- 類別查詢 -->
 
 <form action="<c:url value='/searchtype' />" method="get">
 
-<div class="row">
-	<div class="col-sm-3">
-		<h3>選擇書籍類別：</h3>
-	</div>
-	<div class="col-sm-9">
+
+		<h4 style="display:inline;">選擇書籍類別：</h4>
 		<button class="btn btn-outline-success my-2 my-sm-0" type="submit">查詢</button>
-	</div>
-</div>
+<br>
 <br>
 
-
-<input type="checkbox" name="22" value="100" id="checkallb2"/>文學創作
-<input type="checkbox" name="22" value="200" checked /> 詩
-<input type="checkbox" name="22" value="300" /> 散文
+<!-- <input type="checkbox" name="22" value="100" id="checkallb2"/>文學創作 -->
+<!-- <input type="checkbox" name="22" value="200" checked /> 詩 -->
+<!-- <input type="checkbox" name="22" value="300" /> 散文 -->
 
 <!-- 第一行類別（文學創作＆圖文漫畫＆人文社會） -->
 		<div class="row">
@@ -172,25 +170,25 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 				<div class="btn-group-toggle" data-toggle="buttons">
 					<button type="button" class="btn btn-link btn-lg" style="background-color:#B3D9D9;color:#3C3C3C"value="10">圖文漫畫</button>
 					<br> <br>
-					<p class="btn btn-outline-secondary">
+					<p class="btn btn-outline-secondary"style="margin:3px">
 						<input type="checkbox" name="b" value="11" /> 插畫集
 					</p>
-					<p class="btn btn-outline-secondary">
+					<p class="btn btn-outline-secondary"style="margin:3px">
 						<input type="checkbox" name="b" value="12" /> 各式圖鑑
 					</p>
-					<p class="btn btn-outline-secondary">
+					<p class="btn btn-outline-secondary"style="margin:3px">
 						<input type="checkbox" name="b" value="13" /> 戀愛/言情 漫畫
 					</p>
-					<p class="btn btn-outline-secondary">
+					<p class="btn btn-outline-secondary"style="margin:3px">
 						<input type="checkbox" name="b" value="14" /> 科幻/奇幻 漫畫
 					</p>
-					<p class="btn btn-outline-secondary">
+					<p class="btn btn-outline-secondary"style="margin:3px">
 						<input type="checkbox" name="b" value="15" /> 戰鬥/冒險 漫畫
 					</p>
-					<p class="btn btn-outline-secondary">
+					<p class="btn btn-outline-secondary"style="margin:3px">
 						<input type="checkbox" name="b" value="16" /> 推理/驚悚 漫畫
 					</p>
-					<p class="btn btn-outline-secondary">
+					<p class="btn btn-outline-secondary"style="margin:3px">
 						<input type="checkbox" name="b" value="17" /> 其它 漫畫
 					</p>
 				</div>
@@ -203,28 +201,28 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 				<div class="btn-group-toggle" data-toggle="buttons">
 					<button type="button" class="btn btn-link btn-lg" style="background-color:#D6D6AD;color:#3C3C3C"value="28">人文/社會</button>
 					 <br> <br>
-					<p class="btn btn-outline-secondary">
+					<p class="btn btn-outline-secondary"style="margin:3px">
 						<input type="checkbox" name="b" value="29" /> 政治/軍事
 					</p>
-					<p class="btn btn-outline-secondary">
+					<p class="btn btn-outline-secondary"style="margin:3px">
 						<input type="checkbox" name="b" value="30" /> 歷史/地理
 					</p>
-					<p class="btn btn-outline-secondary">
+					<p class="btn btn-outline-secondary"style="margin:3px">
 						<input type="checkbox" name="b" value="31" /> 宗教/哲學
 					</p>
-					<p class="btn btn-outline-secondary">
+					<p class="btn btn-outline-secondary"style="margin:3px">
 						<input type="checkbox" name="b" value="32" /> 法律/心理
 					</p>
-					<p class="btn btn-outline-secondary">
+					<p class="btn btn-outline-secondary"style="margin:3px">
 						<input type="checkbox" name="b" value="33" /> 社會/文化
 					</p>
-					<p class="btn btn-outline-secondary">
+					<p class="btn btn-outline-secondary"style="margin:3px">
 						<input type="checkbox" name="b" value="34" /> 兩性/家庭
 					</p>
-					<p class="btn btn-outline-secondary">
+					<p class="btn btn-outline-secondary"style="margin:3px">
 						<input type="checkbox" name="b" value="35" /> 報導/傳播
 					</p>
-					<p class="btn btn-outline-secondary">
+					<p class="btn btn-outline-secondary"style="margin:3px">
 						<input type="checkbox" name="b" value="36" /> 國際趨勢
 					</p>
 				</div>
@@ -239,31 +237,31 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 				<div class="btn-group-toggle" data-toggle="buttons">
 					<button type="button" class="btn btn-link btn-lg" style="background-color:#E1C4C4;color:#3C3C3C"value="18">商業/理財</button>
 					 <br> <br>
-					<p class="btn btn-outline-secondary">
+					<p class="btn btn-outline-secondary"style="margin:3px">
 						<input type="checkbox" name="b" value="19" /> 創業
 					</p>
-					<p class="btn btn-outline-secondary">
+					<p class="btn btn-outline-secondary"style="margin:3px">
 						<input type="checkbox" name="b" value="20" /> 會計
 					</p>
-					<p class="btn btn-outline-secondary">
+					<p class="btn btn-outline-secondary"style="margin:3px">
 						<input type="checkbox" name="b" value="21" /> 經濟學
 					</p>
-					<p class="btn btn-outline-secondary">
+					<p class="btn btn-outline-secondary"style="margin:3px">
 						<input type="checkbox" name="b" value="22" /> 管理學
 					</p>
-					<p class="btn btn-outline-secondary">
+					<p class="btn btn-outline-secondary"style="margin:3px">
 						<input type="checkbox" name="b" value="23" /> 財務金融
 					</p>
-					<p class="btn btn-outline-secondary">
+					<p class="btn btn-outline-secondary"style="margin:3px">
 						<input type="checkbox" name="b" value="24" /> 投資理財
 					</p>
-					<p class="btn btn-outline-secondary">
+					<p class="btn btn-outline-secondary"style="margin:3px">
 						<input type="checkbox" name="b" value="25" /> 企業經營
 					</p>
-					<p class="btn btn-outline-secondary">
+					<p class="btn btn-outline-secondary"style="margin:3px">
 						<input type="checkbox" name="b" value="26" /> 市場行銷
 					</p>
-					<p class="btn btn-outline-secondary">
+					<p class="btn btn-outline-secondary"style="margin:3px">
 						<input type="checkbox" name="b" value="27" /> 人際/職場
 					</p>
 				</div>
@@ -273,31 +271,31 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 				<div class="btn-group-toggle" data-toggle="buttons">
 					<button type="button" class="btn btn-link btn-lg" style="background-color:#ACD6FF;color:#3C3C3C"value="37">藝術/生活</button>
 					 <br> <br>
-					<p class="btn btn-outline-secondary">
+					<p class="btn btn-outline-secondary"style="margin:3px">
 						<input type="checkbox" name="b" value="38" /> 美術/設計
 					</p>
-					<p class="btn btn-outline-secondary">
+					<p class="btn btn-outline-secondary"style="margin:3px">
 						<input type="checkbox" name="b" value="39" /> 建築/攝影
 					</p>
-					<p class="btn btn-outline-secondary">
+					<p class="btn btn-outline-secondary"style="margin:3px">
 						<input type="checkbox" name="b" value="40" /> 勵志/成長
 					</p>
-					<p class="btn btn-outline-secondary">
+					<p class="btn btn-outline-secondary"style="margin:3px">
 						<input type="checkbox" name="b" value="41" /> 運動/戶外活動
 					</p>
-					<p class="btn btn-outline-secondary">
+					<p class="btn btn-outline-secondary"style="margin:3px">
 						<input type="checkbox" name="b" value="42" /> 音樂/電影
 					</p>
-					<p class="btn btn-outline-secondary">
+					<p class="btn btn-outline-secondary"style="margin:3px">
 						<input type="checkbox" name="b" value="43" /> 居家生活
 					</p>
-					<p class="btn btn-outline-secondary">
+					<p class="btn btn-outline-secondary"style="margin:3px">
 						<input type="checkbox" name="b" value="44" /> 美妝服飾
 					</p>
-					<p class="btn btn-outline-secondary">
+					<p class="btn btn-outline-secondary"style="margin:3px">
 						<input type="checkbox" name="b" value="45" /> 收藏嗜好
 					</p>
-					<p class="btn btn-outline-secondary">
+					<p class="btn btn-outline-secondary"style="margin:3px">
 						<input type="checkbox" name="b" value="46" /> 命理占卜
 					</p>
 				</div>
@@ -307,28 +305,28 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 				<div class="btn-group-toggle" data-toggle="buttons">
 					<button type="button" class="btn btn-link btn-lg" style="background-color:#FFB5B5;color:#3C3C3C"value="47">旅遊/飲食</button>
 					 <br> <br>
-					<p class="btn btn-outline-secondary">
+					<p class="btn btn-outline-secondary"style="margin:3px">
 						<input type="checkbox" name="b" value="48" /> 台灣旅遊
 					</p>
-					<p class="btn btn-outline-secondary">
+					<p class="btn btn-outline-secondary"style="margin:3px">
 						<input type="checkbox" name="b" value="49" /> 日本旅遊
 					</p>
-					<p class="btn btn-outline-secondary">
+					<p class="btn btn-outline-secondary"style="margin:3px">
 						<input type="checkbox" name="b" value="50" /> 韓國旅遊
 					</p>
-					<p class="btn btn-outline-secondary">
+					<p class="btn btn-outline-secondary"style="margin:3px">
 						<input type="checkbox" name="b" value="51" /> 美洲旅遊
 					</p>
-					<p class="btn btn-outline-secondary">
+					<p class="btn btn-outline-secondary"style="margin:3px">
 						<input type="checkbox" name="b" value="52" /> 歐洲旅遊
 					</p>
-					<p class="btn btn-outline-secondary">
+					<p class="btn btn-outline-secondary"style="margin:3px">
 						<input type="checkbox" name="b" value="53" /> 中國旅遊
 					</p>
-					<p class="btn btn-outline-secondary">
+					<p class="btn btn-outline-secondary"style="margin:3px">
 						<input type="checkbox" name="b" value="54" /> 其它海外旅遊
 					</p>
-					<p class="btn btn-outline-secondary">
+					<p class="btn btn-outline-secondary"style="margin:3px">
 						<input type="checkbox" name="b" value="55" /> 飲食烹調
 					</p>
 				</div>
@@ -342,16 +340,16 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 				<div class="btn-group-toggle" data-toggle="buttons">
 					<button type="button" class="btn btn-link btn-lg" style="background-color:#FFDCB9;color:#3C3C3C"value="57">親子/童書</button>
 					 <br> <br>
-					<p class="btn btn-outline-secondary">
+					<p class="btn btn-outline-secondary"style="margin:3px">
 						<input type="checkbox" name="b" value="58" /> 繪本
 					</p>
-					<p class="btn btn-outline-secondary">
+					<p class="btn btn-outline-secondary"style="margin:3px">
 						<input type="checkbox" name="b" value="59" /> 兒童文學
 					</p>
-					<p class="btn btn-outline-secondary">
+					<p class="btn btn-outline-secondary"style="margin:3px">
 						<input type="checkbox" name="b" value="60" /> 懷孕/育兒
 					</p>
-					<p class="btn btn-outline-secondary">
+					<p class="btn btn-outline-secondary"style="margin:3px">
 						<input type="checkbox" name="b" value="61" /> 成長教養
 					</p>
 				</div>
@@ -360,22 +358,22 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 				<div class="btn-group-toggle" data-toggle="buttons">
 					<button type="button" class="btn btn-link btn-lg" style="background-color:#BEBEBE;color:#3C3C3C"value="63">學習/考用</button>
 					 <br> <br>
-					<p class="btn btn-outline-secondary">
+					<p class="btn btn-outline-secondary"style="margin:3px">
 						<input type="checkbox" name="b" value="64" /> 語言學習
 					</p>
-					<p class="btn btn-outline-secondary">
+					<p class="btn btn-outline-secondary"style="margin:3px">
 						<input type="checkbox" name="b" value="65" /> 公職考試
 					</p>
-					<p class="btn btn-outline-secondary">
+					<p class="btn btn-outline-secondary"style="margin:3px">
 						<input type="checkbox" name="b" value="66" /> 升學考試
 					</p>
-					<p class="btn btn-outline-secondary">
+					<p class="btn btn-outline-secondary"style="margin:3px">
 						<input type="checkbox" name="b" value="67" /> 技能檢定
 					</p>
-					<p class="btn btn-outline-secondary">
+					<p class="btn btn-outline-secondary"style="margin:3px">
 						<input type="checkbox" name="b" value="68" /> 電腦資訊
 					</p>
-					<p class="btn btn-outline-secondary">
+					<p class="btn btn-outline-secondary"style="margin:3px">
 						<input type="checkbox" name="b" value="69" /> 工具書
 					</p>
 				</div>
@@ -384,22 +382,22 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 				<div class="btn-group-toggle" data-toggle="buttons">
 					<button type="button" class="btn btn-link btn-lg" style="background-color:#FFD9EC;color:#3C3C3C"value="70">醫療/科學</button>
 					 <br> <br>
-					<p class="btn btn-outline-secondary">
+					<p class="btn btn-outline-secondary"style="margin:3px">
 						<input type="checkbox" name="b" value="71" /> 日常保健
 					</p>
-					<p class="btn btn-outline-secondary">
+					<p class="btn btn-outline-secondary"style="margin:3px">
 						<input type="checkbox" name="b" value="73" /> 身心養生
 					</p>
-					<p class="btn btn-outline-secondary">
+					<p class="btn btn-outline-secondary"style="margin:3px">
 						<input type="checkbox" name="b" value="74" /> 疾病醫療
 					</p>
-					<p class="btn btn-outline-secondary">
+					<p class="btn btn-outline-secondary"style="margin:3px">
 						<input type="checkbox" name="b" value="76" /> 應用科學
 					</p>
-					<p class="btn btn-outline-secondary">
+					<p class="btn btn-outline-secondary"style="margin:3px">
 						<input type="checkbox" name="b" value="77" /> 自然生物
 					</p>
-					<p class="btn btn-outline-secondary">
+					<p class="btn btn-outline-secondary"style="margin:3px">
 						<input type="checkbox" name="b" value="78" /> 數理化學
 					</p>
 				</div>

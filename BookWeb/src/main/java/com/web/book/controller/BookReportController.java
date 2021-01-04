@@ -34,7 +34,7 @@ public class BookReportController {
 	@Autowired
 	SearchService searchService;
 	
-	Integer bookId;
+	Integer bookId = 0;
 	MemberBean loginUser;
 	
 	@ModelAttribute
@@ -42,8 +42,8 @@ public class BookReportController {
 		loginUser = (MemberBean) model.getAttribute("loginUser");
 	}
 	
-	@GetMapping("")
-	public String homeBookReport (Model model) {
+	@GetMapping("/{br_ID}")
+	public String homeBookReport (@PathVariable("br_ID") Integer br_ID) {
 		return "BookReport/BookReport";
 	}
 	
@@ -115,17 +115,63 @@ public class BookReportController {
 	
 	@PostMapping("/addBookReport/bookInfo")
 	@ResponseBody
-	public Map<String, Object> gotoPage(Model model, @RequestParam(value = "page") Integer bk_id) {
-		BookBean result = searchService.getBook(bk_id);
+	public Map<String, Object> gotoPage() {
+		
+		BookBean result = searchService.getBook(bookId);
 		Map<String, Object> info = new HashMap<>();
 		info.put("bk_Name", result.getBk_Name());
 		info.put("bk_Author", result.getBk_Author());
 		info.put("bk_Pic", result.getBk_Pic());
+		info.put("bk_Publish", result.getBk_Publish());
 		info.put("bk_Translator", result.getBk_Translator());
 		info.put("userAccount", loginUser.getMb_Account());
+		bookId = 0;
+		
 		return info;
 	}
 	
+	@PostMapping("/addBookReport/addReport")
+	@ResponseBody
+	public Boolean addBookReport(
+			@RequestParam(value = "bk_ID", required = true) Integer bk_ID,
+			@RequestParam(value = "br_Score", required = true) Integer br_Score,
+			@RequestParam(value = "br_Content", required = true) String br_Content,
+			@RequestParam(value = "br_Name", required = true) String br_Name){
+		
+		bookReportService.insertBookReport(loginUser.getMb_ID(), bk_ID, br_Name, br_Score, br_Content);
+		return true;
+	}
 	
+	@PostMapping("/checkBookReport")
+	@ResponseBody
+	public Boolean checkBookReport( @RequestParam(value = "bk_ID", required = true) Integer bk_ID){
+		
+		List<BookReportBean> memberBookReport = bookReportService.bookReportMemberAllList(loginUser.getMb_ID());
+		for (BookReportBean bookReport : memberBookReport) {
+			if(bookReport.getBook().getBk_ID().equals(bk_ID) && bookReport.getMember().getMb_ID() == loginUser.getMb_ID()) {
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	@PostMapping("/viewBookReport/{br_ID}")
+	@ResponseBody
+	public Map<String,Object> viewBookReport(@PathVariable("br_ID") Integer br_ID) {
+		BookReportBean bookRepor =  bookReportService.getBookReport(br_ID);
+		Map<String,Object> data = new HashMap<>();
+		data.put("br_DateTime", bookRepor.getBr_DateTime());
+		data.put("br_Content", bookRepor.getBr_Content());
+		data.put("br_Score", bookRepor.getBr_Score());
+		data.put("br_Name", bookRepor.getBr_Name());
+		data.put("bk_Name", bookRepor.getBook().getBk_Name());
+		data.put("bk_Author", bookRepor.getBook().getBk_Author());
+		data.put("bk_Pic", bookRepor.getBook().getBk_Pic());
+		data.put("bk_Translator", bookRepor.getBook().getBk_Translator());
+		data.put("bk_Publish", bookRepor.getBook().getBk_Publish());
+		data.put("userAccount", loginUser.getMb_Account());
+	
+		return data;
+	}
 	
 }

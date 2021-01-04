@@ -40,6 +40,13 @@ public class DiscussionServiceImpl implements DiscussionService {
 		return discussionDao.getAllPost();
 	}
 
+	//依熱門度排序所有貼文
+	@Override
+	public List<PostBean> getAllPostByHot() {
+		return discussionDao.getAllPostByHot();
+	}
+
+	
 	//依時間排序列出所有留言
 	@Override
 	public List<CommandBean> getAllCommand() {
@@ -95,6 +102,13 @@ public class DiscussionServiceImpl implements DiscussionService {
 	public List<CommandBean> getCommandBeanByPostId(Integer pb_ID) {
 		return discussionDao.getCommandBeanByPostId(pb_ID);
 	}
+
+	//查詢貼文關鍵字
+	@Override
+	public List<PostBean> getPostByKeyword(String keyword) {
+		return discussionDao.getPostByKeyword(keyword);
+	}
+
 
 
 

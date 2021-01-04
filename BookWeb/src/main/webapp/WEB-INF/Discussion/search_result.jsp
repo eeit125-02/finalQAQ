@@ -83,9 +83,10 @@
 						<h3>${stored_post.post_title}</h3>
 						<p>${stored_post.post_content}</p>
 
+						<!-- 待改ajax -->
 						<form:form method='post' action='add_command'
 							modelAttribute="commandBean">
-							<div class="input-group mb-3">
+							<div class="input-group mb-3" style="display:none">
 								<form:input type="text" class="form-control" id="command_input"
 									path="command_content" placeholder="請輸入留言" />
 								<form:hidden path="command_time" />

@@ -22,6 +22,8 @@ public interface DiscussionDao {
 	List<CommandBean> getCommandBeanByPostId(Integer pb_ID);
 	//依時間排序列出所有貼文
 	List<PostBean> getAllPost();
+	//依熱門度排序所有貼文
+	List<PostBean> getAllPostByHot();
 	//依時間排序列出所有留言
 	List<CommandBean> getAllCommand();
 	//列出貼文內容
@@ -35,4 +37,6 @@ public interface DiscussionDao {
 	void deletPost(Integer delete_post_id);
 	//修改板規
 	RuleBean updateRule(RuleBean rb);
+	//查詢貼文關鍵字
+	List<PostBean> getPostByKeyword(String keyword);
 }

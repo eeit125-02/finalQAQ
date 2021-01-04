@@ -116,16 +116,17 @@ form {
 <!-- 				<div class="row"> -->
 <!-- 					<div class="col-md-3"> -->
 				<!--用戶一鍵Google登入或綁定Google帳戶時使用↓-->
-				<button class="btn btn-outline-dark" type="button"  id="btnSignIn" style="text-transform:none ;background-color: white;">Google登入
+				<button class="btn btn-outline-dark" type="button"   style="text-transform:none ;background-color: white;">Facebook
+				<img width="20px" style="margin-bottom:3px; margin-right:5px" alt="Google sign-in" src="http://localhost:8080/BookWeb/image/FB.png" />
+				</button>
+				<button class="btn btn-outline-dark" type="button"  id="btnSignIn" style="text-transform:none ;background-color: white;">Google
 				<img width="20px" style="margin-bottom:3px; margin-right:5px" alt="Google sign-in" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/512px-Google_%22G%22_Logo.svg.png" />
 				</button>
 				<hr />
 				<div>
-					<a href="password.html">忘記密碼?</a> <a href="account.html">忘記帳號?</a>
-				</div>
-				<div>
 					<a href="<c:url value='/toRegiste' />"
-						style="text-decoration: none">新帳號註冊</a>
+						style="text-decoration: none">新帳號註冊</a>&nbsp;
+					<a href="password.html">忘記密碼?</a>
 				</div>
 			</fieldset>
 		<input type="hidden" id="file" name="file" value="https://firebasestorage.googleapis.com/v0/b/bookweb-50d11.appspot.com/o/member%2Fa123456?alt=media"/>

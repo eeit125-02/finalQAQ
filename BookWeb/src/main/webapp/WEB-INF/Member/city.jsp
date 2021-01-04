@@ -25,7 +25,7 @@
 	border-radius: 25px;
 	padding: 20px;
 	background-color: #F3F3FA;
-	height:400px;
+	height:300px;
 	width: 200px;
 	float:left;
 }
@@ -59,7 +59,7 @@ p {
 <!-- header -->
 	<header class="container blog-header py-3" id="bookWebheader"></header>
 	<!-- header -->
-	<div class="container media" style="width:1500px; margin-left:400px" >
+	<div class="container media" style="width:1500px; margin-left:200px" >
 	<fieldset id="city">
 		<legend>會員中心</legend>
 		<div>
