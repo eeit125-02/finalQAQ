@@ -118,7 +118,8 @@
 							<li class="nav-item"><a class="nav-link active"
 								id="novel_latest-tab" data-toggle="tab" href="#novel_latest"
 								role="tab">最新貼文</a></li>
-							<li class="nav-item"><a class="nav-link" id="novel_hot-tab"
+							<!-- hql有問題 -->
+							<li style="display:none" class="nav-item"><a class="nav-link" id="novel_hot-tab"
 								data-toggle="tab" href="#novel_hot" role="tab">熱門貼文</a></li>
 						</ul>
 						<br>
@@ -185,7 +186,56 @@
 
 							<!-- content of hot post tab -->
 							<div class="tab-pane fade" id="novel_hot" role="tabpanel">
+
 								<h1>討論度最高貼文排序</h1>
+								<!-- post and command table -->
+								<table class="table table-hover">
+									<thead>
+										<tr class="table-primary">
+											<th scope="col"
+												style="width: 50%; text-align: left; vertical-align: middle">貼文標題</th>
+											<th scope="col" style="width: 15%; vertical-align: middle">貼文時間</th>
+											<th scope="col" style="width: 15%; vertical-align: middle">貼文作者</th>
+											<th scope="col" style="width: 10%; vertical-align: middle">留言數</th>
+											<th scope="col" style="width: 10%; vertical-align: middle">查看貼文</th>
+										</tr>
+									</thead>
+									<tbody>
+										<c:forEach var="stored_post" items="${hotPost}">
+											<tr>
+												<td style="text-align: left; vertical-align: middle">${stored_post.post_title}</td>
+												<td style="vertical-align: middle">${stored_post.post_time}</td>
+												<td style="vertical-align: middle">${stored_post.memberbean.mb_Name}</td>
+												<td style="vertical-align: middle"><c:set
+														var="command_qty" value="${0}" /> <c:forEach
+														var="stored_command" items="${allCommand}">
+														<c:set var="pi" value="${stored_post.post_id}" />
+														<c:set var="ci" value="${stored_command.postBean.post_id}" />
+														<c:if test="${pi==ci}">
+															<c:set var="command_qty" value="${command_qty+1}" />
+														</c:if>
+													</c:forEach> <!-- 	引用icon --> <svg xmlns="http://www.w3.org/2000/svg"
+														width="16" height="16" fill="currentColor"
+														class="bi bi-chat" viewBox="0 0 16 16">
+  															<path
+															d="M2.678 11.894a1 1 0 0 1 .287.801 10.97 10.97 0 0 1-.398 2c1.395-.323 2.247-.697 2.634-.893a1 1 0 0 1 .71-.074A8.06 8.06 0 0 0 8 14c3.996 0 7-2.807 7-6 0-3.192-3.004-6-7-6S1 4.808 1 8c0 1.468.617 2.83 1.678 3.894zm-.493 3.905a21.682 21.682 0 0 1-.713.129c-.2.032-.352-.176-.273-.362a9.68 9.68 0 0 0 .244-.637l.003-.01c.248-.72.45-1.548.524-2.319C.743 11.37 0 9.76 0 8c0-3.866 3.582-7 8-7s8 3.134 8 7-3.582 7-8 7a9.06 9.06 0 0 1-2.347-.306c-.52.263-1.639.742-3.468 1.105z" />
+														</svg> <i class="bi bi-chat"></i> ${command_qty}</td>
+												<td style="vertical-align: middle"><c:url
+														value="show_detail" var="show_detail">
+														<c:param name="post_detail_id"
+															value=" ${stored_post.post_id}" />
+													</c:url>
+													<form action="${show_detail}" method="post">
+														<button type="submit" class="btn btn-link">Go</button>
+													</form></td>
+											</tr>
+										</c:forEach>
+									</tbody>
+								</table>
+
+
+
+
 							</div>
 
 						</div>
@@ -294,56 +344,77 @@
 											id="show_complete_command${stored_post.post_id}">
 											<div class="card card-body" style="border-style: none">
 
-												
-													<div class="input-group mb-3">
-														<input type="text" class="form-control"
-															id="command_input${stored_post.post_id}"
-															placeholder="請輸入留言" />
-															<input type="hidden" name="post_id" id="post_id" value="${stored_post.post_id}" />
-														<div class="input-group-append">
-															<button class="btn btn-outline-secondary"
-																id="command_btn${stored_post.post_id}" type="submit">留言</button>
-														</div>
+
+												<div class="input-group mb-3">
+													<input type="text" class="form-control"
+														id="command_input${stored_post.post_id}"
+														placeholder="請輸入留言" /> <input type="hidden"
+														name="post_id" id="post_id" value="${stored_post.post_id}" />
+													<div class="input-group-append">
+														<button class="btn btn-outline-secondary"
+															id="command_btn${stored_post.post_id}" type="submit">留言</button>
 													</div>
-												
-												<div id="show_command${stored_post.post_id}">
-												<c:forEach var="stored_command" items="${allCommand}">
-													<c:set var="pi" value="${stored_post.post_id}" />
-													<c:set var="ci" value="${stored_command.postBean.post_id}" />
-													<c:if test="${pi==ci}">
-														<div
-															style="background-color: #C4E1FF; margin: 10px; padding: 5px; border-radius: 10px;">
-															<p>${stored_command.memberbean.mb_Name}<br>
-																${stored_command.command_time}</p>
-															<p>${stored_command.command_content}</p>
-														</div>
-													</c:if>
-												</c:forEach>
 												</div>
 
-							<script>
-									$('#command_btn${stored_post.post_id}').click(function() {
-										$.ajax({
-											url : '<c:url value="/Dsicussion/add_command_ajax"/>',
-											type : 'POST',
-											data : {
-												new_command : $("#command_input${stored_post.post_id}").val(),
-												post_id:$("#post_id").val()
-												},
-											dataType : "json",
-											success : function(new_cb) {
-		
-												$( "#show_command${stored_post.post_id}" ).prepend( 
-														'<div style="background-color: #C4E1FF; margin: 10px; padding: 5px; border-radius: 10px;">'+
-														'<p>'+ new_cb.mb_name +'<br>'+ new_cb.cb_time+'</p>'+
-														'<p>'+ new_cb.cb_content+'</p>'+
-														'</div>' );
-											}
-										})
-											$('#command_input${stored_post.post_id}').val("");
-											$('#command_input${stored_post.post_id}').attr("placeholder","請輸入留言");
-									})
-								</script>
+												<div id="show_command${stored_post.post_id}">
+													<c:forEach var="stored_command" items="${allCommand}">
+														<c:set var="pi" value="${stored_post.post_id}" />
+														<c:set var="ci" value="${stored_command.postBean.post_id}" />
+														<c:if test="${pi==ci}">
+															<div
+																style="background-color: #C4E1FF; margin: 10px; padding: 5px; border-radius: 10px;">
+																<p>${stored_command.memberbean.mb_Name}<br>
+																	${stored_command.command_time}
+																</p>
+																<p>${stored_command.command_content}</p>
+															</div>
+														</c:if>
+													</c:forEach>
+												</div>
+
+												<script>
+													$('#command_btn${stored_post.post_id}').click(function() {
+																		$.ajax({
+																					url : '<c:url value="/Dsicussion/add_command_ajax"/>',
+																					type : 'POST',
+																					data : {
+																						new_command : $(
+																								"#command_input${stored_post.post_id}")
+																								.val(),
+																						post_id : $(
+																								"#post_id")
+																								.val()
+																					},
+																					dataType : "json",
+																					success : function(
+																							new_cb) {
+
+																						$(
+																								"#show_command${stored_post.post_id}")
+																								.prepend(
+																										'<div style="background-color: #C4E1FF; margin: 10px; padding: 5px; border-radius: 10px;">'
+																												+ '<p>'
+																												+ new_cb.mb_name
+																												+ '<br>'
+																												+ new_cb.cb_time
+																												+ '</p>'
+																												+ '<p>'
+																												+ new_cb.cb_content
+																												+ '</p>'
+																												+ '</div>');
+																					}
+																				})
+																		$(
+																				'#command_input${stored_post.post_id}')
+																				.val(
+																						"");
+																		$(
+																				'#command_input${stored_post.post_id}')
+																				.attr(
+																						"placeholder",
+																						"請輸入留言");
+																	})
+												</script>
 
 
 
@@ -412,11 +483,8 @@
 
 
 								<script>
-									$('#send_rule')
-											.click(
-													function() {
-														$
-																.ajax({
+									$('#send_rule').click(function() {
+											$.ajax({
 																	url : '<c:url value="/Discussion/edit_rule"/>',
 																	type : 'POST',
 																	data : {
@@ -444,19 +512,73 @@
 
 							<!-- search & delete post -->
 							<div class="tab-pane fade" id="pills-manage_post" role="tabpanel">
-
-								<div>
-									<form class="form-inline justify-content-center"
-										action='search_keyword' method="post">
+								
+								<!-- 搜尋的hql有問題 -->
+								<div style="display:none" class="form-inline justify-content-center">
 										<input class="form-control" type="search" placeholder="請輸入關鍵字"
-											name="keyword" style="margin-right: 10px">
+											name="keyword_manager" id="keyword_manager" style="margin-right: 10px">
 										<button class="btn btn-outline-primary my-2 my-sm-0"
-											type="submit" id="search_post">Search</button>
-									</form>
+											type="submit" id="search_post_manager">Search</button>
 								</div>
 								<br>
+								
+								<script>
+									$('#search_post_manager').click(function(){
+										console.log('success1')
+										$.ajax({
+											url : '<c:url value="/Discussion/search_keyword_manager"/>',
+											type : 'POST',
+											data : {keyword : $("#keyword_manager").val()},
+											dataType : "json",
+											success:function(pb){
+												console.log(pb)
+												$('#show_post_manager').html(
+														"<c:forEach var='stored_post' items='" + pb + "'>"+ pb.post_id+"</c:forEach>")
+											}
+										})
+										$('#keyword_manager').val("");
+										$('keyword_manager').attr("placeholder","請輸入關鍵字");
+									})
+								</script>
 
-								<h5>貼文顯示區域</h5>
+									<!-- show all post -->
+									<div id="show_post_manager">
+									<c:forEach var="stored_post" items="${allPost}">
+										<div
+											style="border: #ADADAD 2px solid; border-radius: 5px; text-align: left; padding: 10px; margin: 0px 10px">
+
+											<c:url value="go_delete" var="go_delete">
+												<c:param name="delete_post_id"
+													value=" ${stored_post.post_id}" />
+											</c:url>
+											<form class="form-inline float-right" action="${go_delete}"
+												method="post">
+												<button class="btn btn-outline-secondary btn-sm"
+													type="submit" style="margin-left: 5px">刪除</button>
+											</form>
+
+											<p>${stored_post.memberbean.mb_Name}
+												<br>${stored_post.post_time}</p>
+											<h3>${stored_post.post_title}</h3>
+
+											<button class="btn btn-link" type="button"
+												data-toggle="collapse"
+												data-target="#manager_show_complete_post${stored_post.post_id}">
+												顯示、收攏貼文</button>
+
+											<!-- show complete post -->
+											<div class="collapse"
+												id="manager_show_complete_post${stored_post.post_id}">
+												<div class="card card-body" style="border-style: none">
+													${stored_post.post_content}</div>
+											</div>
+										</div><br>
+									</c:forEach>
+									</div>
+									
+									
+								
+
 							</div>
 
 						</div>
