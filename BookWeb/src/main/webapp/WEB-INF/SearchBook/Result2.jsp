@@ -31,22 +31,18 @@
 	font-size: 1. 125rem;
 	text-anchor: middle;
 }
-
 @media ( min-width : 768px) {
 	.bd-placeholder-img-lg {
 		font-size: 3.5rem;
 	}
 }
-
 .a3 {
 	margin: 0px;
 	display: inline
 }
-
 .collectindex {
 	float: right;
 }
-
 </style>
 
 <script>
@@ -55,6 +51,14 @@
 		$("#bookWebFooter").load("//localhost:8080/BookWeb/footer");
 
 	});
+	
+	$(document).ready(function() {
+		loadBookTypeList();
+	});	
+// 	$(document).ready(function() {
+// 		loadBookAuthorList();
+// 	});	
+	
 </script>
 <title>Insert title here</title>
 </head>
@@ -79,81 +83,31 @@
 			<form name=a3 class=a3 action="<c:url value='/collectlist' />" method="get">
 				<button type="submit" name="list" class="btn btn-outline-dark">收藏清單</button>
 			</form>
-			<!-- value=會員ID -->
 				
 			<a class="btn btn-outline-dark" href="<c:url value='/addnewbook' />" role="button">新增書籍</a>			
 		</div>
 		<br> <br>
 
 
-		<h3>搜尋結果：（總共 ${searchresultnumber} 筆）</h3>
-		
-						<c:if test='${empty count}'>
-						<h6></h6>				
-						</c:if>
-												
-						<c:if test='${not empty count}'>
-						<h6>頁數：${page}／${totalPages}</h6>
-						</c:if>		
-							
+<!--總筆數 -->
+		<div id="resultnumber"></div>
+
+<%--<h6>頁數：${page}／${totalPages}</h6> --%>
 		<br>
-		
-		<div><h4>　　　　　　${searchresultzero}</h4></div>
-		
-<c:set var="totalUsers" value="${count}"/>
-<c:set var="usersPerPage" value="${perpage}"/>
-<c:set var="totalPages" value="${totalPages}"/>
-<c:set var="beginIndex" value="${beginIndex}"/>
-<c:set var="endIndex" value="${endIndex}"/>
-<c:set var="page" value="${page}"/>
-<c:set var="currentPageUsers" value="${searchresult.subList(beginIndex,endIndex)}"/>	
-		
-<%-- 		<c:forEach items="${currentPageUsers}" var="row"> --%>
-		<c:forEach items="${searchresulttype}" var="row">
-		
-		<div class="row">
-<!--圖片 -->
-			<div class="col-sm-2">			
-<%-- 				<img class="itemcov" alt="" src="${row.getBk_Pic()}" height="190"> --%>
-				<img class="itemcov" alt="" src="${row.getBk_Pic()}" width="150">
-			</div>
-			
-<!-- 書名+作者+出版社+出版日期 -->
-			<div class="col-sm-10">
-				<h3>
-					<form name=a1 action="<c:url value='/bookpage' />" method="get">
-						<button type="submit" name="page" id="sb" class="btn btn-link btn-lg"
-							value="${row.getBk_ID()}">${row.getBk_Name()}</button>
-					</form>
-				</h3>
-				｜ 作者：${row.getBk_Author()} ｜  出版社：${row.getBk_Publish()} ${row.getBk_ID()} ｜  出版日期：${row.getBk_Date()}｜ <br>
-				<p class="ellipsis"style="padding-top:15px">${row.getBk_Content()}</p>
-				
-<!-- 收藏按鈕 -->
-				<div class="collect" id="collect">
-<%-- 					<form name=a2 action="<c:url value='/resultcollect' />" --%>
-<!-- 						method="get"> -->
-<!-- 						<img alt="點選收藏" -->
-<%-- 							src="${pageContext.request.contextPath}/image/heartred.png" --%>
-<!-- 							id="Img/heart" width="25px"> -->
-						<button id="gocollect" type="submit" name="collect" onclick="a${row.getBk_ID()}();"
-							class="btn btn-outline-danger btn-sm" value="${row.getBk_ID()}">
-							<img alt="收藏"
-							src="${pageContext.request.contextPath}/image/heartred.png"
-							id="Img/heart" width="25px"> 加入收藏</button>
-<!-- 					</form> -->
-				</div>
-						<br>
-						<hr>
-			</div>
+
+<!-- 搜尋結果清單 -->
+			<div class="booktypelist" id="booktypelist">	
+			</div>						
+		<br>
+		<hr>
 		</div>
-		
+
 	<script >
 
 //點擊加入收藏
-		function a${row.getBk_ID()}() {
+		function collect() {
 			console.log("test");
-			let bk_ID = ${row.getBk_ID()}
+			let bk_ID = document.getElementById("gocollect").value
 			console.log(bk_ID);
 			let editURL = "searchbook/resultcollect/"+bk_ID;
 			
@@ -172,69 +126,117 @@
 				}
 			});
 		}
+		
+		
+		function loadBookTypeList() {
+			$.ajax({
+				async : false,
+				cache : false,
+				type : 'POST',
+				url : "searchtype/loadBookTypeList",
+				dataType : "json",
+				contentType : "application/json;charset=utf-8",
+				error : function() {
+				},
+				success : function(data) {
+					console.log("test");
+					var insertData = "<div>";
+					for (let i = 0; i < data.length; i++) {
+						insertData += "<div class=\"row\">"
+							+"<div class=\"col-sm-2\">"
+							+"<img class=\"itemcov\" alt=\"\" src=\""
+							+data[i].bk_Pic
+							+"\" width=\"150\">"
+							+"</div>"
+							+"<div class=\"col-sm-10\">"
+							+"<h3>"
+							+"<form name=a1 action=\"<c:url value='/bookpage' />\" method=\"get\">"
+							+"<button type=\"submit\" name=\"page\"class=\"btn btn-link btn-lg\" value=\""
+							+data[i].bk_ID+"\">"+data[i].bk_Name+"</button></form>"
+							+"</h3>"
+							+"｜ 作者："+data[i].bk_Author
+							+" ｜  出版社："+data[i].bk_Publish
+							+"｜  出版日期："+data[i].bk_Date
+							+"<br>"
+							+"<p class=\"ellipsis\"style=\"padding-top:15px\">"
+							+data[i].bk_Content
+							+"</p>"	
+							+"</div>"
+							+"</div>"
+							+"<div class=\"collect\" id=\"collect\">"
+							+"<button id=\"gocollect\" type=\"submit\" name=\"collect\" onclick=\"collect();\""
+							+"class=\"btn btn-outline-danger btn-sm\" value=\""
+							+data[i].bk_ID
+							+"\"<img "
+							+"src=\"${pageContext.request.contextPath}/image/heartred.png\""
+							+" id=\"Img/heart\" width=\"25px\"> 加入收藏</button>"
+							+"</div>"	
+							+"<br>"
+							+"<hr>"
+					}
+					insertData += "</div>"
+						var insertData1 = "<h3>搜尋結果：（總共 "+data.length+" 筆）</h3>"
+					$("#booktypelist").html(insertData);	
+					$("#resultnumber").html(insertData1);	
+					}
+				});
+			}		
+		
+			
+// 		function loadBookAuthorList() {
+// 			$.ajax({
+// 				async : false,
+// 				cache : false,
+// 				type : 'POST',
+// 				url : "searchbookauthor/loadBookAuthorList",
+// 				dataType : "json",
+// 				contentType : "application/json;charset=utf-8",
+// 				error : function() {
+// 				},
+// 				success : function(data) {
+// 					console.log("test2");
+// 					var insertData = "<div>";
+// 					for (let i = 0; i < data.length; i++) {
+// 						insertData += "<div class=\"row\">"
+// 							+"<div class=\"col-sm-2\">"
+// 							+"<img class=\"itemcov\" alt=\"\" src=\""
+// 							+data[i].bk_Pic
+// 							+"\" width=\"150\">"
+// 							+"</div>"
+// 							+"<div class=\"col-sm-10\">"
+// 							+"<h3>"
+// 							+"<form name=a1 action=\"<c:url value='/bookpage' />\" method=\"get\">"
+// 							+"<button type=\"submit\" name=\"page\"class=\"btn btn-link btn-lg\" value=\""
+// 							+data[i].bk_ID+"\">"+data[i].bk_Name+"</button></form>"
+// 							+"</h3>"
+// 							+"｜ 作者："+data[i].bk_Author
+// 							+" ｜  出版社："+data[i].bk_Publish
+// 							+"｜  出版日期："+data[i].bk_Date
+// 							+"<br>"
+// 							+"<p class=\"ellipsis\"style=\"padding-top:15px\">"
+// 							+data[i].bk_Content
+// 							+"</p>"	
+// 							+"</div>"
+// 							+"</div>"
+// 							+"<div class=\"collect\" id=\"collect\">"
+// 							+"<button id=\"gocollect\" type=\"submit\" name=\"collect\" onclick=\"collect();\""
+// 							+"class=\"btn btn-outline-danger btn-sm\" value=\""
+// 							+data[i].bk_ID
+// 							+"\"<img "
+// 							+"src=\"${pageContext.request.contextPath}/image/heartred.png\""
+// 							+" id=\"Img/heart\" width=\"25px\"> 加入收藏</button>"
+// 							+"</div>"	
+// 							+"<br>"
+// 							+"<hr>"
+// 					}
+// 					insertData += "</div>"
+// 						var insertData1 = "<h3>搜尋結果：（總共 "+data.length+" 筆）</h3>"
+// 					$("#booktypelist").html(insertData);	
+// 					$("#resultnumber").html(insertData1);	
+// 					}
+// 				});
+// 			}	
 	</script>
-		</c:forEach>
-<%-- 		</c:forEach> --%>
-<div class="d-flex justify-content-center">
-						
-						<c:if test='${empty count}'>
-						<nav></nav>				
-						</c:if>
-												
-						<c:if test='${not empty count}'>
-						
-<nav aria-label="Page navigation example">
-<ul class="pagination">
-
-	<c:url value="/searchtype/1" var="firstpage">
-		<c:param name="reslist" value="${reslist}"></c:param>	
-	</c:url>
-	
-	<c:url value="/searchtype/${page-1>1?page-1:1}" var="frontpage">
-		<c:param name="reslist" value="${reslist}"></c:param>	
-	</c:url>	
-	
-<li class="page-item"><a href="${firstpage}" class="page-link">首頁</a></li>
-<li class="page-item"><a href="${frontpage}" class="page-link">&laquo;</a></li>
-	
-<c:forEach begin="1" end="${totalPages}" varStatus="loop">
-<c:set var="active" value="${loop.index==page?'active':''}"/>
-	<c:url value="/searchtype/${loop.index}" var="middlepage">
-		<c:param name="reslist" value="${reslist}"></c:param>	
-	</c:url>
-
-	<c:url value="/searchtype/${page+1<totalPages?page+1:totalPages}" var="nextpage">
-		<c:param name="reslist" value="${reslist}"></c:param>	
-	</c:url>
-	
-	<c:url value="/searchtype/${totalPages}" var="finalpage">
-		<c:param name="reslist" value="${reslist}"></c:param>	
-	</c:url>
-
-<li class="page-item ${active}">
-<a href="${middlepage}" class="page-link">${loop.index}</a>
-</li>
-</c:forEach>
-
-<li class="page-item">
-<a href="${nextpage}" class="page-link">&raquo;</a>
-</li>
-<li class="page-item"><a href="${finalpage}" class="page-link">尾頁</a></li>
-</ul>
-</nav>
-						</c:if>								
-						
-						
-						
-						
-						
-						
-						
-						
-						
-</div>	
-
-</div>
 
 	<!-- 內容結束 -->
 	
@@ -244,7 +246,5 @@
 	<footer class="container py-5" id="bookWebFooter"></footer>
 	<!-- footer -->
 	
-
-
 </body>
 </html>
