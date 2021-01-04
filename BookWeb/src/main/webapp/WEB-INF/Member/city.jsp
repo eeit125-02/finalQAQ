@@ -59,7 +59,7 @@ p {
 <!-- header -->
 	<header class="container blog-header py-3" id="bookWebheader"></header>
 	<!-- header -->
-	<div class="container media" style="width:1500px; margin-left:200px" >
+	<div class="container media" style="width:1500px; margin-left:400px" >
 	<fieldset id="city">
 		<legend>會員中心</legend>
 		<div>
@@ -78,7 +78,7 @@ p {
 			</form>
 		</div>
 	</fieldset>
-		<div id="change123" style="width:900px;margin-left:20px ">顯示頁面</div>
+		<div id="change123" style="width:900px;margin-left:10px ">顯示頁面</div>
 	</div>
 	<input id="test" type="hidden" value="${third}">
 	<!-- footer -->
@@ -88,6 +88,9 @@ p {
 	$(document).ready(function() {
 		$("#bookWebheader").load("<c:url value='/header'/>");
         $("#bookWebFooter").load("<c:url value='/footer'/>");
+	});
+	</script>
+	<script>
         var check = $("#test").val();
         if(check=="third"){
 			$("#pwdModify").hide();
@@ -111,7 +114,6 @@ p {
 	 $("#admin1").click(function(){
 		$('#change123').load("/BookWeb/adminall") 
 	 })
-	});
 </script>
 </body>
 </html>

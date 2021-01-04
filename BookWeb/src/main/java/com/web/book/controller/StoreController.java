@@ -36,6 +36,18 @@ public class StoreController {
 		return "/Transation/qaqMain";
 	}
 
+//  灌庫存值
+//	@GetMapping("boobplay")
+//	public String boob(Model model) {
+//		bookStoreService.boobqaq();
+//		return "redirect:/Transation/storeMain";
+//	}
+	
+	@GetMapping("/qaqManyPrice")
+	public String qaqManyPrice(Model model) {
+		return "Transation/qaqManyPrice";
+	}
+
 	@GetMapping("/Transation/storeMain")
 	public String mainPage(Model model) {
 		List<BookBean> list = bookStoreService.searchBookStore();
@@ -52,7 +64,7 @@ public class StoreController {
 
 	@GetMapping("/myStore")
 	public String myStore(Model model) {
-		Integer mb_ID = 13;
+		Integer mb_ID = 9;
 		List<BookStoreBean> list = bookStoreService.searchMemberStore(mb_ID);
 		model.addAttribute("myBookList", list);
 		return "/Transation/myStore";
@@ -67,7 +79,7 @@ public class StoreController {
 			return "/Transation/myUpdateStore";
 		} else {
 			bookStoreService.deleteBookStore(bks_ID);
-			Integer mb_ID = 13;
+			Integer mb_ID = 9;
 			List<BookStoreBean> list = bookStoreService.searchMemberStore(mb_ID);
 			model.addAttribute("myBookList", list);
 			return "/Transation/myStore";
@@ -81,7 +93,7 @@ public class StoreController {
 		System.out.println("2." + bs_Price);
 		System.out.println("3." + bs_Num);
 		bookStoreService.updateBookStore(bks_ID, bs_Num, bs_Price);
-		Integer mb_ID = 13;
+		Integer mb_ID = 9;
 		List<BookStoreBean> list = bookStoreService.searchMemberStore(mb_ID);
 		model.addAttribute("myBookList", list);
 		return "/Transation/myStore";
@@ -104,8 +116,8 @@ public class StoreController {
 		String a = request.getParameter("setbk");
 		bookStoreService.addBookName(Integer.parseInt(request.getParameter(a + "qty")),
 				Integer.parseInt(request.getParameter(a + "price")), Integer.parseInt(request.getParameter("setbk")),
-				13);
-		Integer mb_ID = 13;
+				9);
+		Integer mb_ID = 9;
 		List<BookStoreBean> list = bookStoreService.searchMemberStore(mb_ID);
 		model.addAttribute("myBookList", list);
 		return "/Transation/myStore";
@@ -129,7 +141,7 @@ public class StoreController {
 			e.printStackTrace();
 		}
 		searchService.savebk(book);
-		bookStoreService.addBookName(asd, qwe, book.getBk_ID(), 13);
+		bookStoreService.addBookName(asd, qwe, book.getBk_ID(), 9);
 		return "redirect:/myStore";
 	}
 
