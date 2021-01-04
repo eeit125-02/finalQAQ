@@ -198,7 +198,7 @@ public class SearchBookController {
 			int beginIndex = (page - 1) * perpage;
 			//本頁末尾使用者序號的下一個
 			int endIndex = beginIndex + perpage;
-			model.addAttribute("count1", count);
+			model.addAttribute("count", count);
 			model.addAttribute("perpage", perpage);
 			model.addAttribute("totalPages", totalPages);
 			model.addAttribute("beginIndex", beginIndex);
@@ -206,7 +206,7 @@ public class SearchBookController {
 			model.addAttribute("page", page);
 			model.addAttribute("reslist", reslist);
 			}			
-		return "SearchBook/Result";
+		return "SearchBook/Result2";
 	}
 	
 	//查詢分類後載入分頁
@@ -235,13 +235,13 @@ public class SearchBookController {
 			int beginIndex = (page - 1) * perpage;
 			//本頁末尾使用者序號的下一個
 			int endIndex = beginIndex + perpage;
-			model.addAttribute("count1", count);
+			model.addAttribute("count", count);
 			model.addAttribute("perpage", perpage);
 			model.addAttribute("totalPages", totalPages);
 			model.addAttribute("beginIndex", beginIndex);
 			model.addAttribute("endIndex", endIndex);
 			model.addAttribute("page", page);
-			return "SearchBook/Result";
+			return "SearchBook/Result2";
 		}
 		
 		
