@@ -27,153 +27,62 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
 	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
 	crossorigin="anonymous">
-<!-- <link rel="stylesheet" href="import.css">   -->
 <style>
-
-#mbpwd {
+#mb_pwd {
 	border-radius: 25px;
 	padding: 20px;
 	margin: auto;
-	background-color: #F3F3FA;
-	width: 400px
-}
-
-legend {
-	text-align: center;
-	font-size: 30px;
+	height: 900px;
+	width: 600px
 }
 
 p {
-	margin-top: 5px;
-	font-size: 10px
+border: solid 1px border-radius:10px
 }
 
-form {
-	margin: auto;
+.tr1{
+background-color:#68b0ab
+
 }
 
-input {
-	border-top: white;
-	border-left: white;
-	border-right: white;
-	border-bottom: 1px solid gray;
-}
-
-.a2 input, .a1 input, .a5 input, .a6 input {
-	background-color: rgb(206, 203, 203);
-}
-
-div {
-	margin-left: 50px;
-}
-
-.a11 {
-	text-align: center;
-}
-
-.a11 input {
-	font-size: 16px;
-	text-align: center;
-	border: 1px solid rgb(206, 203, 203);
-	background-color: rgb(233, 162, 115);
-	border-radius: 15px;
-}
-
-span {
-	font-size: 10px;
-}
-
-.a4 {
-	margin-bottom: 25px;
-}
-
-.a5 {
-	margin-bottom: 25px;
-}
-
-.bd-placeholder-img {
-	font-size: 1. 125rem;
-	text-anchor: middle;
-}
-
-@media ( min-width : 768px) {
-	.bd-placeholder-img-lg {
-		font-size: 3.5rem;
-	}
+.tr2{
+background-color:#e0ece4
 }
 </style>
 </head>
 
 <body>
-	<div class="container media">
-					<form action="<c:url value='/Update'/>" method="post">
+		<form action="<c:url value='/Update'/>" method="post">
 			<fieldset id="mb_pwd">
 				<legend>會員個資</legend>
-				<div class="a2">
-					<label>帳號:</label>
-					<p>${account}</p>
-				</div>
-				<div class="a3">
-					<label>密碼:</label> <input type="password" name="pwd" id="pwd" 
-						value="" size="12" onblur="Checkpwd()" > <span id="idsp1"></span><br />
-					<p style="color: gray;">(1.不可空白，2.至少6個字且必須包含英文字母、數字)</p>
-				</div>
-				<div class="a4">
-					<label>確認密碼:</label> <input type="password" name="pwd1" id="pwd1"
-						value="" size="12" onblur="Checkpwd1()"> <span id="idsp9"></span><br />
-				</div>
-<!-- 				<div class="a1"> -->
-<!-- 					<label>姓名:</label> <input type="text" id="name" name="name" -->
-<!-- 						size="12" value="" > -->
-<!-- 				</div> -->
-<!-- 				<br> -->
-<!-- 				<div class="a5"> -->
-<!-- 					<label>性別:</label> <input type="radio" name="sex" id="sex_m" -->
-<!-- 						onblur="" value="男">男 <input type="radio" name="sex" -->
-<!-- 						id="sex_g" onblur="" value="女">女 <span id="idsp3"></span> -->
-<!-- 				</div> -->
-<!-- 				<div class="a6"> -->
-<!-- 					<label>生日:</label> <input type="date" name="date" id="date" -->
-<!-- 						onblur="" readonly> <span id="idsp4"></span><br /> -->
-<!-- 				</div> -->
-<!-- 				<br /> -->
-<!-- 				<div class="a7"> -->
-<!-- 					<label>地址:</label> <input type="text" name="address" id="address" -->
-<!-- 						onblur=""> <span id="idsp5"></span><br /> -->
-<!-- 				</div> -->
-<!-- 				<br /> -->
-<!-- 				<div class="a8"> -->
-<!-- 					<label>電話:</label> <input type="text" name="tel" id="tel" onblur=""> -->
-<!-- 					<span id="idsp6"></span><br /> -->
-<!-- 				</div> -->
-<!-- 				<br /> -->
-<!-- 				<div class="a9"> -->
-<!-- 					<label>E-mail:</label> <input type="email" name="mail" id="mail" -->
-<!-- 						onblur=""> <span id="idsp7"></span><br /> -->
-<!-- 				</div> -->
-<!-- 				<br /> -->
-<!-- 				<div class="a10"> -->
-<!-- 					<label>喜好類型:</label><br /> <input type="checkbox" name="type" -->
-<!-- 						id="type1" value="中">XX <input type="checkbox" name="type" -->
-<!-- 						id="type2" value="新">XX <input type="checkbox" name="type" -->
-<!-- 						id="type3" value="七">XX <input type="checkbox" name="type" -->
-<!-- 						id="type4" value="七">XX <input type="checkbox" name="type" -->
-<!-- 						id="type5" value="八">XX<br> <input type="checkbox" -->
-<!-- 						name="type" id="type6" value="九">XX <input type="checkbox" -->
-<!-- 						name="type" id="type7" value="十">XX <input type="checkbox" -->
-<!-- 						name="type" id="type8" value="十1">XX <input -->
-<!-- 						type="checkbox" name="type" id="type9" value="二">XX <span -->
-<!-- 						id="idsp8"></span><br /> -->
-<!-- 				</div> -->
-<!-- 				<br> -->
-				<div class="a11">
+				<table class="table" >
+					<tr class="tr1">
+						<th colspan="2">帳號</th>
+					</tr>
+					<tr class="table-light">
+						<td colspan="2">${account}</td>
+					</tr>
+					<tr class="tr2">
+						<th colspan="2" >密碼
+						<p style="color: gray; margin:0px;">(1.不可空白，2.至少6個字且必須包含英文字母、數字)</p>
+						</th>
+					</tr>
+					<tr class="table-light">
+						<td><input type="password" name="pwd" id="pwd" 
+						value="" size="12" onblur="Checkpwd()"style=""><span id="idsp1" style="color: red"></span></td>
+					</tr>
+					<tr class="tr2">
+						<th colspan="2">確認密碼</th>
+					</tr>
+					<tr class="table-light">
+						<td><input type="password" name="pwd1" id="pwd1"
+						value="" size="12" onblur="Checkpwd1()"><span id="idsp2" style="color: red"></span></td>
+					</tr>
+					</table>
 					<button type="submit" name="Update">送出</button>
 					<button type="reset">清除</button>
-				</div>
-
 			</fieldset>
-		</form>
-	</div>
+				</form>
 	<script>
 
 		function Checkpwd() {
@@ -197,7 +106,7 @@ span {
 		function Checkpwd1() {
 			let pwd = document.getElementById("pwd").value
 			let pwd1 = document.getElementById("pwd1").value
-			sp = document.getElementById("idsp9")
+			sp = document.getElementById("idsp2")
 			if (pwd == pwd1 && pwd1 != "") {
 				sp.innerHTML = "正確"
 			} else
