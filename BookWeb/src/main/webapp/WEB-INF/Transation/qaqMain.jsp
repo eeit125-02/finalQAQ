@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 <!DOCTYPE html>
 <html>
@@ -70,32 +71,37 @@
 	<br>
 	<!-- 搜尋商品欄	end -->
 	<!-- 	版面置中 -->
-	<div class="container">
-	<!-- 	版面置中 -->
-		<div class="row">
 	<c:forEach items="${store}" var="v">
-			<div class="card col-sm-3" style="width: 18rem;">
-				<a href="">
-				<img src="<c:url value=" ${v.book.bk_Pic} " />" 
-				class="card-img-top" alt="..." style="height: 18rem;">
-				</a>
-				<div class="card-body">
-				<a href="#" >${v.book.bk_Name }</a>
-					<br>
-					<span class="card-text">作者: ${ v.book.bk_Author }</span>
-					<br>
-					<span class="card-text">出版社: ${ v.book.bk_Publish }</span>
-					<br>
-					<span class="card-text">出版日: ${ v.book.bk_Date }</span>
-					<br>
-					<span class="card-text">價錢: ${ v.book.bk_Price }</span>
-					<br>
-					<a href="<c:url value='/qaqManyPrice'/>" >簡介&#149;比價 $ </a>
-				</div>
-			</div>
+		<div class="container">
+			<!-- 	版面置中 -->
+			<div class="row">
+				<div class="card col-sm-3" style="width: 18rem;">
+					<!-- 圖片跟連結 -->
+					<a href="<c:url value='/qaqBookDetail/${v.book.bk_ID}'/>"> <img
+						src="<c:url value=" ${v.book.bk_Pic} " />" class="card-img-top"
+						alt="..." style="height: 18rem;">
+					</a>
+					<!-- 圖片跟連結 -->
+					<div class="card-body">
+						<!-- 書名連結 -->
+						<a href="<c:url value='/qaqBookDetail/${v.book.bk_ID}'/>">${v.book.bk_Name }</a>
+						<!-- 書名連結 -->
+						<br> <span class="card-text">作者: ${ v.book.bk_Author }</span>
+						<br> <span class="card-text">出版社: ${ v.book.bk_Publish }</span>
+						<br> <span class="card-text">出版日: ${ v.book.bk_Date }</span>
+						<br> <span class="card-text">價錢: ${ v.book.bk_Price }</span>
+						<br>
+						<!-- 比價連結 -->
 	</c:forEach>
-			
+	<c:forEach items="${bookCount}" var="bc">
+		<a href="<c:url value='/qaqManyPrice'/>">簡介&#149;比價 $ 最小 &#126; 最大
+			共有 ${ bc } 項 </a>
+		<!-- 比價連結 -->
 		</div>
+		</div>
+	</c:forEach>
+
+	</div>
 	<!-- 	版面置中 -->
 	</div>
 	<!-- 	版面置中 -->

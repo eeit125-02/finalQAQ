@@ -8,7 +8,10 @@ import com.web.book.model.BookStoreBean;
 public interface BookStoreService {
 	
 		// 商品頁面搜尋
-		List<BookBean> searchBookStore();
+		List<BookStoreBean> searchBookStore();
+		
+		// 一件商品所有價錢區間
+		List<BookStoreBean> bookPrices(Integer bk_ID);
 
 		// 單一商品詳細資料
 		BookBean getBookDetail(Integer bk_ID);

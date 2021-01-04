@@ -1,15 +1,20 @@
 package com.web.book.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.sound.midi.Soundbank;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
@@ -28,33 +33,51 @@ public class StoreController {
 	@Autowired
 	SearchService searchService;
 
-//  最終呈現首頁製作中
+	// 最終呈現首頁
 	@GetMapping("qaqTest")
 	public String qaqmainPage(Model model) {
-		List<BookBean> list = bookStoreService.searchBookStore();
+		List<BookStoreBean> list = bookStoreService.searchBookStore();
+		List<Integer> bookCount = new ArrayList<Integer>();
+		for (BookStoreBean book : list) {		
+			bookCount.add(bookStoreService.bookPrices(book.getBook().getBk_ID()).size());
+		}
+//		for(int i=0; i<bookCount.size(); i++) {
+//			System.out.println(bookCount.get(i));
+//		}
+//		for (int i = 0; i < bookMoneySize.size(); i++) {
+//			System.out.println(bookMoneySize);
+//		}
+		model.addAttribute("bookCount", bookCount);
 		model.addAttribute("store", list);
 		return "/Transation/qaqMain";
 	}
 
-//  灌庫存值
-//	@GetMapping("boobplay")
-//	public String boob(Model model) {
-//		bookStoreService.boobqaq();
-//		return "redirect:/Transation/storeMain";
-//	}
+	// 如果前端連結 1. 用 / 後端用PathVariable接   2. 用 ? 後端用RequestParam接
+	@GetMapping("/qaqBookDetail/{bk_ID}")
+	public String qaqBookDetail(Model model,
+			@PathVariable Integer bk_ID
+			) {
+		BookBean bookDetail = bookStoreService.getBookDetail(bk_ID);
+		model.addAttribute("bookdetail", bookDetail);
+		return "Transation/detail";
+	}
 	
+	// 一本書價錢區間畫面
 	@GetMapping("/qaqManyPrice")
-	public String qaqManyPrice(Model model) {
+	public String qaqManyPrice() {
+		List<BookStoreBean> bookPrices = bookStoreService.bookPrices(1);
 		return "Transation/qaqManyPrice";
 	}
+	
+	
 
 	@GetMapping("/Transation/storeMain")
 	public String mainPage(Model model) {
-		List<BookBean> list = bookStoreService.searchBookStore();
+		List<BookStoreBean> list = bookStoreService.searchBookStore();
 		model.addAttribute("bookstore", list);
 		return "/Transation/storeMain";
 	}
-
+	// 前往一本書的詳細頁面
 	@GetMapping("/detail")
 	public String detail(Model model, @RequestParam(value = "selectbk") Integer bk_ID) {
 		BookBean book = bookStoreService.getBookDetail(bk_ID);
@@ -145,4 +168,11 @@ public class StoreController {
 		return "redirect:/myStore";
 	}
 
+
+//  灌庫存值
+//	@GetMapping("boobplay")
+//	public String boob(Model model) {
+//		bookStoreService.boobqaq();
+//		return "redirect:/Transation/storeMain";
+//	}
 }

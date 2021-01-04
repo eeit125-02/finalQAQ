@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.web.book.model.BookBean;
+import com.web.book.model.BookStoreBean;
 import com.web.book.model.ShoppingCartBean;
 import com.web.book.service.BookStoreService;
 import com.web.book.service.ShoppingCartService;
@@ -54,7 +55,7 @@ public class ShoppingCartController {
 				for (ShoppingCartBean shoppingCartBean : listCart) {
 					if (bk_ID == shoppingCartBean.getBook().getBk_ID()) {
 						model.addAttribute("same", "已經加入購物車");
-						List<BookBean> list = bsService.searchBookStore();
+						List<BookStoreBean> list = bsService.searchBookStore();
 						model.addAttribute("bookstore", list);
 						return "Transation/storeMain";
 					}
@@ -86,7 +87,7 @@ public class ShoppingCartController {
 			for (ShoppingCartBean shoppingCartBean : listCart) {
 				if (bk_ID2 == shoppingCartBean.getBook().getBk_ID()) {
 					model.addAttribute("same", "已經加入購物車");
-					List<BookBean> list = bsService.searchBookStore();
+					List<BookStoreBean> list = bsService.searchBookStore();
 					model.addAttribute("bookstore", list);
 					return "Transation/storeMain";
 				}

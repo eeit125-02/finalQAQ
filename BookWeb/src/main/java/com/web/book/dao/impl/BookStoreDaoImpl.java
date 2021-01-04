@@ -23,7 +23,7 @@ public class BookStoreDaoImpl implements BookStoreDao {
 	// 商品頁面搜尋
 	@Override
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public List<BookBean> searchBookStore() {
+	public List<BookStoreBean> searchBookStore() {
 		Session session = factory.getCurrentSession();
 		String hql = "FROM BookStoreBean a where a.member = 13 ";
 		Query query = session.createQuery(hql);
@@ -32,11 +32,19 @@ public class BookStoreDaoImpl implements BookStoreDao {
 		return query.getResultList();
 	}
 	
-	//  一件商品價錢區間
-	public void name() {
+	//  一件商品所有價錢區間
+	@Override
+	@SuppressWarnings("unchecked")
+	public List<BookStoreBean> bookPrices(Integer bk_ID) {
 		Session session = factory.getCurrentSession();
-		String hql = "";
+		String hql = "from BookStoreBean where bk_ID = :bk_ID  order by bs_Price";
+		Query<BookStoreBean> query = session.createQuery(hql);
+		return query.setParameter("bk_ID", bk_ID).getResultList();
 	}
+	
+//	public L name() {
+//		
+//	}
 
 	// 灌庫存值給商店
 	@Override
@@ -47,6 +55,7 @@ public class BookStoreDaoImpl implements BookStoreDao {
 		Integer qaqPrice = 0;
 		MemberBean member = session.load(MemberBean.class, 11);
 	// 管理員灌值 start
+//		MemberBean member = session.load(MemberBean.class, 13);
 //		for (int i = 1; i < 6243; i++) {
 //			BookBean book = session.load(BookBean.class, i);
 //			qaqQty = (int)(Math.random()*(20))+1;
