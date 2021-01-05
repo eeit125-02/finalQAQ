@@ -57,6 +57,7 @@
 
 			<div class="col-10" style='text-align: center;'>
 
+			<h3>詳細貼文</h3><br>
 				<div
 					style="border: #ADADAD 2px solid; border-radius: 5px; text-align: left; padding: 10px; margin: 0px 10px">
 					<p>${PostBean.memberbean.mb_Name}<br>${PostBean.post_time}</p>

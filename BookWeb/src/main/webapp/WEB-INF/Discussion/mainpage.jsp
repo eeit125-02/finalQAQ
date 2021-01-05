@@ -88,10 +88,8 @@
 						
 						<script>
 						$('#list-member-list').click(function(){
-							console.log('按到了')
-							console.log(${loginUser.mb_ID})
-							if(${loginUser.mb_ID}==null){
-								$('#list-member').html('請先登入會員')
+							if('${loginUser.mb_ID}'==''){
+								$('#list-member').html('<br><br><h1>請先登入會員帳號</h1>')
 							} 
 						})
 						</script>
@@ -100,6 +98,15 @@
 						class="list-group-item list-group-item-action"
 						id="list-manager-list" data-toggle="list" href="#list-manager"
 						role="tab">板主專區</a>
+						
+						<script>
+						$('#list-manager-list').click(function(){
+							if('${loginUser.mb_ID}'!=='13'){
+								$('#list-manager').html('<br><br><h1>請先登入版主帳號</h1>')
+							} 
+						})
+						</script>
+						
 				</div>
 			</div>
 
