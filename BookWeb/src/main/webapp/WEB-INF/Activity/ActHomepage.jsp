@@ -186,13 +186,14 @@ td {
 									<div class="caption">
 										<p>${act.act_Theme}</p>
 										<p>${act.act_Date}</p>
-										<p>${act.act_Loc}</p>
-										<p>${act.act_Intro}</p>			
+										<p>${act.act_Loc}</p>		
 										<hr>
 										<p>
 										
 										<!-- Trigger the modal with a button -->
 										<button type="button" class="btn btn-info btn-lg" id = "myModal"  value="${act.act_Loc}" data-toggle="modal" data-target="#myModal1">詳細資料</button>
+										<div><a href="https://www.flaticon.com/authors/freepik" title="Freepik"></a><a href="https://www.flaticon.com/" title="Flaticon"></a></div>
+										
 										<!-- Modal -->												
 										<p>
 										<button class="btn btn-outline-info"><a href="<c:url value='/showUpdateForm'/>?act_ID=${act.act_ID}" />編輯</a></button>
