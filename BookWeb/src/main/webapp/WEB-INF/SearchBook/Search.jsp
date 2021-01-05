@@ -88,7 +88,7 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 	</div>
 			
 	<div class="col-sm-4">		
-		<form action="<c:url value='/searchbook' />" method="get">
+		<form action="<c:url value='/searchbookauthor' />" method="get">
 			<h4>輸入作者關鍵字：</h4>
 			<div class="form-inline">
 				<input class="form-control mr-sm-2" name="author" value=""

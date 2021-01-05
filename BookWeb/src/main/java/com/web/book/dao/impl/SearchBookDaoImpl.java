@@ -65,7 +65,8 @@ public class SearchBookDaoImpl implements SearchBookDAO {
 		
 		for(Integer typeid :reslist) {
 			System.out.println(typeid);
-			String hql = "SELECT book FROM BookTypeBean WHERE sty_ID= :styid";
+//			String hql = "SELECT book FROM BookTypeBean WHERE sty_ID= :styid";
+			String hql = "FROM BookTypeBean WHERE sty_ID= :styid";
 			BookTypeBean bt=session.load(BookTypeBean.class, typeid);
 			Query<BookTypeBean> query = session.createQuery(hql);
 			res1 = query.setParameter("styid", bt).getResultList();

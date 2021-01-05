@@ -182,9 +182,14 @@ public class Login {
 	// 會員修改
 	@PostMapping("/MbUpdate")
 	public String Update(Model model, @ModelAttribute("MemberBean") MemberBean MB,
-			@RequestParam(value = "file", required = false) CommonsMultipartFile file) throws Exception {		
-		MemberBean mb_inf = ms.select(Account);
+			@RequestParam(value = "file", required = false) CommonsMultipartFile file,
+			@RequestParam(value = "test", required = false) String test
+			) throws Exception {		
+		MemberBean mb_inf = ms.select(Account);	
+		System.out.println(test);
+		if(test.equals("abc")) {
 		mb_inf.setMb_pic(GlobalService.saveImage("member", file, mb_inf.getMb_Account()));
+		}
 		mb_inf.setMb_Birthday(MB.getMb_Birthday());
 		mb_inf.setMb_Address(MB.getMb_Address());
 		mb_inf.setMb_Tel(MB.getMb_Tel());
