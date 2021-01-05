@@ -39,20 +39,7 @@
 	}
 }
 
-.hide_content {
-	display: none;
-}
 
-.show_part_text {
-	overflow: hidden;
-	text-overflow: ellipsis;
-	white-space: nowrap;
-}
-
-.show_all_text {
-	white-space: pre-line;
-	overflow: inherit;
-}
 </style>
 
 <script>
@@ -65,6 +52,13 @@
 </head>
 
 <body>
+
+<%
+response.setHeader("Pragma","No-cache");
+response.setHeader("Cache-Control","no-cache");
+response.setDateHeader("Expires", 0);
+%>
+
 	<!-- header -->
 	<header class="container blog-header py-3" id="bookWebheader"></header>
 	<!-- header -->
@@ -80,13 +74,33 @@
 				<div class="list-group" id="list-tab" role="tablist">
 					<a class="list-group-item list-group-item-action active"
 						id="list-novel-list" data-toggle="list" href="#list-novel"
-						role="tab">討論天地</a> <a
+						role="tab">討論天地</a> 
+						<a
 						class="list-group-item list-group-item-action"
 						id="list-member-list" data-toggle="list" href="#list-member"
-						role="tab">會員專區</a> <a
+						role="tab">會員專區</a> 
+						
+						<script>
+						$('#list-member-list').click(function(){
+							if('${loginUser.mb_ID}'==''){
+								$('#list-member').html('<br><br><h1>請先登入會員帳號</h1>')
+							} 
+						})
+						</script>
+						
+						<a
 						class="list-group-item list-group-item-action"
 						id="list-manager-list" data-toggle="list" href="#list-manager"
-						role="tab">管理員專區</a>
+						role="tab">板主專區</a>
+						
+						<script>
+						$('#list-manager-list').click(function(){
+							if('${loginUser.mb_ID}'!=='13'){
+								$('#list-manager').html('<br><br><h1>請先登入版主帳號</h1>')
+							} 
+						})
+						</script>
+						
 				</div>
 			</div>
 
@@ -179,14 +193,6 @@
   															<path
 															d="M2.678 11.894a1 1 0 0 1 .287.801 10.97 10.97 0 0 1-.398 2c1.395-.323 2.247-.697 2.634-.893a1 1 0 0 1 .71-.074A8.06 8.06 0 0 0 8 14c3.996 0 7-2.807 7-6 0-3.192-3.004-6-7-6S1 4.808 1 8c0 1.468.617 2.83 1.678 3.894zm-.493 3.905a21.682 21.682 0 0 1-.713.129c-.2.032-.352-.176-.273-.362a9.68 9.68 0 0 0 .244-.637l.003-.01c.248-.72.45-1.548.524-2.319C.743 11.37 0 9.76 0 8c0-3.866 3.582-7 8-7s8 3.134 8 7-3.582 7-8 7a9.06 9.06 0 0 1-2.347-.306c-.52.263-1.639.742-3.468 1.105z" />
 														</svg> <i class="bi bi-chat"></i> ${command_qty}</td>
-												<%-- <td style="vertical-align: middle"><c:url
-														value="show_detail" var="show_detail">
-														<c:param name="post_detail_id"
-															value=" ${stored_post.post_id}" />
-													</c:url>
-													<form action="${show_detail}" method="post">
-														<button type="submit" class="btn btn-link">Go</button>
-													</form></td> --%>
 											</tr>
 										</c:forEach>
 									</tbody>
@@ -252,7 +258,7 @@
 					</div>
 					<!-- =====================================================member page===================================================== -->
 					<div class="tab-pane fade" id="list-member" role="tabpanel">
-						<h3>[會員名稱] 的個人頁面</h3>
+						<h3>${loginUser.mb_Name} 的個人頁面</h3>
 						<br>
 
 						<!-- member page top button -->
@@ -302,6 +308,9 @@
 							<!-- personal post record -->
 							<div class="tab-pane fade" id="pills-member_post" role="tabpanel">
 								<c:forEach var="stored_post" items="${allPost}">
+								<c:set var="um" value="${loginUser.mb_ID}" />
+								<c:set var="pmm" value="${stored_post.memberbean.mb_ID}" />
+								<c:if test="${um==pmm}">
 									<div
 										style="border: #ADADAD 2px solid; border-radius: 5px; text-align: left; padding: 10px; margin: 0px 10px">
 
@@ -336,10 +345,13 @@
 
 										<button class="btn btn-link" type="button"
 											data-toggle="collapse"
-											data-target="#show_complete_post${stored_post.post_id}">
-											顯示、收攏貼文</button>
+											data-target="#show_complete_post${stored_post.post_id}" aria-expanded="false">
+											顯示、收攏貼文
+										</button>
+										
+											
 										<button class="btn btn-link" type="button"
-											data-toggle="collapse"
+											data-toggle="collapse" 
 											data-target="#show_complete_command${stored_post.post_id}">
 											顯示、收攏留言</button>
 
@@ -433,6 +445,7 @@
 
 									</div>
 									<br>
+									</c:if>
 								</c:forEach>
 
 							</div>
@@ -441,7 +454,8 @@
 
 					<!-- =====================================================manager page===================================================== -->
 					<div class="tab-pane fade" id="list-manager" role="tabpanel">
-
+					<h3>版主頁面</h3>
+						<br>
 						<!-- manager page top button  -->
 						<ul class="nav nav-pills mb-3 justify-content-center"
 							id="pills-tab" role="tablist" style="text-align: center;">

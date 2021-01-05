@@ -43,6 +43,13 @@
 </head>
 
 <body>
+
+<%
+response.setHeader("Pragma","No-cache");
+response.setHeader("Cache-Control","no-cache");
+response.setDateHeader("Expires", 0);
+%>
+
 	<!-- header -->
 	<header class="container blog-header py-3" id="bookWebheader"></header>
 	<!-- header -->
@@ -54,7 +61,7 @@
 			</div>
 
 			<div class="col-10" style='text-align: center;'>
-				<h3>修改貼文</h3>
+				<h3>修改貼文</h3><br>
 				<div
 					style="border: #ADADAD 2px solid; border-radius: 5px; text-align: left; padding: 10px; margin: 0px 10px; padding-top: 20px">
 
