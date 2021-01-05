@@ -51,9 +51,9 @@
 			<!-- Blog Entries Column -->
 
 			<div class="col-md-8">
-				<h1 class="my-4">
+				<!-- <h1 class="my-4">
 					  搜尋結果：<small>分類</small>
-				</h1>
+				</h1> -->
 
 				<div id="searchList">
 					
@@ -140,12 +140,13 @@
 		
 		$("#bookWebheader").load("//localhost:8080/BookWeb/header");
 		$("#bookWebFooter").load("//localhost:8080/BookWeb/footer");
+		loadBookReportList();
 		function loadBookReportList() {
 			$.ajax({
 				async : false,
 				cache : false,
 				type : 'POST',
-				url : location.href + "/getBookReportList",
+				url : "http://localhost:8080/BookWeb/BookReport" + "/allBookReport",
 				dataType : "json",
 				contentType : "application/json;charset=utf-8",
 				error : function() {
@@ -154,24 +155,33 @@
 				success : function(data) {
 
 					var insertData = "";
+					
 					for (let i = 0; i < data.length; i++) {
+						if (data[i].bk_Publish == null){
+							data[i].bk_Publish = ""
+						}
 						insertData +=	"<div class=\"card mb-4\">"
 								    + 	"<div class=\"row g-0\">"
-								    + 	"<img src=\""+ data[i].br_Pic+ "\">"
+								    + 	"<img class=\"ml-4\" width=\"130px\" height=\"150px\" src=\""+ data[i].bk_Pic+ "\">"
 								    + 	"<div class=\"col-md-8\">"
 								    + 	"<div class=\"card-body\">"
-								    + 	"<h5 class=\"card-title\">"+ data[i].br_name+ "</h5>"
-								    + 	"<p class=\"card-text\">"+ data[i].br_Content.replace(/<br>/g,"\n")+ "</p>"
+								    + 	"<h4 class=\"card-title\">"
+								    +	"<a class=\"\" href=\""+data[i].br_ID+"\">"+data[i].br_Name+"</a>"
+								    +	"</h4>"
+								   	+	"<p class=\"card-title\"> 撰寫者："+ data[i].loginUser+ ", 撰寫日期：" + data[i].br_DateTime+ "</p>"
+								    + 	"<div>"
+								    + 	"<p class=\"card-text mb-auto\"> 書名："+data[i].bk_Name+ "</p>"
+								    +	"<p class=\"card-text mb-auto\"> 作者："+data[i].bk_Author+ "</p>"
+								    +	"<p class=\"card-text mb-auto\"> 出版社："+data[i].bk_Publish+ "</p>"
+								    + 	"</div>"
 								    + 	"<div class=\"d-flex justify-content-between align-items-center\">"
-								    + 	"<a href=\""+br_ID+"\">(閱讀全文)</a>"
-								    + 	"<small class=\"text-muted\">創建日期：<br>\""+ data[i].br_DateTime+ "\"</small>"
 								    + 	"</div>"
 								    + 	"</div>"
 								    + 	"</div>"
 								    + 	"</div>"
 								    + 	"</div>"
 					}
-					$('#bookReportList').html(insertData);
+					$('#searchList').html(insertData);
 				}
 			});
 		};

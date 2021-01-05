@@ -82,4 +82,14 @@ public class BookReportDaoImpl implements BookReportDao {
 		session.save(bookReport);
 		
 	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<BookReportBean>  allbookReportList() {
+		Session session = fatory.getCurrentSession();
+		String hql = "From BookReportBean";
+		Query<BookReportBean> query = session.createQuery(hql);
+		
+		return query.getResultList();
+	}
 }

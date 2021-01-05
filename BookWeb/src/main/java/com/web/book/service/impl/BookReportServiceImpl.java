@@ -56,6 +56,14 @@ public class BookReportServiceImpl implements BookReportService {
 		
 	}
 
+	@Override
+	public List<BookReportBean> allbookReportList() {
+		
+		return bookReportDao.allbookReportList();
+	}
+	
+	
+
 	
 
 }

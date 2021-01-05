@@ -34,7 +34,7 @@
 				aria-haspopup="true" aria-expanded="false"> 閱讀履歷 </a>
 			<div class="dropdown-menu text-muted"
 				aria-labelledby="navbarDropdownMenuLink2">
-				<a class="dropdown-item text-muted" href="//localhost:8080/BookWeb/BookReport">讀書心得</a> 
+				<a class="dropdown-item text-muted" href="//localhost:8080/BookWeb/BookReport/searchBookReport">讀書心得</a> 
 				<a class="dropdown-item text-muted" href="#">Another action</a> 
 				<a class="dropdown-item text-muted" href="//localhost:8080/BookWeb/BookReport/EditBookReport">編輯資訊</a>
 			</div>
@@ -55,7 +55,7 @@
 			$('#loginButton').html("<a id=\"login\" href=\"//localhost:8080/BookWeb/toLogin\">登入</a>");
 		};
 // 		$(document).ready(function() {
-// 			if(typeof($.cookie('Member_ID')) == "undefined"){
+// 			if(typeof($.cookie('Member_ID')) == "undefined" && window.location.href !="//localhost:8080/BookWeb/toLogin"){
 // 				window.location.href="//localhost:8080/BookWeb/toLogin";
 // 			}
 // 		})
