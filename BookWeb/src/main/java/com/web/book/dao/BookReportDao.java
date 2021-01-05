@@ -17,4 +17,6 @@ public interface BookReportDao {
 	void upDateBookReportData(Integer br_ID, Integer br_Score, String br_Content );
 	
 	void insertBookReport(Integer mb_ID, Integer bk_ID, String br_Name, Integer br_Score, String br_Content);
+	
+	List<BookReportBean>  allbookReportList();
 }
