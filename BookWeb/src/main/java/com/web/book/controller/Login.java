@@ -3,7 +3,9 @@ package com.web.book.controller;
 import java.io.IOException;
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.ExecutionException;
 
 import javax.servlet.http.Cookie;
@@ -156,27 +158,24 @@ public class Login {
 		return "Member/login";
 				}
 	// 會員資料
-	@GetMapping("/mb_inf")
-	public String Mb_inf(Model model) {
+	@PostMapping("/mb_inf")
+	public @ResponseBody MemberBean Mb_inf(Model model) {
 		MemberBean memberbean = new MemberBean();
 		model.addAttribute("MemberBean", memberbean);
 		MemberBean select = ms.select(Account);
-		System.out.println(select);
-		System.out.println(select.getMb_pic());
 		model.addAttribute("login", select);
-		System.out.println("abc");
-		return "Member/mb_inf";
+		return select;
 	}
 
 	// 會員修改
 	@GetMapping("/MbUpdate")
-	public String toUpdate(Model model) {
+	public @ResponseBody Map<String,Object> toUpdate(Model model) {
 		MemberBean memberbean = new MemberBean();
 		MemberBean mb_inf = ms.select(Account);
-		model.addAttribute("mb_inf", mb_inf);
-		model.addAttribute("account", Account);
-		model.addAttribute("MemberBean", memberbean);
-		return "Member/mb_modify";
+		Map<String,Object> map= new HashMap<>(); 
+		map.put("mb_inf", mb_inf);
+		map.put("MemberBean", memberbean);
+		return map;
 	}
 
 	// 會員修改
@@ -204,10 +203,11 @@ public class Login {
 	}
 
 	// 密碼修改介面
-	@GetMapping("/Modify")
-	public String Modify(Model model) {
+	@PostMapping("/Modify")
+	public @ResponseBody String Modify(Model model) {
+		System.out.println("-----------");
 		model.addAttribute("account", Account);
-		return "Member/Modify";
+		return Account;
 	}
 
 	// 密碼更新
