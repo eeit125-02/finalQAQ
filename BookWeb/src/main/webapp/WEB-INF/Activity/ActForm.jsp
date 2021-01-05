@@ -75,32 +75,38 @@
 					<!-- 					<legend>活動創建表單</legend> -->
 
 					<form>
-						<div>
-							<input type="hidden" class="form-control" value="${mb_account}" />
-						</div>
 						<div class="form-row">
 							<div class="form-group col-md-6">
 								<label for="inputPassword4">活動名稱:</label>
-								<form:input path="act_Name" class="form-control"
-									placeholder="必填" />
+								<form:input path="act_Name" class="form-control" placeholder="必填" />
 							</div>
 							<div class="form-group col-md-6">
 								<label for="inputPassword4">活動主題:</label>
-								<form:input path="act_Theme" class="form-control"
-									placeholder="必填" />
+								<form:input path="act_Theme" class="form-control" placeholder="必填" />
 							</div>
 						</div>
 						<div class="form-row">
 							<div class="form-group col-md-6">
 								<label for="inputPassword4">活動嘉賓:</label>
 								<form:input path="act_Guest" class="form-control" placeholder="" />
-
 							</div>
 							<div class="form-group col-md-6">
 								<label for="inputPassword4">活動圖片:</label> <input name="file"
 									type="file" class="form-control" />
 							</div>
 						</div>
+						
+						<div class="form-row">
+							<div class="form-group col-md-6">
+								<label for="inputPassword4">活動人數:</label>
+								<form:input path="act_Pax" class="form-control" placeholder="" />
+							</div>
+							<div class="form-group col-md-6">
+								<label for="inputPassword4">活動場所:</label> <input name="file"
+									type="file" class="form-control" />
+							</div>
+						</div>
+
 
 						<div class="form-row">
 							<div class="form-group col-md-6">
@@ -121,23 +127,15 @@
 							<form:select path="act_Loc" id="縣市1" class="form-control"></form:select>
 							</div>
 							<div class="form-group col-md-6">
-							<form:label path="act_Loc">活動地點:</form:label>
+							<label>&nbsp</label>
 							<form:select id="鄉鎮市區1" path="act_Loc" class="form-control"></form:select>
 							</div>
-							<form:input path="act_Loc" class="form-control"></form:input>
-						</div>
+						    </div>
+							<div class="form-group">
+							<form:input type="text" path="act_Loc" class="form-control" placeholder="請輸入其餘地址"></form:input>
+							</div>
 
 
-						<div class="form-group">
-							<label for="inputAddress">Address</label> <input type="text"
-								class="form-control" id="inputAddress"
-								placeholder="1234 Main St">
-						</div>
-						<div class="form-group">
-							<label for="inputAddress2">Address 2</label> <input type="text"
-								class="form-control" id="inputAddress2"
-								placeholder="Apartment, studio, or floor">
-						</div>
 						<div class="form-row">
 							<div class="form-group col-md-6">
 								<label for="inputCity">City</label> <input type="text"
@@ -193,18 +191,18 @@
 					<!-- 						<input type="datetime-local" id="to" name="to" placeholder="結束時間"> -->
 					<!-- 					</div> -->
 
-					<div>
-						<form:label path="act_Loc">活動地點:</form:label>
-						<form:select path="act_Loc" id="縣市1"></form:select>
-						<form:select id="鄉鎮市區1" path="act_Loc"></form:select>
-						<form:input path="act_Loc"></form:input>
+<!-- 					<div> -->
+<%-- 						<form:label path="act_Loc">活動地點:</form:label> --%>
+<%-- 						<form:select path="act_Loc" id="縣市1"></form:select> --%>
+<%-- 						<form:select id="鄉鎮市區1" path="act_Loc"></form:select> --%>
+<%-- 						<form:input path="act_Loc"></form:input> --%>
 
-					</div>
+<!-- 					</div> -->
 
-					<div>
-						<form:label path="act_Guest">活動嘉賓:</form:label>
-						<form:input path="act_Guest" />
-					</div>
+<!-- 					<div> -->
+<%-- 						<form:label path="act_Guest">活動嘉賓:</form:label> --%>
+<%-- 						<form:input path="act_Guest" /> --%>
+<!-- 					</div> -->
 
 					<div>
 						<form:label path="act_Pax">活動人數:</form:label>
@@ -212,14 +210,15 @@
 					</div>
 
 					<div>
+						<form:label path="act_Tag">活動標籤:</form:label>
+						<form:input path="act_Tag" />
+					</div>
+
+					<div>
 						<form:label path="act_Rule">活動規則:</form:label>
 						<form:input type="textarea" path="act_Rule" />
 					</div>
 
-					<div>
-						<form:label path="act_Tag">活動標籤:</form:label>
-						<form:input path="act_Tag" />
-					</div>
 
 					<div>
 						<form:label path="act_Place">活動場所:</form:label>

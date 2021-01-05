@@ -70,30 +70,34 @@
 			<form:form method="POST" modelAttribute="ajb" enctype="multipart/form-data">
 
 				<table>
+                    <tr>
+						<td><input type="hidden">會員帳號:${loginUser.getMb_Account()}</label></td>
+<%-- 						<td><input type="hidden" name="mb_Account" value="${member.mb_Account}" /></td> --%>
+					</tr>
 
 					<tr>
-						<td><label>會員帳號:${mb_account}</label></td>
+						<td><label>會員帳號:${loginUser.getMb_Account()}</label></td>
 <%-- 						<td><input type="hidden" name="mb_Account" value="${member.mb_Account}" /></td> --%>
 					</tr>
 
                     <tr>
-						<td><label>活動名稱:${act.act_Name}</label></td>
+						<td><label>活動名稱:${act_Name}</label></td>
 <%-- 						<td><input type="hidden" name="act_Name" value="${act.act_Name}" /></td> --%>
 					</tr>
 
                     <tr>
-						<td><label>會員名稱:${mb_Name}</label></td>
+						<td><label>會員名稱:${loginUser.getMb_Name()}</label></td>
 <%-- 						<td><input type="hidden" name="mb_Name" value="${member.mb_Name}" /></td> --%>
 					</tr>
 
 					<tr>
 						<td><form:label path="member.mb_Mail">email:</form:label></td>
-						<td><form:input path="member.mb_Mail" /></td>
+						<td><form:input path="member.mb_Mail" value="${loginUser.getMb_Mail()}"/></td>
 					</tr>
 
 					<tr>
 						<td><form:label path="member.mb_Tel">聯絡電話:</form:label></td>
-						<td><form:input path="member.mb_Tel" /></td>
+						<td><form:input path="member.mb_Tel" value="${loginUser.getMb_Tel()}"/></td>
 					</tr>
 
 

@@ -59,10 +59,11 @@ public class ActJoinController {
 			@ModelAttribute("loginUser") MemberBean loginUser,Model model
 			,@RequestParam("act_ID")Integer act_ID
 			) {
+		System.out.println("--------"+act_ID);
 		String act_Name = actService.getAct(act_ID).getact_Name();
-		model.addAttribute("act_Name="+act_Name);
+		model.addAttribute("act_Name",act_Name);
 		model.addAttribute("act_ID", act_ID);
-		model.addAttribute("mb_account", loginUser.getMb_Account());
+		model.addAttribute("loginUser", loginUser);
 		ActJoinBean ajb = new ActJoinBean();
 		model.addAttribute("ajb", ajb);
 		return "Activity/JoinForm";
