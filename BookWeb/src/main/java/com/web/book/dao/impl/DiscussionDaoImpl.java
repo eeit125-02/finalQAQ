@@ -88,7 +88,7 @@ public class DiscussionDaoImpl implements DiscussionDao {
 	//修改貼文
 	@Override
 	public void editPost(Integer edit_post_id,  String edit_post_title,
-		String edit_post_content, Timestamp edit_post_time) {
+		String edit_post_content, String edit_post_time) {
 		Session session = factory.getCurrentSession();
 		PostBean pb = (PostBean) session.get(PostBean.class, edit_post_id);
 		pb.setPost_time(edit_post_time);

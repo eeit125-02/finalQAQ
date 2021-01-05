@@ -23,7 +23,7 @@ public class CommandBean implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	Integer command_id;	
 	String command_content;
-	Timestamp command_time;
+	String command_time;
 	
 	@ManyToOne
 	@JoinColumn(name="FK_PostBean_post_id") 	
@@ -35,7 +35,7 @@ public class CommandBean implements Serializable{
 	
 	public CommandBean() {}
 
-	public CommandBean(Integer command_id, String command_content, Timestamp command_time, PostBean postBean,
+	public CommandBean(Integer command_id, String command_content, String command_time, PostBean postBean,
 			MemberBean memberbean) {
 		super();
 		this.command_id = command_id;
@@ -61,11 +61,11 @@ public class CommandBean implements Serializable{
 		this.command_content = command_content;
 	}
 
-	public Timestamp getCommand_time() {
+	public String getCommand_time() {
 		return command_time;
 	}
 
-	public void setCommand_time(Timestamp command_time) {
+	public void setCommand_time(String command_time) {
 		this.command_time = command_time;
 	}
 

@@ -26,7 +26,7 @@ public class PostBean implements Serializable{
 	Integer post_id;
 	String post_title;
 	String post_content;
-	Timestamp post_time;
+	String post_time;
 	
 	@OneToMany(mappedBy="postBean", orphanRemoval=true)
 	private Set<CommandBean> commands=new LinkedHashSet<>( );
@@ -37,7 +37,7 @@ public class PostBean implements Serializable{
 
 	public PostBean() {}
 	
-	public PostBean(Integer post_id, String post_title, String post_content, Timestamp post_time,
+	public PostBean(Integer post_id, String post_title, String post_content, String post_time,
 			Set<CommandBean> commands, MemberBean memberbean) {
 		super();
 		this.post_id = post_id;
@@ -72,11 +72,11 @@ public class PostBean implements Serializable{
 		this.post_content = post_content;
 	}
 
-	public Timestamp getPost_time() {
+	public String getPost_time() {
 		return post_time;
 	}
 
-	public void setPost_time(Timestamp post_time) {
+	public void setPost_time(String post_time) {
 		this.post_time = post_time;
 	}
 

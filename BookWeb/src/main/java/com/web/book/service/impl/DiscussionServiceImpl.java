@@ -68,7 +68,7 @@ public class DiscussionServiceImpl implements DiscussionService {
 	//修改貼文
 	@Override
 	public void editPost(Integer edit_post_id,  String edit_post_title,
-			String edit_post_content, Timestamp edit_post_time) {
+			String edit_post_content, String edit_post_time) {
 		discussionDao.editPost(edit_post_id,  edit_post_title,
 				edit_post_content, edit_post_time);
 	}

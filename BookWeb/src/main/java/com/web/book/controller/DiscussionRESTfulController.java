@@ -2,6 +2,8 @@ package com.web.book.controller;
 
 import java.io.UnsupportedEncodingException;
 import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -41,9 +43,11 @@ public class DiscussionRESTfulController {
 			@RequestParam(value="rule_content") String rule_Content) {	
 		RuleBean rb = new RuleBean();
 		Timestamp d = new Timestamp(System.currentTimeMillis()); 
+		DateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		String tsStr = sdf.format(d);
 		rb.setRule_id(1);
 		rb.setRule_content(rule_Content);
-		rb.setRule_time(d.toString());
+		rb.setRule_time(tsStr);
 		discussionService.updateRule(rb);
 		return rb;
 	}
@@ -55,10 +59,10 @@ public class DiscussionRESTfulController {
 			@RequestParam(value="new_command") String new_command,
 			@RequestParam(value="post_id") Integer post_id){
 		CommandBean cb = new CommandBean();
-		Timestamp d = new Timestamp(System.currentTimeMillis());  
-		cb.setCommand_time(d);
-//		MemberBean mb = discussionService.getMemberBeanById(11); //先寫死
-//		cb.setMemberbean(mb);
+		Timestamp d = new Timestamp(System.currentTimeMillis());
+		DateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		String tsStr = sdf.format(d);
+		cb.setCommand_time(tsStr);
 		cb.setMemberbean(loginUser);
 		PostBean pb = discussionService.getPostBeanById(post_id);
 		cb.setPostBean(pb);

@@ -39,20 +39,7 @@
 	}
 }
 
-.hide_content {
-	display: none;
-}
 
-.show_part_text {
-	overflow: hidden;
-	text-overflow: ellipsis;
-	white-space: nowrap;
-}
-
-.show_all_text {
-	white-space: pre-line;
-	overflow: inherit;
-}
 </style>
 
 <script>
@@ -65,6 +52,13 @@
 </head>
 
 <body>
+
+<%
+response.setHeader("Pragma","No-cache");
+response.setHeader("Cache-Control","no-cache");
+response.setDateHeader("Expires", 0);
+%>
+
 	<!-- header -->
 	<header class="container blog-header py-3" id="bookWebheader"></header>
 	<!-- header -->
@@ -351,10 +345,13 @@
 
 										<button class="btn btn-link" type="button"
 											data-toggle="collapse"
-											data-target="#show_complete_post${stored_post.post_id}">
-											顯示、收攏貼文</button>
+											data-target="#show_complete_post${stored_post.post_id}" aria-expanded="false">
+											顯示、收攏貼文
+										</button>
+										
+											
 										<button class="btn btn-link" type="button"
-											data-toggle="collapse"
+											data-toggle="collapse" 
 											data-target="#show_complete_command${stored_post.post_id}">
 											顯示、收攏留言</button>
 

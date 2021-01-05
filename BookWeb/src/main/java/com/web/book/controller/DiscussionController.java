@@ -1,6 +1,8 @@
 package com.web.book.controller;
 
 import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +34,6 @@ public class DiscussionController {
 	}
 	
 	//由首頁連進討論區主頁
-	//依時間排序列出所有貼文、留言
 	@GetMapping("/Discussion/mainpage")
 	public String Discussionmain(Model model) {
 		List<PostBean> post_list = discussionService.getAllPost();
@@ -54,42 +55,18 @@ public class DiscussionController {
 	@ModelAttribute
 	public void post_inf(Model model) {
 		PostBean pb = new PostBean();
-		Timestamp d = new Timestamp(System.currentTimeMillis());  
-		pb.setPost_time(d);
+		Timestamp d = new Timestamp(System.currentTimeMillis());
+		DateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		String tsStr = sdf.format(d);
+		pb.setPost_time(tsStr);
 		model.addAttribute("postBean",pb);
 	}
-	
-	//留言內容(會員id目前為null)
-	@ModelAttribute
-	public void command_info(Model model) {
-		CommandBean cb = new CommandBean();
-		Timestamp d = new Timestamp(System.currentTimeMillis());  
-		cb.setCommand_time(d);
-		model.addAttribute("commandBean",cb);
-	}
-
 	
 	//會員新增貼文
 	@PostMapping("Discussion/add_post")
 	public String processAddNewPost(@ModelAttribute("postBean")PostBean pb) {
-//		MemberBean mb = discussionService.getMemberBeanById(loginUser.getMb_ID()); //抓取loginUser的ID
-//		pb.setMemberbean(mb);
 		pb.setMemberbean(loginUser); //直接把Bean塞進去
 		discussionService.addPost(pb);
-		return "redirect:/Discussion/mainpage";
-	}
-	
-	//會員新增留言
-	@PostMapping("Discussion/add_command")
-	public String processAddNewCommand(
-			@ModelAttribute("commandBean")CommandBean cb,
-			@RequestParam(value="postBean.post_id") Integer pb_ID) {
-//		MemberBean mb = discussionService.getMemberBeanById(11); //先寫死
-//		cb.setMemberbean(mb);
-		cb.setMemberbean(loginUser); 
-		PostBean pb = discussionService.getPostBeanById(pb_ID);
-		cb.setPostBean(pb);
-		discussionService.addCommand(cb);
 		return "redirect:/Discussion/mainpage";
 	}
 	
@@ -122,7 +99,9 @@ public class DiscussionController {
 			@RequestParam("edit_post_content") String edit_post_content
 			) {
 		Timestamp d = new Timestamp(System.currentTimeMillis());
-		discussionService.editPost(edit_post_id, edit_post_title,edit_post_content, d);
+		DateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		String tsStr = sdf.format(d);
+		discussionService.editPost(edit_post_id, edit_post_title,edit_post_content, tsStr);
 		return "redirect:/Discussion/mainpage"; 
 	}
 	
