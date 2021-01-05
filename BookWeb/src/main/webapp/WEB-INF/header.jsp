@@ -43,6 +43,7 @@
 	</div>
 	
 	<script>
+	$(document).ready(function() {
 		if (typeof($.cookie('Member_ID')) != "undefined"){
 				$('#loginButton').html("<a href=\"//localhost:8080/BookWeb/toCity\">會員中心</a>&nbsp;"
 						+ "<a id=\"logout\" href=\"//localhost:8080/BookWeb/toLogin\">登出</a>");
@@ -52,9 +53,9 @@
 					$.removeCookie('Member_ID', { path: '/BookWeb/toLogin' });
 				});
 		}else{
-			console.log("log")
 			$('#loginButton').html("<a id=\"login\" href=\"//localhost:8080/BookWeb/toLogin\">登入</a>");
 		};
+	})
 // 		$(document).ready(function() {
 // 			if(typeof($.cookie('Member_ID')) == "undefined" && window.location.href !="//localhost:8080/BookWeb/toLogin"){
 // 				window.location.href="//localhost:8080/BookWeb/toLogin";
