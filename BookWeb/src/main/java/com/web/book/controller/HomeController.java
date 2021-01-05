@@ -54,7 +54,6 @@ public class HomeController {
 	public String admin( Model model, HttpServletRequest request,
 			@CookieValue(value = "Member_ID", required=false) String memberId) throws InterruptedException, ExecutionException, IOException {
 		
-		//GlobalService.creatImgInFirebase("111", "2222");
 		if (memberId != null && Boolean.FALSE.equals(sessioIsLoad)) {
 			sessioIsLoad = true;
 			Map<String,String> user = GlobalService.getSession(memberId);

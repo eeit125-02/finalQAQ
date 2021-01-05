@@ -140,13 +140,13 @@
 		
 		$("#bookWebheader").load("//localhost:8080/BookWeb/header");
 		$("#bookWebFooter").load("//localhost:8080/BookWeb/footer");
-		loadBookReportList();
-		function loadBookReportList() {
+		loadBookReportList("/allBookReport");
+		function loadBookReportList(path) {
 			$.ajax({
 				async : false,
 				cache : false,
 				type : 'POST',
-				url : "http://localhost:8080/BookWeb/BookReport" + "/allBookReport",
+				url : "http://localhost:8080/BookWeb/BookReport" + path,
 				dataType : "json",
 				contentType : "application/json;charset=utf-8",
 				error : function() {

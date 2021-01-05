@@ -47,6 +47,7 @@
 				$('#loginButton').html("<a href=\"//localhost:8080/BookWeb/toCity\">會員中心</a>&nbsp;"
 						+ "<a id=\"logout\" href=\"//localhost:8080/BookWeb/toLogin\">登出</a>");
 				$("#logout").click(function(){
+					console.log("123")
 					$.removeCookie('Member_ID', { path: '/BookWeb' });
 					$.removeCookie('Member_ID', { path: '/BookWeb/toLogin' });
 				});

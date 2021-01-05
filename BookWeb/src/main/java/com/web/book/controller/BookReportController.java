@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 
 import com.web.book.model.BookBean;
 import com.web.book.model.BookReportBean;
@@ -39,13 +40,15 @@ public class BookReportController {
 	MemberBean loginUser;
 
 	@ModelAttribute
-	public void setLoginUser(Model model) {
+	public void setLoginUser(Model model, SessionStatus status) {
 		loginUser = (MemberBean) model.getAttribute("loginUser");
+		
 	}
 
 	@GetMapping("/{br_ID}")
 	public String homeBookReport(@PathVariable("br_ID") Integer br_ID) {
 		return "BookReport/BookReport";
+		
 	}
 
 	@GetMapping("/EditBookReport")
@@ -198,6 +201,13 @@ public class BookReportController {
 			bookReport.add(data);
 		}
 		return bookReport;
+	}
+	
+	@PostMapping("/serchBookReportPage")
+	@ResponseBody
+	public Integer searchBookReportPage() {
+		
+		return bookReportService.getAllBookRepotPageSize();
 	}
 
 }

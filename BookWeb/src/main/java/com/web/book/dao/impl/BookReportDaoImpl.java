@@ -92,4 +92,80 @@ public class BookReportDaoImpl implements BookReportDao {
 		
 		return query.getResultList();
 	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public Integer getAllBookRepotPageSize() {
+		
+		Integer maxPage = 0;
+		Session session = fatory.getCurrentSession();
+		String hql = "From BookReportBean";
+		Query<BookReportBean> query = session.createQuery(hql);
+		
+		if (query.getResultList().size()%10 == 0) {
+			maxPage += query.getResultList().size()% 10;
+		}
+		else {
+			maxPage += query.getResultList().size()% 10+ 1;
+		}
+		
+		return maxPage;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<BookReportBean> getThisPageDateForAllBookRepot(Integer page) {
+		
+		Session session = fatory.getCurrentSession();
+		String hql = "From BookReportBean order by br_ID";
+		Query<BookReportBean> query = session.createQuery(hql);
+		query.setFirstResult((page - 1) * 10);
+		query.setMaxResults(10);
+		
+		return query.getResultList();
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public Integer getSearchBookRepotPageSize(String searchString) {
+		
+		Integer maxPage = 0;
+		Session session = fatory.getCurrentSession();
+		String hql = "From BookReportBean br Where "
+					  + "br.book.bk_Name like :searchString"
+					  + "or br.book.bk_Author like :searchString"
+					  + "or br.book.bk_Publish like :searchString"
+					  + "or br.br_Name like :searchString"
+					  + "or br.book.bk_BookType like :searchString";
+		Query<BookReportBean> query = session.createQuery(hql);
+		query.setParameter("searchString", "%"+searchString+"%");
+		if (query.getResultList().size()%10 == 0) {
+			maxPage += query.getResultList().size()% 10;
+		}
+		else {
+			maxPage += query.getResultList().size()% 10+ 1;
+		}
+		
+		return maxPage;
+		
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<BookReportBean> getThisPageDateForSearchBookRepot(Integer page, String searchString) {
+		
+		Session session = fatory.getCurrentSession();
+		String hql = "From BookReportBean br Where "
+					  + "br.book.bk_Name like :searchString"
+					  + "or br.book.bk_Author like :searchString"
+					  + "or br.book.bk_Publish like :searchString"
+					  + "or br.br_Name like :searchString"
+					  + "or br.book.bk_BookType like :searchString";
+		Query<BookReportBean> query = session.createQuery(hql);
+		query.setParameter("searchString", "%"+searchString+"%");
+		query.setFirstResult((page - 1) * 10);
+		query.setMaxResults(10);
+		
+		return query.getResultList();
+	}
 }

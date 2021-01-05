@@ -61,6 +61,30 @@ public class BookReportServiceImpl implements BookReportService {
 		
 		return bookReportDao.allbookReportList();
 	}
+
+	@Override
+	public Integer getAllBookRepotPageSize() {
+		
+		return bookReportDao.getAllBookRepotPageSize();
+	}
+
+	@Override
+	public List<BookReportBean> getThisPageDateForAllBookRepot(Integer page) {
+		
+		return bookReportDao.getThisPageDateForAllBookRepot(page);
+	}
+
+	@Override
+	public Integer getSearchBookRepotPageSize(String searchString) {
+		
+		return bookReportDao.getSearchBookRepotPageSize(searchString);
+	}
+
+	@Override
+	public List<BookReportBean> getThisPageDateForSearchBookRepot(Integer page, String searchString) {
+		
+		return bookReportDao.getThisPageDateForSearchBookRepot(page, searchString);
+	}
 	
 	
 

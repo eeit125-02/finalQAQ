@@ -19,4 +19,13 @@ public interface BookReportDao {
 	void insertBookReport(Integer mb_ID, Integer bk_ID, String br_Name, Integer br_Score, String br_Content);
 	
 	List<BookReportBean>  allbookReportList();
+	
+	Integer getAllBookRepotPageSize();
+	
+	List<BookReportBean> getThisPageDateForAllBookRepot(Integer page);
+	
+	Integer getSearchBookRepotPageSize(String searchString);
+	
+	List<BookReportBean> getThisPageDateForSearchBookRepot(Integer page, String searchString);
+	
 }
