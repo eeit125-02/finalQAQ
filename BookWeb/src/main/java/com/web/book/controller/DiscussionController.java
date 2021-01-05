@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.web.book.model.CommandBean;
 import com.web.book.model.MemberBean;
@@ -18,10 +19,17 @@ import com.web.book.model.RuleBean;
 import com.web.book.service.DiscussionService;
 
 @Controller
+@SessionAttributes(value = {"loginUser"})
 public class DiscussionController {
 
 	@Autowired
 	DiscussionService discussionService;
+	
+	MemberBean loginUser;
+	@ModelAttribute
+	public void setLoginUser(Model model) {
+		loginUser = (MemberBean) model.getAttribute("loginUser");
+	}
 	
 	//由首頁連進討論區主頁
 	//依時間排序列出所有貼文、留言
@@ -38,6 +46,7 @@ public class DiscussionController {
 		model.addAttribute("rule",  rule_content);
 		List<MemberBean> member_list = discussionService.getAllMember();
 		model.addAttribute("member_info", member_list);
+		model.addAttribute("loginUser", loginUser); //獲取LoginUser
 		return "Discussion/mainpage"; 
 	}
 	
@@ -63,8 +72,9 @@ public class DiscussionController {
 	//會員新增貼文
 	@PostMapping("Discussion/add_post")
 	public String processAddNewPost(@ModelAttribute("postBean")PostBean pb) {
-		MemberBean mb = discussionService.getMemberBeanById(13); //先寫死
-		pb.setMemberbean(mb);
+//		MemberBean mb = discussionService.getMemberBeanById(loginUser.getMb_ID()); //抓取loginUser的ID
+//		pb.setMemberbean(mb);
+		pb.setMemberbean(loginUser); //直接把Bean塞進去
 		discussionService.addPost(pb);
 		return "redirect:/Discussion/mainpage";
 	}
@@ -74,8 +84,9 @@ public class DiscussionController {
 	public String processAddNewCommand(
 			@ModelAttribute("commandBean")CommandBean cb,
 			@RequestParam(value="postBean.post_id") Integer pb_ID) {
-		MemberBean mb = discussionService.getMemberBeanById(11); //先寫死
-		cb.setMemberbean(mb);
+//		MemberBean mb = discussionService.getMemberBeanById(11); //先寫死
+//		cb.setMemberbean(mb);
+		cb.setMemberbean(loginUser); 
 		PostBean pb = discussionService.getPostBeanById(pb_ID);
 		cb.setPostBean(pb);
 		discussionService.addCommand(cb);
