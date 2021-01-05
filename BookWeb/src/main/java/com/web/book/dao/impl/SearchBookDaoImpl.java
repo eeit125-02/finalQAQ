@@ -58,17 +58,16 @@ public class SearchBookDaoImpl implements SearchBookDAO {
 	//查詢書籍類型
 	@SuppressWarnings({ "unchecked" })
 	@Override
-	public List<BookTypeBean> searchBookType(List<Integer> reslist) {
+	public List<BookBean> searchBookType(List<Integer> reslist) {
 		Session session = factory.getCurrentSession();
-		List<BookTypeBean> res1=new ArrayList<BookTypeBean>();
-		ArrayList<BookTypeBean> res=new ArrayList<BookTypeBean>();
+		List<BookBean> res1=new ArrayList<BookBean>();
+		ArrayList<BookBean> res=new ArrayList<BookBean>();
 		
 		for(Integer typeid :reslist) {
 			System.out.println(typeid);
-//			String hql = "SELECT book FROM BookTypeBean WHERE sty_ID= :styid";
-			String hql = "FROM BookTypeBean WHERE sty_ID= :styid";
-			BookTypeBean bt=session.load(BookTypeBean.class, typeid);
-			Query<BookTypeBean> query = session.createQuery(hql);
+			String hql = "SELECT book FROM BookTypeBean WHERE sty_ID= :styid";
+			BookBean bt=session.load(BookBean.class, typeid);
+			Query<BookBean> query = session.createQuery(hql);
 			res1 = query.setParameter("styid", bt).getResultList();
 			System.out.println(res1);
 			res.addAll(res1);
@@ -100,6 +99,31 @@ public class SearchBookDaoImpl implements SearchBookDAO {
 		return query.setParameter("bkid", bt).getResultList();
 	}
 
+	
+	//確認收藏與否
+	@SuppressWarnings("unchecked")
+	@Override
+	public boolean checkbc(int bk_id, int mb_id) {
+		System.out.println(bk_id);
+		System.out.println(mb_id);
+		Session session = factory.getCurrentSession();
+		MemberBean member = session.get(MemberBean.class, mb_id);
+		BookBean book = session.get(BookBean.class, bk_id);
+		boolean result=true;
+		
+		String hql = "From BookCollectBean bc Where bc.member = :mbid AND bc.book = :bkid";
+		Query<BookCollectBean> query = session.createQuery(hql);
+		List<BookCollectBean>list = query.setParameter("mbid", member).setParameter("bkid", book).getResultList();
+		System.out.println(list.size());
+		if(list.size()==0) {
+			result=false;
+		}		
+		return result;
+		
+	}
+	
+	
+	
 	// 會員收藏清單
 	@Override
 	@SuppressWarnings("unchecked")

@@ -77,7 +77,7 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 <!-- 三種關鍵字查詢（書名＆作者＆出版社） -->
 <div class="row">
 	<div class="col-sm-4">		
-		<form action="<c:url value='/searchbook' />" method="get">
+		<form action="<c:url value='/searchtype' />" method="get">
 			<h4>輸入書名關鍵字：</h4>
 			<div class="form-inline">
 				<input class="form-control mr-sm-2" name="name" value=""
@@ -88,7 +88,7 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 	</div>
 			
 	<div class="col-sm-4">		
-		<form action="<c:url value='/searchbookauthor' />" method="get">
+		<form action="<c:url value='/searchtype' />" method="get">
 			<h4>輸入作者關鍵字：</h4>
 			<div class="form-inline">
 				<input class="form-control mr-sm-2" name="author" value=""
@@ -99,7 +99,7 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 	</div>
 			
 	<div class="col-sm-4">		
-		<form action="<c:url value='/searchbook' />" method="get">
+		<form action="<c:url value='/searchtype' />" method="get">
 			<h4>輸入出版社關鍵字：</h4>
 			<div class="form-inline">
 				<input class="form-control mr-sm-2" name="publish" value=""

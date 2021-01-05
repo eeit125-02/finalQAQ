@@ -46,7 +46,9 @@
 	margin: 0px;
 	display: inline
 }
-
+.row2{
+	display: inline
+}
 .collectindex {
 	float: right;
 }
@@ -140,19 +142,17 @@
 					<img class="mainpic" alt="" src="${pageresult.bk_Pic}" height="390">
 				</p>
 		<!-- 收藏＆通報&心得&二手書按鈕 -->
-				<div class="row"> 
-				<div class="col-sm-3">
-						<form name=a1 action="<c:url value='/pagecollect' />" method="get">
-<!-- 							<img alt="點選收藏" -->
-<%-- 								src="${pageContext.request.contextPath}/image/heartred.png" --%>
-<!-- 								id="heart" width="25px"> -->
+				<div class="row2">
+						<form name=a1 class=a3 action="<c:url value='/pagecollect' />" method="get">	
 							<button type="submit" name="pagecollect" class="btn btn-outline-info btn-sm"
-								value="${pageresult.bk_ID}">收藏本書</button>
+								value="${pageresult.bk_ID}">
+								<img alt="點選收藏" src="${pageContext.request.contextPath}/image/heartred.png"
+								id="heart" width="18px"> 收藏本書</button>
 						</form>
-				</div>
-				<div class="col-sm-3"><button type="submit" name="" class="btn btn-outline-info btn-sm">通報錯誤</button></div>
-				<div class="col-sm-3"><button type="button" id="addBookReport" value="${pageresult.bk_ID}" class="btn btn-outline-info btn-sm">撰寫心得</button></div>
-				<div class="col-sm-3"><button type="submit" name="" class="btn btn-outline-info btn-sm">尋找二手書</button></div>
+				
+				<button type="submit" name="" class="btn btn-outline-info btn-sm">通報錯誤</button>
+				<button type="button" id="addBookReport" value="${pageresult.bk_ID}" class="btn btn-outline-info btn-sm">撰寫心得</button>
+				<button type="submit" name="" class="btn btn-outline-info btn-sm">尋找二手書</button>
 				</div>
 			</div>
 			

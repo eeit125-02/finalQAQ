@@ -37,7 +37,10 @@ public interface SearchService {
 	//查詢書籍出版社
 	List<BookBean> searchBookPublish(String name);
 	//查詢書籍類型
-	List<BookTypeBean> searchBookType(List<Integer> reslist);
+	List<BookBean> searchBookType(List<Integer> reslist);
+
+	//確認收藏與否
+	boolean checkbc(int bk_ID, int mb_ID);
 
 
 }

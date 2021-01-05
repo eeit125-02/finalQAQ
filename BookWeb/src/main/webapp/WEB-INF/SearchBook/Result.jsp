@@ -138,9 +138,9 @@
 <!-- 							id="Img/heart" width="25px"> -->
 						<button id="gocollect" type="submit" name="collect" onclick="a${row.getBk_ID()}();"
 							class="btn btn-outline-danger btn-sm" value="${row.getBk_ID()}">
-							<img alt="收藏"
-							src="${pageContext.request.contextPath}/image/heartred.png"
-							id="Img/heart" width="25px"> 加入收藏</button>
+							<img alt="收藏" src="${pageContext.request.contextPath}/image/heartred.png"
+							id="Img/heart" width="25px"> 
+							加入收藏</button>
 <!-- 					</form> -->
 				</div>
 						<br>

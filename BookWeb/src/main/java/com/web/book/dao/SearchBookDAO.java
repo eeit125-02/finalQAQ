@@ -10,8 +10,13 @@ import com.web.book.model.BookTypeBean;
 public interface SearchBookDAO {
 
 	// 查詢書籍關鍵字
-	// 缺一個判斷list=0就顯示查無此書的判斷式
 	List<BookBean> searchBook(String name);
+	//查詢書籍作者
+	List<BookBean> searchBookAuthor(String name);
+	//查詢書籍出版社
+	List<BookBean> searchBookPublish(String name);
+	//查詢書籍類別
+	List<BookBean> searchBookType(List<Integer> reslist);
 
 	// 取得單一本書的詳細資訊
 	BookBean getBook(int id);
@@ -34,12 +39,7 @@ public interface SearchBookDAO {
 	// 修改書本
 	int updatebk(BookBean mb);
 
-	//查詢書籍作者
-	List<BookBean> searchBookAuthor(String name);
-	//查詢書籍出版社
-	List<BookBean> searchBookPublish(String name);
-
-	List<BookTypeBean> searchBookType(List<Integer> reslist);
-
+	//查詢收藏與否
+	boolean checkbc(int bk_id, int mb_id);
 
 }

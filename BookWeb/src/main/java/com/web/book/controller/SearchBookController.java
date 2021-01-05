@@ -33,7 +33,9 @@ import com.web.book.service.SearchService;
 public class SearchBookController {
 	String keyword = null;
 	List<Integer> typelist=new ArrayList<Integer>();
-
+	List<BookBean> finalresult = new ArrayList<BookBean>();
+	int count=0;
+	
 	@Autowired
 	SearchService searchService;
 
@@ -150,157 +152,64 @@ public class SearchBookController {
 	}
 	
 	
-
-//	// 查詢書籍作者
-//	@GetMapping("/searchbookauthor")
-//	public String gotoSearchAuthor(Model model, @RequestParam(value = "author") String name) {
-//		List<BookBean> result = searchService.searchBookAuthor(name);
-//		int count=result.size();
-//		model.addAttribute("searchresult", result);
-//		model.addAttribute("searchresultnumber", count);
-//		if(count==0) {
-//			model.addAttribute("searchresultzero", "很抱歉，查無資料");}	
-//		return "SearchBook/Result";
-//	}
-//	
-//	// 查詢書籍出版社
-//	@GetMapping("/searchbookpublish")
-//	public String gotoSearchPublish(Model model, @RequestParam(value = "publish") String name) {
-//		List<BookBean> result = searchService.searchBookPublish(name);
-//		int count=result.size();
-//		model.addAttribute("searchresult", result);
-//		model.addAttribute("searchresultnumber", count);
-//		if(count==0) {
-//			model.addAttribute("searchresultzero", "很抱歉，查無資料");}	
-//		return "SearchBook/Result";
-//	}
-
-//	//導出書籍類別
-//	@GetMapping("/searchtype")
-//	public String gotoSearchType(Model model, @RequestParam(value = "b") List<Integer> reslist) {
-//		System.out.println(reslist);
-//		List<BookTypeBean> result = new ArrayList<BookTypeBean>();
-//		result = searchService.searchBookType(reslist);
-//		int count=result.size();
-//		model.addAttribute("searchresulttype", result);
-//		model.addAttribute("searchresultnumber", count);
-//		if(count==0) {
-//			model.addAttribute("searchresultzero", "很抱歉，查無資料");			
-//		}else {
-//			int page=1; //第一頁
-//			int perpage=10; //每頁筆數
-//			int totalPages = count % perpage == 0 ? count / perpage : count / perpage+ 1;//總頁數
-//			
-//			Integer lastnum = count%perpage;
-//			if(page==totalPages && lastnum != 0) {
-//				perpage = lastnum; 
-//			}
-//			//本頁起始使用者序號
-//			int beginIndex = (page - 1) * perpage;
-//			//本頁末尾使用者序號的下一個
-//			int endIndex = beginIndex + perpage;
-//			model.addAttribute("count", count);
-//			model.addAttribute("perpage", perpage);
-//			model.addAttribute("totalPages", totalPages);
-//			model.addAttribute("beginIndex", beginIndex);
-//			model.addAttribute("endIndex", endIndex);
-//			model.addAttribute("page", page);
-//			model.addAttribute("reslist", reslist);
-//			}			
-//		return "SearchBook/Result2";
-//	}
-//	
-//	//查詢分類後載入分頁
-//		@GetMapping("/searchtype/{nowpage}")
-//		public String SearchTypePage(
-//				Model model
-//				,@RequestParam(value = "reslist", required=false) List<Integer> reslist
-//				,@PathVariable(value = "nowpage") Integer nowpage
-//				) {
-//			List<BookTypeBean> result = new ArrayList<BookTypeBean>();
-//			result = searchService.searchBookType(reslist);
-//			int count=result.size();
-//			model.addAttribute("searchresulttype", result);
-//			model.addAttribute("searchresultnumber", count);
-//
-//			int page=nowpage; //當前頁
-//			int perpage=10; //每頁筆數
-//			int totalPages = count % perpage == 0 ? count / perpage : count / perpage+ 1; //總頁數
-//			
-//			Integer lastnum = count%perpage;
-//			if(nowpage==totalPages && lastnum != 0) {
-//				perpage = lastnum; 
-//			}
-//			
-//			//本頁起始使用者序號
-//			int beginIndex = (page - 1) * perpage;
-//			//本頁末尾使用者序號的下一個
-//			int endIndex = beginIndex + perpage;
-//			model.addAttribute("count", count);
-//			model.addAttribute("perpage", perpage);
-//			model.addAttribute("totalPages", totalPages);
-//			model.addAttribute("beginIndex", beginIndex);
-//			model.addAttribute("endIndex", endIndex);
-//			model.addAttribute("page", page);
-//			return "SearchBook/Result2";
-//		}
-//		
-		
-	
-	// 作者搜尋結果(純導向)
-	@GetMapping("/searchbookauthor")
-	public String gotoSearchAuthor(Model model, @RequestParam(value = "author") String name) {
-		keyword=name;
-		return "SearchBook/Result2";
-	}
-	
-	//導出搜尋結果
-	@PostMapping("/searchbookauthor/loadBookAuthorList")
-	public @ResponseBody List<Map<String, Object>> gotoSearchAuthorFin(Model model) {
-		List<BookBean> result = new ArrayList<BookBean>();
-		result = searchService.searchBookAuthor(keyword);
-		List<Map<String, Object>> book = new ArrayList<>();
-		for (BookBean bookBean : result) {
-			Map<String, Object> data = new HashMap<>();
-			data.put("bk_ID", bookBean.getBk_ID());
-			data.put("bk_Name", bookBean.getBk_Name());
-			data.put("bk_Author", bookBean.getBk_Author());
-			data.put("bk_Publish", bookBean.getBk_Publish());
-			data.put("bk_Date",String.valueOf(bookBean.getBk_Date()));
-			data.put("bk_Pic", bookBean.getBk_Pic());
-			data.put("bk_Content", bookBean.getBk_Content());
-			book.add(data);
-			System.out.println(book.size());
-		}
-	    return book;
-	}
+//	=============================================================
 
 		
-		// 類型搜尋結果(純導向)
+		// 關鍵字+類型搜尋結果(純導向)
 		@GetMapping("/searchtype")
-		public String gotoSearchType(Model model, @RequestParam(value = "b") List<Integer> reslist) {
-			typelist=reslist;
+		public String gotoSearchType(Model model
+				, @RequestParam(value = "b", required=false) List<Integer> reslist
+				, @RequestParam(value = "name", required=false) String bookname
+				, @RequestParam(value = "author", required=false) String authorname
+				, @RequestParam(value = "publish", required=false) String publishname
+				) {
+		
+			if(bookname!=null) { //書名關鍵字
+				keyword=bookname;
+				finalresult = searchService.searchBook(keyword);
+				count=finalresult.size();
+			}else if(authorname!=null) { //作者關鍵字
+				keyword=authorname;
+				finalresult = searchService.searchBookAuthor(keyword);
+				count=finalresult.size();
+			}else if(publishname!=null) { //出版社關鍵字
+				keyword=publishname;
+				finalresult = searchService.searchBookPublish(keyword);
+				count=finalresult.size();
+			}else if(reslist!=null) { //類型關鍵字
+				typelist=reslist;
+				finalresult=searchService.searchBookType(typelist);
+				count=finalresult.size();
+			}else{
+				
+			}
+			
+			if(count==0) { //資料總筆數確認
+				model.addAttribute("searchresultzero", "很抱歉，查無資料");			
+			}
+						
 			return "SearchBook/Result2";
 		}
 		
-		//導出搜尋結果
+		//導出關鍵字+類型搜尋結果
 		@PostMapping("/searchtype/loadBookTypeList")
 		public @ResponseBody List<Map<String, Object>> gotoSearchTypeFin(Model model) {
-			System.out.println(typelist);
-			List<BookTypeBean> result = new ArrayList<BookTypeBean>();
-			result = searchService.searchBookType(typelist);
 			List<Map<String, Object>> book = new ArrayList<>();
-			for (BookTypeBean bookTypeBean : result) {
+			for (BookBean bookTypeBean : finalresult) {
 				Map<String, Object> data = new HashMap<>();
-				data.put("bk_ID", bookTypeBean.getBook().getBk_ID());
-				data.put("bk_Name", bookTypeBean.getBook().getBk_Name());
-				data.put("bk_Author", bookTypeBean.getBook().getBk_Author());
-				data.put("bk_Publish", bookTypeBean.getBook().getBk_Publish());
-				data.put("bk_Date",String.valueOf(bookTypeBean.getBook().getBk_Date()));
-				data.put("bk_Pic", bookTypeBean.getBook().getBk_Pic());
-				data.put("bk_Content", bookTypeBean.getBook().getBk_Content());
+				data.put("bk_ID", bookTypeBean.getBk_ID());
+				data.put("bk_Name", bookTypeBean.getBk_Name());
+				data.put("bk_Author", bookTypeBean.getBk_Author());
+				data.put("bk_Publish", bookTypeBean.getBk_Publish());
+				data.put("bk_Date",String.valueOf(bookTypeBean.getBk_Date()));
+				data.put("bk_Pic", bookTypeBean.getBk_Pic());
+				data.put("bk_Content", bookTypeBean.getBk_Content());
 				book.add(data);
 			}
+			finalresult=null;
+			typelist=null;
+			keyword=null;
+			count=0;
 		    return book;
 		}
 		
@@ -310,6 +219,13 @@ public class SearchBookController {
 		
 		
 	
+	// 在查詢結果頁判斷收藏
+	@GetMapping("/searchbook/checkcollect/{bk_ID}")
+	public @ResponseBody boolean gotoCheckCollect(@PathVariable("bk_ID") Integer bk_id, @ModelAttribute("loginUser") MemberBean loginUser) {
+		boolean result2=searchService.checkbc(bk_id, loginUser.getMb_ID());
+		System.out.println("AAAAAAAAAAAAAA");
+		return result2;
+	}
 	
 	// 在查詢結果頁加入收藏
 	@GetMapping("/searchbook/resultcollect/{bk_ID}")
@@ -330,14 +246,6 @@ public class SearchBookController {
 	}
 
 	
-//	// 會員收藏清單(原版本)
-//	@GetMapping("/collectlist")
-//	public String gotoList(Model model, @RequestParam(value = "list") Integer mb_id) {
-//		mb_id = 5;
-//		List<BookCollectBean> result = searchService.gotoCollect(mb_id);
-//		model.addAttribute("collectresult", result);
-//		return "SearchBook/Collect";
-//	}
 	// 會員收藏清單(純導向)
 	@GetMapping("/collectlist")
 	public String gotoList(Model model) {

@@ -108,7 +108,6 @@
 								+data[i].bk_ID+"\">"+data[i].bk_Name+"</button></form>"
 								+"</h3>"
 								+"｜ 作者："+data[i].bk_Author
-								+data[i].bc_ID
 								+" ｜  出版社："+data[i].bk_Publish
 								+"｜  出版日期："+data[i].bk_Date
 								+"<br>"

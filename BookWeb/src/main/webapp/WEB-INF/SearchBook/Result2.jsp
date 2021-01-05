@@ -53,12 +53,9 @@
 	});
 	
 	$(document).ready(function() {
-		loadBookTypeList();
+		loadBookList();
 	});	
-// 	$(document).ready(function() {
-// 		loadBookAuthorList();
-// 	});	
-	
+
 </script>
 <title>Insert title here</title>
 </head>
@@ -94,10 +91,12 @@
 
 <%--<h6>頁數：${page}／${totalPages}</h6> --%>
 		<br>
+		<div><h4>　　　　　　${searchresultzero}</h4></div>
 
 <!-- 搜尋結果清單 -->
 			<div class="booktypelist" id="booktypelist">	
 			</div>						
+			
 		<br>
 		<hr>
 		</div>
@@ -105,14 +104,12 @@
 	<script >
 
 //點擊加入收藏
-		function collect() {
-			console.log("test");
-			let bk_ID = document.getElementById("gocollect").value
-			console.log(bk_ID);
-			let editURL = "searchbook/resultcollect/"+bk_ID;
-			
+		function collect(i) {
+			let bk_ID = i;
+			console.log(i);
+			let editURL = "searchbook/resultcollect/"+i;
 			$.ajax({
-				async : false,
+				async : true,
 				type : 'GET',
 				url : editURL,
 				dataType : "json",
@@ -120,6 +117,7 @@
 				success : function(data) {
 					if (data) {
 						alert('成功加入收藏 ');
+						$("#collect"+i).html(insertData2);
 					}else {
 						alert('加入失敗，本書已在您的收藏清單 ');
 					}
@@ -128,7 +126,7 @@
 		}
 		
 		
-		function loadBookTypeList() {
+		function loadBookList() {
 			$.ajax({
 				async : false,
 				cache : false,
@@ -142,12 +140,15 @@
 					console.log("test");
 					var insertData = "<div>";
 					for (let i = 0; i < data.length; i++) {
-						insertData += "<div class=\"row\">"
+						insertData = "<div class=\"row\">"
+// 						insertData += "<div class=\"row\">"
+						
 							+"<div class=\"col-sm-2\">"
 							+"<img class=\"itemcov\" alt=\"\" src=\""
 							+data[i].bk_Pic
 							+"\" width=\"150\">"
 							+"</div>"
+							
 							+"<div class=\"col-sm-10\">"
 							+"<h3>"
 							+"<form name=a1 action=\"<c:url value='/bookpage' />\" method=\"get\">"
@@ -162,80 +163,66 @@
 							+data[i].bk_Content
 							+"</p>"	
 							+"</div>"
+							
 							+"</div>"
-							+"<div class=\"collect\" id=\"collect\">"
-							+"<button id=\"gocollect\" type=\"submit\" name=\"collect\" onclick=\"collect();\""
-							+"class=\"btn btn-outline-danger btn-sm\" value=\""
-							+data[i].bk_ID
-							+"\"<img "
-							+"src=\"${pageContext.request.contextPath}/image/heartred.png\""
-							+" id=\"Img/heart\" width=\"25px\"> 加入收藏</button>"
-							+"</div>"	
+							
+							+"<div class=\"collect\" id=\"collect"+data[i].bk_ID+"\">"
+							+"</div>"
+							
 							+"<br>"
 							+"<hr>"
+					$("#booktypelist").append(insertData);	
+							loadCollectList(data[i].bk_ID);
 					}
-					insertData += "</div>"
+
 						var insertData1 = "<h3>搜尋結果：（總共 "+data.length+" 筆）</h3>"
-					$("#booktypelist").html(insertData);	
-					$("#resultnumber").html(insertData1);	
+					$("#resultnumber").html(insertData1);
 					}
 				});
 			}		
+
 		
-			
-// 		function loadBookAuthorList() {
-// 			$.ajax({
-// 				async : false,
-// 				cache : false,
-// 				type : 'POST',
-// 				url : "searchbookauthor/loadBookAuthorList",
-// 				dataType : "json",
-// 				contentType : "application/json;charset=utf-8",
-// 				error : function() {
-// 				},
-// 				success : function(data) {
-// 					console.log("test2");
-// 					var insertData = "<div>";
-// 					for (let i = 0; i < data.length; i++) {
-// 						insertData += "<div class=\"row\">"
-// 							+"<div class=\"col-sm-2\">"
-// 							+"<img class=\"itemcov\" alt=\"\" src=\""
-// 							+data[i].bk_Pic
-// 							+"\" width=\"150\">"
-// 							+"</div>"
-// 							+"<div class=\"col-sm-10\">"
-// 							+"<h3>"
-// 							+"<form name=a1 action=\"<c:url value='/bookpage' />\" method=\"get\">"
-// 							+"<button type=\"submit\" name=\"page\"class=\"btn btn-link btn-lg\" value=\""
-// 							+data[i].bk_ID+"\">"+data[i].bk_Name+"</button></form>"
-// 							+"</h3>"
-// 							+"｜ 作者："+data[i].bk_Author
-// 							+" ｜  出版社："+data[i].bk_Publish
-// 							+"｜  出版日期："+data[i].bk_Date
-// 							+"<br>"
-// 							+"<p class=\"ellipsis\"style=\"padding-top:15px\">"
-// 							+data[i].bk_Content
-// 							+"</p>"	
-// 							+"</div>"
-// 							+"</div>"
-// 							+"<div class=\"collect\" id=\"collect\">"
-// 							+"<button id=\"gocollect\" type=\"submit\" name=\"collect\" onclick=\"collect();\""
-// 							+"class=\"btn btn-outline-danger btn-sm\" value=\""
-// 							+data[i].bk_ID
-// 							+"\"<img "
-// 							+"src=\"${pageContext.request.contextPath}/image/heartred.png\""
-// 							+" id=\"Img/heart\" width=\"25px\"> 加入收藏</button>"
-// 							+"</div>"	
-// 							+"<br>"
-// 							+"<hr>"
-// 					}
-// 					insertData += "</div>"
-// 						var insertData1 = "<h3>搜尋結果：（總共 "+data.length+" 筆）</h3>"
-// 					$("#booktypelist").html(insertData);	
-// 					$("#resultnumber").html(insertData1);	
-// 					}
-// 				});
-// 			}	
+		
+		function loadCollectList(i) {
+			let bk_ID = i;
+			console.log(i);
+			let editURL = "searchbook/checkcollect/"+i;
+			$.ajax({
+				async : false,
+				type : 'GET',
+				url : editURL,
+				dataType : "json",
+				contentType : "application/json;charset=utf-8",
+				success : function(data) {
+					console.log(data + "!!!!");
+					if (data) {
+						var insertData2=
+							"<button id=\"gocollect\" type=\"submit\" name=\"collect\" onclick=\"collect("
+							+i+");\""
+							+"class=\"btn btn-outline-danger btn-sm\" value=\""+i+"\">"
+							+"<img "
+							+"src=\"${pageContext.request.contextPath}/image/heartred.png\""
+							+" id=\"Img/heart\" width=\"25px\">" 
+							+" 取消收藏</button>"
+						$("#collect"+i).html(insertData2);
+						console.log(data + "???");
+					}else {
+						var insertData3=
+							"<button id=\"gocollect\" type=\"submit\" name=\"collect\" onclick=\"collect("
+							+i+");\""
+							+"class=\"btn btn-outline-danger btn-sm\" value=\""+i+"\">"
+							+"<img "
+							+"src=\"${pageContext.request.contextPath}/image/heartwhite.png\""
+							+" id=\"Img/heart\" width=\"25px\">" 
+							+" 加入收藏</button>"
+						$("#collect"+i).html(insertData3);
+						console.log(data + "~~~");
+					}
+				}
+			});
+		}
+		
+		
 	</script>
 
 	<!-- 內容結束 -->
