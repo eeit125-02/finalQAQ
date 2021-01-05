@@ -10,6 +10,7 @@ import org.dom4j.tree.BackedList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -64,7 +65,7 @@ public class ActController {
 	public String showCreateForm(@ModelAttribute("loginUser") MemberBean loginUser, Model model) {
 		ActBean ab = new ActBean();
 		model.addAttribute("actbean", ab);
-		model.addAttribute("mb_account", loginUser.getMb_Account());
+		model.addAttribute("mb_ID", loginUser.getMb_ID());
 		model.addAttribute("mb_Name", loginUser.getMb_Name());
 		return "Activity/ActForm";
 	}
@@ -72,12 +73,14 @@ public class ActController {
 	// 新增活動
 	@PostMapping("/showCreateForm")
 	public String createAct(Model model, @ModelAttribute("actbean") ActBean ab,
+			@ModelAttribute("loginUser") MemberBean loginUser,
 			@RequestParam(value = "file", required = false) CommonsMultipartFile file, HttpServletRequest request,
+			@RequestParam(value = "mb_ID", required = false) Integer mb_ID,
 			RedirectAttributes attr) throws Exception {
 
 		// 圖片上傳用
 		GlobalService.saveImage("active", file, ab.getact_Name());
-
+		ab.setMember(loginUser);
 		ab.setact_Image(GlobalService.saveImage("active", file, ab.getact_Name()));
 		actService.createAct(ab);
 		return "redirect:/showActs";
