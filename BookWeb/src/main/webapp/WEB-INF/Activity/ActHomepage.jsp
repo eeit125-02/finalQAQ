@@ -6,15 +6,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<!-- <link rel="stylesheet" -->
-<!--     href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"> -->
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 
 <title>Fun Tribe</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
+<script src='https://kit.fontawesome.com/a076d05399.js'></script>
+
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
 	integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
@@ -83,7 +82,6 @@ td {
 
 	<div class="container media" >
 		<!-- body -->
-
 		<div class="row">
 			<br>
 
@@ -149,8 +147,9 @@ td {
 				<section class="container" style="width:1100px">
 					<div class="row" id="change">
 						<c:forEach var='act' items='${allacts}'>
-							<div class="col-6,col-md-3" style="width: 350px; height: 1000px">
-								<div class="thumbnail" style="width: 320px; height: 1000px">
+							<input type="hidden" id="mb_ID" value="${act.member.mb_ID}">
+							<div class="col-6,col-md-3" style="width: 400px; height: 1000px">
+								<div class="thumbnail" style="width: 350px; height: 1000px">
 									<p>
 										<b style='font-size: 25px;'>${act.act_Name}</b>
 									</p>
@@ -169,15 +168,15 @@ td {
 <!--      									//彈跳視窗內容 -->
      										 <div class="modal-body">
      										 <p>${act.act_Theme}</p>
-										<p>${act.act_Date}</p>
-										<p>${act.act_Loc}</p>
-										<p>${act.act_Intro}</p>			
-										<hr>
-      										</div>
+										     <p>${act.act_Date}</p>
+										     <p><button class="btn btn-outline-info" style='font-size:10px' id = "myModal"  value="${act.act_Loc}" data-toggle="modal" data-target="#myModal1"><i class='fas fa-map-marked-alt'></i></button>${act.act_Loc}</p>
+										     <p>${act.act_Intro}</p>			
+										     <hr>
+      										 </div>
 <!--       										//頁尾 -->
      									 <div class="modal-footer">
         									<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      										  <button type="button" class="btn btn-primary">報名</button>
+      										 <a href="<c:url value='/showJoinForm'/>?act_ID=${act.act_ID}"><button type="button" class="btn btn-primary">報名</button></a> 
      										    </div>
   											  </div>
  											 </div>
@@ -191,13 +190,14 @@ td {
 										<p>
 										
 										<!-- Trigger the modal with a button -->
-										<button type="button" class="btn btn-info btn-lg" id = "myModal"  value="${act.act_Loc}" data-toggle="modal" data-target="#myModal1">詳細資料</button>
-										<div><a href="https://www.flaticon.com/authors/freepik" title="Freepik"></a><a href="https://www.flaticon.com/" title="Flaticon"></a></div>
+										
+<%-- 										<button type="button" id = "myModal"  value="${act.act_Loc}" data-toggle="modal" data-target="#myModal1"><img src="map.png">活動地圖</button> --%>
+<!-- 										<div><a href="https://www.flaticon.com/authors/freepik" title="Freepik"></a><a href="https://www.flaticon.com/" title="Flaticon"></a></div> -->
 										
 										<!-- Modal -->												
 										<p>
-										<button class="btn btn-outline-info"><a href="<c:url value='/showUpdateForm'/>?act_ID=${act.act_ID}" />編輯</a></button>
-										<button class="btn btn-outline-info"><a href="<c:url value='deleteAct'/>?act_ID=${act.act_ID}">刪除</a></button>
+										<a href="<c:url value='/showUpdateForm'/>?act_ID=${act.act_ID}"><button  class="btn btn-outline-info">編輯</button></a>
+										<a href="<c:url value='deleteAct'/>?act_ID=${act.act_ID}"><button  class="btn btn-outline-info">刪除</button></a>
 <%-- 										<button class="btn btn-outline-info"><a href="<c:url value='/showJoinForm'/>?act_ID=${act.act_ID}">報名</a></button> --%>
 										</p>
 										
@@ -211,7 +211,7 @@ td {
 					<div class="modal-dialog modal-dialog-centered">
 						<div class="modal-content">
 							<div class="modal-header">
-								<h4 class="modal-title" style="text-align:center" align="left">詳細資料</h4>
+								<h4 class="modal-title" style="text-align:center" align="left">${act.act_Loc}</h4>
 								<button type="button" class="close" data-dismiss="modal">&times;</button>
 							</div>
 							<div class="modal-body">
@@ -220,23 +220,37 @@ td {
 							<div class="modal-footer">
 							
 								<button type="button" class="btn btn-outline-info" data-dismiss="modal">關閉視窗</button>
-								<button type="button" class="btn btn-outline-info"><a href="<c:url value='/showJoinForm'/>?act_ID=${act.act_ID}">報名</a></button>
 							</div>
 						</div>
 					</div>
 				</div>
 		</div>
 
-
-		<button class="btn btn-outline-info"><a href='showCreateForm'>新增活動</a></button>
+		<form action="showCreateForm" id="test">
+		<button type="button" class="btn btn-outline-info" id="create">新增活動</button>
+	</form>
 	</div>
 
 	<br>
 				<footer class="container py-5" id="bookWebFooter"></footer>
 <script>
-
 var map, geocoder;
 var mapId="";
+console.log("1231456")
+$(document).ready(function(){
+if(typeof($.cookie('Member_ID')) != "undefined" ){
+	console.log("123")
+}
+})
+$('#create').click(function(){
+	if(typeof($.cookie('Member_ID')) != "undefined" ){
+		console.log("123");
+		$("#test").submit();
+	}else{
+		alert("請先登入會員");
+		window.location.href="//localhost:8080/BookWeb/toLogin";
+	}
+})
 
 $('button').click(function(){
 	mapId = $(this).val();
