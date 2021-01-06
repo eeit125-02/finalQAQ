@@ -9,6 +9,9 @@
 <head>
 <meta charset="utf-8">
 
+<!-- 引用sweetalert -->
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script
 	src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
@@ -282,7 +285,7 @@ response.setDateHeader("Expires", 0);
 									style="border: #ADADAD 2px solid; border-radius: 5px; text-align: left; padding: 10px; margin: 0px 10px; padding-top: 20px">
 
 									<form:form method='post' action='add_post'
-										modelAttribute="postBean">
+										modelAttribute="postBean" id="add_post_form">
 										<div class="form-group row">
 											<label for="new_title" class="col-2 text-center h5">貼文標題</label>
 											<div class="col-9">
@@ -299,11 +302,22 @@ response.setDateHeader("Expires", 0);
 										</div>
 										<form:hidden path="post_time" />
 										<div class="text-center">
-											<button type="submit" class="btn btn-primary">送出貼文</button>
+											<button type="submit" class="btn btn-primary" id="send_added_post">送出貼文</button>
 										</div>
 									</form:form>
 								</div>
 							</div>
+							
+							<script>
+						$('#send_added_post').click(function(){
+							if($('#post_title').val()==''||$('#post_content').val()==''){
+								swal({title:'請輸入貼文標題及內容'});
+								event.preventDefault()
+							}else{
+								$('#add_post_form').submit();
+							}
+						})
+					</script>
 
 							<!-- personal post record -->
 							<div class="tab-pane fade" id="pills-member_post" role="tabpanel">
@@ -396,6 +410,12 @@ response.setDateHeader("Expires", 0);
 
 												<script>
 													$('#command_btn${stored_post.post_id}').click(function() {
+														
+														if($('#command_input${stored_post.post_id}').val()==""){
+															swal({title:'請輸入文字'})
+
+															}else{
+														
 																		$.ajax({
 																					url : '<c:url value="/Dsicussion/add_command_ajax"/>',
 																					type : 'POST',
@@ -435,7 +455,7 @@ response.setDateHeader("Expires", 0);
 																				.attr(
 																						"placeholder",
 																						"請輸入留言");
-																	})
+															}})
 												</script>
 
 
