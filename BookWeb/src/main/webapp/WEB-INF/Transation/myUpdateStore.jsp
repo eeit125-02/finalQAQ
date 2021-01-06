@@ -50,16 +50,36 @@
 		<!-- body -->
 
 		<FORM action="<c:url value='/QAQbook'/>" method="post">
-			${bookStore.book.bk_ID}<BR>
-			 ${bookStore.book.bk_Name}<BR>
-			${bookStore.book.bk_Author}<BR>
-			 ${bookStore.book.bk_Publish}<BR>
-			價錢 : <INPUT TYPE="TEXT" NAME="price" value="${bookStore.bs_Price}"><BR> 數量 : <INPUT
-				TYPE="TEXT" NAME="qty" value="${bookStore.bs_Num}"><BR>
-			<button type="submit" name="updatebk" value="${bookStore.bks_ID}">確定修改</button>
-		</FORM>
-		<FORM ACTION="<c:url value='myStore'/>" method="post">
-			<button type="submit" name="">返回</button>
+			<div class="row">
+				<div class="col-lg-12">書名: ${bookStore.book.bk_Name}</div>
+			</div>
+			<BR>
+			<div class="row">
+				<div class="col-lg-12">作者: ${bookStore.book.bk_Author}</div>
+			</div>
+			<BR>
+			<div class="row">
+				<div class="col-lg-12">出版社: ${bookStore.book.bk_Publish}</div>
+			</div>
+			<BR>
+			<div class="row">
+				<div class="col-lg-12">出版日期: ${bookStore.book.bk_Date}</div>
+			</div>
+			<BR>
+			<div class="row">
+				<div class="col-lg-12">
+					價錢 : <INPUT TYPE="TEXT" NAME="price" value="${bookStore.bs_Price}">
+				</div>
+			</div>
+			<BR>
+			<div class="row">
+				<div class="col-lg-12">
+					數量 : <INPUT TYPE="TEXT" NAME="qty" value="${bookStore.bs_Num}">
+				</div>
+			</div>
+			<br>
+
+			<button type="submit" name="updatebk" value="${bookStore.bks_ID}" class="btn btn-outline-secondary">確定修改</button>
 		</FORM>
 
 
