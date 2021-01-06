@@ -46,54 +46,63 @@
 	<header class="container blog-header py-3" id="bookWebheader"></header>
 	<!-- header -->
 
-	<div class="container media">
-		<!-- body -->
 
+	<!-- body -->
 
-
-		<jsp:useBean id="bookdetail" class="com.web.book.model.BookBean" scope="request" />
+	<div style="text-align: center">
+		<h2>二手書圖</h2>
+	</div>
+	<div class="container">
+		<hr>
+		<div class="row">
+			<div class="col-lg-3">
+				<label for="url"></label> <img alt="圖勒?" width="200px"
+					height="300px" src="<c:url value='${bookdetail.bk_Pic}'/>">
+			</div>
+			<div class="col-lg-9">
+				<h2>書名:</h2>
+				<span>${bookdetail.bk_Name}</span>
+				<hr>
+				<h4>作者:</h4>
+				<span>${bookdetail.bk_Author}</span>
+				<hr>
+				<h4>出版社:</h4>
+				<span>${bookdetail.bk_Publish}</span>
+				<hr>
+				<h4>出版日:</h4>
+				<span> ${bookdetail.bk_Date}</span>
+				<hr>
+				<h4>價錢:</h4>
+				<span>${bookdetail.bk_Price}</span>
+			</div>
+		</div>
+		<!-- 		qaq -->
 		<form action="<c:url value='shopping' />" method="get">
 			<div>
-				<label for="url"></label> <img alt="xx" width="200px" height="300px"
-					src="<jsp:getProperty name="bookdetail" property="bk_Pic" />">
-			</div>
-			<div>
-				<label for="bk_Name">書名</label>
-				<jsp:getProperty name="bookdetail" property="bk_Name" />
-			</div>
-			<div>
-				<label for="bk_Author">作者</label>
-				<jsp:getProperty name="bookdetail" property="bk_Author" />
-			</div>
-			<div>
-				<label for="bk_Publish">出版社</label>
-				<jsp:getProperty name="bookdetail" property="bk_Publish" />
-			</div>
-			<div>
-				<label for="bk_Content">描述: </label>
-				<jsp:getProperty name="bookdetail" property="bk_Content" />
-			</div>
+				<button type="submit" value="${bookdetail.bk_ID}" name="goToCart">直接購買</button>
+				<br>
 
-			<div>
-				<button type="submit" value="${bookdetail.bk_ID}" name="goToCart">直接購買</button><br>
-				
 			</div>
 			<div>
 				<button type="submit" value="${bookdetail.bk_ID}" name="addCart">放入購物車</button>
 			</div>
 			${same}
 		</form>
-		
-		
-		<form action="<c:url value='/Transation/storeMain' />" method="get">
-			<button type="submit" name="">返回</button>
-			<br>
-		</form>
-
-
-
-		<!-- body -->
+		<!-- 		qaq -->
+		<hr>
+		<div class="col-lg-12">
+			<textarea rows="20" cols="150" readonly="readonly"
+				style="border-style: none;">
+			${bookdetail.bk_Content }
+			</textarea>
+		</div>
 	</div>
+	<form action="<c:url value='/qaqTest' />" method="get">
+		<button type="submit" name="">返回</button>
+		<br>
+	</form>
+	<!-- body -->
+
 
 	<!-- footer -->
 	<footer class="container py-5" id="bookWebFooter"></footer>

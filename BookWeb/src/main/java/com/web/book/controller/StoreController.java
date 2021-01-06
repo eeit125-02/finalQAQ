@@ -44,8 +44,12 @@ public class StoreController {
 	// 最終呈現首頁
 	@GetMapping("qaqTest")
 	public String qaqmainPage(Model model) {
-		List<BookBean> list = bookStoreService.searchBookStore();
+		List<BookBean> list = bookStoreService.searchBookStore(1);
+		System.out.println(bookStoreService.countBook().size());
+		System.out.println("--------------------------------------------");
+		int totalPage = (int) Math.ceil(bookStoreService.countBook().size()/12);
 		model.addAttribute("store", list);
+		model.addAttribute("total", totalPage);
 		return "/Transation/qaqMain";
 	}
 
@@ -75,6 +79,16 @@ public class StoreController {
 		BookBean book = bookStoreService.getBookDetail(bk_ID);
 		model.addAttribute("bookdetail", book);
 		return "/Transation/detail";
+	}
+	
+	// 商店首頁搜尋書名
+	@GetMapping("qaqSBookName")
+	public String qaqSBookName(Model model,
+			@RequestParam(value = "sBkNe") String bk_Name
+			) {
+		List<BookBean> list = bookStoreService.searchBookName(bk_Name);
+		model.addAttribute("store", list);
+		return "/Transation/qaqMain";
 	}
 
 	@GetMapping("/myStore")

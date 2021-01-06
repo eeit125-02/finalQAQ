@@ -7,8 +7,12 @@ import com.web.book.model.BookStoreBean;
 
 public interface BookStoreDao {
 
+	
 	// 商品頁面搜尋
-	List<BookBean> searchBookStore();
+	List<BookBean> searchBookStore(int page);
+	
+	// 商品全部數量
+	List<BookBean> countBook();
 	
 	// 一件商品所有價錢區間
 	List<BookStoreBean> bookPrices(Integer bk_ID);
