@@ -36,7 +36,9 @@ public class BookReportController {
 	@Autowired
 	SearchService searchService;
 
-	Integer bookId = 0;
+	private Integer bookId = 0;
+	private Integer page = 0;
+	private String searchType = null;
 	MemberBean loginUser;
 
 	@ModelAttribute
@@ -56,8 +58,14 @@ public class BookReportController {
 		return "BookReport/EditBookReport";
 	}
 
-	@GetMapping("/searchBookReport")
-	public String searchBookReport() {
+	@GetMapping("/searchBookReport/{searchType}/{page}")
+	public String searchBookReport(
+			@PathVariable("searchType") String searchType,
+			@PathVariable("page") Integer page) {
+		
+		this.page = page;
+		this.searchType = searchType;
+		
 		return "BookReport/searchBookReport";
 	}
 
@@ -150,16 +158,9 @@ public class BookReportController {
 
 	@PostMapping("/checkBookReport")
 	@ResponseBody
-	public Boolean checkBookReport(@RequestParam(value = "bk_ID", required = true) Integer bk_ID) {
+	public Boolean checkBookReport(@RequestParam(value = "bk_ID", required = true) Integer bkId) {
 
-		List<BookReportBean> memberBookReport = bookReportService.bookReportMemberAllList(loginUser.getMb_ID());
-		for (BookReportBean bookReport : memberBookReport) {
-			if (bookReport.getBook().getBk_ID().equals(bk_ID)
-					&& bookReport.getMember().getMb_ID() == loginUser.getMb_ID()) {
-				return false;
-			}
-		}
-		return true;
+		return bookReportService.checkBookReport(loginUser.getMb_ID(), bkId);
 	}
 
 	@PostMapping("/viewBookReport/{br_ID}")
@@ -205,9 +206,41 @@ public class BookReportController {
 	
 	@PostMapping("/serchBookReportPage")
 	@ResponseBody
-	public Integer searchBookReportPage() {
+	public Map<String,Object> searchBookReportPage() {
 		
-		return bookReportService.getAllBookRepotPageSize();
+		Map<String, Object>  data = new HashMap<>();
+		List<Map<String, Object>> bookReport = new ArrayList<>();
+		List<BookReportBean> searchBookReport = bookReportService.getSearchBookRepotData(searchType, page);
+		for (BookReportBean bookReportBean : searchBookReport) {
+			Map<String, Object> searchData = new HashMap<>();
+			searchData.put("br_ID", bookReportBean.getBr_ID());
+			searchData.put("br_Name", bookReportBean.getBr_Name());
+			searchData.put("bk_Name", bookReportBean.getBook().getBk_Name());
+			searchData.put("bk_Author", bookReportBean.getBook().getBk_Author());
+			searchData.put("br_Score", bookReportBean.getBr_Score());
+			searchData.put("bk_Publish", bookReportBean.getBook().getBk_Publish());
+			searchData.put("br_DateTime", new SimpleDateFormat("yyyy-MM-dd").format(bookReportBean.getBr_DateTime()));
+			searchData.put("bk_Pic", bookReportBean.getBook().getBk_Pic());
+			searchData.put("loginUser", bookReportBean.getMember().getMb_Account());
+			bookReport.add(searchData);
+		}
+		
+		data.put("pageSize", bookReportService.getSearchPageSize(searchType));
+		data.put("searchType", searchType);
+		data.put("searchPage", page);
+		data.put("searchData", bookReport);
+		
+		page = 0;
+		searchType = null;
+		
+		return data;
+	}
+	
+	@PostMapping("/addSub/{brId}")
+	@ResponseBody
+	public Boolean addSub(@PathVariable("brId") Integer brId) {
+		
+		return bookReportService.addSubReport(brId, loginUser.getMb_ID());
 	}
 
 }

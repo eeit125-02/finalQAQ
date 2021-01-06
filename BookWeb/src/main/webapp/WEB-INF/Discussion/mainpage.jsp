@@ -9,6 +9,10 @@
 <head>
 <meta charset="utf-8">
 
+<!-- 引用sweetalert -->
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script
 	src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
@@ -105,7 +109,7 @@ response.setDateHeader("Expires", 0);
 			</div>
 
 			<!-- content area -->
-			<div class="col-10" style='text-align: center;'>
+			<div class="col-8" style='text-align: center;'>
 				<!-- content connect to sidebar -->
 				<div class="tab-content" id="nav-tabContent">
 
@@ -160,7 +164,6 @@ response.setDateHeader("Expires", 0);
 											<th scope="col" style="width: 15%; vertical-align: middle">貼文時間</th>
 											<th scope="col" style="width: 15%; vertical-align: middle">貼文作者</th>
 											<th scope="col" style="width: 10%; vertical-align: middle">留言數</th>
-											<!-- <th scope="col" style="width: 10%; vertical-align: middle">查看貼文</th> -->
 										</tr>
 									</thead>
 									<tbody>
@@ -203,23 +206,31 @@ response.setDateHeader("Expires", 0);
 							<!-- content of hot post tab -->
 							<div class="tab-pane fade" id="novel_hot" role="tabpanel">
 
-								<h1>討論度最高貼文排序</h1>
 								<!-- post and command table -->
-								<table class="table table-hover">
+								<table class="table table-hover tablesorter" id="myTable">
 									<thead>
 										<tr class="table-primary">
 											<th scope="col"
-												style="width: 50%; text-align: left; vertical-align: middle">貼文標題</th>
+												style="width: 60%; text-align: left; vertical-align: middle">貼文標題</th>
 											<th scope="col" style="width: 15%; vertical-align: middle">貼文時間</th>
 											<th scope="col" style="width: 15%; vertical-align: middle">貼文作者</th>
 											<th scope="col" style="width: 10%; vertical-align: middle">留言數</th>
-											<th scope="col" style="width: 10%; vertical-align: middle">查看貼文</th>
 										</tr>
 									</thead>
 									<tbody>
-										<c:forEach var="stored_post" items="${hotPost}">
+										<c:forEach var="stored_post" items="${allPost}">
 											<tr>
-												<td style="text-align: left; vertical-align: middle">${stored_post.post_title}</td>
+												<td style="text-align: left; vertical-align: middle">
+												<c:url
+														value="show_detail" var="show_detail">
+														<c:param name="post_detail_id"
+															value=" ${stored_post.post_id}" />
+													</c:url>
+													<form action="${show_detail}" method="post">
+														<button type="submit" class="btn btn-link">
+												${stored_post.post_title}
+												</button>
+													</form></td>
 												<td style="vertical-align: middle">${stored_post.post_time}</td>
 												<td style="vertical-align: middle">${stored_post.memberbean.mb_Name}</td>
 												<td style="vertical-align: middle"><c:set
@@ -236,20 +247,17 @@ response.setDateHeader("Expires", 0);
   															<path
 															d="M2.678 11.894a1 1 0 0 1 .287.801 10.97 10.97 0 0 1-.398 2c1.395-.323 2.247-.697 2.634-.893a1 1 0 0 1 .71-.074A8.06 8.06 0 0 0 8 14c3.996 0 7-2.807 7-6 0-3.192-3.004-6-7-6S1 4.808 1 8c0 1.468.617 2.83 1.678 3.894zm-.493 3.905a21.682 21.682 0 0 1-.713.129c-.2.032-.352-.176-.273-.362a9.68 9.68 0 0 0 .244-.637l.003-.01c.248-.72.45-1.548.524-2.319C.743 11.37 0 9.76 0 8c0-3.866 3.582-7 8-7s8 3.134 8 7-3.582 7-8 7a9.06 9.06 0 0 1-2.347-.306c-.52.263-1.639.742-3.468 1.105z" />
 														</svg> <i class="bi bi-chat"></i> ${command_qty}</td>
-												<td style="vertical-align: middle"><c:url
-														value="show_detail" var="show_detail">
-														<c:param name="post_detail_id"
-															value=" ${stored_post.post_id}" />
-													</c:url>
-													<form action="${show_detail}" method="post">
-														<button type="submit" class="btn btn-link">Go</button>
-													</form></td>
 											</tr>
 										</c:forEach>
 									</tbody>
 								</table>
-
-
+								<script  type="text/javascript">
+								$(document).ready(function(){
+									$('#myTable').tablesorter(
+											{sortList: [[3,0]]});
+									})	
+								
+								</script>
 
 
 							</div>
@@ -282,7 +290,7 @@ response.setDateHeader("Expires", 0);
 									style="border: #ADADAD 2px solid; border-radius: 5px; text-align: left; padding: 10px; margin: 0px 10px; padding-top: 20px">
 
 									<form:form method='post' action='add_post'
-										modelAttribute="postBean">
+										modelAttribute="postBean" id="add_post_form">
 										<div class="form-group row">
 											<label for="new_title" class="col-2 text-center h5">貼文標題</label>
 											<div class="col-9">
@@ -299,11 +307,22 @@ response.setDateHeader("Expires", 0);
 										</div>
 										<form:hidden path="post_time" />
 										<div class="text-center">
-											<button type="submit" class="btn btn-primary">送出貼文</button>
+											<button type="submit" class="btn btn-primary" id="send_added_post">送出貼文</button>
 										</div>
 									</form:form>
 								</div>
 							</div>
+							
+							<script>
+						$('#send_added_post').click(function(){
+							if($('#post_title').val()==''||$('#post_content').val()==''){
+								swal({title:'請輸入貼文標題及內容'});
+								event.preventDefault()
+							}else{
+								$('#add_post_form').submit();
+							}
+						})
+					</script>
 
 							<!-- personal post record -->
 							<div class="tab-pane fade" id="pills-member_post" role="tabpanel">
@@ -396,6 +415,12 @@ response.setDateHeader("Expires", 0);
 
 												<script>
 													$('#command_btn${stored_post.post_id}').click(function() {
+														
+														if($('#command_input${stored_post.post_id}').val()==""){
+															swal({title:'請輸入文字'})
+
+															}else{
+														
 																		$.ajax({
 																					url : '<c:url value="/Dsicussion/add_command_ajax"/>',
 																					type : 'POST',
@@ -435,7 +460,7 @@ response.setDateHeader("Expires", 0);
 																				.attr(
 																						"placeholder",
 																						"請輸入留言");
-																	})
+															}})
 												</script>
 
 

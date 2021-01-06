@@ -9,6 +9,9 @@
 <head>
 <meta charset="utf-8">
 
+<!-- 引用sweetalert -->
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script
 	src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
@@ -58,11 +61,11 @@ response.setDateHeader("Expires", 0);
 	<div class="container-fluid" style="margin: 20px 0px">
 		<div class="row">
 			<!-- side area -->
-			<div class="col-2 text-center">
+			<div class="col-2 text-center" >
 				<h2>書適論壇</h2>
 			</div>
 
-			<div class="col-10" style='text-align: center;'>
+			<div class="col-8" style='text-align: center;'>
 
 			<h3>詳細貼文</h3><br>
 				<div
@@ -120,6 +123,12 @@ response.setDateHeader("Expires", 0);
 													'#command_btn${stored_post.post_id}')
 													.removeAttr(
 															'data-toggle data-target')
+															
+															if($('#command_input${stored_post.post_id}').val()==""){
+																swal({title:'請輸入文字'})
+
+																}else{
+															
 										$.ajax({
 											url : '<c:url value="/Dsicussion/add_command_ajax"/>',
 											type : 'POST',
@@ -139,7 +148,7 @@ response.setDateHeader("Expires", 0);
 										})
 											$('#command_input').val("");
 											$('#command_input').attr("placeholder","請輸入留言");
-										}})
+																}}})
 								</script>
 
 				</div>

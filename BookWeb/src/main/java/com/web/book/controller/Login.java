@@ -157,41 +157,45 @@ public class Login {
 				}
 	// 會員資料
 	@PostMapping("/mb_inf")
-	public @ResponseBody MemberBean Mb_inf(Model model) {
-		MemberBean memberbean = new MemberBean();
-		model.addAttribute("MemberBean", memberbean);
+	public @ResponseBody Map<String,Object> Mb_inf(Model model) {
 		MemberBean select = ms.select(Account);
-		model.addAttribute("login", select);
-		return select;
+		Map<String,Object> map= new HashMap<>(); 
+		map.put("login", select);
+		map.put("mb_Birthday",String.valueOf(select.getMb_Birthday()));
+		return map;
 	}
 
 	// 會員修改
-	@GetMapping("/MbUpdate")
+	@PostMapping("/toMbUpdate")
 	public @ResponseBody Map<String,Object> toUpdate(Model model) {
-		MemberBean memberbean = new MemberBean();
 		MemberBean mb_inf = ms.select(Account);
 		Map<String,Object> map= new HashMap<>(); 
 		map.put("mb_inf", mb_inf);
-		map.put("MemberBean", memberbean);
+		map.put("mb_Birthday",String.valueOf(mb_inf.getMb_Birthday()));
 		return map;
 	}
 
 	// 會員修改
 	@PostMapping("/MbUpdate")
-	public String Update(Model model, @ModelAttribute("MemberBean") MemberBean MB,
+	public String Update(Model model,
 			@RequestParam(value = "file", required = false) CommonsMultipartFile file,
-			@RequestParam(value = "test", required = false) String test
+			@RequestParam(value = "test", required = false) String test,
+			@RequestParam(value = "mb_Birthday", required = false) Date mb_Birthday,
+			@RequestParam(value = "mb_Address", required = false) String mb_Address,
+			@RequestParam(value = "mb_Tel", required = false) String mb_Tel,
+			@RequestParam(value = "mb_Mail", required = false) String mb_Mail,
+			@RequestParam(value = "mb_type", required = false) String mb_type
 			) throws Exception {		
 		MemberBean mb_inf = ms.select(Account);	
 		System.out.println(test);
 		if(test.equals("abc")) {
 		mb_inf.setMb_pic(GlobalService.saveImage("member", file, mb_inf.getMb_Account()));
 		}
-		mb_inf.setMb_Birthday(MB.getMb_Birthday());
-		mb_inf.setMb_Address(MB.getMb_Address());
-		mb_inf.setMb_Tel(MB.getMb_Tel());
-		mb_inf.setMb_Mail(MB.getMb_Mail());
-		mb_inf.setMb_type(MB.getMb_type());
+		mb_inf.setMb_Birthday(mb_Birthday);
+		mb_inf.setMb_Address(mb_Address);
+		mb_inf.setMb_Tel(mb_Tel);
+		mb_inf.setMb_Mail(mb_Mail);
+		mb_inf.setMb_type(mb_type);
 		boolean update = ms.update(mb_inf);
 		if (update) {
 			System.out.println(mb_inf);
@@ -217,6 +221,19 @@ public class Login {
 		return "redirect:toCity";
 	}
 
+	//管理員搜尋
+	@PostMapping("/admin_search")
+	public @ResponseBody Map<String,Object> admin_inf(String account) {
+		System.out.println(account);
+		MemberBean select = ms.select(account);
+		Map<String,Object> map= new HashMap<>(); 
+		map.put("infcheck", select.isCheckColume());
+		map.put("inf", select);
+		map.put("infDate",String.valueOf(select.getMb_Date()));
+		System.out.println(map);
+		return map;
+	}
+	
 	// 管理員(會員資料)
 	@GetMapping("/adminall")
 	public String Memberall(Model model) {

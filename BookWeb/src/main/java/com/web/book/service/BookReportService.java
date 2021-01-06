@@ -20,11 +20,14 @@ public interface BookReportService {
 	
 	List<BookReportBean> allbookReportList();
 	
-	Integer getAllBookRepotPageSize();
+	Integer getSearchPageSize(String searchType);
 	
-	List<BookReportBean> getThisPageDateForAllBookRepot(Integer page);
+	List<BookReportBean> getSearchBookRepotData(String searchType, Integer page);
 	
-	Integer getSearchBookRepotPageSize(String searchString);
+	Boolean checkBookReport(Integer mbId, Integer bkId);
 	
-	List<BookReportBean> getThisPageDateForSearchBookRepot(Integer page, String searchString);
+	Boolean addSubReport(Integer brId, Integer mbId);
+	
+	
+	
 }

@@ -8,6 +8,10 @@
 <html>
 <head>
 <meta charset="utf-8">
+
+<!-- 引用sweetalert -->
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
@@ -62,7 +66,7 @@ response.setDateHeader("Expires", 0);
 			</div>
 
 			<!-- content area -->
-			<div class="col-10" style='text-align: center;'>
+			<div class="col-8" style='text-align: center;'>
 				<nav class="navbar navbar-light bg-light justify-content-between">
 					<a class="navbar-brand">搜尋貼文關鍵字</a>
 					<form class="form-inline" action='search_keyword' method="post">
@@ -157,33 +161,26 @@ response.setDateHeader("Expires", 0);
 									</c:forEach>
 								</div>
 
+								
 								<script>
-									$('#command_btn${stored_post.post_id}')
-											.click(
-													function() {
-														if ('${loginUser.mb_ID}' !== '') {
-															$(
-																	'#command_btn${stored_post.post_id}')
-																	.removeAttr(
-																			'data-toggle data-target')
-															$
-																	.ajax({
+									$('#command_btn${stored_post.post_id}').click(function() {
+												if ('${loginUser.mb_ID}' !== '') {
+															$('#command_btn${stored_post.post_id}')
+																	.removeAttr('data-toggle data-target')
+																			
+															if($('#command_input${stored_post.post_id}').val()==""){
+																swal({title:'請輸入文字'})
+
+																}else{
+																			
+																	$.ajax({
 																		url : '<c:url value="/Dsicussion/add_command_ajax"/>',
 																		type : 'POST',
-																		data : {
-																			new_command : $(
-																					"#command_input${stored_post.post_id}")
-																					.val(),
-																			post_id : $(
-																					"#post_id")
-																					.val()
-																		},
+																		data : {new_command : $("#command_input${stored_post.post_id}").val(),
+																						post_id : $("#post_id").val()},
 																		dataType : "json",
-																		success : function(
-																				new_cb) {
-																			$(
-																					"#show_command${stored_post.post_id}")
-																					.prepend(
+																		success : function(new_cb) {
+																			$("#show_command${stored_post.post_id}").prepend(
 																							'<div style="background-color: #C4E1FF; margin: 10px; padding: 5px; border-radius: 10px;">'
 																									+ '<p>'
 																									+ new_cb.mb_name
@@ -196,15 +193,9 @@ response.setDateHeader("Expires", 0);
 																									+ '</div>');
 																		}
 																	})
-															$(
-																	'#command_input${stored_post.post_id}')
-																	.val("");
-															$(
-																	'#command_input${stored_post.post_id}')
-																	.attr(
-																			"placeholder",
-																			"請輸入留言");
-														}
+															$('#command_input${stored_post.post_id}').val("");
+															$('#command_input${stored_post.post_id}').attr("placeholder","請輸入留言");
+														}}		
 													})
 								</script>
 

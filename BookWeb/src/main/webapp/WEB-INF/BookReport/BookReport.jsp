@@ -10,6 +10,7 @@
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/jquery.rateyo.css"/>
@@ -62,6 +63,10 @@
 						<label>評分：</label>
 						<div id="rateYo"></div>
 					</div>
+					<br>
+					<div class="form-group">
+						<button id="addSub" type="button" class="btn btn-outline-primary">加入收藏</button>
+					</div>
 				</form>
 			</div>
 		</div>
@@ -73,7 +78,7 @@
 		<p id="brContent"></p>
 		<br>
 		
-		<button type="button" class="btn btn-outline-danger btn-mi float-right"> 返回 </button>
+		<button type="button" id="backButton" class="btn btn-outline-danger btn-mi float-right"> 返回 </button>
 		<br>
 	</div>
 
@@ -82,11 +87,8 @@
 	<!-- footer -->
 	<script>
 		
-
 		$("#bookWebheader").load("//localhost:8080/BookWeb/header");
 		$("#bookWebFooter").load("//localhost:8080/BookWeb/footer");
-		
-		
 		
 		$.ajax({
 			async : false,
@@ -114,30 +116,35 @@
 		  	}
 		});
 
-		$('#addBookReport').click(function(){
-			/* var addData = {
-						bk_ID : window.location.href.split("/").pop(),
-						br_Score : brScore,
-						br_Content : $('#brContent').val().replace(/\n|\r\n/g, "<br>")
-				};
+		$('#backButton').click(function(){
+			history.go(-1);
+		});
+		
+		$('#addSub').click(function(){
 			$.ajax({
 				async : false,
 				type : 'POST',
-				url : 'http://localhost:8080/BookWeb/BookReport/addBookReport/addReport',
-				data : addData,
-				dataType : 'json',
-				success : function(data){
-					if (data){
-						window.location.href = "http://localhost:8080/BookWeb/BookReport/EditBookReport"
-					}
-					else{
-						alert.val(已傳野果);
+				url : "http://localhost:8080/BookWeb/BookReport/addSub/" + window.location.href.split("/").pop(),
+				dataType : "json",
+				contentType : "application/json;charset=utf-8",
+				success : function(data) {
+					if(data){
+						swal({
+							  title: "新增成功",
+							  icon: "success",
+							  button: "ok",
+						});
+					}else{
+						swal({
+							  title: "已加入收藏",
+							  icon: "error",
+							  button: "ok",
+						});
 					}
 				}
-			}) */
-		});
+			});
+		})
 
-		
 	</script>
 </body>
 </html>

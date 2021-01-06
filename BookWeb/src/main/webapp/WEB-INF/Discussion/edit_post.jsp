@@ -7,6 +7,10 @@
 <html>
 <head>
 <meta charset="utf-8">
+
+<!-- 引用sweetalert -->
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
@@ -60,12 +64,12 @@ response.setDateHeader("Expires", 0);
 				<h2>書適論壇</h2>
 			</div>
 
-			<div class="col-10" style='text-align: center;'>
+			<div class="col-8" style='text-align: center;'>
 				<h3>修改貼文</h3><br>
 				<div
 					style="border: #ADADAD 2px solid; border-radius: 5px; text-align: left; padding: 10px; margin: 0px 10px; padding-top: 20px">
 
-					<form action="edit_post" method="post">
+					<form action="edit_post" method="post" id="form1">
 
 						<input type="hidden" name="edit_post_id" value="${param.edit_post_id}" />
 						<input type="hidden" name="edit_post_time" value="${param.edit_post_time}" />
@@ -73,7 +77,7 @@ response.setDateHeader("Expires", 0);
 						<div class="form-group row">
 							<label for="new_title" class="col-2 text-center h5">貼文標題</label>
 							<div class="col-9">
-								<input type="text" class="form-control" name="edit_post_title"
+								<input type="text" class="form-control" name="edit_post_title" id="edit_post_title"
 									value="${param.edit_post_title}" />
 							</div>
 						</div>
@@ -81,14 +85,25 @@ response.setDateHeader("Expires", 0);
 						<div class="form-group row">
 							<label for="new_content" class="col-2 text-center h5">貼文內容</label>
 							<div class="col-9">
-								<textarea class="form-control" name="edit_post_content" rows="6">${param.edit_post_content}</textarea>
+								<textarea class="form-control" name="edit_post_content" id="edit_post_content" rows="6">${param.edit_post_content}</textarea>
 							</div>
 						</div>
 						
 						<div class="text-center">
-							<button type="submit" class="btn btn-primary">送出貼文</button>
+							<button type="submit" id="send_edited_post" class="btn btn-primary">送出貼文</button>
 						</div>
 					</form>
+					
+					<script>
+						$('#send_edited_post').click(function(){
+							if($('#edit_post_title').val()==''||$('#edit_post_content').val()==''){
+								swal({title:'請輸入文字'});
+								event.preventDefault()
+							}else{
+								$('#form1').submit();
+							}
+						})
+					</script>
 
 				</div>
 			</div>
