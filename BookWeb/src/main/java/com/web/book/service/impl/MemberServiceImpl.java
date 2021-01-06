@@ -30,8 +30,12 @@ public class MemberServiceImpl implements MemberService {
 	public boolean insertMember(MemberBean memberData) {
 		return dao.insertMember(memberData);
 	}
-
-
+	@Override
+	public MemberBean email(String email) {
+		return dao.email(email);
+	}
+	
+	
 	@Override
 	public List<MemberBean> adminselect() {
 		return dao.adminselect();

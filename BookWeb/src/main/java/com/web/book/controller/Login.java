@@ -54,6 +54,14 @@ public class Login {
 		return "Member/confirm";
 	}
 
+//	//JavaMail
+//	@PostMapping("/JavaMail")
+//	public void JavaMail(@RequestParam(value = "mail",required = false) String email) {
+//		JavaMail mail = new JavaMail();
+//		MemberBean member = ms.email(email);
+//		mail.SendMail(email,member.getMb_Password());
+//	}
+	
 	// 註冊資料確認後送至資料庫
 	@PostMapping("/confirm")
 	public String Confirm() {
