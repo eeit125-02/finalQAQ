@@ -19,7 +19,6 @@ import com.web.book.service.SearchService;
 		@Autowired
 		SearchBookDAO searchBookDAO;
 		
-		
 		//查詢書籍關鍵字
 		@Override
 		public List<BookBean> searchBook(String name){
@@ -39,7 +38,7 @@ import com.web.book.service.SearchService;
 		
 		//查詢書籍類型
 		@Override
-		public List<BookTypeBean> searchBookType(List<Integer> reslist){
+		public List<BookBean> searchBookType(List<Integer> reslist){
 			return searchBookDAO.searchBookType(reslist);
 		}
 		
@@ -56,6 +55,12 @@ import com.web.book.service.SearchService;
 			return searchBookDAO.getBookType(id);	
 		}
 				
+		//確認是否收藏
+		@Override
+		public boolean checkbc(int bk_ID, int mb_ID) {
+			return searchBookDAO.checkbc(bk_ID, mb_ID);	
+		}
+		
 		// 會員收藏清單
 		@Override
 		public List<BookCollectBean> gotoCollect(int id) {

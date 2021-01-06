@@ -9,6 +9,9 @@ public interface BookStoreDao {
 
 	// 商品頁面搜尋
 	List<BookBean> searchBookStore();
+	
+	// 一件商品所有價錢區間
+	List<BookStoreBean> bookPrices(Integer bk_ID);
 
 	// 單一商品詳細資料
 	BookBean getBookDetail(Integer bk_ID);
@@ -30,5 +33,8 @@ public interface BookStoreDao {
 
 	// 刪除會員賣場資料
 	void deleteBookStore(Integer bks_ID);
+	
+	//灌庫存值給商店
+	void boobqaq();
 
 }

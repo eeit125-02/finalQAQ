@@ -88,7 +88,7 @@ public class DiscussionDaoImpl implements DiscussionDao {
 	//修改貼文
 	@Override
 	public void editPost(Integer edit_post_id,  String edit_post_title,
-		String edit_post_content, Timestamp edit_post_time) {
+		String edit_post_content, String edit_post_time) {
 		Session session = factory.getCurrentSession();
 		PostBean pb = (PostBean) session.get(PostBean.class, edit_post_id);
 		pb.setPost_time(edit_post_time);
@@ -135,6 +135,17 @@ public class DiscussionDaoImpl implements DiscussionDao {
 		String hql="FROM CommandBean c WHERE FK_PostBean_post_id=:pb_ID ORDER BY c.command_time DESC";
 		Session session = factory.getCurrentSession();
 		return session.createQuery(hql).setParameter("pb_ID", pb_ID).getResultList();
+	}
+
+	//有問題！！！
+	//查詢貼文關鍵字
+	@SuppressWarnings({ "unchecked"})
+	@Override
+	public List<PostBean> getPostByKeyword(String keyword) {
+		String hql="FROM PostBean p WHERE p.post_content LIKE '%" + keyword + 
+				"%' OR p.post_title LIKE '%" + keyword + "%'";
+		Session session = factory.getCurrentSession();
+		return session.createQuery(hql).getResultList();
 	}
 
 

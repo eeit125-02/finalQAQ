@@ -17,4 +17,17 @@ public interface BookReportService {
 	void upDateBookReportData(Integer br_ID, Integer br_Score, String br_Content );
 	
 	void insertBookReport(Integer mb_ID, Integer bk_ID, String br_Name, Integer br_Score, String br_Content);
+	
+	List<BookReportBean> allbookReportList();
+	
+	Integer getSearchPageSize(String searchType);
+	
+	List<BookReportBean> getSearchBookRepotData(String searchType, Integer page);
+	
+	Boolean checkBookReport(Integer mbId, Integer bkId);
+	
+	Boolean addSubReport(Integer brId, Integer mbId);
+	
+	
+	
 }

@@ -32,15 +32,7 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
 	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
 	crossorigin="anonymous">
-<!-- <link rel="stylesheet" href="import.css"> -->
 <style>
-/* @import url(https://fonts.googleapis.com/earlyaccess/cwtexyen.css); */
-/* body { */
-/* 	font-family: "cwTeXYen", sans-serif; */
-/* 	font-weight: 800; */
-/* 	line-height: 2; */
-/* 	font-size: 16px; */
-/* } */
 .switch {
 position: relative;
 display: inline-block;
@@ -134,31 +126,33 @@ legend {
 <body>
 	<div class="container media">
 		<br>
-		<form action="<c:url value='/delete' />" method="post">
 			<fieldset id="admin">
 				<legend>會員清單</legend>
-				<table class="a" width="100%">
-					<tr>
-						<th>帳號</th>
-						<th>密碼</th>
-						<th>姓名</th>
-						<th>註冊日期</th>
-						<th></th>
-						<th></th>
-					</tr>
-					<c:forEach items="${memberall}" var="u">
+	<label for="site-search" style="align:left">Search the site:</label>
+	<input type="search" id="site-search" name="search" aria-label="Search through site content">
+	<button id="searchbtn" name="searchbtn">Search</button>
+		<form action="<c:url value='/delete' />" method="post">
+				<table class="table"  width="100%"  id="change">
+					<c:forEach items="${memberall}" var="u" varStatus="loop">
+						<c:if test="${loop.index == 0}">
+							<tr>
+								<th>帳號</th>
+								<th>密碼</th>
+								<th>姓名</th>
+								<th>註冊日期</th>
+								<th></th>
+								<th></th>
+							</tr>
+						</c:if>
 						<tr>
 							<td>${u.getMb_Account()}</td>
 							<td>${u.getMb_Password()}</td>
 							<td>${u.getMb_Name()}</td>
 							<td>${u.getMb_Date()}</td>
 							<td><button type="submit" name="delete"
-									class="btn btn-outline-secondary" value="${u.getMb_ID()}"
-									onclick="confirmChoice( )">
-									刪除
+									class="btn btn-outline-secondary" value="${u.getMb_ID()}">刪除</button>
 									<button type="submit" name="update"
-										class="btn btn-outline-secondary" value="${u.getMb_Account()}"
-										onclick="confirmChoice( )">修改</td>
+										class="btn btn-outline-secondary" value="${u.getMb_Account()}">修改</button></td>
 										
 							<td><label class="switch"> <input type="checkbox">
 									<span id="ball" class="slider" check="${u.checkColume}"></span>
@@ -166,17 +160,52 @@ legend {
 							</td>
 						</tr>
 					</c:forEach>
-
 				</table>
-
+			</form>
 				<a href="<c:url value='/toAdmin'/>">返回</a>
 			</fieldset>
-		</form>
 	</div>
-
+</body>
 	<script>
+	$('#searchbtn').click(function(){
+		console.log($('#site-search').val())
+	$.ajax({
+		type : 'POST',
+		url : "admin_search?account=" + $('#site-search').val(),
+		data:{
+// 			'search':$('#site-search').val() 
+		},
+		dataType : "json",
+		success : function(data) {
+			console.log(data.inf.checkColume)
+			
+			var insertData = "";
+			insertData = ("<c:forEach items='"+data.inf+"' var='u'>"
+						+"<tr>"
+						+"<td>"+data.inf.mb_Account+"</td>"
+						+"<td>"+data.inf.mb_Password+"</td>"
+						+"<td>"+data.inf.mb_Name+"</td>"
+						+"<td>"+data.infDate+"</td>"
+						+"<td><button type=\"submit\" name=\"delete\""
+						+"class=\"btn btn-outline-secondary\" value=\""+data.inf.mb_ID+"\">刪除"
+						+"<button type=\"submit\" name=\"update\""
+							+"class=\"btn btn-outline-secondary\" value=\""+data.infcheck+"\">修改</td>"
+						
+				+"<td><label class=\"switch\"> <input type=\"checkbox\">"
+						+"<span id=\"ball\" class=\"slider\" check=\""+data.inf.checkColume+"\"></span>"
+				+"</label>"
+				+"</td>"
+			+"</tr>"
+		+"</c:forEach>")
+		$('#change').html(insertData);
+			already();
+		}
+	});	
+})
+
 		$(document).ready(function() {
 			already();
+			check();
 		});
 		
 		function already(){
@@ -206,6 +235,5 @@ legend {
 		})
 		}
 	</script>
-</body>
 
 </html>

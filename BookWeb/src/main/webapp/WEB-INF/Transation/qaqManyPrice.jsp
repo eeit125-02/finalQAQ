@@ -46,59 +46,56 @@
 	<header class="container blog-header py-3" id="bookWebheader"></header>
 	<!-- header -->
 
-	<div class="container media">
-		<!-- body -->
-
-
-
-		<form action="<c:url value='/addMyBook'/>" method="post">
-			<button type="submit" name="">我要賣東西</button>
-			<br>
-		</form>
-		<form action="<c:url value='qaqTest' />" method="get">
-			<button type="submit" name="">返回</button>
-			<br>
-		</form>
+	<!-- body -->
+	<div style="text-align: center">
+		<h2>二手書圖</h2>
 	</div>
-	<br>
-	<div class="container media">
-		<form action="<c:url value='/updateOrDelete'/>" method="post">
-			<table border="2" width="100%">
-				<tr>
-					<th>編號</th>
-					<th>書名</th>
-					<th>作者</th>
-					<th>出版社</th>
-					<th>二手價</th>
-					<th>數量</th>
-					<th>&nbsp;</th>
-					<th>&nbsp;</th>
-				</tr>
-				<c:forEach var="table" items="${myBookList}">
-					<tr>
-						<td><c:out value="${table.bks_ID}" /></td>
-						<td><c:out value="${table.book.bk_Name}" /></td>
-						<td><c:out value="${table.book.bk_Author}" /></td>
-						<td><c:out value="${table.book.bk_Publish}" /></td>
-						<td><c:out value="${table.bs_Price}" /></td>
-						<td><c:out value="${table.bs_Num}" /></td>
-						<td><button type="submit" value="${table.bks_ID}"
-								name="waitupbk">修改</button></td>
-						<td><button type="submit" value="${table.bks_ID}"
-								name="deletebk">刪除</button></td>
-					</tr>
-				</c:forEach>
-			</table>
-		</form>
-
-		<%-- <input type="hidden" name="BK_ID" value="${table.bks_ID}"/> --%>
-
-		<!-- body -->
+	<div class="container">
+		<hr>
+		<c:forEach items="${bookPrices}" var="v" begin="0" end="0">
+			<div class="row">
+				<div class="col-lg-4">
+					<label for="url"></label> <img alt="圖勒?" width="200px"
+						height="300px" src="<c:url value='${v.book.bk_Pic}'/>">
+				</div>
+				<div class="col-lg-8">
+					<h2>書名: ${v.book.bk_Name}</h2>
+					<h4>作者: ${v.book.bk_Author}</h4>
+					<h4>出版社: ${v.book.bk_Publish}</h4>
+					<h4>出版日: ${v.book.bk_Date}</h4>
+				</div>
+			</div>
+		</c:forEach>
+		<div class="row">
+			<div class="col-lg-3">二手價</div>
+			<div class="col-lg-3">賣家</div>
+			<div class="col-lg-3">數量</div>
+			<div class="col-lg-3">&nbsp;</div>
+		</div>
+		<hr>
+		<c:forEach items="${bookPrices}" var="v">
+			<div class="row">
+				<div class="col-lg-3">
+					<c:out value="${v.bs_Price}" />
+				</div>
+				<div class="col-lg-3">
+					<c:out value="${v.member.mb_Account}" />
+				</div>
+				<div class="col-lg-3">
+					<c:out value="${v.bs_Num}" />
+				</div>
+				<div class="col-lg-3">
+					<button type="button" class="btn btn-outline-secondary">我是按鈕</button>
+				</div>
+			</div>
+			<hr>
+		</c:forEach>
 	</div>
+
+	<!-- body -->
 
 	<!-- footer -->
 	<footer class="container py-5" id="bookWebFooter"></footer>
 	<!-- footer -->
-
 </body>
 </html>

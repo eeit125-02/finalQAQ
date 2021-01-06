@@ -9,6 +9,9 @@
 <head>
 <meta charset="utf-8">
 
+<!-- 引用sweetalert -->
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script
 	src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
@@ -44,6 +47,13 @@
 <title>書適論壇</title>
 </head>
 <body>
+
+<%
+response.setHeader("Pragma","No-cache");
+response.setHeader("Cache-Control","no-cache");
+response.setDateHeader("Expires", 0);
+%>
+
 	<!-- header -->
 	<header class="container blog-header py-3" id="bookWebheader"></header>
 	<!-- header -->
@@ -51,12 +61,13 @@
 	<div class="container-fluid" style="margin: 20px 0px">
 		<div class="row">
 			<!-- side area -->
-			<div class="col-2 text-center">
+			<div class="col-2 text-center" >
 				<h2>書適論壇</h2>
 			</div>
 
-			<div class="col-10" style='text-align: center;'>
+			<div class="col-8" style='text-align: center;'>
 
+			<h3>詳細貼文</h3><br>
 				<div
 					style="border: #ADADAD 2px solid; border-radius: 5px; text-align: left; padding: 10px; margin: 0px 10px">
 					<p>${PostBean.memberbean.mb_Name}<br>${PostBean.post_time}</p>
@@ -70,9 +81,27 @@
 						<input type="hidden" name="post_id" id="post_id" value="${PostBean.post_id}" />
 						<div class="input-group-append">
 							<button class="btn btn-outline-secondary" id="command_btn"
-								type="submit">留言</button>
+								type="button" data-toggle="modal" data-target="#exampleModalCenter">留言</button>
 						</div>
 					</div>
+					
+					<!-- 彈出登入提示框 -->
+								<div class="modal fade" id="exampleModalCenter" tabindex="-1"
+									role="dialog" aria-labelledby="exampleModalCenterTitle"
+									aria-hidden="true">
+									<div class="modal-dialog modal-dialog-centered" role="document">
+										<div class="modal-content">
+											<div class="modal-header">
+												<h5 class="modal-title" id="exampleModalCenterTitle">提醒</h5>
+												<button type="button" class="close" data-dismiss="modal"
+													aria-label="Close">
+													<span aria-hidden="true">&times;</span>
+												</button>
+											</div>
+											<div class="modal-body">請先登入會員</div>
+										</div>
+									</div>
+								</div>
 
 					<div id="show_command">
 						<c:forEach var="stored_command" items="${CommandBean}">
@@ -89,6 +118,17 @@
 
 								<script>
 									$('#command_btn').click(function() {
+										if ('${loginUser.mb_ID}' !== '') {
+											$(
+													'#command_btn${stored_post.post_id}')
+													.removeAttr(
+															'data-toggle data-target')
+															
+															if($('#command_input${stored_post.post_id}').val()==""){
+																swal({title:'請輸入文字'})
+
+																}else{
+															
 										$.ajax({
 											url : '<c:url value="/Dsicussion/add_command_ajax"/>',
 											type : 'POST',
@@ -108,7 +148,7 @@
 										})
 											$('#command_input').val("");
 											$('#command_input').attr("placeholder","請輸入留言");
-									})
+																}}})
 								</script>
 
 				</div>

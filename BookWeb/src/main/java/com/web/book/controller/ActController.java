@@ -5,9 +5,12 @@ import java.util.List;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.codec.digest.MessageDigestAlgorithms;
+import org.dom4j.tree.BackedList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -62,7 +65,7 @@ public class ActController {
 	public String showCreateForm(@ModelAttribute("loginUser") MemberBean loginUser, Model model) {
 		ActBean ab = new ActBean();
 		model.addAttribute("actbean", ab);
-		model.addAttribute("mb_account", loginUser.getMb_Account());
+		model.addAttribute("mb_ID", loginUser.getMb_ID());
 		model.addAttribute("mb_Name", loginUser.getMb_Name());
 		return "Activity/ActForm";
 	}
@@ -70,12 +73,14 @@ public class ActController {
 	// 新增活動
 	@PostMapping("/showCreateForm")
 	public String createAct(Model model, @ModelAttribute("actbean") ActBean ab,
+			@ModelAttribute("loginUser") MemberBean loginUser,
 			@RequestParam(value = "file", required = false) CommonsMultipartFile file, HttpServletRequest request,
+			@RequestParam(value = "mb_ID", required = false) Integer mb_ID,
 			RedirectAttributes attr) throws Exception {
 
 		// 圖片上傳用
 		GlobalService.saveImage("active", file, ab.getact_Name());
-
+		ab.setMember(loginUser);
 		ab.setact_Image(GlobalService.saveImage("active", file, ab.getact_Name()));
 		actService.createAct(ab);
 		return "redirect:/showActs";
@@ -94,13 +99,27 @@ public class ActController {
 	public String updateAct(Model model, @ModelAttribute("ab") ActBean ab,
 			@RequestParam(value = "act_ID", required = false) Integer act_ID,
 			@RequestParam(value = "file", required = false) CommonsMultipartFile file, HttpServletRequest request,
+			@RequestParam(value = "picpath", required = false) String picpath,
 			RedirectAttributes attr) throws Exception {
 		System.out.println("--------------------");
 		// 圖片上傳用
-		GlobalService.saveImage("active", file, ab.getact_Name());
-
-		ab.setact_Image(GlobalService.saveImage("active", file, ab.getact_Name()));
-		actService.updateAct(ab);
+		System.out.println(picpath);
+		ActBean act = actService.getAct(act_ID);
+		if(picpath.equals("abc")) {
+			act.setact_Image(GlobalService.saveImage("active", file, ab.getact_Name()));
+		}
+		
+		act.setact_Name(ab.getact_Name());
+		act.setact_Theme(ab.getact_Theme());
+		act.setact_Date(ab.getact_Date());
+		act.setact_Loc(ab.getact_Loc());
+		act.setact_Intro(ab.getact_Intro());
+		act.setact_Guest(ab.getact_Guest());
+		act.setact_Pax(ab.getact_Pax());
+		act.setact_Rule(ab.getact_Rule());
+		act.setact_Tag(ab.getact_Tag());
+		act.setact_Place(ab.getact_Place());
+		actService.updateAct(act);
 		return "redirect:/showActs";
 
 	}

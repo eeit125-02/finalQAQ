@@ -34,10 +34,11 @@ public interface DiscussionService {
 	List<MemberBean> getAllMember();
 	//修改貼文
 	void editPost(Integer edit_post_id,  String edit_post_title,
-			String edit_post_content, Timestamp edit_post_time);
+			String edit_post_content, String edit_post_time);
 	//刪除貼文
 	void deletPost(Integer delete_post_id);
 	//修改板規
 	RuleBean updateRule(RuleBean rb);
-	
+	//查詢貼文關鍵字
+	List<PostBean> getPostByKeyword(String keyword);
 }

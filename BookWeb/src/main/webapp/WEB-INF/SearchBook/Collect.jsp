@@ -90,7 +90,7 @@
 					contentType : "application/json;charset=utf-8",
 					error : function() {
 						alert('請先登入');
-						window.location("Member/toLogin");
+						window.location.href("http://localhost:8080/BookWeb/toLogin");
 					},
 					success : function(data) {
 						var insertData = "<div>";
@@ -108,7 +108,6 @@
 								+data[i].bk_ID+"\">"+data[i].bk_Name+"</button></form>"
 								+"</h3>"
 								+"｜ 作者："+data[i].bk_Author
-								+data[i].bc_ID
 								+" ｜  出版社："+data[i].bk_Publish
 								+"｜  出版日期："+data[i].bk_Date
 								+"<br>"

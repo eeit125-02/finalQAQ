@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.web.book.dao.BookReportDao;
 import com.web.book.model.BookReportBean;
+import com.web.book.model.BookReportCollectBean;
 import com.web.book.service.BookReportService;
 
 @Transactional
@@ -55,6 +56,72 @@ public class BookReportServiceImpl implements BookReportService {
 		bookReportDao.insertBookReport(mb_ID, bk_ID, br_Name, br_Score, br_Content);
 		
 	}
+
+	@Override
+	public List<BookReportBean> allbookReportList() {
+		
+		return bookReportDao.allbookReportList();
+	}
+
+	@Override
+	public Integer getSearchPageSize(String searchType) {
+		
+		
+		if(searchType.equals("all")) {
+			
+			return bookReportDao.getAllBookRepotPageSize();
+			
+		}else {
+			
+			return bookReportDao.getSearchBookRepotPageSize(searchType);
+		}
+		
+	}
+
+	@Override
+	public List<BookReportBean> getSearchBookRepotData(String searchType, Integer page) {
+		
+		
+		if (searchType.equals("all")) {
+			
+			return bookReportDao.getThisPageDateForAllBookRepot(page);
+			
+		}else {
+			
+			return bookReportDao.getThisPageDateForSearchBookRepot(page, searchType);
+			
+		}
+		
+	}
+
+	@Override
+	public Boolean checkBookReport(Integer mbId, Integer bkId) {
+		
+		List<BookReportBean> memberBookReport = bookReportDao.bookReportMemberAllList(mbId);
+		for (BookReportBean bookReport : memberBookReport) {
+			if (bookReport.getBook().getBk_ID().equals(bkId)) {
+				return false;
+			}
+		}
+		return true;
+	}
+
+	@Override
+	public Boolean addSubReport(Integer brId, Integer mbId) {
+		
+		List<BookReportCollectBean> collects = bookReportDao.getMemberCollectReportList(brId);
+		
+		for (BookReportCollectBean collect : collects) {
+			if(collect.getBookReport().getBr_ID().equals(brId)) {
+				return false;
+			}
+		}
+		
+		bookReportDao.addSubReport(brId, mbId);
+		return true;
+	}
+	
+	
 
 	
 

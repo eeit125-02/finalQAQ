@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 <!DOCTYPE html>
 <html>
@@ -65,36 +66,43 @@
 					</span>
 				</div>
 			</div>
+			<div class="col-lg-4">
+				<button type="button" class="btn btn-outline-secondary" onclick="storeCheck()">我的賣場</button>
+			</div>
 		</div>
 	</form>
 	<br>
 	<!-- 搜尋商品欄	end -->
 	<!-- 	版面置中 -->
 	<div class="container">
-	<!-- 	版面置中 -->
+		<!-- 	版面置中 -->
 		<div class="row">
-	<c:forEach items="${store}" var="v">
-			<div class="card col-sm-3" style="width: 18rem;">
-				<img src="<c:url value=" ${v.bk_Pic} " />" 
-				class="card-img-top" alt="..." style="height: 18rem;">
-				<div class="card-body">
-				<a href="#" >${v.bk_Name }</a>
-					<br>
-					<span class="card-text">作者: ${ v.bk_Author }</span>
-					<br>
-					<span class="card-text">出版社: ${ v.bk_Publish }</span>
-					<br>
-					<span class="card-text">出版日: ${ v.bk_Date }</span>
-					<br>
-					<span class="card-text">價錢: ${ v.bk_Price }</span>
-					<br>
-					<a href="#" >簡介&#149;比價 $ 最小 ~ 最大   共 $ 項</a>
+			<c:forEach items="${store}" var="v">
+				<div class="card col-sm-3" style="width: 18rem;">
+					<!-- 圖片跟連結 -->
+					<a href="<c:url value='/qaqBookDetail/${v.bk_ID}'/>"> <img
+						src="<c:url value=" ${v.bk_Pic} " />" class="card-img-top"
+						alt="..." style="height: 18rem;">
+					</a>
+					<!-- 圖片跟連結 -->
+					<div class="card-body">
+						<!-- 書名連結 -->
+						<a href="<c:url value='/qaqBookDetail/${v.bk_ID}'/>">${v.bk_Name }</a>
+						<!-- 書名連結 -->
+						<br> <span class="card-text">作者: ${ v.bk_Author }</span>
+						<br> <span class="card-text">出版社: ${ v.bk_Publish }</span>
+						<br> <span class="card-text">出版日: ${ v.bk_Date }</span>
+						<br> <span class="card-text">價錢: ${ v.bk_Price }</span>
+						<br>
+						<!-- 比價連結 -->
+						<a href="<c:url value='/qaqManyPrice?ID=${v.bk_ID}'/>">簡介&#149;比價 $ </a>
+						<!-- 比價連結 -->
+					</div>
 				</div>
-			</div>
-	</c:forEach>
-			
+			</c:forEach>
+
 		</div>
-	<!-- 	版面置中 -->
+		<!-- 	版面置中 -->
 	</div>
 	<!-- 	版面置中 -->
 
@@ -105,5 +113,14 @@
 	<!-- footer -->
 	<footer class="container py-5" id="bookWebFooter"></footer>
 	<!-- footer -->
+	<script type="text/javascript">
+	function storeCheck() {
+		if (typeof ($.cookie('Member_ID')) != "undefined") {
+			window.location.href="//localhost:8080/BookWeb/myStore";
+		} else {
+			window.location.href="//localhost:8080/BookWeb/toLogin";
+		};
+	}
+	</script>
 </body>
 </html>

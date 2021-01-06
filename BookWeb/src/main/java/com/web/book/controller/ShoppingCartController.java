@@ -11,15 +11,17 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 
 import com.web.book.model.BookBean;
+import com.web.book.model.MemberBean;
 import com.web.book.model.ShoppingCartBean;
 import com.web.book.service.BookStoreService;
 import com.web.book.service.ShoppingCartService;
 
 
 @Controller
-@SessionAttributes(value = "list")
+@SessionAttributes(value = { "loginUser", "list"})
 public class ShoppingCartController {
 
 	@Autowired
@@ -27,7 +29,14 @@ public class ShoppingCartController {
 	
 	@Autowired
 	BookStoreService bsService;
+	
+	MemberBean loginUser;
 
+	@ModelAttribute
+	public void setLoginUser(Model model, SessionStatus status) {
+		loginUser = (MemberBean) model.getAttribute("loginUser");
+		
+	}
 	
 	@GetMapping("shopping")
 	public String addCart(Model model,
@@ -41,7 +50,7 @@ public class ShoppingCartController {
 		if (bk_ID != 0 && bk_ID2 == 0) {
 // 如果listCart沒內容新增		
 			if (listCart.size() == 0) {
-				scService.addToCart(1, 100, bk_ID, 13);
+				scService.addToCart(1, 100, bk_ID, 9);
 				listCart = scService.searchCart(13);
 				model.addAttribute("list", listCart);
 				for (ShoppingCartBean shoppingCartBean : listCart) {
@@ -60,8 +69,8 @@ public class ShoppingCartController {
 					}
 				}
 // 沒有內容新增
-				scService.addToCart(1, 100, bk_ID, 13);
-				listCart = scService.searchCart(13);
+				scService.addToCart(1, 100, bk_ID, 9);
+				listCart = scService.searchCart(9);
 				model.addAttribute("list", listCart);
 				for (ShoppingCartBean shoppingCartBean : listCart) {
 					tatolMoney += shoppingCartBean.getCart_Num()*shoppingCartBean.getCart_Price();
@@ -73,8 +82,8 @@ public class ShoppingCartController {
 		} else if (bk_ID == 0 && bk_ID2 != 0) {
 // 如果listCart沒內容新增	
 			if (listCart.size() == 0) {
-				scService.addToCart(1, 100, bk_ID2, 13);
-				listCart = scService.searchCart(13);
+				scService.addToCart(1, 100, bk_ID2, 9);
+				listCart = scService.searchCart(9);
 				model.addAttribute("list", listCart);
 				for (ShoppingCartBean shoppingCartBean : listCart) {
 					tatolMoney += shoppingCartBean.getCart_Num()*shoppingCartBean.getCart_Price();
@@ -92,8 +101,8 @@ public class ShoppingCartController {
 				}
 			}
 // 沒有內容新增
-			scService.addToCart(1, 100, bk_ID2, 13);
-			listCart = scService.searchCart(13);
+			scService.addToCart(1, 100, bk_ID2, 9);
+			listCart = scService.searchCart(9);
 			model.addAttribute("list", listCart);
 			for (ShoppingCartBean shoppingCartBean : listCart) {
 				tatolMoney += shoppingCartBean.getCart_Num()*shoppingCartBean.getCart_Price();

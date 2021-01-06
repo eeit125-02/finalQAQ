@@ -51,7 +51,7 @@ public class ActDaoImpl implements ActDao {
 	public int updateAct(ActBean ab) {
 		int count = 0;
 		Session session = factory.getCurrentSession();
-		session.update(ab);
+		session.saveOrUpdate(ab);
 		count++;
 
 		return count;

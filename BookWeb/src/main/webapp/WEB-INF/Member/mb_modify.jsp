@@ -61,9 +61,14 @@ background-color:#e0ece4
 
 <body>
 <!-- 	<div class="container media"> -->
-			<fieldset id="mb_modify">
-				<legend>會員修改</legend>
 			<form:form method="POST" modelAttribute="MemberBean" enctype="multipart/form-data">
+			<fieldset id="mb_modify">
+				<div>
+					<img src="${mb_inf.mb_pic}" id="show" width="200" height="200"><br>		
+					<input id="myfile" type="file" name="file" style="margin-left:90px"/>
+					<input type="hidden" id="test" name="test">
+				</div>
+				<legend>會員修改</legend>
 				<table class="table">
 					<tr class="tr1">
 						<th scope="col">帳號</th>
@@ -83,12 +88,10 @@ background-color:#e0ece4
 					</tr>
 
 					<tr class="tr2">
-						<th scope="col">E-mail</th>
-						<th scope="col">頭像</th>
+						<th colspan="2">E-mail</th>
 					</tr>
 					<tr class="table-light">
-						<td><form:input type="email" id="mail" path="mb_Mail" value="${mb_inf.mb_Mail}"/></td>
-						<td><input type="file" name="file" value="${mb_inf.mb_pic}"/></td>
+						<td colspan="2"><form:input type="email" id="mail" path="mb_Mail" value="${mb_inf.mb_Mail}"/></td>
 					</tr>
 
 					<tr class="tr2">
@@ -112,8 +115,8 @@ background-color:#e0ece4
 					<button type="submit">送出</button>
 					<button type="reset">清除</button>
 				</div>
-		</form:form>
 			</fieldset>
+		</form:form>
 <!-- 	</div> -->
 
 	<script>
@@ -133,6 +136,20 @@ background-color:#e0ece4
 			}
 			//說明合法    
 		})
+	</script>
+	<script type="text/javascript">
+	$(function() {
+				$("#myfile").change(function() {
+					var readFile = new FileReader();
+					var mfile = $("#myfile")[0].files[0];  //注意這裡必須時$("#myfile")[0]，document.getElementById('file')等價與$("#myfile")[0]
+					readFile.readAsDataURL(mfile);
+					$("#test").val("abc");
+					readFile.onload = function() {
+						var img = $("#show");
+						img.attr("src", this.result);
+					}
+				});
+			})	
 	</script>
 </body>
 </html>

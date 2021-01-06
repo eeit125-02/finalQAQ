@@ -3,11 +3,12 @@ package com.web.book.controller;
 import java.io.IOException;
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.ExecutionException;
 
 import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +22,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.web.book.model.MemberBean;
 import com.web.book.service.GlobalService;
@@ -124,7 +124,7 @@ public class Login {
 				String sessionId = GlobalService.createSessionID(String.valueOf(loginMember.getMb_ID()),
 					loginMember.getMb_Name(), loginMember.getMb_Account());
 			Cookie memId = new Cookie("Member_ID", sessionId);
-			memId.setMaxAge(1200);
+			memId.setMaxAge(20*60);
 			response.addCookie(memId);
 			logincheck = "c" ;
 			return true;
@@ -164,40 +164,46 @@ public class Login {
 		return "Member/login";
 				}
 	// 會員資料
-	@GetMapping("/mb_inf")
-	public String Mb_inf(Model model) {
-		MemberBean memberbean = new MemberBean();
-		model.addAttribute("MemberBean", memberbean);
+	@PostMapping("/mb_inf")
+	public @ResponseBody Map<String,Object> Mb_inf(Model model) {
 		MemberBean select = ms.select(Account);
-		System.out.println(select);
-		System.out.println(select.getMb_pic());
-		model.addAttribute("login", select);
-		System.out.println("abc");
-		return "Member/mb_inf";
+		Map<String,Object> map= new HashMap<>(); 
+		map.put("login", select);
+		map.put("mb_Birthday",String.valueOf(select.getMb_Birthday()));
+		return map;
 	}
 
 	// 會員修改
-	@GetMapping("/MbUpdate")
-	public String toUpdate(Model model) {
-		MemberBean memberbean = new MemberBean();
+	@PostMapping("/toMbUpdate")
+	public @ResponseBody Map<String,Object> toUpdate(Model model) {
 		MemberBean mb_inf = ms.select(Account);
-		model.addAttribute("mb_inf", mb_inf);
-		model.addAttribute("account", Account);
-		model.addAttribute("MemberBean", memberbean);
-		return "Member/mb_modify";
+		Map<String,Object> map= new HashMap<>(); 
+		map.put("mb_inf", mb_inf);
+		map.put("mb_Birthday",String.valueOf(mb_inf.getMb_Birthday()));
+		return map;
 	}
 
 	// 會員修改
 	@PostMapping("/MbUpdate")
-	public String Update(Model model, @ModelAttribute("MemberBean") MemberBean MB,
-			@RequestParam(value = "file", required = false) CommonsMultipartFile file) throws Exception {		
-		MemberBean mb_inf = ms.select(Account);
+	public String Update(Model model,
+			@RequestParam(value = "file", required = false) CommonsMultipartFile file,
+			@RequestParam(value = "test", required = false) String test,
+			@RequestParam(value = "mb_Birthday", required = false) Date mb_Birthday,
+			@RequestParam(value = "mb_Address", required = false) String mb_Address,
+			@RequestParam(value = "mb_Tel", required = false) String mb_Tel,
+			@RequestParam(value = "mb_Mail", required = false) String mb_Mail,
+			@RequestParam(value = "mb_type", required = false) String mb_type
+			) throws Exception {		
+		MemberBean mb_inf = ms.select(Account);	
+		System.out.println(test);
+		if(test.equals("abc")) {
 		mb_inf.setMb_pic(GlobalService.saveImage("member", file, mb_inf.getMb_Account()));
-		mb_inf.setMb_Birthday(MB.getMb_Birthday());
-		mb_inf.setMb_Address(MB.getMb_Address());
-		mb_inf.setMb_Tel(MB.getMb_Tel());
-		mb_inf.setMb_Mail(MB.getMb_Mail());
-		mb_inf.setMb_type(MB.getMb_type());
+		}
+		mb_inf.setMb_Birthday(mb_Birthday);
+		mb_inf.setMb_Address(mb_Address);
+		mb_inf.setMb_Tel(mb_Tel);
+		mb_inf.setMb_Mail(mb_Mail);
+		mb_inf.setMb_type(mb_type);
 		boolean update = ms.update(mb_inf);
 		if (update) {
 			System.out.println(mb_inf);
@@ -207,10 +213,11 @@ public class Login {
 	}
 
 	// 密碼修改介面
-	@GetMapping("/Modify")
-	public String Modify(Model model) {
+	@PostMapping("/Modify")
+	public @ResponseBody String Modify(Model model) {
+		System.out.println("-----------");
 		model.addAttribute("account", Account);
-		return "Member/Modify";
+		return Account;
 	}
 
 	// 密碼更新
@@ -222,11 +229,24 @@ public class Login {
 		return "redirect:toCity";
 	}
 
+	//管理員搜尋
+	@PostMapping("/admin_search")
+	public @ResponseBody Map<String,Object> admin_inf(String account) {
+		System.out.println(account);
+		MemberBean select = ms.select(account);
+		Map<String,Object> map= new HashMap<>(); 
+		map.put("infcheck", select.isCheckColume());
+		map.put("inf", select);
+		map.put("infDate",String.valueOf(select.getMb_Date()));
+		System.out.println(map);
+		return map;
+	}
+	
 	// 管理員(會員資料)
 	@GetMapping("/adminall")
 	public String Memberall(Model model) {
 		List<MemberBean> inf = ms.adminselect();
-			model.addAttribute("memberall", inf);
+		model.addAttribute("memberall", inf);
 		return "Member/adminModify";
 	}
 

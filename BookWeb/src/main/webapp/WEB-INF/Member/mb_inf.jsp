@@ -9,7 +9,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <title>Document</title>
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
 	integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
@@ -48,7 +47,6 @@ background-color:#e0ece4
 		<fieldset id="mb_inf">
 			<legend>會員資料</legend>
 			<form>
-<!-- 				<fieldset style="background-color:white; width:550px; height:700px"> -->
 				<div >
 					<img src="${login.mb_pic}" style="width: 200px; height: 200px; text-align:center; border-radius: 50%;" />
 				</div>

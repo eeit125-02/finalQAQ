@@ -56,7 +56,7 @@
 					</div>
 					<div class="form-group">
 						<label>閱讀標題：</label> 
-						<input type="text" class="form-control" id="exampleFormControlInput1">
+						<input type="text" class="form-control" id="brTitle">
 					</div>
 					
 					<div class="form-inline">
@@ -70,7 +70,7 @@
 		<textarea id="brContent" class="form-control" style="height: 350px;"></textarea>
 		<br>
 		
-		<button type="button" class="btn btn-outline-danger btn-mi float-right">刪除</button>
+		<button type="button" id="backButton" class="btn btn-outline-danger btn-mi float-right">刪除</button>
 		<button type="button" id="addBookReport" class="btn btn-outline-primary btn-mi float-right mr-4">新增</button>
 		<br>
 	</div>
@@ -116,7 +116,8 @@
 			var addData = {
 						bk_ID : window.location.href.split("/").pop(),
 						br_Score : brScore,
-						br_Content : $('#brContent').val().replace(/\n|\r\n/g, "<br>")
+						br_Content : $('#brContent').val().replace(/\n|\r\n/g, "<br>"),
+						br_Name : $('#brTitle').val()
 				};
 			$.ajax({
 				async : false,
@@ -133,6 +134,10 @@
 					}
 				}
 			})
+		});
+		
+		$('#backButton').click(function(){
+			history.go(-1);
 		});
 
 		

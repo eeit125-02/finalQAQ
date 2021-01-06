@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 import com.web.book.dao.BookReportDao;
 import com.web.book.model.BookBean;
 import com.web.book.model.BookReportBean;
+import com.web.book.model.BookReportCollectBean;
 import com.web.book.model.MemberBean;
 
 @Repository
@@ -77,8 +78,121 @@ public class BookReportDaoImpl implements BookReportDao {
 		MemberBean member = session.load(MemberBean.class, mb_ID);
 		BookBean book = session.load(BookBean.class, bk_ID);
 		Date date =  new Date();
-		BookReportBean bookReport = new BookReportBean(br_Score, mb_ID, br_Score, br_Content, date, bk_ID, br_Score, book, member);
+		BookReportBean bookReport = new BookReportBean(null, br_Name, br_Score,
+														br_Content, date, null, null, book, member);
 		session.save(bookReport);
 		
 	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<BookReportBean>  allbookReportList() {
+		Session session = fatory.getCurrentSession();
+		String hql = "From BookReportBean";
+		Query<BookReportBean> query = session.createQuery(hql);
+		
+		return query.getResultList();
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public Integer getAllBookRepotPageSize() {
+		
+		Integer maxPage = 0;
+		Session session = fatory.getCurrentSession();
+		String hql = "From BookReportBean";
+		Query<BookReportBean> query = session.createQuery(hql);
+		
+		if (query.getResultList().size()%10 == 0) {
+			maxPage += query.getResultList().size()/ 10;
+		}
+		else {
+			maxPage += query.getResultList().size()/ 10+ 1;
+		}
+		
+		return maxPage;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<BookReportBean> getThisPageDateForAllBookRepot(Integer page) {
+		
+		Session session = fatory.getCurrentSession();
+		String hql = "From BookReportBean order by br_ID";
+		Query<BookReportBean> query = session.createQuery(hql);
+		query.setFirstResult((page - 1) * 10);
+		query.setMaxResults(10);
+		
+		return query.getResultList();
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public Integer getSearchBookRepotPageSize(String searchString) {
+		
+		Integer maxPage = 0;
+		Session session = fatory.getCurrentSession();
+		String hql = "From BookReportBean br Where "
+					  + "br.book.bk_Name like :searchString"
+					  + " or br.book.bk_Author like :searchString"
+					  + " or br.book.bk_Publish like :searchString"
+					  + " or br.br_Name like :searchString"
+					  + " or br.book.bk_BookType like :searchString";
+		Query<BookReportBean> query = session.createQuery(hql);
+		query.setParameter("searchString", "%"+searchString+"%");
+		if (query.getResultList().size()%10 == 0) {
+			maxPage += query.getResultList().size()/ 10;
+		}
+		else {
+			maxPage += query.getResultList().size()/ 10+ 1;
+		}
+		
+		return maxPage;
+		
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<BookReportBean> getThisPageDateForSearchBookRepot(Integer page, String searchString) {
+		
+		Session session = fatory.getCurrentSession();
+		String hql = "From BookReportBean as br Where "
+					  + "br.book.bk_Name like :searchString"
+					  + " or br.book.bk_Author like :searchString"
+					  + " or br.book.bk_Publish like :searchString"
+					  + " or br.br_Name like :searchString"
+					  + " or br.book.bk_BookType like :searchString";
+		Query<BookReportBean> query = session.createQuery(hql);
+		query.setParameter("searchString", "%"+searchString+"%");
+		query.setFirstResult((page - 1) * 10);
+		query.setMaxResults(10);
+		
+		return query.getResultList();
+	}
+
+	@Override
+	public void addSubReport(Integer br_ID, Integer mb_ID) {
+		
+		Session session = fatory.getCurrentSession();
+		MemberBean member = session.load(MemberBean.class, mb_ID);
+		BookReportBean bookReport = session.load(BookReportBean.class, br_ID);
+		Date date =  new Date();
+		BookReportCollectBean collect = new BookReportCollectBean(null, bookReport, member, date);
+		session.save(collect);
+		
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<BookReportCollectBean> getMemberCollectReportList(Integer br_ID) {
+		
+		Session session = fatory.getCurrentSession();
+		String hql = "From BookReportCollectBean rc Where rc.bookReport = :bookReport";
+		Query<BookReportCollectBean> query = session.createQuery(hql);
+		
+		return query.setParameter("bookReport", session.get(BookReportBean.class, br_ID)).getResultList();
+	}
+	
+	
+	
 }

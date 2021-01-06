@@ -69,9 +69,6 @@
 
 	<!-- body -->
 	<div class="container">
-
-
-
 	<p>&nbsp;</p>
 	<hr>
 	<div class='center'>
@@ -79,19 +76,23 @@
 		<hr>
 		<p>
 			<form:form method="POST" modelAttribute="ab" enctype="multipart/form-data">
-
+			<input type="hidden" id="picpath" name="picpath">
 <div>
 <!-- 				<label>會員帳號:</label> -->
 <%-- 				<span>${mb_account}</span> --%>
 				<input type="hidden" name="finalDecision" value="">
 </div>				
+					
 				<Table>
-				
 				<tr>
-					<td><form:label path="act_Image">活動圖片:</form:label></td>
-					<td><form:input name="file" type="file" path="act_Image"/></td>
+					<td><label >活動圖片:</label></td>
+					<td><img src="${ab.act_Image}" id="show" width="150" height="200"></td>	
+								
 				</tr>
-				
+				<tr>
+					<td><label></label></td>
+					<td><input id="myfile" type="file" name="file"></td>
+				</tr>
 				<tr>
 					<td><form:label path="act_Name">活動名稱:</form:label></td>
 					<td><form:input path="act_Name" /></td>
@@ -161,11 +162,26 @@
 
 	</div>
 
-
-	
-</body>
+	</div>
 	<!-- footer -->
 	<footer class="container py-5" id="bookWebFooter"></footer>
 	<!-- footer -->
+</body>
+<script type="text/javascript">
+				$(function() {
+				$("#myfile").change(function() {
+					var readFile = new FileReader();
+					var mfile = $("#myfile")[0].files[0];  //注意這裡必須時$("#myfile")[0]，document.getElementById('file')等價與$("#myfile")[0]
+					readFile.readAsDataURL(mfile);
+					$("#picpath").val("abc");
+					readFile.onload = function() {
+						var img = $("#show");
+						img.attr("src", this.result);
+					}
+
+				});
+
+			})
+		</script>
 
 </html>

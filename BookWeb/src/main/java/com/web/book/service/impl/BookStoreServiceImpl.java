@@ -22,6 +22,11 @@ public class BookStoreServiceImpl implements BookStoreService {
 	public List<BookBean> searchBookStore() {
 		return dao.searchBookStore();
 	}
+	// 一件商品所有價錢區間
+	@Override
+	public List<BookStoreBean> bookPrices(Integer bk_ID) {
+		return dao.bookPrices(bk_ID);
+	}
 
 	@Override
 	public BookBean getBookDetail(Integer bk_ID) {
@@ -57,6 +62,13 @@ public class BookStoreServiceImpl implements BookStoreService {
 	public void deleteBookStore(Integer bks_ID) {
 		dao.deleteBookStore(bks_ID);
 	}
+
+	@Override
+	public void boobqaq() {
+		dao.boobqaq();
+	}
+
+	
 
 	
 

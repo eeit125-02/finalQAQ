@@ -47,14 +47,24 @@
 	<!-- header -->
 
 	<!-- body -->
-	
+<!-- 偷偷放購物車QAQ start -->
+	<br>
+		<a href="<c:url value='/shopping' />"><img alt="wtf..."
+			src="${pageContext.request.contextPath}/image/shoppingCart.png"
+			width="30px" height="30px"></a>
+<!-- 偷偷放購物車QAQ end -->
 	<br>
 	<div class="container media">
 		<form action="<c:url value='/qaqTest'/>" method="get">
 			<button type="submit" name="">QAQ</button>
 		</form>
 	</div>
-	<br>
+<!-- 	<br> -->
+<!-- 	<div class="container media"> -->
+<%-- 		<form action="<c:url value='/boobplay'/>" method="get"> --%>
+<!-- 			<button type="submit" name="">按了會爆炸</button> -->
+<!-- 		</form> -->
+<!-- 	</div> -->
 	<br>
 	<div class="container media">
 		<span style="color: red;">${same}</span>
@@ -74,12 +84,12 @@
 				</tr>
 				<c:forEach var="table" items="${bookstore}" begin="0" end="20">
 					<tr>
-						<th><button type="submit" value="${table.bk_ID}"
+						<th><button type="submit" value="${table.book.bk_ID}"
 								name="selectbk">檢視</button></th>
-						<td><img alt="XX" src="<c:out value="${table.bk_Pic}"/>"
+						<td><img alt="XX" src="<c:out value="${table.book.bk_Pic}"/>"
 							width="50px" height="50px"></td>
-						<td><c:out value="${table.bk_Name}" /></td>
-						<td><c:out value="${table.bk_Author}" /></td>
+						<td><c:out value="${table.book.bk_Name}" /></td>
+						<td><c:out value="${table.book.bk_Author}" /></td>
 					</tr>
 				</c:forEach>
 			</table>
