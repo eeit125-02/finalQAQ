@@ -61,11 +61,11 @@ response.setDateHeader("Expires", 0);
 	<div class="container-fluid" style="margin: 20px 0px">
 		<div class="row">
 			<!-- side area -->
-			<div class="col-2 text-center">
+			<div class="col-2 text-center" >
 				<h2>書適論壇</h2>
 			</div>
 
-			<div class="col-10" style='text-align: center;'>
+			<div class="col-8" style='text-align: center;'>
 
 			<h3>詳細貼文</h3><br>
 				<div

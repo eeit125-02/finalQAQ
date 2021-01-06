@@ -109,7 +109,7 @@ response.setDateHeader("Expires", 0);
 			</div>
 
 			<!-- content area -->
-			<div class="col-10" style='text-align: center;'>
+			<div class="col-8" style='text-align: center;'>
 				<!-- content connect to sidebar -->
 				<div class="tab-content" id="nav-tabContent">
 

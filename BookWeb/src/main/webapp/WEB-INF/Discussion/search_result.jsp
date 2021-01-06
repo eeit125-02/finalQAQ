@@ -66,7 +66,7 @@ response.setDateHeader("Expires", 0);
 			</div>
 
 			<!-- content area -->
-			<div class="col-10" style='text-align: center;'>
+			<div class="col-8" style='text-align: center;'>
 				<nav class="navbar navbar-light bg-light justify-content-between">
 					<a class="navbar-brand">搜尋貼文關鍵字</a>
 					<form class="form-inline" action='search_keyword' method="post">

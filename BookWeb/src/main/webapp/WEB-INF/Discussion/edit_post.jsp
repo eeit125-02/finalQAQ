@@ -64,7 +64,7 @@ response.setDateHeader("Expires", 0);
 				<h2>書適論壇</h2>
 			</div>
 
-			<div class="col-10" style='text-align: center;'>
+			<div class="col-8" style='text-align: center;'>
 				<h3>修改貼文</h3><br>
 				<div
 					style="border: #ADADAD 2px solid; border-radius: 5px; text-align: left; padding: 10px; margin: 0px 10px; padding-top: 20px">
