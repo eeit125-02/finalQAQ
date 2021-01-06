@@ -11,16 +11,17 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 
 import com.web.book.model.BookBean;
-import com.web.book.model.BookStoreBean;
+import com.web.book.model.MemberBean;
 import com.web.book.model.ShoppingCartBean;
 import com.web.book.service.BookStoreService;
 import com.web.book.service.ShoppingCartService;
 
 
 @Controller
-@SessionAttributes(value = "list")
+@SessionAttributes(value = { "loginUser", "list"})
 public class ShoppingCartController {
 
 	@Autowired
@@ -28,7 +29,14 @@ public class ShoppingCartController {
 	
 	@Autowired
 	BookStoreService bsService;
+	
+	MemberBean loginUser;
 
+	@ModelAttribute
+	public void setLoginUser(Model model, SessionStatus status) {
+		loginUser = (MemberBean) model.getAttribute("loginUser");
+		
+	}
 	
 	@GetMapping("shopping")
 	public String addCart(Model model,
@@ -55,7 +63,7 @@ public class ShoppingCartController {
 				for (ShoppingCartBean shoppingCartBean : listCart) {
 					if (bk_ID == shoppingCartBean.getBook().getBk_ID()) {
 						model.addAttribute("same", "已經加入購物車");
-						List<BookStoreBean> list = bsService.searchBookStore();
+						List<BookBean> list = bsService.searchBookStore();
 						model.addAttribute("bookstore", list);
 						return "Transation/storeMain";
 					}
@@ -87,7 +95,7 @@ public class ShoppingCartController {
 			for (ShoppingCartBean shoppingCartBean : listCart) {
 				if (bk_ID2 == shoppingCartBean.getBook().getBk_ID()) {
 					model.addAttribute("same", "已經加入購物車");
-					List<BookStoreBean> list = bsService.searchBookStore();
+					List<BookBean> list = bsService.searchBookStore();
 					model.addAttribute("bookstore", list);
 					return "Transation/storeMain";
 				}

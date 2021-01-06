@@ -66,43 +66,43 @@
 					</span>
 				</div>
 			</div>
+			<div class="col-lg-4">
+				<button type="button" class="btn btn-outline-secondary" onclick="storeCheck()">我的賣場</button>
+			</div>
 		</div>
 	</form>
 	<br>
 	<!-- 搜尋商品欄	end -->
 	<!-- 	版面置中 -->
-	<c:forEach items="${store}" var="v">
-		<div class="container">
-			<!-- 	版面置中 -->
-			<div class="row">
+	<div class="container">
+		<!-- 	版面置中 -->
+		<div class="row">
+			<c:forEach items="${store}" var="v">
 				<div class="card col-sm-3" style="width: 18rem;">
 					<!-- 圖片跟連結 -->
-					<a href="<c:url value='/qaqBookDetail/${v.book.bk_ID}'/>"> <img
-						src="<c:url value=" ${v.book.bk_Pic} " />" class="card-img-top"
+					<a href="<c:url value='/qaqBookDetail/${v.bk_ID}'/>"> <img
+						src="<c:url value=" ${v.bk_Pic} " />" class="card-img-top"
 						alt="..." style="height: 18rem;">
 					</a>
 					<!-- 圖片跟連結 -->
 					<div class="card-body">
 						<!-- 書名連結 -->
-						<a href="<c:url value='/qaqBookDetail/${v.book.bk_ID}'/>">${v.book.bk_Name }</a>
+						<a href="<c:url value='/qaqBookDetail/${v.bk_ID}'/>">${v.bk_Name }</a>
 						<!-- 書名連結 -->
-						<br> <span class="card-text">作者: ${ v.book.bk_Author }</span>
-						<br> <span class="card-text">出版社: ${ v.book.bk_Publish }</span>
-						<br> <span class="card-text">出版日: ${ v.book.bk_Date }</span>
-						<br> <span class="card-text">價錢: ${ v.book.bk_Price }</span>
+						<br> <span class="card-text">作者: ${ v.bk_Author }</span>
+						<br> <span class="card-text">出版社: ${ v.bk_Publish }</span>
+						<br> <span class="card-text">出版日: ${ v.bk_Date }</span>
+						<br> <span class="card-text">價錢: ${ v.bk_Price }</span>
 						<br>
 						<!-- 比價連結 -->
-	</c:forEach>
-	<c:forEach items="${bookCount}" var="bc">
-		<a href="<c:url value='/qaqManyPrice'/>">簡介&#149;比價 $ 最小 &#126; 最大
-			共有 ${ bc } 項 </a>
-		<!-- 比價連結 -->
-		</div>
-		</div>
-	</c:forEach>
+						<a href="<c:url value='/qaqManyPrice?ID=${v.bk_ID}'/>">簡介&#149;比價 $ </a>
+						<!-- 比價連結 -->
+					</div>
+				</div>
+			</c:forEach>
 
-	</div>
-	<!-- 	版面置中 -->
+		</div>
+		<!-- 	版面置中 -->
 	</div>
 	<!-- 	版面置中 -->
 
@@ -113,5 +113,14 @@
 	<!-- footer -->
 	<footer class="container py-5" id="bookWebFooter"></footer>
 	<!-- footer -->
+	<script type="text/javascript">
+	function storeCheck() {
+		if (typeof ($.cookie('Member_ID')) != "undefined") {
+			window.location.href="//localhost:8080/BookWeb/myStore";
+		} else {
+			window.location.href="//localhost:8080/BookWeb/toLogin";
+		};
+	}
+	</script>
 </body>
 </html>

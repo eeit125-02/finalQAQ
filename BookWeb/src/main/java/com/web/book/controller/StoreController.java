@@ -2,12 +2,9 @@ package com.web.book.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.sound.midi.Soundbank;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,37 +14,37 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import com.web.book.model.BookBean;
 import com.web.book.model.BookStoreBean;
+import com.web.book.model.MemberBean;
 import com.web.book.service.BookStoreService;
 import com.web.book.service.GlobalService;
 import com.web.book.service.SearchService;
 
 @Controller
+@SessionAttributes(value = { "loginUser" })
 public class StoreController {
 
 	@Autowired
 	BookStoreService bookStoreService;
 	@Autowired
 	SearchService searchService;
+	
+	MemberBean loginUser;
+
+	@ModelAttribute
+	public void setLoginUser(Model model, SessionStatus status) {
+		loginUser = (MemberBean) model.getAttribute("loginUser");
+	}
 
 	// 最終呈現首頁
 	@GetMapping("qaqTest")
 	public String qaqmainPage(Model model) {
-		List<BookStoreBean> list = bookStoreService.searchBookStore();
-		List<Integer> bookCount = new ArrayList<Integer>();
-		for (BookStoreBean book : list) {		
-			bookCount.add(bookStoreService.bookPrices(book.getBook().getBk_ID()).size());
-		}
-//		for(int i=0; i<bookCount.size(); i++) {
-//			System.out.println(bookCount.get(i));
-//		}
-//		for (int i = 0; i < bookMoneySize.size(); i++) {
-//			System.out.println(bookMoneySize);
-//		}
-		model.addAttribute("bookCount", bookCount);
+		List<BookBean> list = bookStoreService.searchBookStore();
 		model.addAttribute("store", list);
 		return "/Transation/qaqMain";
 	}
@@ -64,19 +61,14 @@ public class StoreController {
 	
 	// 一本書價錢區間畫面
 	@GetMapping("/qaqManyPrice")
-	public String qaqManyPrice() {
-		List<BookStoreBean> bookPrices = bookStoreService.bookPrices(1);
+	public String qaqManyPrice(Model model,
+			@RequestParam(value = "ID") Integer bk_ID
+			) {
+		List<BookStoreBean> bookPrices = bookStoreService.bookPrices(bk_ID);
+		model.addAttribute("bookPrices", bookPrices);
 		return "Transation/qaqManyPrice";
 	}
 	
-	
-
-	@GetMapping("/Transation/storeMain")
-	public String mainPage(Model model) {
-		List<BookStoreBean> list = bookStoreService.searchBookStore();
-		model.addAttribute("bookstore", list);
-		return "/Transation/storeMain";
-	}
 	// 前往一本書的詳細頁面
 	@GetMapping("/detail")
 	public String detail(Model model, @RequestParam(value = "selectbk") Integer bk_ID) {
@@ -87,8 +79,7 @@ public class StoreController {
 
 	@GetMapping("/myStore")
 	public String myStore(Model model) {
-		Integer mb_ID = 9;
-		List<BookStoreBean> list = bookStoreService.searchMemberStore(mb_ID);
+		List<BookStoreBean> list = bookStoreService.searchMemberStore(loginUser.getMb_ID());
 		model.addAttribute("myBookList", list);
 		return "/Transation/myStore";
 	}
@@ -102,8 +93,7 @@ public class StoreController {
 			return "/Transation/myUpdateStore";
 		} else {
 			bookStoreService.deleteBookStore(bks_ID);
-			Integer mb_ID = 9;
-			List<BookStoreBean> list = bookStoreService.searchMemberStore(mb_ID);
+			List<BookStoreBean> list = bookStoreService.searchMemberStore(loginUser.getMb_ID());
 			model.addAttribute("myBookList", list);
 			return "/Transation/myStore";
 		}
@@ -116,8 +106,7 @@ public class StoreController {
 		System.out.println("2." + bs_Price);
 		System.out.println("3." + bs_Num);
 		bookStoreService.updateBookStore(bks_ID, bs_Num, bs_Price);
-		Integer mb_ID = 9;
-		List<BookStoreBean> list = bookStoreService.searchMemberStore(mb_ID);
+		List<BookStoreBean> list = bookStoreService.searchMemberStore(loginUser.getMb_ID());
 		model.addAttribute("myBookList", list);
 		return "/Transation/myStore";
 	}
@@ -137,11 +126,13 @@ public class StoreController {
 	@PostMapping("/addBook")
 	public String addOneBook(Model model, HttpServletRequest request) {
 		String a = request.getParameter("setbk");
-		bookStoreService.addBookName(Integer.parseInt(request.getParameter(a + "qty")),
-				Integer.parseInt(request.getParameter(a + "price")), Integer.parseInt(request.getParameter("setbk")),
-				9);
-		Integer mb_ID = 9;
-		List<BookStoreBean> list = bookStoreService.searchMemberStore(mb_ID);
+		bookStoreService.addBookName(
+				Integer.parseInt(request.getParameter(a + "qty")),
+				Integer.parseInt(request.getParameter(a + "price")),
+				Integer.parseInt(request.getParameter("setbk")),
+				loginUser.getMb_ID()
+				);
+		List<BookStoreBean> list = bookStoreService.searchMemberStore(loginUser.getMb_ID());
 		model.addAttribute("myBookList", list);
 		return "/Transation/myStore";
 	}
@@ -164,7 +155,7 @@ public class StoreController {
 			e.printStackTrace();
 		}
 		searchService.savebk(book);
-		bookStoreService.addBookName(asd, qwe, book.getBk_ID(), 9);
+		bookStoreService.addBookName(asd, qwe, book.getBk_ID(), loginUser.getMb_ID());
 		return "redirect:/myStore";
 	}
 

@@ -19,7 +19,7 @@ public class BookStoreServiceImpl implements BookStoreService {
 	BookStoreDao dao;
 	
 	@Override
-	public List<BookStoreBean> searchBookStore() {
+	public List<BookBean> searchBookStore() {
 		return dao.searchBookStore();
 	}
 	// 一件商品所有價錢區間

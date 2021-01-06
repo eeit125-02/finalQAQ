@@ -51,7 +51,45 @@
 		<h2>二手書圖</h2>
 	</div>
 	<div class="container">
-	<h1>我又是測試頁 &gt;.&lt;&quot;</h1>
+		<hr>
+		<c:forEach items="${bookPrices}" var="v" begin="0" end="0">
+			<div class="row">
+				<div class="col-lg-4">
+					<label for="url"></label> <img alt="圖勒?" width="200px"
+						height="300px" src="<c:url value='${v.book.bk_Pic}'/>">
+				</div>
+				<div class="col-lg-8">
+					<h2>書名: ${v.book.bk_Name}</h2>
+					<h4>作者: ${v.book.bk_Author}</h4>
+					<h4>出版社: ${v.book.bk_Publish}</h4>
+					<h4>出版日: ${v.book.bk_Date}</h4>
+				</div>
+			</div>
+		</c:forEach>
+		<div class="row">
+			<div class="col-lg-3">二手價</div>
+			<div class="col-lg-3">賣家</div>
+			<div class="col-lg-3">數量</div>
+			<div class="col-lg-3">&nbsp;</div>
+		</div>
+		<hr>
+		<c:forEach items="${bookPrices}" var="v">
+			<div class="row">
+				<div class="col-lg-3">
+					<c:out value="${v.bs_Price}" />
+				</div>
+				<div class="col-lg-3">
+					<c:out value="${v.member.mb_Account}" />
+				</div>
+				<div class="col-lg-3">
+					<c:out value="${v.bs_Num}" />
+				</div>
+				<div class="col-lg-3">
+					<button type="button" class="btn btn-outline-secondary">我是按鈕</button>
+				</div>
+			</div>
+			<hr>
+		</c:forEach>
 	</div>
 
 	<!-- body -->

@@ -2,6 +2,7 @@ package com.web.book.dao.impl;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -20,13 +21,13 @@ public class BookStoreDaoImpl implements BookStoreDao {
 	@Autowired
 	SessionFactory factory;
 
-	// 商品頁面搜尋
+	// 商品頁面搜尋 不包含任何會員
+	@SuppressWarnings("unchecked")
 	@Override
-	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public List<BookStoreBean> searchBookStore() {
+	public List<BookBean> searchBookStore() {
 		Session session = factory.getCurrentSession();
-		String hql = "FROM BookStoreBean a where a.member = 13 ";
-		Query query = session.createQuery(hql);
+		String hql = "FROM BookBean";
+		Query<BookBean> query = session.createQuery(hql);
 		query.setFirstResult(0);
 		query.setMaxResults(40);
 		return query.getResultList();
@@ -41,56 +42,8 @@ public class BookStoreDaoImpl implements BookStoreDao {
 		Query<BookStoreBean> query = session.createQuery(hql);
 		return query.setParameter("bk_ID", bk_ID).getResultList();
 	}
-	
-//	public L name() {
-//		
-//	}
 
-	// 灌庫存值給商店
-	@Override
-	public void boobqaq() {
-		// 6242 /80~84、11 /13 /a123456
-		Session session = factory.getCurrentSession();
-		Integer qaqQty = 0;
-		Integer qaqPrice = 0;
-		MemberBean member = session.load(MemberBean.class, 11);
-	// 管理員灌值 start
-//		MemberBean member = session.load(MemberBean.class, 13);
-//		for (int i = 1; i < 6243; i++) {
-//			BookBean book = session.load(BookBean.class, i);
-//			qaqQty = (int)(Math.random()*(20))+1;
-//			if (book.getBk_Price()==null) {
-//				book.setBk_Price(100);
-//			}
-//			BookStoreBean bookStoreBean = new BookStoreBean(null, qaqQty, book.getBk_Price(), book, member);
-//			session.save(bookStoreBean);
-//		}
-	// 管理員灌值 end
-		
-	// 製造不同庫存不同價錢區間 start
-	// 不重複數字 start
-		LinkedList<Integer> myList = new LinkedList<Integer>();
-	// 書本ID
-		int n = 6243;
-		for (int i = 0; i < n; i++)
-			myList.add(i + 1);
-	// 隨機的比數
-		int[] arr = new int[1000];
-		for (int i = 0; i < arr.length; i++) {
-			arr[i] = myList.remove((int) (Math.random() * n) + 1);
-			n--;
-		}
-	// 不重覆數字 end
-		for (int i = 0; i < arr.length; i++) {
-			BookBean book = session.load(BookBean.class, arr[i]);
-			qaqQty = (int)(Math.random()*(10))+1;
-			qaqPrice = (int)(Math.random()*( (book.getBk_Price()/10) -5))+5;
-			BookStoreBean bookStoreBean = new BookStoreBean(null, qaqQty, qaqPrice*10, book, member);
-			session.save(bookStoreBean);
-		}
-	// 製造不同庫存不同價錢區間 end	
-		
-	}
+	
 
 	// 單一商品詳細資料
 	@Override
@@ -114,7 +67,7 @@ public class BookStoreDaoImpl implements BookStoreDao {
 		String hql = "FROM BookStoreBean a where a.member = :member ";
 		Query<BookStoreBean> query = session.createQuery(hql);
 		MemberBean member = session.load(MemberBean.class, mb_ID);
-		return query.setParameter("member", member).getResultList();
+		return query.setParameter("member", member).setFirstResult(0).setMaxResults(40).getResultList();
 	}
 
 	// 從書庫搜尋書名(新增用途)
@@ -163,5 +116,51 @@ public class BookStoreDaoImpl implements BookStoreDao {
 		BookStoreBean bookStore = session.load(BookStoreBean.class, bks_ID);
 		session.delete(bookStore);
 	}
+	
+	// 灌庫存值給商店
+		@Override
+		public void boobqaq() {
+			// 6242 /80~84、11 /13 /a123456
+			Session session = factory.getCurrentSession();
+			Integer qaqQty = 0;
+			Integer qaqPrice = 0;
+			MemberBean member = session.load(MemberBean.class, 11);
+		// 管理員灌值 start
+//			MemberBean member = session.load(MemberBean.class, 13);
+//			for (int i = 1; i < 6243; i++) {
+//				BookBean book = session.load(BookBean.class, i);
+//				qaqQty = (int)(Math.random()*(20))+1;
+//				if (book.getBk_Price()==null) {
+//					book.setBk_Price(100);
+//				}
+//				BookStoreBean bookStoreBean = new BookStoreBean(null, qaqQty, book.getBk_Price(), book, member);
+//				session.save(bookStoreBean);
+//			}
+		// 管理員灌值 end
+			
+		// 製造不同庫存不同價錢區間 start
+		// 不重複數字 start
+			LinkedList<Integer> myList = new LinkedList<Integer>();
+		// 書本ID
+			int n = 6243;
+			for (int i = 0; i < n; i++)
+				myList.add(i + 1);
+		// 隨機的比數
+			int[] arr = new int[1000];
+			for (int i = 0; i < arr.length; i++) {
+				arr[i] = myList.remove((int) (Math.random() * n) + 1);
+				n--;
+			}
+		// 不重覆數字 end
+			for (int i = 0; i < arr.length; i++) {
+				BookBean book = session.load(BookBean.class, arr[i]);
+				qaqQty = (int)(Math.random()*(10))+1;
+				qaqPrice = (int)(Math.random()*( (book.getBk_Price()/10) -5))+5;
+				BookStoreBean bookStoreBean = new BookStoreBean(null, qaqQty, qaqPrice*10, book, member);
+				session.save(bookStoreBean);
+			}
+		// 製造不同庫存不同價錢區間 end	
+			
+		}
 
 }
