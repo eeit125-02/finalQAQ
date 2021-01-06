@@ -26,12 +26,19 @@ public class MemberServiceImpl implements MemberService {
 		return dao.checkAccount(account);
 	}
 
+	public boolean checkMail(String email) {
+		return dao.checkMail(email);
+	}
+	
 	@Override
 	public boolean insertMember(MemberBean memberData) {
 		return dao.insertMember(memberData);
 	}
-
-
+	@Override
+	public MemberBean email(String email) {
+		return dao.email(email);
+	}
+		
 	@Override
 	public List<MemberBean> adminselect() {
 		return dao.adminselect();
@@ -48,8 +55,7 @@ public class MemberServiceImpl implements MemberService {
 	public boolean deleteMember(int id) {
 		return dao.delete(id);
 	}
-
-
+	
 	@Override
 	public boolean update(MemberBean mb) {
 		return dao.update(mb);

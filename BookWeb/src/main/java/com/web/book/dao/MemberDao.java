@@ -24,4 +24,9 @@ public interface MemberDao {
 
 	void change(String account);
 
+	MemberBean email(String email);
+
+	boolean checkMail(String email);
+
+
 }

@@ -53,6 +53,29 @@ public class MemberDaoImpl implements MemberDao {
 	}
 	
 	@Override
+	public boolean checkMail(String email) {
+		boolean result = false;
+		String hql = "FROM MemberBean WHERE mb_Mail =:email";
+		Session session = factory.getCurrentSession();
+		Query<MemberBean> query = session.createQuery(hql);
+		List<MemberBean> list = query.setParameter("email", email).getResultList();
+		System.out.println(list.size());
+		if (list.size() > 0) {
+			result = true;
+		}
+		return result;
+	}
+	
+	@Override
+	public MemberBean email(String email) {
+		String hql = "FROM MemberBean WHERE mb_Mail=:email";
+		Session session = factory.getCurrentSession();
+		Query<MemberBean> query = session.createQuery(hql);
+		MemberBean mb =query.setParameter("email", email).getSingleResult();
+		return mb;
+	}
+	
+	@Override
 	public boolean update(MemberBean mb) {
 		Session session = factory.getCurrentSession();
 		session.saveOrUpdate(mb);
@@ -67,6 +90,7 @@ public class MemberDaoImpl implements MemberDao {
 		MemberBean mb =query.setParameter("account", account).getSingleResult();
 		return mb;
 	}
+	
 
 	@Override
 	public List<MemberBean> adminselect() {
