@@ -34,7 +34,7 @@
 				aria-haspopup="true" aria-expanded="false"> 閱讀履歷 </a>
 			<div class="dropdown-menu text-muted"
 				aria-labelledby="navbarDropdownMenuLink2">
-				<a class="dropdown-item text-muted" href="//localhost:8080/BookWeb/BookReport/searchBookReport">讀書心得</a> 
+				<a class="dropdown-item text-muted" href="//localhost:8080/BookWeb/BookReport/searchBookReport/all/1">讀書心得</a> 
 				<a class="dropdown-item text-muted" href="#">Another action</a> 
 				<a class="dropdown-item text-muted" href="//localhost:8080/BookWeb/BookReport/EditBookReport">編輯資訊</a>
 			</div>
