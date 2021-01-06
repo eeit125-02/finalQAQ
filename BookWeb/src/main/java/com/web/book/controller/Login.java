@@ -238,7 +238,7 @@ public class Login {
 	@GetMapping("/adminall")
 	public String Memberall(Model model) {
 		List<MemberBean> inf = ms.adminselect();
-			model.addAttribute("memberall", inf);
+		model.addAttribute("memberall", inf);
 		return "Member/adminModify";
 	}
 

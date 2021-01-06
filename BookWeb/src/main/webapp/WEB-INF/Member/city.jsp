@@ -253,7 +253,7 @@ p {
 								insertData = "<form action=\"<c:url value='/MbUpdate'/>\" method=\"post\" enctype=\"multipart/form-data\">"
 											+"<fieldset id=\"mb_modify\">"
 								+"<div>"
-									+"<img src=\""+data.mb_inf.mb_pic+"\" id=\"show\" width=\"200\" height=\"200\"><br>"		
+									+"<img src=\""+data.mb_inf.mb_pic+"\" id=\"show\" width=\"200\" height=\"200\" style=\"border-radius: 50%;\"><br>"		
 									+"<input id=\"myfile\" type=\"file\" name=\"file\" style=\"margin-left:90px\"/>"
 									+"<input type=\"hidden\" id=\"test\" name=\"test\">"
 								+"</div>"
