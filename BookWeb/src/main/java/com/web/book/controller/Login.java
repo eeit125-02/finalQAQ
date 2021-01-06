@@ -78,6 +78,16 @@ public class Login {
 		return check;
 	}
 
+	//JavaMail
+	@PostMapping("/JavaMail")
+	public String JavaMail(@RequestParam(value = "mail",required = false) String email) {
+		System.out.println(email);
+		JavaMail mail = new JavaMail();
+		MemberBean member = ms.email(email);
+		mail.SendMail(email,member.getMb_Password());
+		return "Member/login";
+	}
+	
 	// 檢查是否停權
 	@PostMapping("/toLogin/checkColume/{mb_Account}")
 	@ResponseBody
@@ -299,6 +309,12 @@ public class Login {
 		return "Member/registe";
 	}
 
+	//忘記密碼
+	@GetMapping("/toforget")
+	public String toForget(Model model) {
+		return "Member/forget";
+	}
+	
 	// 會員介面
 	@GetMapping("/toCity")
 	public String tocity(Model model) {

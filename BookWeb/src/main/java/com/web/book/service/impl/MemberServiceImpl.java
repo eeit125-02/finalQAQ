@@ -49,7 +49,11 @@ public class MemberServiceImpl implements MemberService {
 		return dao.delete(id);
 	}
 
-
+	@Override
+	public MemberBean email(String email) {
+		return dao.email(email);
+	}
+	
 	@Override
 	public boolean update(MemberBean mb) {
 		return dao.update(mb);
