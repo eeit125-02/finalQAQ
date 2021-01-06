@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,7 +21,7 @@
 	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
 	crossorigin="anonymous">
 <style>
-#mb_pwd,#mb_inf {
+#admin,#mb_modify,#mb_pwd,#mb_inf {
 	border-radius: 25px;
 	padding: 20px;
 	margin: auto;
@@ -100,7 +99,8 @@ p {
 			</form>
 		</div>
 	</fieldset>
-		<div id="change123" style="width:900px;margin-left:10px ">顯示頁面</div>
+	
+	<div id="change123" style="width:900px;margin-left:10px ">顯示頁面</div>
 	</div>
 	<input id="test" type="hidden" value="${third}">
 	<!-- footer -->
@@ -108,6 +108,9 @@ p {
 	<!-- footer -->
 	</body>
 	<script>
+	$('#admin1').click(function(){
+		$('#change123').load("//localhost:8080/BookWeb/adminall")
+	})
 	$(document).ready(function() {
 		$("#bookWebheader").load("<c:url value='/header'/>");
         $("#bookWebFooter").load("<c:url value='/footer'/>");
@@ -139,7 +142,7 @@ p {
 									+"<legend>會員資料</legend>"
 									+"<form>"
 									+"<div>"
-									+"<img src=\""+data.mb_pic+"\" style=\"width: 200px; height: 200px; text-align:center; border-radius: 50%;\" />"
+									+"<img src=\""+data.login.mb_pic+"\" style=\"width: 200px; height: 200px; text-align:center; border-radius: 50%;\" />"
 									+"</div>"
 									+"<br>"
 									+"<table class=\"table\" >"
@@ -148,8 +151,8 @@ p {
 									+"<th scope=\"col\" >密碼</th>"
 									+"</tr>"
 									+"<tr class=\"table-light\">"
-									+"<td>"+data.mb_Account+"</td>"
-									+"<td>"+data.mb_Password+"</td>"
+									+"<td>"+data.login.mb_Account+"</td>"
+									+"<td>"+data.login.mb_Password+"</td>"
 									+"</tr>"
 
 								+"<tr class=\"tr2\">"
@@ -157,8 +160,8 @@ p {
 									+"<th scope=\"col\">性別</th>"
 								+"</tr>"
 								+"<tr class=\"table-light\">"
-									+"<td>"+data.mb_Name+"</td>"
-									+"<td>"+data.mb_Sex+"</td>"
+									+"<td>"+data.login.mb_Name+"</td>"
+									+"<td>"+data.login.mb_Sex+"</td>"
 								+"</tr>"
 
 								+"<tr class=\"tr2\">"
@@ -167,28 +170,28 @@ p {
 								+"</tr>"
 								+"<tr class=\"table-light\">"
 									+"<td>"+data.mb_Birthday+"</td>"
-									+"<td>"+data.mb_Tel+"</td>"
+									+"<td>"+data.login.mb_Tel+"</td>"
 								+"</tr>"
 
 								+"<tr class=\"tr2\">"
 									+"<th colspan=\"2\">Email</th>"
 								+"</tr>"
 								+"<tr class=\"table-light\">"
-									+"<td colspan=\"2\">"+data.mb_Mail+"</td>"
+									+"<td colspan=\"2\">"+data.login.mb_Mail+"</td>"
 								+"</tr>"
 
 								+"<tr class=\"tr2\">"
 									+"<th colspan=\"2\">地址</th>"
 								+"</tr>"
 								+"<tr  class=\"table-light\">"
-									+"<td colspan=\"2\">"+data.mb_Address+"</td>"
+									+"<td colspan=\"2\">"+data.login.mb_Address+"</td>"
 								+"</tr>"
 
 								+"<tr class=\"tr2\">"
 									+"<th colspan=\"2\">喜好類型</th>"
 								+"</tr>"
 								+"<tr  class=\"table-light\">"
-									+"<td colspan=\"2\">"+data.mb_type+"</td>"
+									+"<td colspan=\"2\">"+data.login.mb_type+"</td>"
 								+"</tr>"
 
 							+"</table>"
@@ -239,79 +242,106 @@ p {
 				}
 	 });
 	 })
-// 	   $("#Modify").click(function(){
-// 				 $.ajax({
-// 						async : false,
-// 						url : "MbUpdate",
-// 						dataType : "json",
-// 						success : function(data) {
-// 								insertData = "<form:form method=\"POST\" modelAttribute=\"MemberBean\" enctype=\"multipart/form-data\">"
-// 											+"<fieldset id=\"mb_modify\">"
-// 								+"<div>"
-// 									+"<img src=\""+data.mb_inf.mb_pic+"\" id=\"show\" width=\"200\" height=\"200\"><br>"		
-// 									+"<input id=\"myfile\" type=\"file\" name=\"file\" style=\"margin-left:90px\"/>"
-// 									+"<input type=\"hidden\" id=\"test\" name=\"test\">"
-// 								+"</div>"
-// 								+"<legend>會員修改</legend>"
-// 								+"<table class=\"table\">"
-// 									+"<tr class=\"tr1\">"
-// 										+"<th scope=\"col\">帳號</th>"
-// 										+"<th scope=\"col\">生日</th>"
-// 									+"</tr>"
-// 									+"<tr class=\"table-light\">"
-// 										+"<td>"+data.mb_inf.mb_Account+"</td>"
-// 										+"<td><form:input type=\"date\" path=\"mb_Birthday\" value=\""+data.mb_inf.mb_Birthday+"\"/></td>"
-// 									+"</tr>"
-// 									+"<tr class=\"tr2\">"
-// 										+"<th scope=\"col\">地址</th>"
-// 										+"<th scope=\"col\">電話</th>"
-// 									+"</tr>"
-// 									+"<tr class=\"table-light\">"
-// 										+"<td><form:input type=\"text\" id=\"address\" value=\""+data.mb_inf.mb_Address+"\" path=\"mb_Address\" /></td>"
-// 										+"<td><form:input type=\"text\" id=\"tel\" value=\""+data.mb_inf.mb_Tel+"\" path=\"mb_Tel\"/><span id=\"idsp6\"></span></td>"
-// 									+"</tr>"
+	  
+	 $("#Modify").click(function(){
+				 $.ajax({
+						async : false,
+						type : 'POST',
+						url : "toMbUpdate",
+						success : function(data) {
+							console.log(data.mb_Birthday)
+								insertData = "<form action=\"<c:url value='/MbUpdate'/>\" method=\"post\" enctype=\"multipart/form-data\">"
+											+"<fieldset id=\"mb_modify\">"
+								+"<div>"
+									+"<img src=\""+data.mb_inf.mb_pic+"\" id=\"show\" width=\"200\" height=\"200\"><br>"		
+									+"<input id=\"myfile\" type=\"file\" name=\"file\" style=\"margin-left:90px\"/>"
+									+"<input type=\"hidden\" id=\"test\" name=\"test\">"
+								+"</div>"
+								+"<legend>會員修改</legend>"
+								+"<table class=\"table\">"
+									+"<tr class=\"tr1\">"
+										+"<th scope=\"col\">帳號</th>"
+										+"<th scope=\"col\">生日</th>"
+									+"</tr>"
+									+"<tr class=\"table-light\">"
+										+"<td>"+data.mb_inf.mb_Account+"</td>"
+										+"<td><input type=\"date\" name=\"mb_Birthday\" value=\""+data.mb_Birthday+"\"/></td>"
+									+"</tr>"
+									+"<tr class=\"tr2\">"
+										+"<th scope=\"col\">地址</th>"
+										+"<th scope=\"col\">電話</th>"
+									+"</tr>"
+									+"<tr class=\"table-light\">"
+										+"<td><input type=\"text\" id=\"address\" value=\""+data.mb_inf.mb_Address+"\" name=\"mb_Address\" /></td>"
+										+"<td><input type=\"text\" id=\"tel\" value=\""+data.mb_inf.mb_Tel+"\" name=\"mb_Tel\"/><span id=\"idsp6\"></span></td>"
+									+"</tr>"
 
-// 									+"<tr class=\"tr2\">"
-// 										+"<th colspan=\"2\">E-mail</th>"
-// 									+"</tr>"
-// 									+"<tr class=\"table-light\">"
-// 										+"<td colspan=\"2\"><form:input type=\"email\" id=\"mail\" path=\"mb_Mail\" value=\""+data.mb_inf.mb_Mail+"\"/></td>"
-// 									+"</tr>"
+									+"<tr class=\"tr2\">"
+										+"<th colspan=\"2\">E-mail</th>"
+									+"</tr>"
+									+"<tr class=\"table-light\">"
+										+"<td colspan=\"2\"><input type=\"email\" id=\"mail\" name=\"mb_Mail\" value=\""+data.mb_inf.mb_Mail+"\"/></td>"
+									+"</tr>"
 
-// 									+"<tr class=\"tr2\">"
-// 										+"<th colspan=\"2\">喜好類型</th>"
-// 									+"</tr>"
-// 									+"<tr class=\"table-light\">"
-// 										+"<td colspan=\"2\">"
-// 											+"<form:checkbox  id=\"type1\" value=\"文學創作\" path=\"mb_type\" checked=\"checked\"/>文學創作" 
-// 											+"<form:checkbox  id=\"type2\" value=\"圖文漫畫\" path=\"mb_type\" />圖文漫畫" 
-// 											+"<form:checkbox  id=\"type3\" value=\"商業/理財\" path=\"mb_type\" />商業/理財<br>" 
-// 											+"<form:checkbox  id=\"type4\" value=\"人文/社會\" path=\"mb_type\" />人文/社會" 
-// 											+"<form:checkbox  id=\"type5\" value=\"藝術/生活\" path=\"mb_type\"/>藝術/生活"
-// 											+"<form:checkbox  id=\"type6\" value=\"旅遊/飲食\" path=\"mb_type\"/>旅遊/飲食 <br>"
-// 											+"<form:checkbox  id=\"type7\" value=\"親子/童書\" path=\"mb_type\"/>親子/童書" 
-// 											+"<form:checkbox  id=\"type8\" value=\"學習/考用\" path=\"mb_type\"/>學習/考用" 
-// 											+"<form:checkbox  id=\"type9\" value=\"醫療/科學\" path=\"mb_type\"/>醫療/科學"
-// 										+"</td>"
-// 									+"</tr>"
-// 								+"</table>"
-// 								+"<div>"
-// 									+"<button type=\"submit\">送出</button>"
-// 									+"<button type=\"reset\">清除</button>"
-// 								+"</div>"
-// 							+"</fieldset>"
-// 						+"</form:form>"
-// 				 			$('#change123').html(insertData);
-// 						},
-// 						error:function(){
-// 							alert("fuck")
-// 						}
-// 			 });
-// 			 })
+									+"<tr class=\"tr2\">"
+										+"<th colspan=\"2\">喜好類型</th>"
+									+"</tr>"
+									+"<tr class=\"table-light\">"
+										+"<td colspan=\"2\">"
+											+"<input type=\"checkbox\" id=\"type1\" value=\"文學創作\" name=\"mb_type\" checked=\"checked\"/>文學創作" 
+											+"<input type=\"checkbox\" id=\"type2\" value=\"圖文漫畫\" name=\"mb_type\" />圖文漫畫" 
+											+"<input type=\"checkbox\" id=\"type3\" value=\"商業/理財\" name=\"mb_type\" />商業/理財<br>" 
+											+"<input type=\"checkbox\" id=\"type4\" value=\"人文/社會\" name=\"mb_type\" />人文/社會" 
+											+"<input type=\"checkbox\" id=\"type5\" value=\"藝術/生活\" name=\"mb_type\"/>藝術/生活"
+											+"<input type=\"checkbox\" id=\"type6\" value=\"旅遊/飲食\" name=\"mb_type\"/>旅遊/飲食 <br>"
+											+"<input type=\"checkbox\" id=\"type7\" value=\"親子/童書\" name=\"mb_type\"/>親子/童書" 
+											+"<input type=\"checkbox\" id=\"type8\" value=\"學習/考用\" name=\"mb_type\"/>學習/考用" 
+											+"<input type=\"checkbox\" id=\"type9\" value=\"醫療/科學\" name=\"mb_type\"/>醫療/科學"
+										+"</td>"
+									+"</tr>"
+								+"</table>"
+								+"<div>"
+									+"<button type=\"submit\">送出</button>"
+									+"<button type=\"reset\">清除</button>"
+								+"</div>"
+							+"</fieldset>"
+						+"</form>"
+				 			$('#change123').html(insertData);
+						showImage();
+						},
+						error:function(){
+							alert("fuck")
+						}
+			 });
+			 })
+		
+		function showImage(){
+    	   $("#myfile").change(function() {
+   			console.log("123")
+   			var readFile = new FileReader();
+   			var mfile = $("#myfile")[0].files[0];  //注意這裡必須時$("#myfile")[0]，document.getElementById('file')等價與$("#myfile")[0]
+   			readFile.readAsDataURL(mfile);
+   			$("#test").val("abc");
+   			readFile.onload = function() {
+   				var img = $("#show");
+   				img.attr("src", this.result);
+   			}
+   		});	  	   
+       }
+		
+       
+      
+//        $("#admin1").click(function(){
+// 			 $.ajax({
+// 					async : false,
+// 					type : 'POST',
+// 					url : "adminall",
+// 					success : function(data) {
+						
+// 							insertData =
+       
 	 
-			 $("#admin1").click(function(){
-		$('#change123').load("/BookWeb/adminall") 
-	 })
+	 
 </script>
 	<script>
 		function Checkpwd() {
@@ -341,7 +371,7 @@ p {
 			} else
 				sp.innerHTML = "錯誤"
 		}
-	</script>
+		</script>
 	<script>
 		$('#tel').blur(function() {
 			var i, j, strTemp;
@@ -359,19 +389,5 @@ p {
 			}
 			//說明合法    
 		})
-	</script>
-	<script type="text/javascript">
-	$(function() {
-				$("#myfile").change(function() {
-					var readFile = new FileReader();
-					var mfile = $("#myfile")[0].files[0];  //注意這裡必須時$("#myfile")[0]，document.getElementById('file')等價與$("#myfile")[0]
-					readFile.readAsDataURL(mfile);
-					$("#test").val("abc");
-					readFile.onload = function() {
-						var img = $("#show");
-						img.attr("src", this.result);
-					}
-				});
-			})	
 	</script>
 </html>

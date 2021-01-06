@@ -32,15 +32,7 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
 	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
 	crossorigin="anonymous">
-<!-- <link rel="stylesheet" href="import.css"> -->
 <style>
-/* @import url(https://fonts.googleapis.com/earlyaccess/cwtexyen.css); */
-/* body { */
-/* 	font-family: "cwTeXYen", sans-serif; */
-/* 	font-weight: 800; */
-/* 	line-height: 2; */
-/* 	font-size: 16px; */
-/* } */
 .switch {
 position: relative;
 display: inline-block;
@@ -137,32 +129,36 @@ legend {
 		<form action="<c:url value='/delete' />" method="post">
 			<fieldset id="admin">
 				<legend>會員清單</legend>
-				
-				<a id="btn0"></a>
-<input id="pageSize" type="text" size="1" maxlength="2" value="getDefaultValue()"/><a> 條 </a> <a href="#" id="pageSizeSet">設定</a> 
-<a id="sjzl"></a> 
-<a  href="#" id="btn1">首頁</a>
-<a  href="#" id="btn2">上一頁</a>
-<a  href="#" id="btn3">下一頁</a>
-<a  href="#" id="btn4">尾頁</a> 
-<a>轉到 </a>
-<input id="changePage" type="text" size="1" maxlength="4"/>
-<a>頁 </a>
-<a  href="#" id="btn5">跳轉</a>
+	<label for="site-search" style="align:left">Search the site:</label>
+	<input type="search" id="site-search" name="search" aria-label="Search through site content">
+	<button id="searchbtn" name="searchbtn">Search</button>
+<!-- 				<a id="btn0"></a> -->
+<!-- <input id="pageSize" type="text" size="1" maxlength="2" value="getDefaultValue()"/><a> 條 </a> <a href="#" id="pageSizeSet">設定</a>  -->
+<!-- <a id="sjzl"></a>  -->
+<!-- <a  href="#" id="btn1">首頁</a> -->
+<!-- <a  href="#" id="btn2">上一頁</a> -->
+<!-- <a  href="#" id="btn3">下一頁</a> -->
+<!-- <a  href="#" id="btn4">尾頁</a>  -->
+<!-- <a>轉到 </a> -->
+<!-- <input id="changePage" type="text" size="1" maxlength="4"/> -->
+<!-- <a>頁 </a> -->
+<!-- <a  href="#" id="btn5">跳轉</a> -->
 
-<table class="a" id="mytable" align="center">
-				
-<!-- 				<table class="a" width="100%"> -->
-					<tr>
-						<th>帳號</th>
-						<th>密碼</th>
-						<th>姓名</th>
-						<th>註冊日期</th>
-						<th></th>
-						<th></th>
-					</tr>
-					<c:forEach items="${memberall}" var="u">
-					
+<!-- <table class="a" id="mytable" align="center"> -->
+
+			
+				<table class="table" width="100%"  id="change">
+					<c:forEach items="${memberall}" var="u" varStatus="loop">
+						<c:if test="${loop.index == 0}">
+							<tr>
+								<th>帳號</th>
+								<th>密碼</th>
+								<th>姓名</th>
+								<th>註冊日期</th>
+								<th></th>
+								<th></th>
+							</tr>
+						</c:if>
 						<tr>
 							<td>${u.getMb_Account()}</td>
 							<td>${u.getMb_Password()}</td>
@@ -170,11 +166,10 @@ legend {
 							<td>${u.getMb_Date()}</td>
 							<td><button type="submit" name="delete"
 									class="btn btn-outline-secondary" value="${u.getMb_ID()}"
-									onclick="confirmChoice( )">
-									刪除
+									onclick="confirmChoice( )" >刪除</button>
 									<button type="submit" name="update"
 										class="btn btn-outline-secondary" value="${u.getMb_Account()}"
-										onclick="confirmChoice( )">修改</td>
+										onclick="confirmChoice( )" >修改</button></td>
 										
 							<td><label class="switch"> <input type="checkbox">
 									<span id="ball" class="slider" check="${u.checkColume}"></span>
@@ -191,6 +186,43 @@ legend {
 	</div>
 </body>
 	<script>
+	$('#searchbtn').click(function(){
+		console.log($('#site-search').val())
+	$.ajax({
+		type : 'POST',
+		url : "admin_search?account=" + $('#site-search').val(),
+		data:{
+// 			'search':$('#site-search').val() 
+		},
+		dataType : "json",
+		success : function(data) {
+			console.log(data)
+			var insertData = "";
+			insertData = ("<c:forEach items='"+data.inf+"' var='u'>"
+						+"<tr>"
+						+"<td>"+data.inf.mb_Account+"</td>"
+						+"<td>"+data.inf.mb_Password+"</td>"
+						+"<td>"+data.inf.mb_Name+"</td>"
+						+"<td>"+data.infDate+"</td>"
+						+"<td><button type=\"submit\" name=\"delete\""
+						+"class=\"btn btn-outline-secondary\" value=\""+data.inf.mb_ID+"\""
+						+"onclick=\"confirmChoice( )\">刪除"
+						+"<button type=\"submit\" name=\"update\""
+							+"class=\"btn btn-outline-secondary\" value=\""+data.infcheck+"\""
+							+"onclick=\"confirmChoice( )\">修改</td>"
+						
+				+"<td><label class=\"switch\"> <input type=\"checkbox\">"
+						+"<span id=\"ball\" class=\"slider\" check=\""+data.inf.checkColume+"\"></span>"
+				+"</label>"
+				+"</td>"
+			+"</tr>"
+		+"</c:forEach>")
+		$('#change').html(insertData);
+		}
+	});	
+})
+
+	
 		$(document).ready(function() {
 			already();
 		});
@@ -223,114 +255,114 @@ legend {
 		}
 	</script>
 	
-	<script type="text/javascript">
-            var pageSize=5;    //每頁顯示的記錄條數
-            var curPage=0;     //當前頁
-            var lastPage;      //最後頁
-            var direct=0;      //方向
+<!-- 	<script type="text/javascript"> 
+//             var pageSize=5;    //每頁顯示的記錄條數
+//             var curPage=0;     //當前頁
+//             var lastPage;      //最後頁
+//             var direct=0;      //方向
             
-            var len;           //總行數
-            var page;          //總頁數
-            var begin;
-            var end;
+//             var len;           //總行數
+//             var page;          //總頁數
+//             var begin;
+//             var end;
 
                
-            $(document).ready(function display(){  
-                len =$("#mytable tr").length - 1;    // 求這個表的總行數，剔除第一行介紹
-                page=len % pageSize==0 ? len/pageSize : Math.floor(len/pageSize) 1;//根據記錄條數，計算頁數
-                // alert("page===" page);
-                curPage=1;    // 設定當前為第一頁
-                displayPage(1);//顯示第一頁
+//             $(document).ready(function display(){  
+//                 len =$("#mytable tr").length - 1;    // 求這個表的總行數，剔除第一行介紹
+//                 page=len % pageSize==0 ? len/pageSize : Math.floor(len/pageSize) 1;//根據記錄條數，計算頁數
+//                 // alert("page===" page);
+//                 curPage=1;    // 設定當前為第一頁
+//                 displayPage(1);//顯示第一頁
 
-                document.getElementById("btn0").innerHTML="當前 " curPage "/" page " 頁    每頁 ";    // 顯示當前多少頁
-                document.getElementById("sjzl").innerHTML="資料總量 " len "";        // 顯示資料量
-                document.getElementById("pageSize").value = pageSize;
-
-               
-
-                $("#btn1").click(function firstPage(){    // 首頁
-                    curPage=1;
-                    direct = 0;
-                    displayPage();
-                });
-                $("#btn2").click(function frontPage(){    // 上一頁
-                    direct=-1;
-                    displayPage();
-                });
-                $("#btn3").click(function nextPage(){    // 下一頁
-                    direct=1;
-                    displayPage();
-                });
-                $("#btn4").click(function lastPage(){    // 尾頁
-                    curPage=page;
-                    direct = 0;
-                    displayPage();
-                });
-                $("#btn5").click(function changePage(){    // 轉頁
-                    curPage=document.getElementById("changePage").value * 1;
-                    if (!/^[1-9]\d*$/.test(curPage)) {
-                        alert("請輸入正整數");
-                        return ;
-                    }
-                    if (curPage > page) {
-                        alert("超出資料頁面");
-                        return ;
-                    }
-                    direct = 0;
-                    displayPage();
-                });
+//                 document.getElementById("btn0").innerHTML="當前 " curPage "/" page " 頁    每頁 ";    // 顯示當前多少頁
+//                 document.getElementById("sjzl").innerHTML="資料總量 " len "";        // 顯示資料量
+//                 document.getElementById("pageSize").value = pageSize;
 
                
-                $("#pageSizeSet").click(function setPageSize(){    // 設定每頁顯示多少條記錄
-                    pageSize = document.getElementById("pageSize").value;    //每頁顯示的記錄條數
-                    if (!/^[1-9]\d*$/.test(pageSize)) {
-                        alert("請輸入正整數");
-                        return ;
-                    }
-                    len =$("#mytable tr").length – 1;
-                    page=len % pageSize==0 ? len/pageSize : Math.floor(len/pageSize) 1;//根據記錄條數，計算頁數
-                    curPage=1;        //當前頁
-                     direct=0;        //方向
-                     firstPage();
-                });
-            });
 
-            function displayPage(){
-                if(curPage <=1 && direct==-1){
-                    direct=0;
-                    alert("已經是第一頁了");
-                    return;
-                } else if (curPage >= page && direct==1) {
-                    direct=0;
-                    alert("已經是最後一頁了");
-                    return ;
-                }
-
-                lastPage = curPage;
-
-                // 修復當len=1時，curPage計算得0的bug
-                if (len > pageSize) {
-                    curPage = ((curPage direct len) % len);
-                } else {
-                    curPage = 1;
-                }
-
-               
-                document.getElementById("btn0").innerHTML="當前 " curPage "/" page " 頁    每頁 ";        // 顯示當前多少頁
-
-                begin=(curPage-1)*pageSize 1;// 起始記錄號
-                end = begin 1*pageSize - 1;    // 末尾記錄號
+//                 $("#btn1").click(function firstPage(){    // 首頁
+//                     curPage=1;
+//                     direct = 0;
+//                     displayPage();
+//                 });
+//                 $("#btn2").click(function frontPage(){    // 上一頁
+//                     direct=-1;
+//                     displayPage();
+//                 });
+//                 $("#btn3").click(function nextPage(){    // 下一頁
+//                     direct=1;
+//                     displayPage();
+//                 });
+//                 $("#btn4").click(function lastPage(){    // 尾頁
+//                     curPage=page;
+//                     direct = 0;
+//                     displayPage();
+//                 });
+//                 $("#btn5").click(function changePage(){    // 轉頁
+//                     curPage=document.getElementById("changePage").value * 1;
+//                     if (!/^[1-9]\d*$/.test(curPage)) {
+//                         alert("請輸入正整數");
+//                         return ;
+//                     }
+//                     if (curPage > page) {
+//                         alert("超出資料頁面");
+//                         return ;
+//                     }
+//                     direct = 0;
+//                     displayPage();
+//                 });
 
                
-                if(end > len ) end=len;
-                $("#mytable tr").hide();    // 首先，設定這行為隱藏
-                $("#mytable tr").each(function(i){    // 然後，通過條件判斷決定本行是否恢復顯示
-                    if((i>=begin && i<=end) || i==0 )//顯示begin<=x<=end的記錄
-                        $(this).show();
-                });
+//                 $("#pageSizeSet").click(function setPageSize(){    // 設定每頁顯示多少條記錄
+//                     pageSize = document.getElementById("pageSize").value;    //每頁顯示的記錄條數
+//                     if (!/^[1-9]\d*$/.test(pageSize)) {
+//                         alert("請輸入正整數");
+//                         return ;
+//                     }
+//                     len =$("#mytable tr").length – 1;
+//                     page=len % pageSize==0 ? len/pageSize : Math.floor(len/pageSize) 1;//根據記錄條數，計算頁數
+//                     curPage=1;        //當前頁
+//                      direct=0;        //方向
+//                      firstPage();
+//                 });
+//             });
 
-             }
+//             function displayPage(){
+//                 if(curPage <=1 && direct==-1){
+//                     direct=0;
+//                     alert("已經是第一頁了");
+//                     return;
+//                 } else if (curPage >= page && direct==1) {
+//                     direct=0;
+//                     alert("已經是最後一頁了");
+//                     return ;
+//                 }
 
-</script>
+//                 lastPage = curPage;
+
+//                 // 修復當len=1時，curPage計算得0的bug
+//                 if (len > pageSize) {
+//                     curPage = ((curPage direct len) % len);
+//                 } else {
+//                     curPage = 1;
+//                 }
+
+               
+//                 document.getElementById("btn0").innerHTML="當前 " curPage "/" page " 頁    每頁 ";        // 顯示當前多少頁
+
+//                 begin=(curPage-1)*pageSize 1;// 起始記錄號
+//                 end = begin 1*pageSize - 1;    // 末尾記錄號
+
+               
+//                 if(end > len ) end=len;
+//                 $("#mytable tr").hide();    // 首先，設定這行為隱藏
+//                 $("#mytable tr").each(function(i){    // 然後，通過條件判斷決定本行是否恢復顯示
+//                     if((i>=begin && i<=end) || i==0 )//顯示begin<=x<=end的記錄
+//                         $(this).show();
+//                 });
+
+//              }
+
+<!-- </script> -->
 
 </html>
