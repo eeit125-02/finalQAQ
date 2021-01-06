@@ -88,6 +88,7 @@ public class DiscussionController {
 		model.addAttribute("PostBean", pb);
 		List<CommandBean> command_detail= discussionService.getCommandBeanByPostId(post_detail_id);
 		model.addAttribute("CommandBean", command_detail);
+		model.addAttribute("loginUser", loginUser); 
 		return "/Discussion/post_detail";
 	}
 	
@@ -121,6 +122,7 @@ public class DiscussionController {
 		model.addAttribute("allPost", post_list);
 		List<CommandBean> command_list = discussionService.getAllCommand();
 		model.addAttribute("allCommand", command_list);
+		model.addAttribute("loginUser", loginUser); 
 		return "/Discussion/search_result";
 	}
 }
