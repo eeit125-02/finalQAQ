@@ -3,6 +3,7 @@ package com.web.book.dao;
 import java.util.List;
 
 import com.web.book.model.BookReportBean;
+import com.web.book.model.BookReportCollectBean;
 
 public interface BookReportDao {
 	
@@ -27,5 +28,9 @@ public interface BookReportDao {
 	Integer getSearchBookRepotPageSize(String searchString);
 	
 	List<BookReportBean> getThisPageDateForSearchBookRepot(Integer page, String searchString);
+	
+	void addSubReport(Integer br_ID, Integer mb_ID);
+	
+	List<BookReportCollectBean> getMemberCollectReportList(Integer br_ID);
 	
 }

@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.web.book.dao.BookReportDao;
 import com.web.book.model.BookReportBean;
+import com.web.book.model.BookReportCollectBean;
 import com.web.book.service.BookReportService;
 
 @Transactional
@@ -63,27 +64,61 @@ public class BookReportServiceImpl implements BookReportService {
 	}
 
 	@Override
-	public Integer getAllBookRepotPageSize() {
+	public Integer getSearchPageSize(String searchType) {
 		
-		return bookReportDao.getAllBookRepotPageSize();
+		
+		if(searchType.equals("all")) {
+			
+			return bookReportDao.getAllBookRepotPageSize();
+			
+		}else {
+			
+			return bookReportDao.getSearchBookRepotPageSize(searchType);
+		}
+		
 	}
 
 	@Override
-	public List<BookReportBean> getThisPageDateForAllBookRepot(Integer page) {
+	public List<BookReportBean> getSearchBookRepotData(String searchType, Integer page) {
 		
-		return bookReportDao.getThisPageDateForAllBookRepot(page);
+		
+		if (searchType.equals("all")) {
+			
+			return bookReportDao.getThisPageDateForAllBookRepot(page);
+			
+		}else {
+			
+			return bookReportDao.getThisPageDateForSearchBookRepot(page, searchType);
+			
+		}
+		
 	}
 
 	@Override
-	public Integer getSearchBookRepotPageSize(String searchString) {
+	public Boolean checkBookReport(Integer mbId, Integer bkId) {
 		
-		return bookReportDao.getSearchBookRepotPageSize(searchString);
+		List<BookReportBean> memberBookReport = bookReportDao.bookReportMemberAllList(mbId);
+		for (BookReportBean bookReport : memberBookReport) {
+			if (bookReport.getBook().getBk_ID().equals(bkId)) {
+				return false;
+			}
+		}
+		return true;
 	}
 
 	@Override
-	public List<BookReportBean> getThisPageDateForSearchBookRepot(Integer page, String searchString) {
+	public Boolean addSubReport(Integer brId, Integer mbId) {
 		
-		return bookReportDao.getThisPageDateForSearchBookRepot(page, searchString);
+		List<BookReportCollectBean> collects = bookReportDao.getMemberCollectReportList(brId);
+		
+		for (BookReportCollectBean collect : collects) {
+			if(collect.getBookReport().getBr_ID().equals(brId)) {
+				return false;
+			}
+		}
+		
+		bookReportDao.addSubReport(brId, mbId);
+		return true;
 	}
 	
 	

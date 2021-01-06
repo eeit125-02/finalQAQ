@@ -70,7 +70,7 @@
 		<textarea id="brContent" class="form-control" style="height: 350px;"></textarea>
 		<br>
 		
-		<button type="button" class="btn btn-outline-danger btn-mi float-right">刪除</button>
+		<button type="button" id="backButton" class="btn btn-outline-danger btn-mi float-right">刪除</button>
 		<button type="button" id="addBookReport" class="btn btn-outline-primary btn-mi float-right mr-4">新增</button>
 		<br>
 	</div>
@@ -134,6 +134,10 @@
 					}
 				}
 			})
+		});
+		
+		$('#backButton').click(function(){
+			history.go(-1);
 		});
 
 		
