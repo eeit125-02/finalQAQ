@@ -5,13 +5,22 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel='stylesheet'
-	href='${pageContext.request.contextPath}/css/style.css' />
-
 <meta charset="UTF-8">
 
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 
+<link rel='stylesheet' href='${pageContext.request.contextPath}/css/style.css' />
+<script>
+	$(document).ready(function() {
+		$("#bookWebheader").load("//localhost:8080/BookWeb/header");
+		$("#bookWebFooter").load("//localhost:8080/BookWeb/footer");
+
+	});
+</script>
+
+
+
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
 	integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
@@ -24,6 +33,7 @@
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
 	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
 	crossorigin="anonymous">
+
 <style>
 .bd-placeholder-img {
 	font-size: 1. 125rem;
@@ -39,15 +49,60 @@
 .tb1 {
 	border: 1px solid background-color:pink
 }
+
+
+/*  #container{ */
+/*             width:380px; */
+/*             margin:20px auto; */
+/*             padding:15px; */
+/*             background-color:#eee; */
+/*           border-radius: 15px; */
+/*         } */
+/*         /** 新增按钮 **/ */
+/*         #addVar{ */
+/*             margin:0 0 0 52px; */
+/*             padding:5px; */
+/*             display:inline-block; */
+/*             background-color:#3A9668; */
+/*             color:#f1f1f1; */
+/*             border:1px solid #005; */
+/*             border-radius: 4px; */
+/*         } */
+/*         /** 删除按钮 **/ */
+/*         .removeVar{ */
+/*             margin:auto; */
+/*             padding:5px; */
+/*             display:inline-block; */
+/*             background-color:	#4F9D9D; */
+/*             color:	#FFFFFF; */
+/*             border:1px solid 	#FFFFFF; */
+/*           border-radius: 4px; */
+/*         } */
+ 
+/*         #addVar:hover, .removeVar:hover{ */
+/*             cursor: pointer; */
+/*         } */
+ 
+/*         .alignRight{ */
+/*             text-align: right; */
+/*         } */
+ 
+/*         input, textarea{ */
+/*             padding:5px; */
+/*             font-size: 16px; */
+/*         } */
+
+.add_field_button{
+
+
+
+
+}
+
+
+
 </style>
 
-<script>
-	$(document).ready(function() {
-		$("#bookWebheader").load("//localhost:8080/BookWeb/header");
-		$("#bookWebFooter").load("//localhost:8080/BookWeb/footer");
-
-	});
-</script>
 <title>新增活動資料</title>
 </head>
 
@@ -91,8 +146,8 @@
 								<form:input path="act_Guest" class="form-control" placeholder="" />
 							</div>
 							<div class="form-group col-md-6">
-								<label for="inputPassword4">活動圖片:</label> <input name="file"
-									type="file" class="form-control" />
+								<label for="inputPassword4">活動圖片:</label> 
+								<input name="file" type="file" class="form-control" />
 							</div>
 						</div>
 						
@@ -102,8 +157,12 @@
 								<form:input path="act_Pax" class="form-control" placeholder="" />
 							</div>
 							<div class="form-group col-md-6">
-								<label for="inputPassword4">活動場所:</label> <input name="file"
-									type="file" class="form-control" />
+								<label for="inputPassword4">活動場所:</label>							
+								<form:select path="act_Place" class="form-control">
+                                <form:option value="NONE" label="請選擇" />
+                                <form:option value="現場" label="現場"/>
+                                <form:option value="線上" label="線上"/>
+                                </form:select>								
 							</div>
 						</div>
 
@@ -136,31 +195,69 @@
 							</div>
 
 
-						<div class="form-row">
-							<div class="form-group col-md-6">
-								<label for="inputCity">City</label> <input type="text"
-									class="form-control" id="inputCity">
-							</div>
-							<div class="form-group col-md-4">
-								<label for="inputState">State</label> <select id="inputState"
-									class="form-control">
-									<option selected>Choose...</option>
-									<option>...</option>
-								</select>
-							</div>
-							<div class="form-group col-md-2">
-								<label for="inputZip">Zip</label> <input type="text"
-									class="form-control" id="inputZip">
-							</div>
-						</div>
-						<div class="form-group">
-							<div class="form-check">
-								<input class="form-check-input" type="checkbox" id="gridCheck">
-								<label class="form-check-label" for="gridCheck"> Check
-									me out </label>
-							</div>
-						</div>
-						<button type="submit" class="btn btn-primary">Sign in</button>
+<!-- 						<div class="form-row"> -->
+<!-- 							<div class="form-group col-md-2"> -->
+<!-- 								<label for="inputZip">Zip</label>  -->
+<!-- 								<input type="text" class="form-control" id="inputZip"> -->
+<!-- 							</div> -->
+<!-- 							<div class="form-group col-md-4"> -->
+<!-- 								<label for="inputState">State</label> <select id="inputState" -->
+<!-- 									class="form-control"> -->
+<!-- 									<option selected>Choose...</option> -->
+<!-- 									<option>...</option> -->
+<!-- 								</select> -->
+<!-- 							</div> -->
+<!-- 							<div class="form-group col-md-6"> -->
+<!-- 								<label for="inputCity">City</label>  -->
+<!-- 								<input type="text" class="form-control" id="inputCity"> -->
+<!-- 							</div> -->
+<!-- 						</div> -->
+						
+					
+                        
+                        <div class="form-row">
+                        <div class="form-group col-md-2 input_fields_wrap">
+						    <label >活動標籤:</label>
+						    <form:input path="act_Tag" type="text" name="mytext[]" class="form-control"></form:input>
+						    </div>
+						  
+						  <div class="form-group col-md-4">
+						    <label >活動規則:</label>
+						    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+<%-- 						    <form:input type="textarea" path="act_Rule" class="form-control" placeholder="" /> --%>
+						  </div>
+						  
+						  <div class="form-group col-md-6">
+						    <label >活動簡介:</label>
+						    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+<%-- 						    <form:input type="textarea" path="act_Intro" class="form-control" placeholder="" rows="10" cols="30" /> --%>
+						  </div>
+						  </div>
+						  <button class="add_field_button btn btn-primary">添加標籤</button>
+						  
+						  
+						  
+<!-- 						  <div class="input_fields_wrap"> -->
+<!--                           <button class="add_field_button">Add More Fields</button> -->
+<!--                           <div><input type="text" name="mytext[]"></div> -->
+<!--                           </div> -->
+						
+<!-- 						 <div class="form-row"> -->
+<!-- 						 <div class="form-group col-md-6"> -->
+<!-- 						 <label>活動標籤:</label> -->
+<!-- 				         <div> -->
+<%-- 				          <form:input type="text" name="var1" id="var1" path="act_Tag" class="form-control" placeholder="標籤1"/><br> --%>
+<%-- 				          <form:input type="text" name="var2" id="var2" path="act_Tag" class="form-control" placeholder="標籤2"/> --%>
+<!-- 				          <span class="removeVar">删除</span> --> 
+<!-- 			             <p><span id="addVar">新增標籤</span></p> -->
+<!-- 				         </div> -->
+<!-- 			             </div> -->
+<!-- 			             </div> -->
+						
+						
+						<hr>
+						<button type="submit" class="btn btn-primary">提交</button>
+						<button type="reset" class="btn btn-primary">還原</button>
 					</form>
 
 
@@ -204,36 +301,36 @@
 <%-- 						<form:input path="act_Guest" /> --%>
 <!-- 					</div> -->
 
-					<div>
-						<form:label path="act_Pax">活動人數:</form:label>
-						<form:input path="act_Pax" />
-					</div>
+<!-- 					<div> -->
+<%-- 						<form:label path="act_Pax">活動人數:</form:label> --%>
+<%-- 						<form:input path="act_Pax" /> --%>
+<!-- 					</div> -->
 
-					<div>
-						<form:label path="act_Tag">活動標籤:</form:label>
-						<form:input path="act_Tag" />
-					</div>
+<!-- 					<div> -->
+<%-- 						<form:label path="act_Tag">活動標籤:</form:label> --%>
+<%-- 						<form:input path="act_Tag" /> --%>
+<!-- 					</div> -->
 
-					<div>
-						<form:label path="act_Rule">活動規則:</form:label>
-						<form:input type="textarea" path="act_Rule" />
-					</div>
-
-
-					<div>
-						<form:label path="act_Place">活動場所:</form:label>
-						<form:input path="act_Place" />
-					</div>
-
-					<div>
-						<form:label path="act_Intro">活動簡介:</form:label>
-						<form:textarea path="act_Intro" rows="5" cols="30" />
-					</div>
-				</fieldset>>
+<!-- 					<div> -->
+<%-- 						<form:label path="act_Rule">活動規則:</form:label> --%>
+<%-- 						<form:input type="textarea" path="act_Rule" /> --%>
+<!-- 					</div> -->
 
 
-					<input type='submit' value='提交' />
-				<input type='reset' value='還原' />
+<!-- 					<div> -->
+<%-- 						<form:label path="act_Place">活動場所:</form:label> --%>
+<%-- 						<form:input path="act_Place" /> --%>
+<!-- 					</div> -->
+
+<!-- 					<div> -->
+<%-- 						<form:label path="act_Intro">活動簡介:</form:label> --%>
+<%-- 						<form:textarea path="act_Intro" rows="5" cols="30" /> --%>
+<!-- 					</div> -->
+				</fieldset>
+
+
+<!-- 				<input type='submit' value='提交' /> -->
+<!-- 				<input type='reset' value='還原' /> -->
 				<br>
 				<br>
 				<a href='${pageContext.request.contextPath}/ActHomepage'>回到活動管理</a>
@@ -246,10 +343,33 @@
 		<!-- footer -->
 		<footer class="container py-5" id="bookWebFooter"></footer>
 		<!-- footer -->
+		
+		<script>
+		$(document).ready(function() {
+			var max_fields      = 10; //maximum input boxes allowed
+			var wrapper   		= $(".input_fields_wrap"); //Fields wrapper
+			var add_button      = $(".add_field_button"); //Add button ID
+			
+			var x = 1; //initlal text box count
+			$(add_button).click(function(e){ //on add input button click
+				e.preventDefault();
+				if(x < max_fields){ //max input box allowed
+					x++; //text box increment
+					$(wrapper).append('<div style="width:200px"><input type="text" style="width:176.66px" name="mytext[]"/><a href="#" class="remove_field">X</a></div>'); //add input box
+				}
+			});
+			
+			$(wrapper).on("click",".remove_field", function(e){ //user click on remove text
+				e.preventDefault(); $(this).parent('div').remove(); x--;
+			})
+		});
+		
+		</script>
 
 
 
 
+    
 		<script type="text/javascript">
 			window.onload = function() {
 				//當頁面載完之後，用AddressSeleclList.Initialize()，
@@ -262,7 +382,7 @@
 				//取出指定縣市及鄉鎮市區的下拉選單的值
 				alert(AddressSeleclList.ReturnSelectAddress('縣市1', '鄉鎮市區1'));
 			}
-		</script>
+		</script>		
 		<script type="text/javascript">
 			var app = window.AddressSeleclList = {
 				AdrressArray : [

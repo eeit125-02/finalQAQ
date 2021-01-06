@@ -71,6 +71,13 @@ td {
 	border: solid 1px;
 	text-align: center;
 }
+
+.mapbutton{
+ border:none
+
+
+}
+
 </style>
 </head>
 
@@ -154,7 +161,7 @@ td {
 										<b style='font-size: 25px;'>${act.act_Name}</b>
 									</p>
 									<div>
-									<input type ="image" src="${act.act_Image}" data-toggle="modal" data-target="#exampleModalCenter${act.act_Name}" style="width: 300px; height: 380px;">
+									<input type ="image" src="${act.act_Image}" data-toggle="modal" data-target="#exampleModalCenter${act.act_Name}" style="width: 300px; height: 380px; float:auto">
 										<div class="modal fade" id="exampleModalCenter${act.act_Name}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   										<div class="modal-dialog modal-dialog-centered" role="document">
    										 <div class="modal-content">
@@ -168,8 +175,8 @@ td {
 <!--      									//彈跳視窗內容 -->
      										 <div class="modal-body">
      										 <p>${act.act_Theme}</p>
-										     <p>${act.act_Date}</p>
-										     <p><button class="btn btn-outline-info" style='font-size:10px' id = "myModal"  value="${act.act_Loc}" data-toggle="modal" data-target="#myModal1"><i class='fas fa-map-marked-alt'></i></button>${act.act_Loc}</p>
+										     <p>${act.act_Date}</p>										     
+										     <p><a href="" class="bgbtn02 btn" id = "myModal"  value="${act.act_Loc}" data-toggle="modal" data-target="#myModal1"><img src="image/map.png" style="width:15px;height:15px" /></a>${act.act_Loc}</p>     
 										     <p>${act.act_Intro}</p>			
 										     <hr>
       										 </div>
@@ -185,7 +192,7 @@ td {
 									<div class="caption">
 										<p>${act.act_Theme}</p>
 										<p>${act.act_Date}</p>
-										<p>${act.act_Loc}</p>		
+										<p><button class="mapbutton"  id="myModal"  value="${act.act_Loc}" data-toggle="modal" data-target="#myModal1"><i class='fas fa-map-marked-alt'></i></button>${act.act_Loc}</p>	
 										<hr>
 										<p>
 										
