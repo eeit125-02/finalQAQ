@@ -249,7 +249,7 @@
 					<hr>
 						<p>
 <!-- 						<textarea style="border-style:none;"rows='20' cols='150' id="t1"> -->
-						<textarea style="border-style:none;"rows='20' cols='150' id="t1">
+						<textarea style="border-style:none;"rows='20' cols='150' id="t1" readonly="readonly">
 						${pageresult.bk_Content}
 						</textarea>
 						</p>

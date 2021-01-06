@@ -45,13 +45,13 @@ public class ShoppingCartController {
 			) {
 		Integer tatolMoney = 0;
 // 先搜尋購物車內容
-		List<ShoppingCartBean> listCart = scService.searchCart(13);
+		List<ShoppingCartBean> listCart = scService.searchCart(loginUser.getMb_ID());
 // 判斷按哪種按鈕 bk_ID:直接購買
 		if (bk_ID != 0 && bk_ID2 == 0) {
 // 如果listCart沒內容新增		
 			if (listCart.size() == 0) {
-				scService.addToCart(1, 100, bk_ID, 9);
-				listCart = scService.searchCart(13);
+				scService.addToCart(1, 100, bk_ID, loginUser.getMb_ID());
+				listCart = scService.searchCart(loginUser.getMb_ID());
 				model.addAttribute("list", listCart);
 				for (ShoppingCartBean shoppingCartBean : listCart) {
 					tatolMoney += shoppingCartBean.getCart_Num()*shoppingCartBean.getCart_Price();
@@ -63,14 +63,14 @@ public class ShoppingCartController {
 				for (ShoppingCartBean shoppingCartBean : listCart) {
 					if (bk_ID == shoppingCartBean.getBook().getBk_ID()) {
 						model.addAttribute("same", "已經加入購物車");
-						List<BookBean> list = bsService.searchBookStore();
+						List<BookBean> list = bsService.searchBookStore(1);
 						model.addAttribute("bookstore", list);
 						return "Transation/storeMain";
 					}
 				}
 // 沒有內容新增
-				scService.addToCart(1, 100, bk_ID, 9);
-				listCart = scService.searchCart(9);
+				scService.addToCart(1, 100, bk_ID, loginUser.getMb_ID());
+				listCart = scService.searchCart(loginUser.getMb_ID());
 				model.addAttribute("list", listCart);
 				for (ShoppingCartBean shoppingCartBean : listCart) {
 					tatolMoney += shoppingCartBean.getCart_Num()*shoppingCartBean.getCart_Price();
@@ -82,8 +82,8 @@ public class ShoppingCartController {
 		} else if (bk_ID == 0 && bk_ID2 != 0) {
 // 如果listCart沒內容新增	
 			if (listCart.size() == 0) {
-				scService.addToCart(1, 100, bk_ID2, 9);
-				listCart = scService.searchCart(9);
+				scService.addToCart(1, 100, bk_ID2, loginUser.getMb_ID());
+				listCart = scService.searchCart(loginUser.getMb_ID());
 				model.addAttribute("list", listCart);
 				for (ShoppingCartBean shoppingCartBean : listCart) {
 					tatolMoney += shoppingCartBean.getCart_Num()*shoppingCartBean.getCart_Price();
@@ -95,14 +95,14 @@ public class ShoppingCartController {
 			for (ShoppingCartBean shoppingCartBean : listCart) {
 				if (bk_ID2 == shoppingCartBean.getBook().getBk_ID()) {
 					model.addAttribute("same", "已經加入購物車");
-					List<BookBean> list = bsService.searchBookStore();
+					List<BookBean> list = bsService.searchBookStore(1);
 					model.addAttribute("bookstore", list);
 					return "Transation/storeMain";
 				}
 			}
 // 沒有內容新增
-			scService.addToCart(1, 100, bk_ID2, 9);
-			listCart = scService.searchCart(9);
+			scService.addToCart(1, 100, bk_ID2, loginUser.getMb_ID());
+			listCart = scService.searchCart(loginUser.getMb_ID());
 			model.addAttribute("list", listCart);
 			for (ShoppingCartBean shoppingCartBean : listCart) {
 				tatolMoney += shoppingCartBean.getCart_Num()*shoppingCartBean.getCart_Price();

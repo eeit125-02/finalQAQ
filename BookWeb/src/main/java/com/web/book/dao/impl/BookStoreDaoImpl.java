@@ -2,7 +2,6 @@ package com.web.book.dao.impl;
 
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Set;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -24,14 +23,25 @@ public class BookStoreDaoImpl implements BookStoreDao {
 	// 商品頁面搜尋 不包含任何會員
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<BookBean> searchBookStore() {
+	public List<BookBean> searchBookStore(int page) {
 		Session session = factory.getCurrentSession();
 		String hql = "FROM BookBean";
 		Query<BookBean> query = session.createQuery(hql);
-		query.setFirstResult(0);
-		query.setMaxResults(40);
+		int startPage = (page - 1) * 12;
+		query.setFirstResult(startPage);
+		query.setMaxResults(12);
 		return query.getResultList();
 	}
+	
+	// 商品全部數量
+	@SuppressWarnings("unchecked")
+	public List<BookBean> countBook() {
+		Session session = factory.getCurrentSession();
+		String hql = "select a.bk_ID from BookBean a";
+		return  session.createQuery(hql).getResultList();
+	}
+	
+	
 	
 	//  一件商品所有價錢區間
 	@Override
