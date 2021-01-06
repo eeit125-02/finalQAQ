@@ -61,7 +61,7 @@ background-color:#e0ece4
 
 <body>
 <!-- 	<div class="container media"> -->
-			<form method="POST" action="MemberBean" enctype="multipart/form-data">
+			<form:form method="POST" modelAttribute="MemberBean" enctype="multipart/form-data">
 			<fieldset id="mb_modify">
 				<div>
 					<img src="${mb_inf.mb_pic}" id="show" width="200" height="200"><br>		
