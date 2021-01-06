@@ -33,7 +33,6 @@
 </body>
 <script>
 	$("#send1").click(function(){
-		console.log("123")
 		alert("請至信箱收取信件後再行登入");
 		$('form').submit();
 	})

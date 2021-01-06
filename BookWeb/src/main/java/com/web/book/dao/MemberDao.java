@@ -26,4 +26,7 @@ public interface MemberDao {
 
 	MemberBean email(String email);
 
+	boolean checkMail(String email);
+
+
 }

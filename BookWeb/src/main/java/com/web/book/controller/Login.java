@@ -77,6 +77,16 @@ public class Login {
 		return check;
 	}
 
+	//重複信箱確認
+	@PostMapping("/checkMail")
+	@ResponseBody
+	public boolean checkMail(@RequestParam(value = "mb_Mail",required = false) String email) {
+		System.out.println("email");
+		boolean check = ms.checkMail(email);
+		System.out.println(check);
+		return check;
+	}
+	
 	// 檢查登入
 	@PostMapping("/toLogin/checklogin/{mb_Account}/{mb_Password}")
 	@ResponseBody
@@ -89,7 +99,6 @@ public class Login {
 	//JavaMail
 	@PostMapping("/JavaMail")
 	public String JavaMail(@RequestParam(value = "mail",required = false) String email) {
-		System.out.println(email);
 		JavaMail mail = new JavaMail();
 		MemberBean member = ms.email(email);
 		mail.SendMail(email,member.getMb_Password());
