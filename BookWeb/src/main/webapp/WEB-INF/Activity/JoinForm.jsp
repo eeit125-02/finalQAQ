@@ -70,10 +70,10 @@
 			<form:form method="POST" modelAttribute="ajb" enctype="multipart/form-data">
 
 				<table>
-                    <tr>
-						<td><input type="hidden">會員帳號:${loginUser.getMb_Account()}</label></td>
-<%-- 						<td><input type="hidden" name="mb_Account" value="${member.mb_Account}" /></td> --%>
-					</tr>
+<!--                     <tr> -->
+<%-- 						<td><label type="hidden">會員帳號:${loginUser.getMb_Account()}</label></td> --%>
+<%-- <%-- 						<td><input type="hidden" name="mb_Account" value="${member.mb_Account}" /></td> --%> 
+<!-- 					</tr> -->
 
 					<tr>
 						<td><label>會員帳號:${loginUser.getMb_Account()}</label></td>
@@ -113,8 +113,8 @@
 				<input type='reset' value='還原' />
 				<br>
 				<br>
-				<a href='ActHomepage'>繼續探索活動</a>
 			</form:form>
+				<a href='${pageContext.request.contextPath}/showActs'>繼續探索活動</a>
 
 
 		</div>

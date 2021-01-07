@@ -102,23 +102,23 @@ td {
 								<div class="col-xl-10 col-lg-10">
 									<!-- Hero Caption -->
 									<div class="hero__caption pt-100">
-										<h1>活動探索</h1>
+										<h3 >活動探索</h3>
 										<!--                                 <p>Let's uncover the best places to eat, drink, and shop nearest to you.</p> -->
 									</div>
 									<!--Hero form -->
-									<form action="#" class="search-box mb-100">
-										<div class="input-form form-inline">
-											<input type="text" id="enter1" placeholder="What are you finding?">
+									<form action="#" class="search-box mb-100" >
+										<div class="input-form form-inline" >
+											<input type="text" id="enter1" placeholder="想找什麼活動呢?" >
 										</div>
 										<div class="select-form form-inline">
 											<div class="select-itms form-inline">
-												<select name="select" id="select1">
-													<option value="">In where?</option>
-													<option value="">Catagories One</option>
-													<option value="">Catagories Two</option>
-													<option value="">Catagories Three</option>
-													<option value="">Catagories Four</option>
-												</select>
+<!-- 												<select name="select" id="select1"> -->
+<!-- 													<option value="">In where?</option> -->
+<!-- 													<option value="">Catagories One</option> -->
+<!-- 													<option value="">Catagories Two</option> -->
+<!-- 													<option value="">Catagories Three</option> -->
+<!-- 													<option value="">Catagories Four</option> -->
+<!-- 												</select> -->
 											</div>
 										</div>
 										<div class="search-form">
@@ -151,17 +151,17 @@ td {
 					</div>
 				</section>
 				<hr style="height: 1px; border: none; color: #333; background-color: #333;">
-				<section class="container" style="width:1100px">
+				<section class="container" style="width:1200px">
 					<div class="row" id="change">
 						<c:forEach var='act' items='${allacts}'>
 							<input type="hidden" id="mb_ID" value="${act.member.mb_ID}">
-							<div class="col-6,col-md-3" style="width: 400px; height: 1000px">
+							<div class="col-6,col-md-3" style="width: 380px; height: 1000px">
 								<div class="thumbnail" style="width: 350px; height: 1000px">
 									<p>
 										<b style='font-size: 25px;'>${act.act_Name}</b>
 									</p>
-									<div>
-									<input type ="image" src="${act.act_Image}" data-toggle="modal" data-target="#exampleModalCenter${act.act_Name}" style="width: 300px; height: 380px; float:auto">
+									<div align="center">
+									<input type ="image" src="${act.act_Image}" data-toggle="modal" data-target="#exampleModalCenter${act.act_Name}" style="width: 300px; height: 380px; align:center">
 										<div class="modal fade" id="exampleModalCenter${act.act_Name}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   										<div class="modal-dialog modal-dialog-centered" role="document">
    										 <div class="modal-content">
@@ -176,7 +176,7 @@ td {
      										 <div class="modal-body">
      										 <p>${act.act_Theme}</p>
 										     <p>${act.act_Date}</p>										     
-										     <p><a href="" class="bgbtn02 btn" id = "myModal"  value="${act.act_Loc}" data-toggle="modal" data-target="#myModal1"><img src="image/map.png" style="width:15px;height:15px" /></a>${act.act_Loc}</p>     
+										     <p>${act.act_Loc}</p>     
 										     <p>${act.act_Intro}</p>			
 										     <hr>
       										 </div>
@@ -235,7 +235,14 @@ td {
 
 		<form action="showCreateForm" id="test">
 		<button type="button" class="btn btn-outline-info" id="create">新增活動</button>
-	</form>
+	    </form>
+	    
+<%-- 	    <form action="showJoins" id="test1"> --%>
+<!-- 		<button type="button" class="btn btn-outline-info" id="showjoin">查看報名紀錄</button> -->
+<%-- 	    </form> --%>
+	    
+	    <a href="<c:url value='/showJoins'/>"><button class="btn btn-outline-info">查看報名紀錄</button></a>
+	    
 	</div>
 
 	<br>
