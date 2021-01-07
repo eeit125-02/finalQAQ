@@ -105,7 +105,7 @@ text-align:center;
 			</c:if>
 			<p />
 <%-- 			<a href='${pageContext.request.contextPath}/ActHomepage'>回到活動管理</a> --%>
-			<button><a href='${pageContext.request.contextPath}/ActHomepage'>繼續探索活動</a></button>
+			<a href='${pageContext.request.contextPath}/showActs'><button class="btn btn-outline-info">繼續探索活動</button></a>
 <!-- 			<button onclick="window.location.href='showCreateForm'">新增活動1</button> -->
 		</div>
 	</div>
