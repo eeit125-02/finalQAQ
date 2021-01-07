@@ -102,7 +102,7 @@ public class Login {
 		JavaMail mail = new JavaMail();
 		MemberBean member = ms.email(email);
 		mail.SendMail(email,member.getMb_Password());
-		return "Member/login";
+		return "redirect:toLogin";
 	}
 	
 	// 檢查是否停權
