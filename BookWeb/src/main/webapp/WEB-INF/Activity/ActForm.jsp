@@ -153,11 +153,11 @@
 						
 						<div class="form-row">
 							<div class="form-group col-md-6">
-								<label for="inputPassword4">活動人數:</label>
+								<label >活動人數:</label>
 								<form:input path="act_Pax" class="form-control" placeholder="" />
 							</div>
 							<div class="form-group col-md-6">
-								<label for="inputPassword4">活動場所:</label>							
+								<label >活動場所:</label>							
 								<form:select path="act_Place" class="form-control">
                                 <form:option value="NONE" label="請選擇" />
                                 <form:option value="現場" label="現場"/>
@@ -174,7 +174,7 @@
 							</div>
 
 							<div class="form-group col-md-6">
-								<label for="inputPassword4">活動時間:</label>
+								<label >活動時間:</label>
 								<form:input type="time" class="form-control" path="act_Time" />
 							</div>
 						</div>
@@ -229,7 +229,7 @@
 						  
 						  <div class="form-group col-md-6">
 						    <label >活動簡介:</label>
-						    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+						    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="act_Intro"></textarea>
 <%-- 						    <form:input type="textarea" path="act_Intro" class="form-control" placeholder="" rows="10" cols="30" /> --%>
 						  </div>
 						  </div>
@@ -333,7 +333,7 @@
 <!-- 				<input type='reset' value='還原' /> -->
 				<br>
 				<br>
-				<a href='${pageContext.request.contextPath}/ActHomepage'>回到活動管理</a>
+				<a href='${pageContext.request.contextPath}/showActs'>回到活動管理</a>
 			</form:form>
 
 
