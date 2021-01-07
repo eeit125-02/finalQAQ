@@ -233,10 +233,9 @@ public class Login {
 
 	// 密碼修改介面
 	@PostMapping("/Modify")
-	public @ResponseBody String Modify(Model model) {
-		System.out.println("-----------");
-		model.addAttribute("account", Account);
-		return Account;
+	public @ResponseBody MemberBean Modify(@ModelAttribute("loginUser") MemberBean loginUser,Model model) {
+		model.addAttribute("loginUser", loginUser);
+		return loginUser;
 	}
 
 	// 密碼更新
@@ -335,7 +334,8 @@ public class Login {
 	// 會員介面
 	@GetMapping("/toCity")
 	public String tocity(Model model) {
-		System.out.println(logincheck);
+		MemberBean inf = ms.select(Account);
+		model.addAttribute("loginUser",inf);
 		if(logincheck.equals("c")) {
 			model.addAttribute("third","third");
 			return "Member/city";
