@@ -90,6 +90,12 @@ import com.web.book.service.SearchService;
 		public int updatebk(BookBean mb) {
 			return searchBookDAO.updatebk(mb);
 		}
+		
+		// 刪除書本
+		@Override
+		public boolean deletebk(BookBean mb) {
+			return searchBookDAO.deletebk(mb);
+		}
 
 	}
 
