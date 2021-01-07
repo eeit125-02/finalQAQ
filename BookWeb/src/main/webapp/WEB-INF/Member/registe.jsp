@@ -137,7 +137,7 @@ form {
 				<br />
 				<div>
 					<label>E-mail:</label> <input type="email" name="mail" id="mail"
-						onblur=""> <span id="idsp7"></span><br />
+						> <span id="idsp7"></span><br />
 				</div>
 				<br>
 				<div class="send">
@@ -191,6 +191,28 @@ form {
 				}
 			});
 		})
+		
+		$('#mail').blur(function() {
+			console.log("test");
+			let sp = document.getElementById("idsp7")
+			let editURL = "checkMail?mb_Mail=" + $('#mail').val();
+			$.ajax({
+				async : false,
+				type : 'POST',
+				url : editURL,
+				dataType : "json",
+				contentType : "application/json;charset=utf-8",
+				success : function(data) {
+					if (data) {
+						sp.innerHTML = "信箱已註冊過"
+					} else {
+						sp.innerHTML = "信箱可以使用"
+						a1 = true;
+					}
+				}
+			});
+		})
+		
 
 		$('#pwd').blur(function() {
 			let pwd = document.getElementById("pwd").value
@@ -222,15 +244,7 @@ form {
 				sp.innerHTML = "錯誤"
 			}
 		})		
-// 		$('#mail').blur(function(){
-// 			var email = $('#mail').val();
-// 			if(!email.matches("^\\w @(\\w \\.) \\w $")){
-// 				var sp = document.getElementById("idsp7")
-// 				sp.innerHTML = "正確"
-// 		        console.log("123");
-// 		    }
-// 		})
-		
+
 		$('#send').click(function() {
 			var mb_Account = $('#account').val();
 			var pwd = $('#pwd').val();

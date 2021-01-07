@@ -54,6 +54,14 @@ public class Login {
 		return "Member/confirm";
 	}
 
+//	//JavaMail
+//	@PostMapping("/JavaMail")
+//	public void JavaMail(@RequestParam(value = "mail",required = false) String email) {
+//		JavaMail mail = new JavaMail();
+//		MemberBean member = ms.email(email);
+//		mail.SendMail(email,member.getMb_Password());
+//	}
+	
 	// 註冊資料確認後送至資料庫
 	@PostMapping("/confirm")
 	public String Confirm() {
@@ -69,6 +77,16 @@ public class Login {
 		return check;
 	}
 
+	//重複信箱確認
+	@PostMapping("/checkMail")
+	@ResponseBody
+	public boolean checkMail(@RequestParam(value = "mb_Mail",required = false) String email) {
+		System.out.println("email");
+		boolean check = ms.checkMail(email);
+		System.out.println(check);
+		return check;
+	}
+	
 	// 檢查登入
 	@PostMapping("/toLogin/checklogin/{mb_Account}/{mb_Password}")
 	@ResponseBody
@@ -78,6 +96,15 @@ public class Login {
 		return check;
 	}
 
+	//JavaMail
+	@PostMapping("/JavaMail")
+	public String JavaMail(@RequestParam(value = "mail",required = false) String email) {
+		JavaMail mail = new JavaMail();
+		MemberBean member = ms.email(email);
+		mail.SendMail(email,member.getMb_Password());
+		return "Member/login";
+	}
+	
 	// 檢查是否停權
 	@PostMapping("/toLogin/checkColume/{mb_Account}")
 	@ResponseBody
@@ -238,7 +265,7 @@ public class Login {
 	@GetMapping("/adminall")
 	public String Memberall(Model model) {
 		List<MemberBean> inf = ms.adminselect();
-			model.addAttribute("memberall", inf);
+		model.addAttribute("memberall", inf);
 		return "Member/adminModify";
 	}
 
@@ -299,6 +326,12 @@ public class Login {
 		return "Member/registe";
 	}
 
+	//忘記密碼
+	@GetMapping("/toforget")
+	public String toForget(Model model) {
+		return "Member/forget";
+	}
+	
 	// 會員介面
 	@GetMapping("/toCity")
 	public String tocity(Model model) {

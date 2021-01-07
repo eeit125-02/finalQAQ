@@ -46,58 +46,106 @@
 	<header class="container blog-header py-3" id="bookWebheader"></header>
 	<!-- header -->
 
-	<div class="container media">
-		<!-- body -->
 
+	<!-- body -->
+	<form></form>
 
-
-		<jsp:useBean id="bookdetail" class="com.web.book.model.BookBean" scope="request" />
-		<form action="<c:url value='shopping' />" method="get">
-			<div>
-				<label for="url"></label> <img alt="xx" width="200px" height="300px"
-					src="<jsp:getProperty name="bookdetail" property="bk_Pic" />">
-			</div>
-			<div>
-				<label for="bk_Name">書名</label>
-				<jsp:getProperty name="bookdetail" property="bk_Name" />
-			</div>
-			<div>
-				<label for="bk_Author">作者</label>
-				<jsp:getProperty name="bookdetail" property="bk_Author" />
-			</div>
-			<div>
-				<label for="bk_Publish">出版社</label>
-				<jsp:getProperty name="bookdetail" property="bk_Publish" />
-			</div>
-			<div>
-				<label for="bk_Content">描述: </label>
-				<jsp:getProperty name="bookdetail" property="bk_Content" />
-			</div>
-
-			<div>
-				<button type="submit" value="${bookdetail.bk_ID}" name="goToCart">直接購買</button><br>
-				
-			</div>
-			<div>
-				<button type="submit" value="${bookdetail.bk_ID}" name="addCart">放入購物車</button>
-			</div>
-			${same}
-		</form>
-		
-		
-		<form action="<c:url value='/Transation/storeMain' />" method="get">
-			<button type="submit" name="">返回</button>
-			<br>
-		</form>
-
-
-
-		<!-- body -->
+	<div style="text-align: center">
+		<h2>二手書圖</h2>
 	</div>
+	<div class="container">
+		<input type="hidden" name="bk_Price"
+			value="${bookdetail.book.bk_Price}">
+		<hr>
+		<div class="row">
+			<div class="col-lg-4">
+				<label for="url"></label> <img alt="圖勒?" width="300px"
+					height="400px" src="<c:url value='${bookdetail.book.bk_Pic}'/>">
+			</div>
+			<div class="col-lg-8">
+				<h3>書名:</h3>
+				<span> ${bookdetail.book.bk_Name}</span>
+				<hr>
+				<h5>作者:</h5>
+				<span> ${bookdetail.book.bk_Author}</span>
+				<hr>
+				<h5>出版社:</h5>
+				<span> ${bookdetail.book.bk_Publish}</span>
+				<hr>
+				<h5>出版日:</h5>
+				<span> ${bookdetail.book.bk_Date}</span>
+				<hr>
+				<h5>價錢:</h5>
+				<span> ${bookdetail.bs_Price}</span>
+				<a href="<c:url value='/qaqManyPrice?ID=${bookdetail.book.bk_ID}'/>"
+				 style="margin-left: 50px;"	>查看其他價格 </a>
+				<hr>
+				<h5>庫存:</h5>
+				<span> ${bookdetail.bs_Num}</span>
+			</div>
+		</div>
+		<!-- 		qaq -->
+
+		<div class="row">
+			<div class="col-sm-1">
+				<button type="submit" class="btn btn-outline-success"
+					onclick="goToCart(${bookdetail.book.bk_ID},${bookdetail.bs_Price})">直接購買</button>
+			</div>
+			<div class="col-sm-1">
+				<button type="submit" class="btn btn-outline-success"
+					onclick="addCart(${bookdetail.book.bk_ID},${bookdetail.bs_Price})">放入購物車</button>
+			</div>
+		</div>
+	</div>
+
+	<!-- 		qaq -->
+	<div class="container">
+	<hr>
+	<div class="col-lg-12">
+		<textarea rows="20" cols="150" readonly="readonly"
+			style="border-style: none;">
+			${bookdetail.book.bk_Content }
+			</textarea>
+	</div>
+	</div>
+	<!-- body -->
+
 
 	<!-- footer -->
 	<footer class="container py-5" id="bookWebFooter"></footer>
 	<!-- footer -->
-
+	<script type="text/javascript">
+		function goToCart(bk_ID, bs_Price) {
+			if (typeof ($.cookie('Member_ID')) != "undefined") {
+				alert("成功")
+				document.forms[0].action="<c:url value='/shopping?bk_ID=" + bk_ID + "&bk_Price=" + bs_Price + "' />" ;
+				document.forms[0].method="post";
+				document.forms[0].submit();
+			} else {
+				console.log(bk_ID);
+				console.log(bk_Price);
+				document.forms[0].action="<c:url value='/toLogin' />" ;
+				document.forms[0].method="get";
+				document.forms[0].submit();
+			}
+			;
+		}
+		
+		function addCart(bk_ID1, bs_Price) {
+			if (typeof ($.cookie('Member_ID')) != "undefined") {
+				alert("成功加入購物車")
+				document.forms[0].action="<c:url value='/qaqTest' />" ;
+				document.forms[0].method="get";
+				document.forms[0].submit();
+			} else {
+				console.log(bk_ID1);
+				console.log(bk_Price);
+				document.forms[0].action="<c:url value='/toLogin' />" ;
+				document.forms[0].method="get";
+				document.forms[0].submit();
+			}
+			;
+		}
+	</script>
 </body>
 </html>

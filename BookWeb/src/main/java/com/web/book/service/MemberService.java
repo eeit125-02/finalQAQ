@@ -24,4 +24,8 @@ public interface MemberService {
 
 	void change(String account);
 
+	MemberBean email(String email);
+	
+	boolean checkMail(String email);
+
 }

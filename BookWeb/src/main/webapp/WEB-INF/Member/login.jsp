@@ -126,7 +126,7 @@ form {
 				<div>
 					<a href="<c:url value='/toRegiste' />"
 						style="text-decoration: none">新帳號註冊</a>&nbsp;
-					<a href="password.html">忘記密碼?</a>
+					<a href="<c:url value='/toforget'/>">忘記密碼?</a>
 				</div>
 			</fieldset>
 		<input type="hidden" id="file" name="file" value="https://firebasestorage.googleapis.com/v0/b/bookweb-50d11.appspot.com/o/member%2Fa123456?alt=media"/>

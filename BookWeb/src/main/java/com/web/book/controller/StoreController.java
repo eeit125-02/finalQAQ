@@ -1,7 +1,6 @@
 package com.web.book.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -44,17 +43,21 @@ public class StoreController {
 	// 最終呈現首頁
 	@GetMapping("qaqTest")
 	public String qaqmainPage(Model model) {
-		List<BookBean> list = bookStoreService.searchBookStore();
+		List<BookStoreBean> list = bookStoreService.searchBookStore(1);
+//		System.out.println(bookStoreService.countBook().size());
+//		System.out.println("--------------------------------------------");
+//		int totalPage = (int) Math.ceil(bookStoreService.countBook().size()/12);
 		model.addAttribute("store", list);
+//		model.addAttribute("total", totalPage);
 		return "/Transation/qaqMain";
 	}
 
 	// 如果前端連結 1. 用 / 後端用PathVariable接   2. 用 ? 後端用RequestParam接
-	@GetMapping("/qaqBookDetail/{bk_ID}")
+	@GetMapping("/qaqBookDetail/{bks_ID}")
 	public String qaqBookDetail(Model model,
-			@PathVariable Integer bk_ID
+			@PathVariable Integer bks_ID
 			) {
-		BookBean bookDetail = bookStoreService.getBookDetail(bk_ID);
+		BookStoreBean bookDetail = bookStoreService.getOneBookStore(bks_ID);
 		model.addAttribute("bookdetail", bookDetail);
 		return "Transation/detail";
 	}
@@ -69,12 +72,30 @@ public class StoreController {
 		return "Transation/qaqManyPrice";
 	}
 	
+	@PostMapping("/detail")
+	public String priceDetail(Model model, @RequestParam(value = "bks_ID") Integer bks_ID
+			) {
+		BookStoreBean bookDetail = bookStoreService.getOneBookStore(bks_ID);
+		model.addAttribute("bookdetail", bookDetail);
+		return "Transation/detail";
+	}
+	
 	// 前往一本書的詳細頁面
 	@GetMapping("/detail")
 	public String detail(Model model, @RequestParam(value = "selectbk") Integer bk_ID) {
 		BookBean book = bookStoreService.getBookDetail(bk_ID);
 		model.addAttribute("bookdetail", book);
 		return "/Transation/detail";
+	}
+	
+	// 商店首頁搜尋書名
+	@GetMapping("qaqSBookName")
+	public String qaqSBookName(Model model,
+			@RequestParam(value = "sBkNe") String bk_Name
+			) {
+		List<BookStoreBean> list = bookStoreService.searchStoreBookName(bk_Name);
+		model.addAttribute("store", list);
+		return "/Transation/qaqMain";
 	}
 
 	@GetMapping("/myStore")
@@ -118,7 +139,7 @@ public class StoreController {
 
 	@PostMapping("/searchBookName")
 	public String searchBookName(Model model, @RequestParam(value = "searchbk") String bk_Name) {
-		List<BookBean> list = bookStoreService.searchBookName(bk_Name);
+		List<BookStoreBean> list = bookStoreService.searchStoreBookName(bk_Name);
 		model.addAttribute("bookName", list);
 		return "/Transation/addMyStore";
 	}
