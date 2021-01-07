@@ -211,7 +211,7 @@ p {
 				success : function(data) {
 						insertData = "<form action=\"<c:url value='/Update' />\" method=\"post\">"
 									 +"<fieldset id=\"mb_pwd\">"
-									 +"<legend>會員個資</legend>"
+									 +"<legend>密碼修改</legend>"
 						+"<table class=\"table\">"
 							+"<tr class=\"tr1\">"
 								+"<th colspan=\"2\">帳號</th>"
@@ -225,20 +225,21 @@ p {
 								+"</th>"
 							+"</tr>"
 							+"<tr class=\"table-light\">"
-								+"<td><input type=\"password\" name=\"pwd\" id=\"pwd\" size=\"12\" onblur=\"Checkpwd()\"><span id=\"idsp1\" style=\"color: red\"></span></td>"
+								+"<td><input type=\"password\" name=\"pwd\" id=\"pwd\" size=\"12\" ><span id=\"idsp1\" style=\"color: red\"></span></td>"
 							+"</tr>"
 							+"<tr class=\"tr2\">"
 								+"<th colspan=\"2\">確認密碼</th>"
 							+"</tr>"
 							+"<tr class=\"table-light\">"
-							+"<td><input type=\"password\" name=\"pwd1\" id=\"pwd1\" size=\"12\" onblur=\"Checkpwd1()\"><span id=\"idsp2\" style=\"color: red\"></span></td>"
+							+"<td><input type=\"password\" name=\"pwd1\" id=\"pwd1\" size=\"12\" ><span id=\"idsp2\" style=\"color: red\"></span></td>"
 							+"</tr>"
 							+"</table>"
-							+"<button type=\"submit\" name=\"Update\">送出</button>"
+							+"<input type=\"button\" id=\"Update\" name=\"Update\" value=\"送出\">"
 							+"<button type=\"reset\">清除</button>"
 					+"</fieldset>"
 						+"</form>"
 		 			$('#change123').html(insertData);
+						Modify();
 				}
 	 });
 	 })
@@ -339,7 +340,49 @@ p {
 // 					success : function(data) {
 						
 // 							insertData =
-       
+    function Modify(){
+	var b1=false;
+	var b2=false;
+	$('#pwd').blur(function(){
+		let pwd = document.getElementById("pwd").value
+		let pwdlen = pwd.length;
+		let sp = document.getElementById("idsp1")
+		var rex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]+$/;
+		if (pwd.length >= 6 && rex.test(pwd)) {
+			b1=true;
+			sp.innerHTML = "ok"
+		} else if (pwd == "") {
+			sp.innerHTML = "密碼不可為空白"
+		} else if (pwd.length < 6) {
+			sp.innerHTML = "密碼不足6碼"
+		} else if (pwd != rex.test(pwd)) {
+			sp.innerHTML = "密碼須包含英文、數字及特殊符號"
+		} else {
+			sp.innerHTML = "錯誤"
+		}
+	})
+
+	$('#pwd1').blur(function(){
+		let pwd = document.getElementById("pwd").value
+		let pwd1 = document.getElementById("pwd1").value
+		sp = document.getElementById("idsp2")
+		if (pwd1 ==pwd && pwd1 != "") {
+				b2=true;
+			sp.innerHTML = "ok"
+		} else
+			sp.innerHTML = "錯誤"
+
+	})
+	$('#Update').click(function(){
+		console.log(b1);
+		console.log(b2);
+		if(b1==true && b2==true){
+			$('form').submit();
+		}else{
+			alert("資料有誤")
+		}
+	})
+	}
 	 
 	 
 </script>
