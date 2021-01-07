@@ -71,7 +71,7 @@ response.setDateHeader("Expires", 0);
 					<a class="navbar-brand">搜尋貼文關鍵字</a>
 					<form class="form-inline" action='search_keyword' method="post">
 						<input class="form-control mr-sm-2" type="search"
-							placeholder="請輸入關鍵字­" name="keyword">
+							placeholder="請輸入關鍵字" name="keyword">
 						<button class="btn btn-outline-primary my-2 my-sm-0" type="submit"
 							id="search_keyword">Search</button>
 					</form>
