@@ -165,12 +165,10 @@ span {
 	
 </body>
 <script>
-	$(document).ready(function() {
 		$('#submit1').click(function() {
 			window.alert('註冊成功');
-			$('form').eq(0).submit();
+			$('form').submit();
 		})
-	})
 	
 	$(document).ready(function() {
 		$("#bookWebheader").load("<c:url value='/header'/>");

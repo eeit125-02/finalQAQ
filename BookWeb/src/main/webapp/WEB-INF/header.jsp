@@ -29,7 +29,6 @@
 			src="${pageContext.request.contextPath}/image/logo1.png"
 			id="Img/logo">
 		</a>
-
 	</div>
 
 
@@ -51,18 +50,22 @@
 					class="dropdown-item text-muted"
 					href="//localhost:8080/BookWeb/BookReport/EditBookReport">編輯資訊</a>
 			</div>
-
 		</nav>
 	</div>
-
+		<input type="hidden" id="pic" value="${loginUser.mb_pic}">
+		<input type="hidden" id="name" value="${loginUser.mb_Name}">
 	<script>
+
+	console.log($('#pic').val())
+		let pic=$('#pic').val();
+		let name=$('#name').val();
 		$(document)
 				.ready(
 						function() {
 							if (typeof ($.cookie('Member_ID')) != "undefined") {
 								$('#loginButton')
-										.html(
-												"<a href=\"//localhost:8080/BookWeb/toCity\">會員中心</a>&nbsp;"
+										.html(  "<img src=\""+pic+"\" style=\"width: 35px; height: 35px; text-align:center; border-radius: 50%;\"/>&nbsp;"
+												+"<a href=\"//localhost:8080/BookWeb/toCity\">"+name+"</a>&nbsp;"
 														+ "<a id=\"logout\" href=\"//localhost:8080/BookWeb/toLogin\">登出</a>");
 								$("#logout").click(function() {
 									console.log("123")

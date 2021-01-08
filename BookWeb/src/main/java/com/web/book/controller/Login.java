@@ -43,7 +43,6 @@ public class Login {
 			@RequestParam(value = "pwd") String mb_Password, @RequestParam(value = "sex") String mb_Sex,
 			@RequestParam(value = "name") String mb_Name,@RequestParam(value = "birthday") Date mb_Birthday,
 			@RequestParam(value = "mail") String mb_Mail,@RequestParam(value = "file",required = false) String file) {
-		System.out.println(file);
 		Timestamp ts = new Timestamp(System.currentTimeMillis());
 		MemberBean reg_member = new MemberBean(0, mb_Account, mb_Password, mb_Sex, mb_Birthday, mb_Name, mb_Mail, null, null,
 				ts, 0, null, file);
@@ -51,20 +50,13 @@ public class Login {
 		reg_member.setCheckColume(true);
 		checkMember = reg_member;
 		model.addAttribute("reg_member", reg_member);
-		return "Member/confirm";
+		return "redirect:toConfirm";
 	}
-
-//	//JavaMail
-//	@PostMapping("/JavaMail")
-//	public void JavaMail(@RequestParam(value = "mail",required = false) String email) {
-//		JavaMail mail = new JavaMail();
-//		MemberBean member = ms.email(email);
-//		mail.SendMail(email,member.getMb_Password());
-//	}
 	
 	// 註冊資料確認後送至資料庫
 	@PostMapping("/confirm")
 	public String Confirm() {
+		System.out.println(checkMember);
 		ms.insertMember(checkMember);
 		return "redirect:toLogin";
 	}
@@ -110,7 +102,6 @@ public class Login {
 	@ResponseBody
 	public boolean checkColume(@PathVariable("mb_Account") String account) {
 		boolean check = ms.checkColume(account);
-		System.out.println(check);
 		return check;
 	}
 	// 三方認證介面
@@ -173,9 +164,12 @@ public class Login {
 			String sessionId = GlobalService.createSessionID(String.valueOf(loginMember.getMb_ID()),
 					loginMember.getMb_Name(), loginMember.getMb_Account());
 			Cookie memId = new Cookie("Member_ID", sessionId);
+			Cookie memName = new Cookie("Member_Name", loginMember.getMb_Name());			
+			System.out.println(loginMember.getMb_pic());
 			memId.setMaxAge(1200);
 			response.addCookie(memId);
-			model.addAttribute("Account", Account);
+			response.addCookie(memName);
+			model.addAttribute("loginMember", loginMember);
 			logincheck = "b" ;
 			}
 			return "redirect:toCity";
@@ -323,6 +317,14 @@ public class Login {
 	@GetMapping("/toRegiste")
 	public String toregiste(Model model) {
 		return "Member/registe";
+	}
+	
+	// 註冊確認介面
+	@GetMapping("/toConfirm")
+	public String toConfirm(Model model) {
+		System.out.println(checkMember);
+		model.addAttribute("reg_member",checkMember);
+		return "Member/confirm";
 	}
 
 	//忘記密碼
