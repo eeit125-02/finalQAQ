@@ -56,11 +56,10 @@ legend {
 
 div {
 	text-align: center;
-	margin: 10px;
 }
-p {
-	text-align: center;
-	margin-top: 0px;
+
+.btn {
+	margin:5px;
 }
 
 .bd-placeholder-img {
@@ -169,13 +168,13 @@ p {
 	<!-- footer -->
 	</body>
 	<script>
-	$('#admin1').click(function(){
-		$('#change123').load("//localhost:8080/BookWeb/adminall")
-	})
 	$(document).ready(function() {
 		$("#bookWebheader").load("<c:url value='/header'/>");
         $("#bookWebFooter").load("<c:url value='/footer'/>");
 	}); 
+	$('#admin1').click(function(){
+		$('#change123').load("//localhost:8080/BookWeb/adminall")
+	})
         var check = $("#test").val();
         if(check=="third"){
         	$("#inf").hide();

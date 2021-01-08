@@ -219,7 +219,7 @@ form {
 										success : function(Colume) {
 											if (Colume) {
 												console.log(Colume);
-												$.ajax({
+													$.ajax({
 															async : false,
 															type : 'POST',
 															url : editURL,
