@@ -60,13 +60,14 @@ response.setDateHeader("Expires", 0);
 	<!-- header -->
 	<div class="container-fluid" style="margin: 20px 0px">
 		<div class="row">
+			<div class="col-2"></div>
 			<!-- sidebar area -->
-			<div class="col-2 text-center">
+			<div class="col-1 text-center">
 				<h2>書適論壇</h2>
 			</div>
 
 			<!-- content area -->
-			<div class="col-8" style='text-align: center;'>
+			<div class="col-7" style='text-align: center;'>
 				<nav class="navbar navbar-light bg-light justify-content-between">
 					<a class="navbar-brand">搜尋貼文關鍵字</a>
 					<form class="form-inline" action='search_keyword' method="post">
@@ -88,7 +89,7 @@ response.setDateHeader("Expires", 0);
 					<c:set var="pt" value="${stored_post.post_title}" />
 					<c:set var="pc" value="${stored_post.post_content}" />
 					<c:if test="${fn:contains(pt, pk)||fn:contains(pc, pk)}">
-
+						
 						<div
 							style="border: #ADADAD 2px solid; border-radius: 5px; text-align: left; padding: 10px; margin: 0px 10px">
 							<p>${stored_post.memberbean.mb_Name}<br>${stored_post.post_time}</p>
