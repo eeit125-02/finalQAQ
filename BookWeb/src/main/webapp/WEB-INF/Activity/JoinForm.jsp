@@ -70,14 +70,11 @@
 			<form:form method="POST" modelAttribute="ajb" enctype="multipart/form-data">
 
 				<table>
-<!--                     <tr> -->
-<%-- 						<td><label type="hidden">會員帳號:${loginUser.getMb_Account()}</label></td> --%>
-<%-- <%-- 						<td><input type="hidden" name="mb_Account" value="${member.mb_Account}" /></td> --%> 
-<!-- 					</tr> -->
 
 					<tr>
 						<td><label>會員帳號:${loginUser.getMb_Account()}</label></td>
 <%-- 						<td><input type="hidden" name="mb_Account" value="${member.mb_Account}" /></td> --%>
+					<form:input type="hidden" path="member.mb_Account" value="${loginUser.getMb_Account()}"/>
 					</tr>
 
                     <tr>
@@ -86,7 +83,7 @@
 					</tr>
 
                     <tr>
-						<td><label>會員名稱:${loginUser.getMb_Name()}</label></td>
+						<td><label>會員姓名:${loginUser.getMb_Name()}</label></td>
 <%-- 						<td><input type="hidden" name="mb_Name" value="${member.mb_Name}" /></td> --%>
 					</tr>
 

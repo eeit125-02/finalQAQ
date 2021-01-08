@@ -81,26 +81,26 @@
 			<form:form method="POST" modelAttribute="updateajb">
 
 				<input type="hidden" name="join_ID" value="${ajb.join_ID}"/>
-				<input type="hidden" name="mb_Account" value="${ajb.mb_Account}"/>
+<%-- 				<form:input type="hidden" path="member.mb_Account" value="${loginUser.getMb_Account()}"/> --%>
 				<input type="hidden" name="finalDecision" value="">
 				<Table>
 					
 					<tr>
-						<td><form:label path="act.act_Name">活動名稱:</form:label></td>
-						
+						<td><form:label path="act_Name">活動名稱:</form:label></td>
+					<td><form:input path="act_Name" /></td>
 					</tr>
 
 					<tr>
-						<td><form:label path="member.mb_Name">會員名稱:</form:label></td>
+						<td><label>會員姓名:${loginUser.getMb_Name()}</label></td>
 					</tr>
-<tr>
+					<tr>
 						<td><form:label path="member.mb_Mail">email:</form:label></td>
-						<td><form:input path="member.mb_Mail"/></td>
+						<td><form:input path="member.mb_Mail" value="${loginUser.getMb_Mail()}"/></td>
 					</tr>
 
 					<tr>
 						<td><form:label path="member.mb_Tel">聯絡電話:</form:label></td>
-						<td><form:input path="member.mb_Tel"/></td>
+						<td><form:input path="member.mb_Tel" value="${loginUser.getMb_Tel()}"/></td>
 					</tr>
 
 					<TR>

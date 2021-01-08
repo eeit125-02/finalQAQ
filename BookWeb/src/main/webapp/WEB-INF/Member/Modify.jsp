@@ -54,7 +54,7 @@ background-color:#e0ece4
 <body>
 		<form action="<c:url value='/Update'/>" method="post">
 			<fieldset id="mb_pwd">
-				<legend>會員個資</legend>
+				<legend>密碼修改</legend>
 				<table class="table" >
 					<tr class="tr1">
 						<th colspan="2">帳號</th>
@@ -79,19 +79,22 @@ background-color:#e0ece4
 						value="" size="12" onblur="Checkpwd1()"><span id="idsp2" style="color: red"></span></td>
 					</tr>
 					</table>
-					<button type="submit" name="Update">送出</button>
+					<button  type="button" id="Update" name="Update">送出</button>
 					<button type="reset">清除</button>
 			</fieldset>
 				</form>
 	<script>
-
+		var a1=false;
+		var a2=false;
 		function Checkpwd() {
 			let pwd = document.getElementById("pwd").value
 			let pwdlen = pwd.length;
 			let sp = document.getElementById("idsp1")
 			var rex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]+$/;
 			if (pwd.length >= 6 && rex.test(pwd)) {
-				sp.innerHTML = "正確"
+				sp.innerHTML = ""
+				a1=true;
+				console.log(a1);
 			} else if (pwd == "") {
 				sp.innerHTML = "密碼不可為空白"
 			} else if (pwd.length < 6) {
@@ -108,11 +111,22 @@ background-color:#e0ece4
 			let pwd1 = document.getElementById("pwd1").value
 			sp = document.getElementById("idsp2")
 			if (pwd == pwd1 && pwd1 != "") {
-				sp.innerHTML = "正確"
+				sp.innerHTML = ""
+					a2=true;
+				console.log(a2);
 			} else
 				sp.innerHTML = "錯誤"
 
 		}
+		console.log(a1);
+		console.log(a2);
+		$('#Update').click(function(){
+			if(a1 && a2){
+				$('form').submit();
+			}else{
+				alert("資料有誤")
+			}
+		})
 	</script>
 </body>
 

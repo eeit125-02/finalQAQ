@@ -56,6 +56,7 @@ public class ActJoinDaoImpl implements ActJoinDao {
 	@Override
 	public int createActJoin(ActJoinBean ajb) {
 		int count = 0;
+		System.out.println(ajb.getMember().getMb_Account());
 		Session session = factory.getCurrentSession();
 		session.save(ajb);
 		count++;

@@ -90,7 +90,7 @@ transform: translateX(26px);
 	margin: auto;
 	background-color: #F3F3FA;
 	width: 1100px;
-	height:1900px;
+	height:1900px
 }
 
 .a tr, .a td, .a th {
