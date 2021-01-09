@@ -153,8 +153,7 @@ public class BookReportController {
 			@RequestParam(value = "br_Content", required = true) String br_Content,
 			@RequestParam(value = "br_Name", required = true) String br_Name) {
 
-		//bookReportService.insertBookReport(loginUser.getMb_ID(), bk_ID, br_Name, br_Score, br_Content);
-		System.out.println(br_Score);
+		bookReportService.insertBookReport(loginUser.getMb_ID(), bk_ID, br_Name, br_Score, br_Content);
 		return true;
 	}
 
