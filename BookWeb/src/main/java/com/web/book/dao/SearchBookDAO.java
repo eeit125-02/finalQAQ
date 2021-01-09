@@ -41,5 +41,8 @@ public interface SearchBookDAO {
 
 	//查詢收藏與否
 	boolean checkbc(int bk_id, int mb_id);
+	
+	//刪除書本
+	boolean deletebk(BookBean bkc);
 
 }

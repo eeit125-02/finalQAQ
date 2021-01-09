@@ -87,12 +87,13 @@ text-align:center;
 						<%-- 			${act.ACT_Image} --%>
 						<tr>
 							<%-- 				<td><a href='/FindActServlet?key=${act.ACT_Name}'></a></td> --%>
-							<td>${mb_Account}</td>
-							<td>${act_Name}</td>
-							<td>${mb_Name}</td>
-							<td>${mb_Mail}</td>
-							<td>${mb_Tel}</td>
+							<td>${ajb.member.mb_Account}</td>
+							<td>${ajb.act.act_Name}</td>
+							<td>${ajb.member.mb_Name}</td>
+							<td>${ajb.member.mb_Mail}</td>
+							<td>${ajb.member.mb_Tel}</td>
 							<td>${ajb.join_Pax}</td>
+							
 							<td><a href="<c:url value='/showJoinUpdateForm'/>?join_ID=${ajb.join_ID}">編輯</a>
 							<td><a href="<c:url value='deleteActJoin'/>?join_ID=${ajb.join_ID}">刪除</a>
 			
@@ -105,7 +106,7 @@ text-align:center;
 			</c:if>
 			<p />
 <%-- 			<a href='${pageContext.request.contextPath}/ActHomepage'>回到活動管理</a> --%>
-			<button><a href='${pageContext.request.contextPath}/ActHomepage'>繼續探索活動</a></button>
+			<a href='${pageContext.request.contextPath}/showActs'><button class="btn btn-outline-info">繼續探索活動</button></a>
 <!-- 			<button onclick="window.location.href='showCreateForm'">新增活動1</button> -->
 		</div>
 	</div>
@@ -114,4 +115,6 @@ text-align:center;
 	<footer class="container py-5" id="bookWebFooter"></footer>
 	<!-- footer -->
 </body>
+<script>
+</script>
 </html>

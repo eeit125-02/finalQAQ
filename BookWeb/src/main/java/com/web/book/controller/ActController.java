@@ -5,12 +5,9 @@ import java.util.List;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.commons.codec.digest.MessageDigestAlgorithms;
-import org.dom4j.tree.BackedList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,6 +22,7 @@ import com.web.book.model.MemberBean;
 import com.web.book.service.ActJoinService;
 import com.web.book.service.ActService;
 import com.web.book.service.GlobalService;
+import com.web.book.service.MemberService;
 
 @Controller
 @SessionAttributes(value = { "loginUser" })
@@ -62,7 +60,9 @@ public class ActController {
 
 	// 顯示新增活動頁面
 	@GetMapping("/showCreateForm")
-	public String showCreateForm(@ModelAttribute("loginUser") MemberBean loginUser, Model model) {
+	public String showCreateForm(
+			@ModelAttribute("loginUser") MemberBean loginUser, Model model
+			) {
 		ActBean ab = new ActBean();
 		model.addAttribute("actbean", ab);
 		model.addAttribute("mb_ID", loginUser.getMb_ID());
@@ -70,7 +70,7 @@ public class ActController {
 		return "Activity/ActForm";
 	}
 
-	// 新增活動
+	// 送出新增活動
 	@PostMapping("/showCreateForm")
 	public String createAct(Model model, @ModelAttribute("actbean") ActBean ab,
 			@ModelAttribute("loginUser") MemberBean loginUser,

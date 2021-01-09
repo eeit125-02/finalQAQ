@@ -16,6 +16,7 @@
 	src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
 	integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
 	crossorigin="anonymous"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
 	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
@@ -119,7 +120,11 @@
 								+"<div class=\"collect\">"
 								+"<button type=\"submit\" class=\"btn btn-outline-danger btn-sm\" onclick=\"deletebc(" + data[i].bc_ID + ");\"value=\""
 								+data[i].bc_ID
-								+"\">取消收藏</button>"
+								+"\">"
+								+ "<img "
+								+ "src=\"${pageContext.request.contextPath}/image/heartred.png\""
+								+ " id=\"Img/heart\" width=\"18px\">" 
+								+" 取消收藏</button>"
 								+"</div>"
 								+"<br>"
 								+"<hr>"
@@ -144,7 +149,7 @@
 				contentType : "application/json;charset=utf-8",
 				success : function(data) { 
 					if (data) { 
-					alert('刪除成功 ');
+					swal("刪除成功", "你已經把這本書取消收藏囉～","info")
 					loadBookCollectList();
 					}else {
 					alert('刪除失敗 ');

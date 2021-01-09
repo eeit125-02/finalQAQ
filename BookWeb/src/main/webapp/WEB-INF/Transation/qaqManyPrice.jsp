@@ -47,6 +47,7 @@
 	<!-- header -->
 
 	<!-- body -->
+	<form></form>
 	<div style="text-align: center">
 		<h2>二手書圖</h2>
 	</div>
@@ -85,7 +86,8 @@
 					<c:out value="${v.bs_Num}" />
 				</div>
 				<div class="col-lg-3">
-					<button type="button" class="btn btn-outline-secondary">我是按鈕</button>
+					<button type="submit" class="btn btn-outline-secondary"
+					onclick="priceDetail(${v.bks_ID})">查看詳細</button>
 				</div>
 			</div>
 			<hr>
@@ -97,5 +99,12 @@
 	<!-- footer -->
 	<footer class="container py-5" id="bookWebFooter"></footer>
 	<!-- footer -->
+	<script type="text/javascript">
+	function priceDetail(bks_ID) {
+		document.forms[0].action="<c:url value='/detail?bks_ID=" + bks_ID + "' />" ;
+		document.forms[0].method="post";
+		document.forms[0].submit();
+	}
+	</script>
 </body>
 </html>

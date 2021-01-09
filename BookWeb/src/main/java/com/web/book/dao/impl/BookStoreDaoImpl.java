@@ -20,30 +20,28 @@ public class BookStoreDaoImpl implements BookStoreDao {
 	@Autowired
 	SessionFactory factory;
 
-	// 商品頁面搜尋 不包含任何會員
+	// 商品頁面搜尋 管理員a123456,13
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<BookBean> searchBookStore(int page) {
+	public List<BookStoreBean> searchBookStore(int page) {
 		Session session = factory.getCurrentSession();
-		String hql = "FROM BookBean";
-		Query<BookBean> query = session.createQuery(hql);
+		String hql = "FROM BookStoreBean where bs_ID = 13";
+		Query<BookStoreBean> query = session.createQuery(hql);
 		int startPage = (page - 1) * 12;
 		query.setFirstResult(startPage);
 		query.setMaxResults(12);
 		return query.getResultList();
 	}
-	
+
 	// 商品全部數量
 	@SuppressWarnings("unchecked")
 	public List<BookBean> countBook() {
 		Session session = factory.getCurrentSession();
 		String hql = "select a.bk_ID from BookBean a";
-		return  session.createQuery(hql).getResultList();
+		return session.createQuery(hql).getResultList();
 	}
-	
-	
-	
-	//  一件商品所有價錢區間
+
+	// 一件商品所有價錢區間
 	@Override
 	@SuppressWarnings("unchecked")
 	public List<BookStoreBean> bookPrices(Integer bk_ID) {
@@ -52,8 +50,6 @@ public class BookStoreDaoImpl implements BookStoreDao {
 		Query<BookStoreBean> query = session.createQuery(hql);
 		return query.setParameter("bk_ID", bk_ID).getResultList();
 	}
-
-	
 
 	// 單一商品詳細資料
 	@Override
@@ -78,6 +74,16 @@ public class BookStoreDaoImpl implements BookStoreDao {
 		Query<BookStoreBean> query = session.createQuery(hql);
 		MemberBean member = session.load(MemberBean.class, mb_ID);
 		return query.setParameter("member", member).setFirstResult(0).setMaxResults(40).getResultList();
+	}
+
+	// 首頁搜尋書名
+	@Override
+	@SuppressWarnings("unchecked")
+	public List<BookStoreBean> searchStoreBookName(String bk_Name) {
+		Session session = factory.getCurrentSession();
+		String hql = "From BookStoreBean a Where a.book.bk_Name like :bkname";
+		Query<BookStoreBean> query = session.createQuery(hql);
+		return query.setParameter("bkname", "%" + bk_Name + "%").setFirstResult(0).setMaxResults(12).getResultList();
 	}
 
 	// 從書庫搜尋書名(新增用途)
@@ -126,15 +132,15 @@ public class BookStoreDaoImpl implements BookStoreDao {
 		BookStoreBean bookStore = session.load(BookStoreBean.class, bks_ID);
 		session.delete(bookStore);
 	}
-	
+
 	// 灌庫存值給商店
-		@Override
-		public void boobqaq() {
-			// 6242 /80~84、11 /13 /a123456
-			Session session = factory.getCurrentSession();
-			Integer qaqQty = 0;
-			Integer qaqPrice = 0;
-			MemberBean member = session.load(MemberBean.class, 11);
+	@Override
+	public void boobqaq() {
+		// 6242 /80~84、11 /13 /a123456
+		Session session = factory.getCurrentSession();
+		Integer qaqQty = 0;
+		Integer qaqPrice = 0;
+		MemberBean member = session.load(MemberBean.class, 11);
 		// 管理員灌值 start
 //			MemberBean member = session.load(MemberBean.class, 13);
 //			for (int i = 1; i < 6243; i++) {
@@ -147,30 +153,30 @@ public class BookStoreDaoImpl implements BookStoreDao {
 //				session.save(bookStoreBean);
 //			}
 		// 管理員灌值 end
-			
+
 		// 製造不同庫存不同價錢區間 start
 		// 不重複數字 start
-			LinkedList<Integer> myList = new LinkedList<Integer>();
+		LinkedList<Integer> myList = new LinkedList<Integer>();
 		// 書本ID
-			int n = 6243;
-			for (int i = 0; i < n; i++)
-				myList.add(i + 1);
+		int n = 6243;
+		for (int i = 0; i < n; i++)
+			myList.add(i + 1);
 		// 隨機的比數
-			int[] arr = new int[1000];
-			for (int i = 0; i < arr.length; i++) {
-				arr[i] = myList.remove((int) (Math.random() * n) + 1);
-				n--;
-			}
-		// 不重覆數字 end
-			for (int i = 0; i < arr.length; i++) {
-				BookBean book = session.load(BookBean.class, arr[i]);
-				qaqQty = (int)(Math.random()*(10))+1;
-				qaqPrice = (int)(Math.random()*( (book.getBk_Price()/10) -5))+5;
-				BookStoreBean bookStoreBean = new BookStoreBean(null, qaqQty, qaqPrice*10, book, member);
-				session.save(bookStoreBean);
-			}
-		// 製造不同庫存不同價錢區間 end	
-			
+		int[] arr = new int[1000];
+		for (int i = 0; i < arr.length; i++) {
+			arr[i] = myList.remove((int) (Math.random() * n) + 1);
+			n--;
 		}
+		// 不重覆數字 end
+		for (int i = 0; i < arr.length; i++) {
+			BookBean book = session.load(BookBean.class, arr[i]);
+			qaqQty = (int) (Math.random() * (10)) + 1;
+			qaqPrice = (int) (Math.random() * ((book.getBk_Price() / 10) - 5)) + 5;
+			BookStoreBean bookStoreBean = new BookStoreBean(null, qaqQty, qaqPrice * 10, book, member);
+			session.save(bookStoreBean);
+		}
+		// 製造不同庫存不同價錢區間 end
+
+	}
 
 }

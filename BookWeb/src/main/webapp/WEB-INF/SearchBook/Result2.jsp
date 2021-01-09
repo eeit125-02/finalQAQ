@@ -18,6 +18,7 @@
 	src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
 	integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
 	crossorigin="anonymous"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
 	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
@@ -42,6 +43,9 @@
 }
 .collectindex {
 	float: right;
+}
+.bkname{
+white-space:pre-wrap;
 }
 </style>
 
@@ -116,10 +120,12 @@
 				contentType : "application/json;charset=utf-8",
 				success : function(data) {
 					if (data) {
-						alert('成功加入收藏 ');
-						$("#collect"+i).html(insertData2);
+// 						alert('成功加入收藏 ');
+						swal("收藏成功", "你已經把這本書加入收藏囉～","success")
+						loadCollectList(i);
 					}else {
-						alert('加入失敗，本書已在您的收藏清單 ');
+						swal("刪除成功", "你已經把這本書取消收藏囉～","info")
+						loadCollectList(i);
 					}
 				}
 			});
@@ -152,7 +158,7 @@
 							+"<div class=\"col-sm-10\">"
 							+"<h3>"
 							+"<form name=a1 action=\"<c:url value='/bookpage' />\" method=\"get\">"
-							+"<button type=\"submit\" name=\"page\"class=\"btn btn-link btn-lg\" value=\""
+							+"<button type=\"submit\" name=\"page\"class=\"btn btn-link btn-lg bkname\" value=\""
 							+data[i].bk_ID+"\">"+data[i].bk_Name+"</button></form>"
 							+"</h3>"
 							+"｜ 作者："+data[i].bk_Author
@@ -195,6 +201,7 @@
 				contentType : "application/json;charset=utf-8",
 				success : function(data) {
 					console.log(data + "!!!!");
+					console.log(typeof(data));
 					if (data) {
 						var insertData2=
 							"<button id=\"gocollect\" type=\"submit\" name=\"collect\" onclick=\"collect("

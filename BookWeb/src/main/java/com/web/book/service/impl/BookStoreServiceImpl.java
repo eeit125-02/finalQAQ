@@ -19,7 +19,7 @@ public class BookStoreServiceImpl implements BookStoreService {
 	BookStoreDao dao;
 	
 	@Override
-	public List<BookBean> searchBookStore(int page) {
+	public List<BookStoreBean> searchBookStore(int page) {
 		return dao.searchBookStore(page);
 	}
 	// 一件商品所有價錢區間
@@ -44,8 +44,8 @@ public class BookStoreServiceImpl implements BookStoreService {
 	}
 
 	@Override
-	public List<BookBean> searchBookName(String bk_Name) {
-		return dao.searchBookName(bk_Name);
+	public List<BookStoreBean> searchStoreBookName(String bk_Name) {
+		return dao.searchStoreBookName(bk_Name);
 	}
 
 	@Override
@@ -70,6 +70,10 @@ public class BookStoreServiceImpl implements BookStoreService {
 	@Override
 	public List<BookBean> countBook() {
 		return dao.countBook();
+	}
+	@Override
+	public List<BookBean> searchBookName(String bk_Name) {
+		return dao.searchBookName(bk_Name);
 	}
 	
 

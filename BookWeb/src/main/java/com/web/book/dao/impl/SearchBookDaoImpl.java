@@ -4,6 +4,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.NoResultException;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
@@ -152,7 +154,7 @@ public class SearchBookDaoImpl implements SearchBookDAO {
 		return result2;
 	}
 
-	// 新增收藏項目
+	// 新增or刪除收藏項目
 	@SuppressWarnings("unchecked")
 	@Override
 	public boolean savebc(int bk_id, int mb_id) {
@@ -165,13 +167,19 @@ public class SearchBookDaoImpl implements SearchBookDAO {
 		
 		String hql = "From BookCollectBean bc Where bc.member = :mbid AND bc.book = :bkid";
 		Query<BookCollectBean> query = session.createQuery(hql);
-		List<BookCollectBean>list = query.setParameter("mbid", member).setParameter("bkid", book).getResultList();
-		System.out.println(list.size());
-		if(list.size()==0) {
+		BookCollectBean list;
+		try {
+			System.out.println(query);
+			System.out.println(member);
+			System.out.println(book);
+			list = query.setParameter("mbid", member).setParameter("bkid", book).getSingleResult();
+			session.delete(list);
+		} catch (Exception e) {
+			e.printStackTrace();
 			result=true;
-			BookCollectBean bkc=new BookCollectBean(1, sqlDate, null, book, member);
-			session.save(bkc);
-		}		
+			list=new BookCollectBean(1, sqlDate, null, book, member);
+			session.save(list);
+		}
 		return result;
 	}
 
@@ -185,6 +193,22 @@ public class SearchBookDaoImpl implements SearchBookDAO {
 		count++;
 		return bkc;
 	}
+	
+	//刪除書本
+	@SuppressWarnings("unused")
+	@Override
+	public boolean deletebk(BookBean bkc) {
+		int count = 0;
+		boolean a=false;
+		Session session = factory.getCurrentSession();
+		session.delete(bkc);
+		count++;
+		if(count>0) {
+			a=true;
+		}
+		return a;
+	}
+	
 
 	// 修改書本
 	@Override

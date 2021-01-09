@@ -42,5 +42,8 @@ public interface SearchService {
 	//確認收藏與否
 	boolean checkbc(int bk_ID, int mb_ID);
 
+	//刪除書本
+	boolean deletebk(BookBean mb);
+
 
 }

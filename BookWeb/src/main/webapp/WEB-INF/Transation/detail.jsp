@@ -48,65 +48,104 @@
 
 
 	<!-- body -->
+	<form></form>
 
 	<div style="text-align: center">
 		<h2>二手書圖</h2>
 	</div>
 	<div class="container">
+		<input type="hidden" name="bk_Price"
+			value="${bookdetail.book.bk_Price}">
 		<hr>
 		<div class="row">
-			<div class="col-lg-3">
-				<label for="url"></label> <img alt="圖勒?" width="200px"
-					height="300px" src="<c:url value='${bookdetail.bk_Pic}'/>">
+			<div class="col-lg-4">
+				<label for="url"></label> <img alt="圖勒?" width="300px"
+					height="400px" src="<c:url value='${bookdetail.book.bk_Pic}'/>">
 			</div>
-			<div class="col-lg-9">
-				<h2>書名:</h2>
-				<span>${bookdetail.bk_Name}</span>
+			<div class="col-lg-8">
+				<h3>書名:</h3>
+				<span> ${bookdetail.book.bk_Name}</span>
 				<hr>
-				<h4>作者:</h4>
-				<span>${bookdetail.bk_Author}</span>
+				<h5>作者:</h5>
+				<span> ${bookdetail.book.bk_Author}</span>
 				<hr>
-				<h4>出版社:</h4>
-				<span>${bookdetail.bk_Publish}</span>
+				<h5>出版社:</h5>
+				<span> ${bookdetail.book.bk_Publish}</span>
 				<hr>
-				<h4>出版日:</h4>
-				<span> ${bookdetail.bk_Date}</span>
+				<h5>出版日:</h5>
+				<span> ${bookdetail.book.bk_Date}</span>
 				<hr>
-				<h4>價錢:</h4>
-				<span>${bookdetail.bk_Price}</span>
+				<h5>價錢:</h5>
+				<span> ${bookdetail.bs_Price}</span>
+				<a href="<c:url value='/qaqManyPrice?ID=${bookdetail.book.bk_ID}'/>"
+				 style="margin-left: 50px;"	>查看其他價格 </a>
+				<hr>
+				<h5>庫存:</h5>
+				<span> ${bookdetail.bs_Num}</span>
 			</div>
 		</div>
 		<!-- 		qaq -->
-		<form action="<c:url value='shopping' />" method="get">
-			<div>
-				<button type="submit" value="${bookdetail.bk_ID}" name="goToCart">直接購買</button>
-				<br>
 
+		<div class="row">
+			<div class="col-sm-1">
+				<button type="submit" class="btn btn-outline-success"
+					onclick="goToCart(${bookdetail.book.bk_ID},${bookdetail.bs_Price})">直接購買</button>
 			</div>
-			<div>
-				<button type="submit" value="${bookdetail.bk_ID}" name="addCart">放入購物車</button>
+			<div class="col-sm-1">
+				<button type="submit" class="btn btn-outline-success"
+					onclick="addCart(${bookdetail.book.bk_ID},${bookdetail.bs_Price})">放入購物車</button>
 			</div>
-			${same}
-		</form>
-		<!-- 		qaq -->
-		<hr>
-		<div class="col-lg-12">
-			<textarea rows="20" cols="150" readonly="readonly"
-				style="border-style: none;">
-			${bookdetail.bk_Content }
-			</textarea>
 		</div>
 	</div>
-	<form action="<c:url value='/qaqTest' />" method="get">
-		<button type="submit" name="">返回</button>
-		<br>
-	</form>
+
+	<!-- 		qaq -->
+	<div class="container">
+	<hr>
+	<div class="col-lg-12">
+		<textarea rows="20" cols="150" readonly="readonly"
+			style="border-style: none;">
+			${bookdetail.book.bk_Content }
+			</textarea>
+	</div>
+	</div>
 	<!-- body -->
 
 
 	<!-- footer -->
 	<footer class="container py-5" id="bookWebFooter"></footer>
 	<!-- footer -->
-
+	<script type="text/javascript">
+		function goToCart(bk_ID, bs_Price) {
+			if (typeof ($.cookie('Member_ID')) != "undefined") {
+				alert("成功")
+				document.forms[0].action="<c:url value='/shopping?bk_ID=" + bk_ID + "&bk_Price=" + bs_Price + "' />" ;
+				document.forms[0].method="post";
+				document.forms[0].submit();
+			} else {
+				console.log(bk_ID);
+				console.log(bk_Price);
+				document.forms[0].action="<c:url value='/toLogin' />" ;
+				document.forms[0].method="get";
+				document.forms[0].submit();
+			}
+			;
+		}
+		
+		function addCart(bk_ID1, bs_Price) {
+			if (typeof ($.cookie('Member_ID')) != "undefined") {
+				alert("成功加入購物車")
+				document.forms[0].action="<c:url value='/qaqTest' />" ;
+				document.forms[0].method="get";
+				document.forms[0].submit();
+			} else {
+				console.log(bk_ID1);
+				console.log(bk_Price);
+				document.forms[0].action="<c:url value='/toLogin' />" ;
+				document.forms[0].method="get";
+				document.forms[0].submit();
+			}
+			;
+		}
+	</script>
 </body>
 </html>

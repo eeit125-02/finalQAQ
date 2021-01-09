@@ -46,57 +46,57 @@
 	<!-- header -->
 	<header class="container blog-header py-3" id="bookWebheader"></header>
 	<!-- header -->
-
-	<!-- body -->
-	<div style="text-align: center">
-		<h2>二手書圖</h2>
-	</div>
-	<!-- 搜尋商品欄	 start -->
-	<form class="bs-example bs-example-form" role="form"
-		action="<c:url value='/qaqSBookName'/>">
-		<div class="row">
-			<div class="col-lg-4"></div>
-			<div class="col-lg-4">
-				<div class="input-group">
-					<input type="text" class="form-control" name="sBkNe"> <span
-						class="input-group-btn">
-						<button type="submit" class="btn btn-outline-secondary">
-							<img alt="圖勒?" src='<c:url value="image/qaqsearch.png" />'
-								width="20px" height="20px">
-						</button>
-					</span>
+	<div class="container">
+		<!-- body -->
+		<div style="text-align: center">
+			<h2>二手書圖</h2>
+		</div>
+		<!-- 搜尋商品欄	 start -->
+		<form class="bs-example bs-example-form" role="form"
+			action="<c:url value='/qaqSBookName'/>">
+			<div class="row">
+				<div class="col-lg-4"></div>
+				<div class="col-lg-4">
+					<div class="input-group">
+						<input type="text" class="form-control" name="sBkNe" placeholder="請輸入書名"> <span
+							class="input-group-btn">
+							<button type="submit" class="btn btn-outline-secondary">
+								<img alt="圖勒?" src='<c:url value="image/qaqsearch.png" />'
+									width="20px" height="20px">
+							</button>
+						</span>
+					</div>
+				</div>
+				<div class="col-lg-4">
+					<button type="button" class="btn btn-outline-secondary"
+						onclick="storeCheck()">我的賣場</button>
 				</div>
 			</div>
-			<div class="col-lg-4">
-				<button type="button" class="btn btn-outline-secondary"
-					onclick="storeCheck()">我的賣場</button>
-			</div>
-		</div>
-	</form>
-	<br>
-	<!-- 搜尋商品欄	end -->
-	<!-- 	版面置中 -->
-	<div class="container">
+		</form>
+		<br>
+		<!-- 搜尋商品欄	end -->
+		<!-- 	版面置中 -->
+
 		<!-- 	版面置中 -->
 		<div class="row">
 			<c:forEach items="${store}" var="v">
-				<div class="card col-sm-3" style="width: 18rem;">
+				<div class="card col-sm-3" style="margin: 1rem">
 					<!-- 圖片跟連結 -->
-					<a href="<c:url value='/qaqBookDetail/${v.bk_ID}'/>"> <img
-						src="<c:url value=" ${v.bk_Pic} " />" class="card-img-top"
+					<a href="<c:url value='/qaqBookDetail/${v.bks_ID}'/>"> <img
+						src="<c:url value=" ${v.book.bk_Pic} " />" class="card-img-top"
 						alt="..." style="height: 18rem;">
 					</a>
 					<!-- 圖片跟連結 -->
 					<div class="card-body">
 						<!-- 書名連結 -->
-						<a href="<c:url value='/qaqBookDetail/${v.bk_ID}'/>">${v.bk_Name }</a>
+						<a href="<c:url value='/qaqBookDetail/${v.book.bk_ID}'/>">${v.book.bk_Name }</a>
 						<!-- 書名連結 -->
-						<br> <span class="card-text">作者: ${ v.bk_Author }</span> <br>
-						<span class="card-text">出版社: ${ v.bk_Publish }</span> <br> <span
-							class="card-text">出版日: ${ v.bk_Date }</span> <br> <span
-							class="card-text">價錢: ${ v.bk_Price }</span> <br>
+						<br> <span class="card-text">作者: ${ v.book.bk_Author }</span> <br>
+						<span class="card-text">出版社: ${ v.book.bk_Publish }</span> <br> <span
+							class="card-text">出版日: ${ v.book.bk_Date }</span> <br> <span
+							class="card-text">價錢: ${ v.book.bk_Price }</span> <br>
 						<!-- 比價連結 -->
-						<a href="<c:url value='/qaqManyPrice?ID=${v.bk_ID}'/>">簡介&#149;比價
+						<a href="<c:url value='/qaqManyPrice?ID=${v.book.bk_ID}'/>">簡介&#149;比價
 							$ </a>
 						<!-- 比價連結 -->
 					</div>
@@ -114,7 +114,7 @@
 							aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
 						</a></li>
 						<c:forEach items="${store}" begin="1" end="5" varStatus="vs">
-						<li class="page-item"><a class="page-link" href="#" >${vs.index}</a></li>
+							<li class="page-item"><a class="page-link" href="#">${vs.index}</a></li>
 						</c:forEach>
 						<li class="page-item"><a class="page-link" href="#"
 							aria-label="Next"> <span aria-hidden="true">&raquo;</span>
@@ -125,13 +125,13 @@
 		</div>
 		<!-- 分頁顯示		 -->
 		<!-- 	版面置中 -->
+
+		<!-- 	版面置中 -->
+
+
+
+		<!-- body -->
 	</div>
-	<!-- 	版面置中 -->
-
-
-
-	<!-- body -->
-
 	<!-- footer -->
 	<footer class="container py-5" id="bookWebFooter"></footer>
 	<!-- footer -->

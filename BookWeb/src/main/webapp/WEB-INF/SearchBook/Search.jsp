@@ -81,7 +81,7 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 			<h4>輸入書名關鍵字：</h4>
 			<div class="form-inline">
 				<input class="form-control mr-sm-2" name="name" value=""
-					type="search" placeholder="Search" aria-label="Search">
+					type="search" placeholder="Search" aria-label="Search"required="required">
 				<button class="btn btn-outline-success my-2 my-sm-0" type="submit">查詢</button>
 			</div>
 		</form>
@@ -92,7 +92,7 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 			<h4>輸入作者關鍵字：</h4>
 			<div class="form-inline">
 				<input class="form-control mr-sm-2" name="author" value=""
-					type="search" placeholder="Search" aria-label="Search">
+					type="search" placeholder="Search" aria-label="Search"required="required">
 				<button class="btn btn-outline-success my-2 my-sm-0" type="submit">查詢</button>
 			</div>
 		</form>
@@ -103,7 +103,7 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 			<h4>輸入出版社關鍵字：</h4>
 			<div class="form-inline">
 				<input class="form-control mr-sm-2" name="publish" value=""
-					type="search" placeholder="Search" aria-label="Search">
+					type="search" placeholder="Search" aria-label="Search"required="required">
 				<button class="btn btn-outline-success my-2 my-sm-0" type="submit">查詢</button>
 			</div>
 		</form>

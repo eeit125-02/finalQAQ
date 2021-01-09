@@ -174,7 +174,7 @@
 					<table border='1'>
 						<tr>
 							<td width="400" align='center'><a
-								href='<c:url value="/Transation/storeMain" />'>繼續購物</a></td>
+								href='<c:url value="/qaqTest" />'>繼續購物</a></td>
 							<td width="400" align='center'>
 								<%-- 							<a href="<c:url value='/checkout' />" --%> <%-- 								onClick="return Checkout(${subtotal});"> --%>
 								<!-- 								結帳 --> <!-- 								</a> -->
@@ -211,7 +211,7 @@
 		aria-labelledby="exampleModalLabel" aria-hidden="true">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
-				<form action="<c:url value='checkout'/>" method="get">
+				<form action="<c:url value='checkout'/>" method="post">
 					<div class="modal-header">
 						<h5 class="modal-title" id="exampleModalLabel">請輸入您的資訊</h5>
 						<button type="button" class="close" data-dismiss="modal"

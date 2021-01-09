@@ -16,6 +16,7 @@
 	src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
 	integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
 	crossorigin="anonymous"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
 	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
@@ -42,13 +43,21 @@
 		font-size: 3.5rem;
 	}
 }
-
+.detail{
+text-align:right;
+font-size:16px;
+}
+/* .detail2{ */
+/* background-image:url('${pageContext.request.contextPath}/image/flower.png'); */
+/* } */
 .a3 {
 	margin: 0px;
 	display: inline
 }
 .row2{
-	display: inline
+	margin:0 auto;
+	text-align:center;
+	display: block;
 }
 .collectindex {
 	float: right;
@@ -84,19 +93,10 @@
 
 	});
 	
-// 	// 顯示結果
-// 	function checkresult(){
-// 		var v=${pageresult2};
-// 		console.log(v);
-		
-// 		if(v){	
-// 			alert('加入成功');
-// 		}else{
-// 			alert('加入失敗');			
-// 		}
-		
-// 	}
 	
+// 	$(document).ready(function() {
+// 		loadCollectList();
+// 	});	
 </script>
 <title>Insert title here</title>
 </head>
@@ -128,6 +128,10 @@
 			<form name=a2 class=a3 action="<c:url value='/updatebook' />" method="get">
 				<button type="submit" name="update" class="btn btn-outline-dark" value="${pageresult.bk_ID}">修改書訊</button>
 			</form>		
+			
+			<form name=a2 class=a3 action="<c:url value='/deletebook' />" method="get">
+				<button type="submit" name="delete" class="btn btn-outline-dark" value="${pageresult.bk_ID}">刪除本書</button>
+			</form>	
 
 		</div>
 		<br> <br>
@@ -139,18 +143,26 @@
 			
 		<!-- 封面 -->
 				<p class="s-corner">
-<%-- 					<img class="mainpic" alt="" src="${pageresult.bk_Pic}" width="390"> --%>
 					<img class="mainpic" alt="" src="${pageresult.bk_Pic}" height="390">
 				</p>
 		<!-- 收藏＆通報&心得&二手書按鈕 -->
 				<div class="row2">
-						<form name=a1 class=a3 action="<c:url value='/pagecollect' />" method="get">	
-							<button type="submit" name="pagecollect" class="btn btn-outline-info btn-sm"
-								value="${pageresult.bk_ID}">
-								<img alt="點選收藏" src="${pageContext.request.contextPath}/image/heartred.png"
-								id="heart" width="18px"> 收藏本書</button>
-						</form>
-				
+						<div id="collect" class="a3">
+						
+<%-- 						<c:if test='${empty havebc}'> --%>
+<%-- 						<form name=a1 class=a3 action="<c:url value='/pagecollect' />" method="get">	 --%>
+<!-- 							<button type="submit" name="pagecollect" class="btn btn-outline-info btn-sm" -->
+<%-- 								value="${pageresult.bk_ID}"> --%>
+<%-- 								<img alt="點選收藏" src="${pageContext.request.contextPath}/image/heartwhite.png" --%>
+<!-- 								id="heart" width="18px"> 收藏本書</button> -->
+<!-- 						</form> -->
+<%-- 						</c:if> --%>
+												
+<%-- 						<c:if test='${not empty havebc}'> --%>
+<!-- 						bbb -->
+<%-- 						</c:if> --%>
+						
+						</div>
 				<button type="submit" name="" class="btn btn-outline-info btn-sm">通報錯誤</button>
 				<button type="button" id="addBookReport" value="${pageresult.bk_ID}" class="btn btn-outline-info btn-sm">撰寫心得</button>
 				<button type="submit" name="" class="btn btn-outline-info btn-sm">尋找二手書</button>
@@ -169,67 +181,70 @@
 					<br>
 		<!-- 作者＆譯者 -->
 					<div class="row" style="margin-bottom:15px"> 
-					<div class="col-sm-1"></div>
-					<div class="col-sm-5">作者：${pageresult.bk_Author}</div>
-					
+<!-- 					<div class="col-sm-1"></div> -->
+				
+					<div class="col-sm-2 detail detail2">作者：</div>
+					<div class="col-sm-4 detail2">${pageresult.bk_Author}</div>
+				
 						<c:if test='${empty pageresult.bk_Translator}'>
 						<div class="col-sm-6"> </div>					
 						</c:if>
 												
 						<c:if test='${not empty pageresult.bk_Translator}'>
-						<div class="col-sm-6">譯者：${pageresult.bk_Translator}</div>
+						<div class="col-sm-6">　譯者：${pageresult.bk_Translator}</div>
+<!-- 						<div class="col-sm-4"></div> -->
 						</c:if>
 
 					</div>
 		<!-- 出版社＆出版地 -->
 					<div class="row" style="margin-bottom:15px"> 
-					<div class="col-sm-1"></div>
-					<div class="col-sm-5">出版社：${pageresult.bk_Publish}</div>
+					<div class="col-sm-2 detail">出版社：</div>
+					<div class="col-sm-4">${pageresult.bk_Publish}</div>
 					
 						<c:if test='${empty pageresult.bk_Publisher_Place}'>
 						<div class="col-sm-6"> </div>					
 						</c:if>
 						
 						<c:if test='${not empty pageresult.bk_Publisher_Place}'>
-						<div class="col-sm-6">${pageresult.bk_Publisher_Place}</div>
+						<div class="col-sm-6 detail2">${pageresult.bk_Publisher_Place}</div>
 						</c:if>					
 
 					</div>					
 
 		<!-- 出版日＆語言 -->
 					<div class="row" style="margin-bottom:15px"> 
-					<div class="col-sm-1"></div>
-					<div class="col-sm-5">出版日期：${pageresult.bk_Date}</div>
+					<div class="col-sm-2 detail">出版日期：</div>
+					<div class="col-sm-4">${pageresult.bk_Date}</div>
 					
 						<c:if test='${empty pageresult.bk_Language}'>
 						<div class="col-sm-6"> </div>					
 						</c:if>
 						
 						<c:if test='${not empty pageresult.bk_Language}'>
-						<div class="col-sm-6">語言：${pageresult.bk_Language}</div>
+						<div class="col-sm-6">　語言：${pageresult.bk_Language}</div>
 						</c:if>	
 					
 					</div>
 											
 		<!-- ISBN＆頁數 -->
 					<div class="row" style="margin-bottom:15px"> 
-					<div class="col-sm-1"></div>
-					<div class="col-sm-5">ISBN：${pageresult.bk_ISBN}</div>
+					<div class="col-sm-2 detail">ISBN：</div>
+					<div class="col-sm-4">${pageresult.bk_ISBN}</div>
 					
 						<c:if test='${empty pageresult.bk_Page}'>
 						<div class="col-sm-6"> </div>					
 						</c:if>
 						
 						<c:if test='${not empty pageresult.bk_Page}'>
-						<div class="col-sm-6">頁數：${pageresult.bk_Page}</div>
+						<div class="col-sm-6">　頁數：${pageresult.bk_Page}</div>
 						</c:if>	
 					
 					</div>
 					
 		<!-- 類型 -->
 					<div class="row"> 
-					<div class="col-sm-1"></div>
-					<div class="col-sm-11">類型：
+					<div class="col-sm-2 detail">類型：</div>
+					<div class="col-sm-9">
 		<c:forEach items="${pageresulttype}" var="row">					
 					<a href="#" class="badge badge-info" style="font-size:1em">${row.getSearchtype().getSty_Name()}</a>
 		</c:forEach>										
@@ -242,6 +257,8 @@
 		
 		<br>
 		<br>
+		
+		<div id="collect1"></div>
 		
 	<!-- 內容簡介 -->
 				<div class="row"> 
@@ -267,6 +284,111 @@
 	<footer class="container py-5" id="bookWebFooter"></footer>
 	<!-- footer -->
 	<script>
+	
+	$(window).ready(function loadCollectList() {
+		var i = ${pageresult.bk_ID};
+		console.log(i);
+		let editURL = "searchbook/checkcollect/"+i;
+		$.ajax({
+			async : false,
+			type : 'GET',
+			url : editURL,
+			dataType : "json",
+			contentType : "application/json;charset=utf-8",
+			success : function(data) {
+				console.log(data + "!!!!");
+				console.log(typeof(data));
+				
+				if (data) {
+					var insertData2 = "<button id=\"collect\" type=\"submit\" name=\"collect\""
+									+ "class=\"btn btn-outline-info btn-sm\" value=\""+i+"\">"
+									+ "<img "
+									+ "src=\"${pageContext.request.contextPath}/image/heartred.png\""
+									+ " id=\"Img/heart\" width=\"18px\">" 
+									+ " 取消收藏</button>"
+					$("#collect").html(insertData2);
+					console.log(data + "???");
+				}else {
+					var insertData3=
+						"<button id=\"collect\" type=\"submit\" name=\"collect\""
+						+"class=\"btn btn-outline-info btn-sm\" value=\""+i+"\">"
+						+"<img "
+						+"src=\"${pageContext.request.contextPath}/image/heartwhite.png\""
+						+" id=\"Img/heart\" width=\"18px\">" 
+						+" 加入收藏</button>"
+					$("#collect").html(insertData3);
+					console.log(data + "~~~");
+				}
+			}
+		});
+	})
+	
+	
+	
+	
+		$('#collect').click(function collect() {
+			i = ${pageresult.bk_ID};
+			console.log(i);
+			let editURL = "searchbook/resultcollect/"+i;
+			$.ajax({
+				async : true,
+				type : 'GET',
+				url : editURL,
+				dataType : "json",
+				contentType : "application/json;charset=utf-8",
+				success : function(data) {
+					if (data) {
+// 						alert('成功加入收藏 ');
+						swal("收藏成功", "你已經把這本書加入收藏囉～","success")
+						loadCollect();
+					}else {
+						swal("刪除成功", "你已經把這本書取消收藏囉～","info")
+						loadCollect();
+					}
+				}
+			});
+		})
+		function loadCollect() {
+		var i = ${pageresult.bk_ID};
+		console.log(i);
+		let editURL = "searchbook/checkcollect/"+i;
+		$.ajax({
+			async : false,
+			type : 'GET',
+			url : editURL,
+			dataType : "json",
+			contentType : "application/json;charset=utf-8",
+			success : function(data) {
+				console.log(data + "!!!!");
+				console.log(typeof(data));
+				
+				if (data) {
+					var insertData2 = "<button id=\"collect\" type=\"submit\" name=\"collect\""
+									+ "class=\"btn btn-outline-info btn-sm\" value=\""+i+"\">"
+									+ "<img "
+									+ "src=\"${pageContext.request.contextPath}/image/heartred.png\""
+									+ " id=\"Img/heart\" width=\"18px\">" 
+									+ " 取消收藏</button>"
+					$("#collect").html(insertData2);
+					console.log(data + "???");
+				}else {
+					var insertData3=
+						"<button id=\"collect\" type=\"submit\" name=\"collect\""
+						+"class=\"btn btn-outline-info btn-sm\" value=\""+i+"\">"
+						+"<img "
+						+"src=\"${pageContext.request.contextPath}/image/heartwhite.png\""
+						+" id=\"Img/heart\" width=\"18px\">" 
+						+" 加入收藏</button>"
+					$("#collect").html(insertData3);
+					console.log(data + "~~~");
+				}
+			}
+		});
+	}
+	
+	
+	
+	
 		$('#addBookReport').click(function(){
 			var check = {
 						bk_ID : $('#addBookReport').val()

@@ -14,9 +14,10 @@
 </head>
 <body>
 	<div id="loginButton" style="float: right"></div>
-
+	<form></form>
 	<!-- 偷偷放購物車QAQ start -->
-	<a href="#" style="float: right;margin-right: 20px" onclick="cartCheck()"><img alt="wtf..."
+	<a href="#" style="float: right; margin-right: 20px"
+		onclick="cartCheck()"><img alt="wtf..."
 		src="${pageContext.request.contextPath}/image/shoppingCart.png"
 		width="30px" height="30px"></a>
 	<!-- 偷偷放購物車QAQ end -->
@@ -28,7 +29,6 @@
 			src="${pageContext.request.contextPath}/image/logo1.png"
 			id="Img/logo">
 		</a>
-
 	</div>
 
 
@@ -44,22 +44,28 @@
 				aria-haspopup="true" aria-expanded="false"> 閱讀履歷 </a>
 			<div class="dropdown-menu text-muted"
 				aria-labelledby="navbarDropdownMenuLink2">
-				<a class="dropdown-item text-muted" href="//localhost:8080/BookWeb/BookReport/searchBookReport/all/1">讀書心得</a> 
-				<a class="dropdown-item text-muted" href="#">Another action</a> 
-				<a class="dropdown-item text-muted" href="//localhost:8080/BookWeb/BookReport/EditBookReport">編輯資訊</a>
+				<a class="dropdown-item text-muted"
+					href="//localhost:8080/BookWeb/BookReport/searchBookReport/all/1">讀書心得</a>
+				<a class="dropdown-item text-muted" href="#">Another action</a> <a
+					class="dropdown-item text-muted"
+					href="//localhost:8080/BookWeb/BookReport/EditBookReport">編輯資訊</a>
 			</div>
-
 		</nav>
 	</div>
-
+		<input type="hidden" id="pic" value="${loginUser.mb_pic}">
+		<input type="hidden" id="name" value="${loginUser.mb_Name}">
 	<script>
+
+	console.log($('#pic').val())
+		let pic=$('#pic').val();
+		let name=$('#name').val();
 		$(document)
 				.ready(
 						function() {
 							if (typeof ($.cookie('Member_ID')) != "undefined") {
 								$('#loginButton')
-										.html(
-												"<a href=\"//localhost:8080/BookWeb/toCity\">會員中心</a>&nbsp;"
+										.html(  "<img src=\""+pic+"\" style=\"width: 35px; height: 35px; text-align:center; border-radius: 50%;\"/>&nbsp;"
+												+"<a href=\"//localhost:8080/BookWeb/toCity\">"+name+"</a>&nbsp;"
 														+ "<a id=\"logout\" href=\"//localhost:8080/BookWeb/toLogin\">登出</a>");
 								$("#logout").click(function() {
 									console.log("123")
@@ -79,9 +85,11 @@
 						})
 		function cartCheck() {
 			if (typeof ($.cookie('Member_ID')) != "undefined") {
-				window.location.href="//localhost:8080/BookWeb/shopping";
-			}else {
-				window.location.href="//localhost:8080/BookWeb/toLogin";
+				document.forms[0].action = "<c:url value='/shopping' />";
+				document.forms[0].method = "post";
+				document.forms[0].submit();
+			} else {
+				window.location.href = "//localhost:8080/BookWeb/toLogin";
 			}
 		}
 		// 		$(document).ready(function() {
