@@ -21,6 +21,7 @@ import org.springframework.web.bind.support.SessionStatus;
 
 import com.web.book.model.BookBean;
 import com.web.book.model.BookReportBean;
+import com.web.book.model.BookReportCollectBean;
 import com.web.book.model.MemberBean;
 import com.web.book.service.BookReportService;
 import com.web.book.service.SearchService;
@@ -152,7 +153,8 @@ public class BookReportController {
 			@RequestParam(value = "br_Content", required = true) String br_Content,
 			@RequestParam(value = "br_Name", required = true) String br_Name) {
 
-		bookReportService.insertBookReport(loginUser.getMb_ID(), bk_ID, br_Name, br_Score, br_Content);
+		//bookReportService.insertBookReport(loginUser.getMb_ID(), bk_ID, br_Name, br_Score, br_Content);
+		System.out.println(br_Score);
 		return true;
 	}
 
@@ -238,9 +240,33 @@ public class BookReportController {
 	
 	@PostMapping("/addSub/{brId}")
 	@ResponseBody
-	public Boolean addSub(@PathVariable("brId") Integer brId) {
+	public String addSub(@PathVariable("brId") Integer brId) {
 		
 		return bookReportService.addSubReport(brId, loginUser.getMb_ID());
 	}
-
+	
+	@PostMapping("/EditBookReport/getMemberCollectReport")
+	@ResponseBody
+	public List<Map<String, Object>> getMemberCollectReport(){
+		
+		List<Map<String, Object>> collectReport = new ArrayList<>();
+		List<BookReportCollectBean> memberCollects = bookReportService.getMemberCollectReport(loginUser.getMb_ID());
+		
+		for (BookReportCollectBean bookReportCollect : memberCollects) {
+			
+			Map<String, Object>  data = new HashMap<>();
+			data.put("bkName", bookReportCollect.getBookReport().getBook().getBk_Name());
+			data.put("bkPic", bookReportCollect.getBookReport().getBook().getBk_Pic());
+			data.put("bkAuthor", bookReportCollect.getBookReport().getBook().getBk_Author());
+			data.put("bkPublish",bookReportCollect.getBookReport().getBook().getBk_Publish());
+			data.put("brName", bookReportCollect.getBookReport().getBr_Name());
+			data.put("brScore", bookReportCollect.getBookReport().getBr_Score());
+			data.put("brDate", new SimpleDateFormat("yyyy-MM-dd").format(bookReportCollect.getBookReport().getBr_DateTime()));
+			
+			collectReport.add(data);
+		}
+		
+		return collectReport;
+	}
+	
 }

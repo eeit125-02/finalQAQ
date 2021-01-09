@@ -30,6 +30,7 @@
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/css/bottle.css">
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <style>
 .bd-placeholder-img {
 	font-size: 1. 125rem;
@@ -284,7 +285,12 @@
 						form.submit();
 					}
 					else{
-						window.alert("以撰寫過心得")
+						swal({
+								  title: "會員以撰寫",
+								  text: '請至會員中心查看',
+								  icon: "error",
+								  button: "ok",
+						});
 					}
 				}
 			})

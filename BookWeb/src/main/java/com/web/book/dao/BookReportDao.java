@@ -31,6 +31,8 @@ public interface BookReportDao {
 	
 	void addSubReport(Integer br_ID, Integer mb_ID);
 	
-	List<BookReportCollectBean> getMemberCollectReportList(Integer br_ID);
+	List<BookReportCollectBean> getMemberCollectReportList(Integer mbId);
+	
+	 void delteCollectReport(Integer rcId);
 	
 }

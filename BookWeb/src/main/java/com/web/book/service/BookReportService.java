@@ -3,6 +3,7 @@ package com.web.book.service;
 import java.util.List;
 
 import com.web.book.model.BookReportBean;
+import com.web.book.model.BookReportCollectBean;
 
 public interface BookReportService {
 	
@@ -26,8 +27,10 @@ public interface BookReportService {
 	
 	Boolean checkBookReport(Integer mbId, Integer bkId);
 	
-	Boolean addSubReport(Integer brId, Integer mbId);
+	String addSubReport(Integer brId, Integer mbId);
 	
+	List<BookReportCollectBean> getMemberCollectReport(Integer mbId);
 	
+	void deleteCollectReport(Integer rcId);
 	
 }
