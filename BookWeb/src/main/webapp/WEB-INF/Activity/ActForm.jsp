@@ -97,8 +97,8 @@
 								<label for="inputPassword4">活動嘉賓:</label>
 								<form:input path="act_Guest" class="form-control" placeholder="" />
 							</div>
-							<div class="form-group col-md-6">
-								<label for="inputPassword4">活動圖片:</label> 
+							<div class="form-group col-md-6 custom-file">
+								<label >活動圖片:</label> 
 								<input name="file" type="file" class="form-control" />
 							</div>
 						</div>

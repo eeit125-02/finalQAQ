@@ -91,28 +91,37 @@
 		<div class="tab-pane fade" id="nav-fav" role="tabpanel"
 			aria-labelledby="nav-fav-tab">
 			<div class="row mb-2">
-				<div class="col-md-6">
-					<div class="card flex-md-row mb-4 shadow-sm h-md-250">
-						<div class="card-body d-flex flex-column align-items-start">
-							<h3 class="mb-0">
-								<a class="text-dark " href="#">書名</a>
-							</h3>
-							<div class="mb-1 text-muted">日期</div>
-							<p class="card-text mb-auto">大綱</p>
-							<a href="#">閱讀全文</a>
-						</div>
-						<svg
-							class="bd-placeholder-img card-img-right flex-auto  d-lg-block"
-							width="200" height="250" xmlns="http://www.w3.org/2000/svg"
-							preserveAspectRatio="xMidYMid slice" focusable="false" role="img"
-							aria-label="Placeholder: Thumbnail">
-							<title>Placeholder</title>
-							<rect fill="#55595c" width="100%" height="100%"></rect>
-							<text fill="#eceeef" dy=".3em" x="50%" y="50%">Thumbnail</text>
-						</svg>
-					</div>
-				</div>
-			</div>
+			    <div class="col-md-6">
+			      <div class="card flex-md-row mb-4 shadow-sm h-md-250">
+			        <div class="card-body d-flex flex-column align-items-start">
+			          <h3 class="mb-0">
+			            <a class="text-dark" href="#">Featured post</a>
+			          </h3>
+			          <div class="mb-1 text-muted">Nov 12</div>
+			          <p class="card-text mb-auto">This is a wider card with supporting text below as a natural lead-in to additional content.</p>
+			          <a href="#">Continue reading</a>
+			        </div>
+			        <svg class="bd-placeholder-img card-img-right flex-auto d-none d-lg-block" width=" 200" height="250" xmlns="http://www.w3.org/50/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail">
+			        	<image xlink:href="https://im2.book.com.tw/image/getImage?i=https://www.books.com.tw/img/001/088/03/0010880353.jpg&v=5fe9b3ba&w=348&h=348" width="100%" height="100%" />
+			        </svg>
+			      </div>
+			    </div>
+			    <div class="col-md-6">
+			      <div class="card flex-md-row mb-4 shadow-sm h-md-250">
+			        <div class="card-body d-flex flex-column align-items-start">
+			          <h3 class="mb-0">
+			            <a class="text-dark" href="#">Post title</a>
+			          </h3>
+			          <div class="mb-1 text-muted">Nov 11</div>
+			          <p class="card-text mb-auto">This is a wider card with supporting text below as a natural lead-in to additional content.</p>
+			          <a href="#">Continue reading</a>
+			        </div>
+			        <svg class="bd-placeholder-img card-img-right flex-auto d-none d-lg-block" width="200" height="250" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail">
+			        	<image xlink:href="https://im2.book.com.tw/image/getImage?i=https://www.books.com.tw/img/001/088/03/0010880353.jpg&v=5fe9b3ba&w=348&h=348" width="100%" height="100%" />
+			        </svg>
+			      </div>
+			    </div>
+			  </div>
 		</div>
 		<!-- 收藏 -->
 
@@ -213,22 +222,14 @@
 	<!-- footer -->
 
 	<script>
-	
-		/* var mb_ID = $.cookie('Mb_ID');
-		var mb_Name = $.cookie('Mb_Name')
-		if ( typeof(mb_ID) != "undefined"){
-			console.log("success Login")
-		}else{
-			window.location.href = "http://localhost:8080/BookWeb/toLogin";
-		}; */
-	
-		
-		$("#bookWebheader").load("//localhost:8080/BookWeb/header");
-		$("#bookWebFooter").load("//localhost:8080/BookWeb/footer");
 
 		$(document).ready(function() {
 			
+			$("#bookWebheader").load("//localhost:8080/BookWeb/header");
+			$("#bookWebFooter").load("//localhost:8080/BookWeb/footer");
+			
 			loadBookReportList();
+			loadCollectReport();
 		});
 
 		$('#deleteSecond').click(function() {
@@ -270,7 +271,43 @@
 				}
 			});
 		};
-
+		
+		function loadCollectReport(){
+			$.ajax({
+				async : false,
+				type : 'POST',
+				url : location.href + "/getMemberCollectReport",
+				type : 'POST',
+				dataType : "json",
+				success : function(data){
+					var inserData = "";
+					console.log()
+					for(var i = 0; i < data.length; i++){						
+						inserData += "<div class=\"col-md-6\">"
+								  	+ "<div class=\"card flex-md-row mb-4 shadow-sm h-md-250\">"
+								  	+ "<div class=\"card-body d-flex flex-column align-items-start\">"
+						      	  	+ "<h3 class=\"mb-0\">"
+						      	  	+ "<a class=\"text-dark\" href=\"#\">"+ +"</a>"
+								  	+ "</h3>"
+									+ "<div class=\"mb-1 text-muted\">"
+									+ "<p>撰寫日期：</p>"
+									+ "</div>"			
+									+ "<p class=\"card-text mb-auto\">書名：</p>"
+									+ "<p class=\"card-text mb-auto\">作者：</p>"
+									+ "<p class=\"card-text mb-auto\">出版社：</p>"
+									+ "<div class=\"form-group\">"
+									+ "<button type=\"button\" class=\"btn btn-sm btn-outline-secondary mr-2\"  id=\"deletSub\" >取消收藏</button>"
+									+ "</div>"
+									+ "</div>"
+									+ "<svg class=\"bd-placeholder-img card-img-right flex-auto  d-lg-block\" width=\"200\" height=\"250\" xmlns=\"http://www.w3.org/2000/svg\" preserveAspectRatio=\"xMidYMid slice\" focusable=\"false\" role=\"img\" aria-label=\"Placeholder: Thumbnail\">"
+									+ "</svg>"
+									+ "</div>"
+					}
+					$('#collectReport').html(inserData);
+				}
+			})
+		}
+		
 		function loadBookReportList() {
 			$.ajax({
 				async : false,

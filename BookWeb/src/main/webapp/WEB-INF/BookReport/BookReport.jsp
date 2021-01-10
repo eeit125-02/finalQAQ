@@ -128,18 +128,31 @@
 				dataType : "json",
 				contentType : "application/json;charset=utf-8",
 				success : function(data) {
-					if(data){
+					console.log(typeof(data))
+
+					if(data && typeof(data) == "boolean"){
 						swal({
 							  title: "新增成功",
 							  icon: "success",
 							  button: "ok",
 						});
 					}else{
-						swal({
-							  title: "已加入收藏",
-							  icon: "error",
-							  button: "ok",
-						});
+						console.log(data)
+						if(data == 1){
+							swal({
+								  title: "會員撰寫",
+								  text: '請至會員中心查看',
+								  icon: "error",
+								  button: "ok",
+							});
+						}else{
+							swal({
+								  title: "已加入收藏",
+								  icon: "error",
+								  button: "ok",
+							});
+						}
+						
 					}
 				}
 			});

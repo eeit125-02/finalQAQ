@@ -31,9 +31,9 @@ public class GlobalService {
 		return encoder.encode(passwordString);
 	}
 	
-	public static Boolean checkMemberEncoder(String checkMemberPassword , String loginMemberPassword){
+	public static Boolean checkMemberEncoder(String loginMemberPassword, String checkMemberPassword ){
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-		return encoder.matches(checkMemberPassword, loginMemberPassword);
+		return encoder.matches(loginMemberPassword,checkMemberPassword);
 	}
 	
 	public static Map<String, String> getSession(String sessionID) throws InterruptedException, ExecutionException, IOException{

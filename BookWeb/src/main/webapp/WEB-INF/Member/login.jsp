@@ -219,7 +219,7 @@ form {
 										success : function(Colume) {
 											if (Colume) {
 												console.log(Colume);
-												$.ajax({
+													$.ajax({
 															async : false,
 															type : 'POST',
 															url : editURL,
@@ -227,7 +227,7 @@ form {
 															contentType : "application/json;charset=utf-8",
 															success : function(data) {
 																console.log(data)
-																console.log("--------");
+																console.log(a);
 																if (data && a) {
 																	console.log("--------")
 																	$('#login1').submit();

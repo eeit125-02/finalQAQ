@@ -113,10 +113,6 @@ span {
 				<h3 id="mb_Account">${reg_member.mb_Account}</h3>
 			</div>
 			<div>
-				<label>密碼:</label>
-				<h3 id="mb_Password">${reg_member.mb_Password}</h3>
-			</div>
-			<div>
 				<label>姓名:</label>
 				<h3 id="mb_Name">${reg_member.mb_Name}</h3>
 			</div>
@@ -165,12 +161,10 @@ span {
 	
 </body>
 <script>
-	$(document).ready(function() {
 		$('#submit1').click(function() {
 			window.alert('註冊成功');
-			$('form').eq(0).submit();
+			$('form').submit();
 		})
-	})
 	
 	$(document).ready(function() {
 		$("#bookWebheader").load("<c:url value='/header'/>");

@@ -136,9 +136,7 @@
 			})
 		});
 		
-		$('#backButton').click(function(){
-			history.go(-1);
-		});
+		$('#backButton').click()
 
 		
 	</script>

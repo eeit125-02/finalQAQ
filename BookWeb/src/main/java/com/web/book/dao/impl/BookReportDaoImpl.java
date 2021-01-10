@@ -184,13 +184,21 @@ public class BookReportDaoImpl implements BookReportDao {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<BookReportCollectBean> getMemberCollectReportList(Integer br_ID) {
+	public List<BookReportCollectBean> getMemberCollectReportList(Integer mbId) {
 		
 		Session session = fatory.getCurrentSession();
-		String hql = "From BookReportCollectBean rc Where rc.bookReport = :bookReport";
+		String hql = "From BookReportCollectBean rc Where rc.member = :member";
 		Query<BookReportCollectBean> query = session.createQuery(hql);
 		
-		return query.setParameter("bookReport", session.get(BookReportBean.class, br_ID)).getResultList();
+		return query.setParameter("member", session.get(MemberBean.class, mbId)).getResultList();
+	}
+
+	@Override
+	public void delteCollectReport(Integer rcId) {
+		
+		Session session = fatory.getCurrentSession();
+		session.delete(session.load(BookReportCollectBean.class, rcId));
+		
 	}
 	
 	

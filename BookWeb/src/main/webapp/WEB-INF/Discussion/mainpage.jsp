@@ -43,6 +43,21 @@
 	}
 }
 
+.show_part_content{
+	width:500px;
+	height:30px;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+}
+
+.show_part_title{
+	width:300px;
+	height:30px;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+}
 
 </style>
 
@@ -69,8 +84,9 @@ response.setDateHeader("Expires", 0);
 
 	<div class="container-fluid" style="margin: 20px 0px">
 		<div class="row">
+			<div class="col-2"></div>
 			<!-- sidebar area -->
-			<div class="col-2 text-center">
+			<div class="col-1 text-center">
 
 				<!-- ====================================================sidebar==================================================== -->
 				<h2>書適論壇</h2>
@@ -109,7 +125,7 @@ response.setDateHeader("Expires", 0);
 			</div>
 
 			<!-- content area -->
-			<div class="col-8" style='text-align: center;'>
+			<div class="col-7" style='text-align: center;'>
 				<!-- content connect to sidebar -->
 				<div class="tab-content" id="nav-tabContent">
 
@@ -177,9 +193,11 @@ response.setDateHeader("Expires", 0);
 													</c:url>
 													<form action="${show_detail}" method="post">
 														<button type="submit" class="btn btn-link">
-												${stored_post.post_title}
+												<div class="show_part_title text-left" >${stored_post.post_title}</div>
 												</button>
-													</form></td>
+													</form>
+													<div class="show_part_content">${stored_post.post_content}</div>
+													</td>
 												<td style="vertical-align: middle">${stored_post.post_time}</td>
 												<td style="vertical-align: middle">${stored_post.memberbean.mb_Name}</td>
 												<td style="vertical-align: middle"><c:set
@@ -339,9 +357,16 @@ response.setDateHeader("Expires", 0);
 										</c:url>
 										<form class="form-inline float-right" action="${go_delete}"
 											method="post">
-											<button class="btn btn-outline-secondary btn-sm"
+											<button class="btn btn-outline-secondary btn-sm" id="member_delete_btn${stored_post.post_id}"
 												type="submit" style="margin-left: 5px">刪除</button>
 										</form>
+										
+										<script>
+											$('#member_delete_btn${stored_post.post_id}').click(function(){
+												var yes = confirm('確定刪除 ${stored_post.post_title} 嗎？');
+												if(!yes){event.preventDefault()}
+											})
+											</script>
 
 										<c:url value="go_edit" var="go_edit">
 											<c:param name="edit_post_id" value=" ${stored_post.post_id}" />
@@ -600,11 +625,18 @@ response.setDateHeader("Expires", 0);
 												<c:param name="delete_post_id"
 													value=" ${stored_post.post_id}" />
 											</c:url>
-											<form class="form-inline float-right" action="${go_delete}"
+											<form class="form-inline float-right" action="${go_delete}" 
 												method="post">
-												<button class="btn btn-outline-secondary btn-sm"
+												<button class="btn btn-outline-secondary btn-sm" id="manager_delete_btn${stored_post.post_id}"
 													type="submit" style="margin-left: 5px">刪除</button>
 											</form>
+											
+											<script>
+											$('#manager_delete_btn${stored_post.post_id}').click(function(){
+												var yes = confirm('確定刪除 ${stored_post.post_title} 嗎？');
+												if(!yes){event.preventDefault()}
+											})
+											</script>
 
 											<p>${stored_post.memberbean.mb_Name}
 												<br>${stored_post.post_time}</p>
