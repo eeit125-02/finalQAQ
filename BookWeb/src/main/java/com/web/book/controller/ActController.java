@@ -53,7 +53,9 @@ public class ActController {
 	// 搜尋關鍵字
 	@GetMapping("/searchkeyword")
 	@ResponseBody
-	public List<ActBean> showSearchResult(Model model, @RequestParam(value = "keyword") String keyword) {
+	public List<ActBean> showSearchResult(
+			Model model, 
+			@RequestParam(value = "keyword") String keyword) {
 		List<ActBean> actlist = actService.searchKeyword(keyword);
 		return actlist;
 	}
