@@ -145,8 +145,6 @@ form {
 				</div>
 			</fieldset>
 		</form>
-	<input type="hidden" name="file"  value="https://firebasestorage.googleapis.com/v0/b/bookweb-50d11.appspot.com/o/member%2Fa123456?alt=media"/>
-
 	</div>
 	<!-- footer -->
 	<footer class="container py-5" id="bookWebFooter"></footer>

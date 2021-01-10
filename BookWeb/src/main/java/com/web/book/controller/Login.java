@@ -42,12 +42,14 @@ public class Login {
 	public String Registe(Model model, @RequestParam(value = "account") String mb_Account,
 			@RequestParam(value = "pwd") String mb_Password, @RequestParam(value = "sex") String mb_Sex,
 			@RequestParam(value = "name") String mb_Name,@RequestParam(value = "birthday") Date mb_Birthday,
-			@RequestParam(value = "mail") String mb_Mail,@RequestParam(value = "file",required = false) String file) {
+			@RequestParam(value = "mail") String mb_Mail) {
 		Timestamp ts = new Timestamp(System.currentTimeMillis());
-		MemberBean reg_member = new MemberBean(0, mb_Account, mb_Password, mb_Sex, mb_Birthday, mb_Name, mb_Mail, null, null,
-				ts, 0, null, file);
+		String encryption = GlobalService.getMemberEncoder(mb_Password);
+		MemberBean reg_member = new MemberBean(0, mb_Account, encryption, mb_Sex, mb_Birthday, mb_Name, mb_Mail, "", "",
+				ts, 0, "", "");
 		System.out.println(reg_member);
 		reg_member.setCheckColume(true);
+		System.out.println(reg_member);
 		checkMember = reg_member;
 		model.addAttribute("reg_member", reg_member);
 		return "redirect:toConfirm";
@@ -79,13 +81,29 @@ public class Login {
 		return check;
 	}
 	
+	//檢查舊密碼
+	@PostMapping("/checkpwd")
+	@ResponseBody
+	public boolean checkPwd(@RequestParam(value = "oldpwd",required = false) String oldpwd) {
+		boolean check = GlobalService.checkMemberEncoder(oldpwd,ms.select(Account).getMb_Password());
+		System.out.println(oldpwd);
+		System.out.println(check);
+		return check;
+	}
+	
 	// 檢查登入
 	@PostMapping("/toLogin/checklogin/{mb_Account}/{mb_Password}")
 	@ResponseBody
 	public boolean checklogin(@PathVariable("mb_Account") String account, @PathVariable("mb_Password") String pwd) {
-		boolean check = ms.Login(account, pwd);
-		System.out.println(check);
+		boolean ck = ms.checkAccount(account);
+		if(ck) {
+		MemberBean mb = ms.select(account);
+		boolean check = GlobalService.checkMemberEncoder(pwd,mb.getMb_Password());
 		return check;
+		}else {
+			return ck;
+		}
+		
 	}
 
 	//JavaMail
@@ -144,32 +162,31 @@ public class Login {
 	public String login(Model model, HttpServletResponse response, 
 			@RequestParam(value = "account",required = false) String account,
 			@RequestParam(value = "pwd",required = false) String pwd) throws IOException, InterruptedException, ExecutionException {
-		boolean mb = ms.Login(account, pwd);
-		if (mb) {
+		MemberBean mb = ms.select(account);
+		boolean pw =  GlobalService.checkMemberEncoder(pwd, mb.getMb_Password());
+		if (pw) {
 			if("a123456".equals(account) && "a123456".equals(pwd)) {
 				Account = account;
-				MemberBean loginMember = ms.select(Account);
 				List<MemberBean> memberall = ms.adminselect();
 				model.addAttribute("adminaccount", Account);
 				model.addAttribute("admin", memberall);
-				String sessionId = GlobalService.createSessionID(String.valueOf(loginMember.getMb_ID()),
-						loginMember.getMb_Name(), loginMember.getMb_Account());
+				String sessionId = GlobalService.createSessionID(String.valueOf(mb.getMb_ID()),
+						mb.getMb_Name(), mb.getMb_Account());
 				Cookie memId = new Cookie("Member_ID", sessionId);
 				memId.setMaxAge(1200);
 				response.addCookie(memId);
 				logincheck = "a" ;	
 			}else {
 			Account = account;
-			MemberBean loginMember = ms.select(Account);
-			String sessionId = GlobalService.createSessionID(String.valueOf(loginMember.getMb_ID()),
-					loginMember.getMb_Name(), loginMember.getMb_Account());
+			String sessionId = GlobalService.createSessionID(String.valueOf(mb.getMb_ID()),
+					mb.getMb_Name(), mb.getMb_Account());
 			Cookie memId = new Cookie("Member_ID", sessionId);
-			Cookie memName = new Cookie("Member_Name", loginMember.getMb_Name());			
-			System.out.println(loginMember.getMb_pic());
+			Cookie memName = new Cookie("Member_Name", mb.getMb_Name());			
+			System.out.println(mb.getMb_pic());
 			memId.setMaxAge(1200);
 			response.addCookie(memId);
 			response.addCookie(memName);
-			model.addAttribute("loginMember", loginMember);
+			model.addAttribute("loginMember", mb);
 			logincheck = "b" ;
 			}
 			return "redirect:toCity";
@@ -227,8 +244,9 @@ public class Login {
 
 	// 密碼修改介面
 	@PostMapping("/Modify")
-	public @ResponseBody MemberBean Modify(@ModelAttribute("loginUser") MemberBean loginUser,Model model) {
-		model.addAttribute("loginUser", loginUser);
+	public @ResponseBody MemberBean Modify(Model model, @ModelAttribute("loginUser") MemberBean loginUser
+										  ) {
+		model.addAttribute("loginUser",loginUser);
 		return loginUser;
 	}
 
@@ -236,7 +254,8 @@ public class Login {
 	@PostMapping("/Update")
 	public String Update(Model model, @RequestParam("pwd") String pwd) {
 		MemberBean mb_inf = ms.select(Account);
-		mb_inf.setMb_Password(pwd);
+		String encryption = GlobalService.getMemberEncoder(pwd);
+		mb_inf.setMb_Password(encryption);
 		ms.update(mb_inf);
 		return "redirect:toCity";
 	}
@@ -285,7 +304,8 @@ public class Login {
 			@RequestParam(value = "tel") String mb_Tel, @RequestParam(value = "address") String mb_Address,
 			@RequestParam(value = "account") String account) {
 		MemberBean mb_inf = ms.select(account);
-		mb_inf.setMb_Password(mb_Password);
+		String encryption = GlobalService.getMemberEncoder(mb_Password);
+		mb_inf.setMb_Password(encryption);
 		mb_inf.setMb_Name(mb_Name);
 		mb_inf.setMb_Mail(mb_Mail);
 		mb_inf.setMb_Tel(mb_Tel);

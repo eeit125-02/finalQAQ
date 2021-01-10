@@ -111,29 +111,27 @@ div {
 									<table class="table" >
 								    <tr class="tr1">
 									<th scope="col" >帳號</th>
-									<th scope="col" >密碼</th>
+									<th scope="col" >姓名</th>
 									</tr>
 									<tr class="table-light">
 									<td>${loginUser.mb_Account}</td>
-									<td>${loginUser.mb_Password}</td>
+									<td>${loginUser.mb_Name}</td>
 									</tr>
 
 								<tr class="tr2">
-									<th scope="col">姓名</th>
 									<th scope="col">性別</th>
-								</tr>
-								<tr class="table-light">
-									<td>${loginUser.mb_Name}</td>
-									<td>${loginUser.mb_Sex}</td>
-								</tr>
-
-								<tr class="tr2">
-									<th scope="col">生日</th>
 									<th scope="col">電話</th>
 								</tr>
 								<tr class="table-light">
-									<td>${loginUser.mb_Birthday}</td>
+									<td>${loginUser.mb_Sex}</td>
 									<td>${loginUser.mb_Tel}</td>
+								</tr>
+
+								<tr class="tr2">
+									<th colspan="2">生日</th>
+								</tr>
+								<tr class="table-light">
+									<td colspan="2">${loginUser.mb_Birthday}</td>
 								</tr>
 
 								<tr class="tr2">
@@ -329,31 +327,29 @@ div {
 									+"<table class=\"table\" >"
 									+"<tr class=\"tr1\">"
 									+"<th scope=\"col\" >帳號</th>"
-									+"<th scope=\"col\" >密碼</th>"
+									+"<th scope=\"col\" >姓名</th>"
 									+"</tr>"
 									+"<tr class=\"table-light\">"
 									+"<td>"+data.login.mb_Account+"</td>"
-									+"<td>"+data.login.mb_Password+"</td>"
+									+"<td>"+data.login.mb_Name+"</td>"
 									+"</tr>"
 
 								+"<tr class=\"tr2\">"
-									+"<th scope=\"col\">姓名</th>"
 									+"<th scope=\"col\">性別</th>"
-								+"</tr>"
-								+"<tr class=\"table-light\">"
-									+"<td>"+data.login.mb_Name+"</td>"
-									+"<td>"+data.login.mb_Sex+"</td>"
-								+"</tr>"
-
-								+"<tr class=\"tr2\">"
-									+"<th scope=\"col\">生日</th>"
 									+"<th scope=\"col\">電話</th>"
 								+"</tr>"
 								+"<tr class=\"table-light\">"
-									+"<td>"+data.mb_Birthday+"</td>"
+									+"<td>"+data.login.mb_Sex+"</td>"
 									+"<td>"+data.login.mb_Tel+"</td>"
 								+"</tr>"
 
+								+"<tr class=\"tr2\">"
+									+"<th colspan=\"2\">生日</th>"
+								+"</tr>"
+								+"<tr class=\"table-light\">"
+									+"<td colspan=\"2\">"+data.mb_Birthday+"</td>"
+								+"</tr>"
+					
 								+"<tr class=\"tr2\">"
 									+"<th colspan=\"2\">Email</th>"
 								+"</tr>"
@@ -407,7 +403,7 @@ div {
 							+"<tr class=\"table-light\">"
 							+"<td><input type=\"password\" name=\"oldpwd\" id=\"oldpwd\" size=\"12\" ></td>"
 							+"</tr>"
-							+"<input type=\"hidden\" id=\"old\" value=\""+data.mb_Password+"\">"
+							+"<input type=\"hidden\" id=\"old\" value=\""+data.pwd+"\">"
 							+"<tr class=\"tr2\">"
 								+"<th colspan=\"2\" >新密碼"
 								+"<p style=\"color: gray; margin:0px;\">(1.不可空白，2.至少6個字且必須包含英文字母、數字)</p>"
@@ -526,6 +522,7 @@ div {
 		console.log(old)
 	var b1=false;
 	var b2=false;
+	var b3=false;
 	$('#pwd').blur(function(){
 		let pwd = document.getElementById("pwd").value
 		let pwdlen = pwd.length;
@@ -555,23 +552,34 @@ div {
 		} else
 			sp.innerHTML = "錯誤"
 
-	})
-	
-	$('#Update').click(function(){
+	})	
+		$('#Update').click(function(){
 		let old = $('#old').val();
 		let oldpwd = $('#oldpwd').val();
 		console.log(oldpwd)
+		console.log("123")
+		 $.ajax({
+						async : false,
+						type : 'POST',
+						data : {'oldpwd':oldpwd},
+						url : "checkpwd",
+						success : function(data) {	
+						if(data){
+							b3=true;						
+						}else{
+							b3=false;
+						}
+		 }
+		})
 		if(b1!=true || b2!=true){
-			alert("資料有誤")
-		}else if(oldpwd != old){
-			alert("舊密碼錯誤")
+			alert("資料有誤");
+		}else if(b3==false){
+			alert("舊密碼錯誤");
 		}else{
 			$('form').submit();
 		}
 	})
-	}
-	 
-	 
+}
 </script>
 	<script>
 		function Checkpwd() {
