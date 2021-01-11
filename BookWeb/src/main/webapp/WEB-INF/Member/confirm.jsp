@@ -115,7 +115,7 @@ span {
 			<div>
 				<label>E-mail:</label>
 				<h3 id="mb_Mail">${reg_member.mb_Mail}</h3>
-			</div>
+			</div><br>
 <!-- 			<div> -->
 <!-- 				<label>喜好類型:</label><br /> -->
 <%-- 				<h3 id="mb_type">${reg_member.mb_type}</h3> --%>
