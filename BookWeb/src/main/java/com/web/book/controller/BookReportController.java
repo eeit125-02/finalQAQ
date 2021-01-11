@@ -263,6 +263,7 @@ public class BookReportController {
 			data.put("brDate", new SimpleDateFormat("yyyy-MM-dd").format(bookReportCollect.getBookReport().getBr_DateTime()));
 			
 			collectReport.add(data);
+			
 		}
 		
 		return collectReport;

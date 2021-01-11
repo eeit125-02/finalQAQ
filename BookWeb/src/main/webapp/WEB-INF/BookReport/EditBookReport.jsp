@@ -22,7 +22,11 @@
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
 	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
-	crossorigin="anonymous">	
+	crossorigin="anonymous">
+	
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/jquery.rateyo.css"/>
+<script src="${pageContext.request.contextPath}/js/jquery.rateyo.js"></script>
+
 <style>
 .bd-placeholder-img {
 	font-size: 1. 125rem;
@@ -83,29 +87,37 @@
 		<br>
 
 		<!-- 閱讀心得 -->
-		<div class="tab-pane fade show active" id="bookReportList"
+		<div class="tab-pane fade" id="bookReportList"
 			role="tabpanel" aria-labelledby="nav-read-tab"></div>
 		<!-- 閱讀心得 -->
 
 		<!-- 收藏 -->
-		<div class="tab-pane fade" id="nav-fav" role="tabpanel"
+		
+		<div class="tab-pane fade  show active" id="nav-fav" role="tabpanel"
 			aria-labelledby="nav-fav-tab">
-			<div class="row mb-2">
+			<div class="row mb-2" id="collectReport">
+			
 			    <div class="col-md-6">
 			      <div class="card flex-md-row mb-4 shadow-sm h-md-250">
 			        <div class="card-body d-flex flex-column align-items-start">
 			          <h3 class="mb-0">
-			            <a class="text-dark" href="#">Featured post</a>
+			            <a class="text-dark" href="#">圖書標題</a>
 			          </h3>
-			          <div class="mb-1 text-muted">Nov 12</div>
-			          <p class="card-text mb-auto">This is a wider card with supporting text below as a natural lead-in to additional content.</p>
-			          <a href="#">Continue reading</a>
+			          <div class="mb-1 text-muted">撰寫者：test, 創建日期：Nov 12</div>
+			          <div id="rateYo"></div>
+			          <br>
+			          <p class="card-text mb-auto">書名</p>
+			          <p class="card-text mb-auto">作者</p>
+			          <p class="card-text mb-auto">出版社</p>
+			          <br>
+			          <a href="#">取消追蹤</a>
 			        </div>
 			        <svg class="bd-placeholder-img card-img-right flex-auto d-none d-lg-block" width=" 200" height="250" xmlns="http://www.w3.org/50/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail">
 			        	<image xlink:href="https://im2.book.com.tw/image/getImage?i=https://www.books.com.tw/img/001/088/03/0010880353.jpg&v=5fe9b3ba&w=348&h=348" width="100%" height="100%" />
 			        </svg>
 			      </div>
 			    </div>
+			     
 			    <div class="col-md-6">
 			      <div class="card flex-md-row mb-4 shadow-sm h-md-250">
 			        <div class="card-body d-flex flex-column align-items-start">
@@ -121,7 +133,7 @@
 			        </svg>
 			      </div>
 			    </div>
-			  </div>
+			</div>
 		</div>
 		<!-- 收藏 -->
 
@@ -230,8 +242,18 @@
 			
 			loadBookReportList();
 			loadCollectReport();
+			
 		});
-
+		
+		$("#rateYo").rateYo({
+			rating: 0.0,
+			fullStar: true,
+		    spacing: "5px",
+		    onSet: function (rating, rateYoInstance) {
+		    	brScore = rating
+		    }
+		});
+		
 		$('#deleteSecond').click(function() {
 			deleteReport($(this).val());
 		});
