@@ -24,10 +24,15 @@ public class ActJoinServiceImpl implements ActJoinService {
 		return actjoinDao.getAllJoins();
 	}
 	
-	// 依活動ID查詢活動
-	@Override
+	//經由報名ID取得單一報名資料
 	public ActJoinBean getActJoin(Integer join_ID) {
 		return actjoinDao.getActJoin(join_ID);
+	}
+		
+	// 依會員ID取得會員報名紀錄
+	@Override
+	public List<ActJoinBean> getJoinRecords(Integer mb_ID) {
+		return actjoinDao.getJoinRecords(mb_ID);
 	}
 
 	// 新增活動

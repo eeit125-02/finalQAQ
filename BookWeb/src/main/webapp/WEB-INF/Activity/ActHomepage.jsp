@@ -11,11 +11,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<!-- 這是search bar的東東 -->
-<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-<!-- 這上面是search bar的東東 -->
+<!-- <!-- search bar的東東 --> -->
+<!-- <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"> -->
+<!-- <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script> -->
+<!-- <script src="//code.jquery.com/jquery-1.11.1.min.js"></script> -->
+<!-- <!-- search bar的東東 --> -->
+
 
 <script src='https://kit.fontawesome.com/a076d05399.js'></script>
 
@@ -98,56 +99,84 @@ td {
 		<div class="row">
 			<br>
 			
+<!-- 			<!-- search bar的東東 --> 
+<!-- 			<div class="container"> -->
+<!-- 				<div class="row"> -->
+<!-- 			        <div class="col-md-6"> -->
+<!-- 			    		<h2>探索活動</h2> -->
+<!-- 			            <div id="custom-search-input"> -->
+<!-- 			                <div class="input-group col-md-12"> -->
+<!-- 			                    <input type="text" class="form-control input-lg" placeholder="請輸入任意活動關鍵字" /> -->
+<!-- 			                    <span class="input-group-btn"> -->
+<!-- 			                        <button class="btn btn-info btn-lg" type="button"> -->
+<!-- 			                            <i class="glyphicon glyphicon-search"></i> -->
+<!-- 			                        </button> -->
+<!-- 			                    </span> -->
+<!-- 			                </div> -->
+<!-- 			            </div> -->
+<!-- 			        </div> -->
+<!-- 				</div> -->
+<!-- 			</div> -->
+<!-- 			<!-- search bar的東東 --> 
 			
-<section id="home" class="helpr-section helpr-layout-1 section section-inverse-color" >
-  <div class="container">
-    <div class="helpr-content" data-stellar-offset-parent="true"> 
-      
-      <!-- helpr TEXT -->
-      
-      <div class="helpr-text" data-wow-duration="1s" data-wow-delay="0.5s"> 
-        <!-- TAGLINE -->
-        <div class="webHomeTitle">
-          <h1 class="helpr-title">Let us help</h1>
-        </div>
-        <div class="home-service clearfix">
-          <div class="wrapper-demo1">
-            <div id="dd1" class="wrapper-dropdown-3" tabindex="1">
-			<span class="active">Select City</span>
-			<ul class="dropdown">
-			<li><a href="javascript:;" class="icon-menu " data-id="2" data-value="Bengaluru">Bengaluru</a></li>
-            </ul>
-            </div>
-          </div>
-          <div class="wrapper-demo">
-            <div id="dd" class="wrapper-dropdown-2" tabindex="1"><span>Select a Service</span>
-            <ul class="dropdown">
-			<li><a href="javascript:;" class="icon-2 icon-menu" data-id="2" data-value="Pest Control">Pest Control</a></li>
-                                           
-			<li><a href="javascript:;" class="icon-1 icon-menu" data-id="1" data-value="Cleaning">Cleaning</a></li>
-                                           
-			<li><a href="javascript:;" class="icon-4 icon-menu" data-id="4" data-value="Plumbing">Plumbing</a></li>
-                                           
-			<li><a href="javascript:;" class="icon-5 icon-menu" data-id="5" data-value="Appliances">Appliances</a></li>
-                                           
-			<li><a href="javascript:;" class="icon-20 icon-menu" data-id="20" data-value="Painting">Painting</a></li>
-                                           
-			<li><a href="javascript:;" class="icon-6 icon-menu" data-id="6" data-value="Carpentry">Carpentry</a></li>
-                                           
-			<li><a href="javascript:;" class="icon-3 icon-menu" data-id="3" data-value="Electrical">Electrical</a></li>
-                                           
-			</ul>
-            </div>
-          </div>
-          <div class="clearfix"></div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-			
-			
-			
+
+
+				<main>
+				<!--? Hero Area Start-->
+				<div class="slider-area hero-bg1 hero-overly">
+					<div
+						class="single-slider hero-overly  slider-height1 d-flex align-items-center">
+						<div class="container">
+							<div class="row justify-content-center">
+								<div class="col-xl-10 col-lg-10">
+									<!-- Hero Caption -->
+									<div class="hero__caption pt-100">
+										<h1>活動探索</h1>
+										<!--                                 <p>Let's uncover the best places to eat, drink, and shop nearest to you.</p> -->
+									</div>
+									<!--Hero form -->
+									<form action="#" class="search-box mb-100">
+										<div class="input-form form-inline">
+											<input type="text" id="enter1" placeholder="What are you finding?">
+										</div>
+										<div class="select-form form-inline">
+											<div class="select-itms form-inline">
+												<select name="select" id="select1">
+													<option value="">In where?</option>
+													<option value="">Catagories One</option>
+													<option value="">Catagories Two</option>
+													<option value="">Catagories Three</option>
+													<option value="">Catagories Four</option>
+												</select>
+											</div>
+										</div>
+										<div class="search-form">
+											<button class="btn btn-outline-info" id="search">
+												<a href="#" ><i class="ti-search"></i> Search</a>
+											</button>
+										</div>
+									</form>
+									<!-- hero category1 img -->
+									<div class="category-img text-center">
+										<a href="listing.html"> <img
+											src="assets/img/gallery/hero_category1.png" alt=""></a> <a
+											href="listing.html"> <img
+											src="assets/img/gallery/hero_category2.png" alt=""></a> <a
+											href="listing.html"> <img
+											src="assets/img/gallery/hero_category3.png" alt=""></a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!--Hero Area End-->
+
+
+
+
+
+
 
 <!-- 			<main> -->
 <!-- 				? Hero Area Start -->
@@ -200,6 +229,7 @@ td {
 <!-- 				</div> -->
 <!-- 				Hero Area End -->
 
+				<hr>
 				<section>
 					<div>
 						<div class="container" style="text-align: center">

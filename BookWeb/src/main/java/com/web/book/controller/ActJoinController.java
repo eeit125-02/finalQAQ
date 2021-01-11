@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -43,8 +44,8 @@ public class ActJoinController {
 	public String actjoinlist(
 			Model model			
 			) {
-//		List<ActJoinBean> actjoinlist = actjoinService.getAllJoins();
-//		model.addAttribute("alljoinacts", actjoinlist);
+		List<ActJoinBean> actjoinlist = actjoinService.getAllJoins();
+		model.addAttribute("alljoinacts", actjoinlist);
 		model.addAttribute("alljoinacts", actjoinService.getAllJoins());
 
 		return "Activity/showJoins";
@@ -52,11 +53,13 @@ public class ActJoinController {
 	
 	//取得單一會員的報名紀錄
 	@GetMapping("/showjoinbyID")
-	public String actjoinlistbyID(
-			Model model
+	public String showjoinbyID(
+			Model model,
+			@RequestParam(value = "mb_ID")Integer mb_ID
 			) {
-		List<ActJoinBean> actjoinlist = actjoinService.getAllJoins(); 
-		return keyword;
+		List<ActJoinBean> mbjoinlist = actjoinService.getJoinRecords(mb_ID);
+		model.addAttribute("mbjoinlist", mbjoinlist);		
+		return "Activity/showjoinbyID";
 		
 	}
 	
