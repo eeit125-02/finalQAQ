@@ -182,6 +182,7 @@ div {
 			$("#pwdModify").hide();
 			$("#Modify").hide();
 			$("#inf").hide();
+			$("#third").hide();
 		}else{
 			$("#third").hide();
 			$("#admin1").hide();

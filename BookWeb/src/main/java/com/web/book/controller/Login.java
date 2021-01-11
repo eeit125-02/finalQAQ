@@ -45,8 +45,9 @@ public class Login {
 			@RequestParam(value = "mail") String mb_Mail) {
 		Timestamp ts = new Timestamp(System.currentTimeMillis());
 		String encryption = GlobalService.getMemberEncoder(mb_Password);
+		String pic = "https://firebasestorage.googleapis.com/v0/b/bookweb-50d11.appspot.com/o/member%2F%E5%81%87%E8%A3%9D%E6%9C%89%E5%9C%96%E7%89%87.jpg?alt=media&token=2ce87f02-12f3-4120-821f-e0dcfa825f49";
 		MemberBean reg_member = new MemberBean(0, mb_Account, encryption, mb_Sex, mb_Birthday, mb_Name, mb_Mail, "", "",
-				ts, 0, "", "");
+				ts, 0, "",pic);
 		System.out.println(reg_member);
 		reg_member.setCheckColume(true);
 		System.out.println(reg_member);
@@ -129,7 +130,6 @@ public class Login {
 				@RequestParam(value = "email",required = false) String email,
 				@RequestParam(value = "file", required = false) String file,
 				HttpServletResponse response) throws IOException, InterruptedException, ExecutionException {
-			System.out.println(file);
 			Account = email;
 			boolean check = ms.checkAccount(Account);
 				if(check==false) {			
