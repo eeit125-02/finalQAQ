@@ -343,15 +343,7 @@ if(typeof($.cookie('Member_ID')) != "undefined" ){
 	console.log("123")
 }
 })
-$('#create').click(function(){
-	if(typeof($.cookie('Member_ID')) != "undefined" ){
-		console.log("123");
-		$("#test").submit();
-	}else{
-		alert("請先登入會員");
-		window.location.href="//localhost:8080/BookWeb/toLogin";
-	}
-})
+
 
 $('button').click(function(){
 	mapId = $(this).val();
@@ -377,6 +369,18 @@ $('button').click(function(){
 	    }
 	  });
 })
+
+
+$('#create').click(function(){
+	if(typeof($.cookie('Member_ID')) != "undefined" ){
+		console.log("123");
+		$("#test").submit();
+	}else{
+		alert("請先登入會員");
+		window.location.href="//localhost:8080/BookWeb/toLogin";
+	}
+})
+
 	
 	
 	$('#search').click(function(){

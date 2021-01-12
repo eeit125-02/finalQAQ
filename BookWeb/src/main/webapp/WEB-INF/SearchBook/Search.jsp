@@ -64,6 +64,7 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 		<label id="test"></label>
 
 		<!-- 		內容開始 -->
+
 		
 							<ul class="nav nav-tabs" id="novelTab" role="tablist">
 							<li class="nav-item"><a class="nav-link" id="novel_rule-tab"

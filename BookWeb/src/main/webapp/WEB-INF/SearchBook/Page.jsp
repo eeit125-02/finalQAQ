@@ -47,9 +47,6 @@
 text-align:right;
 font-size:16px;
 }
-/* .detail2{ */
-/* background-image:url('${pageContext.request.contextPath}/image/flower.png'); */
-/* } */
 .a3 {
 	margin: 0px;
 	display: inline
@@ -267,7 +264,7 @@ font-size:16px;
 					<hr>
 						<p>
 <!-- 						<textarea style="border-style:none;"rows='20' cols='150' id="t1"> -->
-						<textarea style="border-style:none;"rows='20' cols='150' id="t1" readonly="readonly">
+						<textarea style="border-style:none;white-space:pre-wrap;"rows='20' cols='150' id="t1" readonly="readonly">
 						${pageresult.bk_Content}
 						</textarea>
 						</p>

@@ -33,7 +33,7 @@ public class Login {
 
 	@Autowired
 	MemberService ms;
-
+	String mail;
 	String Account;
 	String logincheck =null;
 	MemberBean checkMember;
@@ -53,13 +53,21 @@ public class Login {
 		System.out.println(reg_member);
 		checkMember = reg_member;
 		model.addAttribute("reg_member", reg_member);
-		return "redirect:toConfirm";
+		JavaMail jm = new JavaMail();
+		jm.Register(mb_Mail);
+		return "redirect:toLogin";
+	}
+	
+	//註冊確認
+	@GetMapping("/toconfirm")
+	public String toConfirm() {
+		ms.insertMember(checkMember);
+		return "redirect:toLogin";
 	}
 	
 	// 註冊資料確認後送至資料庫
 	@PostMapping("/confirm")
 	public String Confirm() {
-		System.out.println(checkMember);
 		ms.insertMember(checkMember);
 		return "redirect:toLogin";
 	}
@@ -106,13 +114,30 @@ public class Login {
 		}
 		
 	}
-
+	
+	//忘記密碼更新
+	@PostMapping("/JavaMailUpdate")
+	public String JavaMailUpdate(Model model, @RequestParam("pwd") String pwd) {
+		MemberBean mb_inf = ms.select(Account);
+		String encryption = GlobalService.getMemberEncoder(pwd);
+		mb_inf.setMb_Password(encryption);
+		ms.update(mb_inf);
+		return "redirect:toLogin";
+	}
+	
+	//JavaMail跳轉
+	@GetMapping("/pwdlink")
+	public String pwdlink(Model model) {
+		Account=ms.email(mail).getMb_Account();
+		return "Member/MailModify";
+	}
+	
 	//JavaMail
 	@PostMapping("/JavaMail")
 	public String JavaMail(@RequestParam(value = "mail",required = false) String email) {
+		mail=email;
 		JavaMail mail = new JavaMail();
-		MemberBean member = ms.email(email);
-		mail.SendMail(email,member.getMb_Password());
+		mail.SendMail(email);
 		return "redirect:toLogin";
 	}
 	
@@ -128,14 +153,17 @@ public class Login {
 		public @ResponseBody boolean tothird(Model model,
 				@RequestParam(value = "name",required = false) String name,
 				@RequestParam(value = "email",required = false) String email,
-				@RequestParam(value = "file", required = false) String file,
 				HttpServletResponse response) throws IOException, InterruptedException, ExecutionException {
 			Account = email;
 			boolean check = ms.checkAccount(Account);
 				if(check==false) {			
 					MemberBean loginMember = new MemberBean();
 					Timestamp ts = new Timestamp(System.currentTimeMillis());
-					loginMember.setMb_pic(file);
+					String pic = "https://firebasestorage.googleapis.com/v0/b/bookweb-50d11.appspot.com/o/member%2F%E5%81%87%E8%A3%9D%E6%9C%89%E5%9C%96%E7%89%87.jpg?alt=media&token=2ce87f02-12f3-4120-821f-e0dcfa825f49";
+					loginMember.setMb_Tel("");
+					loginMember.setMb_Address("");
+					loginMember.setMb_type("");
+					loginMember.setMb_pic(pic);
 					loginMember.setCheckColume(true);
 					loginMember.setMb_Birthday(new Date(0));
 					loginMember.setMb_Date(ts);

@@ -21,27 +21,38 @@ import com.web.book.service.SearchService;
 		
 		//查詢書籍關鍵字
 		@Override
-		public List<BookBean> searchBook(String name){
-			return searchBookDAO.searchBook(name);	
+		public List<BookBean> searchBook(String name, Integer page){
+			return searchBookDAO.searchBook(name,page);	
 		}
 		
 		//查詢書籍作者
 		@Override
-		public List<BookBean> searchBookAuthor(String name){
-			return searchBookDAO.searchBookAuthor(name);	
+		public List<BookBean> searchBookAuthor(String name, Integer page){
+			return searchBookDAO.searchBookAuthor(name,page);	
 		}
 		//查詢書籍出版社
 		@Override
-		public List<BookBean> searchBookPublish(String name){
-			return searchBookDAO.searchBookPublish(name);	
+		public List<BookBean> searchBookPublish(String name, Integer page){
+			return searchBookDAO.searchBookPublish(name,page);	
 		}		
 		
 		//查詢書籍類型
 		@Override
-		public List<BookBean> searchBookType(List<Integer> reslist){
-			return searchBookDAO.searchBookType(reslist);
+		public List<BookBean> searchBookType(List<Integer> reslist, Integer page){
+			return searchBookDAO.searchBookType(reslist,page);
 		}
 		
+		//取得總頁數
+		@Override
+		public int getResultPage(){
+			return searchBookDAO.getResultPage();
+		}
+		
+		//取得總筆數
+		@Override
+		public int getResultNumber(){
+			return searchBookDAO.getResultNumber();
+		}
 				
 		//取得單一本書的詳細資訊
 		@Override
@@ -49,7 +60,7 @@ import com.web.book.service.SearchService;
 			return searchBookDAO.getBook(id);	
 		}
 		
-		//取得單一本書的詳細資訊
+		//取得單一本書的詳細類型
 		@Override
 		public List<BookTypeBean> getBookType(int id) {
 			return searchBookDAO.getBookType(id);	

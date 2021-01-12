@@ -33,9 +33,9 @@
 
 
 	<div class="nav-scroller py-1 mb-2">
-		<nav class="nav d-flex justify-content-between">
+		<nav class="nav d-flex justify-content-between" style="background-color:#D2E9FF;">
 			<a class="p-2 text-muted"
-				href="//localhost:8080/BookWeb/SearchBook/Search">圖書漂流瓶</a> <a
+				href='<c:url value="/SearchBook/Search"/>'>圖書漂流瓶</a> <a
 				class="p-2 text-muted" href='<c:url value="/qaqTest"/>'>二手書圖</a> <a
 				class="p-2 text-muted" href='<c:url value="/showActs"/>'>共樂聚落</a> <a
 				class="p-2 text-muted" href='<c:url value="/Discussion/mainpage"/>'>書適論壇</a>
@@ -55,7 +55,7 @@
 		<input type="hidden" id="pic" value="${loginUser.mb_pic}">
 		<input type="hidden" id="name" value="${loginUser.mb_Name}">
 	<script>
-
+	console.log(typeof($.cookie('Member_ID')))
 	console.log($('#pic').val())
 		let pic=$('#pic').val();
 		let name=$('#name').val();
