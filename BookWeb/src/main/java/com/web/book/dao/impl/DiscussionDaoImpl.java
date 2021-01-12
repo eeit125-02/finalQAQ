@@ -14,6 +14,7 @@ import org.springframework.stereotype.Repository;
 import com.web.book.dao.DiscussionDao;
 import com.web.book.model.CommandBean;
 import com.web.book.model.MemberBean;
+import com.web.book.model.NestedCommandBean;
 import com.web.book.model.PostBean;
 import com.web.book.model.RuleBean;
 
@@ -38,6 +39,12 @@ public class DiscussionDaoImpl implements DiscussionDao {
 		return new_command;
 	}
 
+	@Override
+	public NestedCommandBean addNestedCommand(NestedCommandBean new_nested_command) {
+		Session session = factory.getCurrentSession();
+		session.save(new_nested_command);
+		return new_nested_command;
+	}
 	
 	//依時間排序列出所有貼文
 	@SuppressWarnings("unchecked")
@@ -127,6 +134,14 @@ public class DiscussionDaoImpl implements DiscussionDao {
 		MemberBean mb = (MemberBean) session.get(MemberBean.class, mb_ID);
 		return mb;
 	}
+	
+	//用ID取出Command資料
+	@Override
+	public CommandBean getCommandBeanById(Integer command_ID) {
+		Session session = factory.getCurrentSession();
+		CommandBean cb = (CommandBean) session.get(CommandBean.class, command_ID);
+		return cb;
+	}
 
 	//用post id取出command資料
 	@SuppressWarnings("unchecked")
@@ -148,6 +163,9 @@ public class DiscussionDaoImpl implements DiscussionDao {
 		return session.createQuery(hql).getResultList();
 	}
 
+
+
+	
 
 
 
