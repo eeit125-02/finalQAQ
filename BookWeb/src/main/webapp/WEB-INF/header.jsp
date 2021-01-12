@@ -55,7 +55,7 @@
 		<input type="hidden" id="pic" value="${loginUser.mb_pic}">
 		<input type="hidden" id="name" value="${loginUser.mb_Name}">
 	<script>
-
+	console.log(typeof($.cookie('Member_ID')))
 	console.log($('#pic').val())
 		let pic=$('#pic').val();
 		let name=$('#name').val();
