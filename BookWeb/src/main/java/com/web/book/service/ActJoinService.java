@@ -12,8 +12,11 @@ public interface ActJoinService {
 //			//查詢參加活動關鍵字
 //			List<ActJoinBean> searchJoinKeyword(String keyword);
 			
-			//經由參加活動ID查詢單筆資料
+			//經由報名ID取得單一報名資料
 			ActJoinBean getActJoin(Integer join_ID);
+			
+			//經由會員ID查詢報名資料
+			List<ActJoinBean> getJoinRecords(Integer mb_ID);
 			
 			//新增活動
 			int createActJoin(ActJoinBean ajb);

@@ -140,8 +140,8 @@ form {
 				</div>
 				<br>
 				<div class="send">
-					<button type="button" id="send">送出</button>
-					<button type="reset">清除</button>
+					<button type="button" id="send" class="btn btn-outline-secondary">送出</button>
+					<button type="reset" class="btn btn-outline-secondary">清除</button>
 				</div>
 			</fieldset>
 		</form>

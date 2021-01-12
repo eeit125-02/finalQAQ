@@ -25,14 +25,25 @@ public class ActJoinDaoImpl implements ActJoinDao {
 		return actjoinlist;
 	}
 	
-	//查詢單一報名紀錄
-	public ActJoinBean getActJoin(Integer join_ID) {
-		ActJoinBean ajb = null;
+	//依會員ID查詢報名紀錄
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<ActJoinBean> getJoinRecords(Integer mb_ID) {
 		Session session = factory.getCurrentSession();
-		ajb = session.get(ActJoinBean.class, join_ID);
-
-		return ajb;
+		String hql = "FROM ActJoinBean where mb_ID = :mb_ID";
+		List<ActJoinBean> mbjoinlist = session.createQuery(hql).getResultList();
+		return mbjoinlist;		
 	}
+	
+	
+	//依報名ID取得單一報名紀錄
+		public ActJoinBean getActJoin(Integer join_ID) {
+			ActJoinBean ajb = null;
+			Session session = factory.getCurrentSession();
+			ajb = session.get(ActJoinBean.class, join_ID);
+
+			return ajb;
+		}
 	
 //	//依活動名稱關鍵字查詢活動
 //	@SuppressWarnings("unchecked")
