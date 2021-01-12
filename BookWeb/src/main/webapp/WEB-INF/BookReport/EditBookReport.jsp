@@ -87,13 +87,13 @@
 		<br>
 
 		<!-- 閱讀心得 -->
-		<div class="tab-pane fade" id="bookReportList"
+		<div class="tab-pane fade show active" id="bookReportList"
 			role="tabpanel" aria-labelledby="nav-read-tab"></div>
 		<!-- 閱讀心得 -->
 
 		<!-- 收藏 -->
 		
-		<div class="tab-pane fade  show active" id="nav-fav" role="tabpanel"
+		<div class="tab-pane fade" id="nav-fav" role="tabpanel"
 			aria-labelledby="nav-fav-tab">
 			<div class="row mb-2" id="collectReport">
 			
@@ -112,27 +112,54 @@
 			          <br>
 			          <a href="#">取消追蹤</a>
 			        </div>
-			        <svg class="bd-placeholder-img card-img-right flex-auto d-none d-lg-block" width=" 200" height="250" xmlns="http://www.w3.org/50/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail">
+			        <svg class="bd-placeholder-img card-img-right flex-auto d-none d-lg-block" width="200" height="250" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail">
 			        	<image xlink:href="https://im2.book.com.tw/image/getImage?i=https://www.books.com.tw/img/001/088/03/0010880353.jpg&v=5fe9b3ba&w=348&h=348" width="100%" height="100%" />
 			        </svg>
 			      </div>
 			    </div>
-			     
+			    
 			    <div class="col-md-6">
 			      <div class="card flex-md-row mb-4 shadow-sm h-md-250">
 			        <div class="card-body d-flex flex-column align-items-start">
 			          <h3 class="mb-0">
-			            <a class="text-dark" href="#">Post title</a>
+			            <a class="text-dark" href="#">圖書標題</a>
 			          </h3>
-			          <div class="mb-1 text-muted">Nov 11</div>
-			          <p class="card-text mb-auto">This is a wider card with supporting text below as a natural lead-in to additional content.</p>
-			          <a href="#">Continue reading</a>
+			          <div class="mb-1 text-muted">撰寫者：test, 創建日期：Nov 12</div>
+			          <div id="rateYo"></div>
+			          <br>
+			          <p class="card-text mb-auto">書名</p>
+			          <p class="card-text mb-auto">作者</p>
+			          <p class="card-text mb-auto">出版社</p>
+			          <br>
+			          <a href="#">取消追蹤</a>
 			        </div>
 			        <svg class="bd-placeholder-img card-img-right flex-auto d-none d-lg-block" width="200" height="250" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail">
 			        	<image xlink:href="https://im2.book.com.tw/image/getImage?i=https://www.books.com.tw/img/001/088/03/0010880353.jpg&v=5fe9b3ba&w=348&h=348" width="100%" height="100%" />
 			        </svg>
 			      </div>
 			    </div>
+			    
+			    <div class="col-md-6">
+			      <div class="card flex-md-row mb-4 shadow-sm h-md-250">
+			        <div class="card-body d-flex flex-column align-items-start">
+			          <h3 class="mb-0">
+			            <a class="text-dark" href="#">圖書標題</a>
+			          </h3>
+			          <div class="mb-1 text-muted">撰寫者：test, 創建日期：Nov 12</div>
+			          <div id="rateYo"></div>
+			          <br>
+			          <p class="card-text mb-auto">書名</p>
+			          <p class="card-text mb-auto">作者</p>
+			          <p class="card-text mb-auto">出版社</p>
+			          <br>
+			          <button type="button" class="btn btn-outline-danger"  value="" id="deletSub" >取消收藏</button>
+			        </div>
+			        <svg class="bd-placeholder-img card-img-right flex-auto d-none d-lg-block" width="200" height="250" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail">
+			        	<image xlink:href="https://im2.book.com.tw/image/getImage?i=https://www.books.com.tw/img/001/088/03/0010880353.jpg&v=5fe9b3ba&w=348&h=348" width="100%" height="100%" />
+			        </svg>
+			      </div>
+			    </div>
+			    
 			</div>
 		</div>
 		<!-- 收藏 -->
@@ -217,7 +244,7 @@
 					</button>
 				</div>
 				<div class="modal-body">
-					<p>確認是否要刪除心得</p>
+					<p id="deleteInfo">確認是否要刪除心得</p>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-link" id="deleteSecond"
@@ -245,17 +272,16 @@
 			
 		});
 		
-		$("#rateYo").rateYo({
-			rating: 0.0,
-			fullStar: true,
-		    spacing: "5px",
-		    onSet: function (rating, rateYoInstance) {
-		    	brScore = rating
-		    }
-		});
 		
 		$('#deleteSecond').click(function() {
-			deleteReport($(this).val());
+			if($('#deleteInfo').html() == "是否要刪除心得"){
+				deleteReport($(this).val());			
+			}
+			if($('#deleteInfo').html() == "是否要取消收藏"){
+				
+				deleteCollect($(this).val());
+			}
+			
 		});
 
 		$('#editButton').click(function() {
@@ -278,6 +304,22 @@
 				}
 			});
 		});
+		
+		function deleteCollect(rc_ID) {
+			var deleteURL = location.href + "/deleteCollectReport/" + rc_ID;
+			$.ajax({
+				async : false,
+				type : 'POST',
+				url : deleteURL,
+				dataType : "json",
+				success : function(data) {
+					console.log(data)
+					if (data) {
+						loadCollectReport();
+					}
+				}
+			});
+		};
 
 		function deleteReport(br_ID) {
 			var deleteURL = location.href + "/deleteBookReport/" + br_ID;
@@ -303,31 +345,51 @@
 				dataType : "json",
 				success : function(data){
 					var inserData = "";
-					console.log()
 					for(var i = 0; i < data.length; i++){						
 						inserData += "<div class=\"col-md-6\">"
 								  	+ "<div class=\"card flex-md-row mb-4 shadow-sm h-md-250\">"
 								  	+ "<div class=\"card-body d-flex flex-column align-items-start\">"
 						      	  	+ "<h3 class=\"mb-0\">"
-						      	  	+ "<a class=\"text-dark\" href=\"#\">"+ +"</a>"
+						      	  	+ "<a class=\"text-dark\" href=\"http://localhost:8080/BookWeb/BookReport/"+ data[i].brId +"\">"+ data[i].brName +"</a>"
 								  	+ "</h3>"
 									+ "<div class=\"mb-1 text-muted\">"
-									+ "<p>撰寫日期：</p>"
-									+ "</div>"			
-									+ "<p class=\"card-text mb-auto\">書名：</p>"
-									+ "<p class=\"card-text mb-auto\">作者：</p>"
-									+ "<p class=\"card-text mb-auto\">出版社：</p>"
-									+ "<div class=\"form-group\">"
-									+ "<button type=\"button\" class=\"btn btn-sm btn-outline-secondary mr-2\"  id=\"deletSub\" >取消收藏</button>"
+									+ "撰寫者："+ data[i].mbAccount
 									+ "</div>"
+									+ "<div class=\"mb-1 text-muted\">"
+									+ "創建日期："+ data[i].brDate
 									+ "</div>"
-									+ "<svg class=\"bd-placeholder-img card-img-right flex-auto  d-lg-block\" width=\"200\" height=\"250\" xmlns=\"http://www.w3.org/2000/svg\" preserveAspectRatio=\"xMidYMid slice\" focusable=\"false\" role=\"img\" aria-label=\"Placeholder: Thumbnail\">"
+									+ "<div id=rateYo"+ data[i].rcId +"></div>"
+									+ "<br>"
+									+ "<p class=\"card-text mb-auto\">書名："+ data[i].bkName +"</p>"
+									+ "<p class=\"card-text mb-auto\">作者："+ data[i].bkAuthor +"</p>"
+									+ "<p class=\"card-text mb-auto\">出版社："+ data[i].bkPublish +"</p>"
+									+ "<br>"
+									+ "<button type=\"button\" class=\"btn btn-outline-danger\"  data-toggle=\"modal\" data-target=\"#deletModal\" id=\"deletSub\" value=\""+ data[i].rcId +"\" >取消收藏</button>"
+									+ "</div>"
+									+ " <svg class=\"bd-placeholder-img card-img-right flex-auto d-none d-lg-block mr-4 mt-4\" width=\"150\" height=\"250\" xmlns=\"http://www.w3.org/2000/svg\" preserveAspectRatio=\"xMidYMid slice\" focusable=\"false\" role=\"img\" aria-label=\"Placeholder: Thumbnail\">"
+									+ "<image xlink:href=\""+ data[i].bkPic +"\"width=\"100%\" height=\"100%\"/>"
 									+ "</svg>"
+									+ "</div>"
 									+ "</div>"
 					}
 					$('#collectReport').html(inserData);
+					
+					for(var i = 0; i < data.length; i++){	
+						$("#rateYo"+ data[i].rcId).rateYo({
+							rating: data[i].brScore,
+						    spacing: "5px",
+						    starWidth: "20px",
+						    readOnly: true
+						});
+					}				
 				}
-			})
+			});
+			
+			$(".btn-outline-danger").click(function(){
+				$('#deleteInfo').html("是否要取消收藏");
+				$('#deleteSecond').val($(this).val());
+				console.log($('#deleteInfo').html());
+			});	
 		}
 		
 		function loadBookReportList() {
@@ -381,6 +443,7 @@
 			});
 			$('.btn-outline-secondary').click(function() {
 				if ($(this).attr("id") == 'delete') {
+					$('#deleteInfo').html("是否要刪除心得");
 					$('#deleteSecond').val($(this).val());
 				}
 				if ($(this).attr("id") == 'edit') {

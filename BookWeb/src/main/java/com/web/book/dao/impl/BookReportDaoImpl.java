@@ -100,14 +100,14 @@ public class BookReportDaoImpl implements BookReportDao {
 		
 		Integer maxPage = 0;
 		Session session = fatory.getCurrentSession();
-		String hql = "From BookReportBean";
+		String hql = "Select count(br) From BookReportBean br";
 		Query<BookReportBean> query = session.createQuery(hql);
 		
-		if (query.getResultList().size()%10 == 0) {
-			maxPage += query.getResultList().size()/ 10;
+		if (Integer.valueOf(String.valueOf(query.uniqueResult()))%10 == 0) {
+			maxPage += Integer.valueOf(String.valueOf(query.uniqueResult()))/ 10;
 		}
 		else {
-			maxPage += query.getResultList().size()/ 10+ 1;
+			maxPage += Integer.valueOf(String.valueOf(query.uniqueResult()))/ 10+ 1;
 		}
 		
 		return maxPage;
@@ -132,19 +132,21 @@ public class BookReportDaoImpl implements BookReportDao {
 		
 		Integer maxPage = 0;
 		Session session = fatory.getCurrentSession();
-		String hql = "From BookReportBean br Where "
+		String hql = "Select count(br) From BookReportBean br Where "
 					  + "br.book.bk_Name like :searchString"
 					  + " or br.book.bk_Author like :searchString"
 					  + " or br.book.bk_Publish like :searchString"
 					  + " or br.br_Name like :searchString"
 					  + " or br.book.bk_BookType like :searchString";
+		
 		Query<BookReportBean> query = session.createQuery(hql);
 		query.setParameter("searchString", "%"+searchString+"%");
-		if (query.getResultList().size()%10 == 0) {
-			maxPage += query.getResultList().size()/ 10;
+		
+		if (Integer.valueOf(String.valueOf(query.uniqueResult()))%10 == 0) {
+			maxPage += Integer.valueOf(String.valueOf(query.uniqueResult()))/ 10;
 		}
 		else {
-			maxPage += query.getResultList().size()/ 10+ 1;
+			maxPage += Integer.valueOf(String.valueOf(query.uniqueResult()))/ 10+ 1;
 		}
 		
 		return maxPage;
