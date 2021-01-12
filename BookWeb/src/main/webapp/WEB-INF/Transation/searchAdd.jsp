@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page import="java.util.List"%>
-<%@ page import="com.web.book.model.BookStoreBean"%>
+<%@ page import="com.web.book.model.BookBean"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -48,6 +48,32 @@
 	<!-- header -->
 
 	<!-- body -->
+	
+	<form class="bs-example bs-example-form" role="form"
+			action="<c:url value='/qaqSBookName'/>">
+			<div class="row">
+				<div class="col-lg-4"></div>
+				<div class="col-lg-4">
+					<div class="input-group">
+						<input type="text" class="form-control" name="sBkNe" placeholder="請輸入書名"> <span
+							class="input-group-btn">
+							<button type="submit" class="btn btn-outline-secondary">
+								<img alt="圖勒?" src='<c:url value="image/qaqsearch.png" />'
+									width="20px" height="20px">
+							</button>
+						</span>
+					</div>
+				</div>
+				<div class="col-lg-4">
+					<button type="button" class="btn btn-outline-secondary"
+						onclick="storeCheck()">我的賣場</button>
+				</div>
+			</div>
+		</form>
+	
+	
+	
+	
 	<div class="container media">
 		<h1>請從藏書庫中搜尋書名或者按此<a href="<c:url value='addMyBookA'/>">新增</a>一本書</h1>
 	</div>
@@ -70,15 +96,17 @@
 			if (request.getParameter("searchbk") != null) {
 		%>
 		<p>
-			<%!List<BookStoreBean> list;%>
-			<%!BookStoreBean data;%>
+			<%!List<BookBean> list;%>
+			<%!BookBean data;%>
 			<%
-				data = new BookStoreBean();
+				data = new BookBean();
 			list = (List) request.getAttribute("bookName");
 			%>
 		
 		<form action="<c:url value='/addBook'/>" method="post">
-			<c:forEach items="${bookName}" var="v">
+			<%
+				for (BookBean data : list) {
+			%>
 			<table border="1" width="100%">
 				<tr>
 					<th width="70">編號</th>
@@ -90,17 +118,19 @@
 					<th width="110">&nbsp;</th>
 				</tr>
 				<tr height='16'>
-					<td>${v.book.bk_ID}</td>
-					<td>${v.book.bk_Name}</td>
-					<td>${v.book.bk_Author}</td>
-					<td>${v.book.bk_Publish}</td>
-					<td><INPUT TYPE="TEXT" NAME="${v.book.bk_ID}price"></td>
-					<td><INPUT TYPE="TEXT" NAME="${v.book.bk_ID}qty"></td>
-					<td><button type="submit" value="${v.book.bk_ID}"
+					<td><%=data.getBk_ID()%></td>
+					<td><%=data.getBk_Name()%></td>
+					<td><%=data.getBk_Author()%></td>
+					<td><%=data.getBk_Publish()%></td>
+					<td><INPUT TYPE="TEXT" NAME="<%=data.getBk_ID()%>price"></td>
+					<td><INPUT TYPE="TEXT" NAME="<%=data.getBk_ID()%>qty"></td>
+					<td><button type="submit" value=<%=data.getBk_ID()%>
 							name="setbk">刊登</button></td>
 				</tr>
 			</table>
-			</c:forEach>
+			<%
+				}
+			%>
 		</form>
 		<%
 			}
