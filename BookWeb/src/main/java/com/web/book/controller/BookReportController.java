@@ -254,6 +254,9 @@ public class BookReportController {
 		for (BookReportCollectBean bookReportCollect : memberCollects) {
 			
 			Map<String, Object>  data = new HashMap<>();
+			data.put("rcId", bookReportCollect.getRc_ID());
+			data.put("brId", bookReportCollect.getBookReport().getBr_ID());
+			data.put("mbAccount", bookReportCollect.getBookReport().getMember().getMb_Account());
 			data.put("bkName", bookReportCollect.getBookReport().getBook().getBk_Name());
 			data.put("bkPic", bookReportCollect.getBookReport().getBook().getBk_Pic());
 			data.put("bkAuthor", bookReportCollect.getBookReport().getBook().getBk_Author());
@@ -267,6 +270,15 @@ public class BookReportController {
 		}
 		
 		return collectReport;
+	}
+	
+	@PostMapping("/EditBookReport/deleteCollectReport/{rcId}")
+	@ResponseBody
+	public String deletCollectReport(@PathVariable("rcId") Integer rcId){
+		
+		bookReportService.deleteCollectReport(rcId);
+		
+		return "true";
 	}
 	
 }
