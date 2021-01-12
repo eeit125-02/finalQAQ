@@ -33,7 +33,7 @@ public class Login {
 
 	@Autowired
 	MemberService ms;
-
+	String mail;
 	String Account;
 	String logincheck =null;
 	MemberBean checkMember;
@@ -53,13 +53,21 @@ public class Login {
 		System.out.println(reg_member);
 		checkMember = reg_member;
 		model.addAttribute("reg_member", reg_member);
-		return "redirect:toConfirm";
+		JavaMail jm = new JavaMail();
+		jm.Register(mb_Mail);
+		return "redirect:toLogin";
+	}
+	
+	//註冊確認
+	@GetMapping("/toconfirm")
+	public String toConfirm() {
+		ms.insertMember(checkMember);
+		return "redirect:toLogin";
 	}
 	
 	// 註冊資料確認後送至資料庫
 	@PostMapping("/confirm")
 	public String Confirm() {
-		System.out.println(checkMember);
 		ms.insertMember(checkMember);
 		return "redirect:toLogin";
 	}
@@ -106,13 +114,30 @@ public class Login {
 		}
 		
 	}
-
+	
+	//忘記密碼更新
+	@PostMapping("/JavaMailUpdate")
+	public String JavaMailUpdate(Model model, @RequestParam("pwd") String pwd) {
+		MemberBean mb_inf = ms.select(Account);
+		String encryption = GlobalService.getMemberEncoder(pwd);
+		mb_inf.setMb_Password(encryption);
+		ms.update(mb_inf);
+		return "redirect:toLogin";
+	}
+	
+	//JavaMail跳轉
+	@GetMapping("/pwdlink")
+	public String pwdlink(Model model) {
+		Account=ms.email(mail).getMb_Account();
+		return "Member/MailModify";
+	}
+	
 	//JavaMail
 	@PostMapping("/JavaMail")
 	public String JavaMail(@RequestParam(value = "mail",required = false) String email) {
+		mail=email;
 		JavaMail mail = new JavaMail();
-		MemberBean member = ms.email(email);
-		mail.SendMail(email,member.getMb_Password());
+		mail.SendMail(email);
 		return "redirect:toLogin";
 	}
 	
