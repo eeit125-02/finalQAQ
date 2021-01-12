@@ -28,6 +28,8 @@ import com.web.book.service.SearchService;
 @SessionAttributes(value = { "loginUser" })
 public class StoreController {
 
+	private Integer page = 1;
+	
 	@Autowired
 	BookStoreService bookStoreService;
 	@Autowired
@@ -42,13 +44,23 @@ public class StoreController {
 
 	// 最終呈現首頁
 	@GetMapping("qaqTest")
-	public String qaqmainPage(Model model) {
-		List<BookStoreBean> list = bookStoreService.searchBookStore(1);
-//		System.out.println(bookStoreService.countBook().size());
-//		System.out.println("--------------------------------------------");
-//		int totalPage = (int) Math.ceil(bookStoreService.countBook().size()/12);
+	public String qaqMainPage(Model model) {
+		List<BookStoreBean> list = bookStoreService.searchBookStore(page);
 		model.addAttribute("store", list);
-//		model.addAttribute("total", totalPage);
+		model.addAttribute("pageSize", bookStoreService.getAllSearchBookStoreSize());
+		model.addAttribute("pageNow", page);
+		page = 1;
+		return "/Transation/qaqMain";
+	}
+	// 分頁
+	@GetMapping("qaqTest/{page}")
+	public String qaqNextPage(Model model,
+			@PathVariable Integer page
+			) {
+		List<BookStoreBean> list = bookStoreService.searchBookStore(page);
+		model.addAttribute("store", list);
+		model.addAttribute("pageSize", bookStoreService.getAllSearchBookStoreSize());
+		model.addAttribute("pageNow", page);
 		return "/Transation/qaqMain";
 	}
 
@@ -93,8 +105,11 @@ public class StoreController {
 	public String qaqSBookName(Model model,
 			@RequestParam(value = "sBkNe") String bk_Name
 			) {
-		List<BookStoreBean> list = bookStoreService.searchStoreBookName(bk_Name);
+		List<BookStoreBean> list = bookStoreService.searchStoreBookName(bk_Name, page);
 		model.addAttribute("store", list);
+		model.addAttribute("pageSize", bookStoreService.getSearchStoreBookNameSize(bk_Name));
+		model.addAttribute("pageNow", page);
+		page = 1;
 		return "/Transation/qaqMain";
 	}
 
@@ -139,7 +154,7 @@ public class StoreController {
 
 	@PostMapping("/searchBookName")
 	public String searchBookName(Model model, @RequestParam(value = "searchbk") String bk_Name) {
-		List<BookStoreBean> list = bookStoreService.searchStoreBookName(bk_Name);
+		List<BookStoreBean> list = bookStoreService.searchStoreBookName(bk_Name, page);
 		model.addAttribute("bookName", list);
 		return "/Transation/addMyStore";
 	}
@@ -185,6 +200,6 @@ public class StoreController {
 //	@GetMapping("boobplay")
 //	public String boob(Model model) {
 //		bookStoreService.boobqaq();
-//		return "redirect:/Transation/storeMain";
+//		return "redirect:/qaqTest";
 //	}
 }

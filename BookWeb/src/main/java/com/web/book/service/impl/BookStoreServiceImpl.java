@@ -27,6 +27,12 @@ public class BookStoreServiceImpl implements BookStoreService {
 	public List<BookStoreBean> bookPrices(Integer bk_ID) {
 		return dao.bookPrices(bk_ID);
 	}
+	
+	// 商品頁面搜尋全部頁數，管理員a123456,07 
+	@Override
+	public Integer getAllSearchBookStoreSize() {
+		return dao.getAllSearchBookStoreSize();
+	}
 
 	@Override
 	public BookBean getBookDetail(Integer bk_ID) {
@@ -44,8 +50,8 @@ public class BookStoreServiceImpl implements BookStoreService {
 	}
 
 	@Override
-	public List<BookStoreBean> searchStoreBookName(String bk_Name) {
-		return dao.searchStoreBookName(bk_Name);
+	public List<BookStoreBean> searchStoreBookName(String bk_Name, Integer page) {
+		return dao.searchStoreBookName(bk_Name, page);
 	}
 
 	@Override
@@ -68,13 +74,14 @@ public class BookStoreServiceImpl implements BookStoreService {
 		dao.boobqaq();
 	}
 	@Override
-	public List<BookBean> countBook() {
-		return dao.countBook();
-	}
-	@Override
 	public List<BookBean> searchBookName(String bk_Name) {
 		return dao.searchBookName(bk_Name);
 	}
+	@Override
+	public Integer getSearchStoreBookNameSize(String bk_Name) {
+		return dao.getSearchStoreBookNameSize(bk_Name);
+	}
+	
 	
 
 	
