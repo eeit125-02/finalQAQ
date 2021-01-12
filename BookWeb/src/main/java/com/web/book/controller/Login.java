@@ -128,14 +128,17 @@ public class Login {
 		public @ResponseBody boolean tothird(Model model,
 				@RequestParam(value = "name",required = false) String name,
 				@RequestParam(value = "email",required = false) String email,
-				@RequestParam(value = "file", required = false) String file,
 				HttpServletResponse response) throws IOException, InterruptedException, ExecutionException {
 			Account = email;
 			boolean check = ms.checkAccount(Account);
 				if(check==false) {			
 					MemberBean loginMember = new MemberBean();
 					Timestamp ts = new Timestamp(System.currentTimeMillis());
-					loginMember.setMb_pic(file);
+					String pic = "https://firebasestorage.googleapis.com/v0/b/bookweb-50d11.appspot.com/o/member%2F%E5%81%87%E8%A3%9D%E6%9C%89%E5%9C%96%E7%89%87.jpg?alt=media&token=2ce87f02-12f3-4120-821f-e0dcfa825f49";
+					loginMember.setMb_Tel("");
+					loginMember.setMb_Address("");
+					loginMember.setMb_type("");
+					loginMember.setMb_pic(pic);
 					loginMember.setCheckColume(true);
 					loginMember.setMb_Birthday(new Date(0));
 					loginMember.setMb_Date(ts);
