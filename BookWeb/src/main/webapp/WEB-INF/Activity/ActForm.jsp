@@ -84,17 +84,26 @@
 					<form>
 						<div class="form-row">
 							<div class="form-group col-md-6">
-								<label for="inputPassword4">活動名稱:</label>
+								<label >活動名稱:</label>
 								<form:input path="act_Name" class="form-control" placeholder="必填" />
 							</div>
 							<div class="form-group col-md-6">
-								<label for="inputPassword4">活動主題:</label>
-								<form:input path="act_Theme" class="form-control" placeholder="必填" />
+								<label >活動主題:</label>
+								<form:select path="act_Theme" class="form-control">
+                                <form:option value="NONE" label="請選擇" />
+                                <form:option value="書展" label="書展"/>
+                                <form:option value="讀書會" label="讀書會"/>
+                                <form:option value="簽書會" label="簽書會"/>
+                                <form:option value="講座/論壇" label="講座/論壇"/>
+                                <form:option value="公益活動"  label="公益活動"/>
+                                <form:option value="好書交換" label="好書交換"/>
+                                <form:option value="新書/好書討論會" label="新書/好書討論會"/>
+                                </form:select>					
 							</div>
 						</div>
 						<div class="form-row">
 							<div class="form-group col-md-6">
-								<label for="inputPassword4">活動嘉賓:</label>
+								<label >活動嘉賓:</label>
 								<form:input path="act_Guest" class="form-control" placeholder="" />
 							</div>
 							<div class="form-group col-md-6 custom-file">
