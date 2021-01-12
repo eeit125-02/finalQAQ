@@ -115,7 +115,7 @@ response.setDateHeader("Expires", 0);
 						
 						<script>
 						$('#list-manager-list').click(function(){
-							if('${loginUser.mb_ID}'!=='13'){
+							if('${loginUser.mb_ID}'!=='14'){
 								$('#list-manager').html('<br><br><h1>請先登入版主帳號</h1>')
 							} 
 						})

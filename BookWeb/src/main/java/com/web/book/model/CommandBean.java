@@ -2,6 +2,8 @@ package com.web.book.model;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -10,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 
@@ -33,16 +36,20 @@ public class CommandBean implements Serializable{
 	@JoinColumn(name="FK_mb_id")
 	private MemberBean memberbean;
 	
+	@OneToMany(mappedBy="commandBean", orphanRemoval=true)
+	private Set<NestedCommandBean> nestCommands=new LinkedHashSet<>( );
+
 	public CommandBean() {}
 
 	public CommandBean(Integer command_id, String command_content, String command_time, PostBean postBean,
-			MemberBean memberbean) {
+			MemberBean memberbean, Set<NestedCommandBean> nestCommands) {
 		super();
 		this.command_id = command_id;
 		this.command_content = command_content;
 		this.command_time = command_time;
 		this.postBean = postBean;
 		this.memberbean = memberbean;
+		this.nestCommands = nestCommands;
 	}
 
 	public Integer getCommand_id() {
@@ -83,6 +90,14 @@ public class CommandBean implements Serializable{
 
 	public void setMemberbean(MemberBean memberbean) {
 		this.memberbean = memberbean;
-	}	
+	}
 
+	public Set<NestedCommandBean> getNestCommands() {
+		return nestCommands;
+	}
+
+	public void setNestCommands(Set<NestedCommandBean> nestCommands) {
+		this.nestCommands = nestCommands;
+	}
+	
 }

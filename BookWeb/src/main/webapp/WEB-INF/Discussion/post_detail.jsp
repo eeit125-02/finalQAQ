@@ -36,7 +36,6 @@
 		font-size: 3.5rem;
 	}
 }
-
 </style>
 
 <script>
@@ -126,22 +125,54 @@
 							<!-- 	巢狀留言彈出輸入框 -->
 							<div class="collapse"
 								id="nested_command${stored_command.command_id}">
-								
-								<div class=" input-group" >
 
-								<input type="text" class="form-control" id="command_input"
-									placeholder="回覆   ${stored_command.command_content}" /> 
-								<input type="hidden" name="command_id"
-									id="post_id" value="${stored_command.command_id}" />
-								<span class="input-group-append">
-									<button class="btn btn-outline-secondary " id="nested_command_btn"
-										type="button" data-toggle="modal"
-										data-target="#exampleModalCenter">回覆</button>
-								</span>
-								
+								<div style="height: 40px">
+									<div class=" input-group" style="width: 80%; float: right;">
+
+										<input type="text" class="form-control" id="command_input"
+											placeholder="回覆   ${stored_command.command_content}" /> <input
+											type="hidden" name="command_id" id="post_id"
+											value="${stored_command.command_id}" /> <span
+											class="input-group-append">
+											<button class="btn btn-outline-secondary "
+												id="nested_command_btn" type="button" data-toggle="modal"
+												data-target="#exampleModalCenter">回覆</button>
+										</span>
+									</div>
 								</div>
-								
+
+								<div style="height: 125px; padding-top:10px; margin-right:10px">
+									<div
+										style="background-color: #B3D9D9; margin: 0px; padding: 5px; border-radius: 10px; width: 78%; float: right;">
+										<p>
+											nest command mb<br> nest command time
+										</p>
+										<p>nest command content</p>
+									</div>
+								</div>
+
+								<div style="height: 125px; padding-top:10px; margin-right:10px">
+									<div
+										style="background-color: #B3D9D9; margin: 0px; padding: 5px; border-radius: 10px; width: 78%; float: right;">
+										<p>
+											nest command mb<br> nest command time
+										</p>
+										<p>nest command content</p>
+									</div>
+								</div>
+
+							<div style="height: 125px; padding-top:10px; margin-right:10px">
+									<div
+										style="background-color: #B3D9D9; margin: 0px; padding: 5px; border-radius: 10px; width: 78%; float: right;">
+										<p>
+											nest command mb<br> nest command time
+										</p>
+										<p>nest command content</p>
+									</div>
+								</div>
+
 							</div>
+
 
 						</c:forEach>
 					</div>
@@ -185,6 +216,8 @@
 																			"#show_command")
 																			.prepend(
 																					'<div style="background-color: #C4E1FF; margin: 10px; padding: 5px; border-radius: 10px;">'
+																							+ '<button class="btn btn-link btn-sm float-right" type="submit" data-toggle="collapse"'
+																							+ 'data-target="#nested_command${stored_command.command_id}">回覆</button>'
 																							+ '<p>'
 																							+ new_cb.mb_name
 																							+ '<br>'
@@ -193,7 +226,17 @@
 																							+ '<p>'
 																							+ new_cb.cb_content
 																							+ '</p>'
-																							+ '</div>');
+																							+ '</div>'
+																							+ '<div class="collapse" id="nested_command${stored_command.command_id}">'
+																							+ '<div style="height: 40px">'
+																							+ '<div class=" input-group" style="width: 80%; float: right;">'
+																							+ '<input type="text" class="form-control" id="command_input" placeholder="回覆   ${stored_command.command_content}" />'
+																							+ ' <input type="hidden" name="command_id" id="post_id" value="${stored_command.command_id}" />'
+																							+' <span class="input-group-append">'
+																							+ '<button class="btn btn-outline-secondary " id="nested_command_btn" type="button" data-toggle="modal"'
+																							+'data-target="#exampleModalCenter">回覆</button>'
+																							+'</span></div></div>'
+																							);
 																}
 															})
 													$('#command_input').val("");
