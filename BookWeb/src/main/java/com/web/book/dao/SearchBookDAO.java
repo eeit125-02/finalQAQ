@@ -10,13 +10,13 @@ import com.web.book.model.BookTypeBean;
 public interface SearchBookDAO {
 
 	// 查詢書籍關鍵字
-	List<BookBean> searchBook(String name);
+	List<BookBean> searchBook(String name, Integer page);
 	//查詢書籍作者
-	List<BookBean> searchBookAuthor(String name);
+	List<BookBean> searchBookAuthor(String name, Integer page);
 	//查詢書籍出版社
-	List<BookBean> searchBookPublish(String name);
+	List<BookBean> searchBookPublish(String name, Integer page);
 	//查詢書籍類別
-	List<BookBean> searchBookType(List<Integer> reslist);
+	List<BookBean> searchBookType(List<Integer> reslist, Integer page);
 
 	// 取得單一本書的詳細資訊
 	BookBean getBook(int id);
@@ -44,5 +44,10 @@ public interface SearchBookDAO {
 	
 	//刪除書本
 	boolean deletebk(BookBean bkc);
+	
+	//取得總頁數
+	int getResultPage();
+	//取得總筆數
+	int getResultNumber();
 
 }
