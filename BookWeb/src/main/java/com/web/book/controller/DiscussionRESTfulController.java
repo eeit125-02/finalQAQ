@@ -99,6 +99,7 @@ public class DiscussionRESTfulController {
 		new_ncb.put("ncb_time", ncb.getNested_command_time());
 		new_ncb.put("ncb_content", ncb.getNested_command_content());
 		new_ncb.put("cb_id", ncb.getCommandBean().getCommand_id());
+		new_ncb.put("cb_content", ncb.getCommandBean().getCommand_content());
 		return new_ncb;
 	}
 	
