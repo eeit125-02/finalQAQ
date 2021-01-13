@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.web.book.dao.BookReportDao;
 import com.web.book.model.BookReportBean;
 import com.web.book.model.BookReportCollectBean;
+import com.web.book.model.BookReportMessageBean;
 import com.web.book.service.BookReportService;
 
 @Transactional
@@ -146,6 +147,29 @@ public class BookReportServiceImpl implements BookReportService {
 		
 		bookReportDao.delteCollectReport(rcId);
 		
+	}
+
+	@Override
+	public List<BookReportMessageBean> getBookReportMessageList(Integer brId) {
+		
+		return bookReportDao.getBookReportMessageList(brId);
+	}
+
+	@Override
+	public List<BookReportMessageBean> getMemberBookReportMessageList(Integer mbId) {
+		
+		return bookReportDao.getMemberBookReportMessageList(mbId);
+	}
+
+	@Override
+	public void addReportMessage(Integer brId, Integer mbId, String content) {
+
+		bookReportDao.addReportMessage(brId, mbId, content);
+	}
+
+	@Override
+	public void deletReportMessage(Integer bmId) {
+		bookReportDao.deletReportMessage(bmId);
 	}
 	
 	

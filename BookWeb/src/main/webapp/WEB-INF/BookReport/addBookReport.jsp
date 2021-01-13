@@ -10,11 +10,11 @@
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-<!-- <script src="https://cdn.ckeditor.com/4.15.1/standard/ckeditor.js"></script> -->
-<script src="https://cdn.ckeditor.com/ckeditor5/24.0.0/classic/ckeditor.js"></script>
+<!-- <script src="https://cdn.ckeditor.com/4.15.1/standard-all/ckeditor.js"></script> -->
 
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/jquery.rateyo.css"/>
 <script src="${pageContext.request.contextPath}/js/jquery.rateyo.js"></script>
+<script src="${pageContext.request.contextPath}/js/ckeditor/ckeditor.js"></script>
 
 
 
@@ -81,16 +81,42 @@
 	<footer class="container py-5" id="bookWebFooter"></footer>
 	<!-- footer -->
 	<script>
+	 	CKEDITOR.addCss('.cke_editable { font-size: 15px; padding: 2em; }');
+	 	var editor = CKEDITOR.replace( 'brContent' ,{
+			toolbar: [
+		        {
+		          name: 'clipboard',
+		          items: ['Undo', 'Redo']
+		        },
+		        {
+			          name: 'styles',
+			          items: ['Format', 'Font', 'FontSize']
+			    },
+		        {
+		          name: 'basicstyles',
+		          items: ['Bold']
+			    },
+		        {
+		          name: 'colors',
+		          items: ['TextColor']
+		        },
+		        {
+		          name: 'align',
+		          items: ['JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock']
+		        },
+		       /*  {
+		          name: 'paragraph',
+		          items: ['NumberedList', 'BulletedList']
+		        }, */
+		       /*  {
+		            name: 'links',
+		            items: ['EmojiPanel']
+		         } */
+		      ]
+
+		      
+		});
 		
-		
-		ClassicEditor
-	        .create( document.querySelector( '#brContent' ) )
-	        .then( editor => {
-	                console.log( editor );
-	        } )
-	        .catch( error => {
-	                console.error( error );
-	        } );
 		let brScore = 0;
 
 		$("#bookWebheader").load("//localhost:8080/BookWeb/header");
@@ -126,12 +152,11 @@
 			var addData = {
 						bk_ID : window.location.href.split("/").pop(),
 						br_Score : brScore,
-						br_Content : $('#brContent').val().replace(/\n|\r\n/g, "<br>"),
+						br_Content : editor.getData(),
 						br_Name : $('#brTitle').val()
 				};
-			
-			console.log($('#brContent').html());
-			/* $.ajax({
+				console.log(editor.getData().replace(/'"'/g, "<&>"))
+			$.ajax({
 				async : false,
 				type : 'POST',
 				url : 'http://localhost:8080/BookWeb/BookReport/addBookReport/addReport',
@@ -145,7 +170,7 @@
 						alert.val(已傳野果);
 					}
 				}
-			}) */
+			})
 		});
 		
 		$('#backButton').click(function(){
