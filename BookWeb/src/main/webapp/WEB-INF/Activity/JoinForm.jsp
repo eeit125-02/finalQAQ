@@ -72,9 +72,9 @@
 				<table>
 
 					<tr>
-						<td><label>會員帳號:${loginUser.getMb_Account()}</label></td>
+						<td><label>會員帳號:${loginUser.mb_Account}</label></td>
 <%-- 						<td><input type="hidden" name="mb_Account" value="${member.mb_Account}" /></td> --%>
-					<form:input type="hidden" path="member.mb_Account" value="${loginUser.getMb_Account()}"/>
+					<form:input type="hidden" path="act.member.mb_Account" value="${loginUser.mb_Account}"/>
 					</tr>
 
                     <tr>
@@ -88,13 +88,13 @@
 					</tr>
 
 					<tr>
-						<td><form:label path="member.mb_Mail">email:</form:label></td>
-						<td><form:input path="member.mb_Mail" value="${loginUser.getMb_Mail()}"/></td>
+						<td><form:label path="act.member.mb_Mail">email:</form:label></td>
+						<td><form:input path="act.member.mb_Mail" value="${loginUser.getMb_Mail()}"/></td>
 					</tr>
 
 					<tr>
-						<td><form:label path="member.mb_Tel">聯絡電話:</form:label></td>
-						<td><form:input path="member.mb_Tel" value="${loginUser.getMb_Tel()}"/></td>
+						<td><form:label path="act.member.mb_Tel">聯絡電話:</form:label></td>
+						<td><form:input path="act.member.mb_Tel" value="${loginUser.getMb_Tel()}"/></td>
 					</tr>
 
 

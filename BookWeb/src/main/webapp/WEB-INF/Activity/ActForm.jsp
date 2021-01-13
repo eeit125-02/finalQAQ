@@ -10,6 +10,9 @@
 
 <link rel='stylesheet' href='${pageContext.request.contextPath}/css/style.css' />
 
+<!-- CK EDITOR的東東 -->
+<script src="https://cdn.ckeditor.com/ckeditor5/24.0.0/classic/ckeditor.js"></script>
+
 
 
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
@@ -154,24 +157,26 @@
 							</div>					
                         
                         <div class="form-row">
-                        <div class="form-group col-md-2 input_fields_wrap">
+                        <div class="form-group input_fields_wrap">
 						    <label >活動標籤:</label>
 						    <form:input path="act_Tag" type="text" name="mytext[]" class="form-control"></form:input>
 						    </div>
-						  
-						  <div class="form-group col-md-4">
-						    <label >活動規則:</label>
-						    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-<%-- 						    <form:input type="textarea" path="act_Rule" class="form-control" placeholder="" /> --%>
-						  </div>
-						  
+						    </div>
+						    
+						  <div class="form-row">
 						  <div class="form-group col-md-6">
+						    <label >活動摘要:</label>
+<!-- 						  CK EDITOR的東東 -->
+						    <form:textarea id="editor" path="act_Rule" rows = "20" cols = "30" />
+						  </div>
+						  
+						  <div class="form-group  col-md-6">
 						    <label >活動簡介:</label>
-						    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="act_Intro"></textarea>
-<%-- 						    <form:input type="textarea" path="act_Intro" class="form-control" placeholder="" rows="10" cols="30" /> --%>
+<!-- 						  CK EDITOR的東東 -->
+						  <form:textarea id="editor1" path="act_Intro" rows = "20" cols = "30" />
 						  </div>
 						  </div>
-						  <button class="add_field_button btn btn-primary">添加標籤</button>
+<!-- 						  <button class="add_field_button btn btn-primary">添加標籤</button> -->
 						  
 						  
 						<hr>
@@ -278,7 +283,6 @@
 								'545埔里鎮', '546仁愛鄉', '551名間鄉', '552集集鎮',
 								'553水里鄉', '555魚池鄉', '556信義鄉', '557竹山鎮',
 								'558鹿谷鄉' ],
-						[ '南海島', '817東沙群島', '819南沙群島' ],
 						[ '屏東縣', '900屏東市', '901三地門', '902霧台鄉', '903瑪家鄉',
 								'904九如鄉', '905里港鄉', '906高樹鄉', '907鹽埔鄉',
 								'908長治鄉', '909麟洛鄉', '911竹田鄉', '912內埔鄉',
@@ -398,5 +402,27 @@
 				}
 			};
 		</script>
+		
+<!-- 		CK EDITOR的東東 -->
+<script>
+    ClassicEditor
+        .create( document.querySelector( '#editor' ) )
+        .catch( error => {
+            console.error( error );
+        } );
+</script>
+
+<script>
+    ClassicEditor
+        .create( document.querySelector( '#editor1' ) )
+        .catch( error => {
+            console.error( error );
+        } );
+</script>
+
+
+
+
+		
 </body>
 </html>
