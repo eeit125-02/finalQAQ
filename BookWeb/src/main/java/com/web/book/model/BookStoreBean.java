@@ -1,5 +1,7 @@
 package com.web.book.model;
 
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -26,18 +28,21 @@ public class BookStoreBean {
 	@ManyToOne
 	@JoinColumn(name = "bs_ID")
 	private MemberBean member;
+	
+	private Date bs_Date;
 
 	public BookStoreBean() {
 		super();
 	}
 
-	public BookStoreBean(Integer bks_ID, Integer bs_Num, Integer bs_Price, BookBean book, MemberBean member) {
+	public BookStoreBean(Integer bks_ID, Integer bs_Num, Integer bs_Price, BookBean book, MemberBean member, Date bs_Date) {
 		super();
 		this.bks_ID = bks_ID;
 		this.bs_Num = bs_Num;
 		this.bs_Price = bs_Price;
 		this.book = book;
 		this.member = member;
+		this.setBs_Date(bs_Date);
 	}
 
 	public Integer getBks_ID() {
@@ -80,10 +85,18 @@ public class BookStoreBean {
 		this.member = member;
 	}
 
+	public Date getBs_Date() {
+		return bs_Date;
+	}
+
+	public void setBs_Date(Date bs_Date) {
+		this.bs_Date = bs_Date;
+	}
+
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("Book_Store [bks_ID=");
+		builder.append("BookStoreBean [bks_ID=");
 		builder.append(bks_ID);
 		builder.append(", bs_Num=");
 		builder.append(bs_Num);
@@ -93,6 +106,8 @@ public class BookStoreBean {
 		builder.append(book);
 		builder.append(", member=");
 		builder.append(member);
+		builder.append(", bs_Date=");
+		builder.append(bs_Date);
 		builder.append("]");
 		return builder.toString();
 	}

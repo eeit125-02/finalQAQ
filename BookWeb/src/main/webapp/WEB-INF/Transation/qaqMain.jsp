@@ -43,9 +43,9 @@
 </head>
 <body>
 	<!-- 灌值 -->
-	<%-- 	<form action="<c:url value='/boobplay'/>" method="get"> --%>
-	<!-- 		<button type="submit">不要隨便亂按會爆炸</button> -->
-	<!-- 	</form> -->
+<%-- 		<form action="<c:url value='/boobplay'/>" method="get"> --%>
+<!-- 			<button type="submit">不要隨便亂按會爆炸</button> -->
+<!-- 		</form> -->
 	<!-- 灌值 -->
 	<!-- header -->
 	<header class="container blog-header py-3" id="bookWebheader"></header>
@@ -76,7 +76,7 @@
 						onclick="storeCheck()">我的賣場</button>
 				</div>
 			</div>
-		</form>
+		
 		<br>
 		<!-- 搜尋商品欄	end -->
 		<!-- 	版面置中 -->
@@ -119,34 +119,30 @@
 					<div class="col-sm-8">
 						<nav aria-label="Page navigation example">
 							<ul class="pagination">
+								<!-- 組左邊符號 start-->
 								<c:if test="${pageNow != 1}">
-								<li class="page-item"><a class="page-link"
-										href="<c:url value='/qaqTest/1'/>"
-										aria-label="Previous"> <span aria-hidden="true">&laquo;&laquo;</span>
+									<li class="page-item"><a class="page-link"
+										href="<c:url value='/qaqTest/${pageType}/1'/>" aria-label="Previous">
+											<span aria-hidden="true">&laquo;</span>
 									</a></li>
 									<li class="page-item"><a class="page-link"
-										href="<c:url value='/qaqTest/${pageNow-1}'/>"
-										aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
-									</a></li>
-									<li class="page-item"><a class="page-link"
-										href="<c:url value='/qaqTest/${pageNow-1}'/>">
+										href="<c:url value='/qaqTest/${pageType}/${pageNow-1}'/>">
 											${pageNow-1} </a></li>
 								</c:if>
+								<!-- 組左邊符號 end-->
 								<li class="page-item"><a class="page-link"> ${pageNow}
 								</a></li>
+								<!-- 組右邊符號 start-->
 								<c:if test="${pageNow != pageSize}">
 									<li class="page-item"><a class="page-link"
-										href="<c:url value='/qaqTest/${pageNow+1}'/>">
+										href="<c:url value='/qaqTest/${pageType}/${pageNow+1}'/>">
 											${pageNow+1} </a></li>
 									<li class="page-item"><a class="page-link"
-										href="<c:url value='/qaqTest/${pageNow+1}'/>"
-										aria-label="Next"> <span aria-hidden="true">&raquo;</span>
-									</a></li>
-									<li class="page-item"><a class="page-link"
-										href="<c:url value='/qaqTest/${pageSize}'/>"
-										aria-label="Next"> <span aria-hidden="true">&raquo;&raquo;</span>
+										href="<c:url value='/qaqTest/${pageType}/${pageSize}'/>" aria-label="Next">
+											<span aria-hidden="true">&raquo;</span>
 									</a></li>
 								</c:if>
+								<!-- 組右邊符號 end-->
 							</ul>
 						</nav>
 					</div>
@@ -155,6 +151,7 @@
 			<c:otherwise>
 			</c:otherwise>
 		</c:choose>
+		</form>
 		<!-- 分頁顯示		 -->
 		<!-- 	版面置中 -->
 
