@@ -74,6 +74,16 @@ public class DiscussionDaoImpl implements DiscussionDao {
 		Session session = factory.getCurrentSession();
 		return session.createQuery(hql).getResultList();
 	}
+	
+	//依時間排序列出所有巢狀留言
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<NestedCommandBean> getAllNestedCommand() {
+		String hql="FROM NestedCommandBean n ORDER BY n.nested_command_time DESC";
+		Session session = factory.getCurrentSession();
+		return session.createQuery(hql).getResultList();
+	}
+
 
 	//列出版規
 	@SuppressWarnings("unchecked")
@@ -162,6 +172,7 @@ public class DiscussionDaoImpl implements DiscussionDao {
 		Session session = factory.getCurrentSession();
 		return session.createQuery(hql).getResultList();
 	}
+
 
 
 

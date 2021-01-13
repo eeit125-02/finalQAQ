@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.web.book.model.CommandBean;
 import com.web.book.model.MemberBean;
+import com.web.book.model.NestedCommandBean;
 import com.web.book.model.PostBean;
 import com.web.book.model.RuleBean;
 import com.web.book.service.DiscussionService;
@@ -48,6 +49,8 @@ public class DiscussionController {
 		List<MemberBean> member_list = discussionService.getAllMember();
 		model.addAttribute("member_info", member_list);
 		model.addAttribute("loginUser", loginUser); //獲取LoginUser
+		List<NestedCommandBean> nested_command_detail = discussionService.getAllNestedCommand();
+		model.addAttribute("AllNestedCommand", nested_command_detail);
 		return "Discussion/mainpage"; 
 	}
 	
@@ -89,6 +92,8 @@ public class DiscussionController {
 		List<CommandBean> command_detail= discussionService.getCommandBeanByPostId(post_detail_id);
 		model.addAttribute("CommandBean", command_detail);
 		model.addAttribute("loginUser", loginUser); 
+		List<NestedCommandBean> nested_command_detail = discussionService.getAllNestedCommand();
+		model.addAttribute("AllNestedCommand", nested_command_detail);
 		return "/Discussion/post_detail";
 	}
 	
@@ -123,6 +128,8 @@ public class DiscussionController {
 		List<CommandBean> command_list = discussionService.getAllCommand();
 		model.addAttribute("allCommand", command_list);
 		model.addAttribute("loginUser", loginUser); 
+		List<NestedCommandBean> nested_command_detail = discussionService.getAllNestedCommand();
+		model.addAttribute("AllNestedCommand", nested_command_detail);
 		return "/Discussion/search_result";
 	}
 }

@@ -74,6 +74,7 @@ public class DiscussionRESTfulController {
 		 new_cb.put("cb_time", cb.getCommand_time());
 		 new_cb.put("cb_content", cb.getCommand_content());
 		 new_cb.put("cb_id", cb.getCommand_id());
+		 new_cb.put("post_id", cb.getPostBean().getPost_id());
 		return new_cb;
 	}
 	
@@ -99,6 +100,7 @@ public class DiscussionRESTfulController {
 		new_ncb.put("ncb_time", ncb.getNested_command_time());
 		new_ncb.put("ncb_content", ncb.getNested_command_content());
 		new_ncb.put("cb_id", ncb.getCommandBean().getCommand_id());
+		new_ncb.put("cb_content", ncb.getCommandBean().getCommand_content());
 		return new_ncb;
 	}
 	
