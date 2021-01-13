@@ -1,5 +1,6 @@
 package com.web.book.dao.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import org.hibernate.Session;
@@ -39,7 +40,7 @@ public class BookStoreDaoImpl implements BookStoreDao {
 		Session session = factory.getCurrentSession();
 		String hql = "Select bks_ID FROM BookStoreBean where bs_ID = 14";
 		Query<BookStoreBean> query = session.createQuery(hql);
-		if (query.getResultList().size()/12 == 0) {
+		if (query.getResultList().size()%12 == 0) {
 			maxPage += query.getResultList().size()/12;
 		} else {
 			maxPage += (query.getResultList().size()/12) + 1;
@@ -104,7 +105,7 @@ public class BookStoreDaoImpl implements BookStoreDao {
 		String hql = "Select bks_ID From BookStoreBean a Where a.book.bk_Name like :bkname";
 		Query<BookStoreBean> query = session.createQuery(hql);
 		query.setParameter("bkname", "%" + bk_Name + "%");
-		if (query.getResultList().size()/12 == 0) {
+		if (query.getResultList().size()%12 == 0) {
 			maxPage += query.getResultList().size()/12;
 		} else {
 			maxPage += (query.getResultList().size()/12) + 1;
@@ -128,7 +129,8 @@ public class BookStoreDaoImpl implements BookStoreDao {
 		Session session = factory.getCurrentSession();
 		MemberBean member = session.load(MemberBean.class, bs_ID);
 		BookBean book = session.load(BookBean.class, bk_ID);
-		BookStoreBean bookStore = new BookStoreBean(null, bs_Num, bs_Price, book, member);
+		Date date = new Date();
+		BookStoreBean bookStore = new BookStoreBean(null, bs_Num, bs_Price, book, member, date);
 		session.save(bookStore);
 	}
 
@@ -160,6 +162,7 @@ public class BookStoreDaoImpl implements BookStoreDao {
 	}
 
 	// 灌庫存值給商店
+	@SuppressWarnings("deprecation")
 	@Override
 	public void boobqaq() {
 		// 6242 /80~84、11 /13 /a123456
@@ -174,7 +177,8 @@ public class BookStoreDaoImpl implements BookStoreDao {
 				if (book.getBk_Price()==null) {
 					book.setBk_Price(100);
 				}
-				BookStoreBean bookStoreBean = new BookStoreBean(null, qaqQty, book.getBk_Price(), book, member);
+				Date date = new Date(120, 8, 22);
+				BookStoreBean bookStoreBean = new BookStoreBean(null, qaqQty, book.getBk_Price(), book, member, date);
 				session.save(bookStoreBean);
 			}
 		// 管理員灌值 end
