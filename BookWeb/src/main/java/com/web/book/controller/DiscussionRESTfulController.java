@@ -74,6 +74,7 @@ public class DiscussionRESTfulController {
 		 new_cb.put("cb_time", cb.getCommand_time());
 		 new_cb.put("cb_content", cb.getCommand_content());
 		 new_cb.put("cb_id", cb.getCommand_id());
+		 new_cb.put("post_id", cb.getPostBean().getPost_id());
 		return new_cb;
 	}
 	
