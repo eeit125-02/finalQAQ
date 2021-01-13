@@ -211,36 +211,37 @@ form {
 							var editURL1 = location.href + "/checkColume/"
 									+ mb_Account;
 							$.ajax({
-										async : false,
-										type : 'POST',
-										url : editURL1,
-										dataType : "json",
-										contentType : "application/json;charset=utf-8",
-										success : function(Colume) {
-											if (Colume) {
-												console.log(Colume);
-													$.ajax({
-															async : false,
-															type : 'POST',
-															url : editURL,
-															dataType : "json",
-															contentType : "application/json;charset=utf-8",
-															success : function(data) {
-																console.log(data)
-																console.log(a);
-																if (data && a) {
-																	console.log("--------")
-																	$('#login1').submit();
-																} else {
-																	sp.text("輸入錯誤");
-																}
-															}
-														});
-											} else {
-												sp.text("已被停權");
+								async : false,
+								type : 'POST',
+								url : editURL,
+								dataType : "json",
+								contentType : "application/json;charset=utf-8",
+								success : function(data) {
+									console.log(data)
+									console.log(a);
+									if (data && a) {
+										$.ajax({
+											async : false,
+											type : 'POST',
+											url : editURL1,
+											dataType : "json",
+											contentType : "application/json;charset=utf-8",
+											success : function(Colume) {
+												if (Colume) {
+													$('#login1').submit();
+												} else {
+													sp.text("已被停權");
+												}
 											}
-										}
-									});
+										});										
+									} else {
+										sp.text("輸入錯誤");
+									}
+								}
+							});
+							
+							
+						
 						})
 
 		$(document).keypress(function(event) {

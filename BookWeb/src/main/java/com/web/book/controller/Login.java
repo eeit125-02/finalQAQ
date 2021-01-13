@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import com.web.book.model.MemberBean;
@@ -357,7 +358,8 @@ public class Login {
 
 	// 登入介面
 	@GetMapping("/toLogin")
-	public String tologin(Model model) {
+	public String tologin(SessionStatus sessionStatus) {
+		sessionStatus.setComplete();
 		return "Member/login";
 	}
 
