@@ -7,6 +7,7 @@ import com.web.book.model.CommandBean;
 import com.web.book.model.PostBean;
 import com.web.book.model.RuleBean;
 import com.web.book.model.MemberBean;
+import com.web.book.model.NestedCommandBean;
 
 public interface DiscussionDao {
 	
@@ -14,10 +15,14 @@ public interface DiscussionDao {
 	void addPost(PostBean new_post);
 	//會員新增留言
 	CommandBean addCommand(CommandBean new_command);	
+	//會員新增巢狀留言
+	NestedCommandBean addNestedCommand(NestedCommandBean new_nested_command);	
 	//用ID取出Post資料
 	PostBean getPostBeanById(Integer pb_ID);
 	//用ID取出Member資料
 	MemberBean getMemberBeanById(Integer mb_ID);
+	//用ID取出Command資料
+	CommandBean getCommandBeanById(Integer command_ID);
 	//用post id取出command資料
 	List<CommandBean> getCommandBeanByPostId(Integer pb_ID);
 	//依時間排序列出所有貼文

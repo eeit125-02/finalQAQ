@@ -84,12 +84,12 @@
 						<div class="input-group-append">
 							<button class="btn btn-outline-secondary" id="command_btn"
 								type="button" data-toggle="modal"
-								data-target="#exampleModalCenter">留言</button>
+								data-target="#checkLogin">留言</button>
 						</div>
 					</div>
 
 					<!-- 彈出登入提示框 -->
-					<div class="modal fade" id="exampleModalCenter" tabindex="-1"
+					<div class="modal fade" id="checkLogin" tabindex="-1"
 						role="dialog" aria-labelledby="exampleModalCenterTitle"
 						aria-hidden="true">
 						<div class="modal-dialog modal-dialog-centered" role="document">
@@ -129,19 +129,24 @@
 								<div style="height: 40px">
 									<div class=" input-group" style="width: 80%; float: right;">
 
-										<input type="text" class="form-control" id="command_input"
-											placeholder="回覆   ${stored_command.command_content}" /> <input
-											type="hidden" name="command_id" id="post_id"
-											value="${stored_command.command_id}" /> <span
-											class="input-group-append">
+										<input type="text" class="form-control" id="nested_command_input"
+											placeholder="回覆   ${stored_command.command_content}" /> 
+										<input type="hidden" name="command_id" id="command_id"
+											value="${stored_command.command_id}" /> 
+										<span class="input-group-append">
 											<button class="btn btn-outline-secondary "
-												id="nested_command_btn" type="button" data-toggle="modal"
-												data-target="#exampleModalCenter">回覆</button>
+												id="nested_command_btn" type="button" >回覆</button>
+												<!-- data-toggle="modal"
+								data-target="#checkLogin" -->
+								
 										</span>
 									</div>
 								</div>
 
-								<div style="height: 125px; padding-top:10px; margin-right:10px">
+								<div id="show_nested_command"></div>
+								<!-- nested command template -->
+								<div
+									style="height: 125px; padding-top: 10px; margin-right: 10px">
 									<div
 										style="background-color: #B3D9D9; margin: 0px; padding: 5px; border-radius: 10px; width: 78%; float: right;">
 										<p>
@@ -150,74 +155,58 @@
 										<p>nest command content</p>
 									</div>
 								</div>
-
-								<div style="height: 125px; padding-top:10px; margin-right:10px">
-									<div
-										style="background-color: #B3D9D9; margin: 0px; padding: 5px; border-radius: 10px; width: 78%; float: right;">
-										<p>
-											nest command mb<br> nest command time
-										</p>
-										<p>nest command content</p>
-									</div>
-								</div>
-
-							<div style="height: 125px; padding-top:10px; margin-right:10px">
-									<div
-										style="background-color: #B3D9D9; margin: 0px; padding: 5px; border-radius: 10px; width: 78%; float: right;">
-										<p>
-											nest command mb<br> nest command time
-										</p>
-										<p>nest command content</p>
-									</div>
-								</div>
+								<!-- =============== -->
 
 							</div>
-
 
 						</c:forEach>
 					</div>
 
+
 					<script>
+						$('#nested_command_btn').click(function(){
+							console.log($("#nested_command_input").val())
+							/* if (loginUser.mb_ID !== '') {
+								$('#nested_command_btn').removeAttr('data-toggle data-target')
+
+								if ($('#nested_command_input').val() == "") {
+									swal({title : '請輸入文字'})
+
+								} else { */
+									$.ajax({
+										url : '<c:url value="/Discussion/add_nested_command_ajax"/>',
+										type : 'POST',
+										data : {nested_command : $("#nested_command_input").val(),
+												command_id : $("#command_id").val()},
+										dataType : "json"
+									
+								}
+						}}})
+					
+					
 						$('#command_btn')
 								.click(
 										function() {
+											
 											if ('${loginUser.mb_ID}' !== '') {
-												$(
-														'#command_btn${stored_post.post_id}')
-														.removeAttr(
-																'data-toggle data-target')
+												$('#command_btn').removeAttr('data-toggle data-target')
 
-												if ($(
-														'#command_input${stored_post.post_id}')
-														.val() == "") {
-													swal({
-														title : '請輸入文字'
-													})
+												if ($('#command_input').val() == "") {
+													swal({title : '請輸入文字'})
 
 												} else {
 
-													$
-															.ajax({
-																url : '<c:url value="/Dsicussion/add_command_ajax"/>',
-																type : 'POST',
-																data : {
-																	new_command : $(
-																			"#command_input")
-																			.val(),
-																	post_id : $(
-																			"#post_id")
-																			.val()
-																},
-																dataType : "json",
-																success : function(
-																		new_cb) {
-
-																	$(
-																			"#show_command")
-																			.prepend(
+													$.ajax({
+														url : '<c:url value="/Dsicussion/add_command_ajax"/>',
+														type : 'POST',
+														data : {new_command : $("#command_input").val(),
+																post_id : $("#post_id").val()},
+														dataType : "json",
+														success : function(new_cb) {
+															$("#show_command").prepend(
 																					'<div style="background-color: #C4E1FF; margin: 10px; padding: 5px; border-radius: 10px;">'
 																							+ '<button class="btn btn-link btn-sm float-right" type="submit" data-toggle="collapse"'
-																							+ 'data-target="#nested_command${stored_command.command_id}">回覆</button>'
+																							+ 'data-target="#nested_command'+new_cb.cb_id+'">回覆</button>'
 																							+ '<p>'
 																							+ new_cb.mb_name
 																							+ '<br>'
@@ -227,16 +216,15 @@
 																							+ new_cb.cb_content
 																							+ '</p>'
 																							+ '</div>'
-																							+ '<div class="collapse" id="nested_command${stored_command.command_id}">'
+																							+ '<div class="collapse" id="nested_command'+new_cb.cb_id+'">'
 																							+ '<div style="height: 40px">'
 																							+ '<div class=" input-group" style="width: 80%; float: right;">'
-																							+ '<input type="text" class="form-control" id="command_input" placeholder="回覆   ${stored_command.command_content}" />'
-																							+ ' <input type="hidden" name="command_id" id="post_id" value="${stored_command.command_id}" />'
-																							+' <span class="input-group-append">'
+																							+ '<input type="text" class="form-control" id="command_input" placeholder="回覆   '+new_cb.cb_content+'" />'
+																							+ ' <input type="hidden" name="command_id" id="command_id" value="'+new_cb.cb_id+'" />'
+																							+ ' <span class="input-group-append">'
 																							+ '<button class="btn btn-outline-secondary " id="nested_command_btn" type="button" data-toggle="modal"'
-																							+'data-target="#exampleModalCenter">回覆</button>'
-																							+'</span></div></div>'
-																							);
+																							+ 'data-target="#checkLogin">回覆</button>'
+																							+ '</span></div></div>');
 																}
 															})
 													$('#command_input').val("");
@@ -247,6 +235,7 @@
 											}
 										})
 					</script>
+
 
 				</div>
 				<br>

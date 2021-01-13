@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.sound.midi.Soundbank;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -31,10 +32,18 @@ import com.web.book.service.SearchService;
 @Controller
 @SessionAttributes(value = {"loginUser"})
 public class SearchBookController {
+	//查詢關鍵字
 	String keyword = null;
+	//類型關鍵字清單
 	List<Integer> typelist=new ArrayList<Integer>();
+	//查詢結果
 	List<BookBean> finalresult = new ArrayList<BookBean>();
+	//資料總筆數
 	int count=0;
+	//資料總頁數
+	int totalpage=0;
+	//(起始)頁數
+	private Integer page = 1;
 	
 	@Autowired
 	SearchService searchService;
@@ -161,27 +170,78 @@ public class SearchBookController {
 				, @RequestParam(value = "name", required=false) String bookname
 				, @RequestParam(value = "author", required=false) String authorname
 				, @RequestParam(value = "publish", required=false) String publishname
+				, @RequestParam(value = "apage", required=false,defaultValue = "1") Integer nowpage
 				) {
-		
+			
+			
+			if ("".equals(bookname)) {
+				bookname=null;
+			}
+			
+			if ("".equals(authorname)) {
+				authorname=null;
+			}
+			
+			if ("".equals(publishname)) {
+				publishname=null;
+			}
+			
+			System.out.println("cccccccccccccccccccc"+reslist);
+			System.out.println("cccccccccccccccccccc"+typelist);
+			System.out.println("cccccccccccccccccccc"+bookname);
+			System.out.println("cccccccccccccccccccc"+authorname);
+			System.out.println("cccccccccccccccccccc"+publishname);
+			System.out.println("cccccccccccccccccccc"+nowpage);
+			
+			
+			if(nowpage!=null) {
+				page=nowpage;
+			}
+			
 			if(bookname!=null) { //書名關鍵字
 				keyword=bookname;
-				finalresult = searchService.searchBook(keyword);
-				count=finalresult.size();
+				finalresult = searchService.searchBook(keyword,page);
+				totalpage=searchService.getResultPage();
+				count=searchService.getResultNumber();
+				System.out.println("111111111111111111111111111111");
 			}else if(authorname!=null) { //作者關鍵字
 				keyword=authorname;
-				finalresult = searchService.searchBookAuthor(keyword);
-				count=finalresult.size();
-			}else if(publishname!=null) { //出版社關鍵字
+				finalresult = searchService.searchBookAuthor(keyword,page);
+				totalpage=searchService.getResultPage();
+				count=searchService.getResultNumber();
+				System.out.println("111111111111111111111111111111222222222");
+			}else if(publishname!=null && publishname!="") { //出版社關鍵字
 				keyword=publishname;
-				finalresult = searchService.searchBookPublish(keyword);
-				count=finalresult.size();
+				finalresult = searchService.searchBookPublish(keyword,page);
+				totalpage=searchService.getResultPage();
+				count=searchService.getResultNumber();
+				System.out.println("111111111111111111111111111111333333333");
 			}else if(reslist!=null) { //類型關鍵字
 				typelist=reslist;
-				finalresult=searchService.searchBookType(typelist);
-				count=finalresult.size();
+				finalresult=searchService.searchBookType(typelist,page);
+				totalpage=searchService.getResultPage();
+				count=searchService.getResultNumber();
+				System.out.println("111111111111111111111111111111444444444");
+			}else if(typelist!=null) {	
+				System.out.println("hhhhh1");
+				System.out.println("jjjjjjjjjjjjjjjjj"+typelist);
+				finalresult=searchService.searchBookType(typelist,page);
+				System.out.println("hhhhh2");
+				totalpage=searchService.getResultPage();
+				System.out.println("hhhhh3");
+				count=searchService.getResultNumber();
+				System.out.println("111111111111111111111111111111444444444");
 			}else{
 				
 			}
+			System.out.println("out");
+			model.addAttribute("count", count);
+			model.addAttribute("name", bookname);
+			model.addAttribute("author", authorname);
+			model.addAttribute("publish", publishname);
+			model.addAttribute("b", reslist);
+			System.out.println("nowwwwwwwwwwwwww"+nowpage);
+			model.addAttribute("apage",nowpage);
 			
 			if(count==0) { //資料總筆數確認
 				model.addAttribute("searchresultzero", "很抱歉，查無資料");			
@@ -192,24 +252,33 @@ public class SearchBookController {
 		
 		//導出關鍵字+類型搜尋結果
 		@PostMapping("/searchtype/loadBookTypeList")
-		public @ResponseBody List<Map<String, Object>> gotoSearchTypeFin(Model model) {
+		public @ResponseBody Map<String,Object> gotoSearchTypeFin(Model model) {
+			//存放頁數與最終搜尋結果list的變數
+			Map<String, Object>  data = new HashMap<>();
+			//存放最終搜尋結果list的變數
 			List<Map<String, Object>> book = new ArrayList<>();
-			for (BookBean bookTypeBean : finalresult) {
-				Map<String, Object> data = new HashMap<>();
-				data.put("bk_ID", bookTypeBean.getBk_ID());
-				data.put("bk_Name", bookTypeBean.getBk_Name());
-				data.put("bk_Author", bookTypeBean.getBk_Author());
-				data.put("bk_Publish", bookTypeBean.getBk_Publish());
-				data.put("bk_Date",String.valueOf(bookTypeBean.getBk_Date()));
-				data.put("bk_Pic", bookTypeBean.getBk_Pic());
-				data.put("bk_Content", bookTypeBean.getBk_Content());
-				book.add(data);
+			System.out.println("finalresult"+finalresult);
+			for (BookBean bookBean : finalresult) {
+				Map<String, Object> finaldata = new HashMap<>();
+				finaldata.put("bk_ID", bookBean.getBk_ID());
+				finaldata.put("bk_Name", bookBean.getBk_Name());
+				finaldata.put("bk_Author", bookBean.getBk_Author());
+				finaldata.put("bk_Publish", bookBean.getBk_Publish());
+				finaldata.put("bk_Date",String.valueOf(bookBean.getBk_Date()));
+				finaldata.put("bk_Pic", bookBean.getBk_Pic());
+				finaldata.put("bk_Content", bookBean.getBk_Content());
+				book.add(finaldata);
 			}
-//			finalresult=null;
+			data.put("totalpage", totalpage);
+			data.put("nowpage", page);
+			data.put("finaldata", book);
+			finalresult=null;
 //			typelist=null;
-//			keyword=null;
-//			count=0;
-		    return book;
+			keyword=null;
+			count=0;
+			totalpage=0;
+			page=1;
+		    return data;
 		}
 		
 		
@@ -222,7 +291,6 @@ public class SearchBookController {
 	@GetMapping("/searchbook/checkcollect/{bk_ID}")
 	public @ResponseBody boolean gotoCheckCollect(@PathVariable("bk_ID") Integer bk_id, @ModelAttribute("loginUser") MemberBean loginUser) {
 		boolean result2=searchService.checkbc(bk_id, loginUser.getMb_ID());
-		System.out.println("AAAAAAAAAAAAAA");
 		return result2;
 	}
 	

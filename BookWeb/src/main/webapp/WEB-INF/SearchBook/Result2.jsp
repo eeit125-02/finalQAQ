@@ -88,7 +88,7 @@ white-space:pre-wrap;
 			<a class="btn btn-outline-dark" href="<c:url value='/addnewbook' />" role="button">新增書籍</a>			
 		</div>
 		<br> <br>
-
+<%-- <input type="hidden" name="apage" value="${page }"/> --%>
 
 <!--總筆數 -->
 		<div id="resultnumber"></div>
@@ -98,10 +98,22 @@ white-space:pre-wrap;
 		<div><h4>　　　　　　${searchresultzero}</h4></div>
 
 <!-- 搜尋結果清單 -->
+${b }------
 			<div class="booktypelist" id="booktypelist">	
 			</div>						
 			
 		<br>
+	<c:url value="/searchtype" var="gotopage">
+		<c:param name="name" value="${name}"></c:param>
+		<c:param name="author" value="${author}"></c:param>
+		<c:param name="publish" value="${publish}"></c:param>		
+<%-- 		<c:param name="b" value="${b}"></c:param>		 --%>
+<%-- 		<c:param name="apage" value="${apage }"></c:param>	 --%>
+	</c:url>
+
+<ul class="pagination justify-content-center mb-4" id="pageButton">
+</ul>	
+		
 		<hr>
 		</div>
 
@@ -144,14 +156,60 @@ white-space:pre-wrap;
 				},
 				success : function(data) {
 					console.log("test");
+					console.log(data.totalpage);
+					console.log(data.nowpage);
+					
+					var innerHtml="";
+					if(data.totalpage != 0){
+						if(data.nowpage != 1){						
+							innerHtml +="<li class=\"page-item \"><a class=\"page-link\" href=\""+"${gotopage}"+"&apage="+1+"\">"+"第一頁"+"</a></li>"
+							innerHtml += "<li class=\"page-item\">"
+									  + " <a class=\"page-link\" aria-label=\"Previous\" href=\""+"${gotopage}"+"&apage="+(data.nowpage - 1)+"\">"
+									  + "<span aria-hidden=\"true\">&laquo;</span>"
+									  + "</a>"
+									  + "</li>"
+								innerHtml += "<li class=\"page-item \"><a class=\"page-link\" href=\""+"${gotopage}"+"&apage="+(data.nowpage - 1)+"\">"+ (data.nowpage - 1) +"</a></li>"
+										}
+											
+											    
+								innerHtml += "<li class=\"page-item active\"><a class=\"page-link\" href=\""+ "${gotopage}"+"&apage="+ data.nowpage +"\">"+ data.nowpage +"</a></li>"
+											
+						if(data.nowpage != data.totalpage){						
+								innerHtml += "<li class=\"page-item \"><a class=\"page-link\" href=\""+"${gotopage}"+"&apage="+(data.nowpage + 1)+"\">"+(data.nowpage + 1) +"</a></li>"
+// 								innerHtml += "<li class=\"page-item \"><a class=\"page-link\" href=\""+"${gotopage}"+"&apage="+(data.nowpage + 2)+"\">"+(data.nowpage + 2) +"</a></li>"
+								innerHtml += "<li class=\"page-item\"></li>"
+										  + "<a class=\"page-link\" aria-label=\"Next\" href=\""+"${gotopage}"+"&apage="+(data.nowpage + 1)+"\">"
+										  + "<span aria-hidden=\"true\">&raquo;</span>"
+										  + "</a>"
+										  + "</li>"
+								innerHtml +="<li class=\"page-item \"><a class=\"page-link\" href=\""+"${gotopage}"+"&apage="+data.totalpage+"\">"+"最後一頁"+"</a></li>"
+							}
+											
+							$('#pageButton').html(innerHtml)
+					
+					}
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
 					var insertData = "<div>";
-					for (let i = 0; i < data.length; i++) {
+					for (let i = 0; i < data.finaldata.length; i++) {
+						
+						console.log(data);
+						
 						insertData = "<div class=\"row\">"
 // 						insertData += "<div class=\"row\">"
 						
 							+"<div class=\"col-sm-2\">"
 							+"<img class=\"itemcov\" alt=\"\" src=\""
-							+data[i].bk_Pic
+							+data.finaldata[i].bk_Pic
 							+"\" width=\"150\">"
 							+"</div>"
 							
@@ -159,29 +217,29 @@ white-space:pre-wrap;
 							+"<h3>"
 							+"<form name=a1 action=\"<c:url value='/bookpage' />\" method=\"get\">"
 							+"<button type=\"submit\" name=\"page\"class=\"btn btn-link btn-lg bkname\" value=\""
-							+data[i].bk_ID+"\">"+data[i].bk_Name+"</button></form>"
+							+data.finaldata[i].bk_ID+"\">"+data.finaldata[i].bk_Name+"</button></form>"
 							+"</h3>"
-							+"｜ 作者："+data[i].bk_Author
-							+" ｜  出版社："+data[i].bk_Publish
-							+"｜  出版日期："+data[i].bk_Date
+							+"｜ 作者："+data.finaldata[i].bk_Author
+							+" ｜  出版社："+data.finaldata[i].bk_Publish
+							+"｜  出版日期："+data.finaldata[i].bk_Date
 							+"<br>"
 							+"<p class=\"ellipsis\"style=\"padding-top:15px\">"
-							+data[i].bk_Content
+							+data.finaldata[i].bk_Content
 							+"</p>"	
 							+"</div>"
 							
 							+"</div>"
 							
-							+"<div class=\"collect\" id=\"collect"+data[i].bk_ID+"\">"
+							+"<div class=\"collect\" id=\"collect"+data.finaldata[i].bk_ID+"\">"
 							+"</div>"
 							
 							+"<br>"
 							+"<hr>"
 					$("#booktypelist").append(insertData);	
-							loadCollectList(data[i].bk_ID);
+							loadCollectList(data.finaldata[i].bk_ID);
 					}
 
-						var insertData1 = "<h3>搜尋結果：（總共 "+data.length+" 筆）</h3>"
+						var insertData1 = "<h3>搜尋結果：（總共 "+${count}+" 筆）</h3>"
 					$("#resultnumber").html(insertData1);
 					}
 				});
