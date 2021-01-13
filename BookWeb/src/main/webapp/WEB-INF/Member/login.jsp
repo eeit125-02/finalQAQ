@@ -238,10 +238,7 @@ form {
 										sp.text("輸入錯誤");
 									}
 								}
-							});
-							
-							
-						
+							});			
 						})
 
 		$(document).keypress(function(event) {
