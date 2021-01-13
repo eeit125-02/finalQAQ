@@ -117,16 +117,20 @@ span{
 
 
 					<div class="form-row">
-						<div class="form-group col-md-6">
+						<div class="form-group col-md-5" style="margin:auto">
 							<form:label path="bk_Publisher_Place">出版地</form:label><span id="idsp6">　</span><br />
 							<form:input path="bk_Publisher_Place" id="bk_Publisher_Place" class="form-control" />
 						</div>
 
-						<div class="form-group col-md-6">
+						<div class="form-group col-md-5" style="margin:auto">
 							<form:label path="bk_Pic">封面圖片</form:label><span id="idsp7">　</span><br />
-							<input class="form-control" name="file" type="file" />
+							<input class="form-control" name="file" type="file" id="imgInp"/>
+							
 <%-- 							<form:input path="bk_Pic" class="form-control" name="file" type="file" /> --%>
 <%-- 							<form:hidden path="bk_Pic" /> --%>
+						</div>
+						<div class="form-group col-md-2">
+							<img id="blah" src="${pageContext.request.contextPath}/image/bottlestar.png" alt="圖片預覽" width="100%;" />
 						</div>
 					</div>
 
@@ -161,8 +165,27 @@ span{
 <%-- 							onafterpaste="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}" --%>
 							
 						</div>
-
 					</div>
+					
+<%-- <form:form method="POST" modelAttribute="typeForm" id="form1" enctype="multipart/form-data">						 --%>
+					<div class="form-row">
+						<div class="form-group col-md-6">
+						<label>書籍類型</label>
+<%-- 						<form:select path="sty_Name" class="form-control" > --%>
+						<form:select path="" class="form-control" >
+							<form:option path="" value="NONE" label="請選擇主類別" />                   
+                        	<form:options items="${maintype}" itemLabel="sty_Name"/>
+						</form:select>
+						</div>
+						
+						<div class="form-group col-md-6">
+						<label>書籍類型</label>
+						<form:select path="" class="form-control" placeholder="請選擇子類別"></form:select>
+					
+						</div>
+					</div>
+<%-- </form:form> --%>
+										
 					<form:label path="bk_Content">內容簡介</form:label><span id="idsp11">　</span><br />
 					<form:textarea path="bk_Content" id="bk_Content" class="form-control" rows="6" />
 			</div>
@@ -175,6 +198,26 @@ span{
 	</div>
 
 	<!-- 內容結束 -->
+
+<script>
+
+function readURL(input) {
+	  if (input.files && input.files[0]) {
+	    var reader = new FileReader();
+	    
+	    reader.onload = function(e) {
+	      $('#blah').attr('src', e.target.result);
+	    }
+	    
+	    reader.readAsDataURL(input.files[0]); // convert to base64 string
+	  }
+	}
+
+	$("#imgInp").change(function() {
+	  readURL(this);
+	});
+
+</script>
 
 	<!-- body -->
 

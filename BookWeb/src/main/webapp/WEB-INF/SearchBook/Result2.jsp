@@ -119,6 +119,7 @@ ${b }------
 
 	<script >
 
+
 //點擊加入收藏
 		function collect(i) {
 			let bk_ID = i;

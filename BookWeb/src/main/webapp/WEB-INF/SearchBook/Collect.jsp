@@ -80,7 +80,10 @@
 
 
 <script>
-			
+
+
+
+		
 			function loadBookCollectList() {
 				$.ajax({
 					async : false,
@@ -90,8 +93,8 @@
 					dataType : "json",
 					contentType : "application/json;charset=utf-8",
 					error : function() {
-						alert('請先登入');
-						window.location.href("http://localhost:8080/BookWeb/toLogin");
+						swal("尚未登入", "請先登入會員～","error")
+						window.location.href="//localhost:8080/BookWeb/toLogin";
 					},
 					success : function(data) {
 						var insertData = "<div>";
