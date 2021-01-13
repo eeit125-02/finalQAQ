@@ -87,11 +87,11 @@ text-align:center;
 						<%-- 			${act.ACT_Image} --%>
 						<tr>
 							<%-- 				<td><a href='/FindActServlet?key=${act.ACT_Name}'></a></td> --%>
-							<td>${ajb.member.mb_Account}</td>
+							<td>${ajb.act.member.mb_Account}</td>
 							<td>${ajb.act.act_Name}</td>
-							<td>${ajb.member.mb_Name}</td>
-							<td>${ajb.member.mb_Mail}</td>
-							<td>${ajb.member.mb_Tel}</td>
+							<td>${ajb.act.member.mb_Name}</td>
+							<td>${ajb.act.member.mb_Mail}</td>
+							<td>${ajb.act.member.mb_Tel}</td>
 							<td>${ajb.join_Pax}</td>
 							
 							<td><a href="<c:url value='/showJoinUpdateForm'/>?join_ID=${ajb.join_ID}">編輯</a>
