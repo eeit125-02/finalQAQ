@@ -8,18 +8,19 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Document</title>
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
-	integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
-	crossorigin="anonymous"></script>
-<script
-	src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
-	integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
-	crossorigin="anonymous"></script>
+<!-- <script -->
+<!-- 	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" -->
+<!-- 	integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" -->
+<!-- 	crossorigin="anonymous"></script> -->
+<!-- <script -->
+<!-- 	src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" -->
+<!-- 	integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" -->
+<!-- 	crossorigin="anonymous"></script> -->
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
 	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
 	crossorigin="anonymous">
+	
 <style>
 #admin,#mb_modify,#mb_pwd,#mb_inf {
 	border-radius: 25px;
@@ -79,7 +80,7 @@ div {
 	<header class="container blog-header py-3" id="bookWebheader"></header>
 	<!-- header -->
 	<div class="container media" style="width:1500px; margin-left:400px" >
-	<fieldset id="city">
+	<fieldset id="city" >
 		<legend>會員中心</legend>
 		<div>
 				<div><button  id="admin1" name="admin" class="btn btn-outline-secondary">會員資訊</button>
@@ -100,7 +101,7 @@ div {
 			</form>
 		</div>
 	</fieldset>
-	<div id="change123" style="width:900px;margin-left:10px ">
+	<div id="change123" style="width:1500px;margin-left:10px ">
 									<fieldset id="mb_inf">
 									<legend>會員資料</legend>
 									<form>
@@ -170,9 +171,6 @@ div {
 		$("#bookWebheader").load("<c:url value='/header'/>");
         $("#bookWebFooter").load("<c:url value='/footer'/>");
 	}); 
-	$('#admin1').click(function(){
-		$('#change123').load("//localhost:8080/BookWeb/adminall")
-	})
         var check = $("#test").val();
         if(check=="third"){
         	$("#inf").hide();
@@ -494,6 +492,69 @@ div {
 			 });
 			 })
 		
+			 $('#admin1').click(function(){
+			$('#change123').load("//localhost:8080/BookWeb/adminall")
+		})	 
+			 
+// 			$('#admin1').click(function(){
+// 				 $.ajax({
+// 						async : false,
+// 						cache : false,
+// 						url : "mb_inf",
+// 						type : 'POST',
+// 						dataType : "json",
+// 						contentType : "application/json;charset=utf-8",
+// 						success : function(data) {
+// 							console.log(data)
+							
+// 								insertData += 	<div class="container media">
+// 							<br>
+// 							<fieldset id="admin">
+// 								<legend>會員清單</legend>
+// 					<label for="site-search" style="align:left">Search the site:</label>
+// 					<input type="search" id="site-search" name="search" aria-label="Search through site content">
+// 					<button id="searchbtn" name="searchbtn">Search</button>
+// 						<form action="<c:url value='/delete' />" method="post">
+// 								<table class="table"  width="100%"  id="change">
+// 									<c:forEach items="${memberall}" var="u" varStatus="loop">
+// 										<c:if test="${loop.index == 0}">
+// 											<tr>
+// 												<th>帳號</th>
+// 												<th>密碼</th>
+// 												<th>姓名</th>
+// 												<th>註冊日期</th>
+// 												<th></th>
+// 												<th></th>
+// 											</tr>
+// 										</c:if>
+// 										<tr>
+// 											<td>${u.getMb_Account()}</td>
+// 											<td>${u.getMb_Password()}</td>
+// 											<td>${u.getMb_Name()}</td>
+// 											<td>${u.getMb_Date()}</td>
+// 											<td><button type="submit" name="delete"
+// 													class="btn btn-outline-secondary" value="${u.getMb_ID()}">刪除</button>
+// 													<button type="submit" name="update"
+// 														class="btn btn-outline-secondary" value="${u.getMb_Account()}">修改</button></td>
+														
+// 											<td><label class="switch"> <input type="checkbox">
+// 													<span id="ball" class="slider" check="${u.checkColume}"></span>
+// 											</label>
+// 											</td>
+// 										</tr>
+// 									</c:forEach>
+// 								</table>
+// 							</form>
+// 								<a href="<c:url value='/toCity'/>">返回</a>
+// 							</fieldset>
+// 					</div>
+		
+// 						}
+// 						})	 
+// 			})
+			 
+			 
+			 
 		function showImage(){
     	   $("#myfile").change(function() {
    			console.log("123")
