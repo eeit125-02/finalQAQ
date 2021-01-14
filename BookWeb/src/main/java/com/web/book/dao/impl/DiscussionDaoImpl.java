@@ -175,7 +175,7 @@ public class DiscussionDaoImpl implements DiscussionDao {
 	@Override
 	public List<PostBean> getPostByKeyword(String keyword) {
 		String hql="FROM PostBean p WHERE p.post_content LIKE :content_keyword "+
-							" OR p.post_title LIKE :title_keyword";
+							" OR p.post_title LIKE :title_keyword ORDER BY p.post_time  DESC";
 		Session session = factory.getCurrentSession();
 		Query<PostBean> query = session.createQuery(hql);
 		query.setParameter("content_keyword", "%" + keyword + "%");

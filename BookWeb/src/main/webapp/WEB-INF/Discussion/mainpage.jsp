@@ -695,7 +695,7 @@ response.setDateHeader("Expires", 0);
 							<!-- search & delete post -->
 							<div class="tab-pane fade" id="pills-manage_post" role="tabpanel">
 								
-								<!-- 搜尋的hql有問題 -->
+								<!-- search -->
 								<div class="form-inline justify-content-center">
 										<input class="form-control" type="search" placeholder="請輸入關鍵字"
 											name="keyword_manager" id="keyword_manager" style="margin-right: 10px">
@@ -704,20 +704,45 @@ response.setDateHeader("Expires", 0);
 								</div>
 								<br>
 								
+								<h4 id="show_type_keyword"></h4>
+								
 								<script>
-									$('#search_post_manager').click(function(){
+								$(document).on("click", '#search_post_manager', function(){
+				
 										$.ajax({
 											url : '<c:url value="/Discussion/search_keyword_manager"/>',
 											type : 'POST',
 											data : {keyword : $("#keyword_manager").val()},
 											dataType : "json",
- 											success:function(post_search_result){											
-												$('#show_post_manager').html("")
+ 											success: function(post_search_result){											
+ 												var show_search_result="";
+ 												if(post_search_result.length==0){
+ 													$('#show_type_keyword').html('查無資料<br><br>');
+ 												}else{
+ 												for(let i=0; i<post_search_result.length; i++){
+ 													$('#show_type_keyword').html('');
+ 														show_search_result += 
+ 															'<div style="border: #ADADAD 2px solid; border-radius: 5px; text-align: left; padding: 10px; margin: 0px 10px">'
+														+ '<form class="form-inline float-right">'
+ 														+	'<button class="btn btn-outline-secondary btn-sm" id="manager_delete_btn'+post_search_result[i].post_id+'"'	
+ 														+	'type="submit" style="margin-left: 5px">刪除</button>'	
+ 														+ '</form>'		
+ 														+	'<p>'+post_search_result[i].mb_name+'<br>'+post_search_result[i].post_time+'</p>'
+ 														+	'<h3>'+post_search_result[i].post_title+'</h3>'
+ 														+	'<button class="btn btn-link" type="button" data-toggle="collapse" '																
+ 														+	'data-target="#manager_show_complete_post'+post_search_result[i].post_id+'">顯示、收攏貼文</button>'
+ 														+	'<div class="collapse" id="manager_show_complete_post'+post_search_result[i].post_id+'">'	
+														+ '<div class="card card-body" style="border-style: none">' +post_search_result[i].post_content+'</div>'
+ 														+ '</div></div><br>'
+ 													}
+ 												}
+ 												
+ 											$('#show_post_manager').html(show_search_result);
  											}
-										})
+ 										}) 																									
 										$('#keyword_manager').val("");
 										$('keyword_manager').attr("placeholder","請輸入關鍵字");
-									})
+										})
 								</script>
 
 									<!-- show all post -->
