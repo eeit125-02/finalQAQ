@@ -131,7 +131,7 @@
 								<c:set var="ncid" value="${all_nested_command.commandBean.command_id}" />
 								<c:if test="${cid==ncid}">
 									
-									<div style="height: 125px; padding-top: 10px; margin-right: 10px">'
+									<div style="height: 125px; padding-top: 10px; margin-right: 10px">
 											<div style="background-color: #B3D9D9; margin: 0px; padding: 5px; border-radius: 10px; width: 78%; float: right;">
 													<p>${all_nested_command.memberbean.mb_Name}<br>${all_nested_command.nested_command_time}</p>
 													<p>${all_nested_command.nested_command_content}</p>

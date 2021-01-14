@@ -41,6 +41,8 @@ public class DiscussionController {
 		model.addAttribute("allPost", post_list);
 		List<PostBean> post_list_hot = discussionService.getAllPostByHot();
 		model.addAttribute("hotPost", post_list_hot);
+		List<PostBean> post_list_click = discussionService.getAllPostByClick();
+		model.addAttribute("clickPost", post_list_click);
 		List<CommandBean> command_list = discussionService.getAllCommand();
 		model.addAttribute("allCommand", command_list);
 		List<RuleBean> rule_content = discussionService.getRule();
@@ -68,6 +70,7 @@ public class DiscussionController {
 	@PostMapping("Discussion/add_post")
 	public String processAddNewPost(@ModelAttribute("postBean")PostBean pb) {
 		pb.setMemberbean(loginUser); //直接把Bean塞進去
+		pb.setClick(0);
 		discussionService.addPost(pb);
 		return "redirect:/Discussion/mainpage";
 	}
@@ -86,6 +89,7 @@ public class DiscussionController {
 	@PostMapping("Discussion/show_detail")
 	public String showDetailPage(Model model,
 			@RequestParam("post_detail_id") Integer post_detail_id) {
+		discussionService.addClick(post_detail_id);
 		PostBean pb = discussionService.getPostBeanById(post_detail_id);
 		model.addAttribute("PostBean", pb);
 		List<CommandBean> command_detail= discussionService.getCommandBeanByPostId(post_detail_id);

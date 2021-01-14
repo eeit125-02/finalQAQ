@@ -154,6 +154,8 @@ response.setDateHeader("Expires", 0);
 								role="tab">最新貼文</a></li>
 							<li class="nav-item"><a class="nav-link" id="novel_hot-tab"
 								data-toggle="tab" href="#novel_hot" role="tab">熱門貼文</a></li>
+							<li class="nav-item"><a class="nav-link" id="click-tab"
+								data-toggle="tab" href="#click" role="tab">最多瀏覽</a></li>
 						</ul>
 						<br>
 
@@ -270,16 +272,45 @@ response.setDateHeader("Expires", 0);
 										</c:forEach>
 									</tbody>
 								</table>
-								<script  type="text/javascript">
-								$(document).ready(function(){
-									$('#myTable').tablesorter(
-											{sortList: [[3,0]]});
-									})	
-								
-								</script>
-
-
 							</div>
+							
+							<!-- content of post click sorted tab -->
+							<div class="tab-pane fade" id="click" role="tabpanel">
+							<table class="table table-hover tablesorter" id="myTable">
+									<thead>
+										<tr class="table-primary">
+											<th scope="col"
+												style="width: 60%; text-align: left; vertical-align: middle">貼文標題</th>
+											<th scope="col" style="width: 15%; vertical-align: middle">貼文時間</th>
+											<th scope="col" style="width: 15%; vertical-align: middle">貼文作者</th>
+											<th scope="col" style="width: 10%; vertical-align: middle">點擊數</th>
+										</tr>
+									</thead>
+									<tbody>
+										<c:forEach var="stored_post" items="${clickPost}">
+											<tr>
+												<td style="text-align: left; vertical-align: middle">
+												<c:url
+														value="show_detail" var="show_detail">
+														<c:param name="post_detail_id"
+															value=" ${stored_post.post_id}" />
+													</c:url>
+													<form action="${show_detail}" method="post">
+														<button type="submit" class="btn btn-link">
+												${stored_post.post_title}
+												</button>
+													</form>
+													<div class="show_part_content">&thinsp;&thinsp;&thinsp;&thinsp;${stored_post.post_content}</div>
+													</td>
+												<td style="vertical-align: middle">${stored_post.post_time}</td>
+												<td style="vertical-align: middle">${stored_post.memberbean.mb_Name}</td>
+												<td style="vertical-align: middle">${stored_post.click}</td>
+											</tr>
+										</c:forEach>
+									</tbody>
+								</table>
+							</div>
+							
 
 						</div>
 					</div>
@@ -665,7 +696,7 @@ response.setDateHeader("Expires", 0);
 							<div class="tab-pane fade" id="pills-manage_post" role="tabpanel">
 								
 								<!-- 搜尋的hql有問題 -->
-								<div style="display:none" class="form-inline justify-content-center">
+								<div class="form-inline justify-content-center">
 										<input class="form-control" type="search" placeholder="請輸入關鍵字"
 											name="keyword_manager" id="keyword_manager" style="margin-right: 10px">
 										<button class="btn btn-outline-primary my-2 my-sm-0"
@@ -675,17 +706,14 @@ response.setDateHeader("Expires", 0);
 								
 								<script>
 									$('#search_post_manager').click(function(){
-										console.log('success1')
 										$.ajax({
 											url : '<c:url value="/Discussion/search_keyword_manager"/>',
 											type : 'POST',
 											data : {keyword : $("#keyword_manager").val()},
 											dataType : "json",
-											success:function(pb){
-												console.log(pb)
-												$('#show_post_manager').html(
-														"<c:forEach var='stored_post' items='" + pb + "'>"+ pb.post_id+"</c:forEach>")
-											}
+ 											success:function(post_search_result){											
+												$('#show_post_manager').html("")
+ 											}
 										})
 										$('#keyword_manager').val("");
 										$('keyword_manager').attr("placeholder","請輸入關鍵字");
