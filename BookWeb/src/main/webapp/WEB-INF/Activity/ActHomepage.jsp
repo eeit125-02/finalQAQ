@@ -255,7 +255,7 @@ td {
     									  <div class="modal-header">
 <!--     									  //標頭 -->
       										  <h5 class="modal-title" id="#exampleModalCenter${act.act_Name}">${act.act_Name}</h5>
-      										  <h6>${act.act_Pax}</h6><span>/</span><span>${act.act_Differentpax}</span>
+      										  &nbsp;<h6>${act.act_Differentpax}</h6><span>/</span><span>${act.act_Pax}</span>
        											 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
      											     <span aria-hidden="true">&times;</span>
      												   </button>
