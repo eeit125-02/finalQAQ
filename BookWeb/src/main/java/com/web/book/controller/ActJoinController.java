@@ -79,19 +79,32 @@ public class ActJoinController {
 			@ModelAttribute("loginUser") MemberBean loginUser
 			,Model model
 			,@RequestParam("act_ID")Integer act_ID
-//			,@RequestParam("mb_Account")String mb_Account
+			,@RequestParam("mb_ID")Integer mb_ID
 			) {
-		System.out.println("--------"+act_ID);
+		System.out.println(mb_ID);
+		System.out.println(actjoinService.check(mb_ID, act_ID));
+		if(actjoinService.check(mb_ID, act_ID)==false) {
 		String act_Name = actService.getAct(act_ID).getact_Name();
 		ActJoinBean ajb = new ActJoinBean();
 		model.addAttribute("act_Name", act_Name);
 		model.addAttribute("act_ID", act_ID);
 		model.addAttribute("loginUser", loginUser);
 		model.addAttribute("ajb", ajb);
-		System.out.println(ajb.getAct());
 		return "Activity/JoinForm";
+		}else {
+		return "redirect:showActs1";
+		}
 	}
 
+	//跳轉主頁
+	@GetMapping("/showActs1")
+	public String actlist(Model model) {
+		List<ActBean> actlist = actService.getAllActs();
+		model.addAttribute("allacts", actlist);
+		model.addAttribute("check","repeat");
+		return "Activity/ActHomepage";
+	}
+	
 	// 送出報名表
 	@PostMapping("/showJoinForm")
 	public String createActJoin(
@@ -99,13 +112,14 @@ public class ActJoinController {
 			, @ModelAttribute("loginUser") MemberBean loginUser
 			, @ModelAttribute("ajb") ActJoinBean ajb
 			, @RequestParam("act_ID") Integer act_ID
-//			,@RequestParam("mb_Account")String mb_Account
+			,@RequestParam("mb_ID")Integer mb_ID
 			)throws Exception {
 		System.out.println("++++++++++++++");
 		ActBean act = actService.getAct(act_ID);
 		act.setAct_Differentpax(act.getAct_Differentpax()+1);
 		ajb.setAct(act);
 		ajb.getAct().getMember().setMb_Account(loginUser.getMb_Account());
+		ajb.setMb_ID(mb_ID);
 		model.addAttribute("ajb", ajb);
 		System.out.println(ajb);
 		actjoinService.createActJoin(ajb);
@@ -113,7 +127,6 @@ public class ActJoinController {
 		return "redirect:/showJoins";
 	}
 
-	// 顯示修改報名資料頁面
 	@GetMapping("/showJoinUpdateForm")
 	public String showUpdateForm(
 			@ModelAttribute("loginUser") MemberBean loginUser,

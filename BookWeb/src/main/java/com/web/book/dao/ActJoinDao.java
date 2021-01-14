@@ -29,6 +29,6 @@ public interface ActJoinDao {
 	//刪除活動
 	int deleteActJoin(Integer join_ID);
 
-
+	public boolean check(Integer mb_ID,Integer act_ID);
 
 }
