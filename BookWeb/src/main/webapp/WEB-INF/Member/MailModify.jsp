@@ -3,7 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%
-	response.setContentType("text/html;charset=UTF-8");
+response.setContentType("text/html;charset=UTF-8");
 response.setHeader("Cache-Control", "no-cache"); // HTTP 1.1
 response.setHeader("Pragma", "no-cache"); // HTTP 1.0
 response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
@@ -27,6 +27,7 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
 	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
 	crossorigin="anonymous">
+
 <style>
 #mb_pwd {
 	border-radius: 25px;
@@ -52,14 +53,21 @@ background-color:#e0ece4
 </head>
 
 <body>
-		<form action="<c:url value='/JavaMailUpdate'/>" method="post">
-			<fieldset id="mb_pwd">
+
+	<!-- header -->
+	<header class="container blog-header py-3" id="bookWebheader"></header>
+	<!-- header -->
+
+		<div class="container media">
+		
+			<fieldset id="mb_pwd" style="text-align:center">
 				<legend>密碼修改</legend>
+				<form action="<c:url value='/JavaMailUpdate'/>" method="post">
 				<input type="hidden" name="javamail" value="account">
 				<table class="table" >
-					<tr class="tr2">
+					<tr class="tr1">
 						<th colspan="2" >密碼
-						<p style="color: gray; margin:0px;">(1.不可空白，2.至少6個字且必須包含英文字母、數字)</p>
+						<p style="color: #F0F0F0; margin:0px;">(1.不可空白，2.至少6個字且必須包含英文字母、數字)</p>
 						</th>
 					</tr>
 					<tr class="table-light">
@@ -74,10 +82,17 @@ background-color:#e0ece4
 						value="" size="12" onblur="Checkpwd1()"><span id="idsp2" style="color: red"></span></td>
 					</tr>
 					</table>
-					<button  type="button" id="Update" name="Update">送出</button>
-					<button type="reset">清除</button>
-			</fieldset>
+					<br>
+					<button class="btn btn-outline-secondary" type="button" id="Update" name="Update">送出</button>
+					<button class="btn btn-outline-secondary" type="reset">清除</button>
 				</form>
+			</fieldset>
+			</div>
+			
+			<!-- footer -->
+			<footer class="container py-5" id="bookWebFooter"></footer>
+			<!-- footer -->
+					
 	<script>
 		var a1=false;
 		var a2=false;
@@ -124,6 +139,12 @@ background-color:#e0ece4
 			}
 		})
 	</script>
+	
+		<script>
+		$("#bookWebheader").load("//localhost:8080/BookWeb/header");
+		$("#bookWebFooter").load("//localhost:8080/BookWeb/footer");
+	</script>
+	
 </body>
 
 </html>

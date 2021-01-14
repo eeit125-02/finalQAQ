@@ -274,6 +274,7 @@ form {
 			if (name == "" || mail == "" || mb_Account == "" || pwd =="" || a1 != true || a2 != true || a3 != true || a4 != true || b == "") {
 				alert("有資料錯誤");
 			} else {
+				alert("請至信箱點擊連結後，才完成註冊。")
 				$('form').submit();
 			}
 		})

@@ -59,6 +59,12 @@ public class DiscussionServiceImpl implements DiscussionService {
 	public List<CommandBean> getAllCommand() {
 		return discussionDao.getAllCommand();
 	}
+	
+	//依時間排序列出所有巢狀留言
+	@Override
+	public List<NestedCommandBean> getAllNestedCommand() {
+		return discussionDao.getAllNestedCommand();
+	}
 
 	//列出版規
 	@Override
@@ -120,6 +126,8 @@ public class DiscussionServiceImpl implements DiscussionService {
 	public CommandBean getCommandBeanById(Integer command_ID) {
 		return discussionDao.getCommandBeanById(command_ID);
 	}
+
+
 
 
 

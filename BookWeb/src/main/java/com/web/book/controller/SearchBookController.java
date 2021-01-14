@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.sound.midi.Soundbank;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,6 +25,7 @@ import com.web.book.model.BookBean;
 import com.web.book.model.BookCollectBean;
 import com.web.book.model.BookTypeBean;
 import com.web.book.model.MemberBean;
+import com.web.book.model.SearchTypeBean;
 import com.web.book.service.GlobalService;
 import com.web.book.service.SearchService;
 
@@ -173,64 +173,40 @@ public class SearchBookController {
 				, @RequestParam(value = "apage", required=false,defaultValue = "1") Integer nowpage
 				) {
 			
-			
 			if ("".equals(bookname)) {
-				bookname=null;
-			}
-			
+				bookname=null;}			
 			if ("".equals(authorname)) {
-				authorname=null;
-			}
-			
+				authorname=null;}			
 			if ("".equals(publishname)) {
-				publishname=null;
-			}
-			
-			System.out.println("cccccccccccccccccccc"+reslist);
-			System.out.println("cccccccccccccccccccc"+typelist);
-			System.out.println("cccccccccccccccccccc"+bookname);
-			System.out.println("cccccccccccccccccccc"+authorname);
-			System.out.println("cccccccccccccccccccc"+publishname);
-			System.out.println("cccccccccccccccccccc"+nowpage);
-			
+				publishname=null;}
 			
 			if(nowpage!=null) {
-				page=nowpage;
-			}
+				page=nowpage;}
 			
 			if(bookname!=null) { //書名關鍵字
 				keyword=bookname;
 				finalresult = searchService.searchBook(keyword,page);
 				totalpage=searchService.getResultPage();
 				count=searchService.getResultNumber();
-				System.out.println("111111111111111111111111111111");
 			}else if(authorname!=null) { //作者關鍵字
 				keyword=authorname;
 				finalresult = searchService.searchBookAuthor(keyword,page);
 				totalpage=searchService.getResultPage();
 				count=searchService.getResultNumber();
-				System.out.println("111111111111111111111111111111222222222");
-			}else if(publishname!=null && publishname!="") { //出版社關鍵字
+			}else if(publishname!=null) { //出版社關鍵字
 				keyword=publishname;
 				finalresult = searchService.searchBookPublish(keyword,page);
 				totalpage=searchService.getResultPage();
 				count=searchService.getResultNumber();
-				System.out.println("111111111111111111111111111111333333333");
 			}else if(reslist!=null) { //類型關鍵字
 				typelist=reslist;
 				finalresult=searchService.searchBookType(typelist,page);
 				totalpage=searchService.getResultPage();
 				count=searchService.getResultNumber();
-				System.out.println("111111111111111111111111111111444444444");
 			}else if(typelist!=null) {	
-				System.out.println("hhhhh1");
-				System.out.println("jjjjjjjjjjjjjjjjj"+typelist);
 				finalresult=searchService.searchBookType(typelist,page);
-				System.out.println("hhhhh2");
 				totalpage=searchService.getResultPage();
-				System.out.println("hhhhh3");
 				count=searchService.getResultNumber();
-				System.out.println("111111111111111111111111111111444444444");
 			}else{
 				
 			}
@@ -240,7 +216,6 @@ public class SearchBookController {
 			model.addAttribute("author", authorname);
 			model.addAttribute("publish", publishname);
 			model.addAttribute("b", reslist);
-			System.out.println("nowwwwwwwwwwwwww"+nowpage);
 			model.addAttribute("apage",nowpage);
 			
 			if(count==0) { //資料總筆數確認
@@ -386,6 +361,20 @@ public class SearchBookController {
 	@GetMapping("/addnewbook")
 	public String gotoAddnewbook(Model model) {
 		BookBean result = new BookBean();
+		List<SearchTypeBean> maintype= new ArrayList<SearchTypeBean>();
+		List<SearchTypeBean> alltype= searchService.getAllBookType();
+		
+		maintype.add(alltype.get(0));
+		maintype.add(alltype.get(9));
+		maintype.add(alltype.get(17));
+		maintype.add(alltype.get(27));
+		maintype.add(alltype.get(36));
+		maintype.add(alltype.get(46));
+		maintype.add(alltype.get(56));
+		maintype.add(alltype.get(62));
+		maintype.add(alltype.get(69));
+
+		model.addAttribute("maintype", maintype);
 		model.addAttribute("newonebook", result);
 		return "SearchBook/Addnewbook";
 	}

@@ -39,6 +39,7 @@ public class DiscussionDaoImpl implements DiscussionDao {
 		return new_command;
 	}
 
+	//會員新增巢狀留言
 	@Override
 	public NestedCommandBean addNestedCommand(NestedCommandBean new_nested_command) {
 		Session session = factory.getCurrentSession();
@@ -50,7 +51,7 @@ public class DiscussionDaoImpl implements DiscussionDao {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<PostBean> getAllPost() {
-		String hql="FROM PostBean p ORDER BY p.post_time DESC";
+		String hql="FROM PostBean p ORDER BY p.post_time  DESC";
 		Session session = factory.getCurrentSession();
 		return session.createQuery(hql).getResultList();
 	}
@@ -59,9 +60,10 @@ public class DiscussionDaoImpl implements DiscussionDao {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<PostBean> getAllPostByHot() {
-		//有問題!!!
-		String hql="SELECT p, COUNT(c.FK_PostBean_post_id) hot FROM PostBean p, CommandBean c WHERE p.post_id=c.FK_PostBean_post_id"
-				+ " ORDER BY hot";
+		String hql= //"SELECT p.post_id, p.post_content, p.post_title, p.post_time, p.memberbean.mb_Name, p.commands.FK_PostBean_post_id"+
+				"FROM PostBean p " + 
+				//"WHERE p.post_id=c.FK_PostBean_post_id" + 
+				"ORDER BY COUNT(p.commands.command_id) DESC";
 		Session session = factory.getCurrentSession();
 		return session.createQuery(hql).getResultList();
 	}
@@ -74,6 +76,16 @@ public class DiscussionDaoImpl implements DiscussionDao {
 		Session session = factory.getCurrentSession();
 		return session.createQuery(hql).getResultList();
 	}
+	
+	//依時間排序列出所有巢狀留言
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<NestedCommandBean> getAllNestedCommand() {
+		String hql="FROM NestedCommandBean n ORDER BY n.nested_command_time DESC";
+		Session session = factory.getCurrentSession();
+		return session.createQuery(hql).getResultList();
+	}
+
 
 	//列出版規
 	@SuppressWarnings("unchecked")
@@ -162,6 +174,7 @@ public class DiscussionDaoImpl implements DiscussionDao {
 		Session session = factory.getCurrentSession();
 		return session.createQuery(hql).getResultList();
 	}
+
 
 
 

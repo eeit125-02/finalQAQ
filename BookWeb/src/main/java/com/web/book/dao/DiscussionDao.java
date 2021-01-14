@@ -31,6 +31,8 @@ public interface DiscussionDao {
 	List<PostBean> getAllPostByHot();
 	//依時間排序列出所有留言
 	List<CommandBean> getAllCommand();
+	//依時間排序列出所有巢狀留言
+	List<NestedCommandBean> getAllNestedCommand();
 	//列出貼文內容
 	List<RuleBean> getRule();
 	//列出會員內容

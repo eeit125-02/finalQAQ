@@ -152,8 +152,7 @@ response.setDateHeader("Expires", 0);
 							<li class="nav-item"><a class="nav-link active"
 								id="novel_latest-tab" data-toggle="tab" href="#novel_latest"
 								role="tab">最新貼文</a></li>
-							<!-- hql有問題 -->
-							<li style="display:none" class="nav-item"><a class="nav-link" id="novel_hot-tab"
+							<li class="nav-item"><a class="nav-link" id="novel_hot-tab"
 								data-toggle="tab" href="#novel_hot" role="tab">熱門貼文</a></li>
 						</ul>
 						<br>
@@ -196,7 +195,7 @@ response.setDateHeader("Expires", 0);
 												<div class="show_part_title text-left" >${stored_post.post_title}</div>
 												</button>
 													</form>
-													<div class="show_part_content">${stored_post.post_content}</div>
+													<div class="show_part_content">&thinsp;&thinsp;&thinsp;&thinsp;${stored_post.post_content}</div>
 													</td>
 												<td style="vertical-align: middle">${stored_post.post_time}</td>
 												<td style="vertical-align: middle">${stored_post.memberbean.mb_Name}</td>
@@ -236,7 +235,7 @@ response.setDateHeader("Expires", 0);
 										</tr>
 									</thead>
 									<tbody>
-										<c:forEach var="stored_post" items="${allPost}">
+										<c:forEach var="stored_post" items="${hotPost}">
 											<tr>
 												<td style="text-align: left; vertical-align: middle">
 												<c:url
@@ -248,7 +247,9 @@ response.setDateHeader("Expires", 0);
 														<button type="submit" class="btn btn-link">
 												${stored_post.post_title}
 												</button>
-													</form></td>
+													</form>
+													<div class="show_part_content">&thinsp;&thinsp;&thinsp;&thinsp;${stored_post.post_content}</div>
+													</td>
 												<td style="vertical-align: middle">${stored_post.post_time}</td>
 												<td style="vertical-align: middle">${stored_post.memberbean.mb_Name}</td>
 												<td style="vertical-align: middle"><c:set
@@ -414,11 +415,10 @@ response.setDateHeader("Expires", 0);
 												<div class="input-group mb-3">
 													<input type="text" class="form-control"
 														id="command_input${stored_post.post_id}"
-														placeholder="請輸入留言" /> <input type="hidden"
-														name="post_id" id="post_id" value="${stored_post.post_id}" />
+														placeholder="請輸入留言" /> 
 													<div class="input-group-append">
-														<button class="btn btn-outline-secondary"
-															id="command_btn${stored_post.post_id}" type="submit">留言</button>
+														<button class="btn btn-outline-secondary normal_command${stored_post.post_id}"
+															id="command_btn${stored_post.post_id}" type="submit" value="${stored_post.post_id}">留言</button>
 													</div>
 												</div>
 
@@ -429,65 +429,142 @@ response.setDateHeader("Expires", 0);
 														<c:if test="${pi==ci}">
 															<div
 																style="background-color: #C4E1FF; margin: 10px; padding: 5px; border-radius: 10px;">
+																
+																<button class="btn btn-link btn-sm float-right" type="submit"
+													data-toggle="collapse" 
+													data-target="#nested_command${stored_command.command_id}">
+													回覆
+												</button>
+																
 																<p>${stored_command.memberbean.mb_Name}<br>
 																	${stored_command.command_time}
 																</p>
 																<p>${stored_command.command_content}</p>
 															</div>
+															
+															<!-- 	巢狀留言彈出輸入框 -->
+							<div class="collapse"
+								id="nested_command${stored_command.command_id}">
+
+								<div style="height: 40px">
+									<div class=" input-group" style="width: 80%; float: right;">
+
+										<input type="text" class="form-control" id="nested_command_input${stored_command.command_id}"  placeholder="回覆   ${stored_command.command_content}" /> 
+										<span class="input-group-append">
+											<button class="btn btn-outline-secondary nestcommand${stored_post.post_id} " 
+												id="nested_command_btn${stored_command.command_id}" value="${stored_command.command_id}" >
+												回覆
+											</button>
+										</span>
+									</div>
+								</div>
+							</div>
+							
+							
+							<div id="show_nested_command${stored_command.command_id}"></div>
+											<c:forEach var="all_nested_command" items="${AllNestedCommand}">
+									
+									<c:set var="cid" value="${stored_command.command_id}" />
+								<c:set var="ncid" value="${all_nested_command.commandBean.command_id}" />
+								<c:if test="${cid==ncid}">
+									
+									<div style="height: 125px; padding-top: 10px; margin-right: 10px">
+											<div style="background-color: #B3D9D9; margin: 0px; padding: 5px; border-radius: 10px; width: 78%; float: right;">
+													<p>${all_nested_command.memberbean.mb_Name}<br>${all_nested_command.nested_command_time}</p>
+													<p>${all_nested_command.nested_command_content}</p>
+											</div>
+									</div>
+															
+														</c:if>
+													</c:forEach>	
 														</c:if>
 													</c:forEach>
 												</div>
 
-												<script>
-													$('#command_btn${stored_post.post_id}').click(function() {
-														
-														if($('#command_input${stored_post.post_id}').val()==""){
-															swal({title:'請輸入文字'})
+<script>
+								$(document).on("click", '.nestcommand${stored_post.post_id}', function(){
+									
+									if (typeof ($.cookie('Member_ID')) != "undefined") {
 
-															}else{
-														
-																		$.ajax({
-																					url : '<c:url value="/Dsicussion/add_command_ajax"/>',
-																					type : 'POST',
-																					data : {
-																						new_command : $(
-																								"#command_input${stored_post.post_id}")
-																								.val(),
-																						post_id : $(
-																								"#post_id")
-																								.val()
-																					},
-																					dataType : "json",
-																					success : function(
-																							new_cb) {
+										if ($(this).parent().prev().val() =="") {
+											swal({title : '請輸入文字'})
 
-																						$(
-																								"#show_command${stored_post.post_id}")
-																								.prepend(
-																										'<div style="background-color: #C4E1FF; margin: 10px; padding: 5px; border-radius: 10px;">'
-																												+ '<p>'
-																												+ new_cb.mb_name
-																												+ '<br>'
-																												+ new_cb.cb_time
-																												+ '</p>'
-																												+ '<p>'
-																												+ new_cb.cb_content
-																												+ '</p>'
-																												+ '</div>');
-																					}
-																				})
-																		$(
-																				'#command_input${stored_post.post_id}')
-																				.val(
-																						"");
-																		$(
-																				'#command_input${stored_post.post_id}')
-																				.attr(
-																						"placeholder",
-																						"請輸入留言");
-															}})
-												</script>
+										} else {
+											$.ajax({
+												url : '<c:url value="/Discussion/add_nested_command_ajax"/>',
+												type : 'POST',
+												data : {nested_command : $(this).parent().prev().val(),
+															  command_id : $(this).val()},
+												dataType : "json",
+												success:function(new_ncb){
+													$('#show_nested_command'+new_ncb.cb_id).prepend(
+															'<div style="height: 125px; padding-top: 10px; margin-right: 10px">'
+															+ '<div style="background-color: #B3D9D9; margin: 0px; padding: 5px; border-radius: 10px; width: 78%; float: right;">'
+															+	'<p>' + new_ncb.mb_name+'<br>'+new_ncb.ncb_time+'</p>'
+															+	'<p>' + new_ncb.ncb_content+'</p>'
+															+'</div></div>'
+													)
+												}
+										})
+												$(this).parent().prev().val("");
+								}}else{
+									swal({title : '請先登入'})
+								}						 
+									})
+								
+									
+									
+									$(document).on("click", '.normal_command${stored_post.post_id}', function(){
+										
+										console.log($(this).parent().prev().val())
+									
+										if (typeof ($.cookie('Member_ID')) != "undefined") {
+																			
+															if($(this).parent().prev().val()==""){
+																swal({title:'請輸入文字'})
 
+																}else{
+																			
+																	$.ajax({
+																		url : '<c:url value="/Dsicussion/add_command_ajax"/>',
+																		type : 'POST',
+																		data : {new_command : $(this).parent().prev().val(),
+																						post_id : $(this).val()},
+																		dataType : "json",
+																		success : function(new_cb) {
+																			$("#show_command"+new_cb.post_id).prepend(
+																							'<div style="background-color: #C4E1FF; margin: 10px; padding: 5px; border-radius: 10px;">'
+																							+ '<button class="btn btn-link btn-sm float-right" type="submit" data-toggle="collapse"'
+																							+ 'data-target="#nested_command'+new_cb.cb_id+'">回覆</button>'
+																									+ '<p>'
+																									+ new_cb.mb_name
+																									+ '<br>'
+																									+ new_cb.cb_time
+																									+ '</p>'
+																									+ '<p>'
+																									+ new_cb.cb_content
+																									+ '</p>'
+																									+ '</div>'
+																									+ '<div class="collapse" id="nested_command'+new_cb.cb_id+'">'
+																									+ '<div style="height: 40px">'
+																									+ '<div class=" input-group" style="width: 80%; float: right;">'
+																									+ '<input type="text" class="form-control" id="command_input'+new_cb.cb_id+'" placeholder="回覆   '+new_cb.cb_content+'" />'
+																									+ ' <span class="input-group-append">'
+																									+ '<button class="btn btn-outline-secondary nestcommand'+new_cb.post_id+'" id="nested_command_btn'+new_cb.cb_id+'" value="'+new_cb.cb_id+'">'
+																									+ '回覆</button>'
+																									+ '</span></div></div></div>'
+																									+'<div id="show_nested_command'+new_cb.cb_id+'"></div>'
+																			);
+																						$('#command_input'+new_cb.post_id).val("");
+																		}
+																						
+																	})
+																
+														}}else{
+															swal({title : '請先登入'})
+														}					
+													})
+								</script>
 
 
 											</div>
