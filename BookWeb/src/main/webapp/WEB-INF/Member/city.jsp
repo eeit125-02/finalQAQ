@@ -45,7 +45,7 @@ background-color:#e0ece4
 #city {
 	border-radius: 25px;
 	padding: 20px;
-	background-color: #F3F3FA;
+	background-color: 	#F0F0F0;
 	height:300px;
 	width: 200px;
 	float:left;
