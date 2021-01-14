@@ -96,9 +96,13 @@ div {
 				<div>
 				<button type="submit" name="list" class="btn btn-outline-secondary">收藏清單</button>
 				</div>
-			
-			</form>
-		</div>
+				</form>
+				<form name=a3 class=a3 action="<c:url value='/myStore' />" method="get">
+				<div>
+				<button type="submit" name="sell" class="btn btn-outline-secondary">我的賣場</button>
+				</div>
+				</form>	
+				</div>
 	</fieldset>
 	<div id="change123" style="width:900px;margin-left:10px ">
 									<fieldset id="mb_inf">

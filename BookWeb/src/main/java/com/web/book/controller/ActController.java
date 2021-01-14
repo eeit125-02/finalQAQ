@@ -1,6 +1,8 @@
 package com.web.book.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -18,6 +20,7 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.web.book.model.ActBean;
+import com.web.book.model.ActJoinBean;
 import com.web.book.model.MemberBean;
 import com.web.book.service.ActJoinService;
 import com.web.book.service.ActService;
@@ -81,7 +84,9 @@ public class ActController {
 			RedirectAttributes attr) throws Exception {
 
 		// 圖片上傳用
+		
 		GlobalService.saveImage("active", file, ab.getact_Name());
+//		ab.setAct_Differentpax();
 		ab.setMember(loginUser);
 		ab.setact_Image(GlobalService.saveImage("active", file, ab.getact_Name()));
 		actService.createAct(ab);
