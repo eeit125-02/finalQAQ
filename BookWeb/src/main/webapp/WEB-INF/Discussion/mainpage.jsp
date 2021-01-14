@@ -152,8 +152,7 @@ response.setDateHeader("Expires", 0);
 							<li class="nav-item"><a class="nav-link active"
 								id="novel_latest-tab" data-toggle="tab" href="#novel_latest"
 								role="tab">最新貼文</a></li>
-							<!-- hql有問題 -->
-							<li style="display:none" class="nav-item"><a class="nav-link" id="novel_hot-tab"
+							<li class="nav-item"><a class="nav-link" id="novel_hot-tab"
 								data-toggle="tab" href="#novel_hot" role="tab">熱門貼文</a></li>
 						</ul>
 						<br>
@@ -196,7 +195,7 @@ response.setDateHeader("Expires", 0);
 												<div class="show_part_title text-left" >${stored_post.post_title}</div>
 												</button>
 													</form>
-													<div class="show_part_content">${stored_post.post_content}</div>
+													<div class="show_part_content">&thinsp;&thinsp;&thinsp;&thinsp;${stored_post.post_content}</div>
 													</td>
 												<td style="vertical-align: middle">${stored_post.post_time}</td>
 												<td style="vertical-align: middle">${stored_post.memberbean.mb_Name}</td>
@@ -236,7 +235,7 @@ response.setDateHeader("Expires", 0);
 										</tr>
 									</thead>
 									<tbody>
-										<c:forEach var="stored_post" items="${allPost}">
+										<c:forEach var="stored_post" items="${hotPost}">
 											<tr>
 												<td style="text-align: left; vertical-align: middle">
 												<c:url
@@ -248,7 +247,9 @@ response.setDateHeader("Expires", 0);
 														<button type="submit" class="btn btn-link">
 												${stored_post.post_title}
 												</button>
-													</form></td>
+													</form>
+													<div class="show_part_content">&thinsp;&thinsp;&thinsp;&thinsp;${stored_post.post_content}</div>
+													</td>
 												<td style="vertical-align: middle">${stored_post.post_time}</td>
 												<td style="vertical-align: middle">${stored_post.memberbean.mb_Name}</td>
 												<td style="vertical-align: middle"><c:set
