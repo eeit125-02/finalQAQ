@@ -67,7 +67,7 @@ background-color:#e0ece4
 				<table class="table" >
 					<tr class="tr1">
 						<th colspan="2" >密碼
-						<p style="color: gray; margin:0px;">(1.不可空白，2.至少6個字且必須包含英文字母、數字)</p>
+						<p style="color: #F0F0F0; margin:0px;">(1.不可空白，2.至少6個字且必須包含英文字母、數字)</p>
 						</th>
 					</tr>
 					<tr class="table-light">
@@ -82,6 +82,7 @@ background-color:#e0ece4
 						value="" size="12" onblur="Checkpwd1()"><span id="idsp2" style="color: red"></span></td>
 					</tr>
 					</table>
+					<br>
 					<button class="btn btn-outline-secondary" type="button" id="Update" name="Update">送出</button>
 					<button class="btn btn-outline-secondary" type="reset">清除</button>
 				</form>
