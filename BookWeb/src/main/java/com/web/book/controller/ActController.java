@@ -86,7 +86,7 @@ public class ActController {
 		// 圖片上傳用
 		
 		GlobalService.saveImage("active", file, ab.getact_Name());
-//		ab.setAct_Differentpax();
+		ab.setAct_Differentpax(0);
 		ab.setMember(loginUser);
 		ab.setact_Image(GlobalService.saveImage("active", file, ab.getact_Name()));
 		actService.createAct(ab);

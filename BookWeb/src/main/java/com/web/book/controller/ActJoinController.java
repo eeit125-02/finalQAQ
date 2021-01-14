@@ -103,6 +103,7 @@ public class ActJoinController {
 			)throws Exception {
 		System.out.println("++++++++++++++");
 		ActBean act = actService.getAct(act_ID);
+		act.setAct_Differentpax(ajb.getjoin_Pax());
 		ajb.setAct(act);
 		ajb.getAct().getMember().setMb_Account(loginUser.getMb_Account());
 		model.addAttribute("ajb", ajb);
