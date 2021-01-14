@@ -10,7 +10,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "ACT_Join")
+@Table(name = "ACT_Join1")
 public class ActJoinBean {
 
 	
@@ -19,8 +19,10 @@ public class ActJoinBean {
 	private Integer join_ID;
 	private String join_Time;
 	private Integer join_Pax;
+	private Integer mb_ID;
 	
-	
+
+
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name="act_ID")
 	private ActBean act;
@@ -40,6 +42,14 @@ public class ActJoinBean {
 	}
 
 
+	public Integer getMb_ID() {
+		return mb_ID;
+	}
+
+	public void setMb_ID(Integer mb_ID) {
+		this.mb_ID = mb_ID;
+	}
+	
 	public Integer getjoin_ID() {
 		return join_ID;
 	}

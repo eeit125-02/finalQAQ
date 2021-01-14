@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import com.web.book.dao.ActJoinDao;
 import com.web.book.model.ActJoinBean;
+import com.web.book.model.MemberBean;
 
 
 @Repository
@@ -100,6 +101,20 @@ public class ActJoinDaoImpl implements ActJoinDao {
 
 		return count;
 	}
+	
+	@Override
+	public boolean check(Integer mb_ID,Integer act_ID) {
+		boolean result = false;
+		Session session = factory.getCurrentSession();
+		String hql = "FROM ActJoinBean where mb_ID = :mb_ID and act_ID = :act_ID";
+		Query<MemberBean> query = session.createQuery(hql);
+		List<MemberBean> list = query.setParameter("mb_ID", mb_ID).setParameter("act_ID", act_ID).getResultList();
+		if (list.size() > 0) {
+			result = true;
+		}
+		return result;
+	}
 
+	
 }
 

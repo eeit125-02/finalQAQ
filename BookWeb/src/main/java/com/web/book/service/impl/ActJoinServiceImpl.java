@@ -6,6 +6,7 @@ import javax.transaction.Transactional;
 
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.stereotype.Service;
 
 import com.web.book.dao.ActJoinDao;
@@ -53,5 +54,11 @@ public class ActJoinServiceImpl implements ActJoinService {
 	public int deleteActJoin(Integer join_ID) {
 		return actjoinDao.deleteActJoin(join_ID);
 	}
+	
+	@Override
+	public boolean check(Integer mb_ID,Integer act_ID) {
+		return actjoinDao.check(mb_ID, act_ID);
+	}
+	
 	
 }
