@@ -10,7 +10,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "ACT_Records12")
+@Table(name = "ACT_Records1234")
 public class ActBean {
 
 	@Id
@@ -29,8 +29,24 @@ public class ActBean {
 	private String act_Rule;
 	private String act_Tag;
 	private String act_Place;
-
+	private Integer act_Differentpax;
 	
+	
+	
+
+	public Integer getAct_Differentpax() {
+		return act_Differentpax;
+	}
+
+
+	public void setAct_Differentpax(Integer act_Differentpax) {
+		this.act_Differentpax = act_Differentpax;
+	}
+
+
+
+
+
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn
 	private MemberBean member;
@@ -55,9 +71,6 @@ public class ActBean {
 		this.member = member;
 
 	}
-
-
-
 
 
 	public ActBean() {
