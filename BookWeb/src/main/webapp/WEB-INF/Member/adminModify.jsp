@@ -166,7 +166,6 @@ legend {
 					</c:forEach>
 				</table>
 			</form>
-				<a href="<c:url value='/toCity'/>">返回</a>
 			</fieldset>
 	</div>
 </body>

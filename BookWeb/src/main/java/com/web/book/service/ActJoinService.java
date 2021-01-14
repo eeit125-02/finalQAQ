@@ -27,8 +27,9 @@ public interface ActJoinService {
 			//刪除活動
 			int deleteActJoin(Integer join_ID);
 
-	
+			boolean check(Integer mb_ID, Integer act_ID);
 
+	
 //			//會員報名活動清單
 //			List<ActJoinBean> getJoinRecords(Integer mb_ID);
 //			

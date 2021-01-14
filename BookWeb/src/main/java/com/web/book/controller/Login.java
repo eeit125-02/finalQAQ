@@ -181,7 +181,7 @@ public class Login {
 				String sessionId = GlobalService.createSessionID(String.valueOf(loginMember.getMb_ID()),
 					loginMember.getMb_Name(), loginMember.getMb_Account());
 			Cookie memId = new Cookie("Member_ID", sessionId);
-			memId.setMaxAge(20*60);
+			memId.setMaxAge(60*60);
 			response.addCookie(memId);
 			logincheck = "c" ;
 			return true;
@@ -212,7 +212,7 @@ public class Login {
 			Cookie memId = new Cookie("Member_ID", sessionId);
 			Cookie memName = new Cookie("Member_Name", mb.getMb_Name());			
 			System.out.println(mb.getMb_pic());
-			memId.setMaxAge(1200);
+			memId.setMaxAge(60*60);
 			response.addCookie(memId);
 			response.addCookie(memName);
 			model.addAttribute("loginMember", mb);

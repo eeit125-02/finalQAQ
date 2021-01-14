@@ -271,7 +271,8 @@ td {
 <!--       										//頁尾 -->
      									 <div class="modal-footer">
         									<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      										 <a href="<c:url value='/showJoinForm'/>?act_ID=${act.act_ID}"><button type="button" class="btn btn-primary">報名</button></a> 
+        									<input type="hidden" id="check" value="${check}">
+      										 <a href="<c:url value='/showJoinForm'/>?act_ID=${act.act_ID}&mb_ID=${act.member.mb_ID}"><button type="button" class="btn btn-primary">報名</button></a> 
      										    </div>
   											  </div>
  											 </div>
@@ -339,9 +340,11 @@ td {
 var map, geocoder;
 var mapId="";
 console.log("1231456")
+console.log($("#check").val())
+
 $(document).ready(function(){
-if(typeof($.cookie('Member_ID')) != "undefined" ){
-	console.log("123")
+	if($("#check").val()=="repeat"){
+		alert("你已報名過");	
 }
 })
 

@@ -98,10 +98,10 @@
 					</tr>
 
 
-					<tr>
-						<td><form:label path="join_Pax">報名人數:</form:label></td>
-						<td><form:input path="join_Pax" /></td>
-					</tr>
+<!-- 					<tr> -->
+<%-- 						<td><form:label path="join_Pax">報名人數:</form:label></td> --%>
+<%-- 						<td><form:input path="join_Pax" /></td> --%>
+<!-- 					</tr> -->
 
 				</table>
 
