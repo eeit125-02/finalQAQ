@@ -162,9 +162,17 @@ public class BookReportServiceImpl implements BookReportService {
 	}
 
 	@Override
-	public void addReportMessage(Integer brId, Integer mbId, String content) {
-
+	public Boolean addReportMessage(Integer brId, Integer mbId, String content) {
+		
+		List<BookReportMessageBean> reportMessages = bookReportDao.getMemberBookReportMessageList(mbId);
+		for (BookReportMessageBean reportMessage : reportMessages) {
+			if(reportMessage.getBookReport().getBr_ID().equals(brId)) {
+				return false;
+			}
+		}
+		
 		bookReportDao.addReportMessage(brId, mbId, content);
+		return true;
 	}
 
 	@Override
