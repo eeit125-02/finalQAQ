@@ -255,7 +255,7 @@ td {
     									  <div class="modal-header">
 <!--     									  //標頭 -->
       										  <h5 class="modal-title" id="#exampleModalCenter${act.act_Name}">${act.act_Name}</h5>
-      										  &nbsp;<h6>${act.act_Differentpax}</h6><span>/</span><span>${act.act_Pax}</span>
+      										  
        											 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
      											     <span aria-hidden="true">&times;</span>
      												   </button>
@@ -265,14 +265,14 @@ td {
      										 <p>${act.act_Theme}</p>
 										     <p>${act.act_Date}</p>										     
 										     <p>${act.act_Loc}</p>     
-										     <p>${act.act_Intro}</p>			
+										     <p>${act.act_Intro}</p>
+										     <span>${act.act_Differentpax}</span><span>/</span><span>${act.act_Pax}</span>			
 										     <hr>
       										 </div>
 <!--       										//頁尾 -->
      									 <div class="modal-footer">
         									<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        									<input type="hidden" id="check" value="${check}">
-      										 <a href="<c:url value='/showJoinForm'/>?act_ID=${act.act_ID}&mb_ID=${act.member.mb_ID}"><button type="button" class="btn btn-primary">報名</button></a> 
+      										 <a href="<c:url value='/showJoinForm'/>?act_ID=${act.act_ID}"><button type="button" class="btn btn-primary">報名</button></a> 
      										    </div>
   											  </div>
  											 </div>
@@ -281,7 +281,9 @@ td {
 									<div class="caption">
 										<p>${act.act_Theme}</p>
 										<p>${act.act_Date}</p>
-										<p><button class="mapbutton"  id="myModal"  value="${act.act_Loc}" data-toggle="modal" data-target="#myModal1"><i class='fas fa-map-marked-alt'></i></button>${act.act_Loc}</p>	
+										<p></p>
+										<p><img src=${pageContext.request.contextPath}/image/iconfinder_clock_1814097.png style="width:22px;height:22px">${act.act_Time}</p>
+										<p><button class="mapbutton" style="background-color:white" id="myModal"  value="${act.act_Loc}" data-toggle="modal" data-target="#myModal1"><img src=${pageContext.request.contextPath}/image/iconfinder_location_1814106.png style="width:25px;height:25px"></button>${act.act_Loc}</p>
 										<hr>
 										<p>
 										
@@ -340,11 +342,9 @@ td {
 var map, geocoder;
 var mapId="";
 console.log("1231456")
-console.log($("#check").val())
-
 $(document).ready(function(){
-	if($("#check").val()=="repeat"){
-		alert("你已報名過");	
+if(typeof($.cookie('Member_ID')) != "undefined" ){
+	console.log("123")
 }
 })
 
