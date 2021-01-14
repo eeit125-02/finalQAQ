@@ -156,73 +156,73 @@
 							<form:input type="text" path="act_Loc" class="form-control" placeholder="請輸入其餘地址"></form:input>
 							</div>					
                         
-                        <div class="form-row">
-                        <div class="form-group input_fields_wrap">
-						    <label >活動標籤:</label>
-<%-- 						    <form:input path="act_Tag" type="text" name="mytext[]" class="form-control"></form:input> --%>
+<!--                         <div class="form-row"> -->
+<!--                         <div class="form-group input_fields_wrap"> -->
+<!-- 						    <label >活動標籤:</label> -->
+<%-- <%-- 						    <form:input path="act_Tag" type="text" name="mytext[]" class="form-control"></form:input> --%> --%>
 
 						    
-						    <form:checkbox path="act_Tag" class="btn-check" id="btn-check-outlined" autocomplete="off" />
-							<label class="btn btn-outline-primary" for="btn-check-outlined">學習</label><br>
+<%-- 						    <form:checkbox path="act_Tag" class="btn-check" id="btn-check-outlined" autocomplete="off" /> --%>
+<!-- 							<label class="btn btn-outline-primary" for="btn-check-outlined">學習</label><br> -->
 							
-							<form:checkbox path="act_Tag" class="btn-check" id="btn-check-2-outlined" checked autocomplete="off" />
-							<label class="btn btn-outline-primary" for="btn-check-2-outlined">親子</label><br>
+<%-- 							<form:checkbox path="act_Tag" class="btn-check" id="btn-check-2-outlined" checked autocomplete="off" /> --%>
+<!-- 							<label class="btn btn-outline-primary" for="btn-check-2-outlined">親子</label><br> -->
 							
-							<form:checkbox path="act_Tag" class="btn-check" id="btn-check-2-outlined" checked autocomplete="off" />
-							<label class="btn btn-outline-primary" for="btn-check-2-outlined">寵物</label><br>
+<%-- 							<form:checkbox path="act_Tag" class="btn-check" id="btn-check-2-outlined" checked autocomplete="off" /> --%>
+<!-- 							<label class="btn btn-outline-primary" for="btn-check-2-outlined">寵物</label><br> -->
 							
-							<form:checkbox path="act_Tag" class="btn-check" id="btn-check-2-outlined" checked autocomplete="off" />
-							<label class="btn btn-outline-primary" for="btn-check-2-outlined">科技</label><br>
+<%-- 							<form:checkbox path="act_Tag" class="btn-check" id="btn-check-2-outlined" checked autocomplete="off" /> --%>
+<!-- 							<label class="btn btn-outline-primary" for="btn-check-2-outlined">科技</label><br> -->
 							
-							<form:checkbox path="act_Tag" class="btn-check" id="btn-check-2-outlined" checked autocomplete="off" />
-							<label class="btn btn-outline-primary" for="btn-check-2-outlined">商業</label><br>
+<%-- 							<form:checkbox path="act_Tag" class="btn-check" id="btn-check-2-outlined" checked autocomplete="off" /> --%>
+<!-- 							<label class="btn btn-outline-primary" for="btn-check-2-outlined">商業</label><br> -->
 							
-							<form:checkbox path="act_Tag" class="btn-check" id="btn-check-2-outlined" checked autocomplete="off" />
-							<label class="btn btn-outline-primary" for="btn-check-2-outlined">創業</label><br>
+<%-- 							<form:checkbox path="act_Tag" class="btn-check" id="btn-check-2-outlined" checked autocomplete="off" /> --%>
+<!-- 							<label class="btn btn-outline-primary" for="btn-check-2-outlined">創業</label><br> -->
 							
-							<form:checkbox path="act_Tag" class="btn-check" id="btn-check-2-outlined" checked autocomplete="off" />
-							<label class="btn btn-outline-primary" for="btn-check-2-outlined">投資</label><br>
+<%-- 							<form:checkbox path="act_Tag" class="btn-check" id="btn-check-2-outlined" checked autocomplete="off" /> --%>
+<!-- 							<label class="btn btn-outline-primary" for="btn-check-2-outlined">投資</label><br> -->
 							
-							<form:checkbox path="act_Tag" class="btn-check" id="btn-check-2-outlined" checked autocomplete="off" />
-							<label class="btn btn-outline-primary" for="btn-check-2-outlined">設計</label><br>
+<%-- 							<form:checkbox path="act_Tag" class="btn-check" id="btn-check-2-outlined" checked autocomplete="off" /> --%>
+<!-- 							<label class="btn btn-outline-primary" for="btn-check-2-outlined">設計</label><br> -->
 							
-							<form:checkbox path="act_Tag" class="btn-check" id="btn-check-2-outlined" checked autocomplete="off" />
-							<label class="btn btn-outline-primary" for="btn-check-2-outlined">藝文</label><br>
+<%-- 							<form:checkbox path="act_Tag" class="btn-check" id="btn-check-2-outlined" checked autocomplete="off" /> --%>
+<!-- 							<label class="btn btn-outline-primary" for="btn-check-2-outlined">藝文</label><br> -->
 							
-							<form:checkbox path="act_Tag" class="btn-check" id="btn-check-2-outlined" checked autocomplete="off" />
-							<label class="btn btn-outline-primary" for="btn-check-2-outlined">手作</label><br>
+<%-- 							<form:checkbox path="act_Tag" class="btn-check" id="btn-check-2-outlined" checked autocomplete="off" /> --%>
+<!-- 							<label class="btn btn-outline-primary" for="btn-check-2-outlined">手作</label><br> -->
 							
-							<form:checkbox path="act_Tag" class="btn-check" id="btn-check-2-outlined" checked autocomplete="off" />
-							<label class="btn btn-outline-primary" for="btn-check-2-outlined">美食</label><br>
+<%-- 							<form:checkbox path="act_Tag" class="btn-check" id="btn-check-2-outlined" checked autocomplete="off" /> --%>
+<!-- 							<label class="btn btn-outline-primary" for="btn-check-2-outlined">美食</label><br> -->
 							
-							<form:checkbox path="act_Tag" class="btn-check" id="btn-check-2-outlined" checked autocomplete="off" />
-							<label class="btn btn-outline-primary" for="btn-check-2-outlined">攝影</label><br>
+<%-- 							<form:checkbox path="act_Tag" class="btn-check" id="btn-check-2-outlined" checked autocomplete="off" /> --%>
+<!-- 							<label class="btn btn-outline-primary" for="btn-check-2-outlined">攝影</label><br> -->
 							
-							<form:checkbox path="act_Tag" class="btn-check" id="btn-check-2-outlined" checked autocomplete="off" />
-							<label class="btn btn-outline-primary" for="btn-check-2-outlined">遊戲</label><br>
+<%-- 							<form:checkbox path="act_Tag" class="btn-check" id="btn-check-2-outlined" checked autocomplete="off" /> --%>
+<!-- 							<label class="btn btn-outline-primary" for="btn-check-2-outlined">遊戲</label><br> -->
 							
-							<form:checkbox path="act_Tag" class="btn-check" id="btn-check-2-outlined" checked autocomplete="off" />
-							<label class="btn btn-outline-primary" for="btn-check-2-outlined">運動</label><br>
+<%-- 							<form:checkbox path="act_Tag" class="btn-check" id="btn-check-2-outlined" checked autocomplete="off" /> --%>
+<!-- 							<label class="btn btn-outline-primary" for="btn-check-2-outlined">運動</label><br> -->
 							
-							<form:checkbox path="act_Tag" class="btn-check" id="btn-check-2-outlined" checked autocomplete="off" />
-							<label class="btn btn-outline-primary" for="btn-check-2-outlined">健康</label><br>
+<%-- 							<form:checkbox path="act_Tag" class="btn-check" id="btn-check-2-outlined" checked autocomplete="off" /> --%>
+<!-- 							<label class="btn btn-outline-primary" for="btn-check-2-outlined">健康</label><br> -->
 							
-							<form:checkbox path="act_Tag" class="btn-check" id="btn-check-2-outlined" checked autocomplete="off" />
-							<label class="btn btn-outline-primary" for="btn-check-2-outlined">音樂</label><br>
+<%-- 							<form:checkbox path="act_Tag" class="btn-check" id="btn-check-2-outlined" checked autocomplete="off" /> --%>
+<!-- 							<label class="btn btn-outline-primary" for="btn-check-2-outlined">音樂</label><br> -->
 							
-							<form:checkbox path="act_Tag" class="btn-check" id="btn-check-2-outlined" checked autocomplete="off" />
-							<label class="btn btn-outline-primary" for="btn-check-2-outlined">電影</label><br>
+<%-- 							<form:checkbox path="act_Tag" class="btn-check" id="btn-check-2-outlined" checked autocomplete="off" /> --%>
+<!-- 							<label class="btn btn-outline-primary" for="btn-check-2-outlined">電影</label><br> -->
 							
-							<form:checkbox path="act_Tag" class="btn-check" id="btn-check-2-outlined" checked autocomplete="off" />
-							<label class="btn btn-outline-primary" for="btn-check-2-outlined">娛樂</label><br>
+<%-- 							<form:checkbox path="act_Tag" class="btn-check" id="btn-check-2-outlined" checked autocomplete="off" /> --%>
+<!-- 							<label class="btn btn-outline-primary" for="btn-check-2-outlined">娛樂</label><br> -->
 							
-							<form:checkbox path="act_Tag" class="btn-check" id="btn-check-2-outlined" checked autocomplete="off" />
-							<label class="btn btn-outline-primary" for="btn-check-2-outlined">時尚</label><br>
+<%-- 							<form:checkbox path="act_Tag" class="btn-check" id="btn-check-2-outlined" checked autocomplete="off" /> --%>
+<!-- 							<label class="btn btn-outline-primary" for="btn-check-2-outlined">時尚</label><br> -->
 							
-							<form:checkbox path="act_Tag" class="btn-check" id="btn-check-2-outlined" checked autocomplete="off" />
-							<label class="btn btn-outline-primary" for="btn-check-2-outlined">公益</label><br>
-						    </div>
-						    </div>						    
+<%-- 							<form:checkbox path="act_Tag" class="btn-check" id="btn-check-2-outlined" checked autocomplete="off" /> --%>
+<!-- 							<label class="btn btn-outline-primary" for="btn-check-2-outlined">公益</label><br> -->
+<!-- 						    </div> -->
+<!-- 						    </div>						     -->
 						    						    
 						    
 						  <div class="form-row">

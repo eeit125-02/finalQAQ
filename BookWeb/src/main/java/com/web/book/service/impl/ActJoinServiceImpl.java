@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -52,5 +53,5 @@ public class ActJoinServiceImpl implements ActJoinService {
 	public int deleteActJoin(Integer join_ID) {
 		return actjoinDao.deleteActJoin(join_ID);
 	}
-
+	
 }
