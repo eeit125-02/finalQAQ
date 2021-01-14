@@ -20,6 +20,10 @@
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
 	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
 	crossorigin="anonymous">
+<link rel="stylesheet"
+	href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
+	integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU"
+	crossorigin="anonymous">
 <style>
 .bd-placeholder-img {
 	font-size: 1. 125rem;
@@ -32,7 +36,6 @@
 	}
 }
 </style>
-
 <script>
 	$(document).ready(function() {
 		$("#bookWebheader").load("//localhost:8080/BookWeb/header");
@@ -42,78 +45,82 @@
 <title>Insert title here</title>
 </head>
 <body>
-
 	<!-- header -->
 	<header class="container blog-header py-3" id="bookWebheader"></header>
 	<!-- header -->
-
 	<!-- body -->
-	<div class="container media">
-		<h1>請從藏書庫中搜尋書名或者按此<a href="<c:url value='addMyBookA'/>">新增</a>一本書</h1>
-	</div>
-	<br>
-	<div class="container media">
-
-
-		<form action="<c:url value='/searchBookName'/>" method="post">
-			<div>
-				<input class="search-bar" type="text" name="searchbk" id="search"
-					placeholder="輸入名稱">
-				<button class="search-btn">搜尋</button>
-
+	<!-- 	我是測試線 -->
+	<!-- 	我是測試線 -->
+	<div class="container">
+<%-- 		<form action="<c:url value='/searchBookName'/>" method="post"> --%>
+			<div class="row">
+				<div class="col-lg-4">
+					<h2>請搜尋書名來新增!!!</h2>
+				</div>
+				<div class="input-group col-lg-5">
+					<input type="text" class="form-control" name="searchbk" id="bkName"
+						placeholder="請輸入書名"> <span class="input-group-btn">
+						<button type="button" class="btn btn-outline-secondary" onclick="searchBookName()">
+							<img alt="圖勒?" src='<c:url value="/image/qaqsearch.png" />'
+								width="20px" height="20px">
+						</button>
+					</span>
+				</div>
 			</div>
-		</form>
+<!-- 		</form> -->
 	</div>
-	<br>
-	<div class="container media">
-		<%
-			if (request.getParameter("searchbk") != null) {
-		%>
-		<p>
-			<%!List<BookStoreBean> list;%>
-			<%!BookStoreBean data;%>
-			<%
-				data = new BookStoreBean();
-			list = (List) request.getAttribute("bookName");
-			%>
-		
-		<form action="<c:url value='/addBook'/>" method="post">
-			<c:forEach items="${bookName}" var="v">
-			<table border="1" width="100%">
-				<tr>
-					<th width="70">編號</th>
-					<th width="320">書名</th>
-					<th width="60">作者</th>
-					<th width="60">出版社</th>
-					<th width="40">二手價</th>
-					<th width="110">數量</th>
-					<th width="110">&nbsp;</th>
-				</tr>
-				<tr height='16'>
-					<td>${v.book.bk_ID}</td>
-					<td>${v.book.bk_Name}</td>
-					<td>${v.book.bk_Author}</td>
-					<td>${v.book.bk_Publish}</td>
-					<td><INPUT TYPE="TEXT" NAME="${v.book.bk_ID}price"></td>
-					<td><INPUT TYPE="TEXT" NAME="${v.book.bk_ID}qty"></td>
-					<td><button type="submit" value="${v.book.bk_ID}"
-							name="setbk">刊登</button></td>
-				</tr>
-			</table>
-			</c:forEach>
-		</form>
-		<%
-			}
-		%>
-
-
-
+	<div class="container" >
+	<div class="row" id="qaqResult">
+	</div>
+	</div>		
 		<!-- body -->
-	</div>
-
 	<!-- footer -->
 	<footer class="container py-5" id="bookWebFooter"></footer>
 	<!-- footer -->
-
+	<script type="text/javascript">
+	
+	function searchBookName() {
+		$.ajax({
+			async : false,
+			type : 'GET',
+			data : {qaqBookName : $('#bkName').val()} ,
+			url : "Transation/qaqBookName",
+			dataType : "json",
+			contentType : "application/json;charset=utf-8",
+			error : function() {
+				alert("你做錯了喔!!!")
+			},
+			success : function(data) {
+				console.log(data);
+				var inserData = "";
+				for(var i = 0; i < data.length; i++){
+					inserData += "<div class=\"card col-sm-3\""
+					+ " style=\"margin: 20px 40px; width: 500px; padding: 15px\">"
+					+ "<form action=\"<c:url value='/addBook'/>\" method=\"post\">"
+					+ "<input type=\"hidden\" name=\"qaqBkID\" value=\""+data[i].bk_ID+"\">"
+					+ "<img src=\"<c:url value='" + data[i].bk_Pic + "' />\""
+					+ " class=\"card-img-top\" alt=\"...\""
+					+ " style=\"height: 18rem; width: 250px;\">"
+					+ "<div class=\"card-body\">"
+					+ "<span class=\"h5\"> " + data[i].bk_Name + "</span> <br> <span"
+					+ " class=\"card-text\">作者: " + data[i].bk_Author + "</span> <br>"
+					+ "<span class=\"card-text\">出版社: " + data[i].bk_Publish + "</span> <br>"
+					+ "<span class=\"card-text\">出版日: " + data[i].bk_Date + "</span> <br>"
+					+ "</div>"
+					+ "<div class=\"form-group\">"
+					+ "數量<input type=\"number\" class=\"form-control\" name=\"qtyNew\">"
+					+ "價格<input type=\"number\" class=\"form-control\" name=\"priceNew\"><br>"
+					+ "<button type=\"submit\" class=\"btn btn-outline-primary\">刊登</button>"
+					+ "</div>"
+					+ "</form>"
+					+ "</div>"
+				}
+				$('#qaqResult').html(inserData);
+			}
+				
+		})
+	}
+	
+	</script>
 </body>
 </html>

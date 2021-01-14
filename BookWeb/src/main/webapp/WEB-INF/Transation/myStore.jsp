@@ -54,46 +54,69 @@
 		</form>
 	</div>
 	<br>
-	<div class="container media">
-		<form action="<c:url value='/updateOrDelete'/>" method="post">
-			<div class="row">
-				<div class="col-lg-4">書名</div>
-				<div class="col-lg-2">作者</div>
-				<div class="col-lg-1">出版社</div>
-				<div class="col-lg-1">出版日</div>
-				<div class="col-lg-1">二手價</div>
-				<div class="col-lg-1">數量</div>
-				<div class="col-lg-1"></div>
-				<div class="col-lg-1"></div>
-			</div>
-			<hr>
-				<c:forEach var="table" items="${myBookList}">
-			<div class="row">
-					<div class="col-lg-4">${table.book.bk_Name}</div>
-					<div class="col-lg-2">${table.book.bk_Author}</div>
-					<div class="col-lg-1">${table.book.bk_Publish}</div>
-					<div class="col-lg-1">${table.book.bk_Date}</div>
-					<div class="col-lg-1">${table.bs_Price}</div>
-					<div class="col-lg-1">${table.bs_Num}</div>
-					<div class="col-lg-1">
-						<button type="submit" value="${table.bks_ID}" name="waitupbk" class="btn btn-outline-info">修改</button>
+	<div class="container">
+		<c:choose>
+			<c:when test="${not empty myBookList}">
+				<form action="<c:url value='/updateOrDelete'/>" method="post">
+					<div class="row">
+						<div class="col-lg-2">上架時間</div>
+						<div class="col-lg-2">書名</div>
+						<div class="col-lg-1">作者</div>
+						<div class="col-lg-1">出版社</div>
+						<div class="col-lg-2">出版日</div>
+						<div class="col-lg-1">二手價</div>
+						<div class="col-lg-1">數量</div>
+						<div class="col-lg-2"></div>
 					</div>
-					<div class="col-lg-1">
-						<button type="submit" value="${table.bks_ID}" name="deletebk" class="btn btn-outline-info">刪除</button>
-					</div>
-			</div>
 					<hr>
-				</c:forEach>
-		</form>
-
-		<%-- <input type="hidden" name="BK_ID" value="${table.bks_ID}"/> --%>
-
+					<c:forEach var="v" items="${myBookList}">
+						<div class="row">
+							<div class="col-lg-2">${v.bs_Date}</div>
+							<div class="col-lg-2">${v.book.bk_Name}</div>
+							<div class="col-lg-1">${v.book.bk_Author}</div>
+							<div class="col-lg-1">${v.book.bk_Publish}</div>
+							<div class="col-lg-2">${v.book.bk_Date}</div>
+							<div class="col-lg-1">${v.bs_Price}</div>
+							<div class="col-lg-1">${v.bs_Num}</div>
+							<div class="col-lg-2">
+								<button type="submit" value="${v.bks_ID}" name="waitupbk"
+									class="btn btn-outline-info" onclick="update(${v.bks_ID})">修改</button>
+								<button type="submit" value="${v.bks_ID}" name="deletebk"
+									class="btn btn-outline-info" onclick="delete(${v.bks_ID})">刪除</button>
+							</div>
+						</div>
+						<hr>
+					</c:forEach>
+				</form>
+			</c:when>
+			<c:otherwise>			
+					<h1>您現在並無任何上架商品。</h1>
+			</c:otherwise>
+		</c:choose>
 		<!-- body -->
 	</div>
 
 	<!-- footer -->
 	<footer class="container py-5" id="bookWebFooter"></footer>
 	<!-- footer -->
+<script type="text/javascript">
 
+// function dalete(bks_ID) {
+// 	$.ajax({
+// 		async : false,
+// 		type : 'POST',
+// 		url : "http://localhost:8080/BookWeb/Transation/tryUpdateDelete",
+// 		dataType : "json",
+// 		contentType : "application/json;charset=utf-8",
+// 		error : function(){
+// 			alert("你寫錯囉");
+// 		}
+// 		success : function(data) {
+			
+// 		}
+// 	})
+// }
+
+</script>
 </body>
 </html>
