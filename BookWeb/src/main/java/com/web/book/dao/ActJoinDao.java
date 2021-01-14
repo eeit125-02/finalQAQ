@@ -2,6 +2,8 @@ package com.web.book.dao;
 
 import java.util.List;
 
+import org.hibernate.query.Query;
+
 import com.web.book.model.ActJoinBean;
 
 public interface ActJoinDao {
@@ -26,6 +28,7 @@ public interface ActJoinDao {
 	
 	//刪除活動
 	int deleteActJoin(Integer join_ID);
+
 
 
 }

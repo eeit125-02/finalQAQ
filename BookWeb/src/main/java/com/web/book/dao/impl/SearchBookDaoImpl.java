@@ -17,6 +17,7 @@ import com.web.book.model.BookBean;
 import com.web.book.model.BookCollectBean;
 import com.web.book.model.BookTypeBean;
 import com.web.book.model.MemberBean;
+import com.web.book.model.SearchTypeBean;
 
 import net.bytebuddy.asm.Advice.Return;
 
@@ -141,6 +142,16 @@ maxpage=query.getResultList().size();
 		Query<BookBean> query = session.createQuery(hql);
 		result = query.setParameter("bkid", id).getSingleResult();
 		return result;
+	}
+	
+	// 取得全部類型
+	@Override
+	@SuppressWarnings("unchecked")
+	public List<SearchTypeBean> getAllBookType() {
+		String hql = "FROM SearchTypeBean";
+		Session session = factory.getCurrentSession();
+		Query<SearchTypeBean> query = session.createQuery(hql);
+		return query.getResultList();
 	}
 
 	// 取得單一本書的類型

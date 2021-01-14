@@ -5,6 +5,7 @@ import java.util.List;
 import com.web.book.model.BookBean;
 import com.web.book.model.BookCollectBean;
 import com.web.book.model.BookTypeBean;
+import com.web.book.model.SearchTypeBean;
 
 
 public interface SearchBookDAO {
@@ -26,6 +27,9 @@ public interface SearchBookDAO {
 
 	// 會員收藏清單
 	List<BookCollectBean> getCollect(int MB_ID);
+
+	//取得全部類型
+	List<SearchTypeBean> getAllBookType();
 
 	// 刪除收藏項目
 	boolean deletebc(int bcid);
@@ -49,5 +53,6 @@ public interface SearchBookDAO {
 	int getResultPage();
 	//取得總筆數
 	int getResultNumber();
+	
 
 }

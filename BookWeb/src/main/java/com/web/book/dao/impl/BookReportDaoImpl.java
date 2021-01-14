@@ -13,6 +13,7 @@ import com.web.book.dao.BookReportDao;
 import com.web.book.model.BookBean;
 import com.web.book.model.BookReportBean;
 import com.web.book.model.BookReportCollectBean;
+import com.web.book.model.BookReportMessageBean;
 import com.web.book.model.MemberBean;
 
 @Repository
@@ -49,7 +50,7 @@ public class BookReportDaoImpl implements BookReportDao {
 	public BookReportBean getBookReport(Integer br_ID) {
 		
 		Session session = fatory.getCurrentSession();
-		
+		session.get(BookReportBean.class, br_ID).setBr_ClickNumber(session.get(BookReportBean.class, br_ID).getBr_ClickNumber() + 1);
 		return session.get(BookReportBean.class, br_ID);
 	}
 
@@ -79,7 +80,7 @@ public class BookReportDaoImpl implements BookReportDao {
 		BookBean book = session.load(BookBean.class, bk_ID);
 		Date date =  new Date();
 		BookReportBean bookReport = new BookReportBean(null, br_Name, br_Score,
-														br_Content, date, null, null, book, member);
+														br_Content, date, 0, 0, book, member);
 		session.save(bookReport);
 		
 	}
@@ -181,7 +182,7 @@ public class BookReportDaoImpl implements BookReportDao {
 		Date date =  new Date();
 		BookReportCollectBean collect = new BookReportCollectBean(null, bookReport, member, date);
 		session.save(collect);
-		
+		session.get(BookReportBean.class, br_ID).setBr_CollectionNumber(session.get(BookReportBean.class, br_ID).getBr_CollectionNumber() + 1);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -200,7 +201,41 @@ public class BookReportDaoImpl implements BookReportDao {
 		
 		Session session = fatory.getCurrentSession();
 		session.delete(session.load(BookReportCollectBean.class, rcId));
+		Integer brId = session.load(BookReportCollectBean.class, rcId).getBookReport().getBr_ID();
+		session.get(BookReportBean.class, brId).setBr_CollectionNumber(session.get(BookReportBean.class, brId).getBr_CollectionNumber() - 1);
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<BookReportMessageBean> getBookReportMessageList(Integer brId) {
+		Session session = fatory.getCurrentSession();
+		String hql = "From BookReportMessage bm where bm.bookReport = :bookReport";
+		Query<BookReportMessageBean> query = session.createQuery(hql);
+		return query.setParameter("bookReport", session.get(BookReportBean.class, brId)).getResultList();
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<BookReportMessageBean> getMemberBookReportMessageList(Integer mbId) {
+		Session session = fatory.getCurrentSession();
+		String hql = "From BookReportMessage bm where bm.member = :member";
+		Query<BookReportMessageBean> query = session.createQuery(hql);
 		
+		return query.setParameter("member", session.get(MemberBean.class, mbId)).getResultList();
+	}
+
+	@Override
+	public void addReportMessage(Integer brId, Integer mbId, String content) {
+		
+		Session session = fatory.getCurrentSession();
+		BookReportMessageBean bookReportMessage = new BookReportMessageBean(null, new Date(), content, session.get(BookReportBean.class, brId), session.get(MemberBean.class, mbId));
+		session.save(bookReportMessage);
+	}
+
+	@Override
+	public void deletReportMessage(Integer bmId) {
+		Session session = fatory.getCurrentSession();
+		session.delete(session.get(BookReportMessageBean.class, bmId));
 	}
 	
 	

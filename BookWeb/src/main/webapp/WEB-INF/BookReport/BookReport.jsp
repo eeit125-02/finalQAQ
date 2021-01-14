@@ -39,7 +39,7 @@
 	<div class="container">
 		<div class="media">
 			<img id="bkPic" src="" class="w-25 p-2" alt="...">
-			<div class="media-body ml-4">
+			<div class="media-body ml-5">
 
 				<form  class="col-ml-4">
 					<br>
@@ -77,8 +77,26 @@
 		<br>
 		<p id="brContent"></p>
 		<br>
+		<div class="input-group mb-3">
+			<input type="text" class="form-control" id="command_input" placeholder="請輸入留言"> <input type="hidden" name="post_id" id="post_id" value="6">
+			<div class="input-group-append">
+				<button class="btn btn-outline-secondary" id="command_btn" type="button" data-toggle="modal" data-target="#checkLogin">留言</button>
+			</div>
+		</div>
+		<div id="show_command" >
+			<div style="background-color: #C4E1FF; margin: 10px; padding: 5px; border-radius: 10px;">
+				<div class="media">
+					<img src="https://cdn4.iconfinder.com/data/icons/logos-and-brands/512/181_Java_logo_logos-512.png" style="width: 50px; height: 50px; text-align:center; border-radius: 60%;"/>
+					<div class="media-body ml-2">
+						<p>JUN<br>
+							2021/01/13 20:36:10
+						</p>
+						<p>123</p>
+					</div>
+				</div>
+			</div>
+		</div>
 		
-		<button type="button" id="backButton" class="btn btn-outline-danger btn-mi float-right"> 返回 </button>
 		<br>
 	</div>
 

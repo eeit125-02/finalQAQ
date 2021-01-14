@@ -10,6 +10,7 @@ import com.web.book.dao.SearchBookDAO;
 import com.web.book.model.BookBean;
 import com.web.book.model.BookCollectBean;
 import com.web.book.model.BookTypeBean;
+import com.web.book.model.SearchTypeBean;
 import com.web.book.service.SearchService;
 
 	@Transactional
@@ -64,6 +65,12 @@ import com.web.book.service.SearchService;
 		@Override
 		public List<BookTypeBean> getBookType(int id) {
 			return searchBookDAO.getBookType(id);	
+		}
+
+		//取得全部類型
+		@Override
+		public List<SearchTypeBean> getAllBookType() {
+			return searchBookDAO.getAllBookType();	
 		}
 				
 		//確認是否收藏

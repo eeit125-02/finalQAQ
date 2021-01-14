@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import com.web.book.model.ActBean;
 import com.web.book.model.ActJoinBean;
 import com.web.book.model.MemberBean;
 import com.web.book.service.ActJoinService;
@@ -41,8 +42,7 @@ public class ActJoinController {
 
 	// 顯示所有報名紀錄
 	@GetMapping("/showJoins")
-	public String actjoinlist(
-			Model model			
+	public String actjoinlist(Model model			
 			) {
 		List<ActJoinBean> actjoinlist = actjoinService.getAllJoins();
 		model.addAttribute("alljoinacts", actjoinlist);
@@ -102,7 +102,9 @@ public class ActJoinController {
 //			,@RequestParam("mb_Account")String mb_Account
 			)throws Exception {
 		System.out.println("++++++++++++++");
-		ajb.setAct(actService.getAct(act_ID));
+		ActBean act = actService.getAct(act_ID);
+		act.setAct_Differentpax(ajb.getjoin_Pax()+act.getAct_Differentpax());
+		ajb.setAct(act);
 		ajb.getAct().getMember().setMb_Account(loginUser.getMb_Account());
 		model.addAttribute("ajb", ajb);
 		System.out.println(ajb);

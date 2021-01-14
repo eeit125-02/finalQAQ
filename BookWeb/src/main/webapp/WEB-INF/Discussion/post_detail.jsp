@@ -36,6 +36,7 @@
 		font-size: 3.5rem;
 	}
 }
+
 </style>
 
 <script>
@@ -78,43 +79,26 @@
 
 
 					<div class="input-group mb-3">
-						<input type="text" class="form-control" id="command_input"
-							placeholder="請輸入留言" /> <input type="hidden" name="post_id"
-							id="post_id" value="${PostBean.post_id}" />
+						<input type="text" class="form-control" id="command_input" placeholder="請輸入留言" /> 
+						<input type="hidden" name="post_id" id="post_id" value="${PostBean.post_id}" />
 						<div class="input-group-append">
-							<button class="btn btn-outline-secondary" id="command_btn"
-								type="button" data-toggle="modal"
-								data-target="#checkLogin">留言</button>
-						</div>
-					</div>
-
-					<!-- 彈出登入提示框 -->
-					<div class="modal fade" id="checkLogin" tabindex="-1"
-						role="dialog" aria-labelledby="exampleModalCenterTitle"
-						aria-hidden="true">
-						<div class="modal-dialog modal-dialog-centered" role="document">
-							<div class="modal-content">
-								<div class="modal-header">
-									<h5 class="modal-title" id="exampleModalCenterTitle">提醒</h5>
-									<button type="button" class="close" data-dismiss="modal"
-										aria-label="Close">
-										<span aria-hidden="true">&times;</span>
-									</button>
-								</div>
-								<div class="modal-body">請先登入會員</div>
-							</div>
+							<button class="btn btn-outline-secondary" id="command_btn" value="${PostBean.post_id}"
+								type="button" >
+								留言
+							</button>
 						</div>
 					</div>
 
 					<div id="show_command">
 						<c:forEach var="stored_command" items="${CommandBean}">
 
-							<div
-								style="background-color: #C4E1FF; margin: 10px; padding: 5px; border-radius: 10px;">
+							<div style="background-color: #C4E1FF; margin: 10px; padding: 5px; border-radius: 10px;">
 
 								<button class="btn btn-link btn-sm float-right" type="submit"
-									data-toggle="collapse"
-									data-target="#nested_command${stored_command.command_id}">回覆</button>
+									data-toggle="collapse" 
+									data-target="#nested_command${stored_command.command_id}">
+									回覆
+								</button>
 
 								<p>${stored_command.memberbean.mb_Name}<br>
 									${stored_command.command_time}
@@ -129,67 +113,74 @@
 								<div style="height: 40px">
 									<div class=" input-group" style="width: 80%; float: right;">
 
-										<input type="text" class="form-control" id="nested_command_input"
-											placeholder="回覆   ${stored_command.command_content}" /> 
-										<input type="hidden" name="command_id" id="command_id"
-											value="${stored_command.command_id}" /> 
+										<input type="text" class="form-control" id="nested_command_input${stored_command.command_id}"  placeholder="回覆   ${stored_command.command_content}" /> 
 										<span class="input-group-append">
-											<button class="btn btn-outline-secondary "
-												id="nested_command_btn" type="button" >回覆</button>
-												<!-- data-toggle="modal"
-								data-target="#checkLogin" -->
-								
+											<button class="btn btn-outline-secondary nestcommand " 
+												id="nested_command_btn${stored_command.command_id}" value="${stored_command.command_id}" >
+												回覆
+											</button>
 										</span>
 									</div>
 								</div>
-
-								<div id="show_nested_command"></div>
-								<!-- nested command template -->
-								<div
-									style="height: 125px; padding-top: 10px; margin-right: 10px">
-									<div
-										style="background-color: #B3D9D9; margin: 0px; padding: 5px; border-radius: 10px; width: 78%; float: right;">
-										<p>
-											nest command mb<br> nest command time
-										</p>
-										<p>nest command content</p>
-									</div>
-								</div>
-								<!-- =============== -->
-
 							</div>
+							
+								<div id="show_nested_command${stored_command.command_id}"></div>
+								<c:forEach var="all_nested_command" items="${AllNestedCommand}">
+									
+									<c:set var="cid" value="${stored_command.command_id}" />
+								<c:set var="ncid" value="${all_nested_command.commandBean.command_id}" />
+								<c:if test="${cid==ncid}">
+									
+									<div style="height: 125px; padding-top: 10px; margin-right: 10px">'
+											<div style="background-color: #B3D9D9; margin: 0px; padding: 5px; border-radius: 10px; width: 78%; float: right;">
+													<p>${all_nested_command.memberbean.mb_Name}<br>${all_nested_command.nested_command_time}</p>
+													<p>${all_nested_command.nested_command_content}</p>
+											</div>
+									</div>
+									
+									</c:if>
+									
+								</c:forEach>
+							
 
 						</c:forEach>
 					</div>
 
 
 					<script>
-						$('#nested_command_btn').click(function(){
-							console.log($("#nested_command_input").val())
-							/* if (loginUser.mb_ID !== '') {
-								$('#nested_command_btn').removeAttr('data-toggle data-target')
+						$(document).on("click", '.nestcommand', function(){
+							
+							if (typeof ($.cookie('Member_ID')) != "undefined") {
 
-								if ($('#nested_command_input').val() == "") {
+								if ($(this).parent().prev().val() == "") {
 									swal({title : '請輸入文字'})
 
-								} else { */
+								} else {
 									$.ajax({
 										url : '<c:url value="/Discussion/add_nested_command_ajax"/>',
 										type : 'POST',
-										data : {nested_command : $("#nested_command_input").val(),
-												command_id : $("#command_id").val()},
-										dataType : "json"
-									
-								}
-						}}})
+										data : {nested_command : $(this).parent().prev().val(),
+													  command_id : $(this).val()},
+										dataType : "json",
+										success:function(new_ncb){
+											$('#show_nested_command'+new_ncb.cb_id).prepend(
+													'<div style="height: 125px; padding-top: 10px; margin-right: 10px">'
+													+ '<div style="background-color: #B3D9D9; margin: 0px; padding: 5px; border-radius: 10px; width: 78%; float: right;">'
+													+	'<p>' + new_ncb.mb_name+'<br>'+new_ncb.ncb_time+'</p>'
+													+	'<p>' + new_ncb.ncb_content+'</p>'
+													+'</div></div>'
+											)
+										}
+								})
+										$(this).parent().prev().val("");
+						}}else{
+							swal({title : '請先登入'})
+						}						 
+							})
 					
-					
-						$('#command_btn')
-								.click(
-										function() {
-											
-											if ('${loginUser.mb_ID}' !== '') {
-												$('#command_btn').removeAttr('data-toggle data-target')
+						$(document).on("click", '#command_btn', function(){
+							
+							if (typeof ($.cookie('Member_ID')) != "undefined") {
 
 												if ($('#command_input').val() == "") {
 													swal({title : '請輸入文字'})
@@ -219,12 +210,12 @@
 																							+ '<div class="collapse" id="nested_command'+new_cb.cb_id+'">'
 																							+ '<div style="height: 40px">'
 																							+ '<div class=" input-group" style="width: 80%; float: right;">'
-																							+ '<input type="text" class="form-control" id="command_input" placeholder="回覆   '+new_cb.cb_content+'" />'
-																							+ ' <input type="hidden" name="command_id" id="command_id" value="'+new_cb.cb_id+'" />'
+																							+ '<input type="text" class="form-control" id="command_input'+new_cb.cb_id+'" placeholder="回覆   '+new_cb.cb_content+'" />'
 																							+ ' <span class="input-group-append">'
-																							+ '<button class="btn btn-outline-secondary " id="nested_command_btn" type="button" data-toggle="modal"'
-																							+ 'data-target="#checkLogin">回覆</button>'
-																							+ '</span></div></div>');
+																							+ '<button class="btn btn-outline-secondary nestcommand" id="nested_command_btn'+new_cb.cb_id+'" value="'+new_cb.cb_id+'">'
+																							+ '回覆</button>'
+																							+ '</span></div></div></div>'
+																							+'<div id="show_nested_command'+new_cb.cb_id+'"></div>');
 																}
 															})
 													$('#command_input').val("");
@@ -232,15 +223,14 @@
 															"placeholder",
 															"請輸入留言");
 												}
+											}else{
+												swal({title : '請先登入'})
 											}
 										})
 					</script>
 
-
 				</div>
 				<br>
-
-
 
 			</div>
 
