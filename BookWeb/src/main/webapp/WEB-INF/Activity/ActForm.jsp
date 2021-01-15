@@ -156,9 +156,10 @@
 							<form:input type="text" path="act_Loc" class="form-control" placeholder="請輸入其餘地址"></form:input>
 							</div>					
                         
-<!--                         <div class="form-row"> -->
-<!--                         <div class="form-group input_fields_wrap"> -->
-<!-- 						    <label >活動標籤:</label> -->
+                        <div class="form-row">
+                        <div class="form-group input_fields_wrap">
+						    <label >活動標籤:</label>
+						    <form:checkboxes items="${TagList}" path="act_Tag"/>
 <%-- <%-- 						    <form:input path="act_Tag" type="text" name="mytext[]" class="form-control"></form:input> --%> --%>
 
 						    
@@ -221,8 +222,8 @@
 							
 <%-- 							<form:checkbox path="act_Tag" class="btn-check" id="btn-check-2-outlined" checked autocomplete="off" /> --%>
 <!-- 							<label class="btn btn-outline-primary" for="btn-check-2-outlined">公益</label><br> -->
-<!-- 						    </div> -->
-<!-- 						    </div>						     -->
+						    </div>
+						    </div>						    
 						    						    
 						    
 						  <div class="form-row">

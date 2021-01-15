@@ -33,9 +33,9 @@
 }
 
 td{
-width:100px;
-border:solid 1px;
-text-align:center;
+	width:100px;
+	border:solid 1px;
+	text-align:center;
 }
 </style>
 
@@ -87,15 +87,15 @@ text-align:center;
 						<%-- 			${act.ACT_Image} --%>
 						<tr>
 							<%-- 				<td><a href='/FindActServlet?key=${act.ACT_Name}'></a></td> --%>
-							<td>${ajb.act.member.mb_Account}</td>
+							<td>${ajb.member.mb_Account}</td>
 							<td>${ajb.act.act_Name}</td>
-							<td>${ajb.act.member.mb_Name}</td>
-							<td>${ajb.act.member.mb_Mail}</td>
-							<td>${ajb.act.member.mb_Tel}</td>
+							<td>${ajb.member.mb_Name}</td>
+							<td>${ajb.member.mb_Mail}</td>
+							<td>${ajb.member.mb_Tel}</td>
 							<td>${ajb.join_Pax}</td>
 							
 							<td><a href="<c:url value='/showJoinUpdateForm'/>?join_ID=${ajb.join_ID}">編輯</a>
-							<td><a href="<c:url value='deleteActJoin'/>?join_ID=${ajb.join_ID}">刪除</a>
+							<td><a href="<c:url value='/deleteJoin'/>?join_ID=${ajb.join_ID}&act_ID=${ajb.act.act_ID}">刪除</a>
 			
 						</tr>
 					</c:forEach>
@@ -104,7 +104,7 @@ text-align:center;
 				<%-- 				<c:out value="</table>" escapeXml='false'/> --%>
 				<%-- 			</c:if> --%>
 			</c:if>
-			<p />
+			<p/>
 <%-- 			<a href='${pageContext.request.contextPath}/ActHomepage'>回到活動管理</a> --%>
 			<a href='${pageContext.request.contextPath}/showActs'><button class="btn btn-outline-info">繼續探索活動</button></a>
 <!-- 			<button onclick="window.location.href='showCreateForm'">新增活動1</button> -->

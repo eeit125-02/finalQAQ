@@ -103,6 +103,11 @@ div {
 				<button type="submit" name="sell" class="btn btn-outline-secondary">我的賣場</button>
 				</div>
 				</form>	
+				<form name=a3 class=a3 action="<c:url value='/showJoinbyID' />" method="get">
+				<div>
+				<button type="submit" name="getjoinrecords" class="btn btn-outline-secondary">報名紀錄</button>
+				</div>
+				</form>
 				</div>
 	</fieldset>
 	<div id="change123" style="width:1500px;margin-left:10px ">
