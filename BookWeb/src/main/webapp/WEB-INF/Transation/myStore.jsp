@@ -48,47 +48,42 @@
 
 	<div class="container media">
 		<!-- body -->
-
-
-
 		<form action="<c:url value='/addMyBook'/>" method="post">
-			<button type="submit" name="">我要賣東西</button>
-			<br>
-		</form>
-		<form action="<c:url value='qaqTest' />" method="get">
-			<button type="submit" name="">返回</button>
+			<button type="submit" class="btn btn-outline-info">我要賣東西</button>
 			<br>
 		</form>
 	</div>
 	<br>
 	<div class="container media">
 		<form action="<c:url value='/updateOrDelete'/>" method="post">
-			<table border="2" width="100%">
-				<tr>
-					<th>編號</th>
-					<th>書名</th>
-					<th>作者</th>
-					<th>出版社</th>
-					<th>二手價</th>
-					<th>數量</th>
-					<th>&nbsp;</th>
-					<th>&nbsp;</th>
-				</tr>
+			<div class="row">
+				<div class="col-lg-4">書名</div>
+				<div class="col-lg-2">作者</div>
+				<div class="col-lg-1">出版社</div>
+				<div class="col-lg-1">出版日</div>
+				<div class="col-lg-1">二手價</div>
+				<div class="col-lg-1">數量</div>
+				<div class="col-lg-1"></div>
+				<div class="col-lg-1"></div>
+			</div>
+			<hr>
 				<c:forEach var="table" items="${myBookList}">
-					<tr>
-						<td><c:out value="${table.bks_ID}" /></td>
-						<td><c:out value="${table.book.bk_Name}" /></td>
-						<td><c:out value="${table.book.bk_Author}" /></td>
-						<td><c:out value="${table.book.bk_Publish}" /></td>
-						<td><c:out value="${table.bs_Price}" /></td>
-						<td><c:out value="${table.bs_Num}" /></td>
-						<td><button type="submit" value="${table.bks_ID}"
-								name="waitupbk">修改</button></td>
-						<td><button type="submit" value="${table.bks_ID}"
-								name="deletebk">刪除</button></td>
-					</tr>
+			<div class="row">
+					<div class="col-lg-4">${table.book.bk_Name}</div>
+					<div class="col-lg-2">${table.book.bk_Author}</div>
+					<div class="col-lg-1">${table.book.bk_Publish}</div>
+					<div class="col-lg-1">${table.book.bk_Date}</div>
+					<div class="col-lg-1">${table.bs_Price}</div>
+					<div class="col-lg-1">${table.bs_Num}</div>
+					<div class="col-lg-1">
+						<button type="submit" value="${table.bks_ID}" name="waitupbk" class="btn btn-outline-info">修改</button>
+					</div>
+					<div class="col-lg-1">
+						<button type="submit" value="${table.bks_ID}" name="deletebk" class="btn btn-outline-info">刪除</button>
+					</div>
+			</div>
+					<hr>
 				</c:forEach>
-			</table>
 		</form>
 
 		<%-- <input type="hidden" name="BK_ID" value="${table.bks_ID}"/> --%>

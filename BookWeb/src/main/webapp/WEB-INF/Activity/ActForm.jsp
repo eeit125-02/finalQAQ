@@ -9,13 +9,9 @@
 
 
 <link rel='stylesheet' href='${pageContext.request.contextPath}/css/style.css' />
-<script>
-	$(document).ready(function() {
-		$("#bookWebheader").load("//localhost:8080/BookWeb/header");
-		$("#bookWebFooter").load("//localhost:8080/BookWeb/footer");
 
-	});
-</script>
+<!-- CK EDITOR的東東 -->
+<script src="https://cdn.ckeditor.com/ckeditor5/24.0.0/classic/ckeditor.js"></script>
 
 
 
@@ -33,6 +29,13 @@
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
 	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
 	crossorigin="anonymous">
+<script>
+	$(document).ready(function() {
+		$("#bookWebheader").load("//localhost:8080/BookWeb/header");
+		$("#bookWebFooter").load("//localhost:8080/BookWeb/footer");
+
+	});
+</script>
 
 <style>
 .bd-placeholder-img {
@@ -51,55 +54,6 @@
 }
 
 
-/*  #container{ */
-/*             width:380px; */
-/*             margin:20px auto; */
-/*             padding:15px; */
-/*             background-color:#eee; */
-/*           border-radius: 15px; */
-/*         } */
-/*         /** 新增按钮 **/ */
-/*         #addVar{ */
-/*             margin:0 0 0 52px; */
-/*             padding:5px; */
-/*             display:inline-block; */
-/*             background-color:#3A9668; */
-/*             color:#f1f1f1; */
-/*             border:1px solid #005; */
-/*             border-radius: 4px; */
-/*         } */
-/*         /** 删除按钮 **/ */
-/*         .removeVar{ */
-/*             margin:auto; */
-/*             padding:5px; */
-/*             display:inline-block; */
-/*             background-color:	#4F9D9D; */
-/*             color:	#FFFFFF; */
-/*             border:1px solid 	#FFFFFF; */
-/*           border-radius: 4px; */
-/*         } */
- 
-/*         #addVar:hover, .removeVar:hover{ */
-/*             cursor: pointer; */
-/*         } */
- 
-/*         .alignRight{ */
-/*             text-align: right; */
-/*         } */
- 
-/*         input, textarea{ */
-/*             padding:5px; */
-/*             font-size: 16px; */
-/*         } */
-
-.add_field_button{
-
-
-
-
-}
-
-
 
 </style>
 
@@ -114,6 +68,7 @@
 
 	<!-- body -->
 	<div class="container">
+
 		<br>
 
 
@@ -132,32 +87,41 @@
 					<form>
 						<div class="form-row">
 							<div class="form-group col-md-6">
-								<label for="inputPassword4">活動名稱:</label>
+								<label >活動名稱:</label>
 								<form:input path="act_Name" class="form-control" placeholder="必填" />
 							</div>
 							<div class="form-group col-md-6">
-								<label for="inputPassword4">活動主題:</label>
-								<form:input path="act_Theme" class="form-control" placeholder="必填" />
+								<label >活動主題:</label>
+								<form:select path="act_Theme" class="form-control">
+                                <form:option value="NONE" label="請選擇" />
+                                <form:option value="書展" label="書展"/>
+                                <form:option value="讀書會" label="讀書會"/>
+                                <form:option value="簽書會" label="簽書會"/>
+                                <form:option value="講座/論壇" label="講座/論壇"/>
+                                <form:option value="公益活動"  label="公益活動"/>
+                                <form:option value="好書交換" label="好書交換"/>
+                                <form:option value="新書/好書討論會" label="新書/好書討論會"/>
+                                </form:select>					
 							</div>
 						</div>
 						<div class="form-row">
 							<div class="form-group col-md-6">
-								<label for="inputPassword4">活動嘉賓:</label>
+								<label >活動嘉賓:</label>
 								<form:input path="act_Guest" class="form-control" placeholder="" />
 							</div>
-							<div class="form-group col-md-6">
-								<label for="inputPassword4">活動圖片:</label> 
+							<div class="form-group col-md-6 custom-file">
+								<label >活動圖片:</label> 
 								<input name="file" type="file" class="form-control" />
 							</div>
 						</div>
 						
 						<div class="form-row">
 							<div class="form-group col-md-6">
-								<label for="inputPassword4">活動人數:</label>
+								<label >活動人數:</label>
 								<form:input path="act_Pax" class="form-control" placeholder="" />
 							</div>
 							<div class="form-group col-md-6">
-								<label for="inputPassword4">活動場所:</label>							
+								<label >活動場所:</label>							
 								<form:select path="act_Place" class="form-control">
                                 <form:option value="NONE" label="請選擇" />
                                 <form:option value="現場" label="現場"/>
@@ -166,7 +130,6 @@
 							</div>
 						</div>
 
-
 						<div class="form-row">
 							<div class="form-group col-md-6">
 								<label>活動日期:</label>
@@ -174,11 +137,10 @@
 							</div>
 
 							<div class="form-group col-md-6">
-								<label for="inputPassword4">活動時間:</label>
+								<label >活動時間:</label>
 								<form:input type="time" class="form-control" path="act_Time" />
 							</div>
 						</div>
-
 
 						<div class="form-row">
 						<div class="form-group col-md-6">
@@ -192,152 +154,108 @@
 						    </div>
 							<div class="form-group">
 							<form:input type="text" path="act_Loc" class="form-control" placeholder="請輸入其餘地址"></form:input>
-							</div>
-
-
-<!-- 						<div class="form-row"> -->
-<!-- 							<div class="form-group col-md-2"> -->
-<!-- 								<label for="inputZip">Zip</label>  -->
-<!-- 								<input type="text" class="form-control" id="inputZip"> -->
-<!-- 							</div> -->
-<!-- 							<div class="form-group col-md-4"> -->
-<!-- 								<label for="inputState">State</label> <select id="inputState" -->
-<!-- 									class="form-control"> -->
-<!-- 									<option selected>Choose...</option> -->
-<!-- 									<option>...</option> -->
-<!-- 								</select> -->
-<!-- 							</div> -->
-<!-- 							<div class="form-group col-md-6"> -->
-<!-- 								<label for="inputCity">City</label>  -->
-<!-- 								<input type="text" class="form-control" id="inputCity"> -->
-<!-- 							</div> -->
-<!-- 						</div> -->
-						
-					
+							</div>					
                         
-                        <div class="form-row">
-                        <div class="form-group col-md-2 input_fields_wrap">
-						    <label >活動標籤:</label>
-						    <form:input path="act_Tag" type="text" name="mytext[]" class="form-control"></form:input>
-						    </div>
-						  
-						  <div class="form-group col-md-4">
-						    <label >活動規則:</label>
-						    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-<%-- 						    <form:input type="textarea" path="act_Rule" class="form-control" placeholder="" /> --%>
-						  </div>
-						  
+<!--                         <div class="form-row"> -->
+<!--                         <div class="form-group input_fields_wrap"> -->
+<!-- 						    <label >活動標籤:</label> -->
+<%-- <%-- 						    <form:input path="act_Tag" type="text" name="mytext[]" class="form-control"></form:input> --%> --%>
+
+						    
+<%-- 						    <form:checkbox path="act_Tag" class="btn-check" id="btn-check-outlined" autocomplete="off" /> --%>
+<!-- 							<label class="btn btn-outline-primary" for="btn-check-outlined">學習</label><br> -->
+							
+<%-- 							<form:checkbox path="act_Tag" class="btn-check" id="btn-check-2-outlined" checked autocomplete="off" /> --%>
+<!-- 							<label class="btn btn-outline-primary" for="btn-check-2-outlined">親子</label><br> -->
+							
+<%-- 							<form:checkbox path="act_Tag" class="btn-check" id="btn-check-2-outlined" checked autocomplete="off" /> --%>
+<!-- 							<label class="btn btn-outline-primary" for="btn-check-2-outlined">寵物</label><br> -->
+							
+<%-- 							<form:checkbox path="act_Tag" class="btn-check" id="btn-check-2-outlined" checked autocomplete="off" /> --%>
+<!-- 							<label class="btn btn-outline-primary" for="btn-check-2-outlined">科技</label><br> -->
+							
+<%-- 							<form:checkbox path="act_Tag" class="btn-check" id="btn-check-2-outlined" checked autocomplete="off" /> --%>
+<!-- 							<label class="btn btn-outline-primary" for="btn-check-2-outlined">商業</label><br> -->
+							
+<%-- 							<form:checkbox path="act_Tag" class="btn-check" id="btn-check-2-outlined" checked autocomplete="off" /> --%>
+<!-- 							<label class="btn btn-outline-primary" for="btn-check-2-outlined">創業</label><br> -->
+							
+<%-- 							<form:checkbox path="act_Tag" class="btn-check" id="btn-check-2-outlined" checked autocomplete="off" /> --%>
+<!-- 							<label class="btn btn-outline-primary" for="btn-check-2-outlined">投資</label><br> -->
+							
+<%-- 							<form:checkbox path="act_Tag" class="btn-check" id="btn-check-2-outlined" checked autocomplete="off" /> --%>
+<!-- 							<label class="btn btn-outline-primary" for="btn-check-2-outlined">設計</label><br> -->
+							
+<%-- 							<form:checkbox path="act_Tag" class="btn-check" id="btn-check-2-outlined" checked autocomplete="off" /> --%>
+<!-- 							<label class="btn btn-outline-primary" for="btn-check-2-outlined">藝文</label><br> -->
+							
+<%-- 							<form:checkbox path="act_Tag" class="btn-check" id="btn-check-2-outlined" checked autocomplete="off" /> --%>
+<!-- 							<label class="btn btn-outline-primary" for="btn-check-2-outlined">手作</label><br> -->
+							
+<%-- 							<form:checkbox path="act_Tag" class="btn-check" id="btn-check-2-outlined" checked autocomplete="off" /> --%>
+<!-- 							<label class="btn btn-outline-primary" for="btn-check-2-outlined">美食</label><br> -->
+							
+<%-- 							<form:checkbox path="act_Tag" class="btn-check" id="btn-check-2-outlined" checked autocomplete="off" /> --%>
+<!-- 							<label class="btn btn-outline-primary" for="btn-check-2-outlined">攝影</label><br> -->
+							
+<%-- 							<form:checkbox path="act_Tag" class="btn-check" id="btn-check-2-outlined" checked autocomplete="off" /> --%>
+<!-- 							<label class="btn btn-outline-primary" for="btn-check-2-outlined">遊戲</label><br> -->
+							
+<%-- 							<form:checkbox path="act_Tag" class="btn-check" id="btn-check-2-outlined" checked autocomplete="off" /> --%>
+<!-- 							<label class="btn btn-outline-primary" for="btn-check-2-outlined">運動</label><br> -->
+							
+<%-- 							<form:checkbox path="act_Tag" class="btn-check" id="btn-check-2-outlined" checked autocomplete="off" /> --%>
+<!-- 							<label class="btn btn-outline-primary" for="btn-check-2-outlined">健康</label><br> -->
+							
+<%-- 							<form:checkbox path="act_Tag" class="btn-check" id="btn-check-2-outlined" checked autocomplete="off" /> --%>
+<!-- 							<label class="btn btn-outline-primary" for="btn-check-2-outlined">音樂</label><br> -->
+							
+<%-- 							<form:checkbox path="act_Tag" class="btn-check" id="btn-check-2-outlined" checked autocomplete="off" /> --%>
+<!-- 							<label class="btn btn-outline-primary" for="btn-check-2-outlined">電影</label><br> -->
+							
+<%-- 							<form:checkbox path="act_Tag" class="btn-check" id="btn-check-2-outlined" checked autocomplete="off" /> --%>
+<!-- 							<label class="btn btn-outline-primary" for="btn-check-2-outlined">娛樂</label><br> -->
+							
+<%-- 							<form:checkbox path="act_Tag" class="btn-check" id="btn-check-2-outlined" checked autocomplete="off" /> --%>
+<!-- 							<label class="btn btn-outline-primary" for="btn-check-2-outlined">時尚</label><br> -->
+							
+<%-- 							<form:checkbox path="act_Tag" class="btn-check" id="btn-check-2-outlined" checked autocomplete="off" /> --%>
+<!-- 							<label class="btn btn-outline-primary" for="btn-check-2-outlined">公益</label><br> -->
+<!-- 						    </div> -->
+<!-- 						    </div>						     -->
+						    						    
+						    
+						  <div class="form-row">
 						  <div class="form-group col-md-6">
+						    <label >活動摘要:</label>
+<!-- 						  CK EDITOR的東東 -->
+						    <form:textarea id="editor" path="act_Rule" rows = "20" cols = "30" />
+						  </div>
+						  
+						  <div class="form-group  col-md-6">
 						    <label >活動簡介:</label>
-						    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-<%-- 						    <form:input type="textarea" path="act_Intro" class="form-control" placeholder="" rows="10" cols="30" /> --%>
+<!-- 						  CK EDITOR的東東 -->
+						  <form:textarea id="editor1" path="act_Intro" rows = "20" cols = "30" />
 						  </div>
 						  </div>
-						  <button class="add_field_button btn btn-primary">添加標籤</button>
+<!-- 						  <button class="add_field_button btn btn-primary">添加標籤</button> -->
 						  
 						  
-						  
-<!-- 						  <div class="input_fields_wrap"> -->
-<!--                           <button class="add_field_button">Add More Fields</button> -->
-<!--                           <div><input type="text" name="mytext[]"></div> -->
-<!--                           </div> -->
-						
-<!-- 						 <div class="form-row"> -->
-<!-- 						 <div class="form-group col-md-6"> -->
-<!-- 						 <label>活動標籤:</label> -->
-<!-- 				         <div> -->
-<%-- 				          <form:input type="text" name="var1" id="var1" path="act_Tag" class="form-control" placeholder="標籤1"/><br> --%>
-<%-- 				          <form:input type="text" name="var2" id="var2" path="act_Tag" class="form-control" placeholder="標籤2"/> --%>
-<!-- 				          <span class="removeVar">删除</span> --> 
-<!-- 			             <p><span id="addVar">新增標籤</span></p> -->
-<!-- 				         </div> -->
-<!-- 			             </div> -->
-<!-- 			             </div> -->
-						
-						
 						<hr>
 						<button type="submit" class="btn btn-primary">提交</button>
 						<button type="reset" class="btn btn-primary">還原</button>
 					</form>
-
-
-					<!-- 					<div> -->
-					<!-- 						<label>會員帳號:</label> -->
-					<%-- 						<span>${mb_account}</span> --%>
-					<!-- 					</div> -->
-
-					<!-- 					<div> -->
-					<%-- 						<form:label path="act_Image">活動圖片:</form:label> --%>
-					<!-- 						<input name="file" type="file" /> -->
-					<!-- 					</div> -->
-
-					<!-- 					<div> -->
-					<%-- 						<form:label path="act_Name">活動名稱:</form:label> --%>
-					<%-- 						<form:input path="act_Name" /> --%>
-					<!-- 					</div> -->
-
-					<!-- 					<div> -->
-					<!-- 						<label>活動主題:</label> -->
-					<%-- 						<form:input path="act_Theme" /> --%>
-					<!-- 					</div> -->
-
-					<!-- 					<div> -->
-					<!-- 						<label>活動日期:</label>   -->
-					<!-- 						<input type="datetime-local" id="from" name="from" placeholder="開始時間">  -->
-					<!-- 						<label for="to">至</label> -->
-					<!-- 						<input type="datetime-local" id="to" name="to" placeholder="結束時間"> -->
-					<!-- 					</div> -->
-
-<!-- 					<div> -->
-<%-- 						<form:label path="act_Loc">活動地點:</form:label> --%>
-<%-- 						<form:select path="act_Loc" id="縣市1"></form:select> --%>
-<%-- 						<form:select id="鄉鎮市區1" path="act_Loc"></form:select> --%>
-<%-- 						<form:input path="act_Loc"></form:input> --%>
-
-<!-- 					</div> -->
-
-<!-- 					<div> -->
-<%-- 						<form:label path="act_Guest">活動嘉賓:</form:label> --%>
-<%-- 						<form:input path="act_Guest" /> --%>
-<!-- 					</div> -->
-
-<!-- 					<div> -->
-<%-- 						<form:label path="act_Pax">活動人數:</form:label> --%>
-<%-- 						<form:input path="act_Pax" /> --%>
-<!-- 					</div> -->
-
-<!-- 					<div> -->
-<%-- 						<form:label path="act_Tag">活動標籤:</form:label> --%>
-<%-- 						<form:input path="act_Tag" /> --%>
-<!-- 					</div> -->
-
-<!-- 					<div> -->
-<%-- 						<form:label path="act_Rule">活動規則:</form:label> --%>
-<%-- 						<form:input type="textarea" path="act_Rule" /> --%>
-<!-- 					</div> -->
-
-
-<!-- 					<div> -->
-<%-- 						<form:label path="act_Place">活動場所:</form:label> --%>
-<%-- 						<form:input path="act_Place" /> --%>
-<!-- 					</div> -->
-
-<!-- 					<div> -->
-<%-- 						<form:label path="act_Intro">活動簡介:</form:label> --%>
-<%-- 						<form:textarea path="act_Intro" rows="5" cols="30" /> --%>
-<!-- 					</div> -->
-				</fieldset>
-
-
-<!-- 				<input type='submit' value='提交' /> -->
-<!-- 				<input type='reset' value='還原' /> -->
-				<br>
-				<br>
-				<a href='${pageContext.request.contextPath}/ActHomepage'>回到活動管理</a>
+			  </fieldset>
+			  
 			</form:form>
 
 
+				<br>
+				<br>
+				<a href='${pageContext.request.contextPath}/showActs'>回到活動管理</a>
+
 		</div>
+
 		<!-- body -->
 
 		<!-- footer -->
@@ -365,9 +283,6 @@
 		});
 		
 		</script>
-
-
-
 
     
 		<script type="text/javascript">
@@ -430,7 +345,6 @@
 								'545埔里鎮', '546仁愛鄉', '551名間鄉', '552集集鎮',
 								'553水里鄉', '555魚池鄉', '556信義鄉', '557竹山鎮',
 								'558鹿谷鄉' ],
-						[ '南海島', '817東沙群島', '819南沙群島' ],
 						[ '屏東縣', '900屏東市', '901三地門', '902霧台鄉', '903瑪家鄉',
 								'904九如鄉', '905里港鄉', '906高樹鄉', '907鹽埔鄉',
 								'908長治鄉', '909麟洛鄉', '911竹田鄉', '912內埔鄉',
@@ -550,5 +464,27 @@
 				}
 			};
 		</script>
+		
+<!-- 		CK EDITOR的東東 -->
+<script>
+    ClassicEditor
+        .create( document.querySelector( '#editor' ) )
+        .catch( error => {
+            console.error( error );
+        } );
+</script>
+
+<script>
+    ClassicEditor
+        .create( document.querySelector( '#editor1' ) )
+        .catch( error => {
+            console.error( error );
+        } );
+</script>
+
+
+
+
+		
 </body>
 </html>

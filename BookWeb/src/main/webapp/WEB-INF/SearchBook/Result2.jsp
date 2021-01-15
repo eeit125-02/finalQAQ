@@ -18,6 +18,7 @@
 	src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
 	integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
 	crossorigin="anonymous"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
 	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
@@ -42,6 +43,9 @@
 }
 .collectindex {
 	float: right;
+}
+.bkname{
+white-space:pre-wrap;
 }
 </style>
 
@@ -84,7 +88,7 @@
 			<a class="btn btn-outline-dark" href="<c:url value='/addnewbook' />" role="button">新增書籍</a>			
 		</div>
 		<br> <br>
-
+<%-- <input type="hidden" name="apage" value="${page }"/> --%>
 
 <!--總筆數 -->
 		<div id="resultnumber"></div>
@@ -94,14 +98,27 @@
 		<div><h4>　　　　　　${searchresultzero}</h4></div>
 
 <!-- 搜尋結果清單 -->
+${b }------
 			<div class="booktypelist" id="booktypelist">	
 			</div>						
 			
 		<br>
+	<c:url value="/searchtype" var="gotopage">
+		<c:param name="name" value="${name}"></c:param>
+		<c:param name="author" value="${author}"></c:param>
+		<c:param name="publish" value="${publish}"></c:param>		
+<%-- 		<c:param name="b" value="${b}"></c:param>		 --%>
+<%-- 		<c:param name="apage" value="${apage }"></c:param>	 --%>
+	</c:url>
+
+<ul class="pagination justify-content-center mb-4" id="pageButton">
+</ul>	
+		
 		<hr>
 		</div>
 
 	<script >
+
 
 //點擊加入收藏
 		function collect(i) {
@@ -116,10 +133,12 @@
 				contentType : "application/json;charset=utf-8",
 				success : function(data) {
 					if (data) {
-						alert('成功加入收藏 ');
-						$("#collect"+i).html(insertData2);
+// 						alert('成功加入收藏 ');
+						swal("收藏成功", "你已經把這本書加入收藏囉～","success")
+						loadCollectList(i);
 					}else {
-						alert('加入失敗，本書已在您的收藏清單 ');
+						swal("刪除成功", "你已經把這本書取消收藏囉～","info")
+						loadCollectList(i);
 					}
 				}
 			});
@@ -138,44 +157,90 @@
 				},
 				success : function(data) {
 					console.log("test");
+					console.log(data.totalpage);
+					console.log(data.nowpage);
+					
+					var innerHtml="";
+					if(data.totalpage != 0){
+						if(data.nowpage != 1){						
+							innerHtml +="<li class=\"page-item \"><a class=\"page-link\" href=\""+"${gotopage}"+"&apage="+1+"\">"+"第一頁"+"</a></li>"
+							innerHtml += "<li class=\"page-item\">"
+									  + " <a class=\"page-link\" aria-label=\"Previous\" href=\""+"${gotopage}"+"&apage="+(data.nowpage - 1)+"\">"
+									  + "<span aria-hidden=\"true\">&laquo;</span>"
+									  + "</a>"
+									  + "</li>"
+								innerHtml += "<li class=\"page-item \"><a class=\"page-link\" href=\""+"${gotopage}"+"&apage="+(data.nowpage - 1)+"\">"+ (data.nowpage - 1) +"</a></li>"
+										}
+											
+											    
+								innerHtml += "<li class=\"page-item active\"><a class=\"page-link\" href=\""+ "${gotopage}"+"&apage="+ data.nowpage +"\">"+ data.nowpage +"</a></li>"
+											
+						if(data.nowpage != data.totalpage){						
+								innerHtml += "<li class=\"page-item \"><a class=\"page-link\" href=\""+"${gotopage}"+"&apage="+(data.nowpage + 1)+"\">"+(data.nowpage + 1) +"</a></li>"
+// 								innerHtml += "<li class=\"page-item \"><a class=\"page-link\" href=\""+"${gotopage}"+"&apage="+(data.nowpage + 2)+"\">"+(data.nowpage + 2) +"</a></li>"
+								innerHtml += "<li class=\"page-item\"></li>"
+										  + "<a class=\"page-link\" aria-label=\"Next\" href=\""+"${gotopage}"+"&apage="+(data.nowpage + 1)+"\">"
+										  + "<span aria-hidden=\"true\">&raquo;</span>"
+										  + "</a>"
+										  + "</li>"
+								innerHtml +="<li class=\"page-item \"><a class=\"page-link\" href=\""+"${gotopage}"+"&apage="+data.totalpage+"\">"+"最後一頁"+"</a></li>"
+							}
+											
+							$('#pageButton').html(innerHtml)
+					
+					}
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
 					var insertData = "<div>";
-					for (let i = 0; i < data.length; i++) {
+					for (let i = 0; i < data.finaldata.length; i++) {
+						
+						console.log(data);
+						
 						insertData = "<div class=\"row\">"
 // 						insertData += "<div class=\"row\">"
 						
 							+"<div class=\"col-sm-2\">"
 							+"<img class=\"itemcov\" alt=\"\" src=\""
-							+data[i].bk_Pic
+							+data.finaldata[i].bk_Pic
 							+"\" width=\"150\">"
 							+"</div>"
 							
 							+"<div class=\"col-sm-10\">"
 							+"<h3>"
 							+"<form name=a1 action=\"<c:url value='/bookpage' />\" method=\"get\">"
-							+"<button type=\"submit\" name=\"page\"class=\"btn btn-link btn-lg\" value=\""
-							+data[i].bk_ID+"\">"+data[i].bk_Name+"</button></form>"
+							+"<button type=\"submit\" name=\"page\"class=\"btn btn-link btn-lg bkname\" value=\""
+							+data.finaldata[i].bk_ID+"\">"+data.finaldata[i].bk_Name+"</button></form>"
 							+"</h3>"
-							+"｜ 作者："+data[i].bk_Author
-							+" ｜  出版社："+data[i].bk_Publish
-							+"｜  出版日期："+data[i].bk_Date
+							+"｜ 作者："+data.finaldata[i].bk_Author
+							+" ｜  出版社："+data.finaldata[i].bk_Publish
+							+"｜  出版日期："+data.finaldata[i].bk_Date
 							+"<br>"
 							+"<p class=\"ellipsis\"style=\"padding-top:15px\">"
-							+data[i].bk_Content
+							+data.finaldata[i].bk_Content
 							+"</p>"	
 							+"</div>"
 							
 							+"</div>"
 							
-							+"<div class=\"collect\" id=\"collect"+data[i].bk_ID+"\">"
+							+"<div class=\"collect\" id=\"collect"+data.finaldata[i].bk_ID+"\">"
 							+"</div>"
 							
 							+"<br>"
 							+"<hr>"
 					$("#booktypelist").append(insertData);	
-							loadCollectList(data[i].bk_ID);
+							loadCollectList(data.finaldata[i].bk_ID);
 					}
 
-						var insertData1 = "<h3>搜尋結果：（總共 "+data.length+" 筆）</h3>"
+						var insertData1 = "<h3>搜尋結果：（總共 "+${count}+" 筆）</h3>"
 					$("#resultnumber").html(insertData1);
 					}
 				});
@@ -195,6 +260,7 @@
 				contentType : "application/json;charset=utf-8",
 				success : function(data) {
 					console.log(data + "!!!!");
+					console.log(typeof(data));
 					if (data) {
 						var insertData2=
 							"<button id=\"gocollect\" type=\"submit\" name=\"collect\" onclick=\"collect("

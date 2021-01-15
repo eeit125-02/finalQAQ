@@ -13,7 +13,6 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="css/login.css">
 <title>Document</title>
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script
@@ -29,14 +28,6 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
 	crossorigin="anonymous">
 <style>
-/* @import url(https://fonts.googleapis.com/earlyaccess/cwtexyen.css); */
-/* body { */
-/* 	font-family: "cwTeXYen", sans-serif; */
-/* 	font-weight: 800; */
-/* 	line-height: 2; */
-/* 	font-size: 18px; */
-/* } */
-
 fieldset {
 	border-radius: 25px;
 	padding: 20px;
@@ -83,9 +74,6 @@ span {
 	font-size: 10px;
 }
 
-.space {
-	margin-bottom: 25px;
-}
 .bd-placeholder-img {
 	font-size: 1. 125rem;
 	text-anchor: middle;
@@ -97,7 +85,6 @@ span {
 	}
 }
 </style>
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script> 
 </head>
 <body>
 <!-- header -->
@@ -113,15 +100,11 @@ span {
 				<h3 id="mb_Account">${reg_member.mb_Account}</h3>
 			</div>
 			<div>
-				<label>密碼:</label>
-				<h3 id="mb_Password">${reg_member.mb_Password}</h3>
-			</div>
-			<div>
 				<label>姓名:</label>
 				<h3 id="mb_Name">${reg_member.mb_Name}</h3>
 			</div>
-			<br>
-			<div class="space">
+			
+			<div>
 				<label>性別:</label>
 				<h3 id="mb_Sex">${reg_member.mb_Sex}</h3>
 			</div>
@@ -129,30 +112,18 @@ span {
 				<label>生日:</label>
 				<h3 id="mb_Birthday">${reg_member.mb_Birthday}</h3>
 			</div>
-<!-- 			<br /> -->
-<!-- 			<div> -->
-<!-- 				<label>地址:</label> -->
-<%-- 				<h3 id="mb_Address">${reg_member.mb_Address}</h3> --%>
-<!-- 			</div> -->
-<!-- 			<br /> -->
-<!-- 			<div> -->
-<!-- 				<label>電話:</label> -->
-<%-- 				<h3 id="mb_Tel">${reg_member.mb_Tel}</h3> --%>
-<!-- 			</div> -->
-<!-- 			<br /> -->
 			<div>
 				<label>E-mail:</label>
 				<h3 id="mb_Mail">${reg_member.mb_Mail}</h3>
-			</div>
-			<br />
+			</div><br>
 <!-- 			<div> -->
 <!-- 				<label>喜好類型:</label><br /> -->
 <%-- 				<h3 id="mb_type">${reg_member.mb_type}</h3> --%>
 <!-- 			</div> -->
 			<div>
-				<button type="button" id="submit1" name="confirm">送出</button>
-				<button>
-					<a href="<c:url value="/toRegiste" />" />返回
+				<button type="button" id="submit1" name="confirm" class="btn btn-outline-secondary">送出</button>
+				<button class="btn btn-outline-secondary">
+					<a href="<c:url value="/toRegiste" />" style="color:gray"/>返回
 				</button>
 			</div>
 			<br>
@@ -165,12 +136,10 @@ span {
 	
 </body>
 <script>
-	$(document).ready(function() {
 		$('#submit1').click(function() {
 			window.alert('註冊成功');
-			$('form').eq(0).submit();
+			$('form').submit();
 		})
-	})
 	
 	$(document).ready(function() {
 		$("#bookWebheader").load("<c:url value='/header'/>");

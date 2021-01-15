@@ -109,21 +109,20 @@ form {
 				<legend>會員註冊</legend>
 				<div>
 					<label>帳號:</label> <input type="text" name="account" id="account"
-						value="" size="12"> <span id="idsp2"></span><br />
+						value="" size="12"> <span id="idsp2" style="color: red;"></span><br />
 					<p style="color: gray;">(1.不可空白 2.至少6個字且必須包含英文字母、數字)</p>
 				</div>
 				<div>
 					<label>密碼:</label> <input type="password" name="pwd" id="pwd"
-						value="" size="12"> <span id="idsp1"></span><br />
+						value="" size="12"> <span id="idsp1" style="color: red;"></span><br />
 					<p style="color: gray;">(1.不可空白，2.至少6個字且必須包含英文字母、數字)</p>
 				</div>
 				<div class="space">
 					<label>確認密碼:</label> <input type="password" name="pwd1" id="pwd1"
-						value="" size="12"> <span id="idsp9"></span><br />
+						value="" size="12"> <span id="idsp9" style="color: red;"></span><br />
 				</div>
 				<div>
-					<label>姓名:</label> <input type="text" id="name" name="name"
-						size="12" value="">
+					<label>姓名:</label> <input type="text" id="name1" name="name" size="12" value="">
 				</div>
 				<br>
 				<div class="space">
@@ -137,17 +136,15 @@ form {
 				<br />
 				<div>
 					<label>E-mail:</label> <input type="email" name="mail" id="mail"
-						> <span id="idsp7"></span><br />
+						> <span id="idsp7" style="color: red;"></span><br />
 				</div>
 				<br>
 				<div class="send">
-					<button type="button" id="send">送出</button>
-					<button type="reset">清除</button>
+					<button type="button" id="send" class="btn btn-outline-secondary">送出</button>
+					<button type="reset" class="btn btn-outline-secondary">清除</button>
 				</div>
 			</fieldset>
-	<input type="hidden" name="file"  value="https://firebasestorage.googleapis.com/v0/b/bookweb-50d11.appspot.com/o/member%2Fa123456?alt=media"/>
 		</form>
-
 	</div>
 	<!-- footer -->
 	<footer class="container py-5" id="bookWebFooter"></footer>
@@ -160,7 +157,7 @@ form {
 		let a1 = false;
 		let a2 = false;
 		let a3 = false;
-		
+		let a4 = false;
 		$('#account').blur(function() {
 			console.log("test");
 			var mb_Account = $('#account').val();
@@ -168,10 +165,12 @@ form {
 			let sp = document.getElementById("idsp2")
 			var rex1 = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]+$/
 			if (mb_Account == "") {
+					a1=false;
 				sp.innerHTML = "不可為空白"
 			} else if (rex1.test(mb_Account) && mb_Accountlen >= 6) {
 				sp.innerHTML = ""
 			} else {
+					a1=false;
 				sp.innerHTML = "格式錯誤"
 			}
 			let editURL = location.href + "/checkAccount/" + mb_Account;
@@ -183,10 +182,13 @@ form {
 				contentType : "application/json;charset=utf-8",
 				success : function(data) {
 					if (data) {
+						a1=false;
 						sp.innerHTML = "帳號已存在"
+							sp.style.color="red";
 					} else {
-						sp.innerHTML = "帳號可使用"
 						a1 = true;
+						sp.innerHTML = "帳號可使用"
+						sp.style.color="green";
 					}
 				}
 			});
@@ -204,10 +206,12 @@ form {
 				contentType : "application/json;charset=utf-8",
 				success : function(data) {
 					if (data) {
+						a4 =false;
 						sp.innerHTML = "信箱已註冊過"
 					} else {
+						a4 = true;
 						sp.innerHTML = "信箱可以使用"
-						a1 = true;
+						sp.style.color="green"
 					}
 				}
 			});
@@ -220,16 +224,21 @@ form {
 			let sp = document.getElementById("idsp1")
 			var rex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]+$/;
 			if (pwd.length >= 6 && rex.test(pwd)) {
-				sp.innerHTML = "正確"
 				a2 = true;
+				sp.innerHTML = "正確"
+				sp.style.color="green"
 			} else if (pwd == "") {
+					a2 = false;
 				sp.innerHTML = "密碼不可為空白"
 			} else if (pwd.length < 6) {
+					a2 = false;
 				sp.innerHTML = "密碼不足6碼"
 			} else if (pwd != rex.test(pwd)) {
+					a2 = false;
 				sp.innerHTML = "密碼須包含英文、數字及特殊符號"
 			} else {
 				sp.innerHTML = "錯誤"
+					a2 = false;
 			}
 		})
 
@@ -238,22 +247,34 @@ form {
 			let pwd1 = document.getElementById("pwd1").value
 			sp = document.getElementById("idsp9")
 			if (pwd == pwd1 && pwd1 != "") {
-				sp.innerHTML = "正確"
 				a3 = true;
+				sp.innerHTML = "正確"
+				sp.style.color="green"
 			} else {
+					a3 = false;
 				sp.innerHTML = "錯誤"
 			}
 		})		
 
-		$('#send').click(function() {
+		$('#send').click(function() {		
 			var mb_Account = $('#account').val();
 			var pwd = $('#pwd').val();
 			var b = $('#birthday').val();
 			var mail = $('#mail').val();
-			var name = $('#name').val();
-			if (name == "" || mail == "" || mb_Account == "" || pwd =="" || a1 != true || a2 != true || a3 != true || b == "") {
-				alert("未填寫正確");
+			var name = $('#name1').val();
+			console.log(name)
+			console.log(mail)
+			console.log(mb_Account)
+			console.log(pwd)
+			console.log(a1)
+			console.log(a2)
+			console.log(a3)
+			console.log(a4)
+			console.log(b)
+			if (name == "" || mail == "" || mb_Account == "" || pwd =="" || a1 != true || a2 != true || a3 != true || a4 != true || b == "") {
+				alert("有資料錯誤");
 			} else {
+				alert("請至信箱點擊連結後，才完成註冊。")
 				$('form').submit();
 			}
 		})

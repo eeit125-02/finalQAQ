@@ -47,6 +47,7 @@
 	<!-- header -->
 
 	<!-- body -->
+	<form></form>
 	<div style="text-align: center">
 		<h2>二手書圖</h2>
 	</div>
@@ -56,36 +57,41 @@
 			<div class="row">
 				<div class="col-lg-4">
 					<label for="url"></label> <img alt="圖勒?" width="200px"
-						height="300px" src="<c:url value='${v.book.bk_Pic}'/>">
+						height="300px" src="<c:url value='${v.bk_Pic}'/>">
 				</div>
 				<div class="col-lg-8">
-					<h2>書名: ${v.book.bk_Name}</h2>
-					<h4>作者: ${v.book.bk_Author}</h4>
-					<h4>出版社: ${v.book.bk_Publish}</h4>
-					<h4>出版日: ${v.book.bk_Date}</h4>
+					<h2>書名: ${v.bk_Name}</h2>
+					<h4>作者: ${v.bk_Author}</h4>
+					<h4>出版社: ${v.bk_Publish}</h4>
+					<h4>出版日: ${v.bk_PublishDate}</h4>
 				</div>
 			</div>
 		</c:forEach>
 		<div class="row">
-			<div class="col-lg-3">二手價</div>
 			<div class="col-lg-3">賣家</div>
-			<div class="col-lg-3">數量</div>
+			<div class="col-lg-2">二手價</div>
+			<div class="col-lg-2">庫存</div>
+			<div class="col-lg-2">上架日期</div>
 			<div class="col-lg-3">&nbsp;</div>
 		</div>
 		<hr>
 		<c:forEach items="${bookPrices}" var="v">
 			<div class="row">
 				<div class="col-lg-3">
+					<c:out value="${v.mb_Account}" />
+				</div>
+				<div class="col-lg-2">
 					<c:out value="${v.bs_Price}" />
 				</div>
-				<div class="col-lg-3">
-					<c:out value="${v.member.mb_Account}" />
-				</div>
-				<div class="col-lg-3">
+				<div class="col-lg-2">
 					<c:out value="${v.bs_Num}" />
 				</div>
+				<div class="col-lg-2">
+					<c:out value="${v.bs_Date}" />
+				</div>
 				<div class="col-lg-3">
-					<button type="button" class="btn btn-outline-secondary">我是按鈕</button>
+					<button type="submit" class="btn btn-outline-secondary"
+					onclick="priceDetail(${v.bks_ID})">查看詳細</button>
 				</div>
 			</div>
 			<hr>
@@ -97,5 +103,12 @@
 	<!-- footer -->
 	<footer class="container py-5" id="bookWebFooter"></footer>
 	<!-- footer -->
+	<script type="text/javascript">
+	function priceDetail(bks_ID) {
+		document.forms[0].action="<c:url value='/detail?bks_ID=" + bks_ID + "' />" ;
+		document.forms[0].method="post";
+		document.forms[0].submit();
+	}
+	</script>
 </body>
 </html>

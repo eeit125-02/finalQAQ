@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import com.web.book.model.MemberBean;
@@ -33,7 +34,7 @@ public class Login {
 
 	@Autowired
 	MemberService ms;
-
+	String mail;
 	String Account;
 	String logincheck =null;
 	MemberBean checkMember;
@@ -42,25 +43,28 @@ public class Login {
 	public String Registe(Model model, @RequestParam(value = "account") String mb_Account,
 			@RequestParam(value = "pwd") String mb_Password, @RequestParam(value = "sex") String mb_Sex,
 			@RequestParam(value = "name") String mb_Name,@RequestParam(value = "birthday") Date mb_Birthday,
-			@RequestParam(value = "mail") String mb_Mail,@RequestParam(value = "file",required = false) String file) {
-		System.out.println(file);
+			@RequestParam(value = "mail") String mb_Mail) {
 		Timestamp ts = new Timestamp(System.currentTimeMillis());
-		MemberBean reg_member = new MemberBean(0, mb_Account, mb_Password, mb_Sex, mb_Birthday, mb_Name, mb_Mail, null, null,
-				ts, 0, null, file);
+		String encryption = GlobalService.getMemberEncoder(mb_Password);
+		String pic = "https://firebasestorage.googleapis.com/v0/b/bookweb-50d11.appspot.com/o/member%2F%E5%81%87%E8%A3%9D%E6%9C%89%E5%9C%96%E7%89%87.jpg?alt=media&token=2ce87f02-12f3-4120-821f-e0dcfa825f49";
+		MemberBean reg_member = new MemberBean(0, mb_Account, encryption, mb_Sex, mb_Birthday, mb_Name, mb_Mail, "", "",
+				ts, 0, "",pic);
 		System.out.println(reg_member);
 		reg_member.setCheckColume(true);
+		System.out.println(reg_member);
 		checkMember = reg_member;
 		model.addAttribute("reg_member", reg_member);
-		return "Member/confirm";
+		JavaMail jm = new JavaMail();
+		jm.Register(mb_Mail);
+		return "redirect:toLogin";
 	}
-
-//	//JavaMail
-//	@PostMapping("/JavaMail")
-//	public void JavaMail(@RequestParam(value = "mail",required = false) String email) {
-//		JavaMail mail = new JavaMail();
-//		MemberBean member = ms.email(email);
-//		mail.SendMail(email,member.getMb_Password());
-//	}
+	
+	//註冊確認
+	@GetMapping("/toconfirm")
+	public String toConfirm() {
+		ms.insertMember(checkMember);
+		return "redirect:toLogin";
+	}
 	
 	// 註冊資料確認後送至資料庫
 	@PostMapping("/confirm")
@@ -87,22 +91,55 @@ public class Login {
 		return check;
 	}
 	
+	//檢查舊密碼
+	@PostMapping("/checkpwd")
+	@ResponseBody
+	public boolean checkPwd(@RequestParam(value = "oldpwd",required = false) String oldpwd) {
+		boolean check = GlobalService.checkMemberEncoder(oldpwd,ms.select(Account).getMb_Password());
+		System.out.println(oldpwd);
+		System.out.println(check);
+		return check;
+	}
+	
 	// 檢查登入
 	@PostMapping("/toLogin/checklogin/{mb_Account}/{mb_Password}")
 	@ResponseBody
 	public boolean checklogin(@PathVariable("mb_Account") String account, @PathVariable("mb_Password") String pwd) {
-		boolean check = ms.Login(account, pwd);
-		System.out.println(check);
+		boolean ck = ms.checkAccount(account);
+		if(ck) {
+		MemberBean mb = ms.select(account);
+		boolean check = GlobalService.checkMemberEncoder(pwd,mb.getMb_Password());
 		return check;
+		}else {
+			return ck;
+		}
+		
 	}
-
+	
+	//忘記密碼更新
+	@PostMapping("/JavaMailUpdate")
+	public String JavaMailUpdate(Model model, @RequestParam("pwd") String pwd) {
+		MemberBean mb_inf = ms.select(Account);
+		String encryption = GlobalService.getMemberEncoder(pwd);
+		mb_inf.setMb_Password(encryption);
+		ms.update(mb_inf);
+		return "redirect:toLogin";
+	}
+	
+	//JavaMail跳轉
+	@GetMapping("/pwdlink")
+	public String pwdlink(Model model) {
+		Account=ms.email(mail).getMb_Account();
+		return "Member/MailModify";
+	}
+	
 	//JavaMail
 	@PostMapping("/JavaMail")
 	public String JavaMail(@RequestParam(value = "mail",required = false) String email) {
+		mail=email;
 		JavaMail mail = new JavaMail();
-		MemberBean member = ms.email(email);
-		mail.SendMail(email,member.getMb_Password());
-		return "Member/login";
+		mail.SendMail(email);
+		return "redirect:toLogin";
 	}
 	
 	// 檢查是否停權
@@ -110,7 +147,6 @@ public class Login {
 	@ResponseBody
 	public boolean checkColume(@PathVariable("mb_Account") String account) {
 		boolean check = ms.checkColume(account);
-		System.out.println(check);
 		return check;
 	}
 	// 三方認證介面
@@ -118,15 +154,17 @@ public class Login {
 		public @ResponseBody boolean tothird(Model model,
 				@RequestParam(value = "name",required = false) String name,
 				@RequestParam(value = "email",required = false) String email,
-				@RequestParam(value = "file", required = false) String file,
 				HttpServletResponse response) throws IOException, InterruptedException, ExecutionException {
-			System.out.println(file);
 			Account = email;
 			boolean check = ms.checkAccount(Account);
 				if(check==false) {			
 					MemberBean loginMember = new MemberBean();
 					Timestamp ts = new Timestamp(System.currentTimeMillis());
-					loginMember.setMb_pic(file);
+					String pic = "https://firebasestorage.googleapis.com/v0/b/bookweb-50d11.appspot.com/o/member%2F%E5%81%87%E8%A3%9D%E6%9C%89%E5%9C%96%E7%89%87.jpg?alt=media&token=2ce87f02-12f3-4120-821f-e0dcfa825f49";
+					loginMember.setMb_Tel("");
+					loginMember.setMb_Address("");
+					loginMember.setMb_type("");
+					loginMember.setMb_pic(pic);
 					loginMember.setCheckColume(true);
 					loginMember.setMb_Birthday(new Date(0));
 					loginMember.setMb_Date(ts);
@@ -153,29 +191,31 @@ public class Login {
 	public String login(Model model, HttpServletResponse response, 
 			@RequestParam(value = "account",required = false) String account,
 			@RequestParam(value = "pwd",required = false) String pwd) throws IOException, InterruptedException, ExecutionException {
-		boolean mb = ms.Login(account, pwd);
-		if (mb) {
+		MemberBean mb = ms.select(account);
+		boolean pw =  GlobalService.checkMemberEncoder(pwd, mb.getMb_Password());
+		if (pw) {
 			if("a123456".equals(account) && "a123456".equals(pwd)) {
 				Account = account;
-				MemberBean loginMember = ms.select(Account);
 				List<MemberBean> memberall = ms.adminselect();
 				model.addAttribute("adminaccount", Account);
 				model.addAttribute("admin", memberall);
-				String sessionId = GlobalService.createSessionID(String.valueOf(loginMember.getMb_ID()),
-						loginMember.getMb_Name(), loginMember.getMb_Account());
+				String sessionId = GlobalService.createSessionID(String.valueOf(mb.getMb_ID()),
+						mb.getMb_Name(), mb.getMb_Account());
 				Cookie memId = new Cookie("Member_ID", sessionId);
 				memId.setMaxAge(1200);
 				response.addCookie(memId);
 				logincheck = "a" ;	
 			}else {
 			Account = account;
-			MemberBean loginMember = ms.select(Account);
-			String sessionId = GlobalService.createSessionID(String.valueOf(loginMember.getMb_ID()),
-					loginMember.getMb_Name(), loginMember.getMb_Account());
+			String sessionId = GlobalService.createSessionID(String.valueOf(mb.getMb_ID()),
+					mb.getMb_Name(), mb.getMb_Account());
 			Cookie memId = new Cookie("Member_ID", sessionId);
+			Cookie memName = new Cookie("Member_Name", mb.getMb_Name());			
+			System.out.println(mb.getMb_pic());
 			memId.setMaxAge(1200);
 			response.addCookie(memId);
-			model.addAttribute("Account", Account);
+			response.addCookie(memName);
+			model.addAttribute("loginMember", mb);
 			logincheck = "b" ;
 			}
 			return "redirect:toCity";
@@ -233,17 +273,18 @@ public class Login {
 
 	// 密碼修改介面
 	@PostMapping("/Modify")
-	public @ResponseBody String Modify(Model model) {
-		System.out.println("-----------");
-		model.addAttribute("account", Account);
-		return Account;
+	public @ResponseBody MemberBean Modify(Model model, @ModelAttribute("loginUser") MemberBean loginUser
+										  ) {
+		model.addAttribute("loginUser",loginUser);
+		return loginUser;
 	}
 
 	// 密碼更新
 	@PostMapping("/Update")
 	public String Update(Model model, @RequestParam("pwd") String pwd) {
 		MemberBean mb_inf = ms.select(Account);
-		mb_inf.setMb_Password(pwd);
+		String encryption = GlobalService.getMemberEncoder(pwd);
+		mb_inf.setMb_Password(encryption);
 		ms.update(mb_inf);
 		return "redirect:toCity";
 	}
@@ -292,7 +333,8 @@ public class Login {
 			@RequestParam(value = "tel") String mb_Tel, @RequestParam(value = "address") String mb_Address,
 			@RequestParam(value = "account") String account) {
 		MemberBean mb_inf = ms.select(account);
-		mb_inf.setMb_Password(mb_Password);
+		String encryption = GlobalService.getMemberEncoder(mb_Password);
+		mb_inf.setMb_Password(encryption);
 		mb_inf.setMb_Name(mb_Name);
 		mb_inf.setMb_Mail(mb_Mail);
 		mb_inf.setMb_Tel(mb_Tel);
@@ -316,7 +358,8 @@ public class Login {
 
 	// 登入介面
 	@GetMapping("/toLogin")
-	public String tologin(Model model) {
+	public String tologin(SessionStatus sessionStatus) {
+		sessionStatus.setComplete();
 		return "Member/login";
 	}
 
@@ -324,6 +367,14 @@ public class Login {
 	@GetMapping("/toRegiste")
 	public String toregiste(Model model) {
 		return "Member/registe";
+	}
+	
+	// 註冊確認介面
+	@GetMapping("/toConfirm")
+	public String toConfirm(Model model) {
+		System.out.println(checkMember);
+		model.addAttribute("reg_member",checkMember);
+		return "Member/confirm";
 	}
 
 	//忘記密碼
@@ -335,7 +386,8 @@ public class Login {
 	// 會員介面
 	@GetMapping("/toCity")
 	public String tocity(Model model) {
-		System.out.println(logincheck);
+		MemberBean inf = ms.select(Account);
+		model.addAttribute("loginUser",inf);
 		if(logincheck.equals("c")) {
 			model.addAttribute("third","third");
 			return "Member/city";

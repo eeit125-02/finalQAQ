@@ -11,6 +11,13 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
+<!-- <!-- search bar的東東 --> 
+<!-- <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"> -->
+<!-- <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script> -->
+<!-- <script src="//code.jquery.com/jquery-1.11.1.min.js"></script> -->
+<!-- <!-- search bar的東東 --> 
+
+
 <script src='https://kit.fontawesome.com/a076d05399.js'></script>
 
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
@@ -91,8 +98,30 @@ td {
 		<!-- body -->
 		<div class="row">
 			<br>
+			
+<!-- 			<!-- search bar的東東 --> 
+<!-- 			<div class="container"> -->
+<!-- 				<div class="row"> -->
+<!-- 			        <div class="col-md-6"> -->
+<!-- 			    		<h2>探索活動</h2> -->
+<!-- 			            <div id="custom-search-input"> -->
+<!-- 			                <div class="input-group col-md-12"> -->
+<!-- 			                    <input type="text" class="form-control input-lg" placeholder="請輸入任意活動關鍵字" /> -->
+<!-- 			                    <span class="input-group-btn"> -->
+<!-- 			                        <button class="btn btn-info btn-lg" type="button"> -->
+<!-- 			                            <i class="glyphicon glyphicon-search"></i> -->
+<!-- 			                        </button> -->
+<!-- 			                    </span> -->
+<!-- 			                </div> -->
+<!-- 			            </div> -->
+<!-- 			        </div> -->
+<!-- 				</div> -->
+<!-- 			</div> -->
+<!-- 			<!-- search bar的東東 --> 
+			
 
-			<main>
+
+				<main>
 				<!--? Hero Area Start-->
 				<div class="slider-area hero-bg1 hero-overly">
 					<div
@@ -143,6 +172,64 @@ td {
 				</div>
 				<!--Hero Area End-->
 
+
+
+
+
+
+
+<!-- 			<main> -->
+<!-- 				? Hero Area Start -->
+<!-- 				<div class="slider-area hero-bg1 hero-overly"> -->
+<!-- 					<div -->
+<!-- 						class="single-slider hero-overly  slider-height1 d-flex align-items-center"> -->
+<!-- 						<div class="container"> -->
+<!-- 							<div class="row justify-content-center"> -->
+<!-- 								<div class="col-xl-10 col-lg-10"> -->
+<!-- 									Hero Caption -->
+<!-- 									<div class="hero__caption pt-100"> -->
+<!-- 										<h3 >活動探索</h3> -->
+<!-- 										                                <p>Let's uncover the best places to eat, drink, and shop nearest to you.</p> -->
+<!-- 									</div> -->
+<!-- 									Hero form -->
+<%-- 									<form action="#" class="search-box mb-100" > --%>
+<!-- 										<div class="input-form form-inline" > -->
+<!-- 											<input type="text" id="enter1" placeholder="想找什麼活動呢?" > -->
+<!-- 										</div> -->
+<!-- 										<div class="select-form form-inline"> -->
+<!-- 											<div class="select-itms form-inline"> -->
+<!-- <!-- 												<select name="select" id="select1"> -->
+<!-- <!-- 													<option value="">In where?</option> -->
+<!-- <!-- 													<option value="">Catagories One</option> --> 
+<!-- <!-- 													<option value="">Catagories Two</option> -->
+<!-- <!-- 													<option value="">Catagories Three</option> -->
+<!-- <!-- 													<option value="">Catagories Four</option> --> 
+<!-- <!-- 												</select> --> 
+<!-- 											</div> -->
+<!-- 										</div> -->
+<!-- 										<div class="search-form"> -->
+<!-- 											<button class="btn btn-outline-info" id="search"> -->
+<!-- 												<a href="#" ><i class="ti-search"></i> Search</a> -->
+<!-- 											</button> -->
+<!-- 										</div> -->
+<%-- 									</form> --%>
+<!-- 									hero category1 img -->
+<!-- 									<div class="category-img text-center"> -->
+<!-- 										<a href="listing.html"> <img -->
+<!-- 											src="assets/img/gallery/hero_category1.png" alt=""></a> <a -->
+<!-- 											href="listing.html"> <img -->
+<!-- 											src="assets/img/gallery/hero_category2.png" alt=""></a> <a -->
+<!-- 											href="listing.html"> <img -->
+<!-- 											src="assets/img/gallery/hero_category3.png" alt=""></a> -->
+<!-- 									</div> -->
+<!-- 								</div> -->
+<!-- 							</div> -->
+<!-- 						</div> -->
+<!-- 					</div> -->
+<!-- 				</div> -->
+<!-- 				Hero Area End -->
+
+				<hr>
 				<section>
 					<div>
 						<div class="container" style="text-align: center">
@@ -151,23 +238,24 @@ td {
 					</div>
 				</section>
 				<hr style="height: 1px; border: none; color: #333; background-color: #333;">
-				<section class="container" style="width:1100px">
+				<section class="container" style="width:1200px">
 					<div class="row" id="change">
 						<c:forEach var='act' items='${allacts}'>
 							<input type="hidden" id="mb_ID" value="${act.member.mb_ID}">
-							<div class="col-6,col-md-3" style="width: 400px; height: 1000px">
+							<div class="col-6,col-md-3" style="width: 380px; height: 1000px">
 								<div class="thumbnail" style="width: 350px; height: 1000px">
 									<p>
 										<b style='font-size: 25px;'>${act.act_Name}</b>
 									</p>
-									<div>
-									<input type ="image" src="${act.act_Image}" data-toggle="modal" data-target="#exampleModalCenter${act.act_Name}" style="width: 300px; height: 380px; float:auto">
+									<div align="center">
+									<input type ="image" src="${act.act_Image}" data-toggle="modal" data-target="#exampleModalCenter${act.act_Name}" style="width: 300px; height: 380px; align:center">
 										<div class="modal fade" id="exampleModalCenter${act.act_Name}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   										<div class="modal-dialog modal-dialog-centered" role="document">
    										 <div class="modal-content">
     									  <div class="modal-header">
 <!--     									  //標頭 -->
       										  <h5 class="modal-title" id="#exampleModalCenter${act.act_Name}">${act.act_Name}</h5>
+      										  &nbsp;<h6>${act.act_Differentpax}</h6><span>/</span><span>${act.act_Pax}</span>
        											 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
      											     <span aria-hidden="true">&times;</span>
      												   </button>
@@ -176,7 +264,7 @@ td {
      										 <div class="modal-body">
      										 <p>${act.act_Theme}</p>
 										     <p>${act.act_Date}</p>										     
-										     <p><a href="" class="bgbtn02 btn" id = "myModal"  value="${act.act_Loc}" data-toggle="modal" data-target="#myModal1"><img src="image/map.png" style="width:15px;height:15px" /></a>${act.act_Loc}</p>     
+										     <p>${act.act_Loc}</p>     
 										     <p>${act.act_Intro}</p>			
 										     <hr>
       										 </div>
@@ -235,7 +323,14 @@ td {
 
 		<form action="showCreateForm" id="test">
 		<button type="button" class="btn btn-outline-info" id="create">新增活動</button>
-	</form>
+	    </form>
+	    
+<%-- 	    <form action="showJoins" id="test1"> --%>
+<!-- 		<button type="button" class="btn btn-outline-info" id="showjoin">查看報名紀錄</button> -->
+<%-- 	    </form> --%>
+	    
+	    <a href="<c:url value='/showJoins'/>"><button class="btn btn-outline-info">查看報名紀錄</button></a>
+	    
 	</div>
 
 	<br>
@@ -249,15 +344,7 @@ if(typeof($.cookie('Member_ID')) != "undefined" ){
 	console.log("123")
 }
 })
-$('#create').click(function(){
-	if(typeof($.cookie('Member_ID')) != "undefined" ){
-		console.log("123");
-		$("#test").submit();
-	}else{
-		alert("請先登入會員");
-		window.location.href="//localhost:8080/BookWeb/toLogin";
-	}
-})
+
 
 $('button').click(function(){
 	mapId = $(this).val();
@@ -283,6 +370,18 @@ $('button').click(function(){
 	    }
 	  });
 })
+
+
+$('#create').click(function(){
+	if(typeof($.cookie('Member_ID')) != "undefined" ){
+		console.log("123");
+		$("#test").submit();
+	}else{
+		alert("請先登入會員");
+		window.location.href="//localhost:8080/BookWeb/toLogin";
+	}
+})
+
 	
 	
 	$('#search').click(function(){
@@ -357,7 +456,7 @@ $('button').click(function(){
 			}
 		});
 	})
-					
+				
 	
 	/* function initMap() {
 		console.log("wwww"+mapId);
@@ -368,6 +467,17 @@ $('button').click(function(){
 	
 	
 	} */
+</script>
+
+<script>
+$(document).ready(function(){
+    $(".wrapper-dropdown-3").on("click",function(){
+        $(this).toggleClass("active")
+    })
+    $(".wrapper-dropdown-2").on("click",function(){
+        $(this).toggleClass("active")
+    })
+})
 </script>
 
 </body>

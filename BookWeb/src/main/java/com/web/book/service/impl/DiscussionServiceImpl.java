@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.web.book.dao.DiscussionDao;
 import com.web.book.model.CommandBean;
 import com.web.book.model.MemberBean;
+import com.web.book.model.NestedCommandBean;
 import com.web.book.model.PostBean;
 import com.web.book.model.RuleBean;
 import com.web.book.service.DiscussionService;
@@ -34,6 +35,12 @@ public class DiscussionServiceImpl implements DiscussionService {
 		return discussionDao.addCommand(new_command);		
 	}
 	
+	//會員新增巢狀留言
+	@Override
+	public NestedCommandBean addNestedCommand(NestedCommandBean new_nested_command) {
+		return discussionDao.addNestedCommand(new_nested_command);
+	}
+	
 	//依時間排序列出所有貼文
 	@Override
 	public List<PostBean> getAllPost() {
@@ -51,6 +58,12 @@ public class DiscussionServiceImpl implements DiscussionService {
 	@Override
 	public List<CommandBean> getAllCommand() {
 		return discussionDao.getAllCommand();
+	}
+	
+	//依時間排序列出所有巢狀留言
+	@Override
+	public List<NestedCommandBean> getAllNestedCommand() {
+		return discussionDao.getAllNestedCommand();
 	}
 
 	//列出版規
@@ -108,6 +121,15 @@ public class DiscussionServiceImpl implements DiscussionService {
 	public List<PostBean> getPostByKeyword(String keyword) {
 		return discussionDao.getPostByKeyword(keyword);
 	}
+
+	@Override
+	public CommandBean getCommandBeanById(Integer command_ID) {
+		return discussionDao.getCommandBeanById(command_ID);
+	}
+
+
+
+
 
 
 

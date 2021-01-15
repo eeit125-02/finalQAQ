@@ -114,16 +114,20 @@
 
 
 					<div class="form-row">
-						<div class="form-group col-md-6">
+						<div class="form-group col-md-5" style="margin:auto">
 							<form:label path="bk_Publisher_Place">出版地</form:label>
 							<form:input path="bk_Publisher_Place" class="form-control" />
 						</div>
 
-						<div class="form-group col-md-6">
+						<div class="form-group col-md-5" style="margin:auto">
 							<form:label path="bk_Pic">封面圖片</form:label>
-							<input class="form-control" name="file" type="file" />
+							<input class="form-control" name="file" type="file" id="imgInp" required="required"/>
 <%-- 							<form:input path="" class="form-control" type="file" /> --%>
 <%-- 							<form:hidden path="bk_Pic" /> --%>
+						</div>
+						
+						<div class="form-group col-md-2">
+							<img id="blah" src="${pageresult.bk_Pic}" alt="圖片預覽" width="100%;" />
 						</div>
 					</div>
 
@@ -139,16 +143,6 @@
 						<div class="form-group col-md-5">
 							<form:label path="bk_Language">語言</form:label>
 							<form:input path="bk_Language" class="form-control"/>
-							<%-- 	    <form:checkboxes path="bk_Language" /> --%>
-							<!--       <label for="inputState">語言</label> -->
-							<!--       <select id="inputState" class="form-control"> -->
-							<!--         <option selected>繁體中文</option> -->
-							<!--         <option>簡體中文</option> -->
-							<!--         <option>英文</option> -->
-							<!--         <option>日文</option> -->
-							<!--         <option>德文</option> -->
-							<!--         <option>法文</option> -->
-							<!--       </select> -->
 						</div>
 
 						<div class="form-group col-md-2">
@@ -171,6 +165,24 @@
 	</div>
 
 	<!-- 內容結束 -->
+
+<script>
+function readURL(input) {
+	  if (input.files && input.files[0]) {
+	    var reader = new FileReader();
+	    
+	    reader.onload = function(e) {
+	      $('#blah').attr('src', e.target.result);
+	    }
+	    
+	    reader.readAsDataURL(input.files[0]); // convert to base64 string
+	  }
+	}
+
+	$("#imgInp").change(function() {
+	  readURL(this);
+	});
+</script>
 
 	<!-- body -->
 

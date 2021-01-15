@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.web.book.dao.BookReportDao;
 import com.web.book.model.BookReportBean;
 import com.web.book.model.BookReportCollectBean;
+import com.web.book.model.BookReportMessageBean;
 import com.web.book.service.BookReportService;
 
 @Transactional
@@ -107,18 +108,68 @@ public class BookReportServiceImpl implements BookReportService {
 	}
 
 	@Override
-	public Boolean addSubReport(Integer brId, Integer mbId) {
+	public String addSubReport(Integer brId, Integer mbId) {
 		
-		List<BookReportCollectBean> collects = bookReportDao.getMemberCollectReportList(brId);
+		List<BookReportCollectBean> collects = bookReportDao.getMemberCollectReportList(mbId);
+		BookReportBean bookReport = bookReportDao.getBookReport(brId);
 		
-		for (BookReportCollectBean collect : collects) {
-			if(collect.getBookReport().getBr_ID().equals(brId)) {
-				return false;
+		
+		if(bookReport.getMember().getMb_ID() == mbId) { 
+	
+			return "1";
+			
+		}else {
+			
+			for (BookReportCollectBean collect : collects) {
+				
+				if (collect.getBookReport().getBr_ID().equals(brId)) {
+					
+					return "2";
+					
+				}
 			}
 		}
 		
 		bookReportDao.addSubReport(brId, mbId);
-		return true;
+
+		return "true";
+	}
+
+	@Override
+	public List<BookReportCollectBean> getMemberCollectReport(Integer mbId) {
+		
+		return bookReportDao.getMemberCollectReportList(mbId);
+		
+	}
+
+	@Override
+	public void deleteCollectReport(Integer rcId) {
+		
+		bookReportDao.delteCollectReport(rcId);
+		
+	}
+
+	@Override
+	public List<BookReportMessageBean> getBookReportMessageList(Integer brId) {
+		
+		return bookReportDao.getBookReportMessageList(brId);
+	}
+
+	@Override
+	public List<BookReportMessageBean> getMemberBookReportMessageList(Integer mbId) {
+		
+		return bookReportDao.getMemberBookReportMessageList(mbId);
+	}
+
+	@Override
+	public void addReportMessage(Integer brId, Integer mbId, String content) {
+
+		bookReportDao.addReportMessage(brId, mbId, content);
+	}
+
+	@Override
+	public void deletReportMessage(Integer bmId) {
+		bookReportDao.deletReportMessage(bmId);
 	}
 	
 	

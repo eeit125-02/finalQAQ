@@ -82,6 +82,7 @@ public class ActDaoImpl implements ActDao {
 		return query.setParameter("searchkw","%"+ keyword +"%").getResultList();
 	}
 
+	
 }
 
 

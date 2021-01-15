@@ -1,16 +1,15 @@
 package com.web.book.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.commons.codec.digest.MessageDigestAlgorithms;
-import org.dom4j.tree.BackedList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,10 +20,12 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.web.book.model.ActBean;
+import com.web.book.model.ActJoinBean;
 import com.web.book.model.MemberBean;
 import com.web.book.service.ActJoinService;
 import com.web.book.service.ActService;
 import com.web.book.service.GlobalService;
+import com.web.book.service.MemberService;
 
 @Controller
 @SessionAttributes(value = { "loginUser" })
@@ -55,14 +56,18 @@ public class ActController {
 	// 搜尋關鍵字
 	@GetMapping("/searchkeyword")
 	@ResponseBody
-	public List<ActBean> showSearchResult(Model model, @RequestParam(value = "keyword") String keyword) {
+	public List<ActBean> showSearchResult(
+			Model model, 
+			@RequestParam(value = "keyword") String keyword) {
 		List<ActBean> actlist = actService.searchKeyword(keyword);
 		return actlist;
 	}
 
 	// 顯示新增活動頁面
 	@GetMapping("/showCreateForm")
-	public String showCreateForm(@ModelAttribute("loginUser") MemberBean loginUser, Model model) {
+	public String showCreateForm(
+			@ModelAttribute("loginUser") MemberBean loginUser, Model model
+			) {
 		ActBean ab = new ActBean();
 		model.addAttribute("actbean", ab);
 		model.addAttribute("mb_ID", loginUser.getMb_ID());
@@ -70,7 +75,7 @@ public class ActController {
 		return "Activity/ActForm";
 	}
 
-	// 新增活動
+	// 送出新增活動
 	@PostMapping("/showCreateForm")
 	public String createAct(Model model, @ModelAttribute("actbean") ActBean ab,
 			@ModelAttribute("loginUser") MemberBean loginUser,
@@ -79,7 +84,9 @@ public class ActController {
 			RedirectAttributes attr) throws Exception {
 
 		// 圖片上傳用
+		
 		GlobalService.saveImage("active", file, ab.getact_Name());
+		ab.setAct_Differentpax(0);
 		ab.setMember(loginUser);
 		ab.setact_Image(GlobalService.saveImage("active", file, ab.getact_Name()));
 		actService.createAct(ab);

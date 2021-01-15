@@ -1,8 +1,11 @@
 package com.web.book.controller;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -29,6 +32,9 @@ import com.web.book.service.SearchService;
 @SessionAttributes(value = { "loginUser" })
 public class StoreController {
 
+	private Integer page = 1;
+	private String pageType = null;
+	
 	@Autowired
 	BookStoreService bookStoreService;
 	@Autowired
@@ -43,22 +49,59 @@ public class StoreController {
 
 	// 最終呈現首頁
 	@GetMapping("qaqTest")
-	public String qaqmainPage(Model model) {
-		List<BookBean> list = bookStoreService.searchBookStore(1);
-		System.out.println(bookStoreService.countBook().size());
-		System.out.println("--------------------------------------------");
-		int totalPage = (int) Math.ceil(bookStoreService.countBook().size()/12);
+	public String qaqMainPage(Model model) {
+		page = 1;
+		pageType = "main";
+		List<BookStoreBean> list = bookStoreService.searchBookStore(page);
 		model.addAttribute("store", list);
-		model.addAttribute("total", totalPage);
+		model.addAttribute("pageSize", bookStoreService.getAllSearchBookStoreSize());
+		model.addAttribute("pageNow", page);
+		model.addAttribute("pageType", pageType);
+		return "/Transation/qaqMain";
+	}
+	
+	// 商店首頁搜尋書名
+	@GetMapping("qaqSBookName")
+	public String qaqSBookName(Model model,
+			@RequestParam(value = "sBkNe") String bk_Name
+			) {
+		List<BookStoreBean> list = bookStoreService.searchStoreBookName(bk_Name, page);
+		page = 1;
+		pageType = bk_Name;
+		model.addAttribute("store", list);
+		model.addAttribute("pageSize", bookStoreService.getSearchStoreBookNameSize(bk_Name));
+		model.addAttribute("pageNow", page);
+		model.addAttribute("pageType", pageType);
+		return "/Transation/qaqMain";
+	}
+	
+	// 分頁
+	@GetMapping("qaqTest/{pageType}/{page}")
+	public String qaqNextPage(Model model,
+			@PathVariable Integer page,
+			@PathVariable String pageType,
+			@RequestParam(value = "sBkNe", required = false) String bk_Name
+			) {
+		if(pageType.equals("main") ) {
+			List<BookStoreBean> list = bookStoreService.searchBookStore(page);
+			model.addAttribute("pageSize", bookStoreService.getAllSearchBookStoreSize());
+			model.addAttribute("store", list);
+		}else {
+			List<BookStoreBean> list = bookStoreService.searchStoreBookName(pageType, page);
+			model.addAttribute("store", list);
+			model.addAttribute("pageSize", bookStoreService.getSearchStoreBookNameSize(pageType));
+		}
+		model.addAttribute("pageNow", page);
+		model.addAttribute("pageType", pageType);
 		return "/Transation/qaqMain";
 	}
 
 	// 如果前端連結 1. 用 / 後端用PathVariable接   2. 用 ? 後端用RequestParam接
-	@GetMapping("/qaqBookDetail/{bk_ID}")
+	@GetMapping("/qaqBookDetail/{bks_ID}")
 	public String qaqBookDetail(Model model,
-			@PathVariable Integer bk_ID
+			@PathVariable Integer bks_ID
 			) {
-		BookBean bookDetail = bookStoreService.getBookDetail(bk_ID);
+		BookStoreBean bookDetail = bookStoreService.getOneBookStore(bks_ID);
 		model.addAttribute("bookdetail", bookDetail);
 		return "Transation/detail";
 	}
@@ -68,9 +111,32 @@ public class StoreController {
 	public String qaqManyPrice(Model model,
 			@RequestParam(value = "ID") Integer bk_ID
 			) {
-		List<BookStoreBean> bookPrices = bookStoreService.bookPrices(bk_ID);
+		List<Map<String, Object>> bookPrices = new ArrayList<>();
+		List<BookStoreBean> manyPrice = bookStoreService.bookPrices(bk_ID);
+		for (BookStoreBean bookStoreBean : manyPrice) {
+			Map<String, Object> data = new HashMap<>();
+			data.put("bk_Pic", bookStoreBean.getBook().getBk_Pic());
+			data.put("bks_ID", bookStoreBean.getBks_ID());
+			data.put("bk_Name", bookStoreBean.getBook().getBk_Name());
+			data.put("bk_Author", bookStoreBean.getBook().getBk_Author());
+			data.put("bk_Publish", bookStoreBean.getBook().getBk_Publish());
+			data.put("bk_PublishDate", bookStoreBean.getBook().getBk_Date());
+			data.put("mb_Account", bookStoreBean.getMember().getMb_Account());
+			data.put("bs_Price", bookStoreBean.getBs_Price());
+			data.put("bs_Num", bookStoreBean.getBs_Num());
+			data.put("bs_Date", new SimpleDateFormat("yyyy-MM-dd").format(bookStoreBean.getBs_Date()));
+			bookPrices.add(data);
+		}
 		model.addAttribute("bookPrices", bookPrices);
 		return "Transation/qaqManyPrice";
+	}
+	
+	@PostMapping("/detail")
+	public String priceDetail(Model model, @RequestParam(value = "bks_ID") Integer bks_ID
+			) {
+		BookStoreBean bookDetail = bookStoreService.getOneBookStore(bks_ID);
+		model.addAttribute("bookdetail", bookDetail);
+		return "Transation/detail";
 	}
 	
 	// 前往一本書的詳細頁面
@@ -81,15 +147,6 @@ public class StoreController {
 		return "/Transation/detail";
 	}
 	
-	// 商店首頁搜尋書名
-	@GetMapping("qaqSBookName")
-	public String qaqSBookName(Model model,
-			@RequestParam(value = "sBkNe") String bk_Name
-			) {
-		List<BookBean> list = bookStoreService.searchBookName(bk_Name);
-		model.addAttribute("store", list);
-		return "/Transation/qaqMain";
-	}
 
 	@GetMapping("/myStore")
 	public String myStore(Model model) {
@@ -132,7 +189,7 @@ public class StoreController {
 
 	@PostMapping("/searchBookName")
 	public String searchBookName(Model model, @RequestParam(value = "searchbk") String bk_Name) {
-		List<BookBean> list = bookStoreService.searchBookName(bk_Name);
+		List<BookStoreBean> list = bookStoreService.searchStoreBookName(bk_Name, page);
 		model.addAttribute("bookName", list);
 		return "/Transation/addMyStore";
 	}
@@ -178,6 +235,6 @@ public class StoreController {
 //	@GetMapping("boobplay")
 //	public String boob(Model model) {
 //		bookStoreService.boobqaq();
-//		return "redirect:/Transation/storeMain";
+//		return "redirect:/qaqTest";
 //	}
 }

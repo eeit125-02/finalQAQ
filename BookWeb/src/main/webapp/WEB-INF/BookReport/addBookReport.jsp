@@ -10,10 +10,12 @@
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-
+<!-- <script src="https://cdn.ckeditor.com/4.15.1/standard-all/ckeditor.js"></script> -->
 
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/jquery.rateyo.css"/>
 <script src="${pageContext.request.contextPath}/js/jquery.rateyo.js"></script>
+<script src="${pageContext.request.contextPath}/js/ckeditor/ckeditor.js"></script>
+
 
 
 <style>
@@ -79,7 +81,41 @@
 	<footer class="container py-5" id="bookWebFooter"></footer>
 	<!-- footer -->
 	<script>
-		
+	 	CKEDITOR.addCss('.cke_editable { font-size: 15px; padding: 2em; }');
+	 	var editor = CKEDITOR.replace( 'brContent' ,{
+			toolbar: [
+		        {
+		          name: 'clipboard',
+		          items: ['Undo', 'Redo']
+		        },
+		        {
+			          name: 'styles',
+			          items: ['Format', 'Font', 'FontSize']
+			    },
+		        {
+		          name: 'basicstyles',
+		          items: ['Bold']
+			    },
+		        {
+		          name: 'colors',
+		          items: ['TextColor']
+		        },
+		        {
+		          name: 'align',
+		          items: ['JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock']
+		        },
+		       /*  {
+		          name: 'paragraph',
+		          items: ['NumberedList', 'BulletedList']
+		        }, */
+		       /*  {
+		            name: 'links',
+		            items: ['EmojiPanel']
+		         } */
+		      ]
+
+		      
+		});
 		
 		let brScore = 0;
 
@@ -116,9 +152,10 @@
 			var addData = {
 						bk_ID : window.location.href.split("/").pop(),
 						br_Score : brScore,
-						br_Content : $('#brContent').val().replace(/\n|\r\n/g, "<br>"),
+						br_Content : editor.getData(),
 						br_Name : $('#brTitle').val()
 				};
+				console.log(editor.getData().replace(/'"'/g, "<&>"))
 			$.ajax({
 				async : false,
 				type : 'POST',

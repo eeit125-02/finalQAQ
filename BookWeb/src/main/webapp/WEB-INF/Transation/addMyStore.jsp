@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page import="java.util.List"%>
-<%@ page import="com.web.book.model.BookBean"%>
+<%@ page import="com.web.book.model.BookStoreBean"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -70,17 +70,15 @@
 			if (request.getParameter("searchbk") != null) {
 		%>
 		<p>
-			<%!List<BookBean> list;%>
-			<%!BookBean data;%>
+			<%!List<BookStoreBean> list;%>
+			<%!BookStoreBean data;%>
 			<%
-				data = new BookBean();
+				data = new BookStoreBean();
 			list = (List) request.getAttribute("bookName");
 			%>
 		
 		<form action="<c:url value='/addBook'/>" method="post">
-			<%
-				for (BookBean data : list) {
-			%>
+			<c:forEach items="${bookName}" var="v">
 			<table border="1" width="100%">
 				<tr>
 					<th width="70">編號</th>
@@ -92,19 +90,17 @@
 					<th width="110">&nbsp;</th>
 				</tr>
 				<tr height='16'>
-					<td><%=data.getBk_ID()%></td>
-					<td><%=data.getBk_Name()%></td>
-					<td><%=data.getBk_Author()%></td>
-					<td><%=data.getBk_Publish()%></td>
-					<td><INPUT TYPE="TEXT" NAME="<%=data.getBk_ID()%>price"></td>
-					<td><INPUT TYPE="TEXT" NAME="<%=data.getBk_ID()%>qty"></td>
-					<td><button type="submit" value=<%=data.getBk_ID()%>
+					<td>${v.book.bk_ID}</td>
+					<td>${v.book.bk_Name}</td>
+					<td>${v.book.bk_Author}</td>
+					<td>${v.book.bk_Publish}</td>
+					<td><INPUT TYPE="TEXT" NAME="${v.book.bk_ID}price"></td>
+					<td><INPUT TYPE="TEXT" NAME="${v.book.bk_ID}qty"></td>
+					<td><button type="submit" value="${v.book.bk_ID}"
 							name="setbk">刊登</button></td>
 				</tr>
 			</table>
-			<%
-				}
-			%>
+			</c:forEach>
 		</form>
 		<%
 			}

@@ -22,7 +22,11 @@
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
 	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
-	crossorigin="anonymous">	
+	crossorigin="anonymous">
+	
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/jquery.rateyo.css"/>
+<script src="${pageContext.request.contextPath}/js/jquery.rateyo.js"></script>
+
 <style>
 .bd-placeholder-img {
 	font-size: 1. 125rem;
@@ -88,30 +92,74 @@
 		<!-- 閱讀心得 -->
 
 		<!-- 收藏 -->
+		
 		<div class="tab-pane fade" id="nav-fav" role="tabpanel"
 			aria-labelledby="nav-fav-tab">
-			<div class="row mb-2">
-				<div class="col-md-6">
-					<div class="card flex-md-row mb-4 shadow-sm h-md-250">
-						<div class="card-body d-flex flex-column align-items-start">
-							<h3 class="mb-0">
-								<a class="text-dark " href="#">書名</a>
-							</h3>
-							<div class="mb-1 text-muted">日期</div>
-							<p class="card-text mb-auto">大綱</p>
-							<a href="#">閱讀全文</a>
-						</div>
-						<svg
-							class="bd-placeholder-img card-img-right flex-auto  d-lg-block"
-							width="200" height="250" xmlns="http://www.w3.org/2000/svg"
-							preserveAspectRatio="xMidYMid slice" focusable="false" role="img"
-							aria-label="Placeholder: Thumbnail">
-							<title>Placeholder</title>
-							<rect fill="#55595c" width="100%" height="100%"></rect>
-							<text fill="#eceeef" dy=".3em" x="50%" y="50%">Thumbnail</text>
-						</svg>
-					</div>
-				</div>
+			<div class="row mb-2" id="collectReport">
+			
+			    <div class="col-md-6">
+			      <div class="card flex-md-row mb-4 shadow-sm h-md-250">
+			        <div class="card-body d-flex flex-column align-items-start">
+			          <h3 class="mb-0">
+			            <a class="text-dark" href="#">圖書標題</a>
+			          </h3>
+			          <div class="mb-1 text-muted">撰寫者：test, 創建日期：Nov 12</div>
+			          <div id="rateYo"></div>
+			          <br>
+			          <p class="card-text mb-auto">書名</p>
+			          <p class="card-text mb-auto">作者</p>
+			          <p class="card-text mb-auto">出版社</p>
+			          <br>
+			          <a href="#">取消追蹤</a>
+			        </div>
+			        <svg class="bd-placeholder-img card-img-right flex-auto d-none d-lg-block" width="200" height="250" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail">
+			        	<image xlink:href="https://im2.book.com.tw/image/getImage?i=https://www.books.com.tw/img/001/088/03/0010880353.jpg&v=5fe9b3ba&w=348&h=348" width="100%" height="100%" />
+			        </svg>
+			      </div>
+			    </div>
+			    
+			    <div class="col-md-6">
+			      <div class="card flex-md-row mb-4 shadow-sm h-md-250">
+			        <div class="card-body d-flex flex-column align-items-start">
+			          <h3 class="mb-0">
+			            <a class="text-dark" href="#">圖書標題</a>
+			          </h3>
+			          <div class="mb-1 text-muted">撰寫者：test, 創建日期：Nov 12</div>
+			          <div id="rateYo"></div>
+			          <br>
+			          <p class="card-text mb-auto">書名</p>
+			          <p class="card-text mb-auto">作者</p>
+			          <p class="card-text mb-auto">出版社</p>
+			          <br>
+			          <a href="#">取消追蹤</a>
+			        </div>
+			        <svg class="bd-placeholder-img card-img-right flex-auto d-none d-lg-block" width="200" height="250" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail">
+			        	<image xlink:href="https://im2.book.com.tw/image/getImage?i=https://www.books.com.tw/img/001/088/03/0010880353.jpg&v=5fe9b3ba&w=348&h=348" width="100%" height="100%" />
+			        </svg>
+			      </div>
+			    </div>
+			    
+			    <div class="col-md-6">
+			      <div class="card flex-md-row mb-4 shadow-sm h-md-250">
+			        <div class="card-body d-flex flex-column align-items-start">
+			          <h3 class="mb-0">
+			            <a class="text-dark" href="#">圖書標題</a>
+			          </h3>
+			          <div class="mb-1 text-muted">撰寫者：test, 創建日期：Nov 12</div>
+			          <div id="rateYo"></div>
+			          <br>
+			          <p class="card-text mb-auto">書名</p>
+			          <p class="card-text mb-auto">作者</p>
+			          <p class="card-text mb-auto">出版社</p>
+			          <br>
+			          <button type="button" class="btn btn-outline-danger"  value="" id="deletSub" >取消收藏</button>
+			        </div>
+			        <svg class="bd-placeholder-img card-img-right flex-auto d-none d-lg-block" width="200" height="250" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail">
+			        	<image xlink:href="https://im2.book.com.tw/image/getImage?i=https://www.books.com.tw/img/001/088/03/0010880353.jpg&v=5fe9b3ba&w=348&h=348" width="100%" height="100%" />
+			        </svg>
+			      </div>
+			    </div>
+			    
 			</div>
 		</div>
 		<!-- 收藏 -->
@@ -196,7 +244,7 @@
 					</button>
 				</div>
 				<div class="modal-body">
-					<p>確認是否要刪除心得</p>
+					<p id="deleteInfo">確認是否要刪除心得</p>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-link" id="deleteSecond"
@@ -213,26 +261,27 @@
 	<!-- footer -->
 
 	<script>
-	
-		/* var mb_ID = $.cookie('Mb_ID');
-		var mb_Name = $.cookie('Mb_Name')
-		if ( typeof(mb_ID) != "undefined"){
-			console.log("success Login")
-		}else{
-			window.location.href = "http://localhost:8080/BookWeb/toLogin";
-		}; */
-	
-		
-		$("#bookWebheader").load("//localhost:8080/BookWeb/header");
-		$("#bookWebFooter").load("//localhost:8080/BookWeb/footer");
 
 		$(document).ready(function() {
 			
+			$("#bookWebheader").load("//localhost:8080/BookWeb/header");
+			$("#bookWebFooter").load("//localhost:8080/BookWeb/footer");
+			
 			loadBookReportList();
+			loadCollectReport();
+			
 		});
-
+		
+		
 		$('#deleteSecond').click(function() {
-			deleteReport($(this).val());
+			if($('#deleteInfo').html() == "是否要刪除心得"){
+				deleteReport($(this).val());			
+			}
+			if($('#deleteInfo').html() == "是否要取消收藏"){
+				
+				deleteCollect($(this).val());
+			}
+			
 		});
 
 		$('#editButton').click(function() {
@@ -255,6 +304,22 @@
 				}
 			});
 		});
+		
+		function deleteCollect(rc_ID) {
+			var deleteURL = location.href + "/deleteCollectReport/" + rc_ID;
+			$.ajax({
+				async : false,
+				type : 'POST',
+				url : deleteURL,
+				dataType : "json",
+				success : function(data) {
+					console.log(data)
+					if (data) {
+						loadCollectReport();
+					}
+				}
+			});
+		};
 
 		function deleteReport(br_ID) {
 			var deleteURL = location.href + "/deleteBookReport/" + br_ID;
@@ -270,7 +335,63 @@
 				}
 			});
 		};
-
+		
+		function loadCollectReport(){
+			$.ajax({
+				async : false,
+				type : 'POST',
+				url : location.href + "/getMemberCollectReport",
+				type : 'POST',
+				dataType : "json",
+				success : function(data){
+					var inserData = "";
+					for(var i = 0; i < data.length; i++){						
+						inserData += "<div class=\"col-md-6\">"
+								  	+ "<div class=\"card flex-md-row mb-4 shadow-sm h-md-250\">"
+								  	+ "<div class=\"card-body d-flex flex-column align-items-start\">"
+						      	  	+ "<h3 class=\"mb-0\">"
+						      	  	+ "<a class=\"text-dark\" href=\"http://localhost:8080/BookWeb/BookReport/"+ data[i].brId +"\">"+ data[i].brName +"</a>"
+								  	+ "</h3>"
+									+ "<div class=\"mb-1 text-muted\">"
+									+ "撰寫者："+ data[i].mbAccount
+									+ "</div>"
+									+ "<div class=\"mb-1 text-muted\">"
+									+ "創建日期："+ data[i].brDate
+									+ "</div>"
+									+ "<div id=rateYo"+ data[i].rcId +"></div>"
+									+ "<br>"
+									+ "<p class=\"card-text mb-auto\">書名："+ data[i].bkName +"</p>"
+									+ "<p class=\"card-text mb-auto\">作者："+ data[i].bkAuthor +"</p>"
+									+ "<p class=\"card-text mb-auto\">出版社："+ data[i].bkPublish +"</p>"
+									+ "<br>"
+									+ "<button type=\"button\" class=\"btn btn-outline-danger\"  data-toggle=\"modal\" data-target=\"#deletModal\" id=\"deletSub\" value=\""+ data[i].rcId +"\" >取消收藏</button>"
+									+ "</div>"
+									+ " <svg class=\"bd-placeholder-img card-img-right flex-auto d-none d-lg-block mr-4 mt-4\" width=\"150\" height=\"250\" xmlns=\"http://www.w3.org/2000/svg\" preserveAspectRatio=\"xMidYMid slice\" focusable=\"false\" role=\"img\" aria-label=\"Placeholder: Thumbnail\">"
+									+ "<image xlink:href=\""+ data[i].bkPic +"\"width=\"100%\" height=\"100%\"/>"
+									+ "</svg>"
+									+ "</div>"
+									+ "</div>"
+					}
+					$('#collectReport').html(inserData);
+					
+					for(var i = 0; i < data.length; i++){	
+						$("#rateYo"+ data[i].rcId).rateYo({
+							rating: data[i].brScore,
+						    spacing: "5px",
+						    starWidth: "20px",
+						    readOnly: true
+						});
+					}				
+				}
+			});
+			
+			$(".btn-outline-danger").click(function(){
+				$('#deleteInfo').html("是否要取消收藏");
+				$('#deleteSecond').val($(this).val());
+				console.log($('#deleteInfo').html());
+			});	
+		}
+		
 		function loadBookReportList() {
 			$.ajax({
 				async : false,
@@ -322,6 +443,7 @@
 			});
 			$('.btn-outline-secondary').click(function() {
 				if ($(this).attr("id") == 'delete') {
+					$('#deleteInfo').html("是否要刪除心得");
 					$('#deleteSecond').val($(this).val());
 				}
 				if ($(this).attr("id") == 'edit') {

@@ -40,17 +40,17 @@
 </script>
 <title>Insert title here</title>
 </head>
-<body style="background: #EBFFEB;">
+<body>
 
 	<!-- header -->
 	<header class="container blog-header py-3" id="bookWebheader"></header>
 	<!-- header -->
 
 	<!-- body -->
-	<div class="container media">
+	<div class="container media"  style="background: #EBFFEB;">
 
 		<h1>
-			我又是測試頁 &gt;.&lt;&quot;<BR> 親愛的會員 QAQ 您好： <BR> <FONT
+			<BR> 親愛的會員  您好： <BR> <FONT
 				COLOR='RED'>二手書圖</FONT><BR> 感謝您的訂購<BR> 期待您再度光臨
 		</h1>
 		<BR>

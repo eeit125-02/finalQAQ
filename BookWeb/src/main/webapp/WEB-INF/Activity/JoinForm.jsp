@@ -70,14 +70,11 @@
 			<form:form method="POST" modelAttribute="ajb" enctype="multipart/form-data">
 
 				<table>
-                    <tr>
-						<td><input type="hidden">會員帳號:${loginUser.getMb_Account()}</label></td>
-<%-- 						<td><input type="hidden" name="mb_Account" value="${member.mb_Account}" /></td> --%>
-					</tr>
 
 					<tr>
-						<td><label>會員帳號:${loginUser.getMb_Account()}</label></td>
+						<td><label>會員帳號:${loginUser.mb_Account}</label></td>
 <%-- 						<td><input type="hidden" name="mb_Account" value="${member.mb_Account}" /></td> --%>
+					<form:input type="hidden" path="act.member.mb_Account" value="${loginUser.mb_Account}"/>
 					</tr>
 
                     <tr>
@@ -86,18 +83,18 @@
 					</tr>
 
                     <tr>
-						<td><label>會員名稱:${loginUser.getMb_Name()}</label></td>
+						<td><label>會員姓名:${loginUser.getMb_Name()}</label></td>
 <%-- 						<td><input type="hidden" name="mb_Name" value="${member.mb_Name}" /></td> --%>
 					</tr>
 
 					<tr>
-						<td><form:label path="member.mb_Mail">email:</form:label></td>
-						<td><form:input path="member.mb_Mail" value="${loginUser.getMb_Mail()}"/></td>
+						<td><form:label path="act.member.mb_Mail">email:</form:label></td>
+						<td><form:input path="act.member.mb_Mail" value="${loginUser.getMb_Mail()}"/></td>
 					</tr>
 
 					<tr>
-						<td><form:label path="member.mb_Tel">聯絡電話:</form:label></td>
-						<td><form:input path="member.mb_Tel" value="${loginUser.getMb_Tel()}"/></td>
+						<td><form:label path="act.member.mb_Tel">聯絡電話:</form:label></td>
+						<td><form:input path="act.member.mb_Tel" value="${loginUser.getMb_Tel()}"/></td>
 					</tr>
 
 
@@ -113,8 +110,8 @@
 				<input type='reset' value='還原' />
 				<br>
 				<br>
-				<a href='ActHomepage'>繼續探索活動</a>
 			</form:form>
+				<a href='${pageContext.request.contextPath}/showActs'>繼續探索活動</a>
 
 
 		</div>

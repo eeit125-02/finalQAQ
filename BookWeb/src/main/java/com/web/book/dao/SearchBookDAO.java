@@ -5,18 +5,19 @@ import java.util.List;
 import com.web.book.model.BookBean;
 import com.web.book.model.BookCollectBean;
 import com.web.book.model.BookTypeBean;
+import com.web.book.model.SearchTypeBean;
 
 
 public interface SearchBookDAO {
 
 	// 查詢書籍關鍵字
-	List<BookBean> searchBook(String name);
+	List<BookBean> searchBook(String name, Integer page);
 	//查詢書籍作者
-	List<BookBean> searchBookAuthor(String name);
+	List<BookBean> searchBookAuthor(String name, Integer page);
 	//查詢書籍出版社
-	List<BookBean> searchBookPublish(String name);
+	List<BookBean> searchBookPublish(String name, Integer page);
 	//查詢書籍類別
-	List<BookBean> searchBookType(List<Integer> reslist);
+	List<BookBean> searchBookType(List<Integer> reslist, Integer page);
 
 	// 取得單一本書的詳細資訊
 	BookBean getBook(int id);
@@ -26,6 +27,9 @@ public interface SearchBookDAO {
 
 	// 會員收藏清單
 	List<BookCollectBean> getCollect(int MB_ID);
+
+	//取得全部類型
+	List<SearchTypeBean> getAllBookType();
 
 	// 刪除收藏項目
 	boolean deletebc(int bcid);
@@ -41,5 +45,14 @@ public interface SearchBookDAO {
 
 	//查詢收藏與否
 	boolean checkbc(int bk_id, int mb_id);
+	
+	//刪除書本
+	boolean deletebk(BookBean bkc);
+	
+	//取得總頁數
+	int getResultPage();
+	//取得總筆數
+	int getResultNumber();
+	
 
 }

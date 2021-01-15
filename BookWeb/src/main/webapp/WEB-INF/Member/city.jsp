@@ -8,18 +8,19 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Document</title>
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
-	integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
-	crossorigin="anonymous"></script>
-<script
-	src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
-	integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
-	crossorigin="anonymous"></script>
+<!-- <script -->
+<!-- 	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" -->
+<!-- 	integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" -->
+<!-- 	crossorigin="anonymous"></script> -->
+<!-- <script -->
+<!-- 	src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" -->
+<!-- 	integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" -->
+<!-- 	crossorigin="anonymous"></script> -->
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
 	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
 	crossorigin="anonymous">
+	
 <style>
 #admin,#mb_modify,#mb_pwd,#mb_inf {
 	border-radius: 25px;
@@ -44,7 +45,7 @@ background-color:#e0ece4
 #city {
 	border-radius: 25px;
 	padding: 20px;
-	background-color: #F3F3FA;
+	background-color: 	#F0F0F0;
 	height:300px;
 	width: 200px;
 	float:left;
@@ -56,11 +57,10 @@ legend {
 
 div {
 	text-align: center;
-	margin: 10px;
 }
-p {
-	text-align: center;
-	margin-top: 0px;
+
+.btn {
+	margin:5px;
 }
 
 .bd-placeholder-img {
@@ -80,27 +80,90 @@ p {
 	<header class="container blog-header py-3" id="bookWebheader"></header>
 	<!-- header -->
 	<div class="container media" style="width:1500px; margin-left:400px" >
-	<fieldset id="city">
+	<fieldset id="city" >
 		<legend>會員中心</legend>
 		<div>
 				<div><button  id="admin1" name="admin" class="btn btn-outline-secondary">會員資訊</button>
 				</div>
 				<div><button  id="inf" name="mb_inf" class="btn btn-outline-secondary">會員資訊</button>
 				</div>
+				<div><button  id="third" name="third" class="btn btn-outline-secondary">會員資訊</button>
+				</div>
 				<button  id="Modify" name="Modify" class="btn btn-outline-secondary">會員修改</button>
 				<div>
 				<button  id="pwdModify" name="pwdModify" class="btn btn-outline-secondary">密碼修改</button>
 				</div>
-			<form name=a3 class=a3 action="<c:url value='/collectlist' />" method="get">
+				<form name=a3 class=a3 action="<c:url value='/collectlist' />" method="get">
 				<div>
 				<button type="submit" name="list" class="btn btn-outline-secondary">收藏清單</button>
 				</div>
-			
-			</form>
-		</div>
+				</form>
+				<form name=a3 class=a3 action="<c:url value='/myStore' />" method="get">
+				<div>
+				<button type="submit" name="sell" class="btn btn-outline-secondary">我的賣場</button>
+				</div>
+				</form>	
+				</div>
 	</fieldset>
-	
-	<div id="change123" style="width:900px;margin-left:10px ">顯示頁面</div>
+	<div id="change123" style="width:1500px;margin-left:10px ">
+									<fieldset id="mb_inf">
+									<legend>會員資料</legend>
+									<form>
+									<div>
+									<img src="${loginUser.mb_pic}" style="width: 200px; height: 200px; text-align:center; border-radius: 50%;"/>
+									</div>
+									<br>
+									<table class="table" >
+								    <tr class="tr1">
+									<th scope="col" >帳號</th>
+									<th scope="col" >姓名</th>
+									</tr>
+									<tr class="table-light">
+									<td>${loginUser.mb_Account}</td>
+									<td>${loginUser.mb_Name}</td>
+									</tr>
+
+								<tr class="tr2">
+									<th scope="col">性別</th>
+									<th scope="col">電話</th>
+								</tr>
+								<tr class="table-light">
+									<td>${loginUser.mb_Sex}</td>
+									<td>${loginUser.mb_Tel}</td>
+								</tr>
+
+								<tr class="tr2">
+									<th colspan="2">生日</th>
+								</tr>
+								<tr class="table-light">
+									<td colspan="2">${loginUser.mb_Birthday}</td>
+								</tr>
+
+								<tr class="tr2">
+					      		<th colspan="2">Email</th>
+								</tr>
+								<tr class="table-light">
+									<td colspan="2">${loginUser.mb_Mail}</td>
+								</tr>
+
+								<tr class="tr2">
+									<th colspan="2">地址</th>
+								</tr>
+								<tr  class="table-light">
+									<td colspan="2">${loginUser.mb_Address}</td>
+								</tr>
+
+								<tr class="tr2">
+									<th colspan="2">喜好類型</th>
+									</tr>
+								<tr  class="table-light">
+									<td colspan="2">${loginUser.mb_type}</td>
+								</tr>
+
+							</table>
+						</form>
+					</fieldset>
+					</div>
 	</div>
 	<input id="test" type="hidden" value="${third}">
 	<!-- footer -->
@@ -108,25 +171,144 @@ p {
 	<!-- footer -->
 	</body>
 	<script>
-	$('#admin1').click(function(){
-		$('#change123').load("//localhost:8080/BookWeb/adminall")
-	})
 	$(document).ready(function() {
 		$("#bookWebheader").load("<c:url value='/header'/>");
         $("#bookWebFooter").load("<c:url value='/footer'/>");
 	}); 
         var check = $("#test").val();
         if(check=="third"){
+        	$("#inf").hide();
 			$("#pwdModify").hide();
 			$("#admin1").hide();
 		}else if(check=="admin"){
 			$("#pwdModify").hide();
 			$("#Modify").hide();
 			$("#inf").hide();
+			$("#third").hide();
 		}else{
+			$("#third").hide();
 			$("#admin1").hide();
 		}
-	
+		
+        if(check=="third"){
+        	$.ajax({
+				async : false,
+				cache : false,
+				url : "mb_inf",
+				type : 'POST',
+				dataType : "json",
+				contentType : "application/json;charset=utf-8",
+				success : function(data) {
+					console.log(data)
+					var insertData = "";
+						insertData ="<fieldset id=\"mb_inf\">"
+									+"<legend>會員資料</legend>"
+									+"<form>"
+									+"<div>"
+									+"<img src=\""+data.login.mb_pic+"\" style=\"width: 200px; height: 200px; text-align:center; border-radius: 50%;\" />"
+									+"</div>"
+									+"<br>"
+									+"<table class=\"table\" >"
+									+"<tr class=\"tr1\">"
+									+"<th scope=\"col\" >帳號</th>"
+									+"<th scope=\"col\" >姓名</th>"
+									+"</tr>"
+									+"<tr class=\"table-light\">"
+									+"<td>"+data.login.mb_Account+"</td>"
+									+"<td>"+data.login.mb_Name+"</td>"
+									+"</tr>"
+
+								+"<tr class=\"tr2\">"
+									+"<th scope=\"col\">電話</th>"
+									+"<th scope=\"col\">生日</th>"
+								+"</tr>"
+								+"<tr class=\"table-light\">"
+									+"<td>"+data.login.mb_Tel+"</td>"
+									+"<td>"+data.mb_Birthday+"</td>"
+								+"</tr>"
+
+								+"<tr class=\"tr2\">"
+									+"<th colspan=\"2\">地址</th>"
+								+"</tr>"
+								+"<tr  class=\"table-light\">"
+									+"<td colspan=\"2\">"+data.login.mb_Address+"</td>"
+								+"</tr>"
+
+								+"<tr class=\"tr2\">"
+									+"<th colspan=\"2\">喜好類型</th>"
+								+"</tr>"
+								+"<tr  class=\"table-light\">"
+									+"<td colspan=\"2\">"+data.login.mb_type+"</td>"
+								+"</tr>"
+
+							+"</table>"
+						+"</form>"
+					+"</fieldset>"	
+		 			$('#change123').html(insertData);
+				}
+	 });
+        }
+       
+        $("#third").click(function(){
+        	$.ajax({
+				async : false,
+				cache : false,
+				url : "mb_inf",
+				type : 'POST',
+				dataType : "json",
+				contentType : "application/json;charset=utf-8",
+				success : function(data) {
+					console.log(data)
+					var insertData = "";
+						insertData ="<fieldset id=\"mb_inf\">"
+									+"<legend>會員資料</legend>"
+									+"<form>"
+									+"<div>"
+									+"<img src=\""+data.login.mb_pic+"\" style=\"width: 200px; height: 200px; text-align:center; border-radius: 50%;\" />"
+									+"</div>"
+									+"<br>"
+									+"<table class=\"table\" >"
+									+"<tr class=\"tr1\">"
+									+"<th scope=\"col\" >帳號</th>"
+									+"<th scope=\"col\" >姓名</th>"
+									+"</tr>"
+									+"<tr class=\"table-light\">"
+									+"<td>"+data.login.mb_Account+"</td>"
+									+"<td>"+data.login.mb_Name+"</td>"
+									+"</tr>"
+
+								+"<tr class=\"tr2\">"
+									+"<th scope=\"col\">電話</th>"
+									+"<th scope=\"col\">生日</th>"
+								+"</tr>"
+								+"<tr class=\"table-light\">"
+									+"<td>"+data.login.mb_Tel+"</td>"
+									+"<td>"+data.mb_Birthday+"</td>"
+								+"</tr>"
+
+								+"<tr class=\"tr2\">"
+									+"<th colspan=\"2\">地址</th>"
+								+"</tr>"
+								+"<tr  class=\"table-light\">"
+									+"<td colspan=\"2\">"+data.login.mb_Address+"</td>"
+								+"</tr>"
+
+								+"<tr class=\"tr2\">"
+									+"<th colspan=\"2\">喜好類型</th>"
+								+"</tr>"
+								+"<tr  class=\"table-light\">"
+									+"<td colspan=\"2\">"+data.login.mb_type+"</td>"
+								+"</tr>"
+
+							+"</table>"
+						+"</form>"
+					+"</fieldset>"	
+		 			$('#change123').html(insertData);
+				}
+	 });
+        })
+           
+        
        $("#inf").click(function(){
 		 $.ajax({
 				async : false,
@@ -148,31 +330,29 @@ p {
 									+"<table class=\"table\" >"
 									+"<tr class=\"tr1\">"
 									+"<th scope=\"col\" >帳號</th>"
-									+"<th scope=\"col\" >密碼</th>"
+									+"<th scope=\"col\" >姓名</th>"
 									+"</tr>"
 									+"<tr class=\"table-light\">"
 									+"<td>"+data.login.mb_Account+"</td>"
-									+"<td>"+data.login.mb_Password+"</td>"
+									+"<td>"+data.login.mb_Name+"</td>"
 									+"</tr>"
 
 								+"<tr class=\"tr2\">"
-									+"<th scope=\"col\">姓名</th>"
 									+"<th scope=\"col\">性別</th>"
-								+"</tr>"
-								+"<tr class=\"table-light\">"
-									+"<td>"+data.login.mb_Name+"</td>"
-									+"<td>"+data.login.mb_Sex+"</td>"
-								+"</tr>"
-
-								+"<tr class=\"tr2\">"
-									+"<th scope=\"col\">生日</th>"
 									+"<th scope=\"col\">電話</th>"
 								+"</tr>"
 								+"<tr class=\"table-light\">"
-									+"<td>"+data.mb_Birthday+"</td>"
+									+"<td>"+data.login.mb_Sex+"</td>"
 									+"<td>"+data.login.mb_Tel+"</td>"
 								+"</tr>"
 
+								+"<tr class=\"tr2\">"
+									+"<th colspan=\"2\">生日</th>"
+								+"</tr>"
+								+"<tr class=\"table-light\">"
+									+"<td colspan=\"2\">"+data.mb_Birthday+"</td>"
+								+"</tr>"
+					
 								+"<tr class=\"tr2\">"
 									+"<th colspan=\"2\">Email</th>"
 								+"</tr>"
@@ -211,34 +391,43 @@ p {
 				success : function(data) {
 						insertData = "<form action=\"<c:url value='/Update' />\" method=\"post\">"
 									 +"<fieldset id=\"mb_pwd\">"
-									 +"<legend>會員個資</legend>"
+									 +"<legend>密碼修改</legend>"
 						+"<table class=\"table\">"
 							+"<tr class=\"tr1\">"
 								+"<th colspan=\"2\">帳號</th>"
 							+"</tr>"
 							+"<tr class=\"table-light\">"
-								+"<td colspan=\"2\">"+data+"</td>"
+								+"<td colspan=\"2\">"+data.mb_Account+"</td>"
 							+"</tr>"
 							+"<tr class=\"tr2\">"
-								+"<th colspan=\"2\" >密碼"
+							+"<th colspan=\"2\" >舊密碼"
+							+"</th>"
+							+"</tr>"
+							+"<tr class=\"table-light\">"
+							+"<td><input type=\"password\" name=\"oldpwd\" id=\"oldpwd\" size=\"12\" ></td>"
+							+"</tr>"
+							+"<input type=\"hidden\" id=\"old\" value=\""+data.pwd+"\">"
+							+"<tr class=\"tr2\">"
+								+"<th colspan=\"2\" >新密碼"
 								+"<p style=\"color: gray; margin:0px;\">(1.不可空白，2.至少6個字且必須包含英文字母、數字)</p>"
 								+"</th>"
 							+"</tr>"
 							+"<tr class=\"table-light\">"
-								+"<td><input type=\"password\" name=\"pwd\" id=\"pwd\" size=\"12\" onblur=\"Checkpwd()\"><span id=\"idsp1\" style=\"color: red\"></span></td>"
+								+"<td><input type=\"password\" name=\"pwd\" id=\"pwd\" size=\"12\" ><span id=\"idsp1\" style=\"color: red\"></span></td>"
 							+"</tr>"
 							+"<tr class=\"tr2\">"
 								+"<th colspan=\"2\">確認密碼</th>"
 							+"</tr>"
 							+"<tr class=\"table-light\">"
-							+"<td><input type=\"password\" name=\"pwd1\" id=\"pwd1\" size=\"12\" onblur=\"Checkpwd1()\"><span id=\"idsp2\" style=\"color: red\"></span></td>"
+							+"<td><input type=\"password\" name=\"pwd1\" id=\"pwd1\" size=\"12\" ><span id=\"idsp2\" style=\"color: red\"></span></td>"
 							+"</tr>"
 							+"</table>"
-							+"<button type=\"submit\" name=\"Update\">送出</button>"
+							+"<input type=\"button\" id=\"Update\" name=\"Update\" value=\"送出\">"
 							+"<button type=\"reset\">清除</button>"
 					+"</fieldset>"
 						+"</form>"
 		 			$('#change123').html(insertData);
+						Modify();
 				}
 	 });
 	 })
@@ -275,14 +464,6 @@ p {
 										+"<td><input type=\"text\" id=\"address\" value=\""+data.mb_inf.mb_Address+"\" name=\"mb_Address\" /></td>"
 										+"<td><input type=\"text\" id=\"tel\" value=\""+data.mb_inf.mb_Tel+"\" name=\"mb_Tel\"/><span id=\"idsp6\"></span></td>"
 									+"</tr>"
-
-									+"<tr class=\"tr2\">"
-										+"<th colspan=\"2\">E-mail</th>"
-									+"</tr>"
-									+"<tr class=\"table-light\">"
-										+"<td colspan=\"2\"><input type=\"email\" id=\"mail\" name=\"mb_Mail\" value=\""+data.mb_inf.mb_Mail+"\"/></td>"
-									+"</tr>"
-
 									+"<tr class=\"tr2\">"
 										+"<th colspan=\"2\">喜好類型</th>"
 									+"</tr>"
@@ -315,6 +496,69 @@ p {
 			 });
 			 })
 		
+			 $('#admin1').click(function(){
+			$('#change123').load("//localhost:8080/BookWeb/adminall")
+		})	 
+			 
+// 			$('#admin1').click(function(){
+// 				 $.ajax({
+// 						async : false,
+// 						cache : false,
+// 						url : "mb_inf",
+// 						type : 'POST',
+// 						dataType : "json",
+// 						contentType : "application/json;charset=utf-8",
+// 						success : function(data) {
+// 							console.log(data)
+							
+// 								insertData += 	<div class="container media">
+// 							<br>
+// 							<fieldset id="admin">
+// 								<legend>會員清單</legend>
+// 					<label for="site-search" style="align:left">Search the site:</label>
+// 					<input type="search" id="site-search" name="search" aria-label="Search through site content">
+// 					<button id="searchbtn" name="searchbtn">Search</button>
+// 						<form action="<c:url value='/delete' />" method="post">
+// 								<table class="table"  width="100%"  id="change">
+// 									<c:forEach items="${memberall}" var="u" varStatus="loop">
+// 										<c:if test="${loop.index == 0}">
+// 											<tr>
+// 												<th>帳號</th>
+// 												<th>密碼</th>
+// 												<th>姓名</th>
+// 												<th>註冊日期</th>
+// 												<th></th>
+// 												<th></th>
+// 											</tr>
+// 										</c:if>
+// 										<tr>
+// 											<td>${u.getMb_Account()}</td>
+// 											<td>${u.getMb_Password()}</td>
+// 											<td>${u.getMb_Name()}</td>
+// 											<td>${u.getMb_Date()}</td>
+// 											<td><button type="submit" name="delete"
+// 													class="btn btn-outline-secondary" value="${u.getMb_ID()}">刪除</button>
+// 													<button type="submit" name="update"
+// 														class="btn btn-outline-secondary" value="${u.getMb_Account()}">修改</button></td>
+														
+// 											<td><label class="switch"> <input type="checkbox">
+// 													<span id="ball" class="slider" check="${u.checkColume}"></span>
+// 											</label>
+// 											</td>
+// 										</tr>
+// 									</c:forEach>
+// 								</table>
+// 							</form>
+// 								<a href="<c:url value='/toCity'/>">返回</a>
+// 							</fieldset>
+// 					</div>
+		
+// 						}
+// 						})	 
+// 			})
+			 
+			 
+			 
 		function showImage(){
     	   $("#myfile").change(function() {
    			console.log("123")
@@ -339,9 +583,69 @@ p {
 // 					success : function(data) {
 						
 // 							insertData =
-       
-	 
-	 
+    function Modify(){
+    	let old = $('#old').val();
+		console.log(old)
+	var b1=false;
+	var b2=false;
+	var b3=false;
+	$('#pwd').blur(function(){
+		let pwd = document.getElementById("pwd").value
+		let pwdlen = pwd.length;
+		let sp = document.getElementById("idsp1")
+		var rex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]+$/;
+		if (pwd.length >= 6 && rex.test(pwd)) {
+			b1=true;
+			sp.innerHTML = "ok"
+		} else if (pwd == "") {
+			sp.innerHTML = "密碼不可為空白"
+		} else if (pwd.length < 6) {
+			sp.innerHTML = "密碼不足6碼"
+		} else if (pwd != rex.test(pwd)) {
+			sp.innerHTML = "密碼須包含英文、數字及特殊符號"
+		} else {
+			sp.innerHTML = "錯誤"
+		}
+	})
+
+	$('#pwd1').blur(function(){
+		let pwd = document.getElementById("pwd").value
+		let pwd1 = document.getElementById("pwd1").value
+		sp = document.getElementById("idsp2")
+		if (pwd1 ==pwd && pwd1 != "") {
+				b2=true;
+			sp.innerHTML = "ok"
+		} else
+			sp.innerHTML = "錯誤"
+
+	})	
+		$('#Update').click(function(){
+		let old = $('#old').val();
+		let oldpwd = $('#oldpwd').val();
+		console.log(oldpwd)
+		console.log("123")
+		 $.ajax({
+						async : false,
+						type : 'POST',
+						data : {'oldpwd':oldpwd},
+						url : "checkpwd",
+						success : function(data) {	
+						if(data){
+							b3=true;						
+						}else{
+							b3=false;
+						}
+		 }
+		})
+		if(b1!=true || b2!=true){
+			alert("資料有誤");
+		}else if(b3==false){
+			alert("舊密碼錯誤");
+		}else{
+			$('form').submit();
+		}
+	})
+}
 </script>
 	<script>
 		function Checkpwd() {

@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.web.book.model.CommandBean;
 import com.web.book.model.MemberBean;
+import com.web.book.model.NestedCommandBean;
 import com.web.book.model.PostBean;
 import com.web.book.model.RuleBean;
 import com.web.book.service.DiscussionService;
@@ -70,10 +71,40 @@ public class DiscussionRESTfulController {
 		 discussionService.addCommand(cb);
 		 Map<String,Object> new_cb = new HashMap<>();
 		 new_cb.put("mb_name", cb.getMemberbean().getMb_Name());
-		 new_cb.put("cb_time", cb.getCommand_time().toString());
+		 new_cb.put("cb_time", cb.getCommand_time());
 		 new_cb.put("cb_content", cb.getCommand_content());
+		 new_cb.put("cb_id", cb.getCommand_id());
+		 new_cb.put("post_id", cb.getPostBean().getPost_id());
 		return new_cb;
 	}
+	
+	@PostMapping("/Discussion/add_nested_command_ajax")
+	@ResponseBody
+	public Map<String, Object> addNestedCommandAjax(Model model,
+			@RequestParam(value="nested_command") String new_nested_command,
+			@RequestParam(value="command_id") Integer command_id
+			){
+		NestedCommandBean ncb = new NestedCommandBean();
+		Timestamp d = new Timestamp(System.currentTimeMillis());
+		DateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		String tsStr = sdf.format(d);
+		ncb.setNested_command_time(tsStr);
+		ncb.setMemberbean(loginUser);
+		CommandBean pb = discussionService.getCommandBeanById(command_id);
+		ncb.setCommandBean(pb);
+		ncb.setNested_command_content(new_nested_command);
+		discussionService.addNestedCommand(ncb);
+		
+		Map<String,Object> new_ncb = new HashMap<>();
+		new_ncb.put("mb_name", ncb.getMemberbean().getMb_Name());
+		new_ncb.put("ncb_time", ncb.getNested_command_time());
+		new_ncb.put("ncb_content", ncb.getNested_command_content());
+		new_ncb.put("cb_id", ncb.getCommandBean().getCommand_id());
+		new_ncb.put("cb_content", ncb.getCommandBean().getCommand_content());
+		return new_ncb;
+	}
+	
+	
 	
 	//hql有問題！！
 	//查詢貼文關鍵字

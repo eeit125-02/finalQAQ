@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.web.book.model.BookReportBean;
 import com.web.book.model.BookReportCollectBean;
+import com.web.book.model.BookReportMessageBean;
 
 public interface BookReportDao {
 	
@@ -31,6 +32,16 @@ public interface BookReportDao {
 	
 	void addSubReport(Integer br_ID, Integer mb_ID);
 	
-	List<BookReportCollectBean> getMemberCollectReportList(Integer br_ID);
+	List<BookReportCollectBean> getMemberCollectReportList(Integer mbId);
+	
+	void delteCollectReport(Integer rcId);
+	 
+	List<BookReportMessageBean> getBookReportMessageList(Integer brId);
+	
+	List<BookReportMessageBean> getMemberBookReportMessageList(Integer mbId);
+	 
+	void addReportMessage(Integer brId, Integer mbId, String content );
+	 
+	void deletReportMessage(Integer bmId);
 	
 }
