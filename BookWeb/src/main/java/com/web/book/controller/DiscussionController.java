@@ -113,15 +113,7 @@ public class DiscussionController {
 		discussionService.editPost(edit_post_id, edit_post_title,edit_post_content, tsStr);
 		return "redirect:/Discussion/mainpage"; 
 	}
-	
-	//刪除貼文
-	@PostMapping("Discussion/go_delete")
-	public String processPostDelete(Model model,
-			@RequestParam("delete_post_id") Integer delete_post_id) {
-		discussionService.deletPost(delete_post_id);
-		return "redirect:/Discussion/mainpage"; 
-	}
-	
+		
 	//搜尋關鍵字
 	@PostMapping("Discussion/search_keyword")
 	public String showKeywordSearchResult(Model model,

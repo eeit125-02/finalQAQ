@@ -111,7 +111,7 @@ response.setDateHeader("Expires", 0);
 						<a
 						class="list-group-item list-group-item-action"
 						id="list-manager-list" data-toggle="list" href="#list-manager"
-						role="tab">板主專區</a>
+						role="tab">管理員專區</a>
 						
 						<script>
 						$('#list-manager-list').click(function(){
@@ -197,7 +197,6 @@ response.setDateHeader("Expires", 0);
 												<div class="show_part_title text-left" >${stored_post.post_title}</div>
 												</button>
 													</form>
-													<div class="show_part_content">&thinsp;&thinsp;&thinsp;&thinsp;${stored_post.post_content}</div>
 													</td>
 												<td style="vertical-align: middle">${stored_post.post_time}</td>
 												<td style="vertical-align: middle">${stored_post.memberbean.mb_Name}</td>
@@ -250,7 +249,6 @@ response.setDateHeader("Expires", 0);
 												${stored_post.post_title}
 												</button>
 													</form>
-													<div class="show_part_content">&thinsp;&thinsp;&thinsp;&thinsp;${stored_post.post_content}</div>
 													</td>
 												<td style="vertical-align: middle">${stored_post.post_time}</td>
 												<td style="vertical-align: middle">${stored_post.memberbean.mb_Name}</td>
@@ -300,7 +298,6 @@ response.setDateHeader("Expires", 0);
 												${stored_post.post_title}
 												</button>
 													</form>
-													<div class="show_part_content">&thinsp;&thinsp;&thinsp;&thinsp;${stored_post.post_content}</div>
 													</td>
 												<td style="vertical-align: middle">${stored_post.post_time}</td>
 												<td style="vertical-align: middle">${stored_post.memberbean.mb_Name}</td>
@@ -380,23 +377,32 @@ response.setDateHeader("Expires", 0);
 								<c:set var="um" value="${loginUser.mb_ID}" />
 								<c:set var="pmm" value="${stored_post.memberbean.mb_ID}" />
 								<c:if test="${um==pmm}">
+									
+									
+								
 									<div
 										style="border: #ADADAD 2px solid; border-radius: 5px; text-align: left; padding: 10px; margin: 0px 10px">
-
-										<c:url value="go_delete" var="go_delete">
-											<c:param name="delete_post_id"
-												value=" ${stored_post.post_id}" />
-										</c:url>
-										<form class="form-inline float-right" action="${go_delete}"
-											method="post">
+										
+										<form class="form-inline float-right" >
 											<button class="btn btn-outline-secondary btn-sm" id="member_delete_btn${stored_post.post_id}"
-												type="submit" style="margin-left: 5px">刪除</button>
+												type="submit" style="margin-left: 5px" value="${stored_post.post_id}">刪除</button>
 										</form>
 										
 										<script>
 											$('#member_delete_btn${stored_post.post_id}').click(function(){
 												var yes = confirm('確定刪除 ${stored_post.post_title} 嗎？');
-												if(!yes){event.preventDefault()}
+												if(!yes){
+													event.preventDefault()
+												}else{
+													$.ajax({
+														url : '<c:url value="/Discussion/delete_ajax"/>',
+														type : 'POST',
+														data : {delete_post_id : $(this).val()},
+														dataType : "json",
+														success:function(delete_post_id){
+															location.reload();}
+													})	
+												}
 											})
 											</script>
 
@@ -510,6 +516,7 @@ response.setDateHeader("Expires", 0);
 													</c:forEach>	
 														</c:if>
 													</c:forEach>
+													</div>
 												</div>
 
 <script>
@@ -601,8 +608,8 @@ response.setDateHeader("Expires", 0);
 											</div>
 										</div>
 
-									</div>
 									<br>
+									
 									</c:if>
 								</c:forEach>
 
@@ -612,7 +619,7 @@ response.setDateHeader("Expires", 0);
 
 					<!-- =====================================================manager page===================================================== -->
 					<div class="tab-pane fade" id="list-manager" role="tabpanel">
-					<h3>版主頁面</h3>
+					<h3>管理員頁面</h3>
 						<br>
 						<!-- manager page top button  -->
 						<ul class="nav nav-pills mb-3 justify-content-center"
@@ -723,8 +730,9 @@ response.setDateHeader("Expires", 0);
  													$('#show_type_keyword').html('');
  														show_search_result += 
  															'<div style="border: #ADADAD 2px solid; border-radius: 5px; text-align: left; padding: 10px; margin: 0px 10px">'
+														+ '<div style="display:none">'+post_search_result[i].post_title+'</div>'
 														+ '<form class="form-inline float-right">'
- 														+	'<button class="btn btn-outline-secondary btn-sm" id="manager_delete_btn'+post_search_result[i].post_id+'"'	
+ 														+	'<button class="btn btn-outline-secondary btn-sm manager_delete" id="manager_delete_btn'+post_search_result[i].post_id+'" value="'+post_search_result[i].post_id +'"'	
  														+	'type="submit" style="margin-left: 5px">刪除</button>'	
  														+ '</form>'		
  														+	'<p>'+post_search_result[i].mb_name+'<br>'+post_search_result[i].post_time+'</p>'
@@ -743,6 +751,22 @@ response.setDateHeader("Expires", 0);
 										$('#keyword_manager').val("");
 										$('keyword_manager').attr("placeholder","請輸入關鍵字");
 										})
+										
+										$(document).on("click", '.manager_delete', function(){
+											var yes = confirm('確定刪除 '+$(this).parent().prev().html()+' 嗎？');
+											if(!yes){
+												event.preventDefault()
+											}else{
+												$.ajax({
+													url : '<c:url value="/Discussion/delete_ajax"/>',
+													type : 'POST',
+													data : {delete_post_id : $(this).val()},
+													dataType : "json",
+													success:function(delete_post_id){
+														location.reload();}
+												})	
+											}
+										})
 								</script>
 
 									<!-- show all post -->
@@ -751,21 +775,28 @@ response.setDateHeader("Expires", 0);
 										<div
 											style="border: #ADADAD 2px solid; border-radius: 5px; text-align: left; padding: 10px; margin: 0px 10px">
 
-											<c:url value="go_delete" var="go_delete">
-												<c:param name="delete_post_id"
-													value=" ${stored_post.post_id}" />
-											</c:url>
-											<form class="form-inline float-right" action="${go_delete}" 
-												method="post">
+											
+											<form class="form-inline float-right">
 												<button class="btn btn-outline-secondary btn-sm" id="manager_delete_btn${stored_post.post_id}"
-													type="submit" style="margin-left: 5px">刪除</button>
+													type="submit" style="margin-left: 5px" value="${stored_post.post_id}">刪除</button>
 											</form>
 											
-											<script>
-											$('#manager_delete_btn${stored_post.post_id}').click(function(){
-												var yes = confirm('確定刪除 ${stored_post.post_title} 嗎？');
-												if(!yes){event.preventDefault()}
-											})
+											<script>											
+													$('#manager_delete_btn${stored_post.post_id}').click(function(){
+														var yes = confirm('確定刪除 ${stored_post.post_title} 嗎？');
+														if(!yes){
+															event.preventDefault()
+														}else{
+															$.ajax({
+																url : '<c:url value="/Discussion/delete_ajax"/>',
+																type : 'POST',
+																data : {delete_post_id : $(this).val()},
+																dataType : "json",
+																success:function(delete_post_id){
+																	location.reload();}
+															})	
+														}
+													})
 											</script>
 
 											<p>${stored_post.memberbean.mb_Name}
@@ -786,9 +817,6 @@ response.setDateHeader("Expires", 0);
 										</div><br>
 									</c:forEach>
 									</div>
-									
-									
-								
 
 							</div>
 

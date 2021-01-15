@@ -121,11 +121,17 @@ public class DiscussionRESTfulController {
 			data.put("post_title", postBean.getPost_title());
 			data.put("post_content", postBean.getPost_content());
            post_search_result.add(data);
-        }
-		
+        }		
 		return post_search_result;
 	}
 	
-	
+	//刪除貼文
+	@PostMapping("/Discussion/delete_ajax")
+	@ResponseBody
+	public Integer deletePostAjax(Model model,
+			@RequestParam("delete_post_id") Integer delete_post_id) {
+		discussionService.deletPost(delete_post_id);
+		return delete_post_id; 
+	}
 
 }
