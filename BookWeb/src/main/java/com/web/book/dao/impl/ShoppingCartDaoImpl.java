@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -44,20 +45,25 @@ public class ShoppingCartDaoImpl implements ShoppingCartDao {
 		List<ShoppingCartBean> list = session.createQuery(hql).setParameter("member", member).getResultList();
 		return list;
 	}
-	//查詢是否有這筆購物車資料
-//	public void checkCart(Integer bk_ID, Integer bb_ID) {
-//		Session session = factory.getCurrentSession();
-//		String hql = "FROM ShoppingCartBean a where a.book = :book and a.member = :member";
-//		BookBean book = session.get(BookBean.class, bk_ID);
-//		MemberBean member = session.get(MemberBean.class, bb_ID);
-//		session.createQuery(hql).setParameter("book", book).setParameter("member", member).getSingleResult();
-//	}
+	
 	//修改一筆購物車資料
 	@Override
 	public void updateCart(Integer cart_ID, Integer cart_Num) {
 		Session session = factory.getCurrentSession();
 		ShoppingCartBean shoppingCart = session.load(ShoppingCartBean.class, cart_ID);
 		shoppingCart.setCart_Num(cart_Num);
+	}
+	
+	//更新一筆購物車資料
+	@Override
+	@SuppressWarnings("unchecked")
+	public void updateCartAll(Integer cart_Num, Integer bk_ID, Integer bb_ID) {
+		Session session = factory.getCurrentSession();
+		String hql = "UPDATE ShoppingCartBean a SET a.cart_Num = :cart_Num WHERE a.bk_ID = :bk_ID AND a.bb_ID = :bb_ID";
+		Query<ShoppingCartBean> query = session.createQuery(hql);
+		query.setParameter("cart_Num", cart_Num);
+		query.setParameter("bk_ID", bk_ID);
+		query.setParameter("bb_ID", bb_ID);
 	}
 
 }

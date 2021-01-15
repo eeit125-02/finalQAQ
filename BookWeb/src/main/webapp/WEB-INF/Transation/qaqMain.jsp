@@ -63,7 +63,8 @@
 				<div class="col-lg-4">
 					<div class="input-group">
 						<input type="text" class="form-control" name="sBkNe"
-							placeholder="請輸入書名"> <span class="input-group-btn">
+							placeholder="請輸入書名" required="required"> <span
+							class="input-group-btn">
 							<button type="submit" class="btn btn-outline-secondary">
 								<img alt="圖勒?" src='<c:url value="/image/qaqsearch.png" />'
 									width="20px" height="20px">
@@ -115,7 +116,8 @@
 					<br>
 				</c:when>
 				<c:otherwise>
-				<hr><br>
+					<hr>
+					<br>
 					<div class="row">
 						<div class="col-lg-4"></div>
 						<div class="col-lg-8">

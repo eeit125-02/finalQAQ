@@ -37,4 +37,11 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 		dao.updateCart(cart_ID, cart_Num);
 	}
 
+	@Override
+	public void updateCartAll(Integer cart_Num, Integer bk_ID, Integer bb_ID) {
+		dao.updateCartAll(cart_Num, bk_ID, bb_ID);		
+	}
+	
+	
+
 }

@@ -91,7 +91,6 @@
 				alert("你做錯了喔!!!")
 			},
 			success : function(data) {
-				console.log(data);
 				var inserData = "";
 				for(var i = 0; i < data.length; i++){
 					inserData += "<div class=\"card col-sm-3\""

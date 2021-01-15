@@ -95,6 +95,7 @@ public class StoreController {
 		return "/Transation/qaqMain";
 	}
 
+	// 點擊首頁圖片和書名
 	// 如果前端連結 1. 用 / 後端用PathVariable接   2. 用 ? 後端用RequestParam接
 	@GetMapping("/qaqBookDetail/{bks_ID}")
 	public String qaqBookDetail(Model model,
@@ -130,22 +131,6 @@ public class StoreController {
 		return "Transation/qaqManyPrice";
 	}
 	
-	@PostMapping("/detail")
-	public String priceDetail(Model model, @RequestParam(value = "bks_ID") Integer bks_ID
-			) {
-		BookStoreBean bookDetail = bookStoreService.getOneBookStore(bks_ID);
-		model.addAttribute("bookdetail", bookDetail);
-		return "Transation/detail";
-	}
-	
-	// 前往一本書的詳細頁面
-	@GetMapping("/detail")
-	public String detail(Model model, @RequestParam(value = "selectbk") Integer bk_ID) {
-		BookBean book = bookStoreService.getBookDetail(bk_ID);
-		model.addAttribute("bookdetail", book);
-		return "/Transation/detail";
-	}
-	
 	// 前往單一賣家的賣場
 	@GetMapping("/myStore")
 	public String myStore(Model model) {
@@ -154,26 +139,7 @@ public class StoreController {
 		return "/Transation/myStore";
 	}
 	
-//	@PostMapping("/tryUpdateDelete")
-//	@ResponseBody
-//	public List<Map<String, Object>> myStoreew(Model model) {
-//		List<Map<String, Object>> qaqList = new ArrayList<>();
-//		List<BookStoreBean> searchList = bookStoreService.searchMemberStore(loginUser.getMb_ID());
-//		for (BookStoreBean bookStoreBean : searchList) {
-//			Map<String, Object> data = new HashMap<>();
-//			data.put("bs_Date", new SimpleDateFormat("yy/MM/dd HH:mm").format(bookStoreBean.getBs_Date()));
-//			data.put("bk_Name", bookStoreBean.getBook().getBk_Name());
-//			data.put("bk_Author", bookStoreBean.getBook().getBk_Author());
-//			data.put("bk_Publish", bookStoreBean.getBook().getBk_Publish());
-//			data.put("bk_Date", bookStoreBean.getBook().getBk_Date());
-//			data.put("bs_Price", bookStoreBean.getBs_Price());
-//			data.put("bs_Num", bookStoreBean.getBs_Date());
-//			qaqList.add(data);
-//		}
-//		return qaqList;
-//	}
-	
-	// 商店搜尋出來的結果新增
+	// 新增賣場搜尋出來的結果新增
 		@PostMapping("/addBook")
 		public String addOneBook(Model model,
 				@RequestParam(value = "qaqBkID", required = false) Integer bk_ID,
@@ -224,6 +190,7 @@ public class StoreController {
 		return "/Transation/addMyStore";
 	}
 	
+	// 搜尋時ajax
 	@GetMapping("/Transation/qaqBookName")
 	@ResponseBody
 	public List<Map<String, Object>> qaqBookName(@RequestParam(value = "qaqBookName", required = false) String bk_Name
