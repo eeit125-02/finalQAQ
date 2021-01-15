@@ -9,6 +9,8 @@
 <meta charset="UTF-8">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- CK EDITOR的東東 -->
+<script src="//cdn.ckeditor.com/4.15.1/full/ckeditor.js"></script>
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
@@ -80,6 +82,7 @@
 				<form:hidden path="bk_ID" />
 				<form:hidden path="bk_BookType" />
 				<form:hidden path="bk_Price" />
+				<form:hidden path="bk_Click" />
 
 					<div class="form-group">
 						<form:label path="bk_Name">書名</form:label>
@@ -153,8 +156,50 @@
 						</div>
 
 					</div>
+					
+					
+					
+				<br>	
+				<div class="row" style="background-color:#D3D3D3;border-radius:15px;padding:10px"> 
+					<div class="col-sm-2">目前類型：</div>
+					<div class="col-sm-9">
+		<c:forEach items="${pageresulttype}" var="row">					
+					<a href="#" class="badge badge-secondary" style="font-size:1em">${row.getSearchtype().getSty_Name()}</a>
+		</c:forEach>										
+					</div>
+					<br>
+				</div>
+					
+					<br>
+					<div class="form-row">
+						<div class="form-group col-md-5">
+						
+						<label>書籍類型（主）</label>
+						<form:select path="" class="form-control selectCategory" name="types" id="a0">
+							<form:option path="" value="0" label="請選擇主類別" />                   
+                        	<form:options items="${maintype}" itemLabel="sty_Name" itemValue="sty_ID"/>
+						</form:select>
+						</div>
+						
+						<div class="form-group col-md-5">
+						<label>（次）</label>
+<%-- 						<form:select path="" class="form-control" id="selectSubcat" name="types"> --%>
+						<form:select path="" class="form-control" id="ba0" name="types">
+							<form:option path="" value="0" label="請選擇子類別" />                   
+<%--                         	<form:options items="${maintype}" itemLabel="sty_Name" itemValue="sty_ID"/> --%>
+						</form:select>
+						</div>
+						
+						<div class="form-group col-md-2" style="position:relative;">
+						<button id="newtype" type="button" class="btn btn-outline-secondary" style="position:absolute; bottom:0px;">新增書本類型</button>
+						</div>	
+					</div>
+					
+					<div class="form-row" id="newtypeposition">
+					</div>				
+												
 					<form:label path="bk_Content">內容簡介</form:label>
-					<form:textarea path="bk_Content" class="form-control" rows="6" />
+					<form:textarea path="bk_Content" class="form-control" rows="6" id="editor" />
 			</div>
 		
 			<br>
@@ -167,6 +212,78 @@
 	<!-- 內容結束 -->
 
 <script>
+
+var count = 0;
+var sbmcount = count + 1 ;
+
+$(document).on('change', ".selectCategory", function() {
+    var categoryId = $(this).val();
+    var id = $(this).attr("id"); 
+    var sb = "#b"+id;
+    var plzsuccess = id;
+
+    $.ajax({ 
+     type: 'POST', 
+     url: "searchbook/secondarytype/" + categoryId, 
+     success: function(data){ 
+	　  var slctSubcat=$(sb) , option=""; 
+      slctSubcat.empty(); 
+
+      for(var i=0; i<data.length; i++){ 
+       option = option + "<option value='"+data[i].sty_ID + "'>"+data[i].sty_Name + "</option>"; 
+      } 
+      slctSubcat.append(option); 
+
+     }, 
+
+     error:function(){ 
+    	 alert("123");
+     } 
+
+    }); 
+}); 
+
+
+$("#newtype").click(function(){
+	
+    $("#newtypeposition").append(	
+			"<div class=\"form-group col-md-5\">"
+			+"<label>書籍類型（主）</label>"
+			+"<select class='form-control selectCategory'id=a"+sbmcount+" name='types'>"
+			+"<option value='NONE'>請選擇主類別</option>"
+			+"<option value='1'>文學創作</option>"
+			+"<option value='10'>圖文漫畫</option>"
+			+"<option value='18'>商業/理財</option>"
+			+"<option value='28'>人文/社會</option>"
+			+"<option value='37'>藝術/生活</option>"
+			+"<option value='47'>旅遊/飲食</option>"
+			+"<option value='57'>親子/童書</option>"
+			+"<option value='63'>學習/考用</option>"
+			+"<option value='70'>醫療/科學</option>"
+			+"</select>"
+			+"</div>"
+			+"<div class='form-group col-md-5'>"
+			+"<label>（次）</label>"
+			+"<select path='' class='form-control' id=ba"+sbmcount+" name='types'>"
+			+"<option path='' value='NONE' label='請選擇子類別' />"	
+			+"</select>"
+			+"</div>"
+    );     
+    sbmcount = sbmcount + 1;
+});
+
+
+<!-- 		CK EDITOR的東東 -->
+
+    ClassicEditor
+        .create( document.querySelector( '#editor' ) )
+        .catch( error => {
+            console.error( error );
+        } );
+
+
+
+
 function readURL(input) {
 	  if (input.files && input.files[0]) {
 	    var reader = new FileReader();

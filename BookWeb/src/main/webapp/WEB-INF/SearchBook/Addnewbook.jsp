@@ -58,7 +58,6 @@ span{
 	$(document).ready(function() {
 		$("#bookWebheader").load("//localhost:8080/BookWeb/header");
 		$("#bookWebFooter").load("//localhost:8080/BookWeb/footer");
-
 	});
 </script>
 <title>Insert title here</title>
@@ -146,46 +145,41 @@ span{
 						<div class="form-group col-md-5">
 							<form:label path="bk_Language">語言</form:label><span id="idsp9">　</span><br />
 							<form:input path="bk_Language" id="bk_Language" class="form-control" />
-							<%-- 	    <form:checkboxes path="bk_Language" /> --%>
-							<!--       <label for="inputState">語言</label> -->
-							<!--       <select id="inputState" class="form-control"> -->
-							<!--         <option selected>繁體中文</option> -->
-							<!--         <option>簡體中文</option> -->
-							<!--         <option>英文</option> -->
-							<!--         <option>日文</option> -->
-							<!--         <option>德文</option> -->
-							<!--         <option>法文</option> -->
-							<!--       </select> -->
 						</div>
 
 						<div class="form-group col-md-2">
 							<form:label path="bk_Page">頁數</form:label><span id="idsp10">　</span><br />
-							<form:input path="bk_Page" type="number" id="bk_Page" class="form-control" placeholder="請輸入整數"  />
-<%-- 							onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}"  --%>
-<%-- 							onafterpaste="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}" --%>
-							
+							<form:input path="bk_Page" type="number" min="1" id="bk_Page" class="form-control" placeholder="請輸入整數"  />							
 						</div>
 					</div>
 					
-<%-- <form:form method="POST" modelAttribute="typeForm" id="form1" enctype="multipart/form-data">						 --%>
 					<div class="form-row">
-						<div class="form-group col-md-6">
-						<label>書籍類型</label>
-<%-- 						<form:select path="sty_Name" class="form-control" > --%>
-						<form:select path="" class="form-control" >
-							<form:option path="" value="NONE" label="請選擇主類別" />                   
-                        	<form:options items="${maintype}" itemLabel="sty_Name"/>
+						<div class="form-group col-md-5">
+						<label>書籍類型（主）</label>
+<%-- 						<form:select path="" class="form-control selectCategory" name="types"> --%>
+						<form:select path="" class="form-control selectCategory" name="types" id="a0">
+							<form:option path="" value="0" label="請選擇主類別" />                   
+                        	<form:options items="${maintype}" itemLabel="sty_Name" itemValue="sty_ID" />
 						</form:select>
 						</div>
 						
-						<div class="form-group col-md-6">
-						<label>書籍類型</label>
-						<form:select path="" class="form-control" placeholder="請選擇子類別"></form:select>
-					
+						<div class="form-group col-md-5">
+						<label>（次）</label>
+<%-- 						<form:select path="" class="form-control" id="selectSubcat" name="types"> --%>
+						<form:select path="" class="form-control" id="ba0" name="types">
+							<form:option path="" value="0" label="請選擇子類別" />                   
+<%--                         	<form:options items="${maintype}" itemLabel="sty_Name" itemValue="sty_ID"/> --%>
+						</form:select>
 						</div>
+						
+						<div class="form-group col-md-2" style="position:relative;">
+						<button id="newtype" type="button" class="btn btn-outline-secondary" style="position:absolute; bottom:0px;">新增書本類型</button>
+						</div>	
 					</div>
-<%-- </form:form> --%>
-										
+					
+					<div class="form-row" id="newtypeposition">
+					</div>				
+															
 					<form:label path="bk_Content">內容簡介</form:label><span id="idsp11">　</span><br />
 					<form:textarea path="bk_Content" id="bk_Content" class="form-control" rows="6" />
 			</div>
@@ -200,6 +194,87 @@ span{
 	<!-- 內容結束 -->
 
 <script>
+ 
+var count = 0;
+var sbmcount = count + 1 ;
+// $(".selectCategory").change(function(){ 
+// selectCategory.change=(function(){ 
+$(document).on('change', ".selectCategory", function() {
+    var categoryId = $(this).val();
+    var id = $(this).attr("id"); 
+    var sb = "#b"+id;
+    var plzsuccess = id;
+
+    $.ajax({ 
+     type: 'POST', 
+     url: "searchbook/secondarytype/" + categoryId, 
+     success: function(data){ 
+// 	　   var slctSubcat=$('#b0') , option=""; 
+	　  var slctSubcat=$(sb) , option=""; 
+// 	　   var slctSubcat=$(this).attr("id"); 
+      slctSubcat.empty(); 
+//  			$(this).attr('value', '');  
+
+      for(var i=0; i<data.length; i++){ 
+       option = option + "<option value='"+data[i].sty_ID + "'>"+data[i].sty_Name + "</option>"; 
+      } 
+      slctSubcat.append(option); 
+
+     }, 
+
+     error:function(){ 
+    	 alert("123");
+     } 
+
+    }); 
+}); 
+
+
+$("#newtype").click(function(){
+	
+//        $("#newtypeposition").append(
+// //     		   "<span style='color:black'>${maintype[0].sty_Name}</span>"
+    		   
+// 				"<div class='form-group col-md-5'>"
+// 				+"<label>書籍類型（主）</label>"
+// 				+"<select path='' class='form-control' id='selectCategory' name='types'>"
+// 				+"<option path='' value='NONE' label='請選擇主類別' />"
+// 				+"<options items='"+'${maintype[0].sty_Name}'+"' itemLabel='sty_Name' itemValue='sty_ID'/>"
+// 				+"</select>"
+// 				+"</div>"
+// 				+"<div class='form-group col-md-5'>"
+// 				+"<label>（次）</label>"
+// 				+"<select path='' class='form-control' id='selectSubcat' name='types'>"
+// 				+"<option path='' value='NONE' label='請選擇子類別' />"      
+// 				+"</select>"
+// 				+"</div>"
+//     	);	
+    $("#newtypeposition").append(	
+			"<div class=\"form-group col-md-5\">"
+			+"<label>書籍類型（主）</label>"
+			+"<select class='form-control selectCategory'id=a"+sbmcount+" name='types'>"
+			+"<option value='NONE'>請選擇主類別</option>"
+			+"<option value='1'>文學創作</option>"
+			+"<option value='10'>圖文漫畫</option>"
+			+"<option value='18'>商業/理財</option>"
+			+"<option value='28'>人文/社會</option>"
+			+"<option value='37'>藝術/生活</option>"
+			+"<option value='47'>旅遊/飲食</option>"
+			+"<option value='57'>親子/童書</option>"
+			+"<option value='63'>學習/考用</option>"
+			+"<option value='70'>醫療/科學</option>"
+			+"</select>"
+			+"</div>"
+			+"<div class='form-group col-md-5'>"
+			+"<label>（次）</label>"
+			+"<select path='' class='form-control' id=ba"+sbmcount+" name='types'>"
+			+"<option path='' value='NONE' label='請選擇子類別' />"	
+			+"</select>"
+			+"</div>"
+    );     
+    sbmcount = sbmcount + 1;
+});
+
 
 function readURL(input) {
 	  if (input.files && input.files[0]) {

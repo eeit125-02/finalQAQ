@@ -102,6 +102,11 @@ import com.web.book.service.SearchService;
 		public BookBean savebk(BookBean bkc) {
 			return searchBookDAO.savebk(bkc);
 		}
+		// 新增書本類型
+		@Override
+		public int savebkty(List<Integer> tylist, int bk_ID) {
+			return searchBookDAO.savebkty(tylist, bk_ID);
+		}
 
 		// 修改書本
 		@Override
@@ -114,6 +119,12 @@ import com.web.book.service.SearchService;
 		public boolean deletebk(BookBean mb) {
 			return searchBookDAO.deletebk(mb);
 		}
+		
+		//點擊+1
+		@Override
+		public void addclick(int bk_ID) {
+			searchBookDAO.addBookClick(bk_ID);
+		}		
 
 	}
 
