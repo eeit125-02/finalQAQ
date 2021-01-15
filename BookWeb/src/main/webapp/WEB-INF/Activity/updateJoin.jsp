@@ -86,7 +86,7 @@
 				<Table>
 					
 					<tr>
-						<td><label>活動名稱:${act_Name}</label></td>
+						<td><label>活動名稱:${ajb.act.act_Name}</label></td>
 <%-- 					<td><form:input path="act_Name" value="${loginUser.getMb_Mail()}"/></td> --%>
 					</tr>
 
@@ -110,7 +110,7 @@
 
 					<TR>
 						<TD colspan="2" align="center">
-						
+						<input type="hidden" name="act_ID" value="${ajb.act.act_ID}">
 						<input type="submit" value="更新" name='updateBtn'onclick="return confirmUpdate('${join_ID}');"/> 
 						<input type="submit" value="刪除" name='deleteBtn'onclick="return confirmDelete('${join_ID}');"/>
 						</TD>

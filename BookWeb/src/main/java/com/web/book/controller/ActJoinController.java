@@ -43,6 +43,7 @@ public class ActJoinController {
 	@GetMapping("/showJoins")
 	public String actjoinlist(Model model	
 			) {
+		System.out.println("123456");
 		List<ActJoinBean> actjoinlist = actjoinService.getAllJoins();
 		model.addAttribute("alljoinacts", actjoinlist);
 //		System.out.println(actjoinlist.get(0).getAct().getMember().getMb_Account());
@@ -128,6 +129,7 @@ public class ActJoinController {
 		model.addAttribute("loginUser", loginUser);
 //		model.addAttribute("mb_account", loginUser.getMb_Account());
 		model.addAttribute("ajb", ajb);
+		System.out.println(ajb);
 		return "Activity/updateJoin";
 	}
 
@@ -138,7 +140,6 @@ public class ActJoinController {
 			,@ModelAttribute("loginUser") MemberBean loginUser
 			, @ModelAttribute("ajb") ActJoinBean ajb
 			, @RequestParam(value = "act_ID") Integer act_ID
-			, @RequestParam(value = "mb_ID") Integer mb_ID
 			, HttpServletRequest request
 			) {
 		ajb.setAct(actService.getAct(act_ID));
