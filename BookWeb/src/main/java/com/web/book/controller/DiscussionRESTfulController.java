@@ -54,6 +54,26 @@ public class DiscussionRESTfulController {
 		return rb;
 	}
 	
+	//新增貼文
+	@PostMapping("/Discussion/add_post")
+	@ResponseBody
+	public String processAddNewPost(Model model,
+			@RequestParam(value="post_title") String post_title,
+			@RequestParam(value="post_content") String post_content
+			) {
+		PostBean pb = new PostBean();
+		Timestamp d = new Timestamp(System.currentTimeMillis());
+		DateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		String tsStr = sdf.format(d);
+		pb.setPost_time(tsStr);
+		pb.setPost_title(post_title);
+		pb.setPost_content(post_content);
+		pb.setMemberbean(loginUser); //直接把Bean塞進去
+		pb.setClick(0);
+		discussionService.addPost(pb);
+		return post_title;
+	}
+	
 	//新增留言
 	@PostMapping("/Dsicussion/add_command_ajax")
 	@ResponseBody

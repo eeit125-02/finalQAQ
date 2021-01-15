@@ -12,6 +12,8 @@
 <!-- 引用sweetalert -->
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
+<!-- 引用CK Editor -->
+<script src="http://cdn.ckeditor.com/4.6.1/standard/ckeditor.js"></script>
 
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script
@@ -163,9 +165,9 @@ response.setDateHeader("Expires", 0);
 						<div class="tab-content" id="novelTabContent">
 							<!-- content of rule tab -->
 							<div class="tab-pane fade" id="novel_rule" role="tabpanel">
-								<h1 id="show_rule">
+								<div id="show_rule">
 									<c:forEach var="rule" items="${rule}">${rule.rule_content}</c:forEach>
-								</h1>
+								</div>
 							</div>
 
 							<!-- content of latest post tab -->
@@ -336,37 +338,48 @@ response.setDateHeader("Expires", 0);
 								<div
 									style="border: #ADADAD 2px solid; border-radius: 5px; text-align: left; padding: 10px; margin: 0px 10px; padding-top: 20px">
 
-									<form:form method='post' action='add_post'
-										modelAttribute="postBean" id="add_post_form">
+									
 										<div class="form-group row">
 											<label for="new_title" class="col-2 text-center h5">貼文標題</label>
 											<div class="col-9">
-												<form:input type="text" class="form-control" id="post_title"
-													path="post_title" placeholder="請輸入貼文標題" />
+												<input type="text" class="form-control" id="post_title"
+													placeholder="請輸入貼文標題" />
 											</div>
 										</div>
 										<div class="form-group row">
 											<label for="new_content" class="col-2 text-center h5">貼文內容</label>
 											<div class="col-9">
-												<form:textarea class="form-control" id="post_content"
-													path="post_content" rows="6" placeholder="請輸入貼文內容"></form:textarea>
+												<textarea class="form-control" id="post_content" name="post_content"
+													rows="6" placeholder="請輸入貼文內容"></textarea>
 											</div>
 										</div>
-										<form:hidden path="post_time" />
+										
 										<div class="text-center">
 											<button type="submit" class="btn btn-primary" id="send_added_post">送出貼文</button>
 										</div>
-									</form:form>
+									
 								</div>
 							</div>
 							
 							<script>
+									CKEDITOR.replace('post_content');
+							</script>
+							
+							<script>
 						$('#send_added_post').click(function(){
-							if($('#post_title').val()==''||$('#post_content').val()==''){
+							if($('#post_title').val()==''||CKEDITOR.instances["post_content"].getData()==''){
 								swal({title:'請輸入貼文標題及內容'});
-								event.preventDefault()
+								
 							}else{
-								$('#add_post_form').submit();
+								$.ajax({
+									url : '<c:url value="/Discussion/add_post"/>',
+									type : 'POST',
+									data : {post_title : $('#post_title').val(),
+												   post_content:CKEDITOR.instances["post_content"].getData()},
+									dataType : "json",
+									success:function(post_title){
+										location.reload();}
+								})	
 							}
 						})
 					</script>
@@ -669,17 +682,20 @@ response.setDateHeader("Expires", 0);
 
 									</div>
 								</div>
+								
+								<script>
+									CKEDITOR.replace('rule_content');
+								</script>
 
 
 								<script>
 									$('#send_rule').click(function() {
+										
 											$.ajax({
 																	url : '<c:url value="/Discussion/edit_rule"/>',
 																	type : 'POST',
 																	data : {
-																		rule_content : $(
-																				"#rule_content")
-																				.val()
+																		rule_content : CKEDITOR.instances["rule_content"].getData()
 																	},
 																	dataType : "json",
 																	success : function(
