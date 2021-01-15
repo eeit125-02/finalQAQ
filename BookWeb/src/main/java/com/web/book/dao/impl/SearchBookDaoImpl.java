@@ -4,8 +4,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.NoResultException;
-
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
@@ -19,7 +17,6 @@ import com.web.book.model.BookTypeBean;
 import com.web.book.model.MemberBean;
 import com.web.book.model.SearchTypeBean;
 
-import net.bytebuddy.asm.Advice.Return;
 
 @Repository
 public class SearchBookDaoImpl implements SearchBookDAO {
@@ -251,6 +248,21 @@ maxpage=query.getResultList().size();
 		count++;
 		return bkc;
 	}
+	
+	// 新增書本類型
+	@Override
+	public int savebkty(List<Integer> tylist, int bk_ID) {
+		int count = 0;
+		Session session = factory.getCurrentSession();
+		BookBean book =session.get(BookBean.class, bk_ID);
+		for(int i=0;i<tylist.size();i++) {
+			BookTypeBean bkt=new BookTypeBean(null, book, session.get(SearchTypeBean.class, tylist.get(i)));
+			session.save(bkt);			
+			count++;
+		}	
+		System.out.println("88888888888888888888888"+count);
+		return count;
+	}
 
 	// 刪除書本
 	@Override
@@ -258,6 +270,8 @@ maxpage=query.getResultList().size();
 		int count = 0;
 		boolean a = false;
 		Session session = factory.getCurrentSession();
+//		BookTypeBean bt=session.load(BookTypeBean.class, bkc.getBk_ID());		
+//		session.delete(bt);
 		session.delete(bkc);
 		count++;
 		if (count > 0) {
@@ -276,4 +290,14 @@ maxpage=query.getResultList().size();
 		return count;
 	}
 
+	//點擊+1
+	@Override
+	public void addBookClick(Integer bk_ID) {
+		Session session = factory.getCurrentSession();
+		BookBean bk = session.get(BookBean.class, bk_ID);
+		System.out.println(bk.getBk_Author());
+		System.out.println(bk.getBk_Click());
+		bk.setBk_Click(bk.getBk_Click()+1);
+		
+	}
 }

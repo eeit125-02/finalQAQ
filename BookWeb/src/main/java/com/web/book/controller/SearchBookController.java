@@ -8,6 +8,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.remoting.soap.SoapFaultException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -36,6 +37,8 @@ public class SearchBookController {
 	String keyword = null;
 	//類型關鍵字清單
 	List<Integer> typelist=new ArrayList<Integer>();
+	//主類型清單
+	List<SearchTypeBean> maintype= new ArrayList<SearchTypeBean>();
 	//查詢結果
 	List<BookBean> finalresult = new ArrayList<BookBean>();
 	//資料總筆數
@@ -282,6 +285,11 @@ public class SearchBookController {
 	public String gotoPage(Model model, @RequestParam(value = "page") Integer bk_id
 			, @ModelAttribute("loginUser") MemberBean loginUser) {
 		BookBean result = searchService.getBook(bk_id);
+		
+		System.out.println("**************************"+result.getBk_Click());
+//		result.setBk_Click(result.getBk_Click()+1);
+		searchService.addclick(bk_id);
+		System.out.println("**************************"+result.getBk_Click());
 		model.addAttribute("pageresult", result);
 		List<BookTypeBean> result2=searchService.getBookType(bk_id);
 		model.addAttribute("pageresulttype", result2);		
@@ -361,9 +369,7 @@ public class SearchBookController {
 	@GetMapping("/addnewbook")
 	public String gotoAddnewbook(Model model) {
 		BookBean result = new BookBean();
-		List<SearchTypeBean> maintype= new ArrayList<SearchTypeBean>();
 		List<SearchTypeBean> alltype= searchService.getAllBookType();
-		
 		maintype.add(alltype.get(0));
 		maintype.add(alltype.get(9));
 		maintype.add(alltype.get(17));
@@ -379,16 +385,111 @@ public class SearchBookController {
 		return "SearchBook/Addnewbook";
 	}
 	
+	// 在查詢結果頁加入收藏
+	@PostMapping("/searchbook/secondarytype/{categoryId}")
+	public @ResponseBody List<SearchTypeBean> getSecondarytype(@PathVariable("categoryId") Integer categoryId) {
+		List<SearchTypeBean> secondtype= new ArrayList<SearchTypeBean>();
+		List<SearchTypeBean> alltype= searchService.getAllBookType();
+		
+		if(categoryId==1) {
+			secondtype.add(alltype.get(1));
+			secondtype.add(alltype.get(2));
+			secondtype.add(alltype.get(3));
+			secondtype.add(alltype.get(4));
+			secondtype.add(alltype.get(5));
+			secondtype.add(alltype.get(6));
+			secondtype.add(alltype.get(7));
+			secondtype.add(alltype.get(8));
+		}else if(categoryId==10) {
+			secondtype.add(alltype.get(10));
+			secondtype.add(alltype.get(11));
+			secondtype.add(alltype.get(12));
+			secondtype.add(alltype.get(13));
+			secondtype.add(alltype.get(14));
+			secondtype.add(alltype.get(15));
+			secondtype.add(alltype.get(16));
+		}else if(categoryId==18) {
+			secondtype.add(alltype.get(18));
+			secondtype.add(alltype.get(19));
+			secondtype.add(alltype.get(20));
+			secondtype.add(alltype.get(21));
+			secondtype.add(alltype.get(22));
+			secondtype.add(alltype.get(23));
+			secondtype.add(alltype.get(24));
+			secondtype.add(alltype.get(25));
+			secondtype.add(alltype.get(26));
+		}else if(categoryId==28) {
+			secondtype.add(alltype.get(28));
+			secondtype.add(alltype.get(29));
+			secondtype.add(alltype.get(30));
+			secondtype.add(alltype.get(31));
+			secondtype.add(alltype.get(32));
+			secondtype.add(alltype.get(33));
+			secondtype.add(alltype.get(34));
+			secondtype.add(alltype.get(35));
+		}else if(categoryId==37) {
+			secondtype.add(alltype.get(37));
+			secondtype.add(alltype.get(38));
+			secondtype.add(alltype.get(39));
+			secondtype.add(alltype.get(40));
+			secondtype.add(alltype.get(41));
+			secondtype.add(alltype.get(42));
+			secondtype.add(alltype.get(43));
+			secondtype.add(alltype.get(44));
+			secondtype.add(alltype.get(45));
+		}else if(categoryId==47) {
+			secondtype.add(alltype.get(47));
+			secondtype.add(alltype.get(48));
+			secondtype.add(alltype.get(49));
+			secondtype.add(alltype.get(50));
+			secondtype.add(alltype.get(51));
+			secondtype.add(alltype.get(52));
+			secondtype.add(alltype.get(54));
+			secondtype.add(alltype.get(55));
+		}else if(categoryId==57) {
+			secondtype.add(alltype.get(57));
+			secondtype.add(alltype.get(58));
+			secondtype.add(alltype.get(59));
+			secondtype.add(alltype.get(60));
+		}else if(categoryId==63) {
+			secondtype.add(alltype.get(63));
+			secondtype.add(alltype.get(64));
+			secondtype.add(alltype.get(65));
+			secondtype.add(alltype.get(66));
+			secondtype.add(alltype.get(67));
+			secondtype.add(alltype.get(68));
+		}else if(categoryId==70) {
+			secondtype.add(alltype.get(70));
+			secondtype.add(alltype.get(72));
+			secondtype.add(alltype.get(73));
+			secondtype.add(alltype.get(75));
+			secondtype.add(alltype.get(76));
+			secondtype.add(alltype.get(77));
+		}
+		return secondtype;
+	}
+	
 	// 最終新增頁面
 	@PostMapping("/addnewbook")
 	public String gotoAddnewbookFin(Model model, 
 			@ModelAttribute("newonebook")BookBean result,
-			@RequestParam(value = "file", required = false) CommonsMultipartFile file, HttpServletRequest request,
+			@RequestParam(value = "types", required = false) List<Integer> tylist,
+			@RequestParam(value = "file", required = false) CommonsMultipartFile file,
+			HttpServletRequest request,
 			RedirectAttributes attr) throws Exception {
 		// 圖片上傳用
 		GlobalService.saveImage("booksearch", file, result.getBk_Name());
 		result.setBk_Pic(GlobalService.saveImage("booksearch", file, result.getBk_Name()));
+		result.setBk_Click(0);
 		BookBean finalresult=searchService.savebk(result);
+		for(Integer i : tylist) {
+			if(i == 0) {
+				attr.addAttribute("page",finalresult.getBk_ID());
+				return "redirect:/bookpage";
+			}
+		}
+		searchService.savebkty(tylist, result.getBk_ID());
+		
 		attr.addAttribute("page",finalresult.getBk_ID());
 		return "redirect:/bookpage";
 	}
@@ -398,7 +499,20 @@ public class SearchBookController {
 	public String gotoUpdate(Model model, 
 			@RequestParam(value = "update",required=false) Integer bk_id) {
 		BookBean result = searchService.getBook(bk_id);
+		List<SearchTypeBean> alltype= searchService.getAllBookType();
+		List<BookTypeBean> result2=searchService.getBookType(bk_id);
 		model.addAttribute("pageresult", result);
+		model.addAttribute("pageresulttype", result2);
+		maintype.add(alltype.get(0));
+		maintype.add(alltype.get(9));
+		maintype.add(alltype.get(17));
+		maintype.add(alltype.get(27));
+		maintype.add(alltype.get(36));
+		maintype.add(alltype.get(46));
+		maintype.add(alltype.get(56));
+		maintype.add(alltype.get(62));
+		maintype.add(alltype.get(69));
+		model.addAttribute("maintype", maintype);
 		return "SearchBook/Update";
 	}
 	
@@ -406,6 +520,7 @@ public class SearchBookController {
 	@PostMapping("/updatebook")
 	public String gotoUpdateFin(Model model, 
 			@ModelAttribute("pageresult")BookBean result,
+			@RequestParam(value = "types", required = false) List<Integer> tylist,
 			@RequestParam(value="bk_ID",required=false) Integer bk_ID,
 			@RequestParam(value = "file", required = false) CommonsMultipartFile file, HttpServletRequest request,
 			RedirectAttributes attr) throws Exception {
@@ -413,6 +528,14 @@ public class SearchBookController {
 		String img=GlobalService.saveImage("booksearch", file, result.getBk_Name());
 		result.setBk_Pic(img);
 		searchService.updatebk(result);
+		for(Integer i : tylist) {
+			if(i == 0) {
+				attr.addAttribute("page",bk_ID);
+				return "redirect:/bookpage";
+			}
+		}
+		searchService.savebkty(tylist, result.getBk_ID());
+		
 		attr.addAttribute("page",bk_ID);
 		return "redirect:/bookpage";
 	}

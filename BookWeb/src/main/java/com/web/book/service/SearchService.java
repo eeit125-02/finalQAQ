@@ -32,6 +32,8 @@ public interface SearchService {
 
 	// 新增書本
 	BookBean savebk(BookBean bkc);
+	// 新增書本類型
+	int savebkty(List<Integer> tylist, int bk_ID);
 
 	// 修改書本
 	int updatebk(BookBean mb);
@@ -54,5 +56,5 @@ public interface SearchService {
 	//取得總筆數
 	int getResultNumber();
 
-
+	void addclick(int bk_ID);
 }

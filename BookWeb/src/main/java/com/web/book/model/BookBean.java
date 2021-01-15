@@ -28,15 +28,16 @@ public class BookBean {
 	private Integer bk_Page;
 	private String bk_Publisher_Place;
 	private String bk_Content;
-
+	private Integer bk_Click;
 	
 	public BookBean() {
 		super();
 	}
 
+
 	public BookBean(Integer bk_ID, String bk_Name, String bk_BookType, String bk_Author, String bk_Translator,
 			String bk_Publish, String bk_ISBN, Date bk_Date, String bk_Pic, String bk_Language, Integer bk_Price,
-			Integer bk_Page, String bk_Publisher_Place, String bk_Content) {
+			Integer bk_Page, String bk_Publisher_Place, String bk_Content, Integer bk_Click) {
 		super();
 		this.bk_ID = bk_ID;
 		this.bk_Name = bk_Name;
@@ -52,6 +53,7 @@ public class BookBean {
 		this.bk_Page = bk_Page;
 		this.bk_Publisher_Place = bk_Publisher_Place;
 		this.bk_Content = bk_Content;
+		this.bk_Click = bk_Click;
 	}
 
 	public Integer getBk_ID() {
@@ -192,5 +194,14 @@ public class BookBean {
 	public void setBk_Content(String bk_Content) {
 		this.bk_Content = bk_Content;
 	}
+	
+	public Integer getBk_Click() {
+		return bk_Click;
+	}
+
+	public void setBk_Click(Integer bk_Click) {
+		this.bk_Click = bk_Click;
+	}
+
 	
 }

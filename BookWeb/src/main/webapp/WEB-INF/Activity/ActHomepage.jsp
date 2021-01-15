@@ -240,8 +240,7 @@ td {
 				<hr style="height: 1px; border: none; color: #333; background-color: #333;">
 				<section class="container" style="width:1200px">
 					<div class="row" id="change">
-						<c:forEach var='act' items='${allacts}'>
-							<input type="hidden" id="mb_ID" value="${act.member.mb_ID}">
+						<c:forEach var='act' items='${allacts}'>	
 							<div class="col-6,col-md-3" style="width: 380px; height: 1000px">
 								<div class="thumbnail" style="width: 350px; height: 1000px">
 									<p>
@@ -272,7 +271,8 @@ td {
 <!--       										//頁尾 -->
      									 <div class="modal-footer">
         									<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      										 <a href="<c:url value='/showJoinForm'/>?act_ID=${act.act_ID}"><button type="button" class="btn btn-primary">報名</button></a> 
+        									<input type="hidden" id="check" value="${check}">
+      										 <a href="<c:url value='/showJoinForm'/>?act_ID=${act.act_ID}"><button type="button" id="joinact" class="btn btn-primary">報名</button></a> 
      										    </div>
   											  </div>
  											 </div>
@@ -342,12 +342,17 @@ td {
 var map, geocoder;
 var mapId="";
 console.log("1231456")
+console.log($("#check").val())
+console.log($('#memberid').val())
 $(document).ready(function(){
 if(typeof($.cookie('Member_ID')) != "undefined" ){
 	console.log("123")
 }
 })
 
+if($("#check").val() == "repeat"){
+	alert("你已報名過此活動")
+}
 
 $('button').click(function(){
 	mapId = $(this).val();
@@ -482,6 +487,9 @@ $(document).ready(function(){
     })
 })
 </script>
+
+
+
 
 </body>
 

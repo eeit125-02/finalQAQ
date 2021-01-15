@@ -7,7 +7,6 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -42,24 +41,25 @@ public class ActJoinController {
 
 	// 顯示所有報名紀錄
 	@GetMapping("/showJoins")
-	public String actjoinlist(Model model			
+	public String actjoinlist(Model model	
 			) {
+		System.out.println("123456");
 		List<ActJoinBean> actjoinlist = actjoinService.getAllJoins();
 		model.addAttribute("alljoinacts", actjoinlist);
-
-
+//		System.out.println(actjoinlist.get(0).getAct().getMember().getMb_Account());
 		return "Activity/showJoins";
 	}
 	
 	//取得單一會員的報名紀錄
-	@GetMapping("/showjoinbyID")
-	public String showjoinbyID(
-			Model model,
-			@RequestParam(value = "mb_ID")Integer mb_ID
+	@GetMapping("/showJoinbyID")
+	public String showJoinbyID(
+			Model model
+			,@ModelAttribute("loginUser") MemberBean loginUser
 			) {
-		List<ActJoinBean> mbjoinlist = actjoinService.getJoinRecords(mb_ID);
+		System.out.println("aaaaaaaa");
+		List<ActJoinBean> mbjoinlist = actjoinService.getJoinRecords(loginUser.getMb_ID());
 		model.addAttribute("mbjoinlist", mbjoinlist);		
-		return "Activity/showjoinbyID";
+		return "Activity/showJoinbyID";
 		
 	}
 	
@@ -79,32 +79,24 @@ public class ActJoinController {
 			@ModelAttribute("loginUser") MemberBean loginUser
 			,Model model
 			,@RequestParam("act_ID")Integer act_ID
-			,@RequestParam("mb_ID")Integer mb_ID
 			) {
-		System.out.println(mb_ID);
-		System.out.println(actjoinService.check(mb_ID, act_ID));
-		if(actjoinService.check(mb_ID, act_ID)==false) {
+		if(actjoinService.check(loginUser.getMb_ID(), act_ID)==false) {
 		String act_Name = actService.getAct(act_ID).getact_Name();
 		ActJoinBean ajb = new ActJoinBean();
 		model.addAttribute("act_Name", act_Name);
 		model.addAttribute("act_ID", act_ID);
 		model.addAttribute("loginUser", loginUser);
 		model.addAttribute("ajb", ajb);
+		System.out.println(ajb);
 		return "Activity/JoinForm";
 		}else {
-		return "redirect:showActs1";
+			List<ActBean> actlist = actService.getAllActs();
+			model.addAttribute("allacts", actlist);
+			model.addAttribute("check","repeat");
+			return "Activity/ActHomepage";
 		}
 	}
 
-	//跳轉主頁
-	@GetMapping("/showActs1")
-	public String actlist(Model model) {
-		List<ActBean> actlist = actService.getAllActs();
-		model.addAttribute("allacts", actlist);
-		model.addAttribute("check","repeat");
-		return "Activity/ActHomepage";
-	}
-	
 	// 送出報名表
 	@PostMapping("/showJoinForm")
 	public String createActJoin(
@@ -112,15 +104,15 @@ public class ActJoinController {
 			, @ModelAttribute("loginUser") MemberBean loginUser
 			, @ModelAttribute("ajb") ActJoinBean ajb
 			, @RequestParam("act_ID") Integer act_ID
-			,@RequestParam("mb_ID")Integer mb_ID
 			)throws Exception {
-		System.out.println("++++++++++++++");
 		ActBean act = actService.getAct(act_ID);
+		MemberBean mb = memberService.select(loginUser.getMb_Account());
+		mb.setMb_Mail(ajb.getMember().getMb_Mail());
+		mb.setMb_Tel(ajb.getMember().getMb_Tel());
 		act.setAct_Differentpax(act.getAct_Differentpax()+1);
+		ajb.setMember(mb);
+		ajb.setMb_ID(loginUser.getMb_ID());
 		ajb.setAct(act);
-		ajb.getAct().getMember().setMb_Account(loginUser.getMb_Account());
-		ajb.setMb_ID(mb_ID);
-		model.addAttribute("ajb", ajb);
 		System.out.println(ajb);
 		actjoinService.createActJoin(ajb);
 		System.out.println("---------");
@@ -137,6 +129,7 @@ public class ActJoinController {
 		model.addAttribute("loginUser", loginUser);
 //		model.addAttribute("mb_account", loginUser.getMb_Account());
 		model.addAttribute("ajb", ajb);
+		System.out.println(ajb);
 		return "Activity/updateJoin";
 	}
 
@@ -147,11 +140,11 @@ public class ActJoinController {
 			,@ModelAttribute("loginUser") MemberBean loginUser
 			, @ModelAttribute("ajb") ActJoinBean ajb
 			, @RequestParam(value = "act_ID") Integer act_ID
-			, @RequestParam(value = "mb_ID") Integer mb_ID
 			, HttpServletRequest request
 			) {
 		ajb.setAct(actService.getAct(act_ID));
-		ajb.getAct().getMember().setMb_Account(loginUser.getMb_Account());
+		ajb.getMember().setMb_Account(loginUser.getMb_Account());
+//		ajb.getAct().getMember().setMb_Account(loginUser.getMb_Account());
 		actjoinService.updateActJoin(ajb);
 		return "redirect:/showJoins";
 	}
@@ -159,9 +152,13 @@ public class ActJoinController {
 	// 刪除活動後redirect所有報名紀錄
 	@GetMapping("/deleteJoin")
 	public String deleteActJoin(
-			@RequestParam(value = "join_ID", required = false) Integer join_ID
+			@RequestParam(value = "join_ID", required = false) Integer join_ID,
+			@RequestParam(value = "act_ID", required = false) Integer act_ID
 			) {
 		actjoinService.deleteActJoin(join_ID);
+		ActBean act=actService.getAct(act_ID);
+		act.setAct_Differentpax(act.getAct_Differentpax()-1);
+		actService.updateAct(act);
 		return "redirect:/showJoins";
 	}
 

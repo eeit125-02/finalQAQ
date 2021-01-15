@@ -26,18 +26,23 @@ public class ActJoinBean {
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name="act_ID")
 	private ActBean act;
+	
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn
+	private MemberBean member;
 
 	
 	public ActJoinBean() {
 		super();
 	}	
 	
-	public ActJoinBean(Integer join_ID, String join_Time, Integer join_Pax, ActBean act) {
+	public ActJoinBean(Integer join_ID, String join_Time, Integer join_Pax, ActBean act,MemberBean member) {
 		super();
 		this.join_ID = join_ID;
 		this.join_Time = join_Time;
 		this.join_Pax = join_Pax;
 		this.act = act;
+		this.member = member;
 
 	}
 
@@ -81,6 +86,14 @@ public class ActJoinBean {
 	public void setAct(ActBean act) {
 		this.act = act;
 	}
+	
+	public MemberBean getMember() {
+		return member;
+	}
+
+	public void setMember(MemberBean member) {
+		this.member = member;
+	}
 
 
 	@Override
@@ -94,6 +107,8 @@ public class ActJoinBean {
 		builder.append(join_Pax);
 		builder.append(", act=");
 		builder.append(act);
+		builder.append(", member=");
+		builder.append(member);
 		builder.append("]");
 		return builder.toString();
 	}

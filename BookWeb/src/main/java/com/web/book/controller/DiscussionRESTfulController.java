@@ -54,6 +54,26 @@ public class DiscussionRESTfulController {
 		return rb;
 	}
 	
+	//新增貼文
+	@PostMapping("/Discussion/add_post")
+	@ResponseBody
+	public String processAddNewPost(Model model,
+			@RequestParam(value="post_title") String post_title,
+			@RequestParam(value="post_content") String post_content
+			) {
+		PostBean pb = new PostBean();
+		Timestamp d = new Timestamp(System.currentTimeMillis());
+		DateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		String tsStr = sdf.format(d);
+		pb.setPost_time(tsStr);
+		pb.setPost_title(post_title);
+		pb.setPost_content(post_content);
+		pb.setMemberbean(loginUser); //直接把Bean塞進去
+		pb.setClick(0);
+		discussionService.addPost(pb);
+		return post_title;
+	}
+	
 	//新增留言
 	@PostMapping("/Dsicussion/add_command_ajax")
 	@ResponseBody
@@ -121,11 +141,17 @@ public class DiscussionRESTfulController {
 			data.put("post_title", postBean.getPost_title());
 			data.put("post_content", postBean.getPost_content());
            post_search_result.add(data);
-        }
-		
+        }		
 		return post_search_result;
 	}
 	
-	
+	//刪除貼文
+	@PostMapping("/Discussion/delete_ajax")
+	@ResponseBody
+	public Integer deletePostAjax(Model model,
+			@RequestParam("delete_post_id") Integer delete_post_id) {
+		discussionService.deletPost(delete_post_id);
+		return delete_post_id; 
+	}
 
 }

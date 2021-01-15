@@ -405,7 +405,7 @@ font-size:16px;
 					}
 					else{
 						swal({
-								  title: "會員以撰寫",
+								  title: "會員已撰寫",
 								  text: '請至會員中心查看',
 								  icon: "error",
 								  button: "ok",

@@ -12,6 +12,8 @@
 <!-- 引用sweetalert -->
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
+<!-- 引用CK Editor -->
+<script src="http://cdn.ckeditor.com/4.6.1/standard/ckeditor.js"></script>
 
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script
@@ -111,7 +113,7 @@ response.setDateHeader("Expires", 0);
 						<a
 						class="list-group-item list-group-item-action"
 						id="list-manager-list" data-toggle="list" href="#list-manager"
-						role="tab">板主專區</a>
+						role="tab">管理員專區</a>
 						
 						<script>
 						$('#list-manager-list').click(function(){
@@ -163,9 +165,9 @@ response.setDateHeader("Expires", 0);
 						<div class="tab-content" id="novelTabContent">
 							<!-- content of rule tab -->
 							<div class="tab-pane fade" id="novel_rule" role="tabpanel">
-								<h1 id="show_rule">
+								<div id="show_rule">
 									<c:forEach var="rule" items="${rule}">${rule.rule_content}</c:forEach>
-								</h1>
+								</div>
 							</div>
 
 							<!-- content of latest post tab -->
@@ -197,7 +199,6 @@ response.setDateHeader("Expires", 0);
 												<div class="show_part_title text-left" >${stored_post.post_title}</div>
 												</button>
 													</form>
-													<div class="show_part_content">&thinsp;&thinsp;&thinsp;&thinsp;${stored_post.post_content}</div>
 													</td>
 												<td style="vertical-align: middle">${stored_post.post_time}</td>
 												<td style="vertical-align: middle">${stored_post.memberbean.mb_Name}</td>
@@ -250,7 +251,6 @@ response.setDateHeader("Expires", 0);
 												${stored_post.post_title}
 												</button>
 													</form>
-													<div class="show_part_content">&thinsp;&thinsp;&thinsp;&thinsp;${stored_post.post_content}</div>
 													</td>
 												<td style="vertical-align: middle">${stored_post.post_time}</td>
 												<td style="vertical-align: middle">${stored_post.memberbean.mb_Name}</td>
@@ -300,7 +300,6 @@ response.setDateHeader("Expires", 0);
 												${stored_post.post_title}
 												</button>
 													</form>
-													<div class="show_part_content">&thinsp;&thinsp;&thinsp;&thinsp;${stored_post.post_content}</div>
 													</td>
 												<td style="vertical-align: middle">${stored_post.post_time}</td>
 												<td style="vertical-align: middle">${stored_post.memberbean.mb_Name}</td>
@@ -339,37 +338,48 @@ response.setDateHeader("Expires", 0);
 								<div
 									style="border: #ADADAD 2px solid; border-radius: 5px; text-align: left; padding: 10px; margin: 0px 10px; padding-top: 20px">
 
-									<form:form method='post' action='add_post'
-										modelAttribute="postBean" id="add_post_form">
+									
 										<div class="form-group row">
 											<label for="new_title" class="col-2 text-center h5">貼文標題</label>
 											<div class="col-9">
-												<form:input type="text" class="form-control" id="post_title"
-													path="post_title" placeholder="請輸入貼文標題" />
+												<input type="text" class="form-control" id="post_title"
+													placeholder="請輸入貼文標題" />
 											</div>
 										</div>
 										<div class="form-group row">
 											<label for="new_content" class="col-2 text-center h5">貼文內容</label>
 											<div class="col-9">
-												<form:textarea class="form-control" id="post_content"
-													path="post_content" rows="6" placeholder="請輸入貼文內容"></form:textarea>
+												<textarea class="form-control" id="post_content" name="post_content"
+													rows="6" placeholder="請輸入貼文內容"></textarea>
 											</div>
 										</div>
-										<form:hidden path="post_time" />
+										
 										<div class="text-center">
 											<button type="submit" class="btn btn-primary" id="send_added_post">送出貼文</button>
 										</div>
-									</form:form>
+									
 								</div>
 							</div>
 							
 							<script>
+									CKEDITOR.replace('post_content');
+							</script>
+							
+							<script>
 						$('#send_added_post').click(function(){
-							if($('#post_title').val()==''||$('#post_content').val()==''){
+							if($('#post_title').val()==''||CKEDITOR.instances["post_content"].getData()==''){
 								swal({title:'請輸入貼文標題及內容'});
-								event.preventDefault()
+								
 							}else{
-								$('#add_post_form').submit();
+								$.ajax({
+									url : '<c:url value="/Discussion/add_post"/>',
+									type : 'POST',
+									data : {post_title : $('#post_title').val(),
+												   post_content:CKEDITOR.instances["post_content"].getData()},
+									dataType : "json",
+									success:function(post_title){
+										location.reload();}
+								})	
 							}
 						})
 					</script>
@@ -380,23 +390,32 @@ response.setDateHeader("Expires", 0);
 								<c:set var="um" value="${loginUser.mb_ID}" />
 								<c:set var="pmm" value="${stored_post.memberbean.mb_ID}" />
 								<c:if test="${um==pmm}">
+									
+									
+								
 									<div
 										style="border: #ADADAD 2px solid; border-radius: 5px; text-align: left; padding: 10px; margin: 0px 10px">
-
-										<c:url value="go_delete" var="go_delete">
-											<c:param name="delete_post_id"
-												value=" ${stored_post.post_id}" />
-										</c:url>
-										<form class="form-inline float-right" action="${go_delete}"
-											method="post">
+										
+										<form class="form-inline float-right" >
 											<button class="btn btn-outline-secondary btn-sm" id="member_delete_btn${stored_post.post_id}"
-												type="submit" style="margin-left: 5px">刪除</button>
+												type="submit" style="margin-left: 5px" value="${stored_post.post_id}">刪除</button>
 										</form>
 										
 										<script>
 											$('#member_delete_btn${stored_post.post_id}').click(function(){
 												var yes = confirm('確定刪除 ${stored_post.post_title} 嗎？');
-												if(!yes){event.preventDefault()}
+												if(!yes){
+													event.preventDefault()
+												}else{
+													$.ajax({
+														url : '<c:url value="/Discussion/delete_ajax"/>',
+														type : 'POST',
+														data : {delete_post_id : $(this).val()},
+														dataType : "json",
+														success:function(delete_post_id){
+															location.reload();}
+													})	
+												}
 											})
 											</script>
 
@@ -510,6 +529,7 @@ response.setDateHeader("Expires", 0);
 													</c:forEach>	
 														</c:if>
 													</c:forEach>
+													</div>
 												</div>
 
 <script>
@@ -601,8 +621,8 @@ response.setDateHeader("Expires", 0);
 											</div>
 										</div>
 
-									</div>
 									<br>
+									
 									</c:if>
 								</c:forEach>
 
@@ -612,7 +632,7 @@ response.setDateHeader("Expires", 0);
 
 					<!-- =====================================================manager page===================================================== -->
 					<div class="tab-pane fade" id="list-manager" role="tabpanel">
-					<h3>版主頁面</h3>
+					<h3>管理員頁面</h3>
 						<br>
 						<!-- manager page top button  -->
 						<ul class="nav nav-pills mb-3 justify-content-center"
@@ -662,17 +682,20 @@ response.setDateHeader("Expires", 0);
 
 									</div>
 								</div>
+								
+								<script>
+									CKEDITOR.replace('rule_content');
+								</script>
 
 
 								<script>
 									$('#send_rule').click(function() {
+										
 											$.ajax({
 																	url : '<c:url value="/Discussion/edit_rule"/>',
 																	type : 'POST',
 																	data : {
-																		rule_content : $(
-																				"#rule_content")
-																				.val()
+																		rule_content : CKEDITOR.instances["rule_content"].getData()
 																	},
 																	dataType : "json",
 																	success : function(
@@ -723,8 +746,9 @@ response.setDateHeader("Expires", 0);
  													$('#show_type_keyword').html('');
  														show_search_result += 
  															'<div style="border: #ADADAD 2px solid; border-radius: 5px; text-align: left; padding: 10px; margin: 0px 10px">'
+														+ '<div style="display:none">'+post_search_result[i].post_title+'</div>'
 														+ '<form class="form-inline float-right">'
- 														+	'<button class="btn btn-outline-secondary btn-sm" id="manager_delete_btn'+post_search_result[i].post_id+'"'	
+ 														+	'<button class="btn btn-outline-secondary btn-sm manager_delete" id="manager_delete_btn'+post_search_result[i].post_id+'" value="'+post_search_result[i].post_id +'"'	
  														+	'type="submit" style="margin-left: 5px">刪除</button>'	
  														+ '</form>'		
  														+	'<p>'+post_search_result[i].mb_name+'<br>'+post_search_result[i].post_time+'</p>'
@@ -743,6 +767,22 @@ response.setDateHeader("Expires", 0);
 										$('#keyword_manager').val("");
 										$('keyword_manager').attr("placeholder","請輸入關鍵字");
 										})
+										
+										$(document).on("click", '.manager_delete', function(){
+											var yes = confirm('確定刪除 '+$(this).parent().prev().html()+' 嗎？');
+											if(!yes){
+												event.preventDefault()
+											}else{
+												$.ajax({
+													url : '<c:url value="/Discussion/delete_ajax"/>',
+													type : 'POST',
+													data : {delete_post_id : $(this).val()},
+													dataType : "json",
+													success:function(delete_post_id){
+														location.reload();}
+												})	
+											}
+										})
 								</script>
 
 									<!-- show all post -->
@@ -751,21 +791,28 @@ response.setDateHeader("Expires", 0);
 										<div
 											style="border: #ADADAD 2px solid; border-radius: 5px; text-align: left; padding: 10px; margin: 0px 10px">
 
-											<c:url value="go_delete" var="go_delete">
-												<c:param name="delete_post_id"
-													value=" ${stored_post.post_id}" />
-											</c:url>
-											<form class="form-inline float-right" action="${go_delete}" 
-												method="post">
+											
+											<form class="form-inline float-right">
 												<button class="btn btn-outline-secondary btn-sm" id="manager_delete_btn${stored_post.post_id}"
-													type="submit" style="margin-left: 5px">刪除</button>
+													type="submit" style="margin-left: 5px" value="${stored_post.post_id}">刪除</button>
 											</form>
 											
-											<script>
-											$('#manager_delete_btn${stored_post.post_id}').click(function(){
-												var yes = confirm('確定刪除 ${stored_post.post_title} 嗎？');
-												if(!yes){event.preventDefault()}
-											})
+											<script>											
+													$('#manager_delete_btn${stored_post.post_id}').click(function(){
+														var yes = confirm('確定刪除 ${stored_post.post_title} 嗎？');
+														if(!yes){
+															event.preventDefault()
+														}else{
+															$.ajax({
+																url : '<c:url value="/Discussion/delete_ajax"/>',
+																type : 'POST',
+																data : {delete_post_id : $(this).val()},
+																dataType : "json",
+																success:function(delete_post_id){
+																	location.reload();}
+															})	
+														}
+													})
 											</script>
 
 											<p>${stored_post.memberbean.mb_Name}
@@ -786,9 +833,6 @@ response.setDateHeader("Expires", 0);
 										</div><br>
 									</c:forEach>
 									</div>
-									
-									
-								
 
 							</div>
 
