@@ -29,6 +29,10 @@
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
 	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
 	crossorigin="anonymous">
+	
+
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
 <style>
 .bd-placeholder-img {
 	font-size: 1. 125rem;
@@ -74,7 +78,7 @@
 					<tr>
 						<td><label>會員帳號:${loginUser.mb_Account}</label></td>
 <%-- 						<td><input type="hidden" name="mb_Account" value="${member.mb_Account}" /></td> --%>
-					<form:input type="hidden" path="act.member.mb_Account" value="${loginUser.mb_Account}"/>
+					<form:input type="hidden" path="member.mb_Account" value="${loginUser.mb_Account}"/>
 					</tr>
 
                     <tr>
@@ -88,13 +92,13 @@
 					</tr>
 
 					<tr>
-						<td><form:label path="act.member.mb_Mail">email:</form:label></td>
-						<td><form:input path="act.member.mb_Mail" value="${loginUser.getMb_Mail()}"/></td>
+						<td><form:label path="member.mb_Mail">email:</form:label></td>
+						<td><form:input path="member.mb_Mail" value="${loginUser.getMb_Mail()}"/></td>
 					</tr>
 
 					<tr>
-						<td><form:label path="act.member.mb_Tel">聯絡電話:</form:label></td>
-						<td><form:input path="act.member.mb_Tel" value="${loginUser.getMb_Tel()}"/></td>
+						<td><form:label path="member.mb_Tel">聯絡電話:</form:label></td>
+						<td><form:input path="member.mb_Tel" value="${loginUser.getMb_Tel()}"/></td>
 					</tr>
 
 
@@ -106,7 +110,7 @@
 				</table>
 
 
-				<input type='submit' value='提交' />
+				<input type='submit' value='提交' id='confirmjoin'/>
 				<input type='reset' value='還原' />
 				<br>
 				<br>
@@ -121,4 +125,12 @@
 		<footer class="container py-5" id="bookWebFooter"></footer>
 		<!-- footer -->
 </body>
+
+<script>
+document.getElementById("confirmjoin").addEventListener("click",function(){
+	  swal("Good job!", "您已報名成功囉!", "success");
+	});
+
+</script>
+
 </html>

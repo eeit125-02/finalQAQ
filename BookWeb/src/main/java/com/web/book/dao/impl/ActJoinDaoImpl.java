@@ -33,8 +33,9 @@ public class ActJoinDaoImpl implements ActJoinDao {
 	public List<ActJoinBean> getJoinRecords(Integer mb_ID) {
 		Session session = factory.getCurrentSession();
 		String hql = "FROM ActJoinBean where mb_ID = :mb_ID";
-		List<ActJoinBean> mbjoinlist = session.createQuery(hql).getResultList();
-		return mbjoinlist;		
+		Query<ActJoinBean> query = session.createQuery(hql);
+		List<ActJoinBean> list = query.setParameter("mb_ID", mb_ID).getResultList();
+		return list;		
 	}
 	
 	

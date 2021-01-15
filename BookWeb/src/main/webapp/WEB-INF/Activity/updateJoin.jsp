@@ -75,18 +75,18 @@
 	<p>&nbsp;</p>
 	<hr>
 	<div class='center'>
-		<H1 class='center'>更新活動資料</H1>
+		<H1 class='center'>更新報名資料</H1>
 		<hr>
 		<p>
 			<form:form method="POST" modelAttribute="ajb">
 
-				<input type="hidden" name="join_ID" value="${ajb.join_ID}"/>
+				<input type="hidden" name="join_ID" value="${join_ID}"/>
 <%-- 				<form:input type="hidden" path="member.mb_Account" value="${loginUser.getMb_Account()}"/> --%>
 				<input type="hidden" name="finalDecision" value="">
 				<Table>
 					
 					<tr>
-						<td><label>活動名稱:${ajb.act.act_Name}</label></td>
+						<td><label>活動名稱:${act_Name}</label></td>
 <%-- 					<td><form:input path="act_Name" value="${loginUser.getMb_Mail()}"/></td> --%>
 					</tr>
 
@@ -94,25 +94,25 @@
 						<td><label>會員姓名:${loginUser.getMb_Name()}</label></td>
 					</tr>
 					<tr>
-						<td><form:label path="act.member.mb_Mail">email:</form:label></td>
-						<td><form:input path="act.member.mb_Mail" value="${loginUser.getMb_Mail()}"/></td>
+						<td><form:label path="member.mb_Mail">email:</form:label></td>
+						<td><form:input path="member.mb_Mail" value="${loginUser.getMb_Mail()}"/></td>
 					</tr>
 
 					<tr>
-						<td><form:label path="act.member.mb_Tel">聯絡電話:</form:label></td>
-						<td><form:input path="act.member.mb_Tel" value="${loginUser.getMb_Tel()}"/></td>
+						<td><form:label path="member.mb_Tel">聯絡電話:</form:label></td>
+						<td><form:input path="member.mb_Tel" value="${loginUser.getMb_Tel()}"/></td>
 					</tr>
 					
-					<tr>
-						<td><form:label path="join_Pax">報名人數:</form:label></td>
-						<td><form:input path="join_Pax" /></td>
-					</tr>
+<!-- 					<tr> -->
+<%-- 						<td><form:label path="join_Pax">報名人數:</form:label></td> --%>
+<%-- 						<td><form:input path="join_Pax" /></td> --%>
+<!-- 					</tr> -->
 
 					<TR>
 						<TD colspan="2" align="center">
 						
-						<input type="submit" value="更新" name='updateBtn'onclick="return confirmUpdate('${ajb.join_ID}');"/> 
-						<input type="submit" value="刪除" name='deleteBtn'onclick="return confirmDelete('${ajb.join_ID}');"/>
+						<input type="submit" value="更新" name='updateBtn'onclick="return confirmUpdate('${join_ID}');"/> 
+						<input type="submit" value="刪除" name='deleteBtn'onclick="return confirmDelete('${join_ID}');"/>
 						</TD>
 					</TR>
 				</Table>

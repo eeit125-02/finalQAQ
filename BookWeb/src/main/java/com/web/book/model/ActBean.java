@@ -32,28 +32,9 @@ public class ActBean {
 	private Integer act_Differentpax;
 	
 	
-	
-
-	public Integer getAct_Differentpax() {
-		return act_Differentpax;
-	}
-
-
-	public void setAct_Differentpax(Integer act_Differentpax) {
-		this.act_Differentpax = act_Differentpax;
-	}
-
-
-
-
-
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn
-	private MemberBean member;
-	
 	public ActBean(Integer act_ID, String act_Image, String act_Name, String act_Theme, String act_Date,String act_Time,
 			String act_Loc, String act_Intro, String act_Guest, String act_Pax, String act_Rule, String act_Tag,
-			String act_Place,MemberBean member) {
+			String act_Place) {
 		super();
 		this.act_ID = act_ID;
 		this.act_Image = act_Image;
@@ -68,7 +49,7 @@ public class ActBean {
 		this.act_Rule = act_Rule;
 		this.act_Tag = act_Tag;
 		this.act_Place = act_Place;
-		this.member = member;
+		
 
 	}
 
@@ -172,9 +153,15 @@ public class ActBean {
 	public void setact_Place(String act_Place) {
 		this.act_Place = act_Place;
 	}
+	
+	public Integer getAct_Differentpax() {
+		return act_Differentpax;
+	}
 
 
-
+	public void setAct_Differentpax(Integer act_Differentpax) {
+		this.act_Differentpax = act_Differentpax;
+	}
 
 
 	@Override
@@ -204,14 +191,9 @@ public class ActBean {
 		builder.append(act_Tag);
 		builder.append(", act_Place=");
 		builder.append(act_Place);
-		builder.append(", member=");
-		builder.append(member);
 		builder.append("]");
 		return builder.toString();
 	}
-
-
-
 
 
 	public String getact_Time() {
@@ -219,27 +201,8 @@ public class ActBean {
 	}
 
 
-
-
-
 	public void setact_Time(String act_Time) {
 		this.act_Time = act_Time;
-	}
-
-
-
-
-
-	public MemberBean getMember() {
-		return member;
-	}
-
-
-
-
-
-	public void setMember(MemberBean member) {
-		this.member = member;
 	}
 
 	

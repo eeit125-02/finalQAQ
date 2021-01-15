@@ -63,9 +63,9 @@ text-align:center;
 		<p>&nbsp;</p>
 		<hr>
 		<div class='center'>
-			<h1>報名紀錄</h1>
+			<h1>${ajb.member.mb_Name}的活動報名紀錄</h1>
 			<c:if test='${empty mbjoinlist}'>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
-			查無報名紀錄<br>
+			查無您的活動報名紀錄<br>
 			</c:if>
 			<c:if test='${not empty mbjoinlist}'>
 				<%-- 			<c:if test ='${vs.first }'> --%>
@@ -73,6 +73,7 @@ text-align:center;
 				<%-- 				<c:out value="<tr> --%>
 				<table border='1'>
 					<tr>
+						<td>會員ID</td>				
 						<td>會員帳號</td>				
 						<td>活動名稱</td>
 						<td>會員名稱</td>
@@ -87,6 +88,7 @@ text-align:center;
 						<%-- 			${act.ACT_Image} --%>
 						<tr>
 							<%-- 				<td><a href='/FindActServlet?key=${act.ACT_Name}'></a></td> --%>
+							<td>${ajb.member.mb_ID}</td>
 							<td>${ajb.member.mb_Account}</td>
 							<td>${ajb.act.act_Name}</td>
 							<td>${ajb.member.mb_Name}</td>
@@ -95,7 +97,7 @@ text-align:center;
 							<td>${ajb.join_Pax}</td>
 							
 							<td><a href="<c:url value='/showJoinUpdateForm'/>?join_ID=${ajb.join_ID}">編輯</a>
-							<td><a href="<c:url value='deleteActJoin'/>?join_ID=${ajb.join_ID}">刪除</a>
+							<td><a href="<c:url value='deleteJoin'/>?join_ID=${ajb.join_ID}&act_ID=${ajb.act.act_ID}">刪除</a>
 			
 						</tr>
 					</c:forEach>
