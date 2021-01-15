@@ -127,6 +127,17 @@ public class DiscussionServiceImpl implements DiscussionService {
 		return discussionDao.getCommandBeanById(command_ID);
 	}
 
+	@Override
+	public List<PostBean> getAllPostByClick() {
+		return discussionDao.getAllPostByClick();
+	}
+
+	@Override
+	public void addClick(Integer post_ID) {
+		discussionDao.addClick(post_ID);
+		
+	}
+
 
 
 

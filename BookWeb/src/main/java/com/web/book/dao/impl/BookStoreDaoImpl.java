@@ -134,16 +134,6 @@ public class BookStoreDaoImpl implements BookStoreDao {
 		session.save(bookStore);
 	}
 
-	// 找到會員賣場要修改的一筆資料
-//	@SuppressWarnings("unchecked")
-//	public BookStoreBean searchOneData(Integer bk_ID) {
-//		Session session = factory.getCurrentSession();
-//		String hql = "FROM BookStoreBean a where a.book = :book ";
-//		Query<BookStoreBean> query = session.createQuery(hql);
-//		BookBean book = session.load(BookBean.class, bk_ID);
-//		return query.setParameter("book", book).getResultList();
-//	}
-
 	// 修改會員賣場資料
 	@Override
 	public void updateBookStore(Integer bks_ID, Integer bs_Num, Integer bs_Price) {

@@ -4,6 +4,7 @@ import java.io.UnsupportedEncodingException;
 import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -51,6 +52,26 @@ public class DiscussionRESTfulController {
 		rb.setRule_time(tsStr);
 		discussionService.updateRule(rb);
 		return rb;
+	}
+	
+	//新增貼文
+	@PostMapping("/Discussion/add_post")
+	@ResponseBody
+	public String processAddNewPost(Model model,
+			@RequestParam(value="post_title") String post_title,
+			@RequestParam(value="post_content") String post_content
+			) {
+		PostBean pb = new PostBean();
+		Timestamp d = new Timestamp(System.currentTimeMillis());
+		DateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		String tsStr = sdf.format(d);
+		pb.setPost_time(tsStr);
+		pb.setPost_title(post_title);
+		pb.setPost_content(post_content);
+		pb.setMemberbean(loginUser); //直接把Bean塞進去
+		pb.setClick(0);
+		discussionService.addPost(pb);
+		return post_title;
 	}
 	
 	//新增留言
@@ -104,19 +125,33 @@ public class DiscussionRESTfulController {
 		return new_ncb;
 	}
 	
-	
-	
-	//hql有問題！！
-	//查詢貼文關鍵字
+	//管理員查詢貼文關鍵字
 	@PostMapping("/Discussion/search_keyword_manager")
 	@ResponseBody
-	public List<PostBean> searchPostKeyword(Model model,
+	public List<Map<String, Object>> searchPostKeyword(Model model,
 			@RequestParam(value="keyword") String keyword
 			) throws UnsupportedEncodingException {
+		List<Map<String, Object>> post_search_result = new ArrayList<>();
 		List<PostBean> pb = discussionService.getPostByKeyword(keyword);
-		return pb;
+		for (PostBean postBean:pb) {
+			Map<String, Object> data = new HashMap<>();
+			data.put("post_id", postBean.getPost_id());
+			data.put("mb_name", postBean.getMemberbean().getMb_Name());
+			data.put("post_time", postBean.getPost_time());
+			data.put("post_title", postBean.getPost_title());
+			data.put("post_content", postBean.getPost_content());
+           post_search_result.add(data);
+        }		
+		return post_search_result;
 	}
 	
-	
+	//刪除貼文
+	@PostMapping("/Discussion/delete_ajax")
+	@ResponseBody
+	public Integer deletePostAjax(Model model,
+			@RequestParam("delete_post_id") Integer delete_post_id) {
+		discussionService.deletPost(delete_post_id);
+		return delete_post_id; 
+	}
 
 }

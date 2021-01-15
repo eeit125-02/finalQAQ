@@ -105,37 +105,73 @@
 	<!-- footer -->
 	<script>
 		
-		$("#bookWebheader").load("//localhost:8080/BookWeb/header");
-		$("#bookWebFooter").load("//localhost:8080/BookWeb/footer");
-		
-		$.ajax({
-			async : false,
-			type : 'POST',
-			url : "http://localhost:8080/BookWeb/BookReport/viewBookReport/" + window.location.href.split("/").pop(),
-			dataType : "json",
-			contentType : "application/json;charset=utf-8",
-			success : function(data) {
-				$('#bkName').html("書名：" + data.bk_Name);
-				$('#bkAuthor').html("作者：" + data.bk_Author);
-				$('#bkPublish').html("出版社：" + data.bk_Publish);
-				$('#bkPic').attr('src', data.bk_Pic);
-				if (typeof(data.bk_Translator) != "object"){
-					$('#bookWriter').append("<label>翻譯："+ data.bk_Translator +"</label>");
-				}
-				$('#userAccount').html("撰寫者：" + data.userAccount);
-				$('#brTitel').html("閱讀標題：" + data.br_Name);
-				$("#rateYo").rateYo({
-					rating: data.br_Score,
-				    spacing: "10px",
-				    readOnly: true
-				    
-				});
-				$('#brContent').html(data.br_Content);
-		  	}
+		$(document).ready(function() {
+			$("#bookWebheader").load("//localhost:8080/BookWeb/header");
+			$("#bookWebFooter").load("//localhost:8080/BookWeb/footer");
+			
+			$.ajax({
+				async : false,
+				type : 'POST',
+				url : "http://localhost:8080/BookWeb/BookReport/viewBookReport/" + window.location.href.split("/").pop(),
+				dataType : "json",
+				contentType : "application/json;charset=utf-8",
+				success : function(data) {
+					$('#bkName').html("書名：" + data.bk_Name);
+					$('#bkAuthor').html("作者：" + data.bk_Author);
+					$('#bkPublish').html("出版社：" + data.bk_Publish);
+					$('#bkPic').attr('src', data.bk_Pic);
+					if (typeof(data.bk_Translator) != "object"){
+						$('#bookWriter').append("<label>翻譯："+ data.bk_Translator +"</label>");
+					}
+					$('#userAccount').html("撰寫者：" + data.userAccount);
+					$('#brTitel').html("閱讀標題：" + data.br_Name);
+					$("#rateYo").rateYo({
+						rating: data.br_Score,
+					    spacing: "10px",
+					    readOnly: true
+					    
+					});
+					$('#brContent').html(data.br_Content);
+			  	}
+			});
+			getMessage();
 		});
+		
+		
+		
+		
 
-		$('#backButton').click(function(){
+		/* $('#backButton').click(function(){
 			history.go(-1);
+		}); */
+		
+		$('#command_btn').click(function(){
+			var addData = {
+					brId: window.location.href.split("/").pop(),
+					bmContent: $('#command_input').val()
+			}
+			
+			$('#command_input').val("");
+			
+			$.ajax({
+				async : false,
+				type : 'POST',
+				url : "http://localhost:8080/BookWeb/BookReport/addReportMessage",
+				data : addData,
+				dataType : "json",
+				success : function(data) {
+					console.log(data)
+					if(data){
+						getMessage();
+					}else{
+						swal({
+							  title: "已加撰寫過留言",
+							  icon: "error",
+							  button: "ok",
+						});
+					}
+				}
+			});
 		});
 		
 		$('#addSub').click(function(){
@@ -146,7 +182,6 @@
 				dataType : "json",
 				contentType : "application/json;charset=utf-8",
 				success : function(data) {
-					console.log(typeof(data))
 
 					if(data && typeof(data) == "boolean"){
 						swal({
@@ -175,6 +210,32 @@
 				}
 			});
 		})
+		
+		function getMessage(){
+			$.ajax({
+				async : false,
+				type : 'POST',
+				url : "http://localhost:8080/BookWeb/BookReport/bookReportMessageList/" + window.location.href.split("/").pop(),
+				dataType : "json",
+				success : function(data) {
+					innerHtml = "";
+					for( var i = 0; i < data.length; i++ ){
+						innerHtml += "<div style=\"background-color: #C4E1FF; margin: 10px; padding: 5px; border-radius: 10px;\">"
+								   + "<div class=\"media\">"
+								   + "<img src=\""+ data[i].mbPic +"\" style=\"width: 50px; height: 50px; text-align:center; border-radius: 60%;\"/>"	
+								   + "<div class=\"media-body ml-2\">"
+								   + "<p>"+ data[i].mbName +"<br>"
+								   + data[i].bmDate
+								   + "</p>"
+								   + "<p>"+ data[i].bmContent +"</p>"
+								   + "</div>"
+								   + "</div>"
+								   + "</div>"
+					}
+					$('#show_command').html(innerHtml);
+				}
+			});
+		}
 
 	</script>
 </body>

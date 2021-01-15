@@ -91,7 +91,9 @@
 				</div>
 				<div class="col-lg-3">
 					<button type="submit" class="btn btn-outline-secondary"
-					onclick="priceDetail(${v.bks_ID})">查看詳細</button>
+					onclick="priceDetail(${v.bks_ID})">直接購買</button>
+					<button type="submit" class="btn btn-outline-secondary"
+					onclick="priceDetail(${v.bks_ID})">加入購物車</button>
 				</div>
 			</div>
 			<hr>

@@ -209,7 +209,7 @@ public class BookReportDaoImpl implements BookReportDao {
 	@Override
 	public List<BookReportMessageBean> getBookReportMessageList(Integer brId) {
 		Session session = fatory.getCurrentSession();
-		String hql = "From BookReportMessage bm where bm.bookReport = :bookReport";
+		String hql = "From BookReportMessageBean bm where bm.bookReport = :bookReport";
 		Query<BookReportMessageBean> query = session.createQuery(hql);
 		return query.setParameter("bookReport", session.get(BookReportBean.class, brId)).getResultList();
 	}
@@ -218,7 +218,7 @@ public class BookReportDaoImpl implements BookReportDao {
 	@Override
 	public List<BookReportMessageBean> getMemberBookReportMessageList(Integer mbId) {
 		Session session = fatory.getCurrentSession();
-		String hql = "From BookReportMessage bm where bm.member = :member";
+		String hql = "From BookReportMessageBean bm where bm.member = :member";
 		Query<BookReportMessageBean> query = session.createQuery(hql);
 		
 		return query.setParameter("member", session.get(MemberBean.class, mbId)).getResultList();

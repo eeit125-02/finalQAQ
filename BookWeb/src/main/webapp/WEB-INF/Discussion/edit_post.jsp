@@ -11,6 +11,9 @@
 <!-- 引用sweetalert -->
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
+<!-- 引用CK Editor -->
+<script src="http://cdn.ckeditor.com/4.6.1/standard/ckeditor.js"></script>
+
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
@@ -35,6 +38,7 @@
 		font-size: 3.5rem;
 	}
 }
+
 </style>
 
 <script>
@@ -89,6 +93,10 @@ response.setDateHeader("Expires", 0);
 								<textarea class="form-control" name="edit_post_content" id="edit_post_content" rows="6">${param.edit_post_content}</textarea>
 							</div>
 						</div>
+						
+						<script>
+							CKEDITOR.replace('edit_post_content');
+						</script>
 						
 						<div class="text-center">
 							<button type="submit" id="send_edited_post" class="btn btn-primary">送出貼文</button>

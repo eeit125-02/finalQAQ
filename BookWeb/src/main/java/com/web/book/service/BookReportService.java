@@ -38,7 +38,7 @@ public interface BookReportService {
 	
 	List<BookReportMessageBean> getMemberBookReportMessageList(Integer mbId);
 	 
-	void addReportMessage(Integer brId, Integer mbId, String content );
+	Boolean addReportMessage(Integer brId, Integer mbId, String content );
 	 
 	void deletReportMessage(Integer bmId);
 	
