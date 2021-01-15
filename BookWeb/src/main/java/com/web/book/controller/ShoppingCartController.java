@@ -48,39 +48,53 @@ public class ShoppingCartController {
 			@RequestParam(value = "bks", required = false) Integer bks,
 			@RequestParam(value = "qty", required = false) Integer qty) {
 //		{ bk : bk_ID1, bp : bs_Price, bn : bs_Num, bks : $('bks_ID').val() }
-//		System.out.println("------------------------------------------------");
-//		System.out.println(bk);
-//		System.out.println(bp);
-//		System.out.println(bs);
-//		System.out.println(bks);
-//		System.out.println(qty);
-//		System.out.println("------------------------------------------------");
 		Integer amount = (bs - qty);
 		Boolean qaq = true;
-		Integer a = 0;
-		Integer b = 0;
 		Map<String, Object> map = new HashMap<>();
 		map.put("qty", amount);
 		List<ShoppingCartBean> list = scService.searchCart(loginUser.getMb_ID());
 		for (ShoppingCartBean shoppingCartBean : list) {
 //			 如果購物車已經有這筆資料更新
-			System.out.println("---------------------------");
-			System.out.println(shoppingCartBean.getBook().getBk_ID());
-			System.out.println(shoppingCartBean.getCart_Num());
-			a = shoppingCartBean.getBook().getBk_ID();
-			b = shoppingCartBean.getCart_Num();
-			if (bk == a && bs == b) {
-				scService.updateCartAll(shoppingCartBean.getCart_Num() + qty, bk, loginUser.getMb_ID());
+			if (bk == shoppingCartBean.getBook().getBk_ID()) {
+				scService.updateCartAll(shoppingCartBean.getCart_Num() + qty, bk);
+				scService.updateBookStore(bks, amount);
 				qaq = false;
-				System.out.println("---------------------------");
-				System.out.println(qaq);				
+				break;
 			}
+			continue;
 		}
 //		 如果購物車沒有這筆資料則新增
 		if (qaq) {
 			scService.addToCart(qty, bp, bk, loginUser.getMb_ID());
+			scService.updateBookStore(bks, amount);
 		}
 		return map;
+	}
+	
+	//直接購買
+	@PostMapping("/dctyBuy")
+	public String cartDetail(Model model,
+			@RequestParam(value = "bookStore", required = false) BookStoreBean bsb
+			) {
+		//先搜尋購物車裡的內容
+		Boolean qaqCart = true;
+		List<ShoppingCartBean> list = scService.searchCart(loginUser.getMb_ID());
+		for (ShoppingCartBean shoppingCartBean : list) {
+			if (bsb.getBook().getBk_ID() == shoppingCartBean.getBook().getBk_ID()) {
+				scService.updateCartAll(shoppingCartBean.getCart_Num() + 1, bsb.getBook().getBk_ID());
+				scService.updateBookStore(bsb.getBks_ID(), bsb.getBs_Num() - 1);
+				qaqCart = false;
+				break;
+			}
+			continue;
+		}
+		if (qaqCart) {
+			scService.addToCart(1, bsb.getBs_Price(), bsb.getBook().getBk_ID(), loginUser.getMb_ID());
+			scService.updateBookStore(bsb.getBks_ID(), bsb.getBs_Num() - 1);
+		}
+		list = scService.searchCart(loginUser.getMb_ID());
+		model.addAttribute("bookstore", list);
+		return "Transation/shoppingCart";
 	}
 
 	@PostMapping("shopping")

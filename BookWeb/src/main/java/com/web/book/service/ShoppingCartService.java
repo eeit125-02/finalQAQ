@@ -19,6 +19,9 @@ public interface ShoppingCartService {
 		void updateCart(Integer cart_ID, Integer cart_Num);
 		
 		//更新一筆購物車資料
-		void updateCartAll(Integer cart_Num, Integer bk_ID, Integer bb_ID);
+		void updateCartAll(Integer cart_Num, Integer bk_ID);
+		
+		//更新一筆賣場資料
+		void updateBookStore(Integer bks_ID, Integer bs_Num);
 
 }

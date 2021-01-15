@@ -91,13 +91,13 @@
 				<div class="col-sm-6">
 					<input type="number" class="form-control" id="buyNum"
 						aria-label="Dollar amount (with dot and two decimal places)"
-						value="1" min="1" onblur="checkBuy(${bookdetail.bs_Num})">
+						value="1" min="1" onblur="checkBuy()">
 					<span id="sp" style="color: red"></span>
 				</div>
 			</div>
 			<div class="col-sm-1">
 				<button type="submit" class="btn btn-outline-success"
-					onclick="goToCart(${bookdetail.book.bk_ID},${bookdetail.bs_Price})">直接購買</button>
+					onclick="goToCart(${bookdetail})">直接購買</button>
 			</div>
 			<div class="col-sm-1">
 				<button type="submit" class="btn btn-outline-success"
@@ -128,31 +128,26 @@
 		$("#bookWebFooter").load("//localhost:8080/BookWeb/footer");
 	});
 // 	檢查購買數量是否正確
-	function checkBuy(qty) {
+	function checkBuy() {
 		var buyNum = document.getElementById("buyNum");
+		var amount = document.getElementById("amount");
 		var buyNumVal = buyNum.value;
 		var sp = document.getElementById("sp");
-		if (buyNumVal < 1 || buyNumVal > qty) {
+		if (buyNumVal < 1 || buyNumVal > parseInt(amount.innerHTML)) {
 			sp.innerHTML="超過庫存上限";
-			document.getElementById("buyNum").value=qty;
+			document.getElementById("buyNum").value = parseInt(amount.innerHTML);
 		} else{
 			sp.innerHTML="";
 		}
 	}
 	
-		function goToCart(bk_ID, bs_Price, bs_Num) {
+		function goToCart(bookStore) {
+			alert(bookStore)
 			if (typeof ($.cookie('Member_ID')) != "undefined") {
-				var buyNum = document.getElementById("buyNum");
-				var buyNumVal = buyNum.value;
-				if (buyNumVal < 1 || buyNumVal > cart_Num) {
-				document.forms[0].action="<c:url value='/shopping?bk_ID=" + bk_ID + "&bk_Price=" + bs_Price + "&cart_Num=" + cart_Num + "' />" ;
+				alert("111111111")
+				document.forms[0].action="<c:url value='/dctyBuy?bookStore=" + bookStore + "' />" ;
 				document.forms[0].method="post";
 				document.forms[0].submit();
-				}	else{
-					document.forms[0].action="<c:url value='/shopping?bk_ID=" + bk_ID + "&bk_Price=" + bs_Price + "&cart_Num=" + buyNumVal + "' />" ;
-					document.forms[0].method="post";
-					document.forms[0].submit();
-				}
 			} else {
 				document.forms[0].action="<c:url value='/toLogin' />" ;
 				document.forms[0].method="get";

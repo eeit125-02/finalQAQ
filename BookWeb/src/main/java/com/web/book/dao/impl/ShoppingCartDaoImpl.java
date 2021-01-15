@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.web.book.dao.ShoppingCartDao;
 import com.web.book.model.BookBean;
+import com.web.book.model.BookStoreBean;
 import com.web.book.model.MemberBean;
 import com.web.book.model.ShoppingCartBean;
 
@@ -57,13 +58,21 @@ public class ShoppingCartDaoImpl implements ShoppingCartDao {
 	//更新一筆購物車資料
 	@Override
 	@SuppressWarnings("unchecked")
-	public void updateCartAll(Integer cart_Num, Integer bk_ID, Integer bb_ID) {
+	public void updateCartAll(Integer cart_Num, Integer bk_ID) {
 		Session session = factory.getCurrentSession();
-		String hql = "UPDATE ShoppingCartBean a SET a.cart_Num = :cart_Num WHERE a.bk_ID = :bk_ID AND a.bb_ID = :bb_ID";
+		String hql = "UPDATE ShoppingCartBean a SET a.cart_Num = :cart_Num WHERE bk_ID = :bk_ID";
 		Query<ShoppingCartBean> query = session.createQuery(hql);
 		query.setParameter("cart_Num", cart_Num);
 		query.setParameter("bk_ID", bk_ID);
-		query.setParameter("bb_ID", bb_ID);
+		query.executeUpdate();
+	}
+	
+	//更新一筆賣場資料
+	@Override
+	public void updateBookStore(Integer bks_ID, Integer bs_Num) {
+		Session session = factory.getCurrentSession();
+		BookStoreBean bookStore = session.load(BookStoreBean.class, bks_ID);
+		bookStore.setBs_Num(bs_Num);
 	}
 
 }

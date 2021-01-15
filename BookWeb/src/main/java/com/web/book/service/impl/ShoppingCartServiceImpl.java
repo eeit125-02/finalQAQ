@@ -38,8 +38,13 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 	}
 
 	@Override
-	public void updateCartAll(Integer cart_Num, Integer bk_ID, Integer bb_ID) {
-		dao.updateCartAll(cart_Num, bk_ID, bb_ID);		
+	public void updateCartAll(Integer cart_Num, Integer bk_ID) {
+		dao.updateCartAll(cart_Num, bk_ID);		
+	}
+
+	@Override
+	public void updateBookStore(Integer bks_ID, Integer bs_Num) {
+		dao.updateBookStore(bks_ID, bs_Num);		
 	}
 	
 	
