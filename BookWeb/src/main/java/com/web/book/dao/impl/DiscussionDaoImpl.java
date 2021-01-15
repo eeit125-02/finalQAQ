@@ -60,10 +60,16 @@ public class DiscussionDaoImpl implements DiscussionDao {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<PostBean> getAllPostByHot() {
-		String hql= //"SELECT p.post_id, p.post_content, p.post_title, p.post_time, p.memberbean.mb_Name, p.commands.FK_PostBean_post_id"+
-				"FROM PostBean p " + 
-				//"WHERE p.post_id=c.FK_PostBean_post_id" + 
-				"ORDER BY COUNT(p.commands.command_id) DESC";
+		String hql= "FROM PostBean  p ORDER BY SIZE(p.commands) DESC";
+		Session session = factory.getCurrentSession();
+		return session.createQuery(hql).getResultList();
+	}
+	
+	//依點擊率排序所有貼文
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<PostBean> getAllPostByClick() {
+		String hql= "FROM PostBean  p ORDER BY click DESC";
 		Session session = factory.getCurrentSession();
 		return session.createQuery(hql).getResultList();
 	}
@@ -164,16 +170,28 @@ public class DiscussionDaoImpl implements DiscussionDao {
 		return session.createQuery(hql).setParameter("pb_ID", pb_ID).getResultList();
 	}
 
-	//有問題！！！
 	//查詢貼文關鍵字
 	@SuppressWarnings({ "unchecked"})
 	@Override
 	public List<PostBean> getPostByKeyword(String keyword) {
-		String hql="FROM PostBean p WHERE p.post_content LIKE '%" + keyword + 
-				"%' OR p.post_title LIKE '%" + keyword + "%'";
+		String hql="FROM PostBean p WHERE p.post_content LIKE :content_keyword "+
+							" OR p.post_title LIKE :title_keyword ORDER BY p.post_time  DESC";
 		Session session = factory.getCurrentSession();
-		return session.createQuery(hql).getResultList();
+		Query<PostBean> query = session.createQuery(hql);
+		query.setParameter("content_keyword", "%" + keyword + "%");
+		query.setParameter("title_keyword",  "%" + keyword + "%");
+		return query.getResultList();
 	}
+
+	//點擊+1
+	@Override
+	public void addClick(Integer post_ID) {
+		Session session = factory.getCurrentSession();
+		PostBean pb = (PostBean) session.get(PostBean.class, post_ID);
+		pb.setClick(pb.getClick()+1);
+	}
+
+
 
 
 

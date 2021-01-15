@@ -43,9 +43,9 @@
 </head>
 <body>
 	<!-- 灌值 -->
-<%-- 		<form action="<c:url value='/boobplay'/>" method="get"> --%>
-<!-- 			<button type="submit">不要隨便亂按會爆炸</button> -->
-<!-- 		</form> -->
+	<%-- 		<form action="<c:url value='/boobplay'/>" method="get"> --%>
+	<!-- 			<button type="submit">不要隨便亂按會爆炸</button> -->
+	<!-- 		</form> -->
 	<!-- 灌值 -->
 	<!-- header -->
 	<header class="container blog-header py-3" id="bookWebheader"></header>
@@ -76,81 +76,94 @@
 						onclick="storeCheck()">我的賣場</button>
 				</div>
 			</div>
-		
-		<br>
-		<!-- 搜尋商品欄	end -->
-		<!-- 	版面置中 -->
 
-		<!-- 	版面置中 -->
-		<div class="row">
-			<c:forEach items="${store}" var="v">
-				<div class="card col-sm-3"
-					style="margin: 20px 40px; width: 500px; padding: 15px">
-					<!-- 圖片跟連結 -->
-					<a href="<c:url value='/qaqBookDetail/${v.bks_ID}'/>"
-						style="align: center;"> <img
-						src="<c:url value=" ${v.book.bk_Pic} " />" class="card-img-top"
-						alt="..." style="height: 18rem; width: 250px;">
-					</a>
-					<!-- 圖片跟連結 -->
-					<div class="card-body">
-						<!-- 書名連結 -->
-						<a href="<c:url value='/qaqBookDetail/${v.bks_ID}'/>">${v.book.bk_Name }</a>
-						<!-- 書名連結 -->
-						<br> <span class="card-text">作者: ${ v.book.bk_Author }</span>
-						<br> <span class="card-text">出版社: ${ v.book.bk_Publish }</span>
-						<br> <span class="card-text">出版日: ${ v.book.bk_Date }</span>
-						<br> <span class="card-text">價錢: ${ v.book.bk_Price }</span>
-						<br>
-						<!-- 比價連結 -->
-						<a href="<c:url value='/qaqManyPrice?ID=${v.book.bk_ID}'/>">簡介&#149;比價
-							$ </a>
-						<!-- 比價連結 -->
+			<br>
+			<!-- 搜尋商品欄	end -->
+			<!-- 	版面置中 -->
+
+			<!-- 	版面置中 -->
+			<c:choose>
+				<c:when test="${not empty store}">
+					<div class="row">
+						<c:forEach items="${store}" var="v">
+							<div class="card col-sm-3"
+								style="margin: 20px 40px; width: 500px; padding: 15px">
+								<!-- 圖片跟連結 -->
+								<a href="<c:url value='/qaqBookDetail/${v.bks_ID}'/>"
+									style="align: center;"> <img
+									src="<c:url value=" ${v.book.bk_Pic} " />" class="card-img-top"
+									alt="..." style="height: 18rem; width: 250px;">
+								</a>
+								<!-- 圖片跟連結 -->
+								<div class="card-body">
+									<!-- 書名連結 -->
+									<a href="<c:url value='/qaqBookDetail/${v.bks_ID}'/>">${v.book.bk_Name }</a>
+									<!-- 書名連結 -->
+									<br> <span class="card-text">作者: ${ v.book.bk_Author }</span>
+									<br> <span class="card-text">出版社: ${ v.book.bk_Publish }</span>
+									<br> <span class="card-text">出版日: ${ v.book.bk_Date }</span>
+									<br> <span class="card-text">價錢: ${ v.book.bk_Price }</span>
+									<br>
+									<!-- 比價連結 -->
+									<a href="<c:url value='/qaqManyPrice?ID=${v.book.bk_ID}'/>">簡介&#149;比價
+										$ </a>
+									<!-- 比價連結 -->
+								</div>
+							</div>
+						</c:forEach>
 					</div>
-				</div>
-			</c:forEach>
-		</div>
-		<br>
-		<!-- 分頁顯示		 -->
-		<c:choose>
-			<c:when test="${pageSize != 0}">
-				<div class="row">
-					<div class="col-sm-4"></div>
-					<div class="col-sm-8">
-						<nav aria-label="Page navigation example">
-							<ul class="pagination">
-								<!-- 組左邊符號 start-->
-								<c:if test="${pageNow != 1}">
-									<li class="page-item"><a class="page-link"
-										href="<c:url value='/qaqTest/${pageType}/1'/>" aria-label="Previous">
-											<span aria-hidden="true">&laquo;</span>
-									</a></li>
-									<li class="page-item"><a class="page-link"
-										href="<c:url value='/qaqTest/${pageType}/${pageNow-1}'/>">
-											${pageNow-1} </a></li>
-								</c:if>
-								<!-- 組左邊符號 end-->
-								<li class="page-item"><a class="page-link"> ${pageNow}
-								</a></li>
-								<!-- 組右邊符號 start-->
-								<c:if test="${pageNow != pageSize}">
-									<li class="page-item"><a class="page-link"
-										href="<c:url value='/qaqTest/${pageType}/${pageNow+1}'/>">
-											${pageNow+1} </a></li>
-									<li class="page-item"><a class="page-link"
-										href="<c:url value='/qaqTest/${pageType}/${pageSize}'/>" aria-label="Next">
-											<span aria-hidden="true">&raquo;</span>
-									</a></li>
-								</c:if>
-								<!-- 組右邊符號 end-->
-							</ul>
-						</nav>
+					<br>
+				</c:when>
+				<c:otherwise>
+				<hr><br>
+					<div class="row">
+						<div class="col-lg-4"></div>
+						<div class="col-lg-8">
+							<h1>查無資料!!!</h1>
+						</div>
 					</div>
-				</div>
-			</c:when>
-			<c:otherwise>
-			</c:otherwise>
-		</c:choose>
+				</c:otherwise>
+			</c:choose>
+			<!-- 分頁顯示		 -->
+			<c:choose>
+				<c:when test="${pageSize != 0}">
+					<div class="row">
+						<div class="col-sm-4"></div>
+						<div class="col-sm-8">
+							<nav aria-label="Page navigation example">
+								<ul class="pagination">
+									<!-- 組左邊符號 start-->
+									<c:if test="${pageNow != 1}">
+										<li class="page-item"><a class="page-link"
+											href="<c:url value='/qaqTest/${pageType}/1'/>"
+											aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
+										</a></li>
+										<li class="page-item"><a class="page-link"
+											href="<c:url value='/qaqTest/${pageType}/${pageNow-1}'/>">
+												${pageNow-1} </a></li>
+									</c:if>
+									<!-- 組左邊符號 end-->
+									<li class="page-item"><a class="page-link"> ${pageNow}
+									</a></li>
+									<!-- 組右邊符號 start-->
+									<c:if test="${pageNow != pageSize}">
+										<li class="page-item"><a class="page-link"
+											href="<c:url value='/qaqTest/${pageType}/${pageNow+1}'/>">
+												${pageNow+1} </a></li>
+										<li class="page-item"><a class="page-link"
+											href="<c:url value='/qaqTest/${pageType}/${pageSize}'/>"
+											aria-label="Next"> <span aria-hidden="true">&raquo;</span>
+										</a></li>
+									</c:if>
+									<!-- 組右邊符號 end-->
+								</ul>
+							</nav>
+						</div>
+					</div>
+				</c:when>
+				<c:otherwise>
+				</c:otherwise>
+			</c:choose>
 		</form>
 		<!-- 分頁顯示		 -->
 		<!-- 	版面置中 -->

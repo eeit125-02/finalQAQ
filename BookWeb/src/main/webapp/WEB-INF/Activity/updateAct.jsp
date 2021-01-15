@@ -83,75 +83,83 @@
 				<input type="hidden" name="finalDecision" value="">
 </div>				
 					
-				<Table>
-				<tr>
-					<td><label >活動圖片:</label></td>
-					<td><img src="${ab.act_Image}" id="show" width="150" height="200"></td>	
-								
-				</tr>
-				<tr>
-					<td><label></label></td>
-					<td><input id="myfile" type="file" name="file"></td>
-				</tr>
-				<tr>
-					<td><form:label path="act_Name">活動名稱:</form:label></td>
-					<td><form:input path="act_Name" /></td>
-				</tr>
-
-					<tr>
-					<td><form:label path="act_Theme">活動主題:</form:label></td>
-					<td><form:input path="act_Theme" /></td>
-				</tr>
+				
+					<div class="form-row">
+					<div class="form-group">
+					<label >活動圖片:</label>
+					<div class="form-control"><img src="${ab.act_Image}" id="show" width="150" height="200"></div>													
+					<label></label>
+					<input id="myfile" type="file" name="file">
+					</div>
+					</div>
+					
+					<div class="form-row">
+					<div class="form-group col-md-6">
+					<label >活動名稱:</label>
+					<form:input path="act_Name" class="form-control"/>
+					</div>
+	
+					<div class="form-group col-md-6">
+					<label>活動主題:</label>
+<%-- 					<form:input path="act_Theme" /> --%>
+					<form:select path="act_Theme" class="form-control">
+                                <form:option value="NONE" label="請選擇" />
+                                <form:option value="書展" label="書展"/>
+                                <form:option value="讀書會" label="讀書會"/>
+                                <form:option value="簽書會" label="簽書會"/>
+                                <form:option value="講座/論壇" label="講座/論壇"/>
+                                <form:option value="公益活動"  label="公益活動"/>
+                                <form:option value="好書交換" label="好書交換"/>
+                                <form:option value="新書/好書討論會" label="新書/好書討論會"/>
+                                </form:select>					
+					</div>
 				
 					
-				<tr>
-					<td><form:label path="act_Date">活動時間:</form:label></td>
-					<td><form:input type="datetime-local" path="act_Date" /></td>
-				</tr>
+
+					<form:label path="act_Date">活動時間:</form:label>
+					<form:input type="datetime-local" path="act_Date" />
+
 				
-				<tr>
-					<td><form:label path="act_Loc">活動地點:</form:label></td>
-					<td><form:input path="act_Loc" /></td>
-				</tr>
 
-					<tr>
-					<td><form:label path="act_Intro">活動簡介:</form:label></td>
-					<td><form:input path="act_Intro" /></td>
-				</tr>
+					<form:label path="act_Loc">活動地點:</form:label>
+					<form:input path="act_Loc" />
 
-					<tr>
-					<td><form:label path="act_Guest">活動嘉賓:</form:label></td>
-					<td><form:input path="act_Guest" /></td>
-				</tr>
 
-					<tr>
-					<td><form:label path="act_Pax">活動人數:</form:label></td>
-					<td><form:input path="act_Pax" /></td>
-				</tr>
+					<form:label path="act_Intro">活動簡介:</form:label>
+					<form:input path="act_Intro" />
+
+					<form:label path="act_Guest">活動嘉賓:</form:label>
+					<form:input path="act_Guest" />
+
+
 				
-					<tr>
-					<td><form:label path="act_Rule">活動規則:</form:label></td>
-					<td><form:input path="act_Rule" /></td>
-				</tr>
+					<form:label path="act_Pax">活動人數:</form:label>
+					<form:input path="act_Pax" />
+				
+				
+					
+					<form:label path="act_Rule">活動規則:</form:label>
+					<form:input path="act_Rule" />
+			
 
-					<tr>
-					<td><form:label path="act_Tag">活動標籤:</form:label></td>
-					<td><form:input type="textarea" path="act_Tag" /></td>
-				</tr>
+					
+					<form:label path="act_Tag">活動標籤:</form:label>
+					<form:input type="textarea" path="act_Tag" />
+			
 
-				<tr>
-					<td><form:label path="act_Place">活動場所:</form:label></td>
-					<td><form:input path="act_Place" /></td>
-				</tr>
+				
+					<form:label path="act_Place">活動場所:</form:label>
+					<form:input path="act_Place" />
+				
 
-					<TR>
-						<TD colspan="2" align="center">
+					
+						<div colspan="2" align="center">
 						
 						<input type="submit" value="更新" name='updateBtn'onclick="return confirmUpdate('${ab.act_ID}');"/> 
 						<input type="submit" value="刪除" name='deleteBtn'onclick="return confirmDelete('${ab.act_Name}');"/>
-						</TD>
-					</TR>
-				</Table>
+						</div>
+					</div>
+				
 				<c:if test="${not empty requestScope.modify}">
 					<c:remove var="act" scope="request" />
 				</c:if>

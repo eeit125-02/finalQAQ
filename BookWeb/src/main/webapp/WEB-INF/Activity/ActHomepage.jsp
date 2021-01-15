@@ -240,8 +240,7 @@ td {
 				<hr style="height: 1px; border: none; color: #333; background-color: #333;">
 				<section class="container" style="width:1200px">
 					<div class="row" id="change">
-						<c:forEach var='act' items='${allacts}'>
-							<input type="hidden" id="mb_ID" value="${act.member.mb_ID}">
+						<c:forEach var='act' items='${allacts}'>	
 							<div class="col-6,col-md-3" style="width: 380px; height: 1000px">
 								<div class="thumbnail" style="width: 350px; height: 1000px">
 									<p>
@@ -255,7 +254,7 @@ td {
     									  <div class="modal-header">
 <!--     									  //標頭 -->
       										  <h5 class="modal-title" id="#exampleModalCenter${act.act_Name}">${act.act_Name}</h5>
-      										  &nbsp;<h6>${act.act_Differentpax}</h6><span>/</span><span>${act.act_Pax}</span>
+      										  
        											 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
      											     <span aria-hidden="true">&times;</span>
      												   </button>
@@ -265,13 +264,15 @@ td {
      										 <p>${act.act_Theme}</p>
 										     <p>${act.act_Date}</p>										     
 										     <p>${act.act_Loc}</p>     
-										     <p>${act.act_Intro}</p>			
+										     <p>${act.act_Intro}</p>
+										     <span>${act.act_Differentpax}</span><span>/</span><span>${act.act_Pax}</span>			
 										     <hr>
       										 </div>
 <!--       										//頁尾 -->
      									 <div class="modal-footer">
         									<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      										 <a href="<c:url value='/showJoinForm'/>?act_ID=${act.act_ID}"><button type="button" class="btn btn-primary">報名</button></a> 
+        									<input type="hidden" id="check" value="${check}">
+      										 <a href="<c:url value='/showJoinForm'/>?act_ID=${act.act_ID}"><button type="button" id="joinact" class="btn btn-primary">報名</button></a> 
      										    </div>
   											  </div>
  											 </div>
@@ -280,7 +281,9 @@ td {
 									<div class="caption">
 										<p>${act.act_Theme}</p>
 										<p>${act.act_Date}</p>
-										<p><button class="mapbutton"  id="myModal"  value="${act.act_Loc}" data-toggle="modal" data-target="#myModal1"><i class='fas fa-map-marked-alt'></i></button>${act.act_Loc}</p>	
+										<p></p>
+										<p><img src=${pageContext.request.contextPath}/image/iconfinder_clock_1814097.png style="width:22px;height:22px">${act.act_Time}</p>
+										<p><button class="mapbutton" style="background-color:white" id="myModal"  value="${act.act_Loc}" data-toggle="modal" data-target="#myModal1"><img src=${pageContext.request.contextPath}/image/iconfinder_location_1814106.png style="width:25px;height:25px"></button>${act.act_Loc}</p>
 										<hr>
 										<p>
 										
@@ -339,12 +342,17 @@ td {
 var map, geocoder;
 var mapId="";
 console.log("1231456")
+console.log($("#check").val())
+console.log($('#memberid').val())
 $(document).ready(function(){
 if(typeof($.cookie('Member_ID')) != "undefined" ){
 	console.log("123")
 }
 })
 
+if($("#check").val() == "repeat"){
+	alert("你已報名過此活動")
+}
 
 $('button').click(function(){
 	mapId = $(this).val();
@@ -479,6 +487,9 @@ $(document).ready(function(){
     })
 })
 </script>
+
+
+
 
 </body>
 

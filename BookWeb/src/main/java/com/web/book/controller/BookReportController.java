@@ -22,6 +22,7 @@ import org.springframework.web.bind.support.SessionStatus;
 import com.web.book.model.BookBean;
 import com.web.book.model.BookReportBean;
 import com.web.book.model.BookReportCollectBean;
+import com.web.book.model.BookReportMessageBean;
 import com.web.book.model.MemberBean;
 import com.web.book.service.BookReportService;
 import com.web.book.service.SearchService;
@@ -210,6 +211,7 @@ public class BookReportController {
 	public Map<String,Object> searchBookReportPage() {
 		
 		Map<String, Object>  data = new HashMap<>();
+		
 		List<Map<String, Object>> bookReport = new ArrayList<>();
 		List<BookReportBean> searchBookReport = bookReportService.getSearchBookRepotData(searchType, page);
 		for (BookReportBean bookReportBean : searchBookReport) {
@@ -281,4 +283,67 @@ public class BookReportController {
 		return "true";
 	}
 	
+	@PostMapping("/bookReportMessageList/{brId}")
+	@ResponseBody
+	public List<Map<String, Object>> bookReportMessageList(@PathVariable("brId") Integer brId){
+		
+		List<Map<String, Object>> reportMessages = new ArrayList<>();
+		List<BookReportMessageBean> bookReportMessages = bookReportService.getBookReportMessageList(brId);
+		
+		for (BookReportMessageBean bookReportMessage : bookReportMessages) {
+			
+			Map<String, Object>  data = new HashMap<>();
+			
+			data.put("bmContent", bookReportMessage.getBm_Content());
+			data.put("mbName", bookReportMessage.getMember().getMb_Name());
+			data.put("mbPic", bookReportMessage.getMember().getMb_pic());
+			data.put("bmDate", new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(bookReportMessage.getBm_Date()));
+			
+			reportMessages.add(data);
+			
+		}
+		
+		return reportMessages;
+	}
+	
+	@PostMapping("/EditBookReport/memberReportMessageList")
+	@ResponseBody
+	public List<Map<String, Object>> memberReportMessageList(){
+		
+		List<Map<String, Object>> reportMessages = new ArrayList<>();
+		List<BookReportMessageBean> bookReportMessages = bookReportService.getBookReportMessageList(loginUser.getMb_ID());
+		
+		for (BookReportMessageBean bookReportMessage : bookReportMessages) {
+			
+			Map<String, Object>  data = new HashMap<>();
+			
+			data.put("bmContent", bookReportMessage.getBm_Content());
+			data.put("mbName", bookReportMessage.getMember().getMb_Name());
+			data.put("bmDate", bookReportMessage.getBm_Date());
+			
+			reportMessages.add(data);
+			
+		}
+		
+		return reportMessages;
+	}
+	
+	@PostMapping("/addReportMessage")
+	@ResponseBody
+	public Boolean addReportMessage(
+			@RequestParam(value = "bmContent", required = true) String bmContent,
+			@RequestParam(value = "brId", required = true) Integer brId) {
+		
+		
+		return bookReportService.addReportMessage(brId, loginUser.getMb_ID(), bmContent);
+	}
+	
+	@PostMapping("/deleteReportMessage")
+	@ResponseBody
+	public Boolean deleteReportMessage(@RequestParam(value = "bmId", required = true) Integer bmId) {
+		
+		bookReportService.deletReportMessage(bmId);
+		
+		return true;
+	}
 }

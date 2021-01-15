@@ -7,6 +7,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.CascadeType;
 
 @Entity
 @Table(name="Book_Type")
@@ -15,7 +16,7 @@ public class BookTypeBean {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	Integer bt_ID;
 
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name="bk_ID")
 	private BookBean book;
 	

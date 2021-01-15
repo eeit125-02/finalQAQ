@@ -41,6 +41,8 @@ public class DiscussionController {
 		model.addAttribute("allPost", post_list);
 		List<PostBean> post_list_hot = discussionService.getAllPostByHot();
 		model.addAttribute("hotPost", post_list_hot);
+		List<PostBean> post_list_click = discussionService.getAllPostByClick();
+		model.addAttribute("clickPost", post_list_click);
 		List<CommandBean> command_list = discussionService.getAllCommand();
 		model.addAttribute("allCommand", command_list);
 		List<RuleBean> rule_content = discussionService.getRule();
@@ -51,25 +53,6 @@ public class DiscussionController {
 		List<NestedCommandBean> nested_command_detail = discussionService.getAllNestedCommand();
 		model.addAttribute("AllNestedCommand", nested_command_detail);
 		return "Discussion/mainpage"; 
-	}
-	
-	//貼文內容(會員id目前為null)
-	@ModelAttribute
-	public void post_inf(Model model) {
-		PostBean pb = new PostBean();
-		Timestamp d = new Timestamp(System.currentTimeMillis());
-		DateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-		String tsStr = sdf.format(d);
-		pb.setPost_time(tsStr);
-		model.addAttribute("postBean",pb);
-	}
-	
-	//會員新增貼文
-	@PostMapping("Discussion/add_post")
-	public String processAddNewPost(@ModelAttribute("postBean")PostBean pb) {
-		pb.setMemberbean(loginUser); //直接把Bean塞進去
-		discussionService.addPost(pb);
-		return "redirect:/Discussion/mainpage";
 	}
 	
 	//帶參數前往修改貼文頁面
@@ -86,6 +69,7 @@ public class DiscussionController {
 	@PostMapping("Discussion/show_detail")
 	public String showDetailPage(Model model,
 			@RequestParam("post_detail_id") Integer post_detail_id) {
+		discussionService.addClick(post_detail_id);
 		PostBean pb = discussionService.getPostBeanById(post_detail_id);
 		model.addAttribute("PostBean", pb);
 		List<CommandBean> command_detail= discussionService.getCommandBeanByPostId(post_detail_id);
@@ -109,15 +93,7 @@ public class DiscussionController {
 		discussionService.editPost(edit_post_id, edit_post_title,edit_post_content, tsStr);
 		return "redirect:/Discussion/mainpage"; 
 	}
-	
-	//刪除貼文
-	@PostMapping("Discussion/go_delete")
-	public String processPostDelete(Model model,
-			@RequestParam("delete_post_id") Integer delete_post_id) {
-		discussionService.deletPost(delete_post_id);
-		return "redirect:/Discussion/mainpage"; 
-	}
-	
+		
 	//搜尋關鍵字
 	@PostMapping("Discussion/search_keyword")
 	public String showKeywordSearchResult(Model model,

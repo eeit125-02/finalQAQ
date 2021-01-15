@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
-import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,12 +24,12 @@ public class ActJoinServiceImpl implements ActJoinService {
 		return actjoinDao.getAllJoins();
 	}
 	
-	//經由報名ID取得單一報名資料
+	//經由報名表ID取得單一報名資料
 	public ActJoinBean getActJoin(Integer join_ID) {
 		return actjoinDao.getActJoin(join_ID);
 	}
 		
-	// 依會員ID取得會員報名紀錄
+	// 依會員帳號取得會員報名紀錄
 	@Override
 	public List<ActJoinBean> getJoinRecords(Integer mb_ID) {
 		return actjoinDao.getJoinRecords(mb_ID);
@@ -54,4 +53,11 @@ public class ActJoinServiceImpl implements ActJoinService {
 		return actjoinDao.deleteActJoin(join_ID);
 	}
 	
+	//判斷會員是否重複報名活動
+	@Override
+	public boolean check(Integer mb_ID,Integer act_ID) {
+		return actjoinDao.check(mb_ID, act_ID);
+	}
+
+		
 }

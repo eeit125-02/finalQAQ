@@ -181,7 +181,7 @@ public class Login {
 				String sessionId = GlobalService.createSessionID(String.valueOf(loginMember.getMb_ID()),
 					loginMember.getMb_Name(), loginMember.getMb_Account());
 			Cookie memId = new Cookie("Member_ID", sessionId);
-			memId.setMaxAge(20*60);
+			memId.setMaxAge(60*60);
 			response.addCookie(memId);
 			logincheck = "c" ;
 			return true;
@@ -212,7 +212,7 @@ public class Login {
 			Cookie memId = new Cookie("Member_ID", sessionId);
 			Cookie memName = new Cookie("Member_Name", mb.getMb_Name());			
 			System.out.println(mb.getMb_pic());
-			memId.setMaxAge(1200);
+			memId.setMaxAge(60*60);
 			response.addCookie(memId);
 			response.addCookie(memName);
 			model.addAttribute("loginMember", mb);
@@ -250,7 +250,6 @@ public class Login {
 			@RequestParam(value = "mb_Birthday", required = false) Date mb_Birthday,
 			@RequestParam(value = "mb_Address", required = false) String mb_Address,
 			@RequestParam(value = "mb_Tel", required = false) String mb_Tel,
-			@RequestParam(value = "mb_Mail", required = false) String mb_Mail,
 			@RequestParam(value = "mb_type", required = false) String mb_type
 			) throws Exception {		
 		MemberBean mb_inf = ms.select(Account);	
@@ -261,7 +260,6 @@ public class Login {
 		mb_inf.setMb_Birthday(mb_Birthday);
 		mb_inf.setMb_Address(mb_Address);
 		mb_inf.setMb_Tel(mb_Tel);
-		mb_inf.setMb_Mail(mb_Mail);
 		mb_inf.setMb_type(mb_type);
 		boolean update = ms.update(mb_inf);
 		if (update) {
@@ -360,6 +358,7 @@ public class Login {
 	@GetMapping("/toLogin")
 	public String tologin(SessionStatus sessionStatus) {
 		sessionStatus.setComplete();
+		System.out.println("++++++++++++++++++++++++++++++++++++++");
 		return "Member/login";
 	}
 
@@ -387,6 +386,7 @@ public class Login {
 	@GetMapping("/toCity")
 	public String tocity(Model model) {
 		MemberBean inf = ms.select(Account);
+		System.out.println(inf);
 		model.addAttribute("loginUser",inf);
 		if(logincheck.equals("c")) {
 			model.addAttribute("third","third");

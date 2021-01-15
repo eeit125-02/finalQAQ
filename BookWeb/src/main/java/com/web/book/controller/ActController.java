@@ -1,5 +1,6 @@
 package com.web.book.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -50,6 +51,7 @@ public class ActController {
 	public String actlist(Model model) {
 		List<ActBean> actlist = actService.getAllActs();
 		model.addAttribute("allacts", actlist);
+		model.addAttribute("check","");
 		return "Activity/ActHomepage";
 	}
 
@@ -87,7 +89,6 @@ public class ActController {
 		
 		GlobalService.saveImage("active", file, ab.getact_Name());
 		ab.setAct_Differentpax(0);
-		ab.setMember(loginUser);
 		ab.setact_Image(GlobalService.saveImage("active", file, ab.getact_Name()));
 		actService.createAct(ab);
 		return "redirect:/showActs";
@@ -137,5 +138,35 @@ public class ActController {
 		actService.deleteAct(act_ID);
 		return "redirect:/showActs";
 	}
+	
+	
+	 @ModelAttribute("TagList")
+	 public List<String> getTagList(){
+	      List<String> TagList = new ArrayList<String>();
+	      TagList.add("戶外體驗");
+	      TagList.add("學習");
+	      TagList.add("親子");
+	      TagList.add("寵物");
+	      TagList.add("科技");
+	      TagList.add("商業");
+	      TagList.add("創業");
+	      TagList.add("投資");
+	      TagList.add("設計");
+	      TagList.add("藝文");
+	      TagList.add("手作");
+	      TagList.add("美食");
+	      TagList.add("攝影");
+	      TagList.add("遊戲");
+	      TagList.add("運動");
+	      TagList.add("健康");
+	      TagList.add("音樂");
+	      TagList.add("電影");
+	      TagList.add("娛樂");
+	      TagList.add("時尚");
+	      TagList.add("公益");
+
+	      return TagList;
+	   }
+
 
 }

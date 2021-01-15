@@ -19,6 +19,8 @@ public interface DiscussionService {
 	CommandBean addCommand(CommandBean new_command);
 	//會員新增巢狀留言
 	NestedCommandBean addNestedCommand(NestedCommandBean new_nested_command);
+	//加一次點擊
+	void addClick(Integer post_ID);
 	//用ID取出Post資料
 	PostBean getPostBeanById(Integer pb_ID);
 	//用ID取出Member資料
@@ -31,6 +33,8 @@ public interface DiscussionService {
 	List<PostBean> getAllPost();
 	//依熱門度排序所有貼文
 	List<PostBean> getAllPostByHot();
+	//依點擊率排序所有貼文
+	List<PostBean> getAllPostByClick();
 	//依時間排序列出所有留言
 	List<CommandBean> getAllCommand();
 	//依時間排序列出所有巢狀留言
