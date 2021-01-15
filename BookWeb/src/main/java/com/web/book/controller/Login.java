@@ -360,6 +360,7 @@ public class Login {
 	@GetMapping("/toLogin")
 	public String tologin(SessionStatus sessionStatus) {
 		sessionStatus.setComplete();
+		System.out.println("++++++++++++++++++++++++++++++++++++++");
 		return "Member/login";
 	}
 

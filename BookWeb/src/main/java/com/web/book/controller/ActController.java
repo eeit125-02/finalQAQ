@@ -50,6 +50,7 @@ public class ActController {
 	public String actlist(Model model) {
 		List<ActBean> actlist = actService.getAllActs();
 		model.addAttribute("allacts", actlist);
+		model.addAttribute("check","");
 		return "Activity/ActHomepage";
 	}
 
