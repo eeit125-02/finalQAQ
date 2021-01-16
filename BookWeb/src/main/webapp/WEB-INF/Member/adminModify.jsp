@@ -20,6 +20,9 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Document</title>
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.23/datatables.min.css"/>
+<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.23/datatables.min.js"></script>
 <!-- <script -->
 <!-- 	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" -->
 <!-- 	integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" -->
@@ -134,20 +137,21 @@ legend {
 		<br>
 			<fieldset id="admin" style="text-align:center">
 				<legend>會員清單</legend>
-	<label for="site-search" style="align:left">Search the site:</label>
-	<input type="search" id="site-search" name="search" aria-label="Search through site content">
-	<button id="searchbtn" name="searchbtn">Search</button>
+<!-- 	<label for="site-search" style="align:left">Search the site:</label> -->
+<!-- 	<input type="search" id="site-search" name="search" aria-label="Search through site content"> -->
+<!-- 	<button id="searchbtn" name="searchbtn">Search</button> -->
 		<form action="<c:url value='/delete' />" method="post">
 				<table class="table"  width="100%"  id="change">
 					<c:forEach items="${memberall}" var="u" varStatus="loop">
 						<c:if test="${loop.index == 0}">
-							<tr>
+							<thead><tr>
 								<th>帳號</th>
 								<th>姓名</th>
 								<th>註冊日期</th>
 								<th></th>
 								<th></th>
 							</tr>
+							</thead>
 						</c:if>
 						<tr>
 							<td>${u.getMb_Account()}</td>
@@ -172,42 +176,43 @@ legend {
 	<script>
 	$('#searchbtn').click(function(){
 		console.log($('#site-search').val())
-	$.ajax({
-		type : 'POST',
-		url : "admin_search?account=" + $('#site-search').val(),
-		data:{
-// 			'search':$('#site-search').val() 
-		},
-		dataType : "json",
-		success : function(data) {
-			console.log(data.inf.checkColume)
-			
-			var insertData = "";
-			insertData = ("<c:forEach items='"+data.inf+"' var='u'>"
-						+"<tr>"
-						+"<td>"+data.inf.mb_Account+"</td>"
-						+"<td>"+data.inf.mb_Name+"</td>"
-						+"<td>"+data.infDate+"</td>"
-						+"<td><button type=\"submit\" name=\"delete\""
-						+"class=\"btn btn-outline-secondary\" value=\""+data.inf.mb_ID+"\">刪除"
-						+"<button type=\"submit\" name=\"update\""
-						+"class=\"btn btn-outline-secondary\" value=\""+data.infcheck+"\">修改</td>"						
-						+"<td><label class=\"switch\"> <input type=\"checkbox\">"
-						+"<span id=\"ball\" class=\"slider\" check=\""+data.inf.checkColume+"\"></span>"
-						+"</label>"
-						+"</td>"
-						+"</tr>"
-						+"</c:forEach>")
-						
-		$('#change').html(insertData);
-			already();
-		}
-	});	
-})
+		$.ajax({
+			type : 'POST',
+			url : "admin_search?account=" + $('#site-search').val(),
+			data:{
+	// 			'search':$('#site-search').val() 
+			},
+			dataType : "json",
+			success : function(data) {
+				console.log(data.inf.checkColume)
+				
+				var insertData = "";
+				insertData = ("<c:forEach items='"+data.inf+"' var='u'>"
+							+"<tr>"
+							+"<td>"+data.inf.mb_Account+"</td>"
+							+"<td>"+data.inf.mb_Name+"</td>"
+							+"<td>"+data.infDate+"</td>"
+							+"<td><button type=\"submit\" name=\"delete\""
+							+"class=\"btn btn-outline-secondary\" value=\""+data.inf.mb_ID+"\">刪除"
+							+"<button type=\"submit\" name=\"update\""
+							+"class=\"btn btn-outline-secondary\" value=\""+data.infcheck+"\">修改</td>"						
+							+"<td><label class=\"switch\"> <input type=\"checkbox\">"
+							+"<span id=\"ball\" class=\"slider\" check=\""+data.inf.checkColume+"\"></span>"
+							+"</label>"
+							+"</td>"
+							+"</tr>"
+							+"</c:forEach>")
+							
+			$('#change').html(insertData);
+				already();
+			}
+		});	
+	})
 
 		$(document).ready(function() {
 			already();
-			check();
+			dataTable();
+
 		});
 		
 		function already(){
@@ -236,6 +241,40 @@ legend {
 		})
 		})
 		}
+		
+		function dataTable() {
+			console.log($('#change'))
+			$('#change').DataTable({
+					destroy: true,
+					language: {
+// 						"lengthMenu": "顯示 MENU 筆資料",
+						"sProcessing": "處理中...",
+						"sZeroRecords": "没有匹配结果",
+// 						"sInfo": "目前有_ MAX_筆資料",
+						"sInfoEmpty": "目前共有 0 筆紀錄",
+						"sInfoFiltered": " ",
+						"sInfoPostFix": "",
+						"sSearch": "尋找:",
+						"sUrl": "",
+						"sEmptyTable": "尚未有資料紀錄存在",
+						"sLoadingRecords": "載入資料中...",
+						"sInfoThousands": ",",
+						"oPaginate": {
+						"sFirst": "首頁",
+						"sPrevious": "上一頁",
+						"sNext": "下一頁",
+						"sLast": "末頁"
+					},
+						"order": [[0, "desc"]],
+						"oAria": {
+						"sSortAscending": ": 以升序排列此列",
+						"sSortDescending": ": 以降序排列此列"
+					}
+				}
+			})
+		}
+			
+		
 	</script>
 
 </html>

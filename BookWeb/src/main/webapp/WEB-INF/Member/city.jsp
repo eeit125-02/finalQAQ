@@ -16,6 +16,8 @@
 <!-- 	src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" -->
 <!-- 	integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" -->
 <!-- 	crossorigin="anonymous"></script> -->
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.23/datatables.min.css"/>
+<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.23/datatables.min.js"></script>
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
 	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
@@ -502,7 +504,10 @@ div {
 			 })
 		
 			 $('#admin1').click(function(){
-			$('#change123').load("//localhost:8080/BookWeb/adminall")
+			$('#change123').load("//localhost:8080/BookWeb/adminall",function(){
+// 				dataTable();
+				console.log("11111111111111111")
+			})
 		})	 
 			 
 // 			$('#admin1').click(function(){
