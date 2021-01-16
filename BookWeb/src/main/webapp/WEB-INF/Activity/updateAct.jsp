@@ -116,7 +116,7 @@
 							</div>										
 							<div class="form-group col-md-5" style="margin:auto">
 							<label >活動圖片:</label>
-							<input class="form-control" id="myfile" type="file" name="file">
+							<input class="form-control" id="myfile" type="file" name="file" style="overflow:hidden">
 							</div>
 							<div class="form-group col-md-2">
 							<img src="${ab.act_Image}" id="show" width="100%">

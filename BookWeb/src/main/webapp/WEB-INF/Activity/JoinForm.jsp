@@ -31,7 +31,8 @@
 	crossorigin="anonymous">
 	
 
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<!-- <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>  
 
 <style>
 .bd-placeholder-img {
@@ -71,7 +72,7 @@
 		<hr>
 		<div class="center">
 			<H1>新增報名資料</H1>
-			<form:form method="POST" modelAttribute="ajb" enctype="multipart/form-data">
+			<form:form method="POST" modelAttribute="ajb" enctype="multipart/form-data" id="showAlert">
 
 				<table>
 
@@ -110,11 +111,12 @@
 				</table>
 
 
-				<input type='submit' value='提交' id='confirmjoin'/>
+<!-- 				<input type='submit' value='提交' id="confirmjoin"/> -->
 				<input type='reset' value='還原' />
 				<br>
 				<br>
 			</form:form>
+			<button id="cools" type='button' onclick='cool()' >123</button>
 				<a href='${pageContext.request.contextPath}/showActs'>繼續探索活動</a>
 
 
@@ -126,10 +128,57 @@
 		<!-- footer -->
 </body>
 
+
+
 <script>
-document.getElementById("confirmjoin").addEventListener("click",function(){
-	  swal("Good job!", "您已報名成功囉!", "success");
-	});
+
+	function cool(){
+		console.log("12222")
+		
+		Swal.fire({
+		  title: 'Are you sure?',
+		  text: "You won't be able to revert this!",
+		  icon: 'warning',
+		  showCancelButton: true,
+		  confirmButtonColor: '#3085d6',
+		  cancelButtonColor: '#d33',
+		  confirmButtonText: 'Yes, delete it!',
+		  background: '#fff url(/images/trees.png)',
+		  backdrop: `
+		    rgba(0,0,123,0.4)
+		    url("https://i.imgur.com/60cOgdt.gif")
+		    left top
+		    no-repeat
+		  `
+		}).then((result) => {
+		  if (result.isConfirmed) {
+		    Swal.fire(
+		      'Deleted!',
+		      'Your file has been deleted.',
+		      'success'
+		    ).then((result)=>{
+		    	$('#showAlert').submit();
+		    })
+		  }
+		})
+		
+	// 	Swal.fire({
+	// 		  title: '您已報名成功囉!',
+	// 		  width: 600,
+	// 		  padding: '3em',
+	// 		  background: '#fff url(/images/trees.png)',
+	// 		  backdrop: `
+	// 		    rgba(0,0,123,0.4)
+	// 		    url("https://i.imgur.com/60cOgdt.gif")
+	// 		    left top
+	// 		    no-repeat
+	// 		  `
+	// 		})
+				
+			// 	    $('#showAlert').submit();
+			
+	}
+
 
 </script>
 

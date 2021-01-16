@@ -99,26 +99,6 @@ td {
 		<div class="row">
 			<br>
 			
-<!-- 			<!-- search bar的東東 --> 
-<!-- 			<div class="container"> -->
-<!-- 				<div class="row"> -->
-<!-- 			        <div class="col-md-6"> -->
-<!-- 			    		<h2>探索活動</h2> -->
-<!-- 			            <div id="custom-search-input"> -->
-<!-- 			                <div class="input-group col-md-12"> -->
-<!-- 			                    <input type="text" class="form-control input-lg" placeholder="請輸入任意活動關鍵字" /> -->
-<!-- 			                    <span class="input-group-btn"> -->
-<!-- 			                        <button class="btn btn-info btn-lg" type="button"> -->
-<!-- 			                            <i class="glyphicon glyphicon-search"></i> -->
-<!-- 			                        </button> -->
-<!-- 			                    </span> -->
-<!-- 			                </div> -->
-<!-- 			            </div> -->
-<!-- 			        </div> -->
-<!-- 				</div> -->
-<!-- 			</div> -->
-<!-- 			<!-- search bar的東東 --> 
-			
 
 
 				<main>
@@ -172,62 +152,6 @@ td {
 				</div>
 				<!--Hero Area End-->
 
-
-
-
-
-
-
-<!-- 			<main> -->
-<!-- 				? Hero Area Start -->
-<!-- 				<div class="slider-area hero-bg1 hero-overly"> -->
-<!-- 					<div -->
-<!-- 						class="single-slider hero-overly  slider-height1 d-flex align-items-center"> -->
-<!-- 						<div class="container"> -->
-<!-- 							<div class="row justify-content-center"> -->
-<!-- 								<div class="col-xl-10 col-lg-10"> -->
-<!-- 									Hero Caption -->
-<!-- 									<div class="hero__caption pt-100"> -->
-<!-- 										<h3 >活動探索</h3> -->
-<!-- 										                                <p>Let's uncover the best places to eat, drink, and shop nearest to you.</p> -->
-<!-- 									</div> -->
-<!-- 									Hero form -->
-<%-- 									<form action="#" class="search-box mb-100" > --%>
-<!-- 										<div class="input-form form-inline" > -->
-<!-- 											<input type="text" id="enter1" placeholder="想找什麼活動呢?" > -->
-<!-- 										</div> -->
-<!-- 										<div class="select-form form-inline"> -->
-<!-- 											<div class="select-itms form-inline"> -->
-<!-- <!-- 												<select name="select" id="select1"> -->
-<!-- <!-- 													<option value="">In where?</option> -->
-<!-- <!-- 													<option value="">Catagories One</option> --> 
-<!-- <!-- 													<option value="">Catagories Two</option> -->
-<!-- <!-- 													<option value="">Catagories Three</option> -->
-<!-- <!-- 													<option value="">Catagories Four</option> --> 
-<!-- <!-- 												</select> --> 
-<!-- 											</div> -->
-<!-- 										</div> -->
-<!-- 										<div class="search-form"> -->
-<!-- 											<button class="btn btn-outline-info" id="search"> -->
-<!-- 												<a href="#" ><i class="ti-search"></i> Search</a> -->
-<!-- 											</button> -->
-<!-- 										</div> -->
-<%-- 									</form> --%>
-<!-- 									hero category1 img -->
-<!-- 									<div class="category-img text-center"> -->
-<!-- 										<a href="listing.html"> <img -->
-<!-- 											src="assets/img/gallery/hero_category1.png" alt=""></a> <a -->
-<!-- 											href="listing.html"> <img -->
-<!-- 											src="assets/img/gallery/hero_category2.png" alt=""></a> <a -->
-<!-- 											href="listing.html"> <img -->
-<!-- 											src="assets/img/gallery/hero_category3.png" alt=""></a> -->
-<!-- 									</div> -->
-<!-- 								</div> -->
-<!-- 							</div> -->
-<!-- 						</div> -->
-<!-- 					</div> -->
-<!-- 				</div> -->
-<!-- 				Hero Area End -->
 
 				<hr>
 				<section>
