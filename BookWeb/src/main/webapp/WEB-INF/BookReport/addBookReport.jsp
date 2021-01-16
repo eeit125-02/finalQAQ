@@ -133,7 +133,7 @@
 		$.ajax({
 			async : false,
 			type : 'POST',
-			url : "http://localhost:8080/BookWeb/BookReport/addBookReport/bookInfo",
+			url : "http://localhost:8080/BookWeb/BookReport/addBookReport/bookInfo/" + window.location.href.split("/").pop(),
 			dataType : "json",
 			contentType : "application/json;charset=utf-8",
 			success : function(data) {
