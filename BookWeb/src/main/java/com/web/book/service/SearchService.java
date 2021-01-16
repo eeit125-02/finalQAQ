@@ -34,7 +34,8 @@ public interface SearchService {
 	BookBean savebk(BookBean bkc);
 	// 新增書本類型
 	int savebkty(List<Integer> tylist, int bk_ID);
-
+	// 刪除書本類型
+	boolean deletebkty(int bk_ID);
 	// 修改書本
 	int updatebk(BookBean mb);
 
@@ -57,4 +58,37 @@ public interface SearchService {
 	int getResultNumber();
 
 	void addclick(int bk_ID);
+
+	List<BookBean> searchOrderBook(String name, Integer page);
+
+	List<BookBean> searchOrderBookAuthor(String name, Integer page);
+
+	List<BookBean> searchOrderBookPublish(String name, Integer page);
+
+	List<BookBean> searchOrderBookType(List<Integer> reslist, Integer page);
+
+	int getOrderResultPage();
+
+	int getOrderResultNumber();
+
+	List<BookBean> searchOrderBookDate(String name, Integer page);
+
+	List<BookBean> searchOrderBookAuthorDate(String name, Integer page);
+
+	List<BookBean> searchOrderBookPublishDate(String name, Integer page);
+
+	List<BookBean> searchOrderBookTypeDate(List<Integer> reslist, Integer page);
+
+	List<BookBean> searchOrderBookClick(String name, Integer page);
+
+	List<BookBean> searchOrderBookAuthorClick(String name, Integer page);
+
+	List<BookBean> searchOrderBookPublishClick(String name, Integer page);
+
+	List<BookBean> searchOrderBookTypeClick(List<Integer> reslist, Integer page);
+
+	List<BookBean> getAllBook();
+	
+	
+
 }

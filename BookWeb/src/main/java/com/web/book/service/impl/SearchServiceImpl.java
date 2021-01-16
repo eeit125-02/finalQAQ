@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.web.book.dao.SearchBookDAO;
+import com.web.book.dao.SearchOrderBookDAO;
 import com.web.book.model.BookBean;
 import com.web.book.model.BookCollectBean;
 import com.web.book.model.BookTypeBean;
@@ -19,6 +20,8 @@ import com.web.book.service.SearchService;
 
 		@Autowired
 		SearchBookDAO searchBookDAO;
+		@Autowired
+		SearchOrderBookDAO searchOrderBookDAO;
 		
 		//查詢書籍關鍵字
 		@Override
@@ -107,6 +110,11 @@ import com.web.book.service.SearchService;
 		public int savebkty(List<Integer> tylist, int bk_ID) {
 			return searchBookDAO.savebkty(tylist, bk_ID);
 		}
+		// 刪除書本類型
+		@Override
+		public boolean deletebkty(int bk_ID) {
+			return searchBookDAO.deletebkty(bk_ID);
+		}
 
 		// 修改書本
 		@Override
@@ -126,6 +134,95 @@ import com.web.book.service.SearchService;
 			searchBookDAO.addBookClick(bk_ID);
 		}		
 
+//		=======================
+		
+		//查詢書籍關鍵字byPage
+		@Override
+		public List<BookBean> searchOrderBook(String name, Integer page){
+			return searchOrderBookDAO.searchOrderBook(name,page);	
+		}
+		
+		//查詢書籍作者byPage
+		@Override
+		public List<BookBean> searchOrderBookAuthor(String name, Integer page){
+			return searchOrderBookDAO.searchOrderBookAuthor(name,page);	
+		}
+		//查詢書籍出版社byPage
+		@Override
+		public List<BookBean> searchOrderBookPublish(String name, Integer page){
+			return searchOrderBookDAO.searchOrderBookPublish(name,page);	
+		}		
+		
+		//查詢書籍類型byPage
+		@Override
+		public List<BookBean> searchOrderBookType(List<Integer> reslist, Integer page){
+			return searchOrderBookDAO.searchOrderBookType(reslist,page);
+		}
+		
+		//取得總頁數byPage
+		@Override
+		public int getOrderResultPage(){
+			return searchOrderBookDAO.getOrderResultPage();
+		}
+		
+		//取得總筆數byPage
+		@Override
+		public int getOrderResultNumber(){
+			return searchOrderBookDAO.getOrderResultNumber();
+		}
+		
+		//查詢書籍關鍵字byDate
+		@Override
+		public List<BookBean> searchOrderBookDate(String name, Integer page){
+			return searchOrderBookDAO.searchOrderBookDate(name,page);	
+		}
+		
+		//查詢書籍作者byDate
+		@Override
+		public List<BookBean> searchOrderBookAuthorDate(String name, Integer page){
+			return searchOrderBookDAO.searchOrderBookAuthorDate(name,page);	
+		}
+		//查詢書籍出版社byDate
+		@Override
+		public List<BookBean> searchOrderBookPublishDate(String name, Integer page){
+			return searchOrderBookDAO.searchOrderBookPublishDate(name,page);	
+		}		
+		
+		//查詢書籍類型byDate
+		@Override
+		public List<BookBean> searchOrderBookTypeDate(List<Integer> reslist, Integer page){
+			return searchOrderBookDAO.searchOrderBookTypeDate(reslist,page);
+		}
+		
+		
+		//查詢書籍關鍵字byClick
+		@Override
+		public List<BookBean> searchOrderBookClick(String name, Integer page){
+			return searchOrderBookDAO.searchOrderBookClick(name,page);	
+		}
+		
+		//查詢書籍作者byClick
+		@Override
+		public List<BookBean> searchOrderBookAuthorClick(String name, Integer page){
+			return searchOrderBookDAO.searchOrderBookAuthorClick(name,page);	
+		}
+		//查詢書籍出版社byClick
+		@Override
+		public List<BookBean> searchOrderBookPublishClick(String name, Integer page){
+			return searchOrderBookDAO.searchOrderBookPublishClick(name,page);	
+		}		
+		
+		//查詢書籍類型byClick
+		@Override
+		public List<BookBean> searchOrderBookTypeClick(List<Integer> reslist, Integer page){
+			return searchOrderBookDAO.searchOrderBookTypeClick(reslist,page);
+		}
+		
+		//取得全部書籍
+		@Override
+		public List<BookBean> getAllBook(){
+			return searchBookDAO.searchAllBook();
+		}
 	}
 
 

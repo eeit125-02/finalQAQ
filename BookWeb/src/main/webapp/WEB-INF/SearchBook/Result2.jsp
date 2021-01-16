@@ -94,16 +94,43 @@ white-space:pre-wrap;
 		<div id="resultnumber"></div>
 
 <%--<h6>頁數：${page}／${totalPages}</h6> --%>
+<div class="btn-group" role="group" aria-label="Basic example" id="ordersite" style="float: right;">
+<!--   <button type="button" class="btn btn-light" style="font-weight:bold;">重新排序</button> -->
+<%--   <a class="btn btn-danger" href='${gotopagebypage}' role="button">依據 熱門度</a> --%>
+<!--   <a class="btn btn-success" href='' role="button">依據 出版日期</a> -->
+<!--   <a class="btn btn-warning" href='' role="button">依據 頁數</a> -->
+</div>
 		<br>
 		<div><h4>　　　　　　${searchresultzero}</h4></div>
-
+		
 <!-- 搜尋結果清單 -->
-${b }------
+
 			<div class="booktypelist" id="booktypelist">	
 			</div>						
 			
 		<br>
 	<c:url value="/searchtype" var="gotopage">
+		<c:param name="name" value="${name}"></c:param>
+		<c:param name="author" value="${author}"></c:param>
+		<c:param name="publish" value="${publish}"></c:param>		
+<%-- 		<c:param name="b" value="${b}"></c:param>		 --%>
+<%-- 		<c:param name="apage" value="${apage }"></c:param>	 --%>
+	</c:url>
+	<c:url value="/searchtypebypage" var="gotopagebypage">
+		<c:param name="name" value="${name}"></c:param>
+		<c:param name="author" value="${author}"></c:param>
+		<c:param name="publish" value="${publish}"></c:param>		
+<%-- 		<c:param name="b" value="${b}"></c:param>		 --%>
+<%-- 		<c:param name="apage" value="${apage }"></c:param>	 --%>
+	</c:url>
+	<c:url value="/searchtypebydate" var="gotopagebydate">
+		<c:param name="name" value="${name}"></c:param>
+		<c:param name="author" value="${author}"></c:param>
+		<c:param name="publish" value="${publish}"></c:param>		
+<%-- 		<c:param name="b" value="${b}"></c:param>		 --%>
+<%-- 		<c:param name="apage" value="${apage }"></c:param>	 --%>
+	</c:url>
+	<c:url value="/searchtypebyclick" var="gotopagebyclick">
 		<c:param name="name" value="${name}"></c:param>
 		<c:param name="author" value="${author}"></c:param>
 		<c:param name="publish" value="${publish}"></c:param>		
@@ -223,6 +250,8 @@ ${b }------
 							+"｜ 作者："+data.finaldata[i].bk_Author
 							+" ｜  出版社："+data.finaldata[i].bk_Publish
 							+"｜  出版日期："+data.finaldata[i].bk_Date
+							+"｜  頁數："+data.finaldata[i].bk_Page
+							+"｜  點閱率："+data.finaldata[i].bk_Click
 							+"<br>"
 							+"<p class=\"ellipsis\"style=\"padding-top:15px\">"
 							+data.finaldata[i].bk_Content
@@ -240,8 +269,16 @@ ${b }------
 							loadCollectList(data.finaldata[i].bk_ID);
 					}
 
-						var insertData1 = "<h3>搜尋結果：（總共 "+${count}+" 筆）</h3>"
+					var insertData1 = "<h3>搜尋結果：（總共 "+${count}+" 筆）</h3>"
 					$("#resultnumber").html(insertData1);
+					
+					var insertData2 = "<button type='button' class='btn btn-light' style='font-weight:bold;'>重新排序</button>"
+									+ "<a class='btn btn-danger' href='${gotopagebyclick}' role='button'>最多瀏覽</a>"
+					  				+ "<a class='btn btn-success' href='${gotopagebydate}' role='button'>最新出版</a>"
+									+ "<a class='btn btn-warning' href='${gotopagebypage}' role='button'>頁數</a>"
+					
+					$("#ordersite").html(insertData2);
+					
 					}
 				});
 			}		

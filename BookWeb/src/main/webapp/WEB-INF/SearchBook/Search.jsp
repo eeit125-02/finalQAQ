@@ -66,15 +66,29 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 		<!-- 		內容開始 -->
 
 		
-							<ul class="nav nav-tabs" id="novelTab" role="tablist">
-							<li class="nav-item"><a class="nav-link" id="novel_rule-tab"
-								data-toggle="tab" href="" role="tab">單項查詢</a></li>
-							<li class="nav-item"><a class="nav-link active"
-								id="novel_latest-tab" data-toggle="tab" href=""
-								role="tab">進階查詢</a></li>
-						</ul>
-		<br><br>
+<!-- 						<ul class="nav nav-tabs" id="novelTab" role="tablist"> -->
+<!-- 							<li class="nav-item"><a class="nav-link" id="novel_rule-tab" -->
+<!-- 								data-toggle="tab" href="" role="tab">單項查詢</a></li> -->
+<!-- 							<li class="nav-item"><a class="nav-link active" -->
+<!-- 								id="novel_latest-tab" data-toggle="tab" href="" -->
+<!-- 								role="tab">進階查詢</a></li> -->
+<!-- 						</ul> -->
 
+	<div class="" style="text-align:center;margin: auto;">
+	
+ <div class="card-deck">
+<c:forEach items="${allbookfive}" var="all">		
+  <div class="card">
+    <img src="${all.getBk_Pic()}" class="card-img-top" alt="熱門瀏覽" height="150px">
+    <div class="card-body">
+      <h5 class="card-title">${all.getBk_Name()}</h5>
+    </div>
+  </div>
+</c:forEach>
+</div>
+	
+	</div>
+		<br><br>
 <!-- 三種關鍵字查詢（書名＆作者＆出版社） -->
 <div class="row">
 	<div class="col-sm-4">		

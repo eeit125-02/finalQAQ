@@ -166,8 +166,6 @@ maxpage=query.getResultList().size();
 	@SuppressWarnings("unchecked")
 	@Override
 	public boolean checkbc(int bk_id, int mb_id) {
-		System.out.println(bk_id);
-		System.out.println(mb_id);
 		Session session = factory.getCurrentSession();
 		MemberBean member = session.get(MemberBean.class, mb_id);
 		BookBean book = session.get(BookBean.class, bk_id);
@@ -176,7 +174,6 @@ maxpage=query.getResultList().size();
 		String hql = "From BookCollectBean bc Where bc.member = :mbid AND bc.book = :bkid";
 		Query<BookCollectBean> query = session.createQuery(hql);
 		List<BookCollectBean> list = query.setParameter("mbid", member).setParameter("bkid", book).getResultList();
-		System.out.println(list.size());
 		if (list.size() == 0) {
 			result = false;
 		}
@@ -260,8 +257,23 @@ maxpage=query.getResultList().size();
 			session.save(bkt);			
 			count++;
 		}	
-		System.out.println("88888888888888888888888"+count);
 		return count;
+	}
+	
+	
+	// 刪除書本類型
+	@Override
+	@SuppressWarnings("unchecked")
+	public boolean deletebkty(int bk_ID) {
+		String hql = "Delete FROM BookTypeBean Where book = :bkid";
+		Session session = factory.getCurrentSession();
+		BookBean bt = session.load(BookBean.class, bk_ID);
+		Query<BookTypeBean> query = session.createQuery(hql);
+		int list = query.setParameter("bkid", bt).executeUpdate();
+		if(list>0) {
+			return true;
+		}
+		return false;
 	}
 
 	// 刪除書本
@@ -270,8 +282,6 @@ maxpage=query.getResultList().size();
 		int count = 0;
 		boolean a = false;
 		Session session = factory.getCurrentSession();
-//		BookTypeBean bt=session.load(BookTypeBean.class, bkc.getBk_ID());		
-//		session.delete(bt);
 		session.delete(bkc);
 		count++;
 		if (count > 0) {
@@ -295,9 +305,18 @@ maxpage=query.getResultList().size();
 	public void addBookClick(Integer bk_ID) {
 		Session session = factory.getCurrentSession();
 		BookBean bk = session.get(BookBean.class, bk_ID);
-		System.out.println(bk.getBk_Author());
-		System.out.println(bk.getBk_Click());
-		bk.setBk_Click(bk.getBk_Click()+1);
-		
+		bk.setBk_Click(bk.getBk_Click()+100);	
 	}
+	
+	// 選取全部書籍
+	@Override
+	@SuppressWarnings("unchecked")
+	public List<BookBean> searchAllBook() {
+		Session session = factory.getCurrentSession();
+		String hql = "FROM BookBean";
+		Query<BookBean> query = session.createQuery(hql);
+		List<BookBean> list=query.getResultList();
+		return list;
+	}
+	
 }
