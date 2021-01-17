@@ -91,13 +91,14 @@
 				<div class="col-sm-6">
 					<input type="number" class="form-control" id="buyNum"
 						aria-label="Dollar amount (with dot and two decimal places)"
-						value="1" min="1" onblur="checkBuy()">
+						value="1" min="1"  >
 					<span id="sp" style="color: red"></span>
+<!-- 					onblur="checkBuy()" -->
 				</div>
 			</div>
 			<div class="col-sm-1">
 				<button type="submit" class="btn btn-outline-success"
-					onclick="goToCart(${bookdetail})">直接購買</button>
+					onclick="goToCart(${bookdetail.bks_ID})">直接購買</button>
 			</div>
 			<div class="col-sm-1">
 				<button type="submit" class="btn btn-outline-success"
@@ -128,24 +129,34 @@
 		$("#bookWebFooter").load("//localhost:8080/BookWeb/footer");
 	});
 // 	檢查購買數量是否正確
-	function checkBuy() {
-		var buyNum = document.getElementById("buyNum");
-		var amount = document.getElementById("amount");
-		var buyNumVal = buyNum.value;
-		var sp = document.getElementById("sp");
-		if (buyNumVal < 1 || buyNumVal > parseInt(amount.innerHTML)) {
-			sp.innerHTML="超過庫存上限";
-			document.getElementById("buyNum").value = parseInt(amount.innerHTML);
-		} else{
-			sp.innerHTML="";
-		}
+$('#buyNum').change(function() {
+	var buyNum = document.getElementById("buyNum");
+	var amount = document.getElementById("amount");
+	var buyNumVal = buyNum.value;
+	var sp = document.getElementById("sp");
+	if (buyNumVal < 1 || buyNumVal > parseInt(amount.innerHTML)) {
+		sp.innerHTML="超過庫存上限";
+		document.getElementById("buyNum").value = parseInt(amount.innerHTML);
+	} else{
+		sp.innerHTML="";
 	}
+})
+// 	function checkBuy() {
+// 		var buyNum = document.getElementById("buyNum");
+// 		var amount = document.getElementById("amount");
+// 		var buyNumVal = buyNum.value;
+// 		var sp = document.getElementById("sp");
+// 		if (buyNumVal < 1 || buyNumVal > parseInt(amount.innerHTML)) {
+// 			sp.innerHTML="超過庫存上限";
+// 			document.getElementById("buyNum").value = parseInt(amount.innerHTML);
+// 		} else{
+// 			sp.innerHTML="";
+// 		}
+// 	}
 	
-		function goToCart(bookStore) {
-			alert(bookStore)
+		function goToCart(id) {
 			if (typeof ($.cookie('Member_ID')) != "undefined") {
-				alert("111111111")
-				document.forms[0].action="<c:url value='/dctyBuy?bookStore=" + bookStore + "' />" ;
+				document.forms[0].action="<c:url value='/dctyBuy?bks_ID=" + id + "' />" ;
 				document.forms[0].method="post";
 				document.forms[0].submit();
 			} else {

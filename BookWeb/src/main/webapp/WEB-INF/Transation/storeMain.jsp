@@ -84,7 +84,7 @@
 				</tr>
 				<c:forEach var="table" items="${bookstore}" begin="0" end="20">
 					<tr>
-						<th><button type="submit" value="${table.book.bk_ID}"
+						<th><button type="button" value="${table.book.bk_ID}"
 								name="selectbk">檢視</button></th>
 						<td><img alt="XX" src="<c:out value="${table.book.bk_Pic}"/>"
 							width="50px" height="50px"></td>

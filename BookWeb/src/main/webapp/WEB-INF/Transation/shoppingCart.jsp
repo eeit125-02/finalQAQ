@@ -22,6 +22,7 @@
 	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
 	crossorigin="anonymous">
 <script src="https://use.fontawesome.com/c560c025cf.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <style>
 .quantity {
 	float: left;
@@ -89,79 +90,9 @@
 .shopping-cart {
 	margin-top: 20px;
 }
-
-/* ----- */
-.bd-placeholder-img {
-	font-size: 1. 125rem;
-	text-anchor: middle;
-}
-
-@media ( min-width : 768px) {
-	.bd-placeholder-img-lg {
-		font-size: 3.5rem;
-	}
-}
 </style>
 
-<script>
-	$(document).ready(function() {
-		$("#bookWebheader").load("//localhost:8080/BookWeb/header");
-		$("#bookWebFooter").load("//localhost:8080/BookWeb/footer");
-	});
-	
-	function confirmDelete(n) {
-		if (confirm("確定刪除此項商品 ? ") ) {
-			document.forms[0].action="<c:url value='updateCart.do?cmd=DEL&cart_ID=" + n +"' />" ;
-			document.forms[0].method="POST";
-			document.forms[0].submit();
-		} else {
-		
-		}
-	}
-	function modify(key, qty, index) {
-		var x = "newQty" + index;
-		var newQty = document.getElementById(x).value;
-		if  (newQty < 0 ) {
-			window.alert ('數量不能小於 0');
-			return ; 
-		}
-		if  (newQty == 0 ) {
-			window.alert ("請執行刪除功能來刪除此項商品");
-			document.getElementById(x).value = qty;
-			return ; 
-		}
-		if  (newQty == qty ) {
-			window.alert ("新、舊數量相同，不必修改");
-			return ; 
-		}
-		if (confirm("確定將此商品的數量由" + qty + " 改為 " + newQty + " ? ") ) {
-			document.forms[0].action="<c:url value='updateCart.do?cmd=MOD&cart_ID=" + key + "&cart_Num=" + newQty +"' />" ;
-			document.forms[0].method="POST";
-			document.forms[0].submit();
-		} else {
-			document.getElementById(x).value = qty;
-		}
-	}
-	function isNumberKey(evt)
-	{
-	   var charCode = (evt.which) ? evt.which : event.keyCode
-	   if (charCode > 31 && (charCode < 48 || charCode > 57)){
-	      return false;
-	   }
-	   return true;
-	}
-	function Checkout(qty) {
-		if (qty == 0)  {
-			alert("無購買任何商品，不需結帳");
-			return false;
-		}
-		if (confirm("再次確認訂單內容 ? ") ) {
-			return true;
-		} else {
-			return false;
-		}
-	}
-</script>
+
 
 <title>Insert title here</title>
 </head>
@@ -170,131 +101,33 @@
 	<!-- header -->
 	<header class="container blog-header py-3" id="bookWebheader"></header>
 	<!-- header -->
+	<!-- body -->
+	<!--測試用 -->
 	<div class="container">
-		<!-- body -->
-
-		<!-- 內容 -->
-		<table
-			style="margin: 0 auto; width: 820px; background: #EFEFFB; border: 2px solid black;">
-			<tr>
-				<td colspan='4'>
-					<!--          購物車的標題          -->
-					<table style="width: 820px">
-						<tr height='40'>
-							<td width="270">&nbsp;</td>
-							<td width="280" align='center'><FONT size='+2'>某 會 員
-									的 購 物 車</FONT></td>
-							<td width="270" align='right'></td>
-						</tr>
-						<tr height='18'>
-							<td width="270">&nbsp;</td>
-							<td width="280" align='center'><FONT size='+2'>購 物 清
-									單</FONT></td>
-							<td width="270" align='right'></td>
-						</tr>
-					</table>
-				</td>
-			</tr>
-
-			<tr>
-				<td>
-					<table border='1'>
-						<tr>
-							<th width="320">書籍名稱</th>
-							<th width="70">作者</th>
-							<th width="60">出版社</th>
-							<th width="60">單價</th>
-							<th width="40">數量</th>
-							<th width="110">小計</th>
-							<th width="110">修改</th>
-						</tr>
-						<c:forEach varStatus="vs" var="v" items="${list}">
-
-							<tr height='16'>
-								<td>${v.book.bk_Name}</td>
-								<td style="text-align: center;">${fn:substring(v.book.bk_Author, 0, 3)}</td>
-								<td style="text-align: center;">${fn:substring(v.book.bk_Publish, 0, 2)}</td>
-								<td style="text-align: right;"><fmt:formatNumber
-										value="${v.cart_Price }" pattern="#,###" />元</td>
-								<td style="text-align: right;"><Input
-									id="newQty${vs.index}" style="width: 28px; text-align: right"
-									name="newQty" type="text"
-									value="<fmt:formatNumber value="${v.cart_Num}" />" name="qty"
-									onkeypress="return isNumberKey(event)" /></td>
-								<td style="text-align: right;"><fmt:formatNumber
-										value="${v.cart_Price * v.cart_Num}" pattern="#,###,###" />元</td>
-								<td><button type="submit" name="updateCart"
-										value="${v.cart_ID}"
-										onclick="modify(${v.cart_ID}, ${v.cart_Num}, ${vs.index})">修改</button>
-									<button type="submit" name="deleteCart" value="${v.cart_ID}"
-										onclick="confirmDelete(${v.cart_ID})">刪除</button></td>
-							</tr>
-						</c:forEach>
-						<tr>
-							<td colspan='5' align='right'>總計金額：</td>
-							<td align='right'>${totalCart}元</td>
-							<td align='right'>&nbsp;</td>
-						</tr>
-					</table>
-
-				</td>
-			</tr>
-			<tr height='80'>
-				<td>
-					<table border='1'>
-						<tr>
-							<td width="400" align='center'><a
-								href='<c:url value="/qaqTest" />'>繼續購物</a></td>
-							<td width="400" align='center'>
-								<%-- 							<a href="<c:url value='/checkout' />" --%> <%-- 								onClick="return Checkout(${subtotal});"> --%>
-								<!-- 								結帳 --> <!-- 								</a> -->
-
-								<button type="button" class="btn btn-primary"
-									data-toggle="modal" data-target="#exampleModal"
-									data-whatever="@mdo">結帳</button>
-
-							</td>
-						</tr>
-					</table>
-				</td>
-			</tr>
-		</table>
-		<div style='text-align: center;'>
-			<c:if test='${not empty OrderErrorMessage}'>
-				<font color='red'>${OrderErrorMessage}</font>
-				<c:remove var="OrderErrorMessage" />
-			</c:if>
-		</div>
-
-		<form>
-			<input type="hidden" name="a" />
-		</form>
-
-	</div>
-	<%-- 	${sessionScope.list} --%>
-	<!-- 內容 -->
-		<!--測試用 -->
-		<div class="container">
-			<div class="card shopping-cart">
-				<div class="card-header bg-dark text-light">
-					<i class="fa fa-shopping-cart" aria-hidden="true"></i> Shipping
-					cart <a href="" class="btn btn-outline-info btn-sm pull-right">Continiu
-						shopping</a>
-					<div class="clearfix"></div>
-				</div>
-				<div class="card-body">
-					<!-- PRODUCT -->
+		<div class="card shopping-cart">
+			<div class="card-header bg-dark text-light">
+				<i class="fa fa-shopping-cart" aria-hidden="true"></i>
+				${loginUser.mb_Account} 的 購 物 車 
+<%-- 				<a href='<c:url value="/qaqTest" />' --%>
+<!-- 					class="btn btn-outline-info btn-sm pull-right"> 繼 續 購 物 </a> -->
+				<div class="clearfix"></div>
+			</div>
+			<div class="card-body">
+				<!-- PRODUCT -->
+				<c:forEach items="${listCart}" var="v">
+							<form action="<c:url value='/deleteCart'/>" method="post">
+<%-- 				 action='<c:url value="/deleteCart"/>'  --%>
 					<div class="row">
 						<div class="col-12 col-sm-12 col-md-2 text-center">
-							<img class="img-responsive" src="http://placehold.it/120x80"
-								alt="prewiew" width="120" height="80">
+							<img class="img-responsive" src="${v.book.bk_Pic}" alt="prewiew"
+								width="120" height="80">
 						</div>
 						<div class="col-12 text-sm-center col-sm-12 text-md-left col-md-6">
 							<h4 class="product-name">
-								<strong>Product Name</strong>
+								<strong> 書名 </strong>
 							</h4>
 							<h4>
-								<small>Product description</small>
+								<small>${v.book.bk_Name}</small>
 							</h4>
 						</div>
 						<div
@@ -302,93 +135,64 @@
 							<div class="col-3 col-sm-3 col-md-6 text-md-right"
 								style="padding-top: 5px">
 								<h6>
-									<strong>25.00 <span class="text-muted">x</span></strong>
+									<strong id="carPrice">${v.cart_Price} <span class="text-muted">x</span></strong>
 								</h6>
 							</div>
 							<div class="col-4 col-sm-4 col-md-4">
 								<div class="quantity">
-									<input type="button" value="+" class="plus"> <input
-										type="number" step="1" max="99" min="1" value="1" title="Qty"
-										class="qty" size="4"> <input type="button" value="-"
-										class="minus">
+									<input type="button" value="+" class="plus"> 
+									<input id="carNum" type="number" step="1" max="99" min="1" value="${v.cart_Num}"
+										title="Qty" class="qty" size="4"> 
+									<input type="button" value="-" class="minus">
 								</div>
+<!-- 								測試區 -->
+<input type="hidden" class="result" value="${v.cart_Num*v.cart_Price}">
+<!-- 								測試區 -->
 							</div>
 							<div class="col-2 col-sm-2 col-md-2 text-right">
-								<button type="button" class="btn btn-outline-danger btn-xs">
+
+								<button type="submit" class="btn btn-outline-danger btn-xs" id="qaq" name="cart_ID" value="${v.cart_ID}">
 									<i class="fa fa-trash" aria-hidden="true"></i>
 								</button>
+
 							</div>
 						</div>
 					</div>
 					<hr>
-					<!-- END PRODUCT -->
-					<!-- PRODUCT -->
+							</form>
+				</c:forEach>
+				<!-- END PRODUCT -->
+				<div class="pull-right">
+					<a href="" class="btn btn-outline-secondary pull-right"> Update
+						shopping cart </a>
+				</div>
+			</div>
+			<div class="card-footer">
+				<div class="coupon col-md-5 col-sm-5 no-padding-left pull-left">
 					<div class="row">
-						<div class="col-12 col-sm-12 col-md-2 text-center">
-							<img class="img-responsive" src="http://placehold.it/120x80"
-								alt="prewiew" width="120" height="80">
+						<div class="col-6">
+							<a href='<c:url value="/qaqTest" />'
+								class="btn btn-outline-info btn-sm pull-left"> 繼 續 購 物 </a>
+							<!-- 							<input type="text" class="form-control" placeholder="cupone code"> -->
 						</div>
-						<div class="col-12 text-sm-center col-sm-12 text-md-left col-md-6">
-							<h4 class="product-name">
-								<strong>Product Name</strong>
-							</h4>
-							<h4>
-								<small>Product description</small>
-							</h4>
+						<div class="col-6">
+							<!-- 							<input type="submit" class="btn btn-default" value="Use cupone"> -->
 						</div>
-						<div
-							class="col-12 col-sm-12 text-sm-center col-md-4 text-md-right row">
-							<div class="col-3 col-sm-3 col-md-6 text-md-right"
-								style="padding-top: 5px">
-								<h6>
-									<strong>25.00 <span class="text-muted">x</span></strong>
-								</h6>
-							</div>
-							<div class="col-4 col-sm-4 col-md-4">
-								<div class="quantity">
-									<input type="button" value="+" class="plus"> <input
-										type="number" step="1" max="99" min="1" value="1" title="Qty"
-										class="qty" size="4"> <input type="button" value="-"
-										class="minus">
-								</div>
-							</div>
-							<div class="col-2 col-sm-2 col-md-2 text-right">
-								<button type="button" class="btn btn-outline-danger btn-xs">
-									<i class="fa fa-trash" aria-hidden="true"></i>
-								</button>
-							</div>
-						</div>
-					</div>
-					<hr>
-					<!-- END PRODUCT -->
-					<div class="pull-right">
-						<a href="" class="btn btn-outline-secondary pull-right">
-							Update shopping cart </a>
 					</div>
 				</div>
-				<div class="card-footer">
-					<div class="coupon col-md-5 col-sm-5 no-padding-left pull-left">
-						<div class="row">
-							<div class="col-6">
-								<input type="text" class="form-control"
-									placeholder="cupone code">
-							</div>
-							<div class="col-6">
-								<input type="submit" class="btn btn-default" value="Use cupone">
-							</div>
-						</div>
-					</div>
-					<div class="pull-right" style="margin: 10px">
-						<a href="" class="btn btn-success pull-right">Checkout</a>
-						<div class="pull-right" style="margin: 5px">
-							Total price: <b>50.00€</b>
-						</div>
+				<div class="pull-right" style="margin: 10px">
+					<!-- 						<a href="" class="btn btn-success pull-right" > 結 帳  </a> -->
+					<button type="button" class="btn btn-primary pull-right"
+						data-toggle="modal" data-target="#exampleModal"
+						data-whatever="@mdo">結帳</button>
+					<div class="pull-right" style="margin: 5px">
+						Total price: <b id="total">0</b>
 					</div>
 				</div>
 			</div>
 		</div>
-		<!--測試用 -->
-
+	</div>
+	<!--測試用 -->
 
 	<!-- 結帳後的資訊 -->
 	<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
@@ -425,7 +229,7 @@
 							data-dismiss="modal">取消</button>
 						<button type="submit" class="btn btn-primary">確認</button>
 					</div>
-					${totalCart}
+					<%-- 					${totalCart} --%>
 					<%-- 					${sessionScope.list} --%>
 				</form>
 			</div>
@@ -438,6 +242,79 @@
 	<!-- footer -->
 	<footer class="container py-5" id="bookWebFooter"></footer>
 	<!-- footer -->
-
+<script>
+	$(document).ready(function() {
+		$("#bookWebheader").load("//localhost:8080/BookWeb/header");
+		$("#bookWebFooter").load("//localhost:8080/BookWeb/footer");
+		$('.result').each(function(){
+			$(this).prev().children("input").eq(1).change(function(){
+				let stay = $(this);
+				let varNum=$(this).val();
+				let itemPrice = $(this).parents("div").eq(1).prev().children("h6").eq(0).children("strong").eq(0).html().split(" \<span")[0];
+				let totalPrice = parseInt(itemPrice)*parseInt(varNum);
+				stay.parent().next().val(totalPrice)
+				setTotalMoney();
+			})
+			$(this).prev().children("input").eq(0).click(function() {
+				let stay1 = $(this).next();
+				let varNum1 = $(this).next().val();
+				$(this).next().val(parseInt($(this).next().val())+1);
+				let itemPrice1 = $(this).parents("div").eq(1).prev().children("h6").eq(0).children("strong").eq(0).html().split(" \<span")[0];
+				let totalPrice1 = parseInt(itemPrice1)*parseInt(varNum1);
+				stay1.parent().next().val(totalPrice1)
+				setTotalMoney();
+			})
+			$(this).prev().children("input").eq(2).click(function() {
+				let stay2 = $(this).prev();
+				let varNum2 = $(this).prev().val();
+				$(this).prev().val(parseInt($(this).prev().val())-1);
+				let itemPrice2 = $(this).parents("div").eq(1).prev().children("h6").eq(0).children("strong").eq(0).html().split(" \<span")[0];
+				let totalPrice2 = parseInt(itemPrice2)*parseInt(varNum2);
+				stay2.parent().next().val(totalPrice2)
+				setTotalMoney();
+			})
+		})
+		setTotalMoney();
+	});
+	function setTotalMoney(){
+		let total = 0;
+		$('.result').each(function(){
+			total+=parseInt($(this).val());
+		})
+		$('#total').html(total);
+	}
+	
+// 	$('.btn.btn-outline-danger.btn-xs').click(function() {
+		
+// 		Swal.fire({
+// 			  title: 'Are you sure?',
+// 			  text: "You won't be able to revert this!",
+// 			  icon: 'warning',
+// 			  showCancelButton: true,
+// 			  confirmButtonColor: '#3085d6',
+// 			  cancelButtonColor: '#d33',
+// 			  confirmButtonText: 'Yes, delete it!'
+// 		}).then((result) => {
+// 			  if (result.isConfirmed) {
+// 			    Swal.fire(
+// 			      'Deleted!',
+// 			      'Your file has been deleted.',
+// 			      'success'
+// 				)
+// 			  }
+// 		})
+// 	}
+// 	)
+	
+	
+	
+// 	$('.plus').click(function() {
+// 		$(this).next().val(parseInt($(this).next().val())+1);
+// 	})
+// 	$('.minus').click(function() {
+// 		$(this).prev().val(parseInt($(this).prev().val())-1);
+// 	})
+	
+</script>
 </body>
 </html>
