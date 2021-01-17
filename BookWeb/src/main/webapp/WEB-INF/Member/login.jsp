@@ -252,7 +252,7 @@ form {
 		src="https://code.jquery.com/jquery-3.3.1.js"></script>
 	<!--CLIENT_ID請自己改成從 後端組態檔讀取，例如：ASP.net的Web.config-->
 	<script type="text/javascript">
-		let CLIENT_ID = "396111240196-ccf0tvsk8a723kppjblafocbfnmnbvbr.apps.googleusercontent.com";
+		let CLIENT_ID = "12372784206-07q54rhjolv8te7jvp8gv4lcrnnt0su3.apps.googleusercontent.com";
 		//let API_KEY = '';//Javascript SDK無須 API 金鑰
 		// Array of API discovery doc URLs for APIs
 		let DISCOVERY_DOCS = [ "https://www.googleapis.com/discovery/v1/apis/people/v1/rest" ];
