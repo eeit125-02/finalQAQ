@@ -28,6 +28,10 @@
 		font-size: 3.5rem;
 	}
 }
+
+.messageSize{
+	 font-size: 20px;
+}
 </style>
 </head>
 <body>
@@ -139,39 +143,50 @@
 		
 		
 		
-		
-
-		/* $('#backButton').click(function(){
-			history.go(-1);
-		}); */
-		
 		$('#command_btn').click(function(){
-			var addData = {
-					brId: window.location.href.split("/").pop(),
-					bmContent: $('#command_input').val()
+			
+			if ($('#command_input').val().length != 0){
+				var addData = {
+						brId: window.location.href.split("/").pop(),
+						bmContent: $('#command_input').val()
+				}
+				$('#command_input').val("")
+				
+				$.ajax({
+					async : false,
+					type : 'POST',
+					url : "http://localhost:8080/BookWeb/BookReport/addReportMessage",
+					data : addData,
+					dataType : "json",
+					success : function(data) {
+						if(data && typeof(data) == "boolean"){
+							getMessage();
+						}else{
+							if(data == 1){
+								swal({
+									  title: "無法對自己的心得留言",
+									  icon: "error",
+									  button: "ok",
+								});
+							}else{
+								swal({
+									  title: "已加撰寫過留言",
+									  icon: "error",
+									  button: "ok",
+								});
+							}
+							
+						}
+					}
+				});
+			}else{
+				swal({
+					  title: "留言不可為空",
+					  icon: "error",
+					  button: "ok",
+				});
 			}
 			
-			$('#command_input').val("");
-			
-			$.ajax({
-				async : false,
-				type : 'POST',
-				url : "http://localhost:8080/BookWeb/BookReport/addReportMessage",
-				data : addData,
-				dataType : "json",
-				success : function(data) {
-					console.log(data)
-					if(data){
-						getMessage();
-					}else{
-						swal({
-							  title: "已加撰寫過留言",
-							  icon: "error",
-							  button: "ok",
-						});
-					}
-				}
-			});
 		});
 		
 		$('#addSub').click(function(){
@@ -218,16 +233,26 @@
 				url : "http://localhost:8080/BookWeb/BookReport/bookReportMessageList/" + window.location.href.split("/").pop(),
 				dataType : "json",
 				success : function(data) {
+					console.log(data.reportOwner)
 					innerHtml = "";
-					for( var i = 0; i < data.length; i++ ){
+					for( var i = 0; i < data.messages.length; i++ ){
 						innerHtml += "<div style=\"background-color: #C4E1FF; margin: 10px; padding: 5px; border-radius: 10px;\">"
 								   + "<div class=\"media\">"
-								   + "<img src=\""+ data[i].mbPic +"\" style=\"width: 50px; height: 50px; text-align:center; border-radius: 60%;\"/>"	
+								   + "<img src=\""+ data.messages[i].mbPic +"\" style=\"width: 50px; height: 50px; text-align:center; border-radius: 60%;\"/>"	
 								   + "<div class=\"media-body ml-2\">"
-								   + "<p>"+ data[i].mbName +"<br>"
-								   + data[i].bmDate
+								   + "<p class = \"messageSize\">"+ data.messages[i].mbName +"<br>"
+								   + data.messages[i].bmDate
 								   + "</p>"
-								   + "<p>"+ data[i].bmContent +"</p>"
+								   + "<div class=\"btn-toolbar justify-content-between btn-sm\">"
+								   + "<p class = \"messageSize\">"
+								   + data.messages[i].bmContent 
+								   + "</p>"
+								   if(data.reportOwner){									   
+									innerHtml += "<div class=\"input-group\">"
+											   + "<button id=\"deleteMessage\" type=\"button\" class=\"btn btn-outline-danger mr-2 md-3\" value=\""+data.messages[i].bmId+"\" >刪除</button>"
+								   }
+						innerHtml += "</div>"
+								   + "</div>"
 								   + "</div>"
 								   + "</div>"
 								   + "</div>"
@@ -235,6 +260,35 @@
 					$('#show_command').html(innerHtml);
 				}
 			});
+			$('.btn-outline-danger').click(function(){
+				swal({
+					  title: "確定要刪除",
+					  icon: "warning",
+					  buttons: true,
+					  dangerMode: true,
+					}).then((willDelete) => {
+					  if (willDelete) {
+						 $.ajax({
+							async : false,
+							type : 'POST',
+							url : "http://localhost:8080/BookWeb/BookReport/deleteReportMessage",
+							data : {bmId:$(this).val()},
+							dataType : "json",
+							success : function(data) {
+								if(data && typeof(data) == "boolean"){								
+									swal({
+									      title: "刪除成功",
+									      icon: "success",
+									 }).then((willDelete) => {
+										 getMessage();
+									 });
+									
+								}
+							}
+						});
+					  }
+				});
+			})
 		}
 
 	</script>

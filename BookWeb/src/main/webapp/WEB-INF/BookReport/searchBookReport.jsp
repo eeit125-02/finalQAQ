@@ -139,14 +139,19 @@
 		});
 		
 		
-		function page(){			
+		function page(){
+			
+			var searchURL = window.location.href.split("/");
+			var page = searchURL.pop().replace("?", "");
+			var type = searchURL.pop();
+			
 			$.ajax({
 				async : false,
 				cache : false,
 				type : 'POST',
 				url : "http://localhost:8080/BookWeb/BookReport" + "/serchBookReportPage",
+				data : {searchType:type, searchPage:page},
 				dataType : "json",
-				contentType : "application/json;charset=utf-8",
 				error : function() {
 					alert('123 ');
 				},

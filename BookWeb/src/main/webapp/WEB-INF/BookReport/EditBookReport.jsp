@@ -26,6 +26,7 @@
 	
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/jquery.rateyo.css"/>
 <script src="${pageContext.request.contextPath}/js/jquery.rateyo.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 <style>
 .bd-placeholder-img {
@@ -44,6 +45,11 @@
 		font-size: 3.5rem;
 	}
 }
+
+.messageSize{
+	 font-size: 20px;
+}
+
 </style>
 
 <title>閱讀履歷</title>
@@ -167,17 +173,21 @@
 		<!-- 評論 -->
 		<div class="tab-pane fade" id="nav-com" role="tabpanel"
 			aria-labelledby="nav-com-tab">
-			<ul class="list-unstyled">
-				<!-- <li class="media my-4"><img src="..." class="mr-3" alt="..."> -->
-				<div class="media-body">
-					<h5 class="mt-0 mb-1">使用者</h5>
-					<label>書籍: </label><br> <label>評分</label><br>
-					<p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus
-						scelerisque ante sollicitudin. Cras purus odio, vestibulum in
-						vulputate at, tempus viverra turpis. Fusce condimentum nunc ac
-						nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</p>
-				</div>
-				</li>
+			<ul class="list-unstyled ml-5" id="message">
+			  <li class="media my-4">
+			    <img src="https://im1.book.com.tw/image/getImage?i=https://www.books.com.tw/img/001/088/07/0010880768.jpg&v=5feda83c&w=348&h=348" class="mr-3" width="150px">
+			    <div class="media-body">
+			      <h5 class="mt-0 mb-1"><a class="text-dark" href="#">圖書標題</a></h5>
+			      <p>留言日期：</p>
+			      <label class="mr-4">書名：</label><label class="ml-4">作者：</label>
+			      <div class="btn-toolbar justify-content-between btn-sm">
+			       	<p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque</p>
+			       	<div class="input-group">
+			       		<button id="deleteMessage" type="button" class="btn btn-outline-danger mr-4 md-3">刪除</button>
+			       	</div>
+			      </div>
+			    </div>
+			  </li>
 			</ul>
 		</div>
 		<!-- 評論 -->
@@ -269,6 +279,7 @@
 			
 			loadBookReportList();
 			loadCollectReport();
+			loadReportMessageList();
 			
 		});
 		
@@ -474,6 +485,87 @@
 				}
 			});
 		};
+		
+		function loadReportMessageList(){
+			$.ajax({
+				async : false,
+				cache : false,
+				type : 'POST',
+				url : location.href + "/memberReportMessageList",
+				dataType : "json",
+				contentType : "application/json;charset=utf-8",
+				error : function() {
+					alert('123 ');
+				},
+				success : function(data) {
+					var insertData = "";
+					for (let i = 0; i < data.length; i++) {
+						
+						insertData += "<li class=\"media my-4 messageSize\">"
+					    			+ "<img src=\""+ data[i].bkPic +"\" class=\"mr-3\" width=\"150px\">"
+					    			+ "<div class=\"media-body\">"
+					    			+ "<h5 class=\"mt-0 mb-1 messageSize\"><a href=\""+ data[i].brId + "\">"
+					    			+ "<p class = \"messageSize\" >"
+					    			+ data[i].brName
+					    			+ "</p>"
+					    			+ "</a></h5>"
+					    			+ "<p>留言日期："
+					    			+ data[i].bmDate
+					    			+ "</p>"
+					    			+ "<label class=\"mr-4\">書名："
+					    			+ data[i].bkName
+					    			+ "</label><label class=\"ml-4\">作者："
+					    			+ data[i].bkAuthor
+					    			+ "</label>"
+					    			+ "<br>"
+					    			+ "<label class = \"ml-2\" >留言：</label>"
+					    			+ "<div class=\"btn-toolbar justify-content-between btn-sm ml-3 \">"
+					    			+ "<label class = \"messageSize\">"
+					    			+ data[i].bmContent
+					    			+ "</label>"
+					    			+ "<div class=\"input-group\">"
+					    			+ "<button id=\"deleteMessage\" type=\"button\" class=\"btn btn-outline-danger mr-4 md-3\" value = \""
+					    			+ data[i].bmId
+					    			+ "\">刪除</button>"
+					    			+ "</div>"
+					    			+ "</div>"
+					    			+ "</div>"
+					  				+ "</li>"
+					}
+					$('#message').html(insertData);
+				}
+			});
+			$('.btn-outline-danger').click(function(){
+				swal({
+					  title: "確定要刪除",
+					  icon: "warning",
+					  buttons: true,
+					  dangerMode: true,
+					}).then((willDelete) => {
+					  if (willDelete) {
+						 $.ajax({
+							async : false,
+							type : 'POST',
+							url : "http://localhost:8080/BookWeb/BookReport/deleteReportMessage",
+							data : {bmId:$(this).val()},
+							dataType : "json",
+							success : function(data) {
+								if(data && typeof(data) == "boolean"){								
+									swal({
+									      title: "刪除成功",
+									      icon: "success",
+									 }).then((willDelete) => {
+										 loadReportMessageList();
+									 });
+									 
+								}
+							}
+						});
+					  }
+				});
+			})
+		};
+		
 	</script>
 </body>
 </html>

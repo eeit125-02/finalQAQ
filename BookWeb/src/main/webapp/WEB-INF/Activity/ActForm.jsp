@@ -104,6 +104,7 @@
                                 </form:select>					
 							</div>
 						</div>
+						
 						<div class="form-row">
 							<div class="form-group col-md-6">
 								<label >活動嘉賓:</label>
@@ -159,69 +160,7 @@
                         <div class="form-row">
                         <div class="form-group input_fields_wrap">
 						    <label >活動標籤:</label>
-						    <form:checkboxes items="${TagList}" path="act_Tag"/>
-<%-- <%-- 						    <form:input path="act_Tag" type="text" name="mytext[]" class="form-control"></form:input> --%> --%>
-
-						    
-<%-- 						    <form:checkbox path="act_Tag" class="btn-check" id="btn-check-outlined" autocomplete="off" /> --%>
-<!-- 							<label class="btn btn-outline-primary" for="btn-check-outlined">學習</label><br> -->
-							
-<%-- 							<form:checkbox path="act_Tag" class="btn-check" id="btn-check-2-outlined" checked autocomplete="off" /> --%>
-<!-- 							<label class="btn btn-outline-primary" for="btn-check-2-outlined">親子</label><br> -->
-							
-<%-- 							<form:checkbox path="act_Tag" class="btn-check" id="btn-check-2-outlined" checked autocomplete="off" /> --%>
-<!-- 							<label class="btn btn-outline-primary" for="btn-check-2-outlined">寵物</label><br> -->
-							
-<%-- 							<form:checkbox path="act_Tag" class="btn-check" id="btn-check-2-outlined" checked autocomplete="off" /> --%>
-<!-- 							<label class="btn btn-outline-primary" for="btn-check-2-outlined">科技</label><br> -->
-							
-<%-- 							<form:checkbox path="act_Tag" class="btn-check" id="btn-check-2-outlined" checked autocomplete="off" /> --%>
-<!-- 							<label class="btn btn-outline-primary" for="btn-check-2-outlined">商業</label><br> -->
-							
-<%-- 							<form:checkbox path="act_Tag" class="btn-check" id="btn-check-2-outlined" checked autocomplete="off" /> --%>
-<!-- 							<label class="btn btn-outline-primary" for="btn-check-2-outlined">創業</label><br> -->
-							
-<%-- 							<form:checkbox path="act_Tag" class="btn-check" id="btn-check-2-outlined" checked autocomplete="off" /> --%>
-<!-- 							<label class="btn btn-outline-primary" for="btn-check-2-outlined">投資</label><br> -->
-							
-<%-- 							<form:checkbox path="act_Tag" class="btn-check" id="btn-check-2-outlined" checked autocomplete="off" /> --%>
-<!-- 							<label class="btn btn-outline-primary" for="btn-check-2-outlined">設計</label><br> -->
-							
-<%-- 							<form:checkbox path="act_Tag" class="btn-check" id="btn-check-2-outlined" checked autocomplete="off" /> --%>
-<!-- 							<label class="btn btn-outline-primary" for="btn-check-2-outlined">藝文</label><br> -->
-							
-<%-- 							<form:checkbox path="act_Tag" class="btn-check" id="btn-check-2-outlined" checked autocomplete="off" /> --%>
-<!-- 							<label class="btn btn-outline-primary" for="btn-check-2-outlined">手作</label><br> -->
-							
-<%-- 							<form:checkbox path="act_Tag" class="btn-check" id="btn-check-2-outlined" checked autocomplete="off" /> --%>
-<!-- 							<label class="btn btn-outline-primary" for="btn-check-2-outlined">美食</label><br> -->
-							
-<%-- 							<form:checkbox path="act_Tag" class="btn-check" id="btn-check-2-outlined" checked autocomplete="off" /> --%>
-<!-- 							<label class="btn btn-outline-primary" for="btn-check-2-outlined">攝影</label><br> -->
-							
-<%-- 							<form:checkbox path="act_Tag" class="btn-check" id="btn-check-2-outlined" checked autocomplete="off" /> --%>
-<!-- 							<label class="btn btn-outline-primary" for="btn-check-2-outlined">遊戲</label><br> -->
-							
-<%-- 							<form:checkbox path="act_Tag" class="btn-check" id="btn-check-2-outlined" checked autocomplete="off" /> --%>
-<!-- 							<label class="btn btn-outline-primary" for="btn-check-2-outlined">運動</label><br> -->
-							
-<%-- 							<form:checkbox path="act_Tag" class="btn-check" id="btn-check-2-outlined" checked autocomplete="off" /> --%>
-<!-- 							<label class="btn btn-outline-primary" for="btn-check-2-outlined">健康</label><br> -->
-							
-<%-- 							<form:checkbox path="act_Tag" class="btn-check" id="btn-check-2-outlined" checked autocomplete="off" /> --%>
-<!-- 							<label class="btn btn-outline-primary" for="btn-check-2-outlined">音樂</label><br> -->
-							
-<%-- 							<form:checkbox path="act_Tag" class="btn-check" id="btn-check-2-outlined" checked autocomplete="off" /> --%>
-<!-- 							<label class="btn btn-outline-primary" for="btn-check-2-outlined">電影</label><br> -->
-							
-<%-- 							<form:checkbox path="act_Tag" class="btn-check" id="btn-check-2-outlined" checked autocomplete="off" /> --%>
-<!-- 							<label class="btn btn-outline-primary" for="btn-check-2-outlined">娛樂</label><br> -->
-							
-<%-- 							<form:checkbox path="act_Tag" class="btn-check" id="btn-check-2-outlined" checked autocomplete="off" /> --%>
-<!-- 							<label class="btn btn-outline-primary" for="btn-check-2-outlined">時尚</label><br> -->
-							
-<%-- 							<form:checkbox path="act_Tag" class="btn-check" id="btn-check-2-outlined" checked autocomplete="off" /> --%>
-<!-- 							<label class="btn btn-outline-primary" for="btn-check-2-outlined">公益</label><br> -->
+						    <form:checkboxes items="${TagList}" path="act_Tag" class="form-control"/>
 						    </div>
 						    </div>						    
 						    						    
@@ -230,7 +169,7 @@
 						  <div class="form-group col-md-6">
 						    <label >活動摘要:</label>
 <!-- 						  CK EDITOR的東東 -->
-						    <form:textarea id="editor" path="act_Rule" rows = "20" cols = "30" />
+						    <form:textarea  path="act_Rule" rows = "20" cols = "30" class="form-control" />
 						  </div>
 						  
 						  <div class="form-group  col-md-6">
@@ -263,28 +202,25 @@
 		<footer class="container py-5" id="bookWebFooter"></footer>
 		<!-- footer -->
 		
-		<script>
-		$(document).ready(function() {
-			var max_fields      = 10; //maximum input boxes allowed
-			var wrapper   		= $(".input_fields_wrap"); //Fields wrapper
-			var add_button      = $(".add_field_button"); //Add button ID
-			
-			var x = 1; //initlal text box count
-			$(add_button).click(function(e){ //on add input button click
-				e.preventDefault();
-				if(x < max_fields){ //max input box allowed
-					x++; //text box increment
-					$(wrapper).append('<div style="width:200px"><input type="text" style="width:176.66px" name="mytext[]"/><a href="#" class="remove_field">X</a></div>'); //add input box
-				}
-			});
-			
-			$(wrapper).on("click",".remove_field", function(e){ //user click on remove text
-				e.preventDefault(); $(this).parent('div').remove(); x--;
-			})
-		});
-		
-		</script>
 
+
+
+		<script type="text/javascript">
+				$(function() {
+				$("#myfile").change(function() {
+					var readFile = new FileReader();
+					var mfile = $("#myfile")[0].files[0];  //注意這裡必須時$("#myfile")[0]，document.getElementById('file')等價與$("#myfile")[0]
+					readFile.readAsDataURL(mfile);
+					$("#picpath").val("abc");
+					readFile.onload = function() {
+						var img = $("#show");
+						img.attr("src", this.result);
+					}
+
+				});
+
+			})
+		</script>
     
 		<script type="text/javascript">
 			window.onload = function() {
@@ -467,13 +403,6 @@
 		</script>
 		
 <!-- 		CK EDITOR的東東 -->
-<script>
-    ClassicEditor
-        .create( document.querySelector( '#editor' ) )
-        .catch( error => {
-            console.error( error );
-        } );
-</script>
 
 <script>
     ClassicEditor

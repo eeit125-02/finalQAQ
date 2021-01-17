@@ -41,7 +41,8 @@ public interface SearchBookDAO {
 	BookBean savebk(BookBean bkc);
 	// 新增書本類型
 	int savebkty(List<Integer> tylist, int bk_ID);
-
+	// 刪除書本類型
+	boolean deletebkty(int bk_ID);
 	// 修改書本
 	int updatebk(BookBean mb);
 
@@ -58,6 +59,10 @@ public interface SearchBookDAO {
 	
 	//點擊+1
 	void addBookClick(Integer bk_ID);
+	
+	//取得全部書籍
+	List<BookBean> searchAllBook();
+	
 	
 
 }

@@ -10,7 +10,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <!-- CK EDITOR的東東 -->
-<script src="//cdn.ckeditor.com/4.15.1/full/ckeditor.js"></script>
+<script src="https://cdn.ckeditor.com/ckeditor5/24.0.0/classic/ckeditor.js"></script>
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
@@ -213,6 +213,19 @@
 
 <script>
 
+<!-- 		CK EDITOR的東東 -->
+
+    ClassicEditor
+        .create( document.querySelector( '#editor' ) )
+        .catch( error => {
+            console.error( error );
+        } );
+
+</script>
+
+
+<script>
+
 var count = 0;
 var sbmcount = count + 1 ;
 
@@ -226,7 +239,7 @@ $(document).on('change', ".selectCategory", function() {
      type: 'POST', 
      url: "searchbook/secondarytype/" + categoryId, 
      success: function(data){ 
-	　  var slctSubcat=$(sb) , option=""; 
+    	 var slctSubcat=$(sb) , option="";
       slctSubcat.empty(); 
 
       for(var i=0; i<data.length; i++){ 
@@ -271,17 +284,6 @@ $("#newtype").click(function(){
     );     
     sbmcount = sbmcount + 1;
 });
-
-
-<!-- 		CK EDITOR的東東 -->
-
-    ClassicEditor
-        .create( document.querySelector( '#editor' ) )
-        .catch( error => {
-            console.error( error );
-        } );
-
-
 
 
 function readURL(input) {
