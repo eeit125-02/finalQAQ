@@ -28,6 +28,9 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 	crossorigin="anonymous">
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/css/member.css">
+	
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+	
 <style>
 fieldset {
 	border-radius: 25px;
@@ -341,10 +344,13 @@ form {
 																	console.log(pic);
 																	if(data){
 																	//註冊成功頁面跳轉，
-																	alert("成功")
+																	//alert("成功")
+																	swal("登入成功")
 																	$('#fm').submit();
 																	}else{
-																		alert("已被停權");
+																		//("已被停權");
+																		swal("您已被停權");
+																		
 																	}
 																	}
 															});
