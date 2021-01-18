@@ -390,6 +390,20 @@ public class SearchBookController {
 	}
 	
 	
+	// 取得收藏tag
+	@GetMapping("/searchbook/checktag/{bc_ID}")
+	public @ResponseBody BookCollectBean gotoCheckTag(@PathVariable("bc_ID") Integer bc_id) {
+//		Map<String, Object>  data1 = new HashMap<>();
+		BookCollectBean data=searchService.getbctag(bc_id);
+//		data.put("tag1", bc.getBc_Tag_one());
+//		data.put("tag2", bc.getBc_Tag_two());
+//		data.put("tag3", bc.getBc_Tag_three());		
+		return data;
+	}
+	
+	
+	
+	//加tag
 	@PostMapping("/setbctag")
 	@ResponseBody
 	public BookCollectBean checkBookReport(

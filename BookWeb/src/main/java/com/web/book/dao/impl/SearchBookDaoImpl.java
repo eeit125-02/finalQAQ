@@ -235,6 +235,14 @@ maxpage=query.getResultList().size();
 		return result;
 	}
 	
+	//取得收藏(tag)
+	@Override
+	public BookCollectBean getbctag(int bc_ID) {
+		Session session = factory.getCurrentSession();
+		BookCollectBean bc=session.get(BookCollectBean.class, bc_ID);
+		return bc;
+	}
+	
 	//新增收藏tag(1)
 	@Override
 	public BookCollectBean setbctag(int bc_ID, String tag1) {
@@ -324,6 +332,8 @@ maxpage=query.getResultList().size();
 		Session session = factory.getCurrentSession();
 		String hql = "FROM BookBean";
 		Query<BookBean> query = session.createQuery(hql);
+		query.setFirstResult(0);
+		query.setMaxResults(50);
 		List<BookBean> list=query.getResultList();
 		return list;
 	}

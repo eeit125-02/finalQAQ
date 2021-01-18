@@ -104,7 +104,13 @@ import com.web.book.service.SearchService;
 		public BookCollectBean setbctag(int bc_ID, String tag1) {
 			return searchBookDAO.setbctag(bc_ID, tag1);
 		}
-
+		
+		// 取得收藏tag
+		@Override
+		public BookCollectBean getbctag(int bc_ID) {
+			return searchBookDAO.getbctag(bc_ID);
+		}
+			
 		// 新增書本
 		@Override
 		public BookBean savebk(BookBean bkc) {
