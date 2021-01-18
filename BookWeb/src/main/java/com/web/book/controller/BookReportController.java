@@ -30,12 +30,14 @@ public class BookReportController {
 
 	MemberBean loginUser;
 
+	// 抓取當前登入的會員資訊
 	@ModelAttribute
 	public void setLoginUser(Model model, SessionStatus status) {
 		loginUser = (MemberBean) model.getAttribute("loginUser");
 		
 	}
-
+	
+	// 導向心得頁面
 	@GetMapping("/{br_ID}")
 	public String homeBookReport(
 			@PathVariable("br_ID") Integer br_ID) {
@@ -43,12 +45,14 @@ public class BookReportController {
 		return "BookReport/BookReport";
 	}
 
-	@GetMapping("/EditBookReport")
+	// 導向心得管理頁面
+	@PostMapping("/EditBookReport")
 	public String memberBookReport(Model model) {
 		
 		return "BookReport/EditBookReport";
 	}
-
+	
+	// 導向心得主畫面
 	@GetMapping("/searchBookReport/{searchType}/{page}")
 	public String searchBookReport() {
 		
@@ -56,6 +60,7 @@ public class BookReportController {
 		return "BookReport/searchBookReport";
 	}
 
+	// 回傳會員所撰寫的心得資料
 	@PostMapping("/EditBookReport/getBookReportList")
 	@ResponseBody
 	public List<Map<String, Object>> bookReportList() {
@@ -63,6 +68,7 @@ public class BookReportController {
 		return bookReportService.bookReportMemberAllList(loginUser.getMb_ID());
 	}
 
+	// 刪除心得並回傳是否新增成功
 	@PostMapping("/EditBookReport/deleteBookReport/{br_ID}")
 	@ResponseBody
 	public Boolean deleteBookReport(
@@ -70,7 +76,8 @@ public class BookReportController {
 		
 		return bookReportService.deleteBookReport(br_ID);
 	}
-
+	
+	// 取得心得資料
 	@PostMapping("/EditBookReport/getBookReport/{br_ID}")
 	@ResponseBody
 	public Map<String, Object> getBookReport(
@@ -79,6 +86,7 @@ public class BookReportController {
 		return bookReportService.getBookReport(false , br_ID);
 	}
 
+	// 更新心得資料並回傳是否新增成功
 	@PostMapping("/EditBookReport/upDateBookReport")
 	@ResponseBody
 	public Boolean upDateBookReport(
@@ -89,12 +97,14 @@ public class BookReportController {
 		return bookReportService.upDateBookReportData(br_ID, br_Score, br_Content);
 	}
 
+	// 導向新增心得頁面
 	@PostMapping("/addBookReport/{bk_ID}")
 	public String addBookReport() {
 		
 		return "BookReport/addBookReport";
 	}
 
+	// 取得讀書資料並回傳
 	@PostMapping("/addBookReport/bookInfo/{bk_ID}")
 	@ResponseBody
 	public Map<String, Object> gotoPage(
@@ -102,7 +112,8 @@ public class BookReportController {
 
 		return bookReportService.gotoPage(loginUser.getMb_ID() , bkId);
 	}
-
+	
+	// 新增心得並回傳是否新增成功
 	@PostMapping("/addBookReport/addReport")
 	@ResponseBody
 	public Boolean addBookReport(
@@ -114,6 +125,7 @@ public class BookReportController {
 		return bookReportService.insertBookReport(loginUser.getMb_ID(), bk_ID, br_Name, br_Score, br_Content);
 	}
 
+	// 確認心得是否撰寫過
 	@PostMapping("/checkBookReport")
 	@ResponseBody
 	public Boolean checkBookReport(
@@ -122,6 +134,7 @@ public class BookReportController {
 		return bookReportService.checkBookReport(loginUser.getMb_ID(), bkId);
 	}
 
+	// 取得心得資訊
 	@PostMapping("/viewBookReport/{br_ID}")
 	@ResponseBody
 	public Map<String, Object> viewBookReport(
@@ -130,6 +143,7 @@ public class BookReportController {
 		return bookReportService.getBookReport(true , br_ID);
 	}
 
+	// 取得全部心得列表
 	@PostMapping("/allBookReport")
 	@ResponseBody
 	public List<Map<String, Object>> viewAllBookReport() {
@@ -137,6 +151,7 @@ public class BookReportController {
 		return bookReportService.allbookReportList();
 	}
 	
+	// 取得搜尋的心得列表
 	@PostMapping("/serchBookReportPage")
 	@ResponseBody
 	public Map<String,Object> searchBookReportPage(
@@ -146,6 +161,7 @@ public class BookReportController {
 		return bookReportService.getSearchBookRepotData(searchType, page);
 	}
 	
+	//  新增會員追蹤心得
 	@PostMapping("/addSub/{brId}")
 	@ResponseBody
 	public String addSub(
@@ -154,6 +170,7 @@ public class BookReportController {
 		return bookReportService.addSubReport(brId, loginUser.getMb_ID());
 	}
 	
+	// 取得會員所追蹤的所有心得
 	@PostMapping("/EditBookReport/getMemberCollectReport")
 	@ResponseBody
 	public List<Map<String, Object>> getMemberCollectReport(){
@@ -161,6 +178,7 @@ public class BookReportController {
 		return bookReportService.getMemberCollectReport(loginUser.getMb_ID());
 	}
 	
+	// 取消會員所追蹤的心得
 	@PostMapping("/EditBookReport/deleteCollectReport/{rcId}")
 	@ResponseBody
 	public Boolean deletCollectReport(
@@ -169,6 +187,7 @@ public class BookReportController {
 		return bookReportService.deleteCollectReport(rcId);
 	}
 	
+	// 取得心得留言
 	@PostMapping("/bookReportMessageList/{brId}")
 	@ResponseBody
 	public Map<String, Object> bookReportMessageList(
@@ -177,6 +196,7 @@ public class BookReportController {
 		return bookReportService.getBookReportMessageList(brId,  loginUser.getMb_ID());
 	}
 	
+	// 取得會員的心得留言
 	@PostMapping("/EditBookReport/memberReportMessageList")
 	@ResponseBody
 	public List<Map<String, Object>> memberReportMessageList(){
@@ -184,6 +204,7 @@ public class BookReportController {
 		return bookReportService.getMemberBookReportMessageList(loginUser.getMb_ID());
 	}
 	
+	// 新增心得留言
 	@PostMapping("/addReportMessage")
 	@ResponseBody
 	public String addReportMessage(
@@ -193,6 +214,7 @@ public class BookReportController {
 		return bookReportService.addReportMessage(brId, loginUser.getMb_ID(), bmContent);
 	}
 	
+	// 刪除心得留言
 	@PostMapping("/deleteReportMessage")
 	@ResponseBody
 	public Boolean deleteReportMessage(
