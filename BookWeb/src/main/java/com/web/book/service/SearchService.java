@@ -29,7 +29,9 @@ public interface SearchService {
 
 	// 新增收藏項目
 	boolean savebc(int bk_ID, int mb_ID);
-
+	// 新增收藏tag
+	BookCollectBean setbctag(int bc_ID, String tag1);
+	
 	// 新增書本
 	BookBean savebk(BookBean bkc);
 	// 新增書本類型
@@ -88,7 +90,5 @@ public interface SearchService {
 	List<BookBean> searchOrderBookTypeClick(List<Integer> reslist, Integer page);
 
 	List<BookBean> getAllBook();
-	
-	
 
 }

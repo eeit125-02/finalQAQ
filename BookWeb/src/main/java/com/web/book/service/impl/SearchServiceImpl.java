@@ -99,6 +99,11 @@ import com.web.book.service.SearchService;
 		public boolean savebc(int bk_ID, int mb_ID) {
 			return searchBookDAO.savebc(bk_ID, mb_ID);
 		}
+		// 新增收藏tag1
+		@Override
+		public BookCollectBean setbctag(int bc_ID, String tag1) {
+			return searchBookDAO.setbctag(bc_ID, tag1);
+		}
 
 		// 新增書本
 		@Override

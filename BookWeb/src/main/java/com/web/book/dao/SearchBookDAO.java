@@ -63,6 +63,9 @@ public interface SearchBookDAO {
 	//取得全部書籍
 	List<BookBean> searchAllBook();
 	
+	//新增收藏tag1
+	BookCollectBean setbctag(int bc_ID, String tag1);
+	
 	
 
 }

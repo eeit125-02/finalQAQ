@@ -35,6 +35,29 @@
 		font-size: 3.5rem;
 	}
 }
+span{
+padding:5px;
+}
+::placeholder{
+color:#336666;
+}
+
+input{
+padding:2px 5px;
+/* margin: 15px 0px; */
+border: none;
+background-color:#D1E9E9;
+border-radius:10px;
+text-align: center;
+}
+input:focus::placeholder{
+color:#D1E9E9;
+}
+input:focus{
+/* border-color:pink; */
+/* border-color: red; */
+outline:none;
+}
 </style>
 
 <script>
@@ -64,7 +87,6 @@
 
 		<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-			<br><hr>
 			<div class="collect">
 				<a class="btn btn-outline-dark" href="<c:url value='SearchBook/Search' />" role="button">搜尋首頁</a>
 			</div>
@@ -79,11 +101,18 @@
 	</div>
 
 
+<script>			
+		document.querySelector("input").addEventListener("input",function(){
+			    this.style.width="0px";//讓 scrollWidth 獲取最小值，達到回縮的效果
+			    this.style.width=this.scrollWidth+"px";
+			  });
+		
+		
+
+</script>
+
 <script>
 
-
-
-		
 			function loadBookCollectList() {
 				$.ajax({
 					async : false,
@@ -120,8 +149,21 @@
 								+"</p>"	
 								+"</div>"
 								+"</div>"
-								+"<div class=\"collect\">"
-								+"<button type=\"submit\" class=\"btn btn-outline-danger btn-sm\" onclick=\"deletebc(" + data[i].bc_ID + ");\"value=\""
+								+"<div class=\"no\" style=\"margin:auto\">"
+								
+// 								+"<span class='badge badge-light'>自訂標籤</span>"
+								+"<label>自訂標籤</label>"
+								+"<span id='tag1'><input id='newtag1' placeholder='標籤1' onkeydown='this.onkeyup();' onkeyup='this.size=(this.value.length>4?this.value.length:4);' size='4'>"
+								+"<button type=\"submit\" class=\"btn btn-outline-danger btn-sm \" onclick=\"insertag();\"value=\""
+								+"\">＋</button></span>"								
+								+"<span id='tag2'><input placeholder='標籤2' onkeydown='this.onkeyup();' onkeyup='this.size=(this.value.length>4?this.value.length:4);' size='4'>"
+								+"<button type=\"submit\" class=\"btn btn-outline-danger btn-sm \" onclick=\"insertag();\"value=\""
+								+"\">＋</button></span>"	
+								+"<span id='tag3'><input placeholder='標籤3' onkeydown='this.onkeyup();' onkeyup='this.size=(this.value.length>4?this.value.length:4);' size='4'>"
+								+"<button type=\"submit\" class=\"btn btn-outline-danger btn-sm \" onclick=\"insertag();\"value=\""
+								+"\">＋</button></span>"	
+								
+								+"<button id=\"cancel\" type=\"submit\" class=\"btn btn-outline-danger btn-sm collect\" onclick=\"deletebc(" + data[i].bc_ID + ");\"value=\""
 								+data[i].bc_ID
 								+"\">"
 								+ "<img "
@@ -129,7 +171,7 @@
 								+ " id=\"Img/heart\" width=\"18px\">" 
 								+" 取消收藏</button>"
 								+"</div>"
-								+"<br>"
+// 								+"<br>"
 								+"<hr>"
 					}
 					insertData += "</div>"
@@ -143,6 +185,7 @@
 			function deletebc(i){
 				let bc_ID = i;
 				console.log(i);
+				this.input
 				let editURL = "collectlist/deletecollect/"+i;
 				$.ajax({
 				async : true,
@@ -162,6 +205,40 @@
 			
 		}
 			
+			
+			
+			function insertag(){
+				var insertHtml0="";
+				var check = {
+						a : $('#newtag1').val() ,
+						b : $('#cancel').val()
+				};
+				console.log($('#newtag1').val());
+				console.log($('#cancel').val());
+			$.ajax({
+				async : false,
+				type : 'POST',
+				url : 'http://localhost:8080/BookWeb/setbctag',
+				data : check,
+				dataType : 'json',
+				error : function() {
+					alert('123');
+				},
+				success : function(data) { 
+					insertHtml0 = "<span class='badge badge-warning'>"+data.bc_Tag_one+"</span>"
+					+"<button type=\"submit\" class=\"btn btn-outline-danger btn-sm \" onclick=\"deletetag();\"value=\""
+					+"\">Ｘ</button></span>"
+					
+					var hhh="<h2>111</h2>";
+					$('#tag1').empty();
+					$('#tag1').html(insertHtml0);
+					alert('ok');
+					} 
+
+			});
+			
+		}
+	
 			</script>
 
 	<!-- 內容結束 -->

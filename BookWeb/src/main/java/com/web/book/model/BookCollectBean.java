@@ -17,7 +17,9 @@ public class BookCollectBean {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	Integer bc_ID;
 	Date bc_Time;
-	String bc_Tag;
+	String bc_Tag_one;
+	String bc_Tag_two;
+	String bc_Tag_three;
 //	Integer bk_ID;
 //	Integer mb_ID;
 
@@ -33,11 +35,14 @@ public class BookCollectBean {
 		super();
 	}
 
-	public BookCollectBean(Integer bc_ID, Date bc_Time, String bc_Tag, BookBean book, MemberBean member) {
+	public BookCollectBean(Integer bc_ID, Date bc_Time, String bc_Tag_one, String bc_Tag_two, String bc_Tag_three,
+			BookBean book, MemberBean member) {
 		super();
 		this.bc_ID = bc_ID;
 		this.bc_Time = bc_Time;
-		this.bc_Tag = bc_Tag;
+		this.bc_Tag_one = bc_Tag_one;
+		this.bc_Tag_two = bc_Tag_two;
+		this.bc_Tag_three = bc_Tag_three;
 		this.book = book;
 		this.member = member;
 	}
@@ -58,12 +63,28 @@ public class BookCollectBean {
 		this.bc_Time = bc_Time;
 	}
 
-	public String getBc_Tag() {
-		return bc_Tag;
+	public String getBc_Tag_one() {
+		return bc_Tag_one;
 	}
 
-	public void setBc_Tag(String bc_Tag) {
-		this.bc_Tag = bc_Tag;
+	public void setBc_Tag_one(String bc_Tag_one) {
+		this.bc_Tag_one = bc_Tag_one;
+	}
+
+	public String getBc_Tag_two() {
+		return bc_Tag_two;
+	}
+
+	public void setBc_Tag_two(String bc_Tag_two) {
+		this.bc_Tag_two = bc_Tag_two;
+	}
+
+	public String getBc_Tag_three() {
+		return bc_Tag_three;
+	}
+
+	public void setBc_Tag_three(String bc_Tag_three) {
+		this.bc_Tag_three = bc_Tag_three;
 	}
 
 	public BookBean getBook() {
@@ -85,12 +106,16 @@ public class BookCollectBean {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("Book_COLLECTBean [bc_ID=");
+		builder.append("BookCollectBean [bc_ID=");
 		builder.append(bc_ID);
 		builder.append(", bc_Time=");
 		builder.append(bc_Time);
-		builder.append(", bc_Tag=");
-		builder.append(bc_Tag);
+		builder.append(", bc_Tag_one=");
+		builder.append(bc_Tag_one);
+		builder.append(", bc_Tag_two=");
+		builder.append(bc_Tag_two);
+		builder.append(", bc_Tag_three=");
+		builder.append(bc_Tag_three);
 		builder.append(", book=");
 		builder.append(book);
 		builder.append(", member=");

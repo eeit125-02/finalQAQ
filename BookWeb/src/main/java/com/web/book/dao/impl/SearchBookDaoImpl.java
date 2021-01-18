@@ -229,12 +229,21 @@ maxpage=query.getResultList().size();
 		} catch (Exception e) {
 			e.printStackTrace();
 			result = true;
-			list = new BookCollectBean(1, sqlDate, null, book, member);
+			list = new BookCollectBean(1, sqlDate, null, null, null, book, member);
 			session.save(list);
 		}
 		return result;
 	}
-
+	
+	//新增收藏tag(1)
+	@Override
+	public BookCollectBean setbctag(int bc_ID, String tag1) {
+		Session session = factory.getCurrentSession();
+		BookCollectBean bc=session.get(BookCollectBean.class, bc_ID);
+		bc.setBc_Tag_one(tag1);
+		return bc;
+	}
+	
 	// 新增書本
 	@SuppressWarnings("unused")
 	@Override

@@ -88,17 +88,12 @@ white-space:pre-wrap;
 			<a class="btn btn-outline-dark" href="<c:url value='/addnewbook' />" role="button">新增書籍</a>			
 		</div>
 		<br> <br>
-<%-- <input type="hidden" name="apage" value="${page }"/> --%>
 
 <!--總筆數 -->
 		<div id="resultnumber"></div>
 
-<%--<h6>頁數：${page}／${totalPages}</h6> --%>
+<!-- 指定排序 -->
 <div class="btn-group" role="group" aria-label="Basic example" id="ordersite" style="float: right;">
-<!--   <button type="button" class="btn btn-light" style="font-weight:bold;">重新排序</button> -->
-<%--   <a class="btn btn-danger" href='${gotopagebypage}' role="button">依據 熱門度</a> --%>
-<!--   <a class="btn btn-success" href='' role="button">依據 出版日期</a> -->
-<!--   <a class="btn btn-warning" href='' role="button">依據 頁數</a> -->
 </div>
 		<br>
 		<div><h4>　　　　　　${searchresultzero}</h4></div>

@@ -41,7 +41,9 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 		font-size: 3.5rem;
 	}
 }
-
+.bkname{
+white-space:pre-wrap;
+}
 </style>
 
 <script>
@@ -74,15 +76,15 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 <!-- 								role="tab">進階查詢</a></li> -->
 <!-- 						</ul> -->
 
-	<div class="" style="text-align:center;margin: auto;">
+	<div class="carousel slide" style="text-align:center;margin: auto;">
 	
  <div class="card-deck">
 <c:forEach items="${allbookfive}" var="all">		
   <div class="card">
-    <img src="${all.getBk_Pic()}" class="card-img-top" alt="熱門瀏覽" height="150px">
-    <div class="card-body">
-      <h5 class="card-title">${all.getBk_Name()}</h5>
-    </div>
+    <img src="${all.getBk_Pic()}" class="card-img-top" alt="熱門瀏覽" height="200px">
+   <form name=ppp action="<c:url value='/bookpage' />" method="get">
+		<button type="submit" name="page" class="btn btn-link btn-block bkname" value="${all.getBk_ID()}">${all.getBk_Name()}</button>
+	</form>
   </div>
 </c:forEach>
 </div>

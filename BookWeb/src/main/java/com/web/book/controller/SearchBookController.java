@@ -389,6 +389,17 @@ public class SearchBookController {
 	}
 	
 	
+	@PostMapping("/setbctag")
+	@ResponseBody
+	public BookCollectBean checkBookReport(
+			@RequestParam(value = "a", required = false) String tag1 ,
+			@RequestParam(value = "b", required = false) Integer bcId) {			
+		System.out.println("************************"+tag1);
+		System.out.println("************************"+bcId);
+		BookCollectBean data=searchService.setbctag(bcId, tag1);
+		return data;
+	}
+	
 	
 	// 刪除書籍
 	@SuppressWarnings("unused")
