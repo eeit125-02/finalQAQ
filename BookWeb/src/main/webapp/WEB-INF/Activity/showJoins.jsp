@@ -133,18 +133,17 @@ $(document).ready(function () {
     $('#myTable').DataTable({
      bFilter: true,
      bPaginate: true, // 顯示換頁
-    searching: true, // 顯示搜尋
-    info: true, // 顯示資訊
-    fixedHeader: true,  // 標題置頂
-  destroy:true,
-  language:{
+     searching: true, // 顯示搜尋
+     info: true, // 顯示資訊
+     fixedHeader: true,  // 標題置頂
+     destroy:true,
+  	 language:{
       "processing": "處理中...",
-      "loadingRecords": "載入中...",
       "lengthMenu": "顯示_MENU_項結果",
       "zeroRecords": "沒有符合的結果",
       "info": "顯示第_START_至_END_項結果，共_TOTAL_項",
       "infoEmpty": "顯示第 0 至 0 項結果，共 0 項",
-      "infoFiltered": "(從 MAX 項結果中過濾)",
+      "infoFiltered": "(從_MAX_項結果中過濾)",
       "search": "搜尋:",
       "paginate": {
           "first": "第一頁",

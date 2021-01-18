@@ -161,69 +161,67 @@
                         <div class="form-group input_fields_wrap">
                         <div class="btn-group-toggle" data-toggle="buttons">
 						    <label >活動標籤:</label>
-
-							<br> <br>
-							<p class="btn btn-outline-secondary"style="margin:3px">
+							<p class="btn btn-info"style="margin:3px">
 								<input type="checkbox" name="b" value="2" /> 戶外體驗
 							</p>
-							<p class="btn btn-outline-secondary"style="margin:3px">
+							<p class="btn btn-info"style="margin:3px">
 								<input type="checkbox" name="b" value="3" /> 學習
 							</p>
-							<p class="btn btn-outline-secondary"style="margin:3px">
+							<p class="btn btn-info"style="margin:3px">
 								<input type="checkbox" name="b" value="4" /> 親子
 							</p>
-							<p class="btn btn-outline-secondary"style="margin:3px">
+							<p class="btn btn-info"style="margin:3px">
 								<input type="checkbox" name="b" value="5" /> 寵物
 							</p>
-							<p class="btn btn-outline-secondary"style="margin:3px">
+							<p class="btn btn-info"style="margin:3px">
 								<input type="checkbox" name="b" value="6" /> 科技
 							</p>
-							<p class="btn btn-outline-secondary"style="margin:3px">
+							<p class="btn btn-info"style="margin:3px">
 								<input type="checkbox" name="b" value="7" /> 商業
 							</p>
-							<p class="btn btn-outline-secondary"style="margin:3px">
+							<p class="btn btn-info"style="margin:3px">
 								<input type="checkbox" name="b" value="8" /> 創業
 							</p>
-							<p class="btn btn-outline-secondary"style="margin:3px">
+							<p class="btn btn-info"style="margin:3px">
 								<input type="checkbox" name="b" value="9" /> 投資
 							</p>
-							<p class="btn btn-outline-secondary"style="margin:3px">
+							<p class="btn btn-info"style="margin:3px">
 								<input type="checkbox" name="b" value="9" /> 設計
 							</p>
-							<p class="btn btn-outline-secondary"style="margin:3px">
+							<p class="btn btn-info"style="margin:3px">
 								<input type="checkbox" name="b" value="9" /> 藝文
 							</p>
-							<p class="btn btn-outline-secondary"style="margin:3px">
+							<p class="btn btn-info"style="margin:3px">
 								<input type="checkbox" name="b" value="9" /> 手作
 							</p>
-							<p class="btn btn-outline-secondary"style="margin:3px">
+							<p class="btn btn-info"style="margin:3px">
 								<input type="checkbox" name="b" value="9" /> 美食
 							</p>
-							<p class="btn btn-outline-secondary"style="margin:3px">
+							<p class="btn btn-info"style="margin:3px">
 								<input type="checkbox" name="b" value="9" /> 攝影
 							</p>
-							<p class="btn btn-outline-secondary"style="margin:3px">
+							<p class="btn btn-info"style="margin:3px">
 								<input type="checkbox" name="b" value="9" /> 遊戲
 							</p>
-							<p class="btn btn-outline-secondary"style="margin:3px">
+							<p class="btn btn-info"style="margin:3px">
 								<input type="checkbox" name="b" value="9" /> 運動
 							</p>
-							<p class="btn btn-outline-secondary"style="margin:3px">
+							<p class="btn btn-info"style="margin:3px">
 								<input type="checkbox" name="b" value="9" /> 健康
 							</p>
-							<p class="btn btn-outline-secondary"style="margin:3px">
+							<p class="btn btn-info"style="margin:3px">
 								<input type="checkbox" name="b" value="9" /> 音樂
 							</p>
-							<p class="btn btn-outline-secondary"style="margin:3px">
+							<p class="btn btn-info"style="margin:3px">
 								<input type="checkbox" name="b" value="9" /> 電影
 							</p>
-							<p class="btn btn-outline-secondary"style="margin:3px">
+							<p class="btn btn-info"style="margin:3px">
 								<input type="checkbox" name="b" value="9" /> 娛樂
 							</p>
-							<p class="btn btn-outline-secondary"style="margin:3px">
+							<p class="btn btn-info"style="margin:3px">
 								<input type="checkbox" name="b" value="9" /> 時尚
 							</p>
-							<p class="btn btn-outline-secondary"style="margin:3px">
+							<p class="btn btn-info"style="margin:3px">
 								<input type="checkbox" name="b" value="9" /> 公益
 							</p>
 							</div>

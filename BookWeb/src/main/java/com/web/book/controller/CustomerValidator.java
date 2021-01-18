@@ -19,10 +19,18 @@ public class CustomerValidator implements Validator {
 
 	@Override
 	public void validate(Object target, Errors errors) {
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "act_Name", "actbean.name.empty", "姓名欄位不正確");
-		ValidationUtils.rejectIfEmpty(errors, "password", "actbean.password.empty");
-		ValidationUtils.rejectIfEmpty(errors, "password1", "actbean.password1.empty");
-		ValidationUtils.rejectIfEmpty(errors, "email", "actbean.email.empty", "email欄不能空白");
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "act_Name", "actbean.actname.empty", "請填寫活動名稱");
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "act_Theme", "actbean.acttheme.empty", "請選擇活動主題");
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "act_Date", "actbean.actdate.empty", "請選擇活動日期");
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "act_Time", "actbean.acttime.empty", "請上傳活動時間");
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "act_Image", "actbean.actimage.empty", "請上傳活動照片");
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "act_Loc", "actbean.actloc.empty", "請輸入地址");
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "act_Intro", "actbean.actintro.empty", "請輸入活動簡介");
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "act_Guest", "actbean.actguest.empty", "請輸入活動嘉賓");
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "act_Pax", "actbean.actpax.empty", "請輸入活動人數");
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "act_Rule", "actbean.actrule.empty", "請輸入活動規則");
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "act_Tag", "actbean.acttag.empty", "請選擇活動標籤");
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "act_Place", "actbean.actplace.empty", "請選擇活動場所");
 
 		ActBean actbean = (ActBean) target;
 //		String name = customer.getName();
