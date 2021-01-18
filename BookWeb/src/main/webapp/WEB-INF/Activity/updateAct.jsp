@@ -157,7 +157,7 @@
 							<form:select path="act_Loc" id="縣市1" class="form-control"></form:select>
 							</div>
 							<div class="form-group col-md-6">
-							<label>&nbsp</label>
+							<label>&nbsp;</label>
 							<form:select id="鄉鎮市區1" path="act_Loc" class="form-control"></form:select>
 							</div>
 						    </div>
