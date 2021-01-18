@@ -187,11 +187,30 @@ span{
 			<br>
 		<div class="check">
 			<button id="send" type="submit" class="btn btn-outline-danger btn-sm">確認新增</button>
+			<button id="finish" type="button" class="btn btn-outline-secondary btn-sm">一鍵完成</button>
 		</div>
 		</form:form>
 	</div>
 
 	<!-- 內容結束 -->
+	
+<script>
+
+$("#finish").click(function(){
+
+document.getElementById('bk_Name').value = '資策會EEIT125(Java班)成果發表全集' ;
+document.getElementById('bk_Author').value = 'EEIT125' ;
+document.getElementById('bk_Translator').value = '編譯器' ;
+document.getElementById('bk_Publish').value = '資策會' ;
+document.getElementById('bk_Date').value = '2021-01-28' ;
+document.getElementById('bk_Publisher_Place').value = '出版地：台灣中壢' ;
+document.getElementById('bk_ISBN').value = 'EEIT20210128' ;
+document.getElementById('bk_Page').value = '450' ;
+document.getElementById('bk_Language').value = 'JAVA' ;
+document.getElementById('bk_Content').value = 'EEIT125成果發表～' ;
+});
+
+</script>
 
 <script>
  

@@ -353,6 +353,7 @@ public class SearchBookController {
 		model.addAttribute("pageresult", result);
 		List<BookTypeBean> result2=searchService.getBookType(bk_id);
 		model.addAttribute("pageresulttype", result2);		
+		searchService.addclick(bk_id);
 		boolean a=gotoCheckCollect(bk_id, loginUser);
 		if(a==true) {
 			model.addAttribute("havebc", a);					
@@ -408,7 +409,7 @@ public class SearchBookController {
 		BookBean result = searchService.getBook(bk_id);
 		searchService.deletebkty(bk_id);
 		boolean result2 = searchService.deletebk(result);
-		return "SearchBook/Search";
+		return "redirect:/SearchBook/Search";
 	}
 	
 	

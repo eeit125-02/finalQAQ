@@ -213,8 +213,6 @@ outline:none;
 						a : $('#newtag1').val() ,
 						b : $('#cancel').val()
 				};
-				console.log($('#newtag1').val());
-				console.log($('#cancel').val());
 			$.ajax({
 				async : false,
 				type : 'POST',
@@ -229,7 +227,6 @@ outline:none;
 					+"<button type=\"submit\" class=\"btn btn-outline-danger btn-sm \" onclick=\"deletetag();\"value=\""
 					+"\">Ｘ</button></span>"
 					
-					var hhh="<h2>111</h2>";
 					$('#tag1').empty();
 					$('#tag1').html(insertHtml0);
 					alert('ok');

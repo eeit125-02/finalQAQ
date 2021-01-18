@@ -96,13 +96,19 @@ white-space:pre-wrap;
 <div class="btn-group" role="group" aria-label="Basic example" id="ordersite" style="float: right;">
 </div>
 		<br>
-		<div><h4>　　　　　　${searchresultzero}</h4></div>
-		
+<c:if test='${not empty searchresultzero}'>		
+		<div><span>　　　　　　　　　　　　</span>
+		<img alt="查無資料" src="${pageContext.request.contextPath}/image/no_data.png" width="125px" style="position:relative;top:10px;"> 
+							<h4 style="display: inline-block;">　　${searchresultzero}</h4></div>	
+</c:if>
 <!-- 搜尋結果清單 -->
+<c:if test='${empty searchresultzero}'>
+		<div><h4>
+		　　　　　　${searchresultzero}</h4></div>
 
 			<div class="booktypelist" id="booktypelist">	
 			</div>						
-			
+</c:if>			
 		<br>
 	<c:url value="/searchtype" var="gotopage">
 		<c:param name="name" value="${name}"></c:param>
