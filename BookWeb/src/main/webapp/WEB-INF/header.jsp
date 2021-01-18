@@ -35,21 +35,11 @@
 	<div class="nav-scroller py-1 mb-2">
 		<nav class="nav d-flex justify-content-between" style="background-color:#D2E9FF;">
 			<a class="p-2 text-muted"
-				href='<c:url value="/SearchBook/Search"/>'>圖書漂流瓶</a> <a
-				class="p-2 text-muted" href='<c:url value="/qaqTest"/>'>二手書圖</a> <a
-				class="p-2 text-muted" href='<c:url value="/showActs"/>'>共樂聚落</a> <a
-				class="p-2 text-muted" href='<c:url value="/Discussion/mainpage"/>'>書適論壇</a>
-			<a class="nav-link dropdown-toggle text-muted" href="#"
-				id="navbarDropdownMenuLink2" role="button" data-toggle="dropdown"
-				aria-haspopup="true" aria-expanded="false"> 閱讀履歷 </a>
-			<div class="dropdown-menu text-muted"
-				aria-labelledby="navbarDropdownMenuLink2">
-				<a class="dropdown-item text-muted"
-					href="//localhost:8080/BookWeb/BookReport/searchBookReport/all/1">讀書心得</a>
-				<a class="dropdown-item text-muted" href="#">Another action</a> <a
-					class="dropdown-item text-muted"
-					href="//localhost:8080/BookWeb/BookReport/EditBookReport">編輯資訊</a>
-			</div>
+				href='<c:url value="/SearchBook/Search"/>'>圖書漂流瓶</a> 
+				<a class="p-2 text-muted" href='<c:url value="/qaqTest"/>'>二手書圖</a> 
+				<a class="p-2 text-muted" href='<c:url value="/showActs"/>'>共樂聚落</a> 
+				<a class="p-2 text-muted" href='<c:url value="/Discussion/mainpage"/>'>書適論壇</a>
+				<a class="p-2 text-muted" href='//localhost:8080/BookWeb/BookReport/searchBookReport/all/1'>閱讀履歷 </a>
 		</nav>
 	</div>
 		<input type="hidden" id="pic" value="${loginUser.mb_pic}">
