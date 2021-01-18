@@ -110,6 +110,9 @@ div {
 				<button type="submit" name="getjoinrecords" class="btn btn-outline-secondary">報名紀錄</button>
 				</div>
 				</form>
+				<div>
+				<button type="button" id="editBookReport" name="getjoinrecords" class="btn btn-outline-secondary">讀書心得</button>
+				</div>
 				</div>
 	</fieldset>
 	<div id="change123" style="width:1500px;margin-left:10px ">
@@ -703,5 +706,14 @@ div {
 			}
 			//說明合法    
 		})
+		
+		
+		$('#editBookReport').click(function(){
+			let form = $("<form method='post'></form>");
+			form.attr({"action":"//localhost:8080/BookWeb/BookReport/EditBookReport"});
+			$(document.body).append(form);
+			form.submit();
+		});
+		
 	</script>
 </html>
