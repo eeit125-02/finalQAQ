@@ -74,14 +74,12 @@
 			<H1>新增報名資料</H1>
 			<form:form method="POST" modelAttribute="ajb" enctype="multipart/form-data" id="showAlert">
 
-				<table>
-
-					<tr>
-						<td><label>會員帳號:${loginUser.mb_Account}</label></td>
+				<div class="form-row">
+					<div class="form-group col-md-6">
+					<label class="form-control">會員帳號:${loginUser.mb_Account}</label>
 <%-- 						<td><input type="hidden" name="mb_Account" value="${member.mb_Account}" /></td> --%>
 					<form:input type="hidden" path="member.mb_Account" value="${loginUser.mb_Account}"/>
-					</tr>
-
+					
                     <tr>
 						<td><label>活動名稱:${act_Name}</label></td>
 <%-- 						<td><input type="hidden" name="act_Name" value="${act.act_Name}" /></td> --%>
