@@ -57,7 +57,7 @@ public class DiscussionRESTfulController {
 	//新增貼文
 	@PostMapping("/Discussion/add_post")
 	@ResponseBody
-	public String processAddNewPost(Model model,
+	public Integer processAddNewPost(Model model,
 			@RequestParam(value="post_title") String post_title,
 			@RequestParam(value="post_content") String post_content
 			) {
@@ -71,7 +71,7 @@ public class DiscussionRESTfulController {
 		pb.setMemberbean(loginUser); //直接把Bean塞進去
 		pb.setClick(0);
 		discussionService.addPost(pb);
-		return post_title;
+		return 0;
 	}
 	
 	//新增留言

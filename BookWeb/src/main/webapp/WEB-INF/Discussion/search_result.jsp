@@ -81,6 +81,7 @@ response.setDateHeader("Expires", 0);
 				<h3>搜尋 ${param.keyword} 的結果</h3>
 				<br>
 
+				
 				<!-- post and command -->
 				<c:forEach var="stored_post" items="${allPost}">
 
@@ -92,7 +93,7 @@ response.setDateHeader("Expires", 0);
 						<div
 							style="border: #ADADAD 2px solid; border-radius: 5px; text-align: left; padding: 10px; margin: 0px 10px">
 							<p>${stored_post.memberbean.mb_Name}<br>${stored_post.post_time}</p>
-							<h3>${stored_post.post_title}</h3>
+							<h3><strong>${stored_post.post_title}</strong></h3>
 
 
 							<button class="btn btn-link" type="button" data-toggle="collapse"
@@ -275,6 +276,7 @@ response.setDateHeader("Expires", 0);
 						<br>
 					</c:if>
 				</c:forEach>
+				
 
 			</div>
 		</div>
