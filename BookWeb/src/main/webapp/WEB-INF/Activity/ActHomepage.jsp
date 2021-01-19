@@ -207,7 +207,7 @@ td {
 										<p>${act.act_Date}</p>
 										<p></p>
 										<p><img src=${pageContext.request.contextPath}/image/iconfinder_clock_1814097.png style="width:22px;height:22px">${act.act_Time}</p>
-										<p><button class="mapbutton" style="background-color:white" id="myModal"  value="${act.act_Loc}" data-toggle="modal" data-target="#myModal1"><img src=${pageContext.request.contextPath}/image/iconfinder_location_1814106.png style="width:25px;height:25px"></button>${act.act_Loc}</p>
+										<p><button class="mapbutton" style="background-color:white" id="myModal"  value="${act.act_Loc}" data-toggle="modal"  title="Google地圖" data-target="#myModal1"><img src=${pageContext.request.contextPath}/image/iconfinder_location_1814106.png style="width:25px;height:25px" title="Google地圖">${act.act_Loc}</button></p>
 										<hr>
 										<p>
 										
