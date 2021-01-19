@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Document</title>
+<title>書適圈</title>
 
 <!-- sidemenu -->
 <!-- <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"> -->
@@ -30,7 +30,7 @@
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
 	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
 	crossorigin="anonymous">
-	
+<link rel="icon" href="${pageContext.request.contextPath}/image/logo1.ico" type="image/x-icon" />	
 <style>
 #admin,#mb_modify,#mb_pwd,#mb_inf {
 	border-radius: 25px;
@@ -598,6 +598,7 @@ legend {
 							+"<button type=\"reset\">清除</button>"
 					+"</fieldset>"
 						+"</form>"
+					+"<button id=\"insert\" type=\"button\">一鍵輸入</button>"
 		 			$('#change123').html(insertData);
 						Modify();
 				}
@@ -626,7 +627,7 @@ legend {
 									+"</tr>"
 									+"<tr class=\"table-light\">"
 										+"<td>"+data.mb_inf.mb_Account+"</td>"
-										+"<td><input type=\"date\" name=\"mb_Birthday\" value=\""+data.mb_Birthday+"\"/></td>"
+										+"<td><input type=\"date\" name=\"mb_Birthday\" id=\"birthday\" value=\""+data.mb_Birthday+"\"/></td>"
 									+"</tr>"
 									+"<tr class=\"tr2\">"
 										+"<th scope=\"col\">地址</th>"
@@ -657,9 +658,9 @@ legend {
 									+"<button type=\"submit\">送出</button>"
 									+"<button type=\"reset\">清除</button>"
 								+"</div>"
-							+"</fieldset>"
-						 +"<button id=\"insert\" type=\"button\">一鍵輸入</button>"
+								+"</fieldset>"
 						+"</form>"
+								 +"<button id=\"insert\" type=\"button\">一鍵輸入</button>"
 				 			$('#change123').html(insertData);
 						showImage();
 						birthday();
@@ -743,7 +744,6 @@ legend {
         	})
         	
     	   $("#myfile").change(function() {
-   			console.log("123")
    			var readFile = new FileReader();
    			var mfile = $("#myfile")[0].files[0];  //注意這裡必須時$("#myfile")[0]，document.getElementById('file')等價與$("#myfile")[0]
    			readFile.readAsDataURL(mfile);
@@ -770,7 +770,7 @@ legend {
 				$("#birthday").attr("max",year+"-"+month+"-"+date);	
 			})
 			}
-		}
+	
        
       
 //        $("#admin1").click(function(){
@@ -782,6 +782,11 @@ legend {
 						
 // 							insertData =
     function Modify(){
+    	$('#insert').click(function(){
+    		$('#oldpwd').val("aaa11")
+    		$('#pwd').val("aaa111")
+    		$('#pwd1').val("aaa111")
+    	})
     	let old = $('#old').val();
 		console.log(old)
 	var b1=false;

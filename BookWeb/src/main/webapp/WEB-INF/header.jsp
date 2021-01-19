@@ -48,11 +48,11 @@
 	<script>
 	console.log(typeof($.cookie('Member_ID')))
 	console.log($('#pic').val())
-		let pic=$('#pic').val();
-		let name=$('#name').val();
 		$(document)
 				.ready(
 						function() {
+							var pic=$('#pic').val();
+							var name=$('#name').val();
 							if (typeof ($.cookie('Member_ID')) != "undefined") {
 								$('#loginButton')
 										.html(  "<img src=\""+pic+"\" style=\"width: 35px; height: 35px; text-align:center; border-radius: 50%;\"/>&nbsp;"
