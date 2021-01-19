@@ -9,7 +9,8 @@
 <script
 	src="${pageContext.request.contextPath}/js/jQuery/jquery.cookie.js"></script>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<link rel="icon" href="${pageContext.request.contextPath}/image/logo1.ico" type="image/x-icon" />
+<title>書適圈</title>
 
 </head>
 <body>
