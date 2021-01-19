@@ -60,7 +60,7 @@ public class DiscussionDaoImpl implements DiscussionDao {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<PostBean> getAllPostByHot() {
-		String hql= "FROM PostBean  p ORDER BY SIZE(p.commands) DESC";
+		String hql= "FROM PostBean  p ORDER BY SIZE(p.commands) DESC, p.post_time DESC";
 		Session session = factory.getCurrentSession();
 		return session.createQuery(hql).getResultList();
 	}
@@ -69,7 +69,7 @@ public class DiscussionDaoImpl implements DiscussionDao {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<PostBean> getAllPostByClick() {
-		String hql= "FROM PostBean  p ORDER BY click DESC";
+		String hql= "FROM PostBean  p ORDER BY click DESC, p.post_time DESC";
 		Session session = factory.getCurrentSession();
 		return session.createQuery(hql).getResultList();
 	}
