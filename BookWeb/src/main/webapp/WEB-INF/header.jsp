@@ -68,9 +68,9 @@
 									});
 								});
 							} else {
-								$('#loginButton')
-										.html(
-												"<a id=\"login\" href=\"//localhost:8080/BookWeb/toLogin\">登入</a>");
+								$('#loginButton').html("<a id=\"login\" href=\"//localhost:8080/BookWeb/toLogin\">登入</a>");
+// 								if(window.location.href !="http://localhost:8080/BookWeb/toLogin"){ 								 
+// 								window.location.replace("//localhost:8080/BookWeb/toLogin");}
 							}
 							;
 						})
@@ -84,7 +84,7 @@
 			}
 		}
 		// 		$(document).ready(function() {
-		// 			if(typeof($.cookie('Member_ID')) == "undefined" && window.location.href !="//localhost:8080/BookWeb/toLogin"){
+		// 			if(typeof($.cookie('Member_ID')) == "undefined" && window.location.href !="http://localhost:8080/BookWeb/toLogin"){
 		// 				window.location.href="//localhost:8080/BookWeb/toLogin";
 		// 			}
 		// 		})
