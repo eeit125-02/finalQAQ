@@ -146,10 +146,20 @@ form {
 			</fieldset>
 		</form>
 	</div>
+	<button id="insert">一鍵輸入</button>
 	<!-- footer -->
 	<footer class="container py-5" id="bookWebFooter"></footer>
 	<!-- footer -->
 	<script>
+		$('#insert').click(function(){
+			$('#account').val("qsxazqoo159");
+			$('#pwd').val("aaa111");
+			$('#pwd1').val("aaa111");
+			$('#name1').val("陳昱豪");
+			$('#birthday').val("1994-04-19");
+			$('#mail').val("qsxazqoo@gmail.com");
+		})
+	
 		$(document).ready(function() {
 			$("#bookWebheader").load("<c:url value='/header'/>");
 			$("#bookWebFooter").load("<c:url value='/footer'/>");

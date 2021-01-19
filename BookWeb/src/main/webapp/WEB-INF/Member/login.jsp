@@ -136,10 +136,20 @@ form {
 		</form>	
 	</div>
 	<form action="<c:url value='/toCity'/>" id="fm"></form>
+	<button id="insert">一鍵輸入</button>
+	<button id='admininsert'>管理員</button>
 	<!-- footer -->
 	<footer class="container py-5" id="bookWebFooter"></footer>
 	<!-- footer -->
 	<script>
+	$('#insert').click(function(){
+		$('#account').val('qsxazqoo159');
+		$('#pwd').val('aaa111');
+	})
+	$('#admininsert').click(function(){
+		$('#account').val('a123456');
+		$('#pwd').val('a123456');
+	})
 		$(document).ready(function() {
 			$("#bookWebheader").load("<c:url value='/header'/>");
 			$("#bookWebFooter").load("<c:url value='/footer'/>");
