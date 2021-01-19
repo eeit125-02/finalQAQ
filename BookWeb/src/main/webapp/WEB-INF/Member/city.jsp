@@ -147,8 +147,7 @@ div {
 				</form>
 				<div>
 				<button type="button" id="editBookReport" name="getjoinrecords" class="btn btn-outline-secondary">讀書心得</button>
-				</div>
-		
+				</div>		
 	</div>
 	<div id="change123" style="width:1500px;margin-left:10px ">
 									<fieldset id="mb_inf">
@@ -349,6 +348,7 @@ div {
 						+"</form>"
 					+"</fieldset>"	
 		 			$('#change123').html(insertData);
+					birthday();
 				}
 	 });
         })
@@ -531,9 +531,11 @@ div {
 									+"<button type=\"reset\">清除</button>"
 								+"</div>"
 							+"</fieldset>"
+						 +"<button id=\"insert\" type=\"button\">一鍵輸入</button>"
 						+"</form>"
 				 			$('#change123').html(insertData);
 						showImage();
+						birthday();
 						},
 						error:function(){
 							alert("fuck")
@@ -608,6 +610,11 @@ div {
 			 
 			 
 		function showImage(){
+        	$('#insert').click(function(){
+        		$('#address').val("宜蘭縣員山鄉")
+        		$('#tel').val("0912345678")
+        	})
+        	
     	   $("#myfile").change(function() {
    			console.log("123")
    			var readFile = new FileReader();
@@ -620,7 +627,23 @@ div {
    			}
    		});	  	   
        }
-		
+		function birthday(){
+			$(document).ready(function() {
+				var date_now = new Date();
+				//得到当前年份
+				var year = date_now.getFullYear();
+				//得到当前月份
+				//注：
+				//  1：js中获取Date中的month时，会比当前月份少一个月，所以这里需要先加一
+				//  2: 判断当前月份是否小于10，如果小于，那么就在月份的前面加一个 '0' ， 如果大于，就显示当前月份
+				var month = date_now.getMonth()+1 < 10 ? "0"+(date_now.getMonth()+1) : (date_now.getMonth()+1);
+				//得到当前日子（多少号）
+				var date = date_now.getDate() < 10 ? "0"+date_now.getDate() : date_now.getDate();
+				//设置input标签的max属性
+				$("#birthday").attr("max",year+"-"+month+"-"+date);	
+			})
+			}
+		}
        
       
 //        $("#admin1").click(function(){
