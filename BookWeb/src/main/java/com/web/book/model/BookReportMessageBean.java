@@ -2,6 +2,7 @@ package com.web.book.model;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -22,13 +23,17 @@ public class BookReportMessageBean {
 	
 	private String bm_Content;
 	
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "br_ID")
 	private BookReportBean bookReport;
 	
 	@ManyToOne
 	@JoinColumn(name = "mb_ID")
 	private MemberBean member;
+	
+	
+	
+	
 	
 
 	public BookReportMessageBean() {

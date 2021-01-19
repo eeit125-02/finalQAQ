@@ -30,7 +30,7 @@
 }
 
 .messageSize{
-	 font-size: 20px;
+	 font-size: 25px;
 }
 </style>
 </head>
@@ -42,39 +42,43 @@
 
 	<div class="container">
 		<div class="media">
-			<img id="bkPic" src="" class="w-25 p-2" alt="...">
+			
+			<img id="bkPic" src="" class="w-25 h-25 p-2" alt="...">
+			
 			<div class="media-body ml-5">
 
 				<form  class="col-ml-4">
 					<br>
 					<div class="form-group">
-						<label id="brTitel">閱讀標題：</label> 
+						<label class="messageSize" id="brTitel">閱讀標題：</label> 
 					</div>
 					<div class="form-group">
-						<label id="userAccount">撰寫者：</label> 
+						<label class="messageSize" id="userAccount">撰寫者：</label> 
 					</div>
 					<div class="form-group">
-						<label id="bkName">書名：</label> 
+						<label class="messageSize" id="bkName">書名：</label> 
 					</div>
 					<div id = "bookWriter" class="form-group">
-						<label id="bkAuthor" class = "mr-5">作者：12232</label> 
+						<label class="messageSize" id="bkAuthor" class = "mr-5">作者：12232</label> 
 					</div>
 					<div class="form-group">
-						<label id="bkPublish">出版社：</label> 
+						<label class="messageSize" id="bkPublish">出版社：</label> 
 					</div>
 					
 					<div class="form-inline">
-						<label>評分：</label>
+						<label class="messageSize" >評分：</label>
 						<div id="rateYo"></div>
 					</div>
 					<br>
-					<div class="form-group">
-						<button id="addSub" type="button" class="btn btn-outline-primary">加入收藏</button>
+					<div class="btn-toolbar justify-content-between btn-sm">
+						<p></p>
+						<div class="form-group">
+							<button id="addSub" type="button" class="btn btn-outline-primary btn-lg">加入收藏</button>
+						</div>
 					</div>
 				</form>
 			</div>
 		</div>
-		<br>
 		<br>
 		<h3 align="center">心得:</h3>
 		<hr>
@@ -275,14 +279,14 @@
 							data : {bmId:$(this).val()},
 							dataType : "json",
 							success : function(data) {
+								getMessage();
 								if(data && typeof(data) == "boolean"){								
 									swal({
 									      title: "刪除成功",
 									      icon: "success",
 									 }).then((willDelete) => {
-										 getMessage();
+										 loadReportMessageList();
 									 });
-									
 								}
 							}
 						});

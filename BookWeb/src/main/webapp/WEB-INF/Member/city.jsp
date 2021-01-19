@@ -709,10 +709,17 @@ div {
 		
 		
 		$('#editBookReport').click(function(){
-			let form = $("<form method='post'></form>");
-			form.attr({"action":"//localhost:8080/BookWeb/BookReport/EditBookReport"});
-			$(document.body).append(form);
-			form.submit();
+			
+			if("${loginUser.mb_Account}" == "a123456"){
+				$('#change123').load("http://localhost:8080/BookWeb/Admin/BookReport");
+			}else{				
+				window.location.href = "http://localhost:8080/BookWeb/BookReport/EditBookReport"
+				/* let form = $("<form method='get'></form>");
+				form.attr({"action":"//localhost:8080/BookWeb/BookReport/EditBookReport"});
+				$(document.body).append(form);
+				form.submit(); */
+			}
+			
 		});
 		
 	</script>

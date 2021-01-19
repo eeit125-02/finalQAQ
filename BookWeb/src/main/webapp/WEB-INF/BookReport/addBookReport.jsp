@@ -6,17 +6,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Insert title here</title>
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-<!-- <script src="https://cdn.ckeditor.com/4.15.1/standard-all/ckeditor.js"></script> -->
-
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/jquery.rateyo.css"/>
 <script src="${pageContext.request.contextPath}/js/jquery.rateyo.js"></script>
 <script src="${pageContext.request.contextPath}/js/ckeditor/ckeditor.js"></script>
-
-
+<!-- <script src="http://cdn.ckeditor.com/4.6.1/standard/ckeditor.js"></script> -->
 
 <style>
 .bd-placeholder-img {
@@ -81,7 +79,7 @@
 	<footer class="container py-5" id="bookWebFooter"></footer>
 	<!-- footer -->
 	<script>
-	 	CKEDITOR.addCss('.cke_editable { font-size: 15px; padding: 2em; }');
+	 	CKEDITOR.addCss('.cke_editable { font-size: 20px; padding: 1em; }');
 	 	var editor = CKEDITOR.replace( 'brContent' ,{
 			toolbar: [
 		        {
@@ -103,15 +101,7 @@
 		        {
 		          name: 'align',
 		          items: ['JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock']
-		        },
-		       /*  {
-		          name: 'paragraph',
-		          items: ['NumberedList', 'BulletedList']
-		        }, */
-		       /*  {
-		            name: 'links',
-		            items: ['EmojiPanel']
-		         } */
+		        }
 		      ]
 
 		      
@@ -164,9 +154,10 @@
 				dataType : 'json',
 				success : function(data){
 					if (data){
+						console.log(data)
 						window.location.href = "http://localhost:8080/BookWeb/BookReport/EditBookReport"
 					}
-					else{
+					else{s
 						alert.val(已傳野果);
 					}
 				}
