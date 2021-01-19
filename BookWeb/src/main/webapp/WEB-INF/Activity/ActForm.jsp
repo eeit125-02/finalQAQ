@@ -89,6 +89,7 @@
 							<div class="form-group col-md-6">
 								<label >活動名稱:</label>
 								<form:input path="act_Name" class="form-control" placeholder="必填" />
+								<form:errors path="act_Name" cssStyle="color: red;"/>
 							</div>
 							<div class="form-group col-md-6">
 								<label >活動主題:</label>
@@ -160,7 +161,7 @@
                         <div class="form-row">
                         <div class="form-group input_fields_wrap">
                         <div class="btn-group-toggle" data-toggle="buttons">
-						    <label >活動標籤:</label>
+						    <label >活動標籤:</label><br>
 							<p class="btn btn-info"style="margin:3px">
 								<input type="checkbox" name="b" value="2" /> 戶外體驗
 							</p>

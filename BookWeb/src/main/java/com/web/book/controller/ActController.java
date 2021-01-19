@@ -89,9 +89,17 @@ public class ActController {
 							, HttpServletRequest request
 							, @RequestParam(value = "mb_ID", required = false) Integer mb_ID
 							, RedirectAttributes attr) throws Exception {
-
-		new ActFormValidator().validate(ab, bindingResult);
 		
+		
+		// 圖片上傳用
+		GlobalService.saveImage("active", file, ab.getact_Name());
+		ab.setAct_Differentpax(0);
+		ab.setact_Image(GlobalService.saveImage("active", file, ab.getact_Name()));
+		actService.createAct(ab);
+
+		
+		
+		new ActFormValidator().validate(ab, bindingResult);		
 		if (bindingResult.hasErrors()) {
 			System.out.println("======================");
 			List<ObjectError> list = bindingResult.getAllErrors();
@@ -103,11 +111,7 @@ public class ActController {
 		}
 
 		
-		// 圖片上傳用
-		GlobalService.saveImage("active", file, ab.getact_Name());
-		ab.setAct_Differentpax(0);
-		ab.setact_Image(GlobalService.saveImage("active", file, ab.getact_Name()));
-		actService.createAct(ab);
+		
 		return "redirect:/showActs";
 	}
 
