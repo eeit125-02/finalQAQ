@@ -313,21 +313,14 @@ public class Login {
 	}
 
 	// 管理員會員刪除
-	@PostMapping("/delete")
-	public String Delete(Model model, @RequestParam(value = "delete", defaultValue = "0") Integer deleteId,
-			@RequestParam(value = "update", defaultValue = "") String account) {
-		if (deleteId != 0) {
+	@PostMapping("/admindelete")
+	public String Delete(Model model, @RequestParam(value = "dl" ,required = false) Integer deleteId) {
+		System.out.println(deleteId);
 			ms.deleteMember(deleteId);
 			List<MemberBean> inf = ms.adminselect();
 			model.addAttribute("memberall", inf);
-			return "Member/adminModify";
-		} else {
-			MemberBean member = ms.select(account);
-			model.addAttribute("member", member);
-			return "Member/adminupdate";
-		}
+			return "redirect:toCity";
 	}
-
 	// 管理員更新
 	@PostMapping("/adminupdate")
 	public String toadminupdate(Model model, @RequestParam(value = "pwd") String mb_Password,

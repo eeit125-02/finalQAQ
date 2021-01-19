@@ -137,10 +137,7 @@ legend {
 		<br>
 			<fieldset id="admin" style="text-align:center">
 				<legend>會員清單</legend>
-<!-- 	<label for="site-search" style="align:left">Search the site:</label> -->
-<!-- 	<input type="search" id="site-search" name="search" aria-label="Search through site content"> -->
-<!-- 	<button id="searchbtn" name="searchbtn">Search</button> -->
-		<form action="<c:url value='/delete' />" method="post">
+		<form action="<c:url value='admindelete' />" method="post" id="admindelete">
 				<table class="table"  width="100%"  id="change">
 					<c:forEach items="${memberall}" var="u" varStatus="loop">
 						<c:if test="${loop.index == 0}">
@@ -154,19 +151,24 @@ legend {
 							</thead>
 						</c:if>
 						<tr>
-							<td>${u.getMb_Account()}</td>
-							<td>${u.getMb_Name()}</td>
-							<td>${u.getMb_Date()}</td>
-							<td><button type="submit" name="delete"
-									class="btn btn-outline-secondary" value="${u.getMb_ID()}">刪除</button>
-									<button type="submit" name="update"
-										class="btn btn-outline-secondary" value="${u.getMb_Account()}">修改</button></td>
-										
+							<td>${u.mb_Account}</td>
+							<td>${u.mb_Name}</td>
+							<td>${u.mb_Date}</td>
+							<td><button type="button" id="delete${u.mb_ID}"
+									class="btn btn-outline-secondary" >刪除</button>								
+						<input type="hidden" id="dl" name="dl" value="${u.mb_ID}"></td>	
 							<td><label class="switch"> <input type="checkbox">
 									<span id="ball" class="slider" check="${u.checkColume}"></span>
 							</label>
 							</td>
 						</tr>
+						<script>
+						$('#delete${u.getMb_ID()}').click(function(){
+							console.log($('#dl').val())
+							alert("確定刪除")
+							$('#admindelete').submit();
+						})
+						</script>
 					</c:forEach>
 				</table>
 			</form>
