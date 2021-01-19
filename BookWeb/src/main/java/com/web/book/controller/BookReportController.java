@@ -46,8 +46,8 @@ public class BookReportController {
 	}
 
 	// 導向心得管理頁面
-	@PostMapping("/EditBookReport")
-	public String memberBookReport(Model model) {
+	@GetMapping("/EditBookReport")
+	public String memberBookReport() {
 		
 		return "BookReport/EditBookReport";
 	}
@@ -157,7 +157,7 @@ public class BookReportController {
 	public Map<String,Object> searchBookReportPage(
 			@RequestParam(value = "searchType", required = true) String searchType,
 			@RequestParam(value = "searchPage", required = true) Integer page) {
-		
+		System.out.println(searchType);
 		return bookReportService.getSearchBookRepotData(searchType, page);
 	}
 	
