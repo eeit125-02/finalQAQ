@@ -18,7 +18,7 @@
 	<!-- 偷偷放購物車QAQ start -->
 	<a href="#" style="float: right; margin-right: 20px"
 		onclick="cartCheck()"><img alt="wtf..."
-		src="${pageContext.request.contextPath}/image/shoppingCart.png"
+		src="${pageContext.request.contextPath}/image/shopping.png"
 		width="30px" height="30px"></a>
 	<!-- 偷偷放購物車QAQ end -->
 

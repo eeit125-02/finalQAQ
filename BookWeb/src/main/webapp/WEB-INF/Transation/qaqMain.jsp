@@ -20,6 +20,7 @@
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
 	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
 	crossorigin="anonymous">
+<link rel="icon" href="${pageContext.request.contextPath}/image/logo1.ico" type="image/x-icon" />
 <style>
 .bd-placeholder-img {
 	font-size: 1. 125rem;
@@ -39,13 +40,13 @@
 		$("#bookWebFooter").load("//localhost:8080/BookWeb/footer");
 	});
 </script>
-<title>二手書圖</title>
+<title>書適圈</title>
 </head>
 <body>
 	<!-- 灌值 -->
-	<%-- 		<form action="<c:url value='/boobplay'/>" method="get"> --%>
-	<!-- 			<button type="submit">不要隨便亂按會爆炸</button> -->
-	<!-- 		</form> -->
+<%-- 			<form action="<c:url value='/boobplay'/>" method="get"> --%>
+<!-- 				<button type="submit">不要隨便亂按會爆炸</button> -->
+<!-- 			</form> -->
 	<!-- 灌值 -->
 	<!-- header -->
 	<header class="container blog-header py-3" id="bookWebheader"></header>

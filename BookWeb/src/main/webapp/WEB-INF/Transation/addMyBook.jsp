@@ -26,6 +26,9 @@
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
 	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
 	crossorigin="anonymous">
+<link rel="icon"
+	href="${pageContext.request.contextPath}/image/logo1.ico"
+	type="image/x-icon" />
 <style>
 .bd-placeholder-img {
 	font-size: 1. 125rem;
@@ -45,7 +48,7 @@
 		$("#bookWebFooter").load("//localhost:8080/BookWeb/footer");
 	});
 </script>
-<title>Insert title here</title>
+<title>書適圈</title>
 </head>
 <body>
 
@@ -54,64 +57,72 @@
 	<!-- header -->
 
 	<div class="container">
-<!-- 		<h1>我又是測試頁 &gt;.&lt;&quot;</h1> -->
+		<!-- 		<h1>我又是測試頁 &gt;.&lt;&quot;</h1> -->
 		<!-- body -->
-		<c:url var="tempUrl"  value="addMyBookB" />
-		<form:form method="POST" modelAttribute="newBook" id="form" action="${tempUrl}" enctype="multipart/form-data">
+		<c:url var="tempUrl" value="addMyBookB" />
+		<form:form method="POST" modelAttribute="newBook" id="form"
+			action="${tempUrl}" enctype="multipart/form-data">
 			<div class="row">
 				<div class="form-group col-sm-12">
 					<form:label path="bk_Name" for="exampleFormControlInput1">書名</form:label>
 					<form:input path="bk_Name" type="text" class="form-control"
-						id="exampleFormControlInput1" placeholder="必填" />
+						id="ControlInput1" placeholder="必填" required="required" />
 				</div>
 			</div>
 			<div class="row">
 				<div class="form-group col-sm-6">
-					<form:label path="bk_Author" for="exampleFormControlInput1">作者</form:label> 
-					<form:input path="bk_Author" type="text"
-						class="form-control" id="exampleFormControlInput1"
-						placeholder="必填" />
+					<form:label path="bk_Author" for="exampleFormControlInput1">作者</form:label>
+					<form:input path="bk_Author" type="text" class="form-control"
+						id="ControlInput2" placeholder="必填" required="required" />
 				</div>
 				<div class="form-group col-sm-6">
-					<form:label path="bk_Publish" for="exampleFormControlInput1">出版社</form:label> <form:input
-					path="bk_Publish" type="text" class="form-control" id="exampleFormControlInput1"
-						placeholder="必填" />
+					<form:label path="bk_Publish" for="exampleFormControlInput1">出版社</form:label>
+					<form:input path="bk_Publish" type="text" class="form-control"
+						id="ControlInput3" placeholder="必填" required="required" />
 				</div>
 			</div>
 			<div class="row">
 				<div class="form-group col-sm-6">
-					<form:label path="bk_Pic" for="exampleFormControlFile1">封面照片</form:label> 
-					<input type="file" class="form-control" id="exampleFormControlFile1" name="file" />
+					<form:label path="bk_Pic" for="exampleFormControlFile1">封面照片</form:label>
+					<input type="file" class="form-control" id="ControlFile4"
+						name="file" />
 				</div>
 				<div class="form-group col-sm-6">
-					<form:label path="bk_Date" for="exampleFormControlFile1">出版日期</form:label> <form:input
-					 path="bk_Date" type="date" class="form-control-file" id="exampleFormControlFile1" />
+					<form:label path="bk_Date" for="exampleFormControlFile1">出版日期</form:label>
+					<form:input path="bk_Date" type="date" class="form-control-file"
+						id="ControlFile5" />
 				</div>
 			</div>
-<!-- 			測試分隔線!!!!!!!!!!!!!!! -->
+			<!-- 			測試分隔線!!!!!!!!!!!!!!! -->
 			<div class="row">
 				<div class="form-group col-sm-6">
-					<label for="exampleFormControlInput1">價錢</label> <input type="number" name="price"
-						class="form-control" id="exampleFormControlInput1"
-						placeholder="必填">
+					<label for="exampleFormControlInput1">價錢</label> <input
+						type="number" name="price" class="form-control" id="ControlInput6"
+						placeholder="必填" required="required">
 				</div>
 				<div class="form-group col-sm-6">
-					<label for="exampleFormControlInput1">數量</label> <input type="number" name="qty"
-						class="form-control" id="exampleFormControlInput1"
-						placeholder="必填">
+					<label for="exampleFormControlInput1">數量</label> <input
+						type="number" name="qty" class="form-control" id="ControlInput7"
+						placeholder="必填" required="required">
 				</div>
 			</div>
-<!-- 				測試結束線!!!!!!!!!!!!!!!! -->
+			<!-- 				測試結束線!!!!!!!!!!!!!!!! -->
 			<div class="row">
 				<div class="form-group col-sm-12">
 					<form:label path="bk_Content" for="exampleFormControlTextarea1">內容簡介 </form:label>
-					<form:textarea path="bk_Content" class="form-control" id="exampleFormControlTextarea1"
-						rows="3"></form:textarea>
+					<form:textarea path="bk_Content" class="form-control"
+						id="ControlInput8" rows="3"></form:textarea>
 				</div>
 			</div>
-			<center>
-				<button class="btn btn-primary" type="submit">確認</button>
-			</center>
+			<div class="row">
+				<div class="form-group col-sm-7"></div>
+				<div class="form-group col-sm-2">
+					<button id="send" type="submit" class="btn btn-outline-success">確認新增</button>
+				</div>
+				<div class="form-group col-sm-2">
+					<button id="finish" type="button" class="btn btn-outline-dark">一鍵完成</button>
+				</div>
+			</div>
 		</form:form>
 	</div>
 
@@ -121,6 +132,18 @@
 	<!-- footer -->
 	<footer class="container py-5" id="bookWebFooter"></footer>
 	<!-- footer -->
+	<script type="text/javascript">
+		$('.btn.btn-outline-dark').click(function() {
+			$('#ControlInput1').val("Spring MVC 動態網站開發實務");
+			$('#ControlInput2').val("王憲春");
+			$('#ControlInput3').val("資策會");
+			var dateControl = document.querySelector('input[type="date"]');
+			dateControl.value = '2020-09-22';
+			$('#ControlInput6').val(100000);
+			$('#ControlInput7').val(33);
+			$('#ControlInput8').val("非常重要的東東");
 
+		})
+	</script>
 </body>
 </html>

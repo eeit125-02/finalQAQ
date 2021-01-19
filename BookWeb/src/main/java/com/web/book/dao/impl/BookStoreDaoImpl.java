@@ -20,14 +20,15 @@ public class BookStoreDaoImpl implements BookStoreDao {
 	@Autowired
 	SessionFactory factory;
 
-	// 商品頁面搜尋，管理員a123456,07
+	// 商品頁面搜尋，管理員a123456,14
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<BookStoreBean> searchBookStore(int page) {
+	public List<BookStoreBean> searchBookStore(int page, int bs_ID) {
 		Session session = factory.getCurrentSession();
-		String hql = "FROM BookStoreBean where bs_ID = 14";
+		String hql = "FROM BookStoreBean where bs_ID = :bs_ID";
 		Query<BookStoreBean> query = session.createQuery(hql);
 		int startPage = (page - 1)* 12;
+		query.setParameter("bs_ID", bs_ID);
 		query.setFirstResult(startPage);
 		query.setMaxResults(12);
 		return query.getResultList();
@@ -35,11 +36,12 @@ public class BookStoreDaoImpl implements BookStoreDao {
 	
 	// 商品頁面搜尋全部頁數，管理員a123456,07 
 	@SuppressWarnings("unchecked")
-	public Integer getAllSearchBookStoreSize() {
+	public Integer getAllSearchBookStoreSize(int bs_ID) {
 		Integer maxPage = 0;
 		Session session = factory.getCurrentSession();
-		String hql = "Select bks_ID FROM BookStoreBean where bs_ID = 14";
+		String hql = "Select bks_ID FROM BookStoreBean where bs_ID = :bs_ID";
 		Query<BookStoreBean> query = session.createQuery(hql);
+		query.setParameter("bs_ID", bs_ID);
 		if (query.getResultList().size()%12 == 0) {
 			maxPage += query.getResultList().size()/12;
 		} else {
@@ -86,11 +88,12 @@ public class BookStoreDaoImpl implements BookStoreDao {
 	// 首頁搜尋書名
 	@Override
 	@SuppressWarnings("unchecked")
-	public List<BookStoreBean> searchStoreBookName(String bk_Name, Integer page) {
+	public List<BookStoreBean> searchStoreBookName(String bk_Name, Integer page, Integer bs_ID) {
 		Session session = factory.getCurrentSession();
-		String hql = "From BookStoreBean a Where a.book.bk_Name like :bkname";
+		String hql = "From BookStoreBean a Where a.book.bk_Name like :bkname and bs_ID = :bs_ID";
 		Query<BookStoreBean> query = session.createQuery(hql);
 		int startPage = (page - 1)* 12;
+		query.setParameter("bs_ID", bs_ID);
 		query.setParameter("bkname", "%" + bk_Name + "%");
 		query.setFirstResult(startPage);
 		query.setMaxResults(12);
@@ -99,12 +102,13 @@ public class BookStoreDaoImpl implements BookStoreDao {
 	
 	// 首頁搜尋書名全部頁數
 	@SuppressWarnings("unchecked")
-	public Integer getSearchStoreBookNameSize(String bk_Name) {
+	public Integer getSearchStoreBookNameSize(String bk_Name, Integer bs_ID) {
 		Integer maxPage = 0;
 		Session session = factory.getCurrentSession();
-		String hql = "Select bks_ID From BookStoreBean a Where a.book.bk_Name like :bkname";
+		String hql = "Select bks_ID From BookStoreBean a Where a.book.bk_Name like :bkname and bs_ID = :bs_ID";
 		Query<BookStoreBean> query = session.createQuery(hql);
 		query.setParameter("bkname", "%" + bk_Name + "%");
+		query.setParameter("bs_ID", bs_ID);
 		if (query.getResultList().size()%12 == 0) {
 			maxPage += query.getResultList().size()/12;
 		} else {
@@ -125,7 +129,7 @@ public class BookStoreDaoImpl implements BookStoreDao {
 
 	// 從書庫搜尋出來的結果選擇一筆資料新增
 	@Override
-	public void addBookName(Integer bs_Num, Integer bs_Price, Integer bk_ID, Integer bs_ID) {
+	public void insertSearchBookName(Integer bs_Num, Integer bs_Price, Integer bk_ID, Integer bs_ID) {
 		Session session = factory.getCurrentSession();
 		MemberBean member = session.load(MemberBean.class, bs_ID);
 		BookBean book = session.load(BookBean.class, bk_ID);
@@ -158,19 +162,21 @@ public class BookStoreDaoImpl implements BookStoreDao {
 		// 6242 /80~84、11 /13 /a123456
 		Session session = factory.getCurrentSession();
 		Integer qaqQty = 0;
-//		Integer qaqPrice = 0;
-		MemberBean member = session.load(MemberBean.class, 14);
+		Integer qaqPrice = 0;
+		MemberBean member = session.load(MemberBean.class, 24);
+		// 24 15 9
 		// 管理員灌值 start
-			for (int i = 1; i < 6243; i++) {
-				BookBean book = session.load(BookBean.class, i);
-				qaqQty = (int)(Math.random()*(20))+1;
-				if (book.getBk_Price()==null) {
-					book.setBk_Price(100);
-				}
-				Date date = new Date(120, 8, 22);
-				BookStoreBean bookStoreBean = new BookStoreBean(null, qaqQty, book.getBk_Price(), book, member, date);
-				session.save(bookStoreBean);
-			}
+//		MemberBean member = session.load(MemberBean.class, 14);
+//			for (int i = 1; i < 6243; i++) {
+//				BookBean book = session.load(BookBean.class, i);
+//				qaqQty = (int)(Math.random()*(20))+1;
+//				if (book.getBk_Price()==null) {
+//					book.setBk_Price(100);
+//				}
+//				Date date = new Date(120, 8, 22);
+//				BookStoreBean bookStoreBean = new BookStoreBean(null, qaqQty, book.getBk_Price(), book, member, date);
+//				session.save(bookStoreBean);
+//			}
 		// 管理員灌值 end
 
 		// 製造不同庫存不同價錢區間 start
@@ -195,6 +201,15 @@ public class BookStoreDaoImpl implements BookStoreDao {
 //			session.save(bookStoreBean);
 //		}
 		// 製造不同庫存不同價錢區間 end
+		Date date = new Date();
+		for (int i = 0; i < 50; i++) {
+			BookBean book = session.load(BookBean.class, i);
+			qaqQty = (int) (Math.random() * (10)) + 1;
+			qaqPrice = (int) (Math.random() * ((book.getBk_Price() / 10) - 5)) + 5;
+			BookStoreBean bookStoreBean = new BookStoreBean(null, qaqQty, qaqPrice * 10, book, member, date);
+			session.save(bookStoreBean);
+		}
+			
 
 	}
 

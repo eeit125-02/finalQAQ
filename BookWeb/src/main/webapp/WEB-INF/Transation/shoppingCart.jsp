@@ -21,6 +21,7 @@
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
 	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
 	crossorigin="anonymous">
+<link rel="icon" href="${pageContext.request.contextPath}/image/logo1.ico" type="image/x-icon" />
 <script src="https://use.fontawesome.com/c560c025cf.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <style>
@@ -94,7 +95,7 @@
 
 
 
-<title>Insert title here</title>
+<title>書適圈</title>
 </head>
 <body>
 
@@ -107,16 +108,16 @@
 		<div class="card shopping-cart">
 			<div class="card-header bg-dark text-light">
 				<i class="fa fa-shopping-cart" aria-hidden="true"></i>
-				${loginUser.mb_Name} 的 購 物 車 
-<%-- 				<a href='<c:url value="/qaqTest" />' --%>
-<!-- 					class="btn btn-outline-info btn-sm pull-right"> 繼 續 購 物 </a> -->
+				${loginUser.mb_Name} 的 購 物 車
+				<%-- 				<a href='<c:url value="/qaqTest" />' --%>
+				<!-- 					class="btn btn-outline-info btn-sm pull-right"> 繼 續 購 物 </a> -->
 				<div class="clearfix"></div>
 			</div>
 			<div class="card-body">
 				<!-- PRODUCT -->
 				<c:forEach items="${listCart}" var="v">
-<%-- 							<form action="<c:url value='/deleteCart'/>" method="post"> --%>
-<%-- 				 action='<c:url value="/deleteCart"/>'  --%>
+					<%-- 							<form action="<c:url value='/deleteCart'/>" method="post"> --%>
+					<%-- 				 action='<c:url value="/deleteCart"/>'  --%>
 					<div class="row">
 						<div class="col-12 col-sm-12 col-md-2 text-center">
 							<img class="img-responsive" src="${v.book.bk_Pic}" alt="prewiew"
@@ -130,7 +131,7 @@
 								<small>${v.book.bk_Name}</small>
 							</h4>
 						</div>
-<!-- 						測試 -->
+						<!-- 						測試 -->
 						<div class="col-12 text-sm-center col-sm-12 text-md-left col-md-3">
 							<h4 class="product-name">
 								<strong> 賣家 </strong>
@@ -139,32 +140,34 @@
 								<small>${v.memberSel.mb_Account}</small>
 							</h4>
 						</div>
-<!-- 						測試 -->
+						<!-- 						測試 -->
 						<div
 							class="col-12 col-sm-12 text-sm-center col-md-4 text-md-right row">
 							<div class="col-3 col-sm-3 col-md-6 text-md-right"
 								style="padding-top: 5px">
 								<h6>
-									<strong id="carPrice">${v.cart_Price} <span class="text-muted">x</span></strong>
+									<strong id="carPrice">${v.cart_Price} <span
+										class="text-muted">x</span></strong>
 								</h6>
 							</div>
 							<div class="col-4 col-sm-4 col-md-4">
 								<div class="quantity">
-									<input type="button" value="+" class="plus"> 
-									<input id="carNum" type="number" step="1" max="99" min="1" value="${v.cart_Num}"
-										title="Qty" class="qty" size="4"> 
+									<input type="button" value="+" class="plus"> <input
+										id="carNum" type="number" step="1" max="99" min="1"
+										value="${v.cart_Num}" title="Qty" class="qty" size="4">
 									<input type="button" value="-" class="minus">
 								</div>
-<!-- 								測試區 -->
-<input type="hidden" class="result" value="${v.cart_Num*v.cart_Price}">
-<!-- 								測試區 -->
+								<!-- 								測試區 -->
+								<input type="hidden" class="result"
+									value="${v.cart_Num*v.cart_Price}">
+								<!-- 								測試區 -->
 							</div>
 							<div class="col-2 col-sm-2 col-md-2 text-right">
 
-<!-- 								<button type="submit" class="btn btn-outline-danger btn-xs"  -->
-								<button type="button" class="btn btn-outline-danger btn-xs" 
-								id="qaq" name="cart_ID" value="${v.cart_ID}">
-<%-- 								id="qaq" name="cart_ID" value="${v.cart_ID}" onclick="confirmDelete(${v.cart_ID})"> --%>
+								<!-- 								<button type="submit" class="btn btn-outline-danger btn-xs"  -->
+								<button type="button" class="btn btn-outline-danger btn-xs"
+									id="qaq" name="cart_ID" value="${v.cart_ID}">
+									<%-- 								id="qaq" name="cart_ID" value="${v.cart_ID}" onclick="confirmDelete(${v.cart_ID})"> --%>
 									<i class="fa fa-trash" aria-hidden="true"></i>
 								</button>
 
@@ -172,7 +175,7 @@
 						</div>
 					</div>
 					<hr>
-<!-- 							</form> -->
+					<!-- 							</form> -->
 				</c:forEach>
 				<!-- END PRODUCT -->
 				<div class="pull-right">
@@ -212,7 +215,7 @@
 		aria-labelledby="exampleModalLabel" aria-hidden="true">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
-				<form action="<c:url value='checkout'/>" method="post">
+<form action="<c:url value='checkout'/>" method="post">
 					<div class="modal-header">
 						<h5 class="modal-title" id="exampleModalLabel">請輸入您的資訊</h5>
 						<button type="button" class="close" data-dismiss="modal"
@@ -255,7 +258,7 @@
 	<!-- footer -->
 	<footer class="container py-5" id="bookWebFooter"></footer>
 	<!-- footer -->
-<script>
+	<script>
 	$(document).ready(function() {
 		$("#bookWebheader").load("//localhost:8080/BookWeb/header");
 		$("#bookWebFooter").load("//localhost:8080/BookWeb/footer");
@@ -297,29 +300,29 @@
 		$('#total').html(total);
 	}
 	
-	$('.btn.btn-outline-danger.btn-xs').click(function() {
+// 	$('.btn.btn-outline-danger.btn-xs').click(function() {
 		
-		Swal.fire({
-			  title: 'Are you sure?',
-			  text: "You won't be able to revert this!",
-			  icon: 'warning',
-			  showCancelButton: true,
-			  confirmButtonColor: '#3085d6',
-			  cancelButtonColor: '#d33',
-			  confirmButtonText: 'Yes, delete it!'
-		}).then((result) => {
-			  if (result.isConfirmed) {
-			    Swal.fire(
-			      'Deleted!',
-			      'Your file has been deleted.',
-			      'success'
-				).then((result) => {
+// 		Swal.fire({
+// 			  title: 'Are you sure?',
+// 			  text: "You won't be able to revert this!",
+// 			  icon: 'warning',
+// 			  showCancelButton: true,
+// 			  confirmButtonColor: '#3085d6',
+// 			  cancelButtonColor: '#d33',
+// 			  confirmButtonText: 'Yes, delete it!'
+// 		}).then((result) => {
+// 			  if (result.isConfirmed) {
+// 			    Swal.fire(
+// 			      'Deleted!',
+// 			      'Your file has been deleted.',
+// 			      'success'
+// 				).then((result) => {
 			    	
-			    })
-			  }
-		})
-	}
-	)
+// 			    })
+// 			  }
+// 		})
+// 	}
+// 	)
 	
 	
 	
