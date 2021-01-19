@@ -1,5 +1,6 @@
 package com.web.book.controller;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -9,6 +10,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -660,4 +662,25 @@ public class SearchBookController {
 		model.addAttribute("allbookfive", allbookfive);
 		return "SearchBook/Search";
 	}
+	
+	
+//	@GetMapping("/showPDF")
+//	public ResponseEntity<byte[]> pdfDownload(
+//	        HttpServletRequest httpServletRequest
+//	) throws IOException
+//	{
+//	    String path = XXX省略。。。
+//	    File file = new File(path);
+//	    HttpHeaders httpHeaders = new HttpHeaders();
+//	    String fileName = "收藏清單";
+//	    httpHeaders.setContentDispositionFormData("attachment",java.net.URLEncoder.encode(fileName,"UTF-8"));
+//	    httpHeaders.setContentType(MediaType.parseMediaType("application/pdf"));
+//	    return new ResponseEntity<byte[]>(FileUtils.readFileToByteArray(file),
+//	            httpHeaders,
+//	            HttpStatus.CREATED);
+//	}
+	
+	
+	
+	
 }

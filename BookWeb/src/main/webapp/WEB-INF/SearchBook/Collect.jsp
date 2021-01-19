@@ -113,7 +113,7 @@ margin-right:10px;
 									<button class="btn btn btn-link"
 									type="button" onclick="loadBookCollectList();">顯示全部收藏</button>
 								<input class="form-control mr-sm-2" type="search" id="keyword"
-									placeholder="書名or標籤關鍵字" name="keyword">
+									placeholder="書名or標籤關鍵字" name="keyword" required="required">
 								<button class="btn btn-outline-primary my-2 my-sm-0"
 									type="button" onclick="searchword();">查詢</button>
 							</form>
@@ -207,11 +207,17 @@ margin-right:10px;
 					dataType : "json",
 					contentType : "application/json;charset=utf-8",
 					error : function() {
-						swal("出現錯誤", "請呼叫管理員～","error")
+						swal("不可為空", "請輸入關鍵字～","error")
 					},
 					success : function(data) {
 						$("#bookcollectlist").empty();
-						var insertData = "<div>";
+						
+						if(data.length==0){
+							var insertZero = "<br><img alt='查無資料' src='${pageContext.request.contextPath}/image/no_data.png' width='125px' style='position:relative;left:100px;'>" 
+							+"<h4 style='display: inline-block;'>　　　　　查無資料</h4></div>"
+							$("#bookcollectlist").append(insertZero);
+						}else{
+						var insertData = "<div>";		
 						for (let i = 0; i < data.length; i++) {
 // 							insertData += "<div class=\"row\">"
 							insertData = "<div class=\"row\">"
@@ -256,6 +262,7 @@ margin-right:10px;
 					$("#bookcollectlist").append(insertData);	
 					loadTagList(data[i].bc_ID);
 					}
+						}
 // 					insertData += "</div>"
 // 					$("#bookcollectlist").html(insertData);	
 					}
