@@ -75,6 +75,45 @@ div {
 		font-size: 3.5rem;
 	}
 }
+.dropbtn {
+  background-color: #68b0ab;
+  color: white;
+  padding: 14px;
+  font-size: 14px;
+  border: none;
+  cursor: pointer;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {background-color: #f1f1f1}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown:hover .dropbtn {
+  background-color: #3e8e41;
+}
 </style>
 </head>
 <body>
@@ -82,18 +121,16 @@ div {
 	<header class="container blog-header py-3" id="bookWebheader"></header>
 	<!-- header -->
 	<div class="container media" >
-	<fieldset id="city" >
-		<legend>會員中心</legend>
-		<div>
-				<div><button  id="admin1" name="admin" class="btn btn-outline-secondary">會員資訊</button>
-				</div>
-				<div><button  id="inf" name="mb_inf" class="btn btn-outline-secondary">會員資訊</button>
-				</div>
-				<div><button  id="third" name="third" class="btn btn-outline-secondary">會員資訊</button>
-				</div>
-				<button  id="Modify" name="Modify" class="btn btn-outline-secondary">會員修改</button>
-				<div>
+	<div id="city" >
+	<div class="dropdown">
+		<button class="dropbtn">會員中心</button>
+				<div class="dropdown-content">
+				<button  id="admin1" name="admin" class="btn btn-outline-secondary">會員資訊</button>				
+				<button  id="inf" name="mb_inf" class="btn btn-outline-secondary">會員資訊</button>				
+				<button  id="third" name="third" class="btn btn-outline-secondary">會員資訊</button>				
+				<button  id="Modify" name="Modify" class="btn btn-outline-secondary">會員修改</button>				
 				<button  id="pwdModify" name="pwdModify" class="btn btn-outline-secondary">密碼修改</button>
+				</div>
 				</div>
 				<form name=a3 class=a3 action="<c:url value='/collectlist' />" method="get">
 				<div>
@@ -113,14 +150,14 @@ div {
 				<div>
 				<button type="button" id="editBookReport" name="getjoinrecords" class="btn btn-outline-secondary">讀書心得</button>
 				</div>
-				</div>
-	</fieldset>
+		
+	</div>
 	<div id="change123" style="width:1500px;margin-left:10px ">
 									<fieldset id="mb_inf">
 									<legend>會員資料</legend>
 									<form>
 									<div>
-									<img src="${loginUser.mb_pic}" style="width: 200px; height: 200px; text-align:center; border-radius: 50%;"/>
+									<img src="${login.mb_pic}" style="width: 200px; height: 200px; text-align:center; border-radius: 50%;"/>
 									</div>
 									<br>
 									<table class="table" >
@@ -129,8 +166,8 @@ div {
 									<th scope="col" >姓名</th>
 									</tr>
 									<tr class="table-light">
-									<td>${loginUser.mb_Account}</td>
-									<td>${loginUser.mb_Name}</td>
+									<td>${login.mb_Account}</td>
+									<td>${login.mb_Name}</td>
 									</tr>
 
 								<tr class="tr2">
@@ -138,36 +175,36 @@ div {
 									<th scope="col">電話</th>
 								</tr>
 								<tr class="table-light">
-									<td>${loginUser.mb_Sex}</td>
-									<td>${loginUser.mb_Tel}</td>
+									<td>${login.mb_Sex}</td>
+									<td>${login.mb_Tel}</td>
 								</tr>
 
 								<tr class="tr2">
 									<th colspan="2">生日</th>
 								</tr>
 								<tr class="table-light">
-									<td colspan="2">${loginUser.mb_Birthday}</td>
+									<td colspan="2">${login.mb_Birthday}</td>
 								</tr>
 
 								<tr class="tr2">
 					      		<th colspan="2">Email</th>
 								</tr>
 								<tr class="table-light">
-									<td colspan="2">${loginUser.mb_Mail}</td>
+									<td colspan="2">${login.mb_Mail}</td>
 								</tr>
 
 								<tr class="tr2">
 									<th colspan="2">地址</th>
 								</tr>
 								<tr  class="table-light">
-									<td colspan="2">${loginUser.mb_Address}</td>
+									<td colspan="2">${login.mb_Address}</td>
 								</tr>
 
 								<tr class="tr2">
 									<th colspan="2">喜好類型</th>
 									</tr>
 								<tr  class="table-light">
-									<td colspan="2">${loginUser.mb_type}</td>
+									<td colspan="2">${login.mb_type}</td>
 								</tr>
 
 							</table>

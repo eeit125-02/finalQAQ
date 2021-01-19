@@ -115,6 +115,8 @@ public class ActJoinController {
 		ajb.setAct(act);
 		System.out.println(ajb);
 		actjoinService.createActJoin(ajb);
+		JavaMail jm = new JavaMail();
+		jm.SendAct(ajb.getMember().getMb_Mail(), act.getact_Name(), act.getact_Loc(),act.getact_Date(), act.getact_Time(),act.getact_Intro(),act.getact_Image(),loginUser.getMb_Name());
 		System.out.println("---------");
 		return "redirect:/showJoins";
 	}
