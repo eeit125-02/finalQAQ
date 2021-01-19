@@ -63,11 +63,16 @@ public interface SearchBookDAO {
 	//取得全部書籍
 	List<BookBean> searchAllBook();
 	
-	//新增收藏tag1
-	BookCollectBean setbctag(int bc_ID, String tag1);
+	//新增收藏tag
+	BookCollectBean setbctag(int bc_ID, String tag1, String tag2, String tag3);
+	//刪除收藏tag
+	BookCollectBean deletebctag(int bc_ID, String tag1, String tag2, String tag3);
 	
 	//取得收藏tag
 	BookCollectBean getbctag(int bc_ID);
+	
+	//搜尋收藏關鍵字
+	List<BookCollectBean> getKeyCollect(int MB_ID, String key);
 	
 	
 

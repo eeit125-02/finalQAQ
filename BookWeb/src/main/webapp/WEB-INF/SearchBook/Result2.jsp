@@ -27,6 +27,8 @@
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/css/bottle.css">
+<link rel="icon" href="${pageContext.request.contextPath}/image/logo1.ico" type="image/x-icon" />
+	
 <style>
 .bd-placeholder-img {
 	font-size: 1. 125rem;
@@ -61,7 +63,7 @@ white-space:pre-wrap;
 	});	
 
 </script>
-<title>Insert title here</title>
+<title>書適圈</title>
 </head>
 <body>
 
