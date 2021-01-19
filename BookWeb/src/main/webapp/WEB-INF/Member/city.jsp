@@ -76,11 +76,7 @@ div {
 	}
 }
 .dropbtn {
-  background-color: #68b0ab;
-  color: white;
-  padding: 14px;
-  font-size: 14px;
-  border: none;
+ 
   cursor: pointer;
 }
 
@@ -114,6 +110,7 @@ div {
 .dropdown:hover .dropbtn {
   background-color: #3e8e41;
 }
+
 </style>
 </head>
 <body>
@@ -122,8 +119,9 @@ div {
 	<!-- header -->
 	<div class="container media" >
 	<div id="city" >
-	<div class="dropdown">
-		<button class="dropbtn">會員中心</button>
+	
+	<div class="dropdown">	
+		<button class="btn btn-outline-secondary dropbtn" >會員中心</button>
 				<div class="dropdown-content">
 				<button  id="admin1" name="admin" class="btn btn-outline-secondary">會員資訊</button>				
 				<button  id="inf" name="mb_inf" class="btn btn-outline-secondary">會員資訊</button>				
