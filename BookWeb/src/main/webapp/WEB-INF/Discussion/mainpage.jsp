@@ -84,11 +84,10 @@ response.setDateHeader("Expires", 0);
 	<header class="container blog-header py-3" id="bookWebheader"></header>
 	<!-- header -->
 
-	<div class="container-fluid" style="margin: 20px 0px">
+	<div class="container">
 		<div class="row">
-			<div class="col-2"></div>
 			<!-- sidebar area -->
-			<div class="col-1 text-center">
+			<div class="col-2 text-center">
 
 				<!-- ====================================================sidebar==================================================== -->
 				<h2>書適論壇</h2>
@@ -127,7 +126,7 @@ response.setDateHeader("Expires", 0);
 			</div>
 
 			<!-- content area -->
-			<div class="col-7" style='text-align: center;'>
+			<div class="col-10" style='text-align: center;'>
 				<!-- content connect to sidebar -->
 				<div class="tab-content" id="nav-tabContent">
 

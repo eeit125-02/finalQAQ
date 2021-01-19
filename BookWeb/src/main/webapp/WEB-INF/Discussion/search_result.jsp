@@ -58,16 +58,15 @@ response.setDateHeader("Expires", 0);
 	<!-- header -->
 	<header class="container blog-header py-3" id="bookWebheader"></header>
 	<!-- header -->
-	<div class="container-fluid" style="margin: 20px 0px">
+	<div class="container">
 		<div class="row">
-			<div class="col-2"></div>
 			<!-- sidebar area -->
-			<div class="col-1 text-center">
+			<div class="col-2 text-center">
 				<h2>書適論壇</h2>
 			</div>
 
 			<!-- content area -->
-			<div class="col-7" style='text-align: center;'>
+			<div class="col-10" style='text-align: center;'>
 				<nav class="navbar navbar-light bg-light justify-content-between">
 					<a class="navbar-brand">搜尋貼文關鍵字</a>
 					<form class="form-inline" action='search_keyword' method="post">
