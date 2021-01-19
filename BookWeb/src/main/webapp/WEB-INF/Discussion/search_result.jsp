@@ -44,7 +44,8 @@
 		$("#bookWebFooter").load("<c:url value='/footer'/>");
 	});
 </script>
-<title>書適論壇</title>
+<link rel="icon" href="${pageContext.request.contextPath}/image/logo1.ico" type="image/x-icon" />
+<title>書適圈</title>
 </head>
 
 <body>
