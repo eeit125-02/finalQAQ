@@ -38,7 +38,7 @@
 		$("#bookWebFooter").load("//localhost:8080/BookWeb/footer");
 	});
 </script>
-<title>Insert title here</title>
+<title>我的賣場</title>
 </head>
 <body>
 

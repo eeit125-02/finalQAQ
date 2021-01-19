@@ -8,6 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
 	integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
@@ -42,7 +43,7 @@
 		$("#bookWebFooter").load("//localhost:8080/BookWeb/footer");
 	});
 </script>
-<title>Insert title here</title>
+<title>上架書籍</title>
 </head>
 <body>
 	<!-- header -->
@@ -60,10 +61,14 @@
 				<div class="input-group col-lg-5">
 					<input type="text" class="form-control" name="searchbk" id="bkName"
 						placeholder="請輸入書名"> <span class="input-group-btn">
-						<button type="button" class="btn btn-outline-secondary" onclick="searchBookName()">
+						<button type="button" class="btn btn-outline-secondary" onclick="searchBookName()"
+						data-container="body" data-toggle="popover" data-placement="bottom" data-content="不可以空白和含有特殊符號">
 							<img alt="圖勒?" src='<c:url value="/image/qaqsearch.png" />'
 								width="20px" height="20px">
 						</button>
+<!-- 						測試用 -->
+<!-- 						<input type="button" style="z-index: -1" class="test"/> -->
+<!-- 						測試用 -->						
 					</span>
 				</div>
 			</div>
@@ -79,7 +84,27 @@
 	<!-- footer -->
 	<script type="text/javascript">
 	
+// 	$('.btn.btn-outline-secondary').popover({let bkName = document.getElementById("bkName");
+// 	let bkNameVal = bkName.value;
+// 	let re2 = /[!@#$%^&*]/gi;
+// 		if( bkNameVal.trim().length == 0 || re2.test(bkNameVal) ){
+// 			trigger: 'focus'		
+// 		}
+		  
+// 	})
 	function searchBookName() {
+		let bkName = document.getElementById("bkName");
+		let bkNameVal = bkName.value;
+		let re2 = /[!@#$%^&*]/gi;
+		if( bkNameVal.trim().length == 0 || re2.test(bkNameVal) ){
+			Swal.fire({
+				  position: 'top-center',
+				  icon: 'warning',
+				  title: '不可輸入空白及特殊符號',
+				  showConfirmButton: false,
+				  timer: 1000
+				})
+		}else{
 		$.ajax({
 			async : false,
 			type : 'GET',
@@ -118,6 +143,7 @@
 			}
 				
 		})
+	}
 	}
 	
 	</script>

@@ -32,7 +32,7 @@
 	}
 }
 </style>
-<title>Insert title here</title>
+<title>書本詳細</title>
 </head>
 <body>
 
@@ -156,7 +156,8 @@ $('#buyNum').change(function() {
 	
 		function goToCart(id) {
 			if (typeof ($.cookie('Member_ID')) != "undefined") {
-				document.forms[0].action="<c:url value='/dctyBuy?bks_ID=" + id + "' />" ;
+				var buyNum = $('#buyNum').val();
+				document.forms[0].action="<c:url value='/dctyBuy?bks_ID=" + id + "&cart_Num="+buyNum+"' />" ;
 				document.forms[0].method="post";
 				document.forms[0].submit();
 			} else {

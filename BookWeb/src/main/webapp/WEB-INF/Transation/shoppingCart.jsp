@@ -107,7 +107,7 @@
 		<div class="card shopping-cart">
 			<div class="card-header bg-dark text-light">
 				<i class="fa fa-shopping-cart" aria-hidden="true"></i>
-				${loginUser.mb_Account} 的 購 物 車 
+				${loginUser.mb_Name} 的 購 物 車 
 <%-- 				<a href='<c:url value="/qaqTest" />' --%>
 <!-- 					class="btn btn-outline-info btn-sm pull-right"> 繼 續 購 物 </a> -->
 				<div class="clearfix"></div>
@@ -115,14 +115,14 @@
 			<div class="card-body">
 				<!-- PRODUCT -->
 				<c:forEach items="${listCart}" var="v">
-							<form action="<c:url value='/deleteCart'/>" method="post">
+<%-- 							<form action="<c:url value='/deleteCart'/>" method="post"> --%>
 <%-- 				 action='<c:url value="/deleteCart"/>'  --%>
 					<div class="row">
 						<div class="col-12 col-sm-12 col-md-2 text-center">
 							<img class="img-responsive" src="${v.book.bk_Pic}" alt="prewiew"
 								width="120" height="80">
 						</div>
-						<div class="col-12 text-sm-center col-sm-12 text-md-left col-md-6">
+						<div class="col-12 text-sm-center col-sm-12 text-md-left col-md-3">
 							<h4 class="product-name">
 								<strong> 書名 </strong>
 							</h4>
@@ -130,6 +130,16 @@
 								<small>${v.book.bk_Name}</small>
 							</h4>
 						</div>
+<!-- 						測試 -->
+						<div class="col-12 text-sm-center col-sm-12 text-md-left col-md-3">
+							<h4 class="product-name">
+								<strong> 賣家 </strong>
+							</h4>
+							<h4>
+								<small>${v.memberSel.mb_Account}</small>
+							</h4>
+						</div>
+<!-- 						測試 -->
 						<div
 							class="col-12 col-sm-12 text-sm-center col-md-4 text-md-right row">
 							<div class="col-3 col-sm-3 col-md-6 text-md-right"
@@ -151,7 +161,10 @@
 							</div>
 							<div class="col-2 col-sm-2 col-md-2 text-right">
 
-								<button type="submit" class="btn btn-outline-danger btn-xs" id="qaq" name="cart_ID" value="${v.cart_ID}">
+<!-- 								<button type="submit" class="btn btn-outline-danger btn-xs"  -->
+								<button type="button" class="btn btn-outline-danger btn-xs" 
+								id="qaq" name="cart_ID" value="${v.cart_ID}">
+<%-- 								id="qaq" name="cart_ID" value="${v.cart_ID}" onclick="confirmDelete(${v.cart_ID})"> --%>
 									<i class="fa fa-trash" aria-hidden="true"></i>
 								</button>
 
@@ -159,7 +172,7 @@
 						</div>
 					</div>
 					<hr>
-							</form>
+<!-- 							</form> -->
 				</c:forEach>
 				<!-- END PRODUCT -->
 				<div class="pull-right">
@@ -284,27 +297,29 @@
 		$('#total').html(total);
 	}
 	
-// 	$('.btn.btn-outline-danger.btn-xs').click(function() {
+	$('.btn.btn-outline-danger.btn-xs').click(function() {
 		
-// 		Swal.fire({
-// 			  title: 'Are you sure?',
-// 			  text: "You won't be able to revert this!",
-// 			  icon: 'warning',
-// 			  showCancelButton: true,
-// 			  confirmButtonColor: '#3085d6',
-// 			  cancelButtonColor: '#d33',
-// 			  confirmButtonText: 'Yes, delete it!'
-// 		}).then((result) => {
-// 			  if (result.isConfirmed) {
-// 			    Swal.fire(
-// 			      'Deleted!',
-// 			      'Your file has been deleted.',
-// 			      'success'
-// 				)
-// 			  }
-// 		})
-// 	}
-// 	)
+		Swal.fire({
+			  title: 'Are you sure?',
+			  text: "You won't be able to revert this!",
+			  icon: 'warning',
+			  showCancelButton: true,
+			  confirmButtonColor: '#3085d6',
+			  cancelButtonColor: '#d33',
+			  confirmButtonText: 'Yes, delete it!'
+		}).then((result) => {
+			  if (result.isConfirmed) {
+			    Swal.fire(
+			      'Deleted!',
+			      'Your file has been deleted.',
+			      'success'
+				).then((result) => {
+			    	
+			    })
+			  }
+		})
+	}
+	)
 	
 	
 	

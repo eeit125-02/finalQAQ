@@ -22,11 +22,12 @@ public class ShoppingCartDaoImpl implements ShoppingCartDao {
 	
 	//新增一筆購物車資料
 	@Override
-	public void addToCart(Integer cart_Num, Integer cart_Price, Integer bk_ID, Integer bb_ID) {
+	public void addToCart(Integer cart_Num, Integer cart_Price, Integer bk_ID, Integer bb_ID, Integer bs_ID) {
 		Session session = factory.getCurrentSession();
 		MemberBean member = session.load(MemberBean.class, bb_ID);
+		MemberBean memberSel = session.load(MemberBean.class, bs_ID);
 		BookBean book = session.load(BookBean.class, bk_ID);
-		ShoppingCartBean shoppingCart = new ShoppingCartBean(null, cart_Num, cart_Price, book, member);
+		ShoppingCartBean shoppingCart = new ShoppingCartBean(null, cart_Num, cart_Price, book, member, memberSel);
 		session.save(shoppingCart);
 	}
 	//刪除一筆購物車資料

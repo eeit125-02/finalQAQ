@@ -38,7 +38,7 @@
 		$("#bookWebFooter").load("//localhost:8080/BookWeb/footer");
 	});
 </script>
-<title>Insert title here</title>
+<title>書本比價</title>
 </head>
 <body>
 
@@ -78,7 +78,7 @@
 		<c:forEach items="${bookPrices}" var="v">
 			<div class="row">
 				<div class="col-lg-3">
-					<c:out value="${v.mb_Account}" />
+					<c:out value="${v.mb_Name}" />
 				</div>
 				<div class="col-lg-2">
 					<c:out value="${v.bs_Price}" />

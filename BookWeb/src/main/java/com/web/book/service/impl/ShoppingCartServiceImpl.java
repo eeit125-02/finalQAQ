@@ -18,8 +18,8 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 	ShoppingCartDao dao;
 
 	@Override
-	public void addToCart(Integer cart_Num, Integer cart_Price, Integer bk_ID, Integer bb_ID) {
-		dao.addToCart(cart_Num, cart_Price, bk_ID, bb_ID);
+	public void addToCart(Integer cart_Num, Integer cart_Price, Integer bk_ID, Integer bb_ID, Integer bs_ID) {
+		dao.addToCart(cart_Num, cart_Price, bk_ID, bb_ID, bs_ID);
 	}
 
 	@Override

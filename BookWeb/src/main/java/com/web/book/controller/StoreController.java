@@ -124,6 +124,7 @@ public class StoreController {
 			data.put("mb_Account", bookStoreBean.getMember().getMb_Account());
 			data.put("bs_Price", bookStoreBean.getBs_Price());
 			data.put("bs_Num", bookStoreBean.getBs_Num());
+			data.put("mb_Name", bookStoreBean.getMember().getMb_Name());
 			data.put("bs_Date", new SimpleDateFormat("yyyy-MM-dd").format(bookStoreBean.getBs_Date()));
 			bookPrices.add(data);
 		}

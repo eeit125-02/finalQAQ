@@ -43,7 +43,6 @@ public class ShoppingCartController {
 
 	}
 	
-	@SuppressWarnings("unused")
 	private static void initial(){
 		all = new AllInOne("");
 	}
@@ -59,6 +58,7 @@ public class ShoppingCartController {
 //		{ bk : bk_ID1, bp : bs_Price, bn : bs_Num, bks : $('bks_ID').val() }
 		Integer amount = (bs - qty);
 		Boolean qaq = true;
+		bsService.getOneBookStore(bks);
 		Map<String, Object> map = new HashMap<>();
 		map.put("qty", amount);
 		List<ShoppingCartBean> list = scService.searchCart(loginUser.getMb_ID());
@@ -74,7 +74,7 @@ public class ShoppingCartController {
 		}
 //		 如果購物車沒有這筆資料則新增
 		if (qaq) {
-			scService.addToCart(qty, bp, bk, loginUser.getMb_ID());
+			scService.addToCart(qty, bp, bk, loginUser.getMb_ID(), bsService.getOneBookStore(bks).getMember().getMb_ID());
 			scService.updateBookStore(bks, amount);
 		}
 		return map;
@@ -83,8 +83,11 @@ public class ShoppingCartController {
 	//直接購買
 	@PostMapping("/dctyBuy")
 	public String cartDetail(Model model,
-			@RequestParam(value = "bks_ID", required = false) Integer bks_ID
+			@RequestParam(value = "bks_ID", required = false) Integer bks_ID,
+			@RequestParam(value = "cart_Num", required = false) Integer cart_Num		
 			) {
+//		System.out.println("----------------------------------------------");
+//		System.out.println(cart_Num);
 		//先搜尋購物車裡的內容
 		Boolean qaqCart = true;
 		int total = 0;
@@ -92,22 +95,22 @@ public class ShoppingCartController {
 		List<ShoppingCartBean> list = scService.searchCart(loginUser.getMb_ID());
 		for (ShoppingCartBean shoppingCartBean : list) {
 			if (bookStoreBean.getBook().getBk_ID() == shoppingCartBean.getBook().getBk_ID()) {
-				scService.updateCartAll(shoppingCartBean.getCart_Num() + 1, bookStoreBean.getBook().getBk_ID());
-				scService.updateBookStore(bks_ID, bookStoreBean.getBs_Num() - 1);
+				scService.updateCartAll(shoppingCartBean.getCart_Num() + cart_Num, bookStoreBean.getBook().getBk_ID());
+				scService.updateBookStore(bks_ID, bookStoreBean.getBs_Num() - cart_Num);
 				qaqCart = false;
 				break;
 			}
 			continue;
 		}
 		if (qaqCart) {
-			scService.addToCart(1, bookStoreBean.getBs_Price(), bookStoreBean.getBook().getBk_ID(), loginUser.getMb_ID());
+			scService.addToCart(cart_Num, bookStoreBean.getBs_Price(), bookStoreBean.getBook().getBk_ID(), loginUser.getMb_ID(), bsService.getOneBookStore(bks_ID).getMember().getMb_ID());
 			scService.updateBookStore(bookStoreBean.getBks_ID(), bookStoreBean.getBs_Num() - 1);
 		}
 		list = scService.searchCart(loginUser.getMb_ID());
 		for (ShoppingCartBean shoppingCartBean : list) {
-			System.out.println("-------------------------------------------------");
-			System.out.println(shoppingCartBean.getCart_Num());			
-			System.out.println(shoppingCartBean.getCart_Price());			
+//			System.out.println("-------------------------------------------------");
+//			System.out.println(shoppingCartBean.getCart_Num());			
+//			System.out.println(shoppingCartBean.getCart_Price());			
 			total += shoppingCartBean.getCart_Num() * shoppingCartBean.getCart_Price();
 		}
 		model.addAttribute("total", total);

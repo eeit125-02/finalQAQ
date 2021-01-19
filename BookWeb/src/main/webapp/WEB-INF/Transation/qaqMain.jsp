@@ -39,7 +39,7 @@
 		$("#bookWebFooter").load("//localhost:8080/BookWeb/footer");
 	});
 </script>
-<title>Insert title here</title>
+<title>二手書圖</title>
 </head>
 <body>
 	<!-- 灌值 -->

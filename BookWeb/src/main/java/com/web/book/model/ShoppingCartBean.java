@@ -29,18 +29,28 @@ public class ShoppingCartBean {
 	@ManyToOne
 	@JoinColumn(name = "bb_ID")
 	private MemberBean member;
+	
+	//賣家編號
+	@ManyToOne
+	@JoinColumn(name = "bs_ID")
+	private MemberBean memberSel;
+
+	public MemberBean getMemberSel() {
+		return memberSel;
+	}
 
 	public ShoppingCartBean() {
 		super();
 	}
 
-	public ShoppingCartBean(Integer cart_ID, Integer cart_Num, Integer cart_Price, BookBean book, MemberBean member) {
+	public ShoppingCartBean(Integer cart_ID, Integer cart_Num, Integer cart_Price, BookBean book, MemberBean member, MemberBean memberSel) {
 		super();
 		this.cart_ID = cart_ID;
 		this.cart_Num = cart_Num;
 		this.cart_Price = cart_Price;
 		this.book = book;
 		this.member = member;
+		this.memberSel = memberSel;
 	}
 
 	public Integer getCart_ID() {
@@ -82,6 +92,10 @@ public class ShoppingCartBean {
 	public void setMember(MemberBean member) {
 		this.member = member;
 	}
+	
+	public void setMemberSel(MemberBean memberSel) {
+		this.memberSel = memberSel;
+	}
 
 	@Override
 	public String toString() {
@@ -96,6 +110,8 @@ public class ShoppingCartBean {
 		builder.append(book);
 		builder.append(", member=");
 		builder.append(member);
+		builder.append(", memberSel=");
+		builder.append(memberSel);
 		builder.append("]");
 		return builder.toString();
 	}
