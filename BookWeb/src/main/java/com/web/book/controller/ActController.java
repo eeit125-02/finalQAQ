@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -77,20 +79,39 @@ public class ActController {
 		return "Activity/ActForm";
 	}
 
-	// 送出新增活動
+	// 送出活動
 	@PostMapping("/showCreateForm")
-	public String createAct(Model model, @ModelAttribute("actbean") ActBean ab,
-			@ModelAttribute("loginUser") MemberBean loginUser,
-			@RequestParam(value = "file", required = false) CommonsMultipartFile file, HttpServletRequest request,
-			@RequestParam(value = "mb_ID", required = false) Integer mb_ID,
-			RedirectAttributes attr) throws Exception {
-
-		// 圖片上傳用
+	public String createAct(Model model
+							, @ModelAttribute("actbean") ActBean ab
+							, BindingResult bindingResult
+							, @ModelAttribute("loginUser") MemberBean loginUser
+							, @RequestParam(value = "file", required = false) CommonsMultipartFile file
+							, HttpServletRequest request
+							, @RequestParam(value = "mb_ID", required = false) Integer mb_ID
+							, RedirectAttributes attr) throws Exception {
 		
+		
+		// 圖片上傳用
 		GlobalService.saveImage("active", file, ab.getact_Name());
 		ab.setAct_Differentpax(0);
 		ab.setact_Image(GlobalService.saveImage("active", file, ab.getact_Name()));
 		actService.createAct(ab);
+
+		
+		
+		new ActFormValidator().validate(ab, bindingResult);		
+		if (bindingResult.hasErrors()) {
+			System.out.println("======================");
+			List<ObjectError> list = bindingResult.getAllErrors();
+			for(ObjectError error : list) {
+				System.out.println("有錯誤：" + error);
+			}
+			System.out.println("======================");
+			return "Activity/ActForm";
+		}
+
+		
+		
 		return "redirect:/showActs";
 	}
 
