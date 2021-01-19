@@ -35,41 +35,34 @@ public class Login {
 	@Autowired
 	MemberService ms;
 	String mail;
-	String Account;
+//	String Account;
 	String logincheck =null;
-	MemberBean checkMember;
+//	MemberBean checkMember;
 	// 註冊資料
 	@PostMapping("/registe")
 	public String Registe(Model model, @RequestParam(value = "account") String mb_Account,
 			@RequestParam(value = "pwd") String mb_Password, @RequestParam(value = "sex") String mb_Sex,
 			@RequestParam(value = "name") String mb_Name,@RequestParam(value = "birthday") Date mb_Birthday,
-			@RequestParam(value = "mail") String mb_Mail) {
+			@RequestParam(value = "mail") String mb_Mail) throws IOException, InterruptedException, ExecutionException {
 		Timestamp ts = new Timestamp(System.currentTimeMillis());
 		String encryption = GlobalService.getMemberEncoder(mb_Password);
 		String pic = "https://firebasestorage.googleapis.com/v0/b/bookweb-50d11.appspot.com/o/member%2F%E5%81%87%E8%A3%9D%E6%9C%89%E5%9C%96%E7%89%87.jpg?alt=media&token=2ce87f02-12f3-4120-821f-e0dcfa825f49";
 		MemberBean reg_member = new MemberBean(0, mb_Account, encryption, mb_Sex, mb_Birthday, mb_Name, mb_Mail, "", "",
 				ts, 0, "",pic);
-		System.out.println(reg_member);
 		reg_member.setCheckColume(true);
 		System.out.println(reg_member);
-		checkMember = reg_member;
-		model.addAttribute("reg_member", reg_member);
+		String sessionId = GlobalService.createSessionID(String.valueOf(reg_member.getMb_ID()),
+				reg_member.getMb_Name(), reg_member.getMb_Account());
 		JavaMail jm = new JavaMail();
 		jm.Register(mb_Mail);
 		return "redirect:toLogin";
 	}
 	
-	//註冊確認
-	@GetMapping("/toconfirm")
-	public String toConfirm() {
-		ms.insertMember(checkMember);
-		return "redirect:toLogin";
-	}
-	
 	// 註冊資料確認後送至資料庫
 	@PostMapping("/confirm")
-	public String Confirm() {
-		ms.insertMember(checkMember);
+	public String Confirm(@ModelAttribute("loginUser")MemberBean loginUser,SessionStatus session) {
+		ms.insertMember(loginUser);
+		session.setComplete();
 		return "redirect:toLogin";
 	}
 
@@ -94,8 +87,8 @@ public class Login {
 	//檢查舊密碼
 	@PostMapping("/checkpwd")
 	@ResponseBody
-	public boolean checkPwd(@RequestParam(value = "oldpwd",required = false) String oldpwd) {
-		boolean check = GlobalService.checkMemberEncoder(oldpwd,ms.select(Account).getMb_Password());
+	public boolean checkPwd(@RequestParam(value = "oldpwd",required = false) String oldpwd,@ModelAttribute("loginUser")MemberBean loginUser) {
+		boolean check = GlobalService.checkMemberEncoder(oldpwd,ms.select(loginUser.getMb_Account()).getMb_Password());
 		System.out.println(oldpwd);
 		System.out.println(check);
 		return check;
@@ -118,25 +111,28 @@ public class Login {
 	
 	//忘記密碼更新
 	@PostMapping("/JavaMailUpdate")
-	public String JavaMailUpdate(Model model, @RequestParam("pwd") String pwd) {
-		MemberBean mb_inf = ms.select(Account);
+	public String JavaMailUpdate(Model model, @RequestParam("pwd") String pwd,
+								 @ModelAttribute("loginUser")MemberBean loginUser,
+								 SessionStatus session) {
 		String encryption = GlobalService.getMemberEncoder(pwd);
-		mb_inf.setMb_Password(encryption);
-		ms.update(mb_inf);
+		loginUser.setMb_Password(encryption);
+		ms.update(loginUser);
+		session.setComplete();
 		return "redirect:toLogin";
 	}
 	
 	//JavaMail跳轉
 	@GetMapping("/pwdlink")
 	public String pwdlink(Model model) {
-		Account=ms.email(mail).getMb_Account();
 		return "Member/MailModify";
 	}
 	
 	//JavaMail
 	@PostMapping("/JavaMail")
-	public String JavaMail(@RequestParam(value = "mail",required = false) String email) {
-		mail=email;
+	public String JavaMail(@RequestParam(value = "mail",required = false) String email,HttpServletResponse response) throws IOException, InterruptedException, ExecutionException {
+		MemberBean loginMember = ms.email(mail);
+		String sessionId = GlobalService.createSessionID(String.valueOf(loginMember.getMb_ID()),
+				loginMember.getMb_Name(), loginMember.getMb_Account());
 		JavaMail mail = new JavaMail();
 		mail.SendMail(email);
 		return "redirect:toLogin";
@@ -155,7 +151,7 @@ public class Login {
 				@RequestParam(value = "name",required = false) String name,
 				@RequestParam(value = "email",required = false) String email,
 				HttpServletResponse response) throws IOException, InterruptedException, ExecutionException {
-			Account = email;
+			String Account = email;
 			boolean check = ms.checkAccount(Account);
 				if(check==false) {			
 					MemberBean loginMember = new MemberBean();
@@ -195,18 +191,17 @@ public class Login {
 		boolean pw =  GlobalService.checkMemberEncoder(pwd, mb.getMb_Password());
 		if (pw) {
 			if("a123456".equals(account) && "a123456".equals(pwd)) {
-				Account = account;
+				String Account = account;
 				List<MemberBean> memberall = ms.adminselect();
 				model.addAttribute("adminaccount", Account);
 				model.addAttribute("admin", memberall);
 				String sessionId = GlobalService.createSessionID(String.valueOf(mb.getMb_ID()),
 						mb.getMb_Name(), mb.getMb_Account());
 				Cookie memId = new Cookie("Member_ID", sessionId);
-				memId.setMaxAge(1200);
+				memId.setMaxAge(60*60);
 				response.addCookie(memId);
 				logincheck = "a" ;	
 			}else {
-			Account = account;
 			String sessionId = GlobalService.createSessionID(String.valueOf(mb.getMb_ID()),
 					mb.getMb_Name(), mb.getMb_Account());
 			Cookie memId = new Cookie("Member_ID", sessionId);
@@ -224,8 +219,8 @@ public class Login {
 				}
 	// 會員資料
 	@PostMapping("/mb_inf")
-	public @ResponseBody Map<String,Object> Mb_inf(Model model) {
-		MemberBean select = ms.select(Account);
+	public @ResponseBody Map<String,Object> Mb_inf(Model model,@ModelAttribute("loginUser")MemberBean loginUser) {
+		MemberBean select = ms.select(loginUser.getMb_Account());
 		Map<String,Object> map= new HashMap<>(); 
 		map.put("login", select);
 		map.put("mb_Birthday",String.valueOf(select.getMb_Birthday()));
@@ -234,8 +229,8 @@ public class Login {
 
 	// 會員修改
 	@PostMapping("/toMbUpdate")
-	public @ResponseBody Map<String,Object> toUpdate(Model model) {
-		MemberBean mb_inf = ms.select(Account);
+	public @ResponseBody Map<String,Object> toUpdate(Model model,@ModelAttribute("loginUser")MemberBean loginUser) {
+		MemberBean mb_inf = ms.select(loginUser.getMb_Account());
 		Map<String,Object> map= new HashMap<>(); 
 		map.put("mb_inf", mb_inf);
 		map.put("mb_Birthday",String.valueOf(mb_inf.getMb_Birthday()));
@@ -250,9 +245,10 @@ public class Login {
 			@RequestParam(value = "mb_Birthday", required = false) Date mb_Birthday,
 			@RequestParam(value = "mb_Address", required = false) String mb_Address,
 			@RequestParam(value = "mb_Tel", required = false) String mb_Tel,
-			@RequestParam(value = "mb_type", required = false) String mb_type
+			@RequestParam(value = "mb_type", required = false) String mb_type,
+			@ModelAttribute("loginUser")MemberBean loginUser
 			) throws Exception {		
-		MemberBean mb_inf = ms.select(Account);	
+		MemberBean mb_inf = ms.select(loginUser.getMb_Account());	
 		System.out.println(test);
 		if(test.equals("abc")) {
 		mb_inf.setMb_pic(GlobalService.saveImage("member", file, mb_inf.getMb_Account()));
@@ -279,8 +275,8 @@ public class Login {
 
 	// 密碼更新
 	@PostMapping("/Update")
-	public String Update(Model model, @RequestParam("pwd") String pwd) {
-		MemberBean mb_inf = ms.select(Account);
+	public String Update(Model model, @RequestParam("pwd") String pwd,@ModelAttribute("loginUser")MemberBean loginUser) {
+		MemberBean mb_inf = ms.select(loginUser.getMb_Account());
 		String encryption = GlobalService.getMemberEncoder(pwd);
 		mb_inf.setMb_Password(encryption);
 		ms.update(mb_inf);
@@ -367,14 +363,6 @@ public class Login {
 	public String toregiste(Model model) {
 		return "Member/registe";
 	}
-	
-	// 註冊確認介面
-	@GetMapping("/toConfirm")
-	public String toConfirm(Model model) {
-		System.out.println(checkMember);
-		model.addAttribute("reg_member",checkMember);
-		return "Member/confirm";
-	}
 
 	//忘記密碼
 	@GetMapping("/toforget")
@@ -384,8 +372,8 @@ public class Login {
 	
 	// 會員介面
 	@GetMapping("/toCity")
-	public String tocity(Model model) {
-		MemberBean inf = ms.select(Account);
+	public String tocity(Model model,@ModelAttribute("loginUser")MemberBean loginUser) {
+		MemberBean inf = ms.select(loginUser.getMb_Account());
 		System.out.println(inf);
 		model.addAttribute("loginUser",inf);
 		if(logincheck.equals("c")) {
