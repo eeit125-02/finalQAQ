@@ -20,7 +20,9 @@ public interface SearchService {
 
 	// 會員收藏清單
 	List<BookCollectBean> gotoCollect(int id);
-
+	// 搜尋收藏清單
+	List<BookCollectBean> getKeyCollect(int id, String key);
+	
 	//取得全部類型
 	List<SearchTypeBean> getAllBookType();
 
@@ -30,7 +32,9 @@ public interface SearchService {
 	// 新增收藏項目
 	boolean savebc(int bk_ID, int mb_ID);
 	// 新增收藏tag
-	BookCollectBean setbctag(int bc_ID, String tag1);
+	BookCollectBean setbctag(int bc_ID, String tag1, String tag2, String tag3);
+	// 刪除收藏tag
+	BookCollectBean deletebctag(int bc_ID, String tag1, String tag2, String tag3);
 	// 取得收藏tag
 	BookCollectBean getbctag(int bc_ID);
 
@@ -92,6 +96,8 @@ public interface SearchService {
 	List<BookBean> searchOrderBookTypeClick(List<Integer> reslist, Integer page);
 
 	List<BookBean> getAllBook();
+
+
 
 
 }

@@ -45,7 +45,8 @@
 		$("#bookWebFooter").load("<c:url value='/footer'/>");
 	});
 </script>
-<title>書適論壇</title>
+<link rel="icon" href="${pageContext.request.contextPath}/image/logo1.ico" type="image/x-icon" />
+<title>書適圈</title>
 </head>
 <body>
 
@@ -74,7 +75,7 @@
 				<div
 					style="border: #ADADAD 2px solid; border-radius: 5px; text-align: left; padding: 10px; margin: 0px 10px">
 					<p>${PostBean.memberbean.mb_Name}<br>${PostBean.post_time}</p>
-					<h3>${PostBean.post_title}</h3>
+					<h3><strong>${PostBean.post_title}</strong></h3>
 					<p>${PostBean.post_content}</p>
 
 

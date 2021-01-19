@@ -88,6 +88,12 @@ import com.web.book.service.SearchService;
 			return searchBookDAO.getCollect(id);	
 		}
 		
+		// 搜尋收藏清單關鍵字
+		@Override
+		public List<BookCollectBean> getKeyCollect(int id, String key) {
+			return searchBookDAO.getKeyCollect(id, key);	
+		}
+		
 		// 刪除收藏項目
 		@Override
 		public boolean delete(int bcid) {
@@ -99,10 +105,16 @@ import com.web.book.service.SearchService;
 		public boolean savebc(int bk_ID, int mb_ID) {
 			return searchBookDAO.savebc(bk_ID, mb_ID);
 		}
-		// 新增收藏tag1
+		// 新增收藏tag
 		@Override
-		public BookCollectBean setbctag(int bc_ID, String tag1) {
-			return searchBookDAO.setbctag(bc_ID, tag1);
+		public BookCollectBean setbctag(int bc_ID, String tag1, String tag2, String tag3) {
+			return searchBookDAO.setbctag(bc_ID, tag1, tag2, tag3);
+		}
+		
+		// 刪除收藏tag
+		@Override
+		public BookCollectBean deletebctag(int bc_ID, String tag1, String tag2, String tag3) {
+			return searchBookDAO.deletebctag(bc_ID, tag1, tag2, tag3);
 		}
 		
 		// 取得收藏tag

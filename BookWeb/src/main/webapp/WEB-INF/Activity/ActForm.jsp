@@ -53,7 +53,10 @@
 	border: 1px solid background-color:pink
 }
 
-
+.ck-editor__editable_inline {
+	/* 設定最低高度 */
+    min-height: 215px;
+}
 
 </style>
 
@@ -88,7 +91,8 @@
 						<div class="form-row">
 							<div class="form-group col-md-6">
 								<label >活動名稱:</label>
-								<form:input path="act_Name" class="form-control" placeholder="必填" />
+								<form:input path="act_Name" id="aaa" class="form-control" placeholder="必填" />
+								<form:errors path="act_Name" cssStyle="color:#FF0000;"/>
 							</div>
 							<div class="form-group col-md-6">
 								<label >活動主題:</label>
@@ -101,25 +105,29 @@
                                 <form:option value="公益活動"  label="公益活動"/>
                                 <form:option value="好書交換" label="好書交換"/>
                                 <form:option value="新書/好書討論會" label="新書/好書討論會"/>
-                                </form:select>					
+                                </form:select>
+                                <form:errors path="act_Theme" cssStyle="color:#FF0000;"/>					
 							</div>
 						</div>
 						
 						<div class="form-row">
 							<div class="form-group col-md-6">
 								<label >活動嘉賓:</label>
-								<form:input path="act_Guest" class="form-control" placeholder="" />
+								<form:input path="act_Guest" class="form-control" placeholder="必填" />
+								<form:errors path="act_Guest" cssStyle="color:#FF0000;"/>	
 							</div>
 							<div class="form-group col-md-6 custom-file">
 								<label >活動圖片:</label> 
 								<input name="file" type="file" class="form-control" />
+								<form:errors path="act_Image" cssStyle="color:#FF0000;"/>
 							</div>
 						</div>
 						
 						<div class="form-row">
 							<div class="form-group col-md-6">
 								<label >活動人數:</label>
-								<form:input path="act_Pax" class="form-control" placeholder="" />
+								<form:input path="act_Pax" class="form-control" placeholder="必填" />
+								<form:errors path="act_Image" cssStyle="color:#FF0000;"/>
 							</div>
 							<div class="form-group col-md-6">
 								<label >活動場所:</label>							
@@ -127,7 +135,8 @@
                                 <form:option value="NONE" label="請選擇" />
                                 <form:option value="現場" label="現場"/>
                                 <form:option value="線上" label="線上"/>
-                                </form:select>								
+                                </form:select>
+                                <form:errors path="act_Place" cssStyle="color:#FF0000;"/>								
 							</div>
 						</div>
 
@@ -135,11 +144,13 @@
 							<div class="form-group col-md-6">
 								<label>活動日期:</label>
 								<form:input type="date" class="form-control" path="act_Date" />
+								<form:errors path="act_Date" cssStyle="color:#FF0000;"/>
 							</div>
 
 							<div class="form-group col-md-6">
 								<label >活動時間:</label>
 								<form:input type="time" class="form-control" path="act_Time" />
+								<form:errors path="act_Time" cssStyle="color:#FF0000;"/>
 							</div>
 						</div>
 
@@ -155,12 +166,13 @@
 						    </div>
 							<div class="form-group">
 							<form:input type="text" path="act_Loc" class="form-control" placeholder="請輸入其餘地址"></form:input>
+							<form:errors path="act_Loc" cssStyle="color:#FF0000;"/>
 							</div>					
                         
                         <div class="form-row">
                         <div class="form-group input_fields_wrap">
                         <div class="btn-group-toggle" data-toggle="buttons">
-						    <label >活動標籤:</label>
+						    <label >活動標籤:</label><br>
 							<p class="btn btn-info"style="margin:3px">
 								<input type="checkbox" name="b" value="2" /> 戶外體驗
 							</p>
@@ -224,6 +236,8 @@
 							<p class="btn btn-info"style="margin:3px">
 								<input type="checkbox" name="b" value="9" /> 公益
 							</p>
+							<div><form:errors path="act_Tag" cssStyle="color:#FF0000;"/>
+							</div>
 							</div>
 						    </div>	
 						    </div>					    
@@ -233,13 +247,14 @@
 						  <div class="form-group col-md-6">
 						    <label >活動摘要:</label>
 <!-- 						  CK EDITOR的東東 -->
-						    <form:textarea  path="act_Rule" rows = "20" cols = "30" class="form-control" />
+						    <form:textarea  path="act_Rule" rows = "10" cols = "30" class="form-control" />
+						    <form:errors path="act_Image" cssStyle="color:#FF0000;"/>
 						  </div>
 						  
 						  <div class="form-group  col-md-6">
 						    <label >活動簡介:</label>
 <!-- 						  CK EDITOR的東東 -->
-						  <form:textarea id="editor1" path="act_Intro" rows = "20" cols = "30" />
+						  <form:textarea id="editor1" path="act_Intro" rows = "10" cols = "30" />
 						  </div>
 						  </div>
 <!-- 						  <button class="add_field_button btn btn-primary">添加標籤</button> -->
@@ -259,7 +274,7 @@
 				<a href='${pageContext.request.contextPath}/showActs'>回到活動管理</a>
 
 		</div>
-
+		<button id="insert">123</button>
 		<!-- body -->
 
 		<!-- footer -->
@@ -270,6 +285,10 @@
 
 
 		<script type="text/javascript">
+		
+		$('#insert').click(function(){
+			$('#aaa').val("");
+		})
 				$(function() {
 				$("#myfile").change(function() {
 					var readFile = new FileReader();

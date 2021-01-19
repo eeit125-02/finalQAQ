@@ -193,6 +193,22 @@ maxpage=query.getResultList().size();
 		list = query.setParameter("mbid", bc).getResultList();
 		return list;
 	}
+	// 搜尋收藏清單關鍵字
+	@Override
+	@SuppressWarnings("unchecked")
+	public List<BookCollectBean> getKeyCollect(int MB_ID,String key) {
+		List<BookCollectBean> list = new ArrayList<>();
+		String hql = "From BookCollectBean bc Where "
+				+ "bc.member = :mbid"
+				+ " AND bc.bc_Tag_one like :searchString"
+				+ " or bc.bc_Tag_two like :searchString"
+				+ " or bc.bc_Tag_three like :searchString";
+		Session session = factory.getCurrentSession();
+		BookCollectBean bc = session.load(BookCollectBean.class, MB_ID);
+		Query<BookCollectBean> query = session.createQuery(hql);
+		list = query.setParameter("mbid", bc).setParameter("searchString", "%"+key+"%").getResultList();
+		return list;
+	}
 
 	// 刪除收藏項目
 	@Override
@@ -235,7 +251,7 @@ maxpage=query.getResultList().size();
 		return result;
 	}
 	
-	//取得收藏(tag)
+	//取得收藏tag
 	@Override
 	public BookCollectBean getbctag(int bc_ID) {
 		Session session = factory.getCurrentSession();
@@ -243,14 +259,48 @@ maxpage=query.getResultList().size();
 		return bc;
 	}
 	
-	//新增收藏tag(1)
+	//新增收藏tag
 	@Override
-	public BookCollectBean setbctag(int bc_ID, String tag1) {
+	public BookCollectBean setbctag(int bc_ID, String tag1, String tag2, String tag3) {
 		Session session = factory.getCurrentSession();
 		BookCollectBean bc=session.get(BookCollectBean.class, bc_ID);
-		bc.setBc_Tag_one(tag1);
+		System.out.println("+++++++++++++++++++"+tag1);
+		System.out.println("+++++++++++++++++++"+tag2);
+		System.out.println("+++++++++++++++++++"+tag3);
+		if(tag1!=null && ""!=tag1) {
+			bc.setBc_Tag_one(tag1);
+		}
+		if(tag2!=null && ""!=tag2) {
+			bc.setBc_Tag_two(tag2);
+		}
+		if(tag3!=null && ""!=tag3) {
+			bc.setBc_Tag_three(tag3);
+		}
 		return bc;
 	}
+	
+	
+	//刪除收藏tag
+	@Override
+	public BookCollectBean deletebctag(int bc_ID, String tag1, String tag2, String tag3) {
+		Session session = factory.getCurrentSession();
+		BookCollectBean bc=session.get(BookCollectBean.class, bc_ID);
+		System.out.println("-------------------"+tag1);
+		System.out.println("-------------------"+tag2);
+		System.out.println("-------------------"+tag3);
+		if(tag1!=null && ""!=tag1) {
+			bc.setBc_Tag_one(null);
+		}
+		if(tag2!=null && ""!=tag2) {
+			bc.setBc_Tag_two(null);
+		}
+		if(tag3!=null && ""!=tag3) {
+			bc.setBc_Tag_three(null);
+		}
+		return bc;
+	}
+	
+	
 	
 	// 新增書本
 	@SuppressWarnings("unused")

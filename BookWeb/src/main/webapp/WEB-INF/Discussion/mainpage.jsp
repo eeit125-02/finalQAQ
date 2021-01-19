@@ -69,7 +69,8 @@
 		$("#bookWebFooter").load("<c:url value='/footer'/>");
 	});
 </script>
-<title>書適論壇</title>
+<link rel="icon" href="${pageContext.request.contextPath}/image/logo1.ico" type="image/x-icon" />
+<title>書適圈</title>
 </head>
 
 <body>
@@ -117,7 +118,7 @@ response.setDateHeader("Expires", 0);
 						<script>
 						$('#list-manager-list').click(function(){
 							if('${loginUser.mb_ID}'!=='14'){
-								$('#list-manager').html('<br><br><h1>請先登入版主帳號</h1>')
+								$('#list-manager').html('<br><br><h1>請先登入管理員帳號</h1>')
 							} 
 						})
 						</script>
@@ -148,9 +149,9 @@ response.setDateHeader("Expires", 0);
 
 						<!-- discussion board top tab -->
 						<ul class="nav nav-tabs" id="novelTab" role="tablist">
-							<li class="nav-item"><a class="nav-link" id="novel_rule-tab"
+							<li class="nav-item"><a class="nav-link active" id="novel_rule-tab"
 								data-toggle="tab" href="#novel_rule" role="tab">板規</a></li>
-							<li class="nav-item"><a class="nav-link active"
+							<li class="nav-item"><a class="nav-link"
 								id="novel_latest-tab" data-toggle="tab" href="#novel_latest"
 								role="tab">最新貼文</a></li>
 							<li class="nav-item"><a class="nav-link" id="novel_hot-tab"
@@ -163,14 +164,14 @@ response.setDateHeader("Expires", 0);
 						<!-- content connect to top tab -->
 						<div class="tab-content" id="novelTabContent">
 							<!-- content of rule tab -->
-							<div class="tab-pane fade" id="novel_rule" role="tabpanel">
+							<div class="tab-pane fade show active" id="novel_rule" role="tabpanel">
 								<div id="show_rule">
 									<c:forEach var="rule" items="${rule}">${rule.rule_content}</c:forEach>
 								</div>
 							</div>
 
 							<!-- content of latest post tab -->
-							<div class="tab-pane fade show active" id="novel_latest"
+							<div class="tab-pane fade" id="novel_latest"
 								role="tabpanel">
 
 								<!-- post and command table -->
@@ -178,10 +179,11 @@ response.setDateHeader("Expires", 0);
 									<thead>
 										<tr class="table-primary">
 											<th scope="col"
-												style="width: 60%; text-align: left; vertical-align: middle">貼文標題</th>
-											<th scope="col" style="width: 15%; vertical-align: middle">貼文時間</th>
-											<th scope="col" style="width: 15%; vertical-align: middle">貼文作者</th>
-											<th scope="col" style="width: 10%; vertical-align: middle">留言數</th>
+												style="width: 52%; text-align: left; vertical-align: middle">貼文標題</th>
+											<th scope="col" style="width: 12%; vertical-align: middle">貼文作者</th>
+											<th scope="col" style="width: 12%; vertical-align: middle">貼文時間</th>
+											<th scope="col" style="width: 12%; vertical-align: middle">留言數</th>
+											<th scope="col" style="width: 12%; vertical-align: middle">點擊數</th>											
 										</tr>
 									</thead>
 									<tbody>
@@ -199,8 +201,8 @@ response.setDateHeader("Expires", 0);
 												</button>
 													</form>
 													</td>
-												<td style="vertical-align: middle">${stored_post.post_time}</td>
 												<td style="vertical-align: middle">${stored_post.memberbean.mb_Name}</td>
+												<td style="vertical-align: middle; background-color:	#ECF5FF">${stored_post.post_time}</td>
 												<td style="vertical-align: middle"><c:set
 														var="command_qty" value="${0}" /> <c:forEach
 														var="stored_command" items="${allCommand}">
@@ -215,6 +217,7 @@ response.setDateHeader("Expires", 0);
   															<path
 															d="M2.678 11.894a1 1 0 0 1 .287.801 10.97 10.97 0 0 1-.398 2c1.395-.323 2.247-.697 2.634-.893a1 1 0 0 1 .71-.074A8.06 8.06 0 0 0 8 14c3.996 0 7-2.807 7-6 0-3.192-3.004-6-7-6S1 4.808 1 8c0 1.468.617 2.83 1.678 3.894zm-.493 3.905a21.682 21.682 0 0 1-.713.129c-.2.032-.352-.176-.273-.362a9.68 9.68 0 0 0 .244-.637l.003-.01c.248-.72.45-1.548.524-2.319C.743 11.37 0 9.76 0 8c0-3.866 3.582-7 8-7s8 3.134 8 7-3.582 7-8 7a9.06 9.06 0 0 1-2.347-.306c-.52.263-1.639.742-3.468 1.105z" />
 														</svg> <i class="bi bi-chat"></i> ${command_qty}</td>
+												<td style="vertical-align: middle">${stored_post.click}</td>
 											</tr>
 										</c:forEach>
 									</tbody>
@@ -230,10 +233,11 @@ response.setDateHeader("Expires", 0);
 									<thead>
 										<tr class="table-primary">
 											<th scope="col"
-												style="width: 60%; text-align: left; vertical-align: middle">貼文標題</th>
-											<th scope="col" style="width: 15%; vertical-align: middle">貼文時間</th>
-											<th scope="col" style="width: 15%; vertical-align: middle">貼文作者</th>
-											<th scope="col" style="width: 10%; vertical-align: middle">留言數</th>
+												style="width: 52%; text-align: left; vertical-align: middle">貼文標題</th>
+											<th scope="col" style="width: 12%; vertical-align: middle">貼文作者</th>
+											<th scope="col" style="width: 12%; vertical-align: middle">貼文時間</th>
+											<th scope="col" style="width: 12%; vertical-align: middle">留言數</th>
+											<th scope="col" style="width: 12%; vertical-align: middle">點擊數</th>											
 										</tr>
 									</thead>
 									<tbody>
@@ -247,12 +251,63 @@ response.setDateHeader("Expires", 0);
 													</c:url>
 													<form action="${show_detail}" method="post">
 														<button type="submit" class="btn btn-link">
-												${stored_post.post_title}
+												<div class="show_part_title text-left" >${stored_post.post_title}</div>
 												</button>
 													</form>
 													</td>
-												<td style="vertical-align: middle">${stored_post.post_time}</td>
 												<td style="vertical-align: middle">${stored_post.memberbean.mb_Name}</td>
+												<td style="vertical-align: middle">${stored_post.post_time}</td>
+												<td style="vertical-align: middle; background-color:	#ECF5FF"><c:set
+														var="command_qty" value="${0}" /> <c:forEach
+														var="stored_command" items="${allCommand}">
+														<c:set var="pi" value="${stored_post.post_id}" />
+														<c:set var="ci" value="${stored_command.postBean.post_id}" />
+														<c:if test="${pi==ci}">
+															<c:set var="command_qty" value="${command_qty+1}" />
+														</c:if>
+													</c:forEach> <!-- 	引用icon --> <svg xmlns="http://www.w3.org/2000/svg"
+														width="16" height="16" fill="currentColor"
+														class="bi bi-chat" viewBox="0 0 16 16">
+  															<path
+															d="M2.678 11.894a1 1 0 0 1 .287.801 10.97 10.97 0 0 1-.398 2c1.395-.323 2.247-.697 2.634-.893a1 1 0 0 1 .71-.074A8.06 8.06 0 0 0 8 14c3.996 0 7-2.807 7-6 0-3.192-3.004-6-7-6S1 4.808 1 8c0 1.468.617 2.83 1.678 3.894zm-.493 3.905a21.682 21.682 0 0 1-.713.129c-.2.032-.352-.176-.273-.362a9.68 9.68 0 0 0 .244-.637l.003-.01c.248-.72.45-1.548.524-2.319C.743 11.37 0 9.76 0 8c0-3.866 3.582-7 8-7s8 3.134 8 7-3.582 7-8 7a9.06 9.06 0 0 1-2.347-.306c-.52.263-1.639.742-3.468 1.105z" />
+														</svg> <i class="bi bi-chat"></i> ${command_qty}</td>
+												<td style="vertical-align: middle">${stored_post.click}</td>												
+											</tr>
+										</c:forEach>
+									</tbody>
+								</table>
+							</div>
+							
+							<!-- content of post click sorted tab -->
+							<div class="tab-pane fade" id="click" role="tabpanel">
+							<table class="table table-hover tablesorter" id="myTable">
+									<thead>
+										<tr class="table-primary">
+											<th scope="col"
+												style="width: 52%; text-align: left; vertical-align: middle">貼文標題</th>
+											<th scope="col" style="width: 12%; vertical-align: middle">貼文作者</th>
+											<th scope="col" style="width: 12%; vertical-align: middle">貼文時間</th>
+											<th scope="col" style="width: 12%; vertical-align: middle">留言數</th>
+											<th scope="col" style="width: 12%; vertical-align: middle">點擊數</th>
+										</tr>
+									</thead>
+									<tbody>
+										<c:forEach var="stored_post" items="${clickPost}">
+											<tr>
+												<td style="text-align: left; vertical-align: middle">
+												<c:url
+														value="show_detail" var="show_detail">
+														<c:param name="post_detail_id"
+															value=" ${stored_post.post_id}" />
+													</c:url>
+													<form action="${show_detail}" method="post">
+														<button type="submit" class="btn btn-link">
+												<div class="show_part_title text-left" >${stored_post.post_title}</div>
+												</button>
+													</form>
+													</td>
+												<td style="vertical-align: middle">${stored_post.memberbean.mb_Name}</td>
+												<td style="vertical-align: middle">${stored_post.post_time}</td>
 												<td style="vertical-align: middle"><c:set
 														var="command_qty" value="${0}" /> <c:forEach
 														var="stored_command" items="${allCommand}">
@@ -267,42 +322,7 @@ response.setDateHeader("Expires", 0);
   															<path
 															d="M2.678 11.894a1 1 0 0 1 .287.801 10.97 10.97 0 0 1-.398 2c1.395-.323 2.247-.697 2.634-.893a1 1 0 0 1 .71-.074A8.06 8.06 0 0 0 8 14c3.996 0 7-2.807 7-6 0-3.192-3.004-6-7-6S1 4.808 1 8c0 1.468.617 2.83 1.678 3.894zm-.493 3.905a21.682 21.682 0 0 1-.713.129c-.2.032-.352-.176-.273-.362a9.68 9.68 0 0 0 .244-.637l.003-.01c.248-.72.45-1.548.524-2.319C.743 11.37 0 9.76 0 8c0-3.866 3.582-7 8-7s8 3.134 8 7-3.582 7-8 7a9.06 9.06 0 0 1-2.347-.306c-.52.263-1.639.742-3.468 1.105z" />
 														</svg> <i class="bi bi-chat"></i> ${command_qty}</td>
-											</tr>
-										</c:forEach>
-									</tbody>
-								</table>
-							</div>
-							
-							<!-- content of post click sorted tab -->
-							<div class="tab-pane fade" id="click" role="tabpanel">
-							<table class="table table-hover tablesorter" id="myTable">
-									<thead>
-										<tr class="table-primary">
-											<th scope="col"
-												style="width: 60%; text-align: left; vertical-align: middle">貼文標題</th>
-											<th scope="col" style="width: 15%; vertical-align: middle">貼文時間</th>
-											<th scope="col" style="width: 15%; vertical-align: middle">貼文作者</th>
-											<th scope="col" style="width: 10%; vertical-align: middle">點擊數</th>
-										</tr>
-									</thead>
-									<tbody>
-										<c:forEach var="stored_post" items="${clickPost}">
-											<tr>
-												<td style="text-align: left; vertical-align: middle">
-												<c:url
-														value="show_detail" var="show_detail">
-														<c:param name="post_detail_id"
-															value=" ${stored_post.post_id}" />
-													</c:url>
-													<form action="${show_detail}" method="post">
-														<button type="submit" class="btn btn-link">
-												${stored_post.post_title}
-												</button>
-													</form>
-													</td>
-												<td style="vertical-align: middle">${stored_post.post_time}</td>
-												<td style="vertical-align: middle">${stored_post.memberbean.mb_Name}</td>
-												<td style="vertical-align: middle">${stored_post.click}</td>
+												<td style="vertical-align: middle; background-color:	#ECF5FF">${stored_post.click}</td>
 											</tr>
 										</c:forEach>
 									</tbody>
@@ -320,10 +340,12 @@ response.setDateHeader("Expires", 0);
 						<!-- member page top button -->
 						<ul class="nav nav-pills mb-3 justify-content-center"
 							id="pills-tab" role="tablist" style="text-align: center;">
-							<li class="nav-item"><a class="nav-link active"
+							<li class="nav-item">
+							<a class="nav-link active"
 								id="pills-member_new_post-tab" data-toggle="pill"
 								href="#pills-member_new_post" role="tab">新增貼文</a></li>
-							<li class="nav-item"><a class="nav-link"
+							<li class="nav-item">
+							<a class="nav-link"
 								id="pills-member_post-tab" data-toggle="pill"
 								href="#pills-member_post" role="tab">個人貼文紀錄</a></li>
 						</ul>
@@ -376,11 +398,29 @@ response.setDateHeader("Expires", 0);
 									data : {post_title : $('#post_title').val(),
 												   post_content:CKEDITOR.instances["post_content"].getData()},
 									dataType : "json",
-									success:function(post_title){
-										location.reload();}
-								})	
+									success:function(){
+										alert("貼文新增成功");	
+										window.location.hash = 'add_post_reload';
+										window.location.reload();
+										}										
+								})				
 							}
 						})
+						
+						 document.addEventListener("DOMContentLoaded", function() { 
+    						if(window.location.hash == "#add_post_reload"){
+    						
+    						$('#list-novel-list').removeClass('active');
+    						$('#list-novel').removeClass('show active');
+    						$('#pills-member_new_post-tab').removeClass('active');
+    						$('#pills-member_new_post').removeClass('show active');
+    					
+    						$('#list-member-list').addClass('active');
+    						$('#list-member').addClass('show active');
+    						$('#pills-member_post-tab').addClass('active');
+    						$('#pills-member_post').addClass('show active');
+    						}
+  					  });
 					</script>
 
 							<!-- personal post record -->
@@ -412,10 +452,28 @@ response.setDateHeader("Expires", 0);
 														data : {delete_post_id : $(this).val()},
 														dataType : "json",
 														success:function(delete_post_id){
-															location.reload();}
+															alert('貼文刪除成功');
+															window.location.hash = 'delete_post_reload';
+															window.location.reload();
+															}
 													})	
 												}
 											})
+											
+											document.addEventListener("DOMContentLoaded", function() { 
+    											if(window.location.hash == "#delete_post_reload"){
+    						    												
+    												$('#list-novel-list').removeClass('active');
+        											$('#list-novel').removeClass('show active');
+        											$('#pills-member_new_post-tab').removeClass('active');
+        											$('#pills-member_new_post').removeClass('show active');
+        					
+        											$('#list-member-list').addClass('active');
+        											$('#list-member').addClass('show active');
+        											$('#pills-member_post-tab').addClass('active');
+        											$('#pills-member_post').addClass('show active');
+    												}
+  											  });
 											</script>
 
 										<c:url value="go_edit" var="go_edit">
@@ -433,7 +491,7 @@ response.setDateHeader("Expires", 0);
 
 										<p>${stored_post.memberbean.mb_Name}
 											<br>${stored_post.post_time}</p>
-										<h3>${stored_post.post_title}</h3>
+										<h3><strong>${stored_post.post_title}</strong></h3>
 
 
 
@@ -531,7 +589,7 @@ response.setDateHeader("Expires", 0);
 													</div>
 												</div>
 
-<script>
+							<script>
 								$(document).on("click", '.nestcommand${stored_post.post_id}', function(){
 									
 									if (typeof ($.cookie('Member_ID')) != "undefined") {
@@ -562,7 +620,6 @@ response.setDateHeader("Expires", 0);
 								}						 
 									})
 								
-									
 									
 									$(document).on("click", '.normal_command${stored_post.post_id}', function(){
 										
@@ -697,16 +754,9 @@ response.setDateHeader("Expires", 0);
 																		rule_content : CKEDITOR.instances["rule_content"].getData()
 																	},
 																	dataType : "json",
-																	success : function(
-																			rb) {
-																		$(
-																				'#last_edit_time')
-																				.html(
-																						rb.rule_time)
-																		$(
-																				'#show_rule')
-																				.html(
-																						rb.rule_content)
+																	success : function(rb) {
+																		$('#last_edit_time').html(rb.rule_time)
+																		$('#show_rule').html(rb.rule_content)
 																	}
 																})
 													})
@@ -778,10 +828,28 @@ response.setDateHeader("Expires", 0);
 													data : {delete_post_id : $(this).val()},
 													dataType : "json",
 													success:function(delete_post_id){
-														location.reload();}
+														alert('貼文刪除成功');
+														window.location.hash = 'manager_delete_post_reload';
+														window.location.reload();
+													}
 												})	
 											}
 										})
+										
+										document.addEventListener("DOMContentLoaded", function() { 
+    													if(window.location.hash == "#manager_delete_post_reload"){
+    						
+    														$('#list-novel-list').removeClass('active');
+        													$('#list-novel').removeClass('show active');
+        													$('#pills-edit_rule-tab').removeClass('active');
+        													$('#pills-edit_rule').removeClass('show active');
+        					
+        													$('#list-manager-list').addClass('active');
+        													$('#list-manager').addClass('show active');
+        													$('#pills-manage_post-tab').addClass('active');
+        													$('#pills-manage_post').addClass('show active');
+    													}
+  												  });
 								</script>
 
 									<!-- show all post -->
@@ -808,15 +876,33 @@ response.setDateHeader("Expires", 0);
 																data : {delete_post_id : $(this).val()},
 																dataType : "json",
 																success:function(delete_post_id){
-																	location.reload();}
+																	alert('貼文刪除成功');
+																	window.location.hash = 'manager_ajax_delete_post_reload';
+																	window.location.reload();
+																	}
 															})	
 														}
 													})
+													
+													document.addEventListener("DOMContentLoaded", function() { 
+    													if(window.location.hash == "#manager_ajax_delete_post_reload"){
+    						
+    														$('#list-novel-list').removeClass('active');
+        													$('#list-novel').removeClass('show active');
+        													$('#pills-edit_rule-tab').removeClass('active');
+        													$('#pills-edit_rule').removeClass('show active');
+        					
+        													$('#list-manager-list').addClass('active');
+        													$('#list-manager').addClass('show active');
+        													$('#pills-manage_post-tab').addClass('active');
+        													$('#pills-manage_post').addClass('show active');
+    													}
+  												  });
 											</script>
 
 											<p>${stored_post.memberbean.mb_Name}
 												<br>${stored_post.post_time}</p>
-											<h3>${stored_post.post_title}</h3>
+											<h3><strong>${stored_post.post_title}</strong></h3>
 
 											<button class="btn btn-link" type="button"
 												data-toggle="collapse"

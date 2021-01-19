@@ -7,6 +7,14 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Document</title>
+
+<!-- sidemenu -->
+<!-- <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"> -->
+<!-- <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script> -->
+<!-- <script src="//code.jquery.com/jquery-1.11.1.min.js"></script> -->
+<%-- <link rel="stylesheet" href="${pageContext.request.contextPath}/css/navbar.css"> --%>
+<!-- sidemenu -->
+
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <!-- <script -->
 <!-- 	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" -->
@@ -44,22 +52,22 @@ background-color:#68b0ab
 background-color:#e0ece4
 }
 
-#city {
-	border-radius: 25px;
-	padding: 20px;
-	background-color: 	#F0F0F0;
-	height:300px;
-	width: 200px;
-	float:left;
-}
+ #city { 
+ 	border-radius: 25px; 
+ 	padding: 20px; 
+ 	background-color: 	#F0F0F0; 
+ 	height:auto; 
+	width: 200px; 
+ 	float:left; 
+ } 
  
 legend {
 	text-align: center;
 }
 
-div {
-	text-align: center;
-}
+#change123 { 
+ 	text-align: center; 
+} 
 
 .btn {
 	margin:5px;
@@ -75,6 +83,42 @@ div {
 		font-size: 3.5rem;
 	}
 }
+.dropbtn {
+ 
+  cursor: pointer;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {background-color: #f1f1f1}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown:hover .dropbtn {
+  background-color: #3e8e41;
+}
+
 </style>
 </head>
 <body>
@@ -82,18 +126,17 @@ div {
 	<header class="container blog-header py-3" id="bookWebheader"></header>
 	<!-- header -->
 	<div class="container media" >
-	<fieldset id="city" >
-		<legend>會員中心</legend>
-		<div>
-				<div><button  id="admin1" name="admin" class="btn btn-outline-secondary">會員資訊</button>
-				</div>
-				<div><button  id="inf" name="mb_inf" class="btn btn-outline-secondary">會員資訊</button>
-				</div>
-				<div><button  id="third" name="third" class="btn btn-outline-secondary">會員資訊</button>
-				</div>
-				<button  id="Modify" name="Modify" class="btn btn-outline-secondary">會員修改</button>
-				<div>
+	<div id="city" >
+	
+	<div class="dropdown">	
+		<button class="btn btn-outline-secondary dropbtn" >會員中心</button>
+				<div class="dropdown-content">
+				<button  id="admin1" name="admin" class="btn btn-outline-secondary">會員資訊</button>				
+				<button  id="inf" name="mb_inf" class="btn btn-outline-secondary">會員資訊</button>				
+				<button  id="third" name="third" class="btn btn-outline-secondary">會員資訊</button>				
+				<button  id="Modify" name="Modify" class="btn btn-outline-secondary">會員修改</button>				
 				<button  id="pwdModify" name="pwdModify" class="btn btn-outline-secondary">密碼修改</button>
+				</div>
 				</div>
 				<form name=a3 class=a3 action="<c:url value='/collectlist' />" method="get">
 				<div>
@@ -112,15 +155,109 @@ div {
 				</form>
 				<div>
 				<button type="button" id="editBookReport" name="getjoinrecords" class="btn btn-outline-secondary">讀書心得</button>
-				</div>
-				</div>
-	</fieldset>
+				</div>		
+	</div>
+	
+	
+
+<!-- 新的會員CITY -->
+<!-- <div class="row"> -->
+<!--     uncomment code for absolute positioning tweek see top comment in css -->
+<!--     <div class="absolute-wrapper"> </div> -->
+<!--     Menu -->
+<!--     <div class="side-menu"> -->
+    
+<!--     <nav class="navbar navbar-default" role="navigation"> -->
+<!--     Brand and toggle get grouped for better mobile display -->
+<!--     <div class="navbar-header "> -->
+<!--         <div class="brand-wrapper"> -->
+<!--             Hamburger -->
+<!--             <button type="button" class="navbar-toggle"> -->
+<!--                 <span class="sr-only">Toggle navigation</span> -->
+<!--                 <span class="icon-bar"></span> -->
+<!--                 <span class="icon-bar"></span> -->
+<!--                 <span class="icon-bar"></span> -->
+<!--             </button> -->
+
+
+
+
+<!--             Search body -->
+<!--             <div id="search" class="panel-collapse collapse"> -->
+<!--                 <div class="panel-body"> -->
+<!--                     <form class="navbar-form" role="search"> -->
+<!--                         <div class="form-group"> -->
+<!--                             <input type="text" class="form-control" placeholder="Search"> -->
+<!--                         </div> -->
+<!--                         <button type="submit" class="btn btn-default "><span class="glyphicon glyphicon-ok"></span></button> -->
+<!--                     </form> -->
+<!--                 </div> -->
+<!--             </div> -->
+<!--         </div> -->
+
+<!--     </div> -->
+
+<!--     Main Menu -->
+<!--     <div class="side-menu-container"> -->
+<!--         <ul class="nav navbar-nav"> -->
+
+<!--             <li><a href="#"><span class="glyphicon glyphicon-send"></span> Link</a></li> -->
+<!--             <li class="active"><a href="#"><span class="glyphicon glyphicon-plane"></span> Active Link</a></li> -->
+<!--             <li><a href="#"><span class="glyphicon glyphicon-cloud"></span> Link</a></li> -->
+
+<!--             Dropdown -->
+<!--             <li class="panel panel-default" id="dropdown"> -->
+<!--                 <a data-toggle="collapse" href="#dropdown-lvl1"> -->
+<!--                     <span class="glyphicon glyphicon-user"></span> Sub Level <span class="caret"></span> -->
+<!--                 </a> -->
+
+<!--                 Dropdown level 1 -->
+<!--                 <div id="dropdown-lvl1" class="panel-collapse collapse"> -->
+<!--                     <div class="panel-body"> -->
+<!--                         <ul class="nav navbar-nav"> -->
+<!--                             <li><a href="#">Link</a></li> -->
+<!--                             <li><a href="#">Link</a></li> -->
+<!--                             <li><a href="#">Link</a></li> -->
+
+<!--                             Dropdown level 2 -->
+<!--                             <li class="panel panel-default" id="dropdown"> -->
+<!--                                 <a data-toggle="collapse" href="#dropdown-lvl2"> -->
+<!--                                     <span class="glyphicon glyphicon-off"></span> Sub Level <span class="caret"></span> -->
+<!--                                 </a> -->
+<!--                                 <div id="dropdown-lvl2" class="panel-collapse collapse"> -->
+<!--                                     <div class="panel-body"> -->
+<!--                                         <ul class="nav navbar-nav"> -->
+<!--                                             <li><a href="#">Link</a></li> -->
+<!--                                             <li><a href="#">Link</a></li> -->
+<!--                                             <li><a href="#">Link</a></li> -->
+<!--                                         </ul> -->
+<!--                                     </div> -->
+<!--                                 </div> -->
+<!--                             </li> -->
+<!--                         </ul> -->
+<!--                     </div> -->
+<!--                 </div> -->
+<!--             </li> -->
+
+<!--             <li><a href="#"><span class="glyphicon glyphicon-signal"></span> Link</a></li> -->
+
+<!--         </ul> -->
+<!--     </div>/.navbar-collapse -->
+<!-- </nav> -->
+    
+<!--     </div> -->
+<!-- </div> -->
+<!-- </div> -->
+<!-- 新的會員CITY -->	
+	
+	
+	
 	<div id="change123" style="width:1500px;margin-left:10px ">
 									<fieldset id="mb_inf">
 									<legend>會員資料</legend>
 									<form>
 									<div>
-									<img src="${loginUser.mb_pic}" style="width: 200px; height: 200px; text-align:center; border-radius: 50%;"/>
+									<img src="${login.mb_pic}" style="width: 200px; height: 200px; text-align:center; border-radius: 50%;"/>
 									</div>
 									<br>
 									<table class="table" >
@@ -129,8 +266,8 @@ div {
 									<th scope="col" >姓名</th>
 									</tr>
 									<tr class="table-light">
-									<td>${loginUser.mb_Account}</td>
-									<td>${loginUser.mb_Name}</td>
+									<td>${login.mb_Account}</td>
+									<td>${login.mb_Name}</td>
 									</tr>
 
 								<tr class="tr2">
@@ -138,36 +275,36 @@ div {
 									<th scope="col">電話</th>
 								</tr>
 								<tr class="table-light">
-									<td>${loginUser.mb_Sex}</td>
-									<td>${loginUser.mb_Tel}</td>
+									<td>${login.mb_Sex}</td>
+									<td>${login.mb_Tel}</td>
 								</tr>
 
 								<tr class="tr2">
 									<th colspan="2">生日</th>
 								</tr>
 								<tr class="table-light">
-									<td colspan="2">${loginUser.mb_Birthday}</td>
+									<td colspan="2">${login.mb_Birthday}</td>
 								</tr>
 
 								<tr class="tr2">
 					      		<th colspan="2">Email</th>
 								</tr>
 								<tr class="table-light">
-									<td colspan="2">${loginUser.mb_Mail}</td>
+									<td colspan="2">${login.mb_Mail}</td>
 								</tr>
 
 								<tr class="tr2">
 									<th colspan="2">地址</th>
 								</tr>
 								<tr  class="table-light">
-									<td colspan="2">${loginUser.mb_Address}</td>
+									<td colspan="2">${login.mb_Address}</td>
 								</tr>
 
 								<tr class="tr2">
 									<th colspan="2">喜好類型</th>
 									</tr>
 								<tr  class="table-light">
-									<td colspan="2">${loginUser.mb_type}</td>
+									<td colspan="2">${login.mb_type}</td>
 								</tr>
 
 							</table>
@@ -180,6 +317,30 @@ div {
 	<footer class="container py-5" id="bookWebFooter"></footer>
 	<!-- footer -->
 	</body>
+	
+	<script>
+	$(function () {
+	    $('.navbar-toggle').click(function () {
+	        $('.navbar-nav').toggleClass('slide-in');
+	        $('.side-body').toggleClass('body-slide-in');
+	        $('#search').removeClass('in').addClass('collapse').slideUp(200);
+
+	        /// uncomment code for absolute positioning tweek see top comment in css
+	        //$('.absolute-wrapper').toggleClass('slide-in');
+	        
+	    });
+	   
+	   // Remove menu for searching
+	   $('#search-trigger').click(function () {
+	        $('.navbar-nav').removeClass('slide-in');
+	        $('.side-body').removeClass('body-slide-in');
+
+	        /// uncomment code for absolute positioning tweek see top comment in css
+	        //$('.absolute-wrapper').removeClass('slide-in');
+
+	    });
+	});
+	</script>
 	<script>
 	$(document).ready(function() {
 		$("#bookWebheader").load("<c:url value='/header'/>");
@@ -314,6 +475,7 @@ div {
 						+"</form>"
 					+"</fieldset>"	
 		 			$('#change123').html(insertData);
+					birthday();
 				}
 	 });
         })
@@ -496,9 +658,11 @@ div {
 									+"<button type=\"reset\">清除</button>"
 								+"</div>"
 							+"</fieldset>"
+						 +"<button id=\"insert\" type=\"button\">一鍵輸入</button>"
 						+"</form>"
 				 			$('#change123').html(insertData);
 						showImage();
+						birthday();
 						},
 						error:function(){
 							alert("fuck")
@@ -573,6 +737,11 @@ div {
 			 
 			 
 		function showImage(){
+        	$('#insert').click(function(){
+        		$('#address').val("宜蘭縣員山鄉")
+        		$('#tel').val("0912345678")
+        	})
+        	
     	   $("#myfile").change(function() {
    			console.log("123")
    			var readFile = new FileReader();
@@ -585,7 +754,23 @@ div {
    			}
    		});	  	   
        }
-		
+		function birthday(){
+			$(document).ready(function() {
+				var date_now = new Date();
+				//得到当前年份
+				var year = date_now.getFullYear();
+				//得到当前月份
+				//注：
+				//  1：js中获取Date中的month时，会比当前月份少一个月，所以这里需要先加一
+				//  2: 判断当前月份是否小于10，如果小于，那么就在月份的前面加一个 '0' ， 如果大于，就显示当前月份
+				var month = date_now.getMonth()+1 < 10 ? "0"+(date_now.getMonth()+1) : (date_now.getMonth()+1);
+				//得到当前日子（多少号）
+				var date = date_now.getDate() < 10 ? "0"+date_now.getDate() : date_now.getDate();
+				//设置input标签的max属性
+				$("#birthday").attr("max",year+"-"+month+"-"+date);	
+			})
+			}
+		}
        
       
 //        $("#admin1").click(function(){
@@ -716,4 +901,6 @@ div {
 		});
 		
 	</script>
+	
+	
 </html>

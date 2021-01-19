@@ -1,5 +1,6 @@
 package com.web.book.controller;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -9,6 +10,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -388,16 +390,36 @@ public class SearchBookController {
 		}
 	    return book;   
 	}
+	//導出搜尋收藏清單
+	@PostMapping("collectlist/searchbctag/{key}")
+	@ResponseBody
+	public List<Map<String, Object>> searchbctag(
+			@PathVariable(value = "key", required = false) String key ,
+			@ModelAttribute("loginUser") MemberBean loginUser
+			) {			
+		System.out.println("************************"+key);
+		List<Map<String, Object>> book = new ArrayList<>();
+		List<BookCollectBean> result=searchService.getKeyCollect(loginUser.getMb_ID(), key);
+		for (BookCollectBean bookCollectBean : result) {
+			Map<String, Object> data = new HashMap<>();
+			data.put("bc_ID", bookCollectBean.getBc_ID());
+			data.put("bk_ID", bookCollectBean.getBook().getBk_ID());
+			data.put("bk_Name", bookCollectBean.getBook().getBk_Name());
+			data.put("bk_Author", bookCollectBean.getBook().getBk_Author());
+			data.put("bk_Publish", bookCollectBean.getBook().getBk_Publish());
+			data.put("bk_Date",String.valueOf(bookCollectBean.getBook().getBk_Date()));
+			data.put("bk_Pic", bookCollectBean.getBook().getBk_Pic());
+			data.put("bk_Content", bookCollectBean.getBook().getBk_Content());
+			book.add(data);
+		}
+	    return book;   
+	}
 	
 	
 	// 取得收藏tag
 	@GetMapping("/searchbook/checktag/{bc_ID}")
 	public @ResponseBody BookCollectBean gotoCheckTag(@PathVariable("bc_ID") Integer bc_id) {
-//		Map<String, Object>  data1 = new HashMap<>();
 		BookCollectBean data=searchService.getbctag(bc_id);
-//		data.put("tag1", bc.getBc_Tag_one());
-//		data.put("tag2", bc.getBc_Tag_two());
-//		data.put("tag3", bc.getBc_Tag_three());		
 		return data;
 	}
 	
@@ -406,12 +428,31 @@ public class SearchBookController {
 	//加tag
 	@PostMapping("/setbctag")
 	@ResponseBody
-	public BookCollectBean checkBookReport(
+	public BookCollectBean setbctag(
 			@RequestParam(value = "a", required = false) String tag1 ,
+			@RequestParam(value = "c", required = false) String tag2 ,
+			@RequestParam(value = "d", required = false) String tag3 ,
 			@RequestParam(value = "b", required = false) Integer bcId) {			
 		System.out.println("************************"+tag1);
+		System.out.println("************************"+tag2);
+		System.out.println("************************"+tag3);
 		System.out.println("************************"+bcId);
-		BookCollectBean data=searchService.setbctag(bcId, tag1);
+		BookCollectBean data=searchService.setbctag(bcId, tag1, tag2, tag3);
+		return data;
+	}
+	//刪tag
+	@PostMapping("/deletebctag")
+	@ResponseBody
+	public BookCollectBean deletebctag(
+			@RequestParam(value = "a", required = false) String tag1 ,
+			@RequestParam(value = "c", required = false) String tag2 ,
+			@RequestParam(value = "d", required = false) String tag3 ,
+			@RequestParam(value = "b", required = false) Integer bcId) {			
+		System.out.println("========================"+tag1);
+		System.out.println("************************"+tag2);
+		System.out.println("************************"+tag3);
+		System.out.println("************************"+bcId);
+		BookCollectBean data=searchService.deletebctag(bcId, tag1, tag2, tag3);
 		return data;
 	}
 	
@@ -621,4 +662,25 @@ public class SearchBookController {
 		model.addAttribute("allbookfive", allbookfive);
 		return "SearchBook/Search";
 	}
+	
+	
+//	@GetMapping("/showPDF")
+//	public ResponseEntity<byte[]> pdfDownload(
+//	        HttpServletRequest httpServletRequest
+//	) throws IOException
+//	{
+//	    String path = XXX省略。。。
+//	    File file = new File(path);
+//	    HttpHeaders httpHeaders = new HttpHeaders();
+//	    String fileName = "收藏清單";
+//	    httpHeaders.setContentDispositionFormData("attachment",java.net.URLEncoder.encode(fileName,"UTF-8"));
+//	    httpHeaders.setContentType(MediaType.parseMediaType("application/pdf"));
+//	    return new ResponseEntity<byte[]>(FileUtils.readFileToByteArray(file),
+//	            httpHeaders,
+//	            HttpStatus.CREATED);
+//	}
+	
+	
+	
+	
 }
