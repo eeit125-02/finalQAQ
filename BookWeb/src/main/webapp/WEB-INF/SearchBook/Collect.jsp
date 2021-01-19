@@ -41,10 +41,8 @@ padding:5px;
 ::placeholder{
 color:#336666;
 }
-
 input{
 padding:2px 5px;
-/* margin: 15px 0px; */
 border: none;
 background-color:#D1E9E9;
 border-radius:10px;
@@ -54,9 +52,19 @@ input:focus::placeholder{
 color:#D1E9E9;
 }
 input:focus{
-/* border-color:pink; */
-/* border-color: red; */
 outline:none;
+}
+.tagtype{
+color:	#984B4B;
+padding:2px 5px;
+border: none;
+background-color:#E1C4C4;
+border-radius:10px;
+text-align: center;
+}
+label{
+background-color:#FFF4C1;
+margin-right:10px;
 }
 </style>
 
@@ -128,7 +136,8 @@ outline:none;
 					success : function(data) {
 						var insertData = "<div>";
 						for (let i = 0; i < data.length; i++) {
-							insertData += "<div class=\"row\">"
+// 							insertData += "<div class=\"row\">"
+							insertData = "<div class=\"row\">"
 								+"<div class=\"col-sm-2\">"
 								+"<img class=\"itemcov\" alt=\"\" src=\""
 								+data[i].bk_Pic
@@ -153,15 +162,9 @@ outline:none;
 								
 // 								+"<span class='badge badge-light'>自訂標籤</span>"
 								+"<label>自訂標籤</label>"
-								+"<span id='tag1'><input id='newtag1' placeholder='標籤1' onkeydown='this.onkeyup();' onkeyup='this.size=(this.value.length>4?this.value.length:4);' size='4'>"
-								+"<button type=\"submit\" class=\"btn btn-outline-danger btn-sm \" onclick=\"insertag();\"value=\""
-								+"\">＋</button></span>"								
-								+"<span id='tag2'><input placeholder='標籤2' onkeydown='this.onkeyup();' onkeyup='this.size=(this.value.length>4?this.value.length:4);' size='4'>"
-								+"<button type=\"submit\" class=\"btn btn-outline-danger btn-sm \" onclick=\"insertag();\"value=\""
-								+"\">＋</button></span>"	
-								+"<span id='tag3'><input placeholder='標籤3' onkeydown='this.onkeyup();' onkeyup='this.size=(this.value.length>4?this.value.length:4);' size='4'>"
-								+"<button type=\"submit\" class=\"btn btn-outline-danger btn-sm \" onclick=\"insertag();\"value=\""
-								+"\">＋</button></span>"	
+								+"<span id='tag1"+data[i].bc_ID+"'></span>"								
+								+"<span id='tag2'></span>"	
+								+"<span id='tag3'></span>"	
 								
 								+"<button id=\"cancel\" type=\"submit\" class=\"btn btn-outline-danger btn-sm collect\" onclick=\"deletebc(" + data[i].bc_ID + ");\"value=\""
 								+data[i].bc_ID
@@ -173,9 +176,11 @@ outline:none;
 								+"</div>"
 // 								+"<br>"
 								+"<hr>"
+					$("#bookcollectlist").append(insertData);	
+					loadTagList(data[i].bc_ID);
 					}
-					insertData += "</div>"
-					$("#bookcollectlist").html(insertData);	
+// 					insertData += "</div>"
+// 					$("#bookcollectlist").html(insertData);	
 					}
 				});
 			}
@@ -204,6 +209,39 @@ outline:none;
 			});
 			
 		}
+			
+			
+			
+			function loadTagList(a) {
+				let bc_ID = a;
+				let editURL = "searchbook/checktag/"+a;
+				$.ajax({
+					async : false,
+					type : 'GET',
+					url : editURL,
+					dataType : "json",
+					contentType : "application/json;charset=utf-8",
+					success : function(data) {
+						console.log(data.bc_Tag_one + "!!!!");
+						console.log(data.bc_Tag_one!="null");
+						
+						if (data.bc_Tag_one != null) {		
+							var htmltag1ok = "<span class='tagtype'>"+data.bc_Tag_one+"</span>"
+							+"<button type='submit' class='btn btn-link btn-sm' onclick='deletetag();' value=''>"
+							+"<img src='${pageContext.request.contextPath}/image/X.png' width='18px'>"
+							+"</button>"
+							$('#tag1'+a).html(htmltag1ok);
+						}else {
+							var htmltag1 ="<input id='newtag1' placeholder='標籤1' onkeydown='this.onkeyup();' onkeyup='this.size=(this.value.length>4?this.value.length:4);' size='4'>"
+								+"<button type='submit' class='btn btn-link btn-sm' onclick='insertag();' value=''>"
+								+"<img src='${pageContext.request.contextPath}/image/O.png' width='18px'>"
+								+"</button>"
+							$('#tag1'+a).html(htmltag1);
+						}
+					}
+				});
+			}
+			
 			
 			
 			

@@ -34,6 +34,12 @@
 		font-size: 3.5rem;
 	}
 }
+
+.btn-outline-secondary{
+background-color:#B3D9D9;
+color:#3C3C3C;
+}
+
 </style>
 <script>
 	$(document).ready(function() {
@@ -167,31 +173,71 @@
 							
 							<div class="form-row">
                         	<div class="form-group input_fields_wrap">
-                        	<div class="btn-group-toggle" data-toggle="buttons">
-						    <label >活動標籤:</label><br>
-						    <p class="btn btn-outline-secondary"style="margin:3px">
-							<input type="checkbox" name="戶外體驗" value="2" /> 
+                        	<div class="btn-group-toggle" data-toggle="buttons" >
+						    <label >活動標籤:</label>
+						    <br>
+							<p class="btn btn-info"style="margin:3px">
+								<input type="checkbox" name="b" value="2" /> 戶外體驗
 							</p>
-							<p class="btn btn-outline-secondary"style="margin:3px">
-								<input type="checkbox" name="b" value="3" /> 散文
+							<p class="btn btn-info"style="margin:3px">
+								<input type="checkbox" name="b" value="3" /> 學習
 							</p>
-							<p class="btn btn-outline-secondary"style="margin:3px">
-								<input type="checkbox" name="b" value="4" /> 戀愛/言情 小說
+							<p class="btn btn-info"style="margin:3px">
+								<input type="checkbox" name="b" value="4" /> 親子
 							</p>
-							<p class="btn btn-outline-secondary"style="margin:3px">
-								<input type="checkbox" name="b" value="5" /> 武俠/歷史 小說
+							<p class="btn btn-info"style="margin:3px">
+								<input type="checkbox" name="b" value="5" /> 寵物
 							</p>
-							<p class="btn btn-outline-secondary"style="margin:3px">
-								<input type="checkbox" name="b" value="6" /> 推理/驚悚 小說
+							<p class="btn btn-info"style="margin:3px">
+								<input type="checkbox" name="b" value="6" /> 科技
 							</p>
-							<p class="btn btn-outline-secondary"style="margin:3px">
-								<input type="checkbox" name="b" value="7" /> 科幻/奇幻 小說
+							<p class="btn btn-info"style="margin:3px">
+								<input type="checkbox" name="b" value="7" /> 商業
 							</p>
-							<p class="btn btn-outline-secondary"style="margin:3px">
-								<input type="checkbox" name="b" value="8" /> 溫馨/療癒 小說
+							<p class="btn btn-info"style="margin:3px">
+								<input type="checkbox" name="b" value="8" /> 創業
 							</p>
-							<p class="btn btn-outline-secondary"style="margin:3px">
-								<input type="checkbox" name="b" value="9" /> 翻譯文學
+							<p class="btn btn-info"style="margin:3px">
+								<input type="checkbox" name="b" value="9" /> 投資
+							</p>
+							<p class="btn btn-info"style="margin:3px">
+								<input type="checkbox" name="b" value="9" /> 設計
+							</p>
+							<p class="btn btn-info"style="margin:3px">
+								<input type="checkbox" name="b" value="9" /> 藝文
+							</p>
+							<p class="btn btn-info"style="margin:3px">
+								<input type="checkbox" name="b" value="9" /> 手作
+							</p>
+							<p class="btn btn-info"style="margin:3px">
+								<input type="checkbox" name="b" value="9" /> 美食
+							</p>
+							<p class="btn btn-info"style="margin:3px">
+								<input type="checkbox" name="b" value="9" /> 攝影
+							</p>
+							<p class="btn btn-info"style="margin:3px">
+								<input type="checkbox" name="b" value="9" /> 遊戲
+							</p>
+							<p class="btn btn-info"style="margin:3px">
+								<input type="checkbox" name="b" value="9" /> 運動
+							</p>
+							<p class="btn btn-info"style="margin:3px">
+								<input type="checkbox" name="b" value="9" /> 健康
+							</p>
+							<p class="btn btn-info"style="margin:3px">
+								<input type="checkbox" name="b" value="9" /> 音樂
+							</p>
+							<p class="btn btn-info"style="margin:3px">
+								<input type="checkbox" name="b" value="9" /> 電影
+							</p>
+							<p class="btn btn-info"style="margin:3px">
+								<input type="checkbox" name="b" value="9" /> 娛樂
+							</p>
+							<p class="btn btn-info"style="margin:3px">
+								<input type="checkbox" name="b" value="9" /> 時尚
+							</p>
+							<p class="btn btn-info"style="margin:3px">
+								<input type="checkbox" name="b" value="9" /> 公益
 							</p>
                             </div>
                             </div>
