@@ -86,15 +86,49 @@
 	})
 	
 	function viewData(reportId){
-		console.log(reportId)
-		/* $('#change123').load( "http://localhost:8080/BookWeb/BookReport/"+reportId ); */
-		
+		var insertHtml;
+		window.open("http://localhost:8080/BookWeb/BookReport/"+reportId);
+		/* $.ajax({
+			async : false,
+			type : 'POST',
+			url : getBookReportURL,
+			dataType : "json",
+			contentType : "application/json;charset=utf-8",
+			success : function(data) {
+				
+				<div class="modal-body">
+					<div class="media">
+						<img id="bk_Pic" src="" class="w-25 p-3" alt="...">
+						<div class="media-body">
+							<h5 class="mt-0" id="bk_Name">書名：</h5>
+							<br>
+							<p class="mt-0 messageSize" id="bk_Author">作者：</p>
+							<p class="mt-0 messageSize" id="bk_Publish">出版社：</p>
+							<p class="mt-0 messageSize" id="bk_Author">作者：</p>
+							<p class="mt-0 messageSize" id="bk_DataTime">撰寫日期：</p>
+							評分：<div id="rateYoEdit"></div>
+						</div>
+					</div>
+					<label for="message-text" class="col-form-label">心得:</label>
+					<p class="mt-0 messageSize" id="br_Content">心得內容</p>
+				</div>
+				
+				$('#bk_Name').html(data.bk_Name);
+				$('#bk_Author')
+						.html("作者：" + data.bk_Author);
+				$('#bk_Publish').html(
+						"出版社：" + data.bk_Publish);
+				$('#bk_Pic').attr('src', data.bk_Pic);
+				$('#bk_DataTime').html("撰寫日期"+data.br_DateTime);
+				$('#br_Content').html(data.br_Content);
+				$rateYo.rateYo("rating", data.br_Score);
+			}
+		});
 		swal.fire({
 			  title: "<i>Title</i>", 
 			  html: "<div id = \"change1\"><div>",  
-			  confirmButtonText: "V <u>redu</u>", 
-		});
-		$('#change1').load( "http://localhost:8080/BookWeb/BookReport/"+reportId )
+			  confirmButtonText: "ok", 
+		}); */
 	}
 	
 	function DelData(deleteBrId){
