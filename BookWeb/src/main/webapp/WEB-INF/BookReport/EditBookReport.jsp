@@ -27,6 +27,7 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/jquery.rateyo.css"/>
 <script src="${pageContext.request.contextPath}/js/jquery.rateyo.js"></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/ckeditor/ckeditor.js"></script>
 
 <style>
 .bd-placeholder-img {
@@ -62,12 +63,9 @@
 
 	<!-- 版主介紹 -->
 	<div class="container media">
-		<!-- <img src="..." class="align-self-start mr-3" alt="..."> -->
 		<div class="media-body">
-			<h2 class="mt-0" id="memberName">閱讀履歷管理</h4>
-			<h5 class="mt-0 text-muted"></h5>
-			<hr>
-			<!-- <p style="height: 100px;">簡介</p> -->
+			<h2 class="mt-0" id="memberName">閱讀履歷管理</h2>
+			<br>
 		</div>
 	</div>
 	<!-- 版主介紹 -->
@@ -75,13 +73,14 @@
 	<!--功能列-->
 	<nav class="container">
 
-		<div class="nav nav-tabs" id="nav-tab" role="tablist">
-			<a class="nav-item nav-link active" id="nav-read-tab"
+		<div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
+			<a class="nav-item nav-link active messageSize" id="nav-read-tab"
 				data-toggle="tab" href="#bookReportList" role="tab"
-				aria-controls="nav-home" aria-selected="true">讀書心得</a> <a
-				class="nav-item nav-link" id="nav-fav-tab" data-toggle="tab"
+				aria-controls="nav-home" aria-selected="true">讀書心得</a> 
+			<a class="nav-item nav-link messageSize" id="nav-fav-tab" data-toggle="tab"
 				href="#nav-fav" role="tab" aria-controls="nav-contact"
-				aria-selected="false">收藏</a> <a class="nav-item nav-link"
+				aria-selected="false">收藏</a> 
+			<a class="nav-item nav-link messageSize"
 				id="nav-com-tab" data-toggle="tab" href="#nav-com" role="tab"
 				aria-controls="nav-contact" aria-selected="false">評論</a>
 		</div>
@@ -199,7 +198,7 @@
 
 	<!--編輯畫面-->
 	<div class="modal" role="dialog" id="editModal" tabindex="-1">
-		<div class="modal-dialog">
+		<div class="modal-dialog modal-lg">
 			<div class="modal-content">
 				<div class="modal-header">
 					<h5 class="modal-title">更改內容</h5>
@@ -213,16 +212,12 @@
 						<img id="bk_Pic" src="" class="w-25 p-3" alt="...">
 						<div class="media-body">
 							<h5 class="mt-0" id="bk_Name">書名：</h5>
-							<p class="mt-0" id="bk_Author">作者：</p>
-							<p class="mt-0" id="bk_Publish">出版社：</p>
-							
-							評分：<select id="br_Score">
-								<option>1</option>
-								<option>2</option>
-								<option>3</option>
-								<option>4</option>
-								<option>5</option>
-							</select>分
+							<br>
+							<p class="mt-0 messageSize" id="bk_Author">作者：</p>
+							<p class="mt-0 messageSize" id="bk_Publish">出版社：</p>
+							<p class="mt-0 messageSize" id="bk_Author">作者：</p>
+							<p class="mt-0 messageSize" id="bk_DataTime">撰寫日期：</p>
+							評分：<div id="rateYoEdit"></div>
 						</div>
 					</div>
 					<label for="message-text" class="col-form-label">心得:</label>
@@ -271,7 +266,10 @@
 	<!-- footer -->
 
 	<script>
-
+		
+		let brScore = 0;
+		var editor;
+		
 		$(document).ready(function() {
 			
 			$("#bookWebheader").load("//localhost:8080/BookWeb/header");
@@ -281,6 +279,13 @@
 			loadCollectReport();
 			loadReportMessageList();
 			
+			
+		});
+		
+		var $rateYo = $("#rateYoEdit").rateYo({
+			rating: 0.0,
+			fullStar: true,
+		    spacing: "10px"
 		});
 		
 		
@@ -296,10 +301,11 @@
 		});
 
 		$('#editButton').click(function() {
+			
 			var editData = {
 				br_ID : $(this).val(),
-				br_Score : $('#br_Score').val(),
-				br_Content : $('#br_Content').val().replace(/\n|\r\n/g, "<br>")
+				br_Score : $rateYo.rateYo("rating"),
+				br_Content : editor.getData()
 			};
 			var editURL = location.href + "/upDateBookReport";
 			$.ajax({
@@ -310,6 +316,7 @@
 				dataType : "json",
 				success : function(data) {
 					if (data) {
+						$('#bookReportList').html("test");
 						loadBookReportList();
 					}
 				}
@@ -361,7 +368,7 @@
 								  	+ "<div class=\"card flex-md-row mb-4 shadow-sm h-md-250\">"
 								  	+ "<div class=\"card-body d-flex flex-column align-items-start\">"
 						      	  	+ "<h3 class=\"mb-0\">"
-						      	  	+ "<a class=\"text-dark\" href=\"http://localhost:8080/BookWeb/BookReport/"+ data[i].brId +"\">"+ data[i].brName +"</a>"
+						      	  	+ "<a class=\"text-dark \" href=\"http://localhost:8080/BookWeb/BookReport/"+ data[i].brId +"\">"+ data[i].brName +"</a>"
 								  	+ "</h3>"
 									+ "<div class=\"mb-1 text-muted\">"
 									+ "撰寫者："+ data[i].mbAccount
@@ -425,22 +432,25 @@
 								+ "\" width=\"100%\" height=\"100%\" />"
 								+ "</svg>"
 								+ "<div class=\"card-body\">"
-								+ "<p class=\"card-text ellipsis\">"
+								+ "<p class=\"card-text ellipsis messageSize\">"
 								+ data[i].bk_Name
 								+ "</p>"
-								+ "<p class=\"card-text\">作者："
+								+ "<p class=\"card-text messageSize\">作者："
 								+ data[i].bk_Author
 								+ "</p>"
-								+ "<p class=\"card-text\">評分："
-								+ data[i].br_Score
-								+ "</p>"
+								+ "<div class=\"form-inline\">"
+								+ "<label class=\"card-text messageSize\">評分："
+								+ "<div id=rateYo"+ data[i].br_ID +"></div>"
+								+ "</label>"
+								+ "</div>"
+								+ "<br>"
 								+ "<div class=\"d-flex justify-content-between align-items-center\">"
 								+ "<div class=\"btn-group\">"
-								+ "<button type=\"button\" class=\"btn btn-sm btn-outline-secondary\" id=\"view\" value=\""+data[i].br_ID+"\">view</button>"
-								+ "<button type=\"button\" class=\"btn btn-sm btn-outline-secondary\" data-toggle=\"modal\" data-target=\"#editModal\" id=\"edit\" value=\""+data[i].br_ID+"\">Edit</button>"
-								+ "<button type=\"button\" class=\"btn btn-sm btn-outline-secondary\" data-toggle=\"modal\" data-target=\"#deletModal\" id=\"delete\" value=\""+data[i].br_ID+"\">Delete</button>"
+								+ "<button type=\"button\" class=\"btn  btn-outline-secondary\" id=\"view\" value=\""+data[i].br_ID+"\">view</button>"
+								+ "<button type=\"button\" class=\"btn  btn-outline-secondary\" data-toggle=\"modal\" data-target=\"#editModal\" id=\"edit\" value=\""+data[i].br_ID+"\">Edit</button>"
+								+ "<button type=\"button\" class=\"btn  btn-outline-secondary mr-1\" data-toggle=\"modal\" data-target=\"#deletModal\" id=\"delete\" value=\""+data[i].br_ID+"\">Delete</button>"
 								+ "</div>"
-								+ "<small class=\"text-muted\">創建日期：<br>"
+								+ "<small class=\"text-muted\" style=\"font-size:15px;\">創建日期：<br>"
 								+ data[i].br_DateTime
 								+ "</small>"
 								+ "</div>"
@@ -450,6 +460,15 @@
 					}
 					insertData += "</div>"
 					$('#bookReportList').html(insertData);
+					
+					for(var i = 0; i < data.length; i++){	
+						$("#rateYo"+ data[i].br_ID).rateYo({
+							rating: data[i].br_Score,
+						    spacing: "5px",
+						    starWidth: "20px",
+						    readOnly: true
+						});
+					}	
 				}
 			});
 			$('.btn-outline-secondary').click(function() {
@@ -474,11 +493,40 @@
 							$('#bk_Publish').html(
 									"出版社：" + data.bk_Publish);
 							$('#bk_Pic').attr('src', data.bk_Pic);
-							$('#br_Content').val(
-									data.br_Content.replace(/<br>/g,
-											"\n"));
+							$('#bk_DataTime').html("撰寫日期"+data.br_DateTime);
+							$('#br_Content').html(data.br_Content);
+							$rateYo.rateYo("rating", data.br_Score);
+							
+							CKEDITOR.addCss('.cke_editable { font-size: 20px; padding: 1em; }');
+						 	editor = CKEDITOR.replace( 'br_Content' ,{
+								toolbar: [
+							        {
+							          name: 'clipboard',
+							          items: ['Undo', 'Redo']
+							        },
+							        {
+								          name: 'styles',
+								          items: ['Format', 'Font', 'FontSize']
+								    },
+							        {
+							          name: 'basicstyles',
+							          items: ['Bold']
+								    },
+							        {
+							          name: 'colors',
+							          items: ['TextColor']
+							        },
+							        {
+							          name: 'align',
+							          items: ['JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock']
+							        }
+							      ]
+
+							      
+							});
 						}
 					});
+					
 				}
 				if($(this).attr("id") == 'view'){
 					window.location.href = "http://localhost:8080/BookWeb/BookReport/"+$(this).val();
@@ -504,11 +552,11 @@
 						insertData += "<li class=\"media my-4 messageSize\">"
 					    			+ "<img src=\""+ data[i].bkPic +"\" class=\"mr-3\" width=\"150px\">"
 					    			+ "<div class=\"media-body\">"
-					    			+ "<h5 class=\"mt-0 mb-1 messageSize\"><a href=\""+ data[i].brId + "\">"
+					    			+ "<h2 class=\"mt-0 mb-1 messageSize\"><a style=\" color:#146; font-size:20px;\" href=\""+ data[i].brId + "\">"
 					    			+ "<p class = \"messageSize\" >"
 					    			+ data[i].brName
 					    			+ "</p>"
-					    			+ "</a></h5>"
+					    			+ "</a></h2>"
 					    			+ "<p>留言日期："
 					    			+ data[i].bmDate
 					    			+ "</p>"

@@ -118,7 +118,7 @@ public class ActJoinController {
 		JavaMail jm = new JavaMail();
 		jm.SendAct(ajb.getMember().getMb_Mail(), act.getact_Name(), act.getact_Loc(),act.getact_Date(), act.getact_Time(),act.getact_Intro(),act.getact_Image(),loginUser.getMb_Name());
 		System.out.println("---------");
-		return "redirect:/showJoins";
+		return "redirect:showJoinbyID";
 	}
 
 	@GetMapping("/showJoinUpdateForm")
@@ -142,13 +142,15 @@ public class ActJoinController {
 			,@ModelAttribute("loginUser") MemberBean loginUser
 			, @ModelAttribute("ajb") ActJoinBean ajb
 			, @RequestParam(value = "act_ID") Integer act_ID
+			,@RequestParam("join_ID")Integer join_ID
 			, HttpServletRequest request
 			) {
-		ajb.setAct(actService.getAct(act_ID));
-		ajb.getMember().setMb_Account(loginUser.getMb_Account());
+		ActJoinBean actjoin = actjoinService.getActJoin(join_ID);
+		actjoin.getMember().setMb_Mail(ajb.getMember().getMb_Mail());
+		actjoin.getMember().setMb_Tel(ajb.getMember().getMb_Tel());
 //		ajb.getAct().getMember().setMb_Account(loginUser.getMb_Account());
-		actjoinService.updateActJoin(ajb);
-		return "redirect:/showJoins";
+		actjoinService.updateActJoin(actjoin);
+		return "redirect:showJoinbyID";
 	}
 
 	// 刪除活動後redirect所有報名紀錄
@@ -161,7 +163,7 @@ public class ActJoinController {
 		ActBean act=actService.getAct(act_ID);
 		act.setAct_Differentpax(act.getAct_Differentpax()-1);
 		actService.updateAct(act);
-		return "redirect:/showJoins";
+		return "redirect:showJoinbyID";
 	}
 
 }

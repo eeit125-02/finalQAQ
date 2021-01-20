@@ -13,7 +13,7 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Document</title>
+<title>書適圈</title>
 <!-- <link rel="stylesheet" href="login.css">   -->
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script
@@ -28,6 +28,7 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
 	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
 	crossorigin="anonymous">
+<link rel="icon" href="${pageContext.request.contextPath}/image/logo1.ico" type="image/x-icon" />
 <style>
 /* @import url(https://fonts.googleapis.com/earlyaccess/cwtexyen.css); */
 /* body { */

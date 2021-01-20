@@ -39,7 +39,7 @@ public class BookReportServiceImpl implements BookReportService {
 			data.put("bk_Name", bookReportBean.getBook().getBk_Name());
 			data.put("bk_Author", bookReportBean.getBook().getBk_Author());
 			data.put("br_Score", bookReportBean.getBr_Score());
-			data.put("br_DateTime", String.valueOf(bookReportBean.getBr_DateTime()));
+			data.put("br_DateTime", new SimpleDateFormat("yyyy-MM-dd").format(bookReportBean.getBr_DateTime()));
 			data.put("bk_Pic", bookReportBean.getBook().getBk_Pic());
 			book.add(data);
 		}
@@ -60,7 +60,7 @@ public class BookReportServiceImpl implements BookReportService {
 		
 		if (Boolean.TRUE.equals(isView)) {
 			
-			data.put("br_DateTime", bookReport.getBr_DateTime());
+			data.put("br_DateTime", new SimpleDateFormat("yyyy-MM-dd").format(bookReport.getBr_DateTime()));
 			data.put("br_Content", bookReport.getBr_Content());
 			data.put("br_Score", bookReport.getBr_Score());
 			data.put("br_Name", bookReport.getBr_Name());
@@ -80,6 +80,7 @@ public class BookReportServiceImpl implements BookReportService {
 			data.put("br_Score", bookReport.getBr_Score());
 			data.put("bk_Pic", bookReport.getBook().getBk_Pic());
 			data.put("br_Content", bookReport.getBr_Content());
+			data.put("br_DateTime", new SimpleDateFormat("yyyy-MM-dd").format(bookReport.getBr_DateTime()));
 			
 		}
 		return data;

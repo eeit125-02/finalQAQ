@@ -29,7 +29,7 @@
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
 	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
 	crossorigin="anonymous">
-	
+<link rel="icon" href="${pageContext.request.contextPath}/image/logo1.ico" type="image/x-icon" />	
 
 <!-- <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>  
@@ -54,7 +54,7 @@
 
 	});
 </script>
-<title>新增活動資料</title>
+<title>書適圈</title>
 </head>
 
 <body>
@@ -73,32 +73,32 @@
 		<div class="center">
 			<H1>新增報名資料</H1>
 			<form:form method="POST" modelAttribute="ajb" enctype="multipart/form-data" id="showAlert">
-
+			  <div>
 				<div class="form-row">
 					<div class="form-group col-md-6">
 					<label class="form-control">會員帳號:${loginUser.mb_Account}</label>
 <%-- 						<td><input type="hidden" name="mb_Account" value="${member.mb_Account}" /></td> --%>
 					<form:input type="hidden" path="member.mb_Account" value="${loginUser.mb_Account}"/>
 					
-                    <tr>
-						<td><label>活動名稱:${act_Name}</label></td>
+         
+					<label>活動名稱:${act_Name}</label>
 <%-- 						<td><input type="hidden" name="act_Name" value="${act.act_Name}" /></td> --%>
-					</tr>
+				
 
-                    <tr>
-						<td><label>會員姓名:${loginUser.getMb_Name()}</label></td>
+                 
+						<label>會員姓名:${loginUser.getMb_Name()}</label>
 <%-- 						<td><input type="hidden" name="mb_Name" value="${member.mb_Name}" /></td> --%>
-					</tr>
+				
 
-					<tr>
-						<td><form:label path="member.mb_Mail">email:</form:label></td>
-						<td><form:input path="member.mb_Mail" value="${loginUser.getMb_Mail()}"/></td>
-					</tr>
+				
+					<form:label path="member.mb_Mail">email:</form:label>
+					<form:input path="member.mb_Mail" value="${loginUser.getMb_Mail()}"/>
+					
 
-					<tr>
-						<td><form:label path="member.mb_Tel">聯絡電話:</form:label></td>
-						<td><form:input path="member.mb_Tel" value="${loginUser.getMb_Tel()}"/></td>
-					</tr>
+				
+					<form:label path="member.mb_Tel">聯絡電話:</form:label>
+					<form:input path="member.mb_Tel" value="${loginUser.getMb_Tel()}"/>
+				
 
 
 <!-- 					<tr> -->
@@ -106,19 +106,21 @@
 <%-- 						<td><form:input path="join_Pax" /></td> --%>
 <!-- 					</tr> -->
 
-				</table>
-
-
+				</div>
+</div>
+</div>
 <!-- 				<input type='submit' value='提交' id="confirmjoin"/> -->
-				<input type='reset' value='還原' />
+				
 				<br>
 				<br>
 			</form:form>
-			<button id="cools" type='button' onclick='cool()' >123</button>
+			</div>
+			<input type='reset' value='還原' />
+			<button id="cools" type='button' onclick='cool()' >提交</button>
 				<a href='${pageContext.request.contextPath}/showActs'>繼續探索活動</a>
 
+</div>
 
-		</div>
 		<!-- body -->
 
 		<!-- footer -->
@@ -133,47 +135,46 @@
 	function cool(){
 		console.log("12222")
 		
-		Swal.fire({
-		  title: 'Are you sure?',
-		  text: "You won't be able to revert this!",
-		  icon: 'warning',
-		  showCancelButton: true,
-		  confirmButtonColor: '#3085d6',
-		  cancelButtonColor: '#d33',
-		  confirmButtonText: 'Yes, delete it!',
-		  background: '#fff url(/images/trees.png)',
-		  backdrop: `
-		    rgba(0,0,123,0.4)
-		    url("https://i.imgur.com/60cOgdt.gif")
-		    left top
-		    no-repeat
-		  `
-		}).then((result) => {
-		  if (result.isConfirmed) {
-		    Swal.fire(
-		      'Deleted!',
-		      'Your file has been deleted.',
-		      'success'
-		    ).then((result)=>{
-		    	$('#showAlert').submit();
-		    })
-		  }
-		})
+// 		Swal.fire({
+// 		  title: 'Are you sure?',
+// 		  text: "You won't be able to revert this!",
+// 		  icon: 'warning',
+// 		  showCancelButton: true,
+// 		  confirmButtonColor: '#3085d6',
+// 		  cancelButtonColor: '#d33',
+// 		  confirmButtonText: 'Yes, delete it!',
+// 		  background: '#fff url(/images/trees.png)',
+// 		  backdrop: `
+// 		    rgba(0,0,123,0.4)
+// 		    url("https://i.imgur.com/60cOgdt.gif")
+// 		    left top
+// 		    no-repeat
+// 		  `
+// 		}).then((result) => {
+// 		  if (result.isConfirmed) {
+// 		    Swal.fire(
+// 		      'Deleted!',
+// 		      'Your file has been deleted.',
+// 		      'success'
+// 		    ).then((result)=>{
+// 		    	$('#showAlert').submit();
+// 		    })
+// 		  }
+// 		})
 		
-	// 	Swal.fire({
-	// 		  title: '您已報名成功囉!',
-	// 		  width: 600,
-	// 		  padding: '3em',
-	// 		  background: '#fff url(/images/trees.png)',
-	// 		  backdrop: `
-	// 		    rgba(0,0,123,0.4)
-	// 		    url("https://i.imgur.com/60cOgdt.gif")
-	// 		    left top
-	// 		    no-repeat
-	// 		  `
-	// 		})
+		Swal.fire({
+			  title: '您已報名成功囉!',
+			  width: 600,
+			  padding: '3em',
+			  background: '#fff url(/images/trees.png)',
+			  backdrop: `
+			    rgba(0,0,123,0.4)
+			    left top
+			    no-repeat
+			  `
+			})
 				
-			// 	    $('#showAlert').submit();
+				    $('#showAlert').submit();
 			
 	}
 

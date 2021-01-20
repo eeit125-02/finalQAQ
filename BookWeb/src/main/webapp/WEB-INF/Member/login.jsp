@@ -12,7 +12,7 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Document</title>
+<title>書適圈</title>
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
@@ -28,7 +28,7 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 	crossorigin="anonymous">
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/css/member.css">
-	
+<link rel="icon" href="${pageContext.request.contextPath}/image/logo1.ico" type="image/x-icon" />	
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 	
 <style>

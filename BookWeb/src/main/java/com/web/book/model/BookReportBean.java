@@ -2,6 +2,7 @@ package com.web.book.model;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -21,6 +22,8 @@ public class BookReportBean {
 	private Integer br_ID;
 	private String br_Name;
 	private Integer br_Score;
+	
+	@Column(columnDefinition="nvarchar(MAX)")
 	private String br_Content;
 	private Date br_DateTime;
 	private Integer br_ClickNumber;
@@ -33,6 +36,7 @@ public class BookReportBean {
 	@ManyToOne
 	@JoinColumn(name = "mb_ID")
 	private MemberBean member;
+	
 	
 	public BookReportBean() {
 		super();
@@ -123,6 +127,5 @@ public class BookReportBean {
 	public void setMember(MemberBean member) {
 		this.member = member;
 	}
-
 
 }

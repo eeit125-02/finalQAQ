@@ -23,6 +23,7 @@
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
 	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
 	crossorigin="anonymous">
+<link rel="icon" href="${pageContext.request.contextPath}/image/logo1.ico" type="image/x-icon" />
 <style>
 .bd-placeholder-img {
 	font-size: 1. 125rem;
@@ -51,7 +52,7 @@ color:#3C3C3C;
 <link rel='stylesheet'
 	href='${pageContext.request.contextPath}/css/style.css' type="text/css" />
 <meta charset="UTF-8">
-<title>MVC</title>
+<title>書適圈</title>
 <script type="text/javascript">
 	function confirmDelete(act_Name) {
 		var result = confirm("確定刪除此筆記錄(活動名稱:" + act_Name + ")?");

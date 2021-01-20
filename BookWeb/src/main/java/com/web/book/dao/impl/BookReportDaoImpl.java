@@ -27,11 +27,10 @@ public class BookReportDaoImpl implements BookReportDao {
 	public List<BookReportBean> bookReportMemberAllList(Integer mb_ID) {
 		
 		Session session = fatory.getCurrentSession();
-		String hql = "From BookReportBean br Where br.member = :member";
+		String hql = "From BookReportBean br Where br.member.mb_ID = :mb_ID";
 		Query<BookReportBean> query = session.createQuery(hql);
-		MemberBean member = session.load(MemberBean.class, mb_ID);
 		
-		return query.setParameter("member", member).getResultList();
+		return query.setParameter("mb_ID", mb_ID).getResultList();
 	}
 
 	@SuppressWarnings("unchecked")
@@ -58,7 +57,16 @@ public class BookReportDaoImpl implements BookReportDao {
 	public void deleteBookReport(Integer br_ID) {
 		
 		Session session = fatory.getCurrentSession();
-		session.delete(session.load(BookReportBean.class, br_ID));
+		String hql = "Delete BookReportCollectBean rc Where rc.bookReport.br_ID = :br_ID";
+		
+		session.createQuery(hql).setParameter("br_ID", br_ID).executeUpdate();
+		
+		hql = "Delete BookReportMessageBean bm Where bm.bookReport.br_ID = :br_ID";
+		session.createQuery(hql).setParameter("br_ID", br_ID).executeUpdate();
+		
+		hql = "Delete BookReportBean br Where br.br_ID = :br_ID";
+		session.createQuery(hql).setParameter("br_ID", br_ID).executeUpdate();
+		
 	
 	}
 
@@ -89,7 +97,7 @@ public class BookReportDaoImpl implements BookReportDao {
 	@Override
 	public List<BookReportBean>  allbookReportList() {
 		Session session = fatory.getCurrentSession();
-		String hql = "From BookReportBean";
+		String hql = "From BookReportBean br";
 		Query<BookReportBean> query = session.createQuery(hql);
 		
 		return query.getResultList();

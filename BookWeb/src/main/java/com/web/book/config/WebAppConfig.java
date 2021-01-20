@@ -40,6 +40,8 @@ public class WebAppConfig implements WebMvcConfigurer {
 				.addResourceLocations("/Resource/image/");
 		registry.addResourceHandler("/js/**")
 				.addResourceLocations("/Resource/js/");
+		registry.addResourceHandler("/html/**")
+				.addResourceLocations("/Resource/html/");
 	}
 
 	@Bean
