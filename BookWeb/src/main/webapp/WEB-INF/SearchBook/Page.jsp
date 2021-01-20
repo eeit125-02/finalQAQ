@@ -161,13 +161,41 @@ font-size:16px;
 <%-- 						</c:if> --%>
 						
 						</div>
-				<button type="submit" name="" class="btn btn-outline-info btn-sm">通報錯誤</button>
+				<button type="button" name="" class="btn btn-outline-info btn-sm"data-toggle="modal" data-target="#exampleModal" data-whatever="【書適圈】管理員">通報錯誤</button>
 				<button type="button" id="addBookReport" value="${pageresult.bk_ID}" class="btn btn-outline-info btn-sm">撰寫心得</button>
 				<button type="submit" name="" class="btn btn-outline-info btn-sm">尋找二手書</button>
 				</div>
 			</div>
-			
-			
+<form action="<c:url value='/toAdminJavaMail' />" method="post">	
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">通報書籍資訊錯誤</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">書名</label>
+            <input type="text" class="form-control" id="recipient-name"readonly="readonly" value="${pageresult.bk_Name}">
+          </div>
+          <div class="form-group">
+            <label for="message-text" class="col-form-label">錯誤說明</label>
+            <textarea class="form-control" id="message-text" name="report"></textarea>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+        <button type="submit" class="btn btn-primary" name="bk_ID" value="${pageresult.bk_ID}">送出</button>
+      </div>
+    </div>
+  </div>
+</div>
+</form>	
 			
 <!-- 右直行（書訊各欄目） -->
 			<div class="col-sm-7">

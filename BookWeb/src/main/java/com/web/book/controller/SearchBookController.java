@@ -6,8 +6,10 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ExecutionException;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -680,7 +682,18 @@ public class SearchBookController {
 //	            HttpStatus.CREATED);
 //	}
 	
-	
+	//JavaMail
+	@PostMapping("/toAdminJavaMail")
+	public String toAdminJavaMail(Model model,
+			@ModelAttribute("loginUser") MemberBean loginUser,
+			@RequestParam(value="bk_ID",required=false) Integer bk_ID,
+			@RequestParam(value="report",required=false) String report,
+			HttpServletResponse response,RedirectAttributes attr) throws IOException, InterruptedException, ExecutionException {
+		JavaMail_report mail = new JavaMail_report();
+		mail.toAdminJavaMai(loginUser.getMb_ID(), bk_ID, report);
+		attr.addAttribute("page",bk_ID);
+		return "redirect:/bookpage";
+	}
 	
 	
 }

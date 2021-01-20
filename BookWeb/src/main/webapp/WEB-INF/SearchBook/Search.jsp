@@ -45,6 +45,9 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 .bkname{
 white-space:pre-wrap;
 }
+body{
+ background-image: url('${pageContext.request.contextPath}/image/ex2.png');
+} 
 </style>
 
 <script>

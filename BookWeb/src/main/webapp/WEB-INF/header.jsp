@@ -20,6 +20,11 @@
 .text-muted{
 color:white
 }
+/*  body{  */
+/*  background-image: url('${pageContext.request.contextPath}/image/ex2.png');  */
+
+/* } */
+
 </style>
 </head>
 
@@ -43,20 +48,7 @@ color:white
 		</a>
 	</div>
 </div>
-<!-- 	<div class="nav-scroller py-1 mb-2"> -->
-<!-- 		<nav class="nav d-flex justify-content-between" -->
-<!-- 			style="background-color: #D2E9FF;"> -->
-<%-- 			<a class="p-2 text-muted" href='<c:url value="/SearchBook/Search"/>'>圖書漂流瓶</a> --%>
-<%-- 			<a class="p-2 text-muted" href='<c:url value="/qaqTest"/>'>二手書圖</a> <a --%>
-<%-- 				class="p-2 text-muted" href='<c:url value="/showActs"/>'>共樂聚落</a> <a --%>
-<%-- 				class="p-2 text-muted" href='<c:url value="/Discussion/mainpage"/>'>書適論壇</a> --%>
-<!-- 			<a class="p-2 text-muted" -->
-<!-- 				href='//localhost:8080/BookWeb/BookReport/searchBookReport/all/1'>閱讀履歷 -->
-<!-- 			</a> -->
-<!-- 		</nav> -->
-<!-- 	</div> -->
-	
-	
+
 <nav class="menu">
   <ol>
     <li class="menu-item"><a href='<c:url value="/SearchBook/Search"/>'>圖書漂流瓶</a></li>
@@ -70,13 +62,6 @@ color:white
     <li class="menu-item"><a href='//localhost:8080/BookWeb/BookReport/searchBookReport/all/1'>閱讀履歷</a></li>
   </ol>
 </nav>	
-	
-	
-	
-	
-	
-	
-	
 	
 	<input type="hidden" id="pic" value="${loginUser.mb_pic}">
 	<input type="hidden" id="name" value="${loginUser.mb_Name}">

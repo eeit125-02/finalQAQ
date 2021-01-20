@@ -3,7 +3,6 @@
   background: #A3D1D1;
   height: 4rem;
   dispaly:flex;
-  color: black;
 }
 .menu ol {
   list-style-type: none;
@@ -34,6 +33,7 @@
 }
 .menu > ol > .menu-item:hover:after {
   transform: scale(1);
+  color: black;
 }
 .menu-item {
   position: relative;
@@ -45,7 +45,7 @@
   white-space: nowrap;
   text-overflow: ellipsis;
   display: block;
-  color: #FFF;
+  color: #000000;
 }
 .sub-menu .menu-item {
   padding: 0.75rem 0;
@@ -89,8 +89,8 @@
     right: 1rem;
     width: 30px;
     height: 4px;
-    background: #FFF;
-    box-shadow: 0 10px #FFF, 0 -10px #FFF;
+    background: #000000;
+    box-shadow: 0 10px 	#000000, 0 -10px #000000;
   }
   .menu > ol {
     display: none;
@@ -156,10 +156,6 @@ body {
   font-size: 16px;
   font-family: "Fira Mono", monospace;
   margin: 0;
-/*   background: #2A363B; */
-　background-image: url('/image/ex1(1).png');
-/* 　background-image:url('${pageContext.request.contextPath}/image/heartred.png'); */
-/* 　background-image:url('https://png.pngtree.com/thumb_back/fh260/back_our/20190625/ourmid/pngtree-warm-tones-gouache-background-image_260131.jpg'); */
 }
 
 * {
