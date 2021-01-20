@@ -48,7 +48,7 @@ background-color:#e0ece4
 	border-radius: 25px;
 	padding: 20px;
 	background-color: 	#F0F0F0;
-	height:300px;
+	height:100%;
 	width: 200px;
 	float:left;
 }
@@ -75,41 +75,9 @@ div {
 		font-size: 3.5rem;
 	}
 }
-.dropbtn {
- 
-  cursor: pointer;
-}
-
-.dropdown {
-  position: relative;
-  display: inline-block;
-}
-
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #f9f9f9;
-  min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 1;
-}
-
-.dropdown-content a {
-  color: black;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
-}
-
-.dropdown-content a:hover {background-color: #f1f1f1}
-
-.dropdown:hover .dropdown-content {
-  display: block;
-}
-
-.dropdown:hover .dropbtn {
-  background-color: #3e8e41;
-}
+.has_children{ cursor:pointer; }
+.highlight{backgroung:#F60;}
+div a{ display:none;  float:left;}
 
 </style>
 </head>
@@ -119,16 +87,15 @@ div {
 	<!-- header -->
 	<div class="container media" >
 	<div id="city" >
-	
-	<div class="dropdown">	
-		<button class="btn btn-outline-secondary dropbtn" >會員中心</button>
-				<div class="dropdown-content">
-				<button  id="admin1" name="admin" class="btn btn-outline-secondary">會員資訊</button>				
-				<button  id="inf" name="mb_inf" class="btn btn-outline-secondary">會員資訊</button>				
-				<button  id="third" name="third" class="btn btn-outline-secondary">會員資訊</button>				
-				<button  id="Modify" name="Modify" class="btn btn-outline-secondary">會員修改</button>				
-				<button  id="pwdModify" name="pwdModify" class="btn btn-outline-secondary">密碼修改</button>
-				</div>
+	<div class="has_children">	
+		<li style="list-style-type:none">會員中心</li>
+				
+				<a><button  id="admin1" name="admin" class="btn btn-outline-secondary">會員資訊</button></a>				
+				<a><button  id="inf" name="mb_inf" class="btn btn-outline-secondary">會員資訊</button></a>				
+				<a><button  id="third" name="third" class="btn btn-outline-secondary">會員資訊</button></a>				
+				<a><button  id="Modify" name="Modify" class="btn btn-outline-secondary">會員修改</button></a>				
+				<a><button  id="pwdModify" name="pwdModify" class="btn btn-outline-secondary">密碼修改</button></a>
+				
 				</div>
 				<form name=a3 class=a3 action="<c:url value='/collectlist' />" method="get">
 				<div>
@@ -750,5 +717,17 @@ div {
 			form.submit();
 		});
 		
+		$(document).ready(function(){
+			  
+			$(".has_children").click(function(){
+			  $(this).addClass("highlight")
+			  .children("a").show().end()
+			  
+			  .siblings().removeClass("highlight")
+			  .children("a").hide(); 
+			  
+			});
+
+			});
 	</script>
 </html>
