@@ -43,15 +43,15 @@
 <title>書適圈</title>
 </head>
 <body>
+	<!-- header -->
+	<header class="container blog-header py-3" id="bookWebheader"></header>
+	<!-- header -->
+	<div class="container">
 	<!-- 灌值 -->
 <%-- 			<form action="<c:url value='/boobplay'/>" method="get"> --%>
 <!-- 				<button type="submit">不要隨便亂按會爆炸</button> -->
 <!-- 			</form> -->
 	<!-- 灌值 -->
-	<!-- header -->
-	<header class="container blog-header py-3" id="bookWebheader"></header>
-	<!-- header -->
-	<div class="container">
 		<!-- body -->
 		<div style="text-align: center">
 			<h2>二手書圖</h2>

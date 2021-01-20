@@ -47,6 +47,40 @@ public class ShoppingCartController {
 		all = new AllInOne("");
 	}
 
+	// 價錢區間直接購買
+	@PostMapping("/pointMid")
+	public String pointMid(Model model,
+			@RequestParam(value="bk_ID", required = false) Integer bk_ID,
+			@RequestParam(value="mb_ID", required = false) Integer bs_ID,
+			@RequestParam(value="bs_Price", required = false) Integer cart_Price,
+			@RequestParam(value="cart_Num", required = false) Integer cart_Num,
+			@RequestParam(value="qty", required = false) Integer qty
+			) {
+		System.out.println("-----------------------------------------------");
+		System.out.println(bk_ID);
+		System.out.println(bs_ID);
+		System.out.println(cart_Price);
+		System.out.println(cart_Num);
+		System.out.println(qty);
+		// 先搜尋購物車，裡面有相同update
+		Boolean qaq = true;
+		List<ShoppingCartBean> list = scService.searchCart(loginUser.getMb_ID());
+		for (ShoppingCartBean shoppingCartBean : list) {
+			if(bk_ID.equals(shoppingCartBean.getBook().getBk_ID()) && cart_Price.equals(shoppingCartBean.getCart_Price())) {
+				qaq = false;
+				scService.updateCartAll(cart_Num+shoppingCartBean.getCart_Num(), bk_ID);
+				list = scService.searchCart(loginUser.getMb_ID());
+				model.addAttribute("listCart", list);
+			}
+		}
+		if (qaq) {
+		scService.addToCart(cart_Num, cart_Price, bk_ID, loginUser.getMb_ID(), bs_ID);
+		list = scService.searchCart(loginUser.getMb_ID());
+		model.addAttribute("listCart", list);
+		}
+		return "Transation/shoppingCart";
+	}
+	
 	// 放入購物車
 	@GetMapping("/addCart")
 	@ResponseBody
@@ -64,7 +98,7 @@ public class ShoppingCartController {
 		List<ShoppingCartBean> list = scService.searchCart(loginUser.getMb_ID());
 		for (ShoppingCartBean shoppingCartBean : list) {
 //			 如果購物車已經有這筆資料更新
-			if (bk == shoppingCartBean.getBook().getBk_ID()) {
+			if (bk.equals(shoppingCartBean.getBook().getBk_ID())) {
 				scService.updateCartAll(shoppingCartBean.getCart_Num() + qty, bk);
 				scService.updateBookStore(bks, amount);
 				qaq = false;
@@ -107,25 +141,20 @@ public class ShoppingCartController {
 			scService.updateBookStore(bookStoreBean.getBks_ID(), bookStoreBean.getBs_Num() - 1);
 		}
 		list = scService.searchCart(loginUser.getMb_ID());
-		for (ShoppingCartBean shoppingCartBean : list) {
+//		for (ShoppingCartBean shoppingCartBean : list) {
 //			System.out.println("-------------------------------------------------");
 //			System.out.println(shoppingCartBean.getCart_Num());			
 //			System.out.println(shoppingCartBean.getCart_Price());			
-			total += shoppingCartBean.getCart_Num() * shoppingCartBean.getCart_Price();
-		}
+//			total += shoppingCartBean.getCart_Num() * shoppingCartBean.getCart_Price();
+//		}
 		model.addAttribute("total", total);
 		model.addAttribute("listCart", list);
 		return "Transation/shoppingCart";
 	}
 	
-	@PostMapping("/shopping")
+	@GetMapping("/shopping")
 	public String cartMain(Model model) {
 		List<ShoppingCartBean> list = scService.searchCart(loginUser.getMb_ID());
-//		int total = 0;
-//		for (ShoppingCartBean shoppingCartBean : list) {
-//			total += shoppingCartBean.getCart_Num() * shoppingCartBean.getCart_Price();
-//		}
-//		model.addAttribute("total", total);
 		model.addAttribute("listCart", list);
 		return "Transation/shoppingCart";
 	}
@@ -134,11 +163,9 @@ public class ShoppingCartController {
 	public String deleteCart(Model model,
 			@RequestParam(value = "cart_ID", required = false) Integer cart_ID
 			) {
-		System.out.println("--------------------------------------");
-		System.out.println(cart_ID);
 		scService.deleteCart(cart_ID);
 		model.addAttribute("listCart", scService.searchCart(loginUser.getMb_ID()));
-		return "Transation/shoppingCart";
+		return "redirect:/shopping";
 	}
 
 //	@PostMapping("shopping")
