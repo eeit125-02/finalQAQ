@@ -96,16 +96,16 @@
 						<div class="row">
 							<div class="col-lg-6">
 								<ul class="list-unstyled mb-0">
-									<li><a href="http://localhost:8080/BookWeb/BookReport/searchBookReport/文學/1">文學</a></li>
-									<li><a href="#">教育</a></li>
-									<li><a href="#">家庭</a></li>
+									<li><a href="http://localhost:8080/BookWeb/BookReport/searchBookReport/文學創作/1">文學創作</a></li>
+									<li><a href="http://localhost:8080/BookWeb/BookReport/searchBookReport/圖文漫畫/1">圖文漫畫</a></li>
+									<li><a href="http://localhost:8080/BookWeb/BookReport/searchBookReport/商業/1">商業</a></li>
 								</ul>
 							</div>
 							<div class="col-lg-6">
 								<ul class="list-unstyled mb-0">
-									<li><a href="#">廚房</a></li>
-									<li><a href="#">學習</a></li>
-									<li><a href="#">政府</a></li>
+									<li><a href="http://localhost:8080/BookWeb/BookReport/searchBookReport/生活/1">生活</a></li>
+									<li><a href="http://localhost:8080/BookWeb/BookReport/searchBookReport/旅遊/1">旅遊</a></li>
+									<li><a href="http://localhost:8080/BookWeb/BookReport/searchBookReport/學習/1">學習</a></li>
 								</ul>
 							</div>
 						</div>
@@ -141,10 +141,9 @@
 		function page(){
 			
 			var searchURL = window.location.href.split("/");
-			console.log(searchURL)
-			var page = searchURL.pop().replace("?", "");
-			var type = searchURL.pop();
 			
+			var page = searchURL.pop().replace("?", "");
+			var type = decodeURI(searchURL.pop());
 			
 			$.ajax({
 				async : false,
