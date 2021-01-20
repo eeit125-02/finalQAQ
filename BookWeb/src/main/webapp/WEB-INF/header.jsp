@@ -9,6 +9,8 @@
 <script
 	src="${pageContext.request.contextPath}/js/jQuery/jquery.cookie.js"></script>
 <meta charset="UTF-8">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/css/navbar2.css">
 <link rel="icon"
 	href="${pageContext.request.contextPath}/image/logo1.ico"
 	type="image/x-icon" />
@@ -16,7 +18,8 @@
 
 </head>
 <body>
-	<div id="loginButton" style="float: right"></div>
+<div class="container">
+	<div id="loginButton" style="float: right;"></div>
 	<form action="<c:url value='/shopping' />" method="get" class="shop">
 		<!-- 偷偷放購物車QAQ start -->
 		<a href="#" style="float: right; margin-right: 20px"
@@ -30,23 +33,45 @@
 		<a class="blog-header-logo text-dark" href="//localhost:8080/BookWeb">
 			<img alt="LOGO"
 			src="${pageContext.request.contextPath}/image/logo1.png"
-			id="Img/logo">
+			id="Img/logo" height="75px">
 		</a>
 	</div>
-
-
-	<div class="nav-scroller py-1 mb-2">
-		<nav class="nav d-flex justify-content-between"
-			style="background-color: #D2E9FF;">
-			<a class="p-2 text-muted" href='<c:url value="/SearchBook/Search"/>'>圖書漂流瓶</a>
-			<a class="p-2 text-muted" href='<c:url value="/qaqTest"/>'>二手書圖</a> <a
-				class="p-2 text-muted" href='<c:url value="/showActs"/>'>共樂聚落</a> <a
-				class="p-2 text-muted" href='<c:url value="/Discussion/mainpage"/>'>書適論壇</a>
-			<a class="p-2 text-muted"
-				href='//localhost:8080/BookWeb/BookReport/searchBookReport/all/1'>閱讀履歷
-			</a>
-		</nav>
-	</div>
+</div>
+<!-- 	<div class="nav-scroller py-1 mb-2"> -->
+<!-- 		<nav class="nav d-flex justify-content-between" -->
+<!-- 			style="background-color: #D2E9FF;"> -->
+<%-- 			<a class="p-2 text-muted" href='<c:url value="/SearchBook/Search"/>'>圖書漂流瓶</a> --%>
+<%-- 			<a class="p-2 text-muted" href='<c:url value="/qaqTest"/>'>二手書圖</a> <a --%>
+<%-- 				class="p-2 text-muted" href='<c:url value="/showActs"/>'>共樂聚落</a> <a --%>
+<%-- 				class="p-2 text-muted" href='<c:url value="/Discussion/mainpage"/>'>書適論壇</a> --%>
+<!-- 			<a class="p-2 text-muted" -->
+<!-- 				href='//localhost:8080/BookWeb/BookReport/searchBookReport/all/1'>閱讀履歷 -->
+<!-- 			</a> -->
+<!-- 		</nav> -->
+<!-- 	</div> -->
+	
+	
+<nav class="menu">
+  <ol>
+    <li class="menu-item"><a href='<c:url value="/SearchBook/Search"/>'>圖書漂流瓶</a></li>
+    <li class="menu-item"><a href='<c:url value="/qaqTest"/>'>二手書圖</a></li>
+    <li class="menu-item">
+      <a href='<c:url value="/showActs"/>'>共樂聚落</a>
+    </li>
+    <li class="menu-item">
+      <a href='<c:url value="/Discussion/mainpage"/>'>書適論壇</a>
+    </li>
+    <li class="menu-item"><a href='//localhost:8080/BookWeb/BookReport/searchBookReport/all/1'>閱讀履歷</a></li>
+  </ol>
+</nav>	
+	
+	
+	
+	
+	
+	
+	
+	
 	<input type="hidden" id="pic" value="${loginUser.mb_pic}">
 	<input type="hidden" id="name" value="${loginUser.mb_Name}">
 	<script>
