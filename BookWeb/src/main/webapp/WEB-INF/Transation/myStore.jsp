@@ -51,7 +51,7 @@
 	<div class="container media">
 		<form></form>
 		<!-- body -->
-		<form action="<c:url value='/addMyBook'/>" method="post">
+		<form action="<c:url value='/addMyStore'/>" method="post">
 			<button type="submit" class="btn btn-outline-info">我要賣東西</button>
 			<br>
 		</form>
