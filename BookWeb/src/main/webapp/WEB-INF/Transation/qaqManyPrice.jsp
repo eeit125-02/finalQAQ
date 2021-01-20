@@ -79,16 +79,17 @@
 		</div>
 		<hr>
 		<c:forEach items="${bookPrices}" var="v">
-			<%-- 			<form action="<c:url value="/pointMid"/>" method="post" class="lsm"></form> --%>
-		<form action="<c:url value="/qaq"/>" method="post">
+		<form action="<c:url value="/directBuy"/>" method="post">
 			<div class="row">
-				<input type="hidden" name="bk_ID" value="${v.bk_ID}"> <input
-					type="hidden" name="bs_ID" value="${v.mb_ID}">
+				<input type="hidden" name="bk_ID" value="${v.bk_ID}"> 
+				<input type="hidden" name="bs_Num" value="${v.bs_Num}">
+				<input type="hidden" name="bs_Price" value="${v.bs_Price}">
+				<input type="hidden" name="bs_ID" value="${v.bs_ID}">
+				<input type="hidden" name="bks_ID" value="${v.bks_ID}">
 				<div class="col-lg-2">
 					<c:out value="${v.mb_Name}" />
 				</div>
 				<div class="col-lg-2">
-					<input type="hidden" name="cart_Price" value="${v.bs_Price}">
 					<c:out value="${v.bs_Price}" />
 				</div>
 				<div class="col-lg-1">
@@ -98,13 +99,11 @@
 					<c:out value="${v.bs_Date}" />
 				</div>
 				<div class="col-lg-2">
-					<input type="number" name="cart_Num" min="1" max="${v.bs_Num}" value="1" id="${v.bk_ID}"
-						class="form-control">
+					<input type="number" name="cart_Num" min="1" max="${v.bs_Num}" value="1" 
+					class="form-control">
 				</div>
 				<div class="col-lg-3">
-					<button type="submit" class="btn btn-outline-secondary direct"
-<%-- 						onclick="goToCart(${v.bk_ID}, ${v.mb_ID}, ${v.bs_Price})" --%>
-						>直接購買</button>
+					<button type="submit" class="btn btn-outline-secondary direct">直接購買</button>
 					<!-- 					<button type="button" class="btn btn-outline-secondary indirect" -->
 					<!-- 						onclick="addCart()">查看詳情</button> -->
 				</div>
@@ -143,7 +142,7 @@
 			$(document).ready(function() {
 				$("#bookWebheader").load("//localhost:8080/BookWeb/header");
 				$("#bookWebFooter").load("//localhost:8080/BookWeb/footer");
-			console.log($(this).val()>parseInt($(this).attr("max")))
+// 			console.log($(this).val()>parseInt($(this).attr("max")))
 			$('.form-control').each(function() {
 				$(this).change(function() {
 					if( $(this).val()>parseInt($(this).attr("max")) ){

@@ -21,7 +21,9 @@
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
 	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
 	crossorigin="anonymous">
-<link rel="icon" href="${pageContext.request.contextPath}/image/logo1.ico" type="image/x-icon" />
+<link rel="icon"
+	href="${pageContext.request.contextPath}/image/logo1.ico"
+	type="image/x-icon" />
 <script src="https://use.fontawesome.com/c560c025cf.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <style>
@@ -116,8 +118,8 @@
 			<div class="card-body">
 				<!-- PRODUCT -->
 				<c:forEach items="${listCart}" var="v">
-												<form action="<c:url value='/deleteCart'/>" method="post">
-					<%-- 				 action='<c:url value="/deleteCart"/>'  --%>
+					<input type="hidden" value="${v.bks_ID}">
+					<input type="hidden" value="${v.cart_ID}">
 					<div class="row">
 						<div class="col-12 col-sm-12 col-md-2 text-center">
 							<img class="img-responsive" src="${v.book.bk_Pic}" alt="prewiew"
@@ -137,7 +139,7 @@
 								<strong> 賣家 </strong>
 							</h4>
 							<h4>
-								<small>${v.memberSel.mb_Account}</small>
+								<small>${v.memberSel.mb_Name}</small>
 							</h4>
 						</div>
 						<!-- 						測試 -->
@@ -152,8 +154,8 @@
 							</div>
 							<div class="col-4 col-sm-4 col-md-4">
 								<div class="quantity">
-									<input type="button" value="+" class="plus"> <input
-										id="carNum" type="number" step="1" max="99" min="1"
+									<input type="button" value="+" class="plus"> 
+									<input id="carNum" type="number" step="1" max="99" min="1"
 										value="${v.cart_Num}" title="Qty" class="qty" size="4">
 									<input type="button" value="-" class="minus">
 								</div>
@@ -164,23 +166,23 @@
 							</div>
 							<div class="col-2 col-sm-2 col-md-2 text-right">
 
-<!-- 																<button type="submit" class="btn btn-outline-danger btn-xs"  -->
-								<button type="submit" class="btn btn-outline-danger btn-xs"
-									id="qaq" name="cart_ID" value="${v.cart_ID}">
-									<%-- 								id="qaq" name="cart_ID" value="${v.cart_ID}" onclick="confirmDelete(${v.cart_ID})"> --%>
-									<i class="fa fa-trash" aria-hidden="true"></i>
-								</button>
-
+								<!-- 																<button type="submit" class="btn btn-outline-danger btn-xs"  -->
+								<form action="<c:url value='/deleteCart'/>" method="post">
+									<button type="submit" class="btn btn-outline-danger btn-xs"
+										id="qaq" name="cart_ID" value="${v.cart_ID}">
+										<%-- 								id="qaq" name="cart_ID" value="${v.cart_ID}" onclick="confirmDelete(${v.cart_ID})"> --%>
+										<i class="fa fa-trash" aria-hidden="true"></i>
+									</button>
+								</form>
 							</div>
 						</div>
 					</div>
 					<hr>
-												</form>
 				</c:forEach>
 				<!-- END PRODUCT -->
 				<div class="pull-right">
-<!-- 					<a href="" class="btn btn-outline-secondary pull-right"> Update -->
-<!-- 						shopping cart </a> -->
+					<!-- 					<a href="" class="btn btn-outline-secondary pull-right"> Update -->
+					<!-- 						shopping cart </a> -->
 				</div>
 			</div>
 			<div class="card-footer">
@@ -215,7 +217,7 @@
 		aria-labelledby="exampleModalLabel" aria-hidden="true">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
-<form action="<c:url value='checkout'/>" method="post">
+				<form action="<c:url value='checkout'/>" method="post">
 					<div class="modal-header">
 						<h5 class="modal-title" id="exampleModalLabel">請輸入您的資訊</h5>
 						<button type="button" class="close" data-dismiss="modal"
@@ -259,80 +261,112 @@
 	<footer class="container py-5" id="bookWebFooter"></footer>
 	<!-- footer -->
 	<script>
-	$(document).ready(function() {
-		$("#bookWebheader").load("//localhost:8080/BookWeb/header");
-		$("#bookWebFooter").load("//localhost:8080/BookWeb/footer");
-		$('.result').each(function(){
-			$(this).prev().children("input").eq(1).change(function(){
-				let stay = $(this);
-				let varNum=$(this).val();
-				let itemPrice = $(this).parents("div").eq(1).prev().children("h6").eq(0).children("strong").eq(0).html().split(" \<span")[0];
-				let totalPrice = parseInt(itemPrice)*parseInt(varNum);
-				stay.parent().next().val(totalPrice)
-				setTotalMoney();
-			})
-			$(this).prev().children("input").eq(0).click(function() {
-				let stay1 = $(this).next();
-				let varNum1 = $(this).next().val();
-				$(this).next().val(parseInt($(this).next().val())+1);
-				let itemPrice1 = $(this).parents("div").eq(1).prev().children("h6").eq(0).children("strong").eq(0).html().split(" \<span")[0];
-				let totalPrice1 = parseInt(itemPrice1)*parseInt(varNum1);
-				stay1.parent().next().val(totalPrice1)
-				setTotalMoney();
-			})
-			$(this).prev().children("input").eq(2).click(function() {
-				let stay2 = $(this).prev();
-				let varNum2 = $(this).prev().val();
-				$(this).prev().val(parseInt($(this).prev().val())-1);
-				let itemPrice2 = $(this).parents("div").eq(1).prev().children("h6").eq(0).children("strong").eq(0).html().split(" \<span")[0];
-				let totalPrice2 = parseInt(itemPrice2)*parseInt(varNum2);
-				stay2.parent().next().val(totalPrice2)
-				setTotalMoney();
-			})
-		})
-		setTotalMoney();
-	});
-	function setTotalMoney(){
-		let total = 0;
-		$('.result').each(function(){
-			total+=parseInt($(this).val());
-		})
-		$('#total').html(total);
-	}
+					$(document).ready(function() {
+						$("#bookWebheader").load("//localhost:8080/BookWeb/header");
+						$("#bookWebFooter").load("//localhost:8080/BookWeb/footer");
 	
-// 	$('.btn.btn-outline-danger.btn-xs').click(function() {
-		
-// 		Swal.fire({
-// 			  title: 'Are you sure?',
-// 			  text: "You won't be able to revert this!",
-// 			  icon: 'warning',
-// 			  showCancelButton: true,
-// 			  confirmButtonColor: '#3085d6',
-// 			  cancelButtonColor: '#d33',
-// 			  confirmButtonText: 'Yes, delete it!'
-// 		}).then((result) => {
-// 			  if (result.isConfirmed) {
-// 			    Swal.fire(
-// 			      'Deleted!',
-// 			      'Your file has been deleted.',
-// 			      'success'
-// 				).then((result) => {
-			    	
-// 			    })
-// 			  }
-// 		})
-// 	}
-// 	)
-	
-	
-	
-// 	$('.plus').click(function() {
-// 		$(this).next().val(parseInt($(this).next().val())+1);
-// 	})
-// 	$('.minus').click(function() {
-// 		$(this).prev().val(parseInt($(this).prev().val())-1);
-// 	})
-	
-</script>
+						
+						
+						
+						$('.result').each(function(){
+							$(this).prev().children("input").eq(1).change(function(){
+								let stay = $(this);
+								let varNum=$(this).val();
+								let itemPrice = $(this).parents("div").eq(1).prev().children("h6").eq(0).children("strong").eq(0).html().split(" \<span")[0];
+								let totalPrice = parseInt(itemPrice)*parseInt(varNum);
+								stay.parent().next().val(totalPrice);
+								setTotalMoney();
+							}).prev().click(function () {
+								let stay1 = $(this);
+								let varNum1 = $(this).next().val(parseInt($(this).next().val()) + parseInt(1));
+								let itemPrice1 = $(this).parents("div").eq(1).prev().children("h6").eq(0).children("strong").eq(0).html().split(" \<span")[0];
+								let totalPrice1 = parseInt(itemPrice1)*parseInt(varNum1);
+								stay1.parent().next().val(totalPrice1);
+								setTotalMoney();
+							}).next().next().click(function () {
+								let stay2 = $(this);
+								let varNum2 = $(this).next().val(parseInt($(this).prev().val()) - parseInt(1));
+								let itemPrice2 = $(this).parents("div").eq(1).prev().children("h6").eq(0).children("strong").eq(0).html().split(" \<span")[0];
+								let totalPrice2 = parseInt(itemPrice2)*parseInt(varNum2);
+								stay2.parent().next().val(totalPrice2);
+								setTotalMoney();
+							})
+						})
+						setTotalMoney();
+					});
+					function setTotalMoney(){
+						let total = 0;
+						$('.result').each(function(){
+							total+=parseInt($(this).val());
+						})
+						$('#total').html(total);
+					}
+
+					$('.qty').each(function() {
+						$(this).change(function() {
+							console.log("231232")
+						}).prev().click(function() {
+							var qaq = parseInt($(this).next().val())+parseInt(1);
+							$(this).next().val(qaq);
+						}).next().next().click(function () {
+							var qaq1 = parseInt($(this).prev().val())-parseInt(1);
+							$(this).prev().val(qaq1)
+						})
+					})
+					
+// 					$('.qty').each(function() {
+// 							$(this).change(function() {
+// 								$.ajax({
+// 									async : false,
+// 									type : 'POST',
+// 									data : { cartNum : $(this).val(), bksID : $(this).parent().parent().parent().parent().prev().prev().val()
+// 										, cartID : $(this).parent().parent().parent().parent().prev().val()}, 
+// 									url : "<c:url value='/updateCart'/>",
+// 									dataType : "json",
+// 									error : function() {
+// 										alert("你做錯了喔!!!");
+// 									},
+// 									success : function(data) {
+// 				// 						$('')
+// 				console.log(data.work);
+// // 										Swal.fire({
+// // 											  position: 'top-center',
+// // 											  icon: 'success',
+// // 											  title: data.work,
+// // 											  showConfirmButton: false,
+// // 											  timer: 1500
+// // 											})
+// 									}
+// 								})
+// 							});
+// 						})
+					
+					
+		// 	$('.btn.btn-outline-danger.btn-xs').click(function() {
+
+		// 		Swal.fire({
+		// 			  title: 'Are you sure?',
+		// 			  text: "You won't be able to revert this!",
+		// 			  icon: 'warning',
+		// 			  showCancelButton: true,
+		// 			  confirmButtonColor: '#3085d6',
+		// 			  cancelButtonColor: '#d33',
+		// 			  confirmButtonText: 'Yes, delete it!'
+		// 		}).then((result) => {
+		// 			  if (result.isConfirmed) {
+		// 			    Swal.fire(
+		// 			      'Deleted!',
+		// 			      'Your file has been deleted.',
+		// 			      'success'
+		// 				).then((result) => {
+
+		// 			    })
+		// 			  }
+		// 		})
+		// 	}
+		// 	)
+
+
+	</script>
 </body>
 </html>
