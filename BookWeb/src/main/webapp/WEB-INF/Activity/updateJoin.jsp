@@ -44,16 +44,16 @@
 <meta charset="UTF-8">
 <title>書適圈</title>
 <script type="text/javascript">
-	function confirmDelete(mb_Account) {
-		var result = confirm("確定刪除此筆報名記錄(帳號:" + mb_Account + ")?");
+	function confirmDelete(act_Name) {
+		var result = confirm("確定刪除此筆報名記錄(帳號:" + act_Name + ")?");
 		if (result) {
 			document.forms[0].finalDecision.value = "DELETE";
 			return true;
 		}
 		return false;
 	}
-	function confirmUpdate(mb_Account) {
-		var result = confirm("確定送出此筆報名記錄(帳號:" + mb_Account + ")?");
+	function confirmUpdate(act_Name) {
+		var result = confirm("確定送出此筆報名記錄(帳號:" + act_Name + ")?");
 		if (result) {
 			document.forms[0].finalDecision.value = "UPDATE";
 			return true;
@@ -84,26 +84,30 @@
 				<input type="hidden" name="join_ID" value="${join_ID}"/>
 <%-- 				<form:input type="hidden" path="member.mb_Account" value="${loginUser.getMb_Account()}"/> --%>
 				<input type="hidden" name="finalDecision" value="">
-				<Table>
-					
-					<tr>
-						<td><label>活動名稱:${ajb.act.act_Name}</label></td>
+				
+
+						<div class="form-group">
+						<label>活動名稱:${ajb.act.act_Name}</label>
 <%-- 					<td><form:input path="act_Name" value="${loginUser.getMb_Mail()}"/></td> --%>
-					</tr>
+					    </div>
 
-					<tr>
-						<td><label>會員姓名:${loginUser.getMb_Name()}</label></td>
-					</tr>
-					<tr>
-						<td><form:label path="member.mb_Mail">email:</form:label></td>
-						<td><form:input path="member.mb_Mail" value="${loginUser.getMb_Mail()}"/></td>
-					</tr>
-
-					<tr>
-						<td><form:label path="member.mb_Tel">聯絡電話:</form:label></td>
-						<td><form:input path="member.mb_Tel" value="${loginUser.getMb_Tel()}"/></td>
-					</tr>
+						<div class="form-group">
+						<label>會員姓名:${loginUser.getMb_Name()}</label>
+						</div>		
 					
+						<div class="form-row">
+						<div class="form-group">
+						<form:label path="member.mb_Mail">email:</form:label>
+						<form:input path="member.mb_Mail" value="${loginUser.getMb_Mail()}"/>
+					    </div>
+					    </div>
+
+					<div class="form-row">
+						<div class="form-group">
+						<form:label path="member.mb_Tel">聯絡電話:</form:label>
+						<form:input path="member.mb_Tel" value="${loginUser.getMb_Tel()}"/>
+					</div>
+					</div>
 <!-- 					<tr> -->
 <%-- 						<td><form:label path="join_Pax">報名人數:</form:label></td> --%>
 <%-- 						<td><form:input path="join_Pax" /></td> --%>

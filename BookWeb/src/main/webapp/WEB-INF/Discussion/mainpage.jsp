@@ -148,7 +148,7 @@ response.setDateHeader("Expires", 0);
 
 
 						<!-- discussion board top tab -->
-						<ul class="nav nav-tabs" id="novelTab" role="tablist">
+						<ul class="nav nav-tabs nav-fill" id="novelTab" role="tablist">
 							<li class="nav-item"><a class="nav-link active" id="novel_rule-tab"
 								data-toggle="tab" href="#novel_rule" role="tab">板規</a></li>
 							<li class="nav-item"><a class="nav-link"
