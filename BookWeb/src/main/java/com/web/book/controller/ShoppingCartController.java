@@ -47,7 +47,17 @@ public class ShoppingCartController {
 	private static void initial(){
 		all = new AllInOne("");
 	}
-
+	
+	@PostMapping("/qaq")
+	public String qaq(Model model,
+			@RequestParam(value = "bk_ID") int bk_ID
+			) {
+		System.out.println("++++++++++++++++++++++++++++++++++++++++++");
+		System.out.println(bk_ID);
+		System.out.println("------------------------------------------");
+		return "Transation/shoppingCart";
+	}
+	
 	// 價錢區間直接購買
 	@PostMapping("/pointMid")
 	public String pointMid(Model model,
@@ -290,9 +300,10 @@ public class ShoppingCartController {
 		initial();
 		int qaqQty = (int)(Math.random()*(4000))+1000;
 		Date date = new Date();
+		
 		AioCheckOutALL obj = new AioCheckOutALL();
 		obj.setMerchantTradeNo("book"+qaqQty);
-		obj.setMerchantTradeDate(date);
+		obj.setMerchantTradeDate(date.toString());
 		obj.setTotalAmount("50");
 		obj.setTradeDesc("test Description");
 		obj.setItemName("TestItem");
