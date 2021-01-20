@@ -7,8 +7,9 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.css">
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.js"></script>
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+<script src="${pageContext.request.contextPath}/js/jquery.rateyo.js"></script>
+
 
 
 <table id="bookReport_Table" class="display">
@@ -40,6 +41,10 @@
 	var reportTable;
 
 	$(document).ready( function () {
+		getDataTable();
+	})
+	
+	function getDataTable(){
 		reportTable = $('#bookReport_Table').DataTable({
 			"ajax": {
 	            "url": "http://localhost:8080/BookWeb/Admin/getAllBookReport",
@@ -83,52 +88,65 @@
        		  	}
        		}
         }); 
-	})
+	}
 	
 	function viewData(reportId){
 		var insertHtml;
-		window.open("http://localhost:8080/BookWeb/BookReport/"+reportId);
-		/* $.ajax({
+		$.ajax({
 			async : false,
 			type : 'POST',
-			url : getBookReportURL,
+			url : "http://localhost:8080/BookWeb/BookReport/viewBookReport/"+reportId,
 			dataType : "json",
 			contentType : "application/json;charset=utf-8",
 			success : function(data) {
 				
-				<div class="modal-body">
-					<div class="media">
-						<img id="bk_Pic" src="" class="w-25 p-3" alt="...">
-						<div class="media-body">
-							<h5 class="mt-0" id="bk_Name">書名：</h5>
-							<br>
-							<p class="mt-0 messageSize" id="bk_Author">作者：</p>
-							<p class="mt-0 messageSize" id="bk_Publish">出版社：</p>
-							<p class="mt-0 messageSize" id="bk_Author">作者：</p>
-							<p class="mt-0 messageSize" id="bk_DataTime">撰寫日期：</p>
-							評分：<div id="rateYoEdit"></div>
-						</div>
-					</div>
-					<label for="message-text" class="col-form-label">心得:</label>
-					<p class="mt-0 messageSize" id="br_Content">心得內容</p>
-				</div>
-				
-				$('#bk_Name').html(data.bk_Name);
-				$('#bk_Author')
-						.html("作者：" + data.bk_Author);
-				$('#bk_Publish').html(
-						"出版社：" + data.bk_Publish);
-				$('#bk_Pic').attr('src', data.bk_Pic);
-				$('#bk_DataTime').html("撰寫日期"+data.br_DateTime);
-				$('#br_Content').html(data.br_Content);
-				$rateYo.rateYo("rating", data.br_Score);
+				insertHtml = "<div class=\"media\">"
+						   + "<img id=\"bkPic\" src=\""+ data.bk_Pic +"\" class=\"w-25 h-25 p-2\">"
+						   + "<div class=\"media-body ml-5\">"
+						   + "<form class=\"col-ml-4\">"
+						   + "<br>"
+						   + "<div class=\"form-inline\">"
+						   + "<p class=\"messageSize\" id=\"brTitel\">閱讀標題："+ data.br_Name +"</p> "
+						   + "</div>"
+						   + "<div class=\"form-inline\">"
+						   + "<p class=\"messageSize\" id=\"userAccount\">撰寫者："+ data.userAccount +"</p>"
+						   + "</div>"
+						   + "<div class=\"form-inline\">"
+						   + "<p class=\"messageSize\" id=\"bkName\">書名："+ data.bk_Name +"</p>"
+						   + "</div>"
+						   + "<div id=\"bookWriter\" class=\"form-inline\">"
+						   + "<p class=\"messageSize\" id=\"bkAuthor\">作者："+ data.bk_Author +"</p>"
+						   + "</div>"
+						   + "<div class=\"form-inline\">"
+						   + "<p class=\"messageSize\" id=\"bkPublish\">出版社："+ data.bk_Publish +"</p>"
+						   + "</div>"
+						   + "<div class=\"form-inline\">"
+						   + "<p class=\"messageSize\">評分：</p>"
+						   + "<div id=\"rateYo\"></div>"
+						   + "</div>"
+						   + "</form>"
+						   + "</div>"
+						   + "</div>"
+						   + "<br>"
+						   + "<h3>心得:</h3>"
+						   + "<hr>"
+						   + "<p>"+ data.br_Content +"</p>"
+						   
+			   swal.fire({
+					  width: '850px',
+					  html: insertHtml,  
+					  confirmButtonText: "ok", 
+				});
+						   
+				$("#rateYo").rateYo({
+					rating: data.br_Score,
+				    spacing: "10px",
+				    readOnly: true
+				    
+				});
 			}
 		});
-		swal.fire({
-			  title: "<i>Title</i>", 
-			  html: "<div id = \"change1\"><div>",  
-			  confirmButtonText: "ok", 
-		}); */
+		
 	}
 	
 	function DelData(deleteBrId){
@@ -148,7 +166,7 @@
 					dataType : "json",
 					success : function(data) {
 						if(data && typeof(data) == "boolean"){								
-							swal({
+							swal.fire({
 							      title: "刪除成功",
 							      icon: "success",
 							 }).then((willDelete) => {
