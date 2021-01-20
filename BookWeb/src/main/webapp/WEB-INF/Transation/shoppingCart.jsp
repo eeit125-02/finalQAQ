@@ -116,7 +116,7 @@
 			<div class="card-body">
 				<!-- PRODUCT -->
 				<c:forEach items="${listCart}" var="v">
-					<%-- 							<form action="<c:url value='/deleteCart'/>" method="post"> --%>
+												<form action="<c:url value='/deleteCart'/>" method="post">
 					<%-- 				 action='<c:url value="/deleteCart"/>'  --%>
 					<div class="row">
 						<div class="col-12 col-sm-12 col-md-2 text-center">
@@ -164,8 +164,8 @@
 							</div>
 							<div class="col-2 col-sm-2 col-md-2 text-right">
 
-								<!-- 								<button type="submit" class="btn btn-outline-danger btn-xs"  -->
-								<button type="button" class="btn btn-outline-danger btn-xs"
+<!-- 																<button type="submit" class="btn btn-outline-danger btn-xs"  -->
+								<button type="submit" class="btn btn-outline-danger btn-xs"
 									id="qaq" name="cart_ID" value="${v.cart_ID}">
 									<%-- 								id="qaq" name="cart_ID" value="${v.cart_ID}" onclick="confirmDelete(${v.cart_ID})"> --%>
 									<i class="fa fa-trash" aria-hidden="true"></i>
@@ -175,7 +175,7 @@
 						</div>
 					</div>
 					<hr>
-					<!-- 							</form> -->
+												</form>
 				</c:forEach>
 				<!-- END PRODUCT -->
 				<div class="pull-right">
