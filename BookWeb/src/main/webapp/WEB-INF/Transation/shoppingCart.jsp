@@ -179,8 +179,8 @@
 				</c:forEach>
 				<!-- END PRODUCT -->
 				<div class="pull-right">
-					<a href="" class="btn btn-outline-secondary pull-right"> Update
-						shopping cart </a>
+<!-- 					<a href="" class="btn btn-outline-secondary pull-right"> Update -->
+<!-- 						shopping cart </a> -->
 				</div>
 			</div>
 			<div class="card-footer">

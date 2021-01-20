@@ -1,5 +1,6 @@
 package com.web.book.controller;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -288,9 +289,10 @@ public class ShoppingCartController {
 		System.out.println(bko_Cel);
 		initial();
 		int qaqQty = (int)(Math.random()*(4000))+1000;
+		Date date = new Date();
 		AioCheckOutALL obj = new AioCheckOutALL();
-		obj.setMerchantTradeNo("testterry"+qaqQty);
-		obj.setMerchantTradeDate("2017/01/01 08:05:23");
+		obj.setMerchantTradeNo("book"+qaqQty);
+		obj.setMerchantTradeDate(date);
 		obj.setTotalAmount("50");
 		obj.setTradeDesc("test Description");
 		obj.setItemName("TestItem");
