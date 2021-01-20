@@ -16,17 +16,23 @@
 	type="image/x-icon" />
 <title>書適圈</title>
 
+<style>
+.text-muted{
+color:white
+}
+</style>
 </head>
+
 <body>
 <div class="container">
 	<div id="loginButton" style="float: right;"></div>
 	<form action="<c:url value='/shopping' />" method="get" class="shop">
-		<!-- 偷偷放購物車QAQ start -->
+<!-- 		<!-- 偷偷放購物車QAQ start --> 
 		<a href="#" style="float: right; margin-right: 20px"
 			onclick="cartCheck()"><img alt="wtf..."
 			src="${pageContext.request.contextPath}/image/shoppingCart1.png"
 			width="35px" height="35px"></a>
-		<!-- 偷偷放購物車QAQ end -->
+<!-- 		<!-- 偷偷放購物車QAQ end --> 
 	</form>
 	<div class="row flex-nowrap justify-content-between align-items-center">
 

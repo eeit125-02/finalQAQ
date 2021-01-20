@@ -30,11 +30,11 @@
 	text-anchor: middle;
 }
 
-@media ( min-width : 768px) {
-	.bd-placeholder-img-lg {
-		font-size: 3.5rem;
-	}
-}
+/* @media ( min-width : 768px) { */
+/* 	.bd-placeholder-img-lg { */
+/* 		font-size: 3.5rem; */
+/* 	} */
+/* } */
 
 .btn-outline-secondary{
 background-color:#B3D9D9;
