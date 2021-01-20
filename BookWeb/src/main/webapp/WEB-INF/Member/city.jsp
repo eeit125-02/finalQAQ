@@ -6,31 +6,20 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>書適圈</title>
+<title>Document</title>
 
 <!-- sidemenu -->
-<!-- <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"> -->
-<!-- <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script> -->
-<!-- <script src="//code.jquery.com/jquery-1.11.1.min.js"></script> -->
-<%-- <link rel="stylesheet" href="${pageContext.request.contextPath}/css/navbar.css"> --%>
+
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/navbar.css">
 <!-- sidemenu -->
 
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<!-- <script -->
-<!-- 	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" -->
-<!-- 	integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" -->
-<!-- 	crossorigin="anonymous"></script> -->
-<!-- <script -->
-<!-- 	src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" -->
-<!-- 	integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" -->
-<!-- 	crossorigin="anonymous"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.23/datatables.min.css"/>
 <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.23/datatables.min.js"></script>
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
-	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
-	crossorigin="anonymous">
-<link rel="icon" href="${pageContext.request.contextPath}/image/logo1.ico" type="image/x-icon" />	
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+	
 <style>
 #admin,#mb_modify,#mb_pwd,#mb_inf {
 	border-radius: 25px;
@@ -52,14 +41,14 @@ background-color:#68b0ab
 background-color:#e0ece4
 }
 
-#city {
-	border-radius: 25px;
-	padding: 20px;
-	background-color: 	#F0F0F0;
-	height:100%;
-	width: 200px;
-	float:left;
-}
+ #city { 
+ 	border-radius: 25px; 
+ 	padding: 20px; 
+ 	background-color: 	#F0F0F0; 
+ 	height:auto; 
+	width: 200px; 
+ 	float:left; 
+ } 
  
 legend {
 	text-align: center;
@@ -83,9 +72,41 @@ legend {
 		font-size: 3.5rem;
 	}
 }
-.has_children{ cursor:pointer; }
-.highlight{backgroung:#F60;}
-div a{ display:none;  float:left;}
+.dropbtn {
+ 
+  cursor: pointer;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {background-color: #f1f1f1}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown:hover .dropbtn {
+  background-color: #3e8e41;
+}
 
 </style>
 </head>
@@ -95,15 +116,16 @@ div a{ display:none;  float:left;}
 	<!-- header -->
 	<div class="container media" >
 	<div id="city" >
-	<div class="has_children">	
-		<li style="list-style-type:none">會員中心</li>
-				
-				<a><button  id="admin1" name="admin" class="btn btn-outline-secondary">會員資訊</button></a>				
-				<a><button  id="inf" name="mb_inf" class="btn btn-outline-secondary">會員資訊</button></a>				
-				<a><button  id="third" name="third" class="btn btn-outline-secondary">會員資訊</button></a>				
-				<a><button  id="Modify" name="Modify" class="btn btn-outline-secondary">會員修改</button></a>				
-				<a><button  id="pwdModify" name="pwdModify" class="btn btn-outline-secondary">密碼修改</button></a>
-				
+	
+	<div class="dropdown">	
+		<button class="btn btn-outline-secondary dropbtn" >會員中心</button>
+				<div class="dropdown-content">
+				<button  id="admin1" name="admin" class="btn btn-outline-secondary">會員資訊</button>				
+				<button  id="inf" name="mb_inf" class="btn btn-outline-secondary">會員資訊</button>				
+				<button  id="third" name="third" class="btn btn-outline-secondary">會員資訊</button>				
+				<button  id="Modify" name="Modify" class="btn btn-outline-secondary">會員修改</button>				
+				<button  id="pwdModify" name="pwdModify" class="btn btn-outline-secondary">密碼修改</button>
+				</div>
 				</div>
 				<form name=a3 class=a3 action="<c:url value='/collectlist' />" method="get">
 				<div>
@@ -122,7 +144,8 @@ div a{ display:none;  float:left;}
 				</form>
 				<div>
 				<button type="button" id="editBookReport" name="getjoinrecords" class="btn btn-outline-secondary">讀書心得</button>
-				</div>		
+				</div>
+		
 	</div>
 	
 	
@@ -442,7 +465,6 @@ div a{ display:none;  float:left;}
 						+"</form>"
 					+"</fieldset>"	
 		 			$('#change123').html(insertData);
-					birthday();
 				}
 	 });
         })
@@ -565,7 +587,6 @@ div a{ display:none;  float:left;}
 							+"<button type=\"reset\">清除</button>"
 					+"</fieldset>"
 						+"</form>"
-					+"<button id=\"insert\" type=\"button\">一鍵輸入</button>"
 		 			$('#change123').html(insertData);
 						Modify();
 				}
@@ -594,7 +615,7 @@ div a{ display:none;  float:left;}
 									+"</tr>"
 									+"<tr class=\"table-light\">"
 										+"<td>"+data.mb_inf.mb_Account+"</td>"
-										+"<td><input type=\"date\" name=\"mb_Birthday\" id=\"birthday\" value=\""+data.mb_Birthday+"\"/></td>"
+										+"<td><input type=\"date\" name=\"mb_Birthday\" value=\""+data.mb_Birthday+"\"/></td>"
 									+"</tr>"
 									+"<tr class=\"tr2\">"
 										+"<th scope=\"col\">地址</th>"
@@ -625,12 +646,10 @@ div a{ display:none;  float:left;}
 									+"<button type=\"submit\">送出</button>"
 									+"<button type=\"reset\">清除</button>"
 								+"</div>"
-								+"</fieldset>"
+							+"</fieldset>"
 						+"</form>"
-								 +"<button id=\"insert\" type=\"button\">一鍵輸入</button>"
 				 			$('#change123').html(insertData);
 						showImage();
-						birthday();
 						},
 						error:function(){
 							alert("fuck")
@@ -705,12 +724,8 @@ div a{ display:none;  float:left;}
 			 
 			 
 		function showImage(){
-        	$('#insert').click(function(){
-        		$('#address').val("宜蘭縣員山鄉")
-        		$('#tel').val("0912345678")
-        	})
-        	
     	   $("#myfile").change(function() {
+   			console.log("123")
    			var readFile = new FileReader();
    			var mfile = $("#myfile")[0].files[0];  //注意這裡必須時$("#myfile")[0]，document.getElementById('file')等價與$("#myfile")[0]
    			readFile.readAsDataURL(mfile);
@@ -721,23 +736,7 @@ div a{ display:none;  float:left;}
    			}
    		});	  	   
        }
-		function birthday(){
-			$(document).ready(function() {
-				var date_now = new Date();
-				//得到当前年份
-				var year = date_now.getFullYear();
-				//得到当前月份
-				//注：
-				//  1：js中获取Date中的month时，会比当前月份少一个月，所以这里需要先加一
-				//  2: 判断当前月份是否小于10，如果小于，那么就在月份的前面加一个 '0' ， 如果大于，就显示当前月份
-				var month = date_now.getMonth()+1 < 10 ? "0"+(date_now.getMonth()+1) : (date_now.getMonth()+1);
-				//得到当前日子（多少号）
-				var date = date_now.getDate() < 10 ? "0"+date_now.getDate() : date_now.getDate();
-				//设置input标签的max属性
-				$("#birthday").attr("max",year+"-"+month+"-"+date);	
-			})
-			}
-	
+		
        
       
 //        $("#admin1").click(function(){
@@ -749,11 +748,6 @@ div a{ display:none;  float:left;}
 						
 // 							insertData =
     function Modify(){
-    	$('#insert').click(function(){
-    		$('#oldpwd').val("aaa11")
-    		$('#pwd').val("aaa111")
-    		$('#pwd1').val("aaa111")
-    	})
     	let old = $('#old').val();
 		console.log(old)
 	var b1=false;
@@ -866,31 +860,12 @@ div a{ display:none;  float:left;}
 		
 		
 		$('#editBookReport').click(function(){
-			
-			if("${loginUser.mb_Account}" == "a123456"){
-				$('#change123').load("http://localhost:8080/BookWeb/Admin/BookReport");
-			}else{				
-				window.location.href = "http://localhost:8080/BookWeb/BookReport/EditBookReport"
-				/* let form = $("<form method='get'></form>");
-				form.attr({"action":"//localhost:8080/BookWeb/BookReport/EditBookReport"});
-				$(document.body).append(form);
-				form.submit(); */
-			}
-			
+			let form = $("<form method='post'></form>");
+			form.attr({"action":"//localhost:8080/BookWeb/BookReport/EditBookReport"});
+			$(document.body).append(form);
+			form.submit();
 		});
 		
-		$(document).ready(function(){
-			  
-			$(".has_children").click(function(){
-			  $(this).addClass("highlight")
-			  .children("a").show().end()
-			  
-			  .siblings().removeClass("highlight")
-			  .children("a").hide(); 
-			  
-			});
-
-			});
 	</script>
 	
 	
