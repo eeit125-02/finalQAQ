@@ -14,16 +14,22 @@
 	type="image/x-icon" />
 <title>書適圈</title>
 
+<style>
+.text-muted{
+color:white
+}
+</style>
 </head>
+
 <body>
-	<div id="loginButton" style="float: right"></div>
+	<div  id="loginButton" style="float: right"></div>
 	<form action="<c:url value='/shopping' />" method="get" class="shop">
-		<!-- 偷偷放購物車QAQ start -->
+<!-- 		<!-- 偷偷放購物車QAQ start --> 
 		<a href="#" style="float: right; margin-right: 20px"
 			onclick="cartCheck()"><img alt="wtf..."
 			src="${pageContext.request.contextPath}/image/shoppingCart1.png"
 			width="35px" height="35px"></a>
-		<!-- 偷偷放購物車QAQ end -->
+<!-- 		<!-- 偷偷放購物車QAQ end --> 
 	</form>
 	<div class="row flex-nowrap justify-content-between align-items-center">
 
@@ -35,20 +41,55 @@
 	</div>
 
 
-	<div class="nav-scroller py-1 mb-2">
-		<nav class="nav d-flex justify-content-between"
-			style="background-color: #D2E9FF;">
-			<a class="p-2 text-muted" href='<c:url value="/SearchBook/Search"/>'>圖書漂流瓶</a>
-			<a class="p-2 text-muted" href='<c:url value="/qaqTest"/>'>二手書圖</a> <a
-				class="p-2 text-muted" href='<c:url value="/showActs"/>'>共樂聚落</a> <a
-				class="p-2 text-muted" href='<c:url value="/Discussion/mainpage"/>'>書適論壇</a>
-			<a class="p-2 text-muted"
-				href='//localhost:8080/BookWeb/BookReport/searchBookReport/all/1'>閱讀履歷
-			</a>
-		</nav>
-	</div>
-	<input type="hidden" id="pic" value="${loginUser.mb_pic}">
-	<input type="hidden" id="name" value="${loginUser.mb_Name}">
+<!-- 	<div class="nav-scroller py-1 mb-2"> -->
+<!-- 		<nav class="nav d-flex justify-content-between" -->
+<!-- 			style="background-color: #5ca4a9;"> -->
+<%-- 			<a class="p-2 text-muted" href='<c:url value="/SearchBook/Search"/>'>圖書漂流瓶</a> --%>
+<%-- 			<a class="p-2 text-muted" href='<c:url value="/qaqTest"/>'>二手書圖</a> <a --%>
+<%-- 				class="p-2 text-muted" href='<c:url value="/showActs"/>'>共樂聚落</a> <a --%>
+<%-- 				class="p-2 text-muted" href='<c:url value="/Discussion/mainpage"/>'>書適論壇</a> --%>
+<!-- 			<a class="p-2 text-muted" -->
+<!-- 				href='//localhost:8080/BookWeb/BookReport/searchBookReport/all/1'>閱讀履歷 -->
+<!-- 			</a> -->
+<!-- 		</nav> -->
+<!-- 	</div> -->
+<%-- 	<input type="hidden" id="pic" value="${loginUser.mb_pic}"> --%>
+<%-- 	<input type="hidden" id="name" value="${loginUser.mb_Name}"> --%>
+	
+	
+	
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">Navbar</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavDropdown">
+    <ul class="navbar-nav">
+      <li class="nav-item active">
+        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Features</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Pricing</a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Dropdown link
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          <a class="dropdown-item" href="#">Action</a>
+          <a class="dropdown-item" href="#">Another action</a>
+          <a class="dropdown-item" href="#">Something else here</a>
+        </div>
+      </li>
+    </ul>
+  </div>
+</nav>
+	
+	
+	
 	<script>
 	console.log(typeof($.cookie('Member_ID')))
 	console.log($('#pic').val())

@@ -486,12 +486,12 @@
 			};
 		</script>
 		
-<!-- 		CK EDITOR的東東 -->
+<!-- 		CK EDITOR的西西 -->
 
 <script>
     ClassicEditor
         .create( document.querySelector( '#editor1' ) )
-        .catch( error => {
+        .catch( error =>  {
             console.error( error );
         } );
 </script>

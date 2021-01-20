@@ -26,21 +26,21 @@
 	text-anchor: middle;
 }
 
-@media ( min-width : 768px) {
-	.bd-placeholder-img-lg {
-		font-size: 3.5rem;
-	}
-}
+/* @media ( min-width : 768px) { */
+/* 	.bd-placeholder-img-lg { */
+/* 		font-size: 3.5rem; */
+/* 	} */
+/* } */
 </style>
 <title>書適圈</title>
 </head>
 <body>
 
 	<!-- header -->
-	<header class="container blog-header py-3" id="bookWebheader"></header>
+	<header class="blog-header py-3" id="bookWebheader"></header>
 	<!-- header -->
 
-	<div class="container media">
+	<div class="container">
 	<!-- body -->
 		
 	<!-- body -->
