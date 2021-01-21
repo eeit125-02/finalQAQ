@@ -34,25 +34,38 @@ public class ActFormValidator implements Validator {
 //		}	
 		
 		if (actbean.getact_Name() != null && actbean.getact_Name().length() < 2 && actbean.getact_Name().contains(" ")) {
-			errors.rejectValue("act_Name", " ", "actbean.actname.empty");
+			errors.rejectValue("act_Name", " ", "請填寫活動名稱");
 		}
 
 		if (actbean.getact_Theme().contentEquals("NONE")) {
-			errors.rejectValue("act_Theme", " ", "actbean.acttheme.empty");
+			errors.rejectValue("act_Theme", " ", "請填寫活動主題");
 		}
 		
 		if (actbean.getact_Guest() != null && actbean.getact_Guest().isEmpty() && actbean.getact_Guest().equals("0")) {
-			errors.rejectValue("act_Guest", " ", "actbean.actguest.empty");
+			errors.rejectValue("act_Guest", " ", "請填寫活動嘉賓");
 		}		
 		
 		if (actbean.getact_Image().isEmpty()) {
 			errors.rejectValue("act_Image", " ", "actbean.actimage.empty");			
 		}
 		
-		if (actbean.getact_Pax() != null && actbean.getact_Pax().isEmpty() && actbean.getact_Pax().equals("0")) {
-			errors.rejectValue("act_Pax", " ", "actbean.actpax.empty");
-		}			
+		try {
+			
+			Integer act_Pax = Integer.valueOf(actbean.getact_Pax());
+			if (act_Pax<1) {
+				errors.rejectValue("act_Pax", " ", "人數必須大於0");
+			}
+		} catch (Exception e) {
+			errors.rejectValue("act_Pax", " ", "請填寫數字");	
+		}
+		
+		
+//		if (actbean.getact_Pax() != null && actbean.getact_Pax().isEmpty() && actbean.getact_Pax() <= 0) {
+//			errors.rejectValue("act_Pax", " ", "actbean.actpax.empty");
+//		}			
 
+		
+		
 		if (actbean.getact_Place() != null && actbean.getact_Place().isEmpty()) {
 			errors.rejectValue("act_Place", " ", "actbean.actplace.empty");
 		}

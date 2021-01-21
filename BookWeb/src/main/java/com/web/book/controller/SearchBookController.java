@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -32,7 +34,10 @@ import com.web.book.model.BookTypeBean;
 import com.web.book.model.MemberBean;
 import com.web.book.model.SearchTypeBean;
 import com.web.book.service.GlobalService;
+
 import com.web.book.service.SearchService;
+
+
 
 @Controller
 @SessionAttributes(value = {"loginUser"})
@@ -655,33 +660,6 @@ public class SearchBookController {
 		return "redirect:/bookpage";
 	}
 
-	//點選轉到漂流瓶的第一個頁面
-	@RequestMapping(value = "SearchBook/Search")
-	public String serchPage(Model model) {	
-		List<BookBean> allbook = searchService.getAllBook();
-		Collections.shuffle(allbook);
-		List<BookBean> allbookfive = allbook.subList(0, 5);
-		model.addAttribute("allbookfive", allbookfive);
-		return "SearchBook/Search";
-	}
-	
-	
-//	@GetMapping("/showPDF")
-//	public ResponseEntity<byte[]> pdfDownload(
-//	        HttpServletRequest httpServletRequest
-//	) throws IOException
-//	{
-//	    String path = XXX省略。。。
-//	    File file = new File(path);
-//	    HttpHeaders httpHeaders = new HttpHeaders();
-//	    String fileName = "收藏清單";
-//	    httpHeaders.setContentDispositionFormData("attachment",java.net.URLEncoder.encode(fileName,"UTF-8"));
-//	    httpHeaders.setContentType(MediaType.parseMediaType("application/pdf"));
-//	    return new ResponseEntity<byte[]>(FileUtils.readFileToByteArray(file),
-//	            httpHeaders,
-//	            HttpStatus.CREATED);
-//	}
-	
 	//JavaMail
 	@PostMapping("/toAdminJavaMail")
 	public String toAdminJavaMail(Model model,
@@ -695,5 +673,34 @@ public class SearchBookController {
 		return "redirect:/bookpage";
 	}
 	
+	//點選轉到漂流瓶的第一個頁面
+	@RequestMapping(value = "SearchBook/Search")
+	public String serchPage(Model model) {	
+		List<BookBean> allbook = searchService.getAllBook();
+		Collections.shuffle(allbook);
+		List<BookBean> allbookfive = allbook.subList(0, 5);
+		model.addAttribute("allbookfive", allbookfive);
+		ClassLoader classloader = Thread.currentThread().getContextClassLoader();
+		System.out.println("-----------------------------------"+classloader.getResource("")+"++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+		return "SearchBook/Search";
+	}
+	
+	
+//	@GetMapping("/showPDF")
+//	public ResponseEntity<byte[]> pdfDownload(
+//	        HttpServletRequest httpServletRequest
+//	) throws IOException
+//	{
+//	    String path = "C:\\Users";
+//	    File file = new File(path);
+//	    HttpHeaders httpHeaders = new HttpHeaders();
+//	    String fileName = "收藏清單";
+//	    httpHeaders.setContentDispositionFormData("attachment",java.net.URLEncoder.encode(fileName,"UTF-8"));
+//	    httpHeaders.setContentType(MediaType.parseMediaType("application/pdf"));
+//	    return new ResponseEntity<byte[]>(FileUtils.readFileToByteArray(file),
+//	            httpHeaders,
+//	            HttpStatus.CREATED);
+//	}
+
 	
 }
