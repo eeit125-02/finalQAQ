@@ -86,10 +86,10 @@ td {
 
 }
 
-body{
- background-image:url('image/ex1.png'); 
-/* background-color:pink; */
-}
+/* body{ */
+/*  background-image:url('image/ex1.png');  */
+/* /* background-color:pink; */ */
+/* } */
 
 </style>
 </head>
@@ -97,7 +97,7 @@ body{
 <body>
 <c:url value="" />
 	<!-- header -->
-	<header class="container blog-header py-3" id="bookWebheader"></header>
+	<header class=" blog-header py-3" id="bookWebheader"></header>
 	<!-- header -->
 
 	<div class="container media" >
