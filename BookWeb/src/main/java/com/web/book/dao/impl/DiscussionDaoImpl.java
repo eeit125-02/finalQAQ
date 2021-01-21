@@ -47,6 +47,47 @@ public class DiscussionDaoImpl implements DiscussionDao {
 		return new_nested_command;
 	}
 	
+	//點擊+1
+	@Override
+	public void addClick(Integer post_ID) {
+		Session session = factory.getCurrentSession();
+		PostBean pb = (PostBean) session.get(PostBean.class, post_ID);
+		pb.setClick(pb.getClick()+1);
+	}
+	
+	//用post ID取出Post資料
+	@Override
+	public PostBean getPostBeanById(Integer pb_ID) {
+		Session session = factory.getCurrentSession();
+		PostBean pb = (PostBean) session.get(PostBean.class, pb_ID);
+		return pb;
+	}
+
+	//用member ID取出Member資料
+	@Override
+	public MemberBean getMemberBeanById(Integer mb_ID) {
+		Session session = factory.getCurrentSession();
+		MemberBean mb = (MemberBean) session.get(MemberBean.class, mb_ID);
+		return mb;
+	}
+	
+	//用command ID取出Command資料
+	@Override
+	public CommandBean getCommandBeanById(Integer command_ID) {
+		Session session = factory.getCurrentSession();
+		CommandBean cb = (CommandBean) session.get(CommandBean.class, command_ID);
+		return cb;
+	}
+	
+	//用post id取出command資料
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<CommandBean> getCommandBeanByPostId(Integer pb_ID) {
+		String hql="FROM CommandBean c WHERE FK_PostBean_post_id=:pb_ID ORDER BY c.command_time DESC";
+		Session session = factory.getCurrentSession();
+		return session.createQuery(hql).setParameter("pb_ID", pb_ID).getResultList();
+	}
+	
 	//依時間排序列出所有貼文
 	@SuppressWarnings("unchecked")
 	@Override
@@ -102,6 +143,7 @@ public class DiscussionDaoImpl implements DiscussionDao {
 		return session.createQuery(hql).getResultList();
 	}
 	
+	// 列出會員內容
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<MemberBean> getAllMember() {
@@ -109,6 +151,20 @@ public class DiscussionDaoImpl implements DiscussionDao {
 		Session session = factory.getCurrentSession();
 		return session.createQuery(hql).getResultList();
 	}
+	
+	//查詢貼文關鍵字
+	@SuppressWarnings({ "unchecked"})
+	@Override
+	public List<PostBean> getPostByKeyword(String keyword) {
+		String hql="FROM PostBean p WHERE p.post_content LIKE :content_keyword "+
+							" OR p.post_title LIKE :title_keyword ORDER BY p.post_time  DESC";
+		Session session = factory.getCurrentSession();
+		Query<PostBean> query = session.createQuery(hql);
+		query.setParameter("content_keyword", "%" + keyword + "%");
+		query.setParameter("title_keyword",  "%" + keyword + "%");
+		return query.getResultList();
+	}
+
 	
 	//修改貼文
 	@Override
@@ -136,71 +192,5 @@ public class DiscussionDaoImpl implements DiscussionDao {
 		session.saveOrUpdate(rb);
 		return rb;
 	}
-
-	//用ID取出Post資料
-	@Override
-	public PostBean getPostBeanById(Integer pb_ID) {
-		Session session = factory.getCurrentSession();
-		PostBean pb = (PostBean) session.get(PostBean.class, pb_ID);
-		return pb;
-	}
-
-	//用ID取出Member資料
-	@Override
-	public MemberBean getMemberBeanById(Integer mb_ID) {
-		Session session = factory.getCurrentSession();
-		MemberBean mb = (MemberBean) session.get(MemberBean.class, mb_ID);
-		return mb;
-	}
-	
-	//用ID取出Command資料
-	@Override
-	public CommandBean getCommandBeanById(Integer command_ID) {
-		Session session = factory.getCurrentSession();
-		CommandBean cb = (CommandBean) session.get(CommandBean.class, command_ID);
-		return cb;
-	}
-
-	//用post id取出command資料
-	@SuppressWarnings("unchecked")
-	@Override
-	public List<CommandBean> getCommandBeanByPostId(Integer pb_ID) {
-		String hql="FROM CommandBean c WHERE FK_PostBean_post_id=:pb_ID ORDER BY c.command_time DESC";
-		Session session = factory.getCurrentSession();
-		return session.createQuery(hql).setParameter("pb_ID", pb_ID).getResultList();
-	}
-
-	//查詢貼文關鍵字
-	@SuppressWarnings({ "unchecked"})
-	@Override
-	public List<PostBean> getPostByKeyword(String keyword) {
-		String hql="FROM PostBean p WHERE p.post_content LIKE :content_keyword "+
-							" OR p.post_title LIKE :title_keyword ORDER BY p.post_time  DESC";
-		Session session = factory.getCurrentSession();
-		Query<PostBean> query = session.createQuery(hql);
-		query.setParameter("content_keyword", "%" + keyword + "%");
-		query.setParameter("title_keyword",  "%" + keyword + "%");
-		return query.getResultList();
-	}
-
-	//點擊+1
-	@Override
-	public void addClick(Integer post_ID) {
-		Session session = factory.getCurrentSession();
-		PostBean pb = (PostBean) session.get(PostBean.class, post_ID);
-		pb.setClick(pb.getClick()+1);
-	}
-
-
-
-
-
-
-	
-
-
-
-
-
 
 }
