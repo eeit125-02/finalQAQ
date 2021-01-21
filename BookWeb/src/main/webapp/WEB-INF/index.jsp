@@ -67,7 +67,7 @@
 <body>
 
 	<!-- header -->
-	<header class="blog-header" id="bookWebheader" style="background-color:#bb7857"></header>
+	<header class="blog-header" id="bookWebheader"></header>
 	<!-- header -->
 
 	<div class="container">
