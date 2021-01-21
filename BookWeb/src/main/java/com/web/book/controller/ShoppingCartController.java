@@ -1,9 +1,11 @@
 package com.web.book.controller;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,6 +26,8 @@ import com.web.book.service.ShoppingCartService;
 
 import ecpay.payment.integration.AllInOne;
 import ecpay.payment.integration.domain.AioCheckOutALL;
+import ecpay.payment.integration.domain.AioCheckOutCVS;
+import ecpay.payment.integration.domain.InvoiceObj;
 
 @Controller
 @SessionAttributes(value = { "loginUser", "listCart" })
@@ -47,7 +51,43 @@ public class ShoppingCartController {
 	private static void initial() {
 		all = new AllInOne("");
 	}
+	
+	public static String genAioCheckOutCVS(){
+		AioCheckOutCVS obj = new AioCheckOutCVS();
+		InvoiceObj invoice = new InvoiceObj();
+		UUID uid = UUID.randomUUID();
+		obj.setMerchantTradeNo(uid.toString().replaceAll("-", "").substring(0, 20));
+		obj.setMerchantTradeDate("2017/01/01 08:05:23");
+		obj.setTotalAmount("50");
+		obj.setTradeDesc("test Description");
+		obj.setItemName("TestItem");
+		obj.setReturnURL("http://211.23.128.214:5000");
+		obj.setNeedExtraPaidInfo("N");
+		obj.setStoreExpireDate("3");
+		obj.setInvoiceMark("Y");
+		invoice.setRelateNumber("test202017test");
+		invoice.setCustomerID("123456");
+		invoice.setCarruerType("1");
+		invoice.setTaxType("1");
+		invoice.setCarruerNum("");
+		invoice.setDonation("0");
+		invoice.setLoveCode("X123456");
+		invoice.setPrint("0");
+		invoice.setCustomerName("Mark");
+		invoice.setCustomerAddr("台北市南港區三重路");
+		invoice.setCustomerPhone("0911429215");
+		invoice.setDelayDay("1");
+		invoice.setInvType("07");
+		invoice.setInvoiceItemName("測試");
+		invoice.setInvoiceItemCount("1");
+		invoice.setInvoiceItemWord("個");
+		invoice.setInvoiceItemPrice("50");
+		invoice.setInvoiceItemTaxType("1");
+		String form = all.aioCheckOut(obj, invoice);
+		return form;
+	}
 
+	// 點擊購物車
 	@GetMapping("/shopping")
 	public String cartMain(Model model) {
 		List<ShoppingCartBean> list = scService.searchCart(loginUser.getMb_ID());
@@ -145,38 +185,49 @@ public class ShoppingCartController {
 			scService.updateBookStore(bookStoreBean.getBks_ID(), bookStoreBean.getBs_Num() - 1);
 		}
 		list = scService.searchCart(loginUser.getMb_ID());
-//		for (ShoppingCartBean shoppingCartBean : list) {
-//			System.out.println("-------------------------------------------------");
-//			System.out.println(shoppingCartBean.getCart_Num());			
-//			System.out.println(shoppingCartBean.getCart_Price());			
-//			total += shoppingCartBean.getCart_Num() * shoppingCartBean.getCart_Price();
-//		}
-//		model.addAttribute("total", total);
 		model.addAttribute("listCart", list);
 		return "Transation/shoppingCart";
 	}
 
-	@PostMapping("deleteCart")
-	public String deleteCart(Model model, @RequestParam(value = "cart_ID", required = false) Integer cart_ID) {
+	@PostMapping("/deleteCart")
+	@ResponseBody
+	public Map<String, Object> deleteCart(@RequestParam(value = "cartID", required = false) Integer cart_ID) {
 		scService.deleteCart(cart_ID);
-		model.addAttribute("listCart", scService.searchCart(loginUser.getMb_ID()));
-		return "redirect:/shopping";
+		Map<String, Object> map = new HashMap<>();
+		map.put("work", "刪除成功");
+		return map;
 	}
 
+//	ajax 更新數量
 	@PostMapping("updateCart")
 	@ResponseBody
-	public Map<String, String> updateCart(
-			@RequestParam(value = "cartNum") int cartNum,
-			@RequestParam(value = "bksID") int bksID,
-			@RequestParam(value = "cartID") int cartID
+	public Map<String, Object> updateCart(
+			@RequestParam(value = "cartNum") Integer cartNum,
+			@RequestParam(value = "bksID") Integer bksID,
+			@RequestParam(value = "cartID") Integer cartID
 			) {
+		Map<String, Object> map = new HashMap<>();
+// 違法的購買數量或者買一個
+		if (cartNum <= 1) {
+			scService.updateCart(cartID, 1);
+			map.put("minnum", 1);
+		} else {
+			BookStoreBean store = bsService.getOneBookStore(bksID);
+			map.put("maxnum", store.getBs_Num());
+// 超過庫存
+			if (cartNum > store.getBs_Num()) {
+				scService.updateCart(cartID, store.getBs_Num());
+				map.put("buynum", store.getBs_Num());
+			} else {
+				scService.updateCart(cartID, cartNum);
+				map.put("buynum", cartNum);
+			}
+		}
 		System.out.println("++++++++++++++++++++++++++++++++++++++++");
 		System.out.println(cartNum);
 		System.out.println(bksID);
 		System.out.println(cartID);
 		System.out.println("----------------------------------------");
-		Map<String, String> map = new HashMap<>();
-		map.put("work", "大成功");
 		return map;
 	}
 
@@ -191,15 +242,17 @@ public class ShoppingCartController {
 		initial();
 		int qaqQty = (int) (Math.random() * (4000)) + 1000;
 		Date date = new Date();
-
+		SimpleDateFormat sdf = new SimpleDateFormat ("yyyy/MM/dd hh:mm:ss");
+		String now = sdf.format(date);
+//		"2017/01/01 08:05:23"
 		AioCheckOutALL obj = new AioCheckOutALL();
 		obj.setMerchantTradeNo("book" + qaqQty);
-		obj.setMerchantTradeDate(date.toString());
+		obj.setMerchantTradeDate(now);
 		obj.setTotalAmount("50");
 		obj.setTradeDesc("test Description");
 		obj.setItemName("TestItem");
 		obj.setReturnURL("http://localhost:8080/BookWeb/bkCheckout");
-		obj.setClientBackURL(null);
+		obj.setClientBackURL("http://localhost:8080/BookWeb/bkCheckout");
 		obj.setNeedExtraPaidInfo("N");
 		String form = all.aioCheckOut(obj, null);
 		return form;
@@ -209,116 +262,6 @@ public class ShoppingCartController {
 	public String bkCheckout() {
 		return "/Transation/bkCheckout";
 	}
-
-//	@PostMapping("shopping")
-//	public String addCart(Model model,
-//			@RequestParam(value = "bk_ID", defaultValue = "0", required = false) Integer bk_ID,
-//			@RequestParam(value = "bk_ID1", defaultValue = "0", required = false) Integer bk_ID2,
-//			@RequestParam(value = "bk_Price", required = false) Integer bk_Price) {
-//
-//		Integer tatolMoney = 0;
-//		System.out.println("-------------------------------------");
-//		System.out.println("bk_ID=" + bk_ID);
-//		System.out.println("bk_ID1=" + bk_ID2);
-//		System.out.println("bk_Price=" + bk_Price);
-//		System.out.println("-------------------------------------");
-//// 先搜尋購物車內容
-//		List<ShoppingCartBean> listCart = scService.searchCart(loginUser.getMb_ID());
-//// 判斷按哪種按鈕 bk_ID:直接購買
-//		if (bk_ID != 0 && bk_ID2 == 0) {
-//// 如果listCart沒內容新增		
-//			if (listCart.size() == 0) {
-//				scService.addToCart(1, bk_Price, bk_ID, loginUser.getMb_ID());
-//				listCart = scService.searchCart(loginUser.getMb_ID());
-//				model.addAttribute("list", listCart);
-//				for (ShoppingCartBean shoppingCartBean : listCart) {
-//					tatolMoney += shoppingCartBean.getCart_Num() * shoppingCartBean.getCart_Price();
-//				}
-//				model.addAttribute("totalCart", tatolMoney);
-//				return "Transation/shoppingCart";
-//// 有內容判斷購物車裡是否已經有那本書，有就跳轉回去原頁面 -> 改成跳到購物車
-//			} else {
-//				for (ShoppingCartBean shoppingCartBean : listCart) {
-//					if (bk_ID == shoppingCartBean.getBook().getBk_ID()) {
-////						List<BookBean> list = bsService.searchBookStore(1);
-////						model.addAttribute("store", list);
-//						listCart = scService.searchCart(loginUser.getMb_ID());
-//						model.addAttribute("list", listCart);
-//						return "Transation/shoppingCart";
-//					}
-//				}
-//// 沒有內容新增
-//				scService.addToCart(1, bk_Price, bk_ID, loginUser.getMb_ID());
-//				listCart = scService.searchCart(loginUser.getMb_ID());
-//				model.addAttribute("list", listCart);
-//				for (ShoppingCartBean shoppingCartBean : listCart) {
-//					tatolMoney += shoppingCartBean.getCart_Num() * shoppingCartBean.getCart_Price();
-//				}
-//				model.addAttribute("totalCart", tatolMoney);
-//				return "Transation/shoppingCart";
-//			}
-//// 判斷按哪種按鈕 bk_ID2:放入購物車
-//		} else if (bk_ID == 0 && bk_ID2 != 0) {
-//// 如果listCart沒內容新增	
-//			if (listCart.size() == 0) {
-//				scService.addToCart(1, bk_Price, bk_ID2, loginUser.getMb_ID());
-//				listCart = scService.searchCart(loginUser.getMb_ID());
-//				model.addAttribute("list", listCart);
-//				for (ShoppingCartBean shoppingCartBean : listCart) {
-//					tatolMoney += shoppingCartBean.getCart_Num() * shoppingCartBean.getCart_Price();
-//				}
-//				model.addAttribute("totalCart", tatolMoney);
-//				return "Transation/shoppingCart";
-//			}
-//// 有內容判斷購物車裡是否已經有那本書，有就跳轉回去原頁面
-//			for (ShoppingCartBean shoppingCartBean : listCart) {
-//				if (bk_ID2 == shoppingCartBean.getBook().getBk_ID()) {
-//					model.addAttribute("same", "已經加入購物車");
-//					List<BookStoreBean> list = bsService.searchBookStore(1);
-//					model.addAttribute("bookstore", list);
-//					return "Transation/qaqMain";
-//				}
-//			}
-//// 沒有內容新增
-//			scService.addToCart(1, bk_Price, bk_ID2, loginUser.getMb_ID());
-//			listCart = scService.searchCart(loginUser.getMb_ID());
-//			model.addAttribute("list", listCart);
-//			for (ShoppingCartBean shoppingCartBean : listCart) {
-//				tatolMoney += shoppingCartBean.getCart_Num() * shoppingCartBean.getCart_Price();
-//			}
-//			model.addAttribute("totalCart", tatolMoney);
-//			return "Transation/shoppingCart";
-//		} else {
-//			model.addAttribute("list", listCart);
-//			for (ShoppingCartBean shoppingCartBean : listCart) {
-//				tatolMoney += shoppingCartBean.getCart_Num() * shoppingCartBean.getCart_Price();
-//			}
-//			model.addAttribute("totalCart", tatolMoney);
-//			return "Transation/shoppingCart";
-//		}
-//	}
-
-//	@PostMapping("updateCart.do")
-//	public String updateOrDelete(@RequestParam String cmd,
-//			@RequestParam(value = "cart_ID", required = false) Integer cart_ID,
-//			@RequestParam(value = "cart_Num", required = false) Integer cart_Num, Model model) {
-//		List<ShoppingCartBean> listCart = scService.searchCart(loginUser.getMb_ID());
-//		if (cmd.equalsIgnoreCase("DEL")) {
-//			scService.deleteCart(cart_ID); // 刪除購物車內的某項商品
-//			listCart = scService.searchCart(loginUser.getMb_ID());
-//			model.addAttribute("list", listCart);
-//			return "Transation/shoppingCart";
-//		} else if (cmd.equalsIgnoreCase("MOD")) {
-//			scService.updateCart(cart_ID, cart_Num); // 修改某項商品的數項
-//			listCart = scService.searchCart(loginUser.getMb_ID());
-//			model.addAttribute("list", listCart);
-//			return "Transation/shoppingCart";
-//		} else {
-//			listCart = scService.searchCart(loginUser.getMb_ID());
-//			model.addAttribute("list", listCart);
-//			return "Transation/shoppingCart";
-//		}
-//	}
 
 	// 測試用
 //	@PostMapping("checkout")
