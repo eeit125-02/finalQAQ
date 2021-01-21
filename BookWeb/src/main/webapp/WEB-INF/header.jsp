@@ -48,14 +48,17 @@
 	</div>
 	</div>
 <!-- </div> -->
-<nav class="menu">
-  <a class="blog-header-logo text-dark" href="//localhost:8080/BookWeb">
-			<img alt="LOGO"
+
+<nav class="menu" style="height: 10rem;background-color: #f7efe8;margin:auto;">
+  <ol style="margin:auto;">
+  <li class="menu-item">
+  		<a class="blog-header-logo text-dark" href="//localhost:8080/BookWeb">
+			<img alt="LOGO" style="margin-right:220px;"
 			src="${pageContext.request.contextPath}/image/logo1.png"
-			id="Img/logo" height="75px">
+			id="Img/logo" height="100px">
 		</a>
-  <ol>
-    <li class="menu-item"><a href='<c:url value="/SearchBook/Search"/>'>圖書漂流瓶</a></li>
+  </li>
+    <li class="menu-item"style="margin:auto;"><a href='<c:url value="/SearchBook/Search"/>'>圖書漂流瓶</a></li>
     <li class="menu-item"><a href='<c:url value="/qaqTest"/>'>二手書圖</a></li>
     <li class="menu-item">
       <a href='<c:url value="/showActs"/>'>共樂聚落</a>
@@ -66,7 +69,6 @@
     <li class="menu-item"><a href='//localhost:8080/BookWeb/BookReport/searchBookReport/all/1'>閱讀履歷</a></li>
   </ol>
 </nav>	
-	
 	<input type="hidden" id="pic" value="${loginUser.mb_pic}">
 	<input type="hidden" id="name" value="${loginUser.mb_Name}">
 	<script>
