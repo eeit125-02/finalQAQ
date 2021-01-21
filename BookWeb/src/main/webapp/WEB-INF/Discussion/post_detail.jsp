@@ -66,8 +66,8 @@
 			<!-- side area -->
 			<div class="col-2 text-center">
 				<h2>書適論壇</h2><br><br>
-				<button id="lazy_command" class="btn btn-warning" style="border-radius:50%;margin-bottom:10px">command</button><br>
-				<button id="lazy_nested_command" class="btn btn-warning" style="border-radius:50%;">nested_command</button>
+				<button id="lazy_command" class="btn btn-outline-info" style="border-radius:50%;margin-bottom:10px">command</button><br>
+				<button id="lazy_nested_command" class="btn btn-outline-info" style="border-radius:50%;">nested_command</button>
 			</div>
 
 			<div class="col-10" style='text-align: center;'>

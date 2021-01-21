@@ -143,7 +143,7 @@ response.setDateHeader("Expires", 0);
 						<!-- search keyword -->
 						<nav class="navbar navbar-light bg-light justify-content-between">
 							<a class="navbar-brand">搜尋貼文關鍵字
-									<button id="lazy_search" class="btn btn-warning" style="border-radius:50%;">press</button>
+									<button id="lazy_search" class="btn btn-outline-info" style="border-radius:50%;">press</button>
 							</a>
 							<form class="form-inline" action='search_keyword' method="post">
 								<input class="form-control mr-sm-2" type="search" id="get_lazy_search"
@@ -390,7 +390,7 @@ response.setDateHeader("Expires", 0);
 										
 										<div class="text-center">
 											<button type="submit" class="btn btn-primary" id="send_added_post">送出貼文</button>
-											<button id="lazy_input" class="float-left btn btn-warning" style="border-radius:50%;">press</button>
+											<button id="lazy_input" class="float-left btn btn-outline-info" style="border-radius:50%;">press</button>
 										</div>
 									
 								</div>
@@ -787,13 +787,13 @@ response.setDateHeader("Expires", 0);
 							<div class="tab-pane fade" id="pills-manage_post" role="tabpanel">
 								
 								<!-- search -->
-										<button id="lazy_manager_search" class="btn btn-warning" style="border-radius:50%;margin-bottom:10px">press</button>
 								<div class="form-inline justify-content-center">
 										<input class="form-control" type="search" placeholder="請輸入關鍵字"
 											name="keyword_manager" id="keyword_manager" style="margin-right: 10px">
 										<button class="btn btn-outline-primary my-2 my-sm-0"
 											type="submit" id="search_post_manager">Search</button>
 								</div>
+										<button id="lazy_manager_search" class="btn btn-outline-info" style="border-radius:50%;margin-top:10px">press</button>
 								<br>
 								
 								<script>

@@ -71,7 +71,7 @@ response.setDateHeader("Expires", 0);
 			</div>
 
 			<div class="col-10" style='text-align: center;'>
-				<h3>&nbsp; &nbsp; &thinsp; 修改貼文<button id="lazy_input" class="float-right btn btn-warning" style="border-radius:50%; margin-right:40px">press</button></h3><br>
+				<h3>&nbsp; &nbsp; &thinsp; 修改貼文<button id="lazy_input" class="float-right btn btn-outline-info" style="border-radius:50%; margin-right:40px">press</button></h3><br>
 				<div
 					style="border: #ADADAD 2px solid; border-radius: 5px; text-align: left; padding: 10px; margin: 0px 10px; padding-top: 20px">
 
