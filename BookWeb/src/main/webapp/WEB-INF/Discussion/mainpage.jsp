@@ -124,6 +124,12 @@ response.setDateHeader("Expires", 0);
 						</script>
 						
 				</div>
+						<br><br>
+						
+						<form class="form-inline" action='catch_exception' method="post">
+						<button id="catch_exception" class="btn btn-outline-warning" type="submit">錯誤<br>攔截</button>
+						</form>
+						
 			</div>
 
 			<!-- content area -->
@@ -136,9 +142,11 @@ response.setDateHeader("Expires", 0);
 						role="tabpanel">
 						<!-- search keyword -->
 						<nav class="navbar navbar-light bg-light justify-content-between">
-							<a class="navbar-brand">搜尋貼文關鍵字</a>
+							<a class="navbar-brand">搜尋貼文關鍵字
+									<button id="lazy_search" class="btn btn-warning" style="border-radius:50%;">press</button>
+							</a>
 							<form class="form-inline" action='search_keyword' method="post">
-								<input class="form-control mr-sm-2" type="search"
+								<input class="form-control mr-sm-2" type="search" id="get_lazy_search"
 									placeholder="請輸入關鍵字" name="keyword">
 								<button class="btn btn-outline-primary my-2 my-sm-0"
 									type="submit" id="search_keyword">Search</button>
@@ -146,6 +154,11 @@ response.setDateHeader("Expires", 0);
 						</nav>
 						<br>
 
+							<script>
+									$('#lazy_search').click(function(){
+										$('#get_lazy_search').val('30');
+									})
+							</script>
 
 						<!-- discussion board top tab -->
 						<ul class="nav nav-tabs nav-fill" id="novelTab" role="tablist">
@@ -377,6 +390,7 @@ response.setDateHeader("Expires", 0);
 										
 										<div class="text-center">
 											<button type="submit" class="btn btn-primary" id="send_added_post">送出貼文</button>
+											<button id="lazy_input" class="float-left btn btn-warning" style="border-radius:50%;">press</button>
 										</div>
 									
 								</div>
@@ -384,6 +398,11 @@ response.setDateHeader("Expires", 0);
 							
 							<script>
 									CKEDITOR.replace('post_content');
+
+									$('#lazy_input').click(function(){
+										$('#post_title').val('自動帶入貼文標題');
+										CKEDITOR.instances["post_content"].setData('自動帶入貼文內容');
+									})
 							</script>
 							
 							<script>
@@ -768,6 +787,7 @@ response.setDateHeader("Expires", 0);
 							<div class="tab-pane fade" id="pills-manage_post" role="tabpanel">
 								
 								<!-- search -->
+										<button id="lazy_manager_search" class="btn btn-warning" style="border-radius:50%;margin-bottom:10px">press</button>
 								<div class="form-inline justify-content-center">
 										<input class="form-control" type="search" placeholder="請輸入關鍵字"
 											name="keyword_manager" id="keyword_manager" style="margin-right: 10px">
@@ -775,6 +795,12 @@ response.setDateHeader("Expires", 0);
 											type="submit" id="search_post_manager">Search</button>
 								</div>
 								<br>
+								
+								<script>
+								$(document).on("click", '#lazy_manager_search', function(){
+									$('#keyword_manager').val('修改');
+								})
+								</script>
 								
 								<h4 id="show_type_keyword"></h4>
 								
@@ -801,7 +827,7 @@ response.setDateHeader("Expires", 0);
  														+	'type="submit" style="margin-left: 5px">刪除</button>'	
  														+ '</form>'		
  														+	'<p>'+post_search_result[i].mb_name+'<br>'+post_search_result[i].post_time+'</p>'
- 														+	'<h3>'+post_search_result[i].post_title+'</h3>'
+ 														+	'<h3><strong>'+post_search_result[i].post_title+'</strong></h3>'
  														+	'<button class="btn btn-link" type="button" data-toggle="collapse" '																
  														+	'data-target="#manager_show_complete_post'+post_search_result[i].post_id+'">顯示、收攏貼文</button>'
  														+	'<div class="collapse" id="manager_show_complete_post'+post_search_result[i].post_id+'">'	

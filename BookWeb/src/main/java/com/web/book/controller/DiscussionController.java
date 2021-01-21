@@ -91,7 +91,15 @@ public class DiscussionController {
 		DateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 		String tsStr = sdf.format(d);
 		discussionService.editPost(edit_post_id, edit_post_title,edit_post_content, tsStr);
-		return "redirect:/Discussion/mainpage"; 
+		
+		PostBean pb = discussionService.getPostBeanById(edit_post_id);
+		model.addAttribute("PostBean", pb);
+		List<CommandBean> command_detail= discussionService.getCommandBeanByPostId(edit_post_id);
+		model.addAttribute("CommandBean", command_detail);
+		model.addAttribute("loginUser", loginUser); 
+		List<NestedCommandBean> nested_command_detail = discussionService.getAllNestedCommand();
+		model.addAttribute("AllNestedCommand", nested_command_detail);
+		return "/Discussion/post_detail"; 
 	}
 		
 	//搜尋關鍵字
@@ -107,4 +115,13 @@ public class DiscussionController {
 		model.addAttribute("AllNestedCommand", nested_command_detail);
 		return "/Discussion/search_result";
 	}
+	
+	//錯誤攔截
+	@PostMapping("Discussion/catch_exception")
+	public String catchException(Model model) {
+		model.addAttribute("exception", 1/0);
+		return "Discussion/mainpage";
+	}
+	
+	
 }

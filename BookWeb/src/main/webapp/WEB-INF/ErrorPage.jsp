@@ -43,7 +43,7 @@
 	<div class="container">
 	<!-- body -->
 	<div class="text-center">
-		<h1>出現未知錯誤...</h1>
+		<h1>出現了一點錯誤...</h1>
 		<img src="${pageContext.request.contextPath}/image/error.png"/>
 		<h5>  ${exception}</h5>
 		<br><br>

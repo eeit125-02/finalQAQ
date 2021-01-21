@@ -67,10 +67,11 @@ response.setDateHeader("Expires", 0);
 			<!-- side area -->
 			<div class="col-2 text-center">
 				<h2>書適論壇</h2>
+				
 			</div>
 
 			<div class="col-10" style='text-align: center;'>
-				<h3>修改貼文</h3><br>
+				<h3>&nbsp; &nbsp; &thinsp; 修改貼文<button id="lazy_input" class="float-right btn btn-warning" style="border-radius:50%; margin-right:40px">press</button></h3><br>
 				<div
 					style="border: #ADADAD 2px solid; border-radius: 5px; text-align: left; padding: 10px; margin: 0px 10px; padding-top: 20px">
 
@@ -94,15 +95,21 @@ response.setDateHeader("Expires", 0);
 							</div>
 						</div>
 						
-						<script>
-							CKEDITOR.replace('edit_post_content');
-						</script>
 						
 						<div class="text-center">
 							<button type="submit" id="send_edited_post" class="btn btn-primary">送出貼文</button>
 						</div>
 					</form>
+							
 					
+						<script>
+							CKEDITOR.replace('edit_post_content');
+							$('#lazy_input').click(function(){
+								$('#edit_post_title').val('[已修改]自動帶入貼文標題');
+								CKEDITOR.instances["edit_post_content"].setData('[已修改]自動帶入貼文內容');
+							})
+						</script>
+						
 					<script>
 						$('#send_edited_post').click(function(){
 							if($('#edit_post_title').val()==''||$('#edit_post_content').val()==''){
