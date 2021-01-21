@@ -49,9 +49,11 @@ color:white
 	</div>
 </div>
 
+
+<div style="margin:0px;padding:0px;height: 5px;background-color: wheat;"></div>
 <nav class="menu">
   <ol>
-    <li class="menu-item"><a href='<c:url value="/SearchBook/Search"/>'>圖書漂流瓶</a></li>
+    <li class="menu-item" style="font-size: 135%;"><a href='<c:url value="/SearchBook/Search"/>' style="text-decoration: none;">圖書漂流瓶</a></li>
     <li class="menu-item"><a href='<c:url value="/qaqTest"/>'>二手書圖</a></li>
     <li class="menu-item">
       <a href='<c:url value="/showActs"/>'>共樂聚落</a>
