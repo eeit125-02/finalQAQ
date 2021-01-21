@@ -48,7 +48,6 @@ color:white
 		</a>
 	</div>
 </div>
-
 <nav class="menu">
   <ol>
     <li class="menu-item"><a href='<c:url value="/SearchBook/Search"/>'>圖書漂流瓶</a></li>

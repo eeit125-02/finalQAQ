@@ -53,11 +53,11 @@ p {
 	text-align: center
 }
 
-.menu {
-	margin-top: 10px;
-	width: 250px;
-	height: auto
-}
+/* .menu { */
+/* 	margin-top: 10px; */
+/* 	width: 250px; */
+/* 	height: auto */
+/* } */
 
 .list {
 	font-size: 20px;
@@ -68,11 +68,11 @@ p {
 	text-anchor: middle;
 }
 
- @media ( min-width : 768px) { 
- 	.bd-placeholder-img-lg { 
- 		font-size: 3.5rem; 
- 	} 
- } 
+/*  @media ( min-width : 768px) {  */
+/*  	.bd-placeholder-img-lg {  */
+/*  		font-size: 3.5rem;  */
+/*  	}  */
+/*  }  */
 
 td {
 	width: 100px;
@@ -86,11 +86,16 @@ td {
 
 }
 
+body{
+ background-image:url('image/ex1.png'); 
+/* background-color:pink; */
+}
+
 </style>
 </head>
 
 <body>
-
+<c:url value="" />
 	<!-- header -->
 	<header class="container blog-header py-3" id="bookWebheader"></header>
 	<!-- header -->
