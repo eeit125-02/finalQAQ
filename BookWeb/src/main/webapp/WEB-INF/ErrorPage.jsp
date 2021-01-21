@@ -26,23 +26,29 @@
 	text-anchor: middle;
 }
 
-/* @media ( min-width : 768px) { */
-/* 	.bd-placeholder-img-lg { */
-/* 		font-size: 3.5rem; */
-/* 	} */
-/* } */
+@media ( min-width : 768px) {
+	.bd-placeholder-img-lg {
+		font-size: 3.5rem;
+	}
+}
 </style>
 <title>書適圈</title>
 </head>
 <body>
 
 	<!-- header -->
-	<header class="blog-header py-3" id="bookWebheader"></header>
+	<header class="container blog-header py-3" id="bookWebheader"></header>
 	<!-- header -->
 
 	<div class="container">
 	<!-- body -->
-		
+	<div class="text-center">
+		<h1>出現未知錯誤...</h1>
+		<img src="${pageContext.request.contextPath}/image/error.png"/>
+		<h5>  ${exception}</h5>
+		<br><br>
+		<input class="btn btn-outline-primary" name="Submit" type="button" id="Submit" onClick="javascript:history.back(1)" value="回一上頁" />
+	</div>
 	<!-- body -->
 	</div>
 

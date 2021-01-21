@@ -107,7 +107,7 @@ public class StoreController {
 		for (BookStoreBean bookStoreBean : manyPrice) {
 			Map<String, Object> data = new HashMap<>();
 			data.put("bk_ID", bookStoreBean.getBook().getBk_ID());
-			data.put("mb_ID", bookStoreBean.getMember().getMb_ID());
+			data.put("bs_ID", bookStoreBean.getMember().getMb_ID());
 			data.put("bk_Pic", bookStoreBean.getBook().getBk_Pic());
 			data.put("bks_ID", bookStoreBean.getBks_ID());
 			data.put("bk_Name", bookStoreBean.getBook().getBk_Name());

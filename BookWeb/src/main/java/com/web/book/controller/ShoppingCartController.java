@@ -26,7 +26,7 @@ import ecpay.payment.integration.AllInOne;
 import ecpay.payment.integration.domain.AioCheckOutALL;
 
 @Controller
-@SessionAttributes(value = { "loginUser", "listCart"})
+@SessionAttributes(value = { "loginUser", "listCart" })
 public class ShoppingCartController {
 
 	@Autowired
@@ -43,55 +43,48 @@ public class ShoppingCartController {
 		loginUser = (MemberBean) model.getAttribute("loginUser");
 
 	}
-	
-	private static void initial(){
+
+	private static void initial() {
 		all = new AllInOne("");
 	}
-	
-	@PostMapping("/qaq")
-	public String qaq(Model model,
-			@RequestParam(value = "bk_ID") int bk_ID
-			) {
-		System.out.println("++++++++++++++++++++++++++++++++++++++++++");
-		System.out.println(bk_ID);
-		System.out.println("------------------------------------------");
+
+	@GetMapping("/shopping")
+	public String cartMain(Model model) {
+		List<ShoppingCartBean> list = scService.searchCart(loginUser.getMb_ID());
+		model.addAttribute("listCart", list);
 		return "Transation/shoppingCart";
 	}
-	
+
 	// 價錢區間直接購買
-	@PostMapping("/pointMid")
-	public String pointMid(Model model,
-			@RequestParam(value="bk_ID", required = false) Integer bk_ID,
-			@RequestParam(value="mb_ID", required = false) Integer bs_ID,
-			@RequestParam(value="bs_Price", required = false) Integer cart_Price,
-			@RequestParam(value="cart_Num", required = false) Integer cart_Num,
-			@RequestParam(value="qty", required = false) Integer qty
-			) {
-		System.out.println("-----------------------------------------------");
-		System.out.println(bk_ID);
-		System.out.println(bs_ID);
-		System.out.println(cart_Price);
-		System.out.println(cart_Num);
-		System.out.println(qty);
-		// 先搜尋購物車，裡面有相同update
+	@PostMapping("/directBuy")
+	public String directBuy(Model model, @RequestParam(value = "bs_Num", required = false) int bs_Num,
+			@RequestParam(value = "bs_Price", required = false) int bs_Price,
+			@RequestParam(value = "bk_ID", required = false) int bk_ID,
+			@RequestParam(value = "bs_ID", required = false) int bs_ID,
+			@RequestParam(value = "cart_Num", required = false) int cart_Num,
+			@RequestParam(value = "bks_ID", required = false) int bks_ID) {
+//		System.out.println("++++++++++++++++++++++++++++++++++++++++++");
+//		System.out.println("------------------------------------------");
 		Boolean qaq = true;
 		List<ShoppingCartBean> list = scService.searchCart(loginUser.getMb_ID());
 		for (ShoppingCartBean shoppingCartBean : list) {
-			if(bk_ID.equals(shoppingCartBean.getBook().getBk_ID()) && cart_Price.equals(shoppingCartBean.getCart_Price())) {
+			if (bk_ID == shoppingCartBean.getBook().getBk_ID() && bs_Price == shoppingCartBean.getCart_Price()) {
 				qaq = false;
-				scService.updateCartAll(cart_Num+shoppingCartBean.getCart_Num(), bk_ID);
+				scService.updateCartAll(cart_Num + shoppingCartBean.getCart_Num(), bk_ID);
+				bsService.updateBookStore(bks_ID, (bs_Num - cart_Num), bs_Price);
 				list = scService.searchCart(loginUser.getMb_ID());
 				model.addAttribute("listCart", list);
 			}
 		}
 		if (qaq) {
-		scService.addToCart(cart_Num, cart_Price, bk_ID, loginUser.getMb_ID(), bs_ID);
-		list = scService.searchCart(loginUser.getMb_ID());
-		model.addAttribute("listCart", list);
+			scService.addToCart(cart_Num, bs_Price, bk_ID, loginUser.getMb_ID(), bs_ID, bks_ID);
+			bsService.updateBookStore(bks_ID, (bs_Num - cart_Num), bs_Price);
+			list = scService.searchCart(loginUser.getMb_ID());
+			model.addAttribute("listCart", list);
 		}
-		return "Transation/shoppingCart";
+		return "redirect:/shopping";
 	}
-	
+
 	// 放入購物車
 	@GetMapping("/addCart")
 	@ResponseBody
@@ -119,23 +112,22 @@ public class ShoppingCartController {
 		}
 //		 如果購物車沒有這筆資料則新增
 		if (qaq) {
-			scService.addToCart(qty, bp, bk, loginUser.getMb_ID(), bsService.getOneBookStore(bks).getMember().getMb_ID());
+			scService.addToCart(qty, bp, bk, loginUser.getMb_ID(),
+					bsService.getOneBookStore(bks).getMember().getMb_ID(), bks);
 			scService.updateBookStore(bks, amount);
 		}
 		return map;
 	}
-	
-	//直接購買
+
+	// 直接購買
 	@PostMapping("/dctyBuy")
-	public String cartDetail(Model model,
-			@RequestParam(value = "bks_ID", required = false) Integer bks_ID,
-			@RequestParam(value = "cart_Num", required = false) Integer cart_Num		
-			) {
+	public String cartDetail(Model model, @RequestParam(value = "bks_ID", required = false) Integer bks_ID,
+			@RequestParam(value = "cart_Num", required = false) Integer cart_Num) {
 //		System.out.println("----------------------------------------------");
 //		System.out.println(cart_Num);
-		//先搜尋購物車裡的內容
+		// 先搜尋購物車裡的內容
 		Boolean qaqCart = true;
-		int total = 0;
+//		int total = 0;
 		BookStoreBean bookStoreBean = bsService.getOneBookStore(bks_ID);
 		List<ShoppingCartBean> list = scService.searchCart(loginUser.getMb_ID());
 		for (ShoppingCartBean shoppingCartBean : list) {
@@ -148,7 +140,8 @@ public class ShoppingCartController {
 			continue;
 		}
 		if (qaqCart) {
-			scService.addToCart(cart_Num, bookStoreBean.getBs_Price(), bookStoreBean.getBook().getBk_ID(), loginUser.getMb_ID(), bsService.getOneBookStore(bks_ID).getMember().getMb_ID());
+			scService.addToCart(cart_Num, bookStoreBean.getBs_Price(), bookStoreBean.getBook().getBk_ID(),
+					loginUser.getMb_ID(), bsService.getOneBookStore(bks_ID).getMember().getMb_ID(), bks_ID);
 			scService.updateBookStore(bookStoreBean.getBks_ID(), bookStoreBean.getBs_Num() - 1);
 		}
 		list = scService.searchCart(loginUser.getMb_ID());
@@ -158,25 +151,63 @@ public class ShoppingCartController {
 //			System.out.println(shoppingCartBean.getCart_Price());			
 //			total += shoppingCartBean.getCart_Num() * shoppingCartBean.getCart_Price();
 //		}
-		model.addAttribute("total", total);
+//		model.addAttribute("total", total);
 		model.addAttribute("listCart", list);
 		return "Transation/shoppingCart";
 	}
-	
-	@GetMapping("/shopping")
-	public String cartMain(Model model) {
-		List<ShoppingCartBean> list = scService.searchCart(loginUser.getMb_ID());
-		model.addAttribute("listCart", list);
-		return "Transation/shoppingCart";
-	}
-	
+
 	@PostMapping("deleteCart")
-	public String deleteCart(Model model,
-			@RequestParam(value = "cart_ID", required = false) Integer cart_ID
-			) {
+	public String deleteCart(Model model, @RequestParam(value = "cart_ID", required = false) Integer cart_ID) {
 		scService.deleteCart(cart_ID);
 		model.addAttribute("listCart", scService.searchCart(loginUser.getMb_ID()));
 		return "redirect:/shopping";
+	}
+
+	@PostMapping("updateCart")
+	@ResponseBody
+	public Map<String, String> updateCart(
+			@RequestParam(value = "cartNum") int cartNum,
+			@RequestParam(value = "bksID") int bksID,
+			@RequestParam(value = "cartID") int cartID
+			) {
+		System.out.println("++++++++++++++++++++++++++++++++++++++++");
+		System.out.println(cartNum);
+		System.out.println(bksID);
+		System.out.println(cartID);
+		System.out.println("----------------------------------------");
+		Map<String, String> map = new HashMap<>();
+		map.put("work", "大成功");
+		return map;
+	}
+
+	// 套用綠界
+	@PostMapping("checkout")
+	@ResponseBody
+	public String checkoutTest(Model model, @RequestParam String bko_Name, @RequestParam String bko_Add,
+			@RequestParam String bko_Cel) {
+		System.out.println(bko_Name);
+		System.out.println(bko_Add);
+		System.out.println(bko_Cel);
+		initial();
+		int qaqQty = (int) (Math.random() * (4000)) + 1000;
+		Date date = new Date();
+
+		AioCheckOutALL obj = new AioCheckOutALL();
+		obj.setMerchantTradeNo("book" + qaqQty);
+		obj.setMerchantTradeDate(date.toString());
+		obj.setTotalAmount("50");
+		obj.setTradeDesc("test Description");
+		obj.setItemName("TestItem");
+		obj.setReturnURL("http://localhost:8080/BookWeb/bkCheckout");
+		obj.setClientBackURL(null);
+		obj.setNeedExtraPaidInfo("N");
+		String form = all.aioCheckOut(obj, null);
+		return form;
+	}
+
+	@PostMapping("bkCheckout")
+	public String bkCheckout() {
+		return "/Transation/bkCheckout";
 	}
 
 //	@PostMapping("shopping")
@@ -267,56 +298,28 @@ public class ShoppingCartController {
 //		}
 //	}
 
-	@PostMapping("updateCart.do")
-	public String updateOrDelete(@RequestParam String cmd,
-			@RequestParam(value = "cart_ID", required = false) Integer cart_ID,
-			@RequestParam(value = "cart_Num", required = false) Integer cart_Num, Model model) {
-		List<ShoppingCartBean> listCart = scService.searchCart(loginUser.getMb_ID());
-		if (cmd.equalsIgnoreCase("DEL")) {
-			scService.deleteCart(cart_ID); // 刪除購物車內的某項商品
-			listCart = scService.searchCart(loginUser.getMb_ID());
-			model.addAttribute("list", listCart);
-			return "Transation/shoppingCart";
-		} else if (cmd.equalsIgnoreCase("MOD")) {
-			scService.updateCart(cart_ID, cart_Num); // 修改某項商品的數項
-			listCart = scService.searchCart(loginUser.getMb_ID());
-			model.addAttribute("list", listCart);
-			return "Transation/shoppingCart";
-		} else {
-			listCart = scService.searchCart(loginUser.getMb_ID());
-			model.addAttribute("list", listCart);
-			return "Transation/shoppingCart";
-		}
-	}
+//	@PostMapping("updateCart.do")
+//	public String updateOrDelete(@RequestParam String cmd,
+//			@RequestParam(value = "cart_ID", required = false) Integer cart_ID,
+//			@RequestParam(value = "cart_Num", required = false) Integer cart_Num, Model model) {
+//		List<ShoppingCartBean> listCart = scService.searchCart(loginUser.getMb_ID());
+//		if (cmd.equalsIgnoreCase("DEL")) {
+//			scService.deleteCart(cart_ID); // 刪除購物車內的某項商品
+//			listCart = scService.searchCart(loginUser.getMb_ID());
+//			model.addAttribute("list", listCart);
+//			return "Transation/shoppingCart";
+//		} else if (cmd.equalsIgnoreCase("MOD")) {
+//			scService.updateCart(cart_ID, cart_Num); // 修改某項商品的數項
+//			listCart = scService.searchCart(loginUser.getMb_ID());
+//			model.addAttribute("list", listCart);
+//			return "Transation/shoppingCart";
+//		} else {
+//			listCart = scService.searchCart(loginUser.getMb_ID());
+//			model.addAttribute("list", listCart);
+//			return "Transation/shoppingCart";
+//		}
+//	}
 
-	// 套用綠界
-	@PostMapping("checkout")
-	@ResponseBody
-	public String checkoutTest(Model model, @RequestParam String bko_Name, @RequestParam String bko_Add,
-			@RequestParam String bko_Cel) {
-		System.out.println(bko_Name);
-		System.out.println(bko_Add);
-		System.out.println(bko_Cel);
-		initial();
-		int qaqQty = (int)(Math.random()*(4000))+1000;
-		Date date = new Date();
-		
-		AioCheckOutALL obj = new AioCheckOutALL();
-		obj.setMerchantTradeNo("book"+qaqQty);
-		obj.setMerchantTradeDate(date.toString());
-		obj.setTotalAmount("50");
-		obj.setTradeDesc("test Description");
-		obj.setItemName("TestItem");
-		obj.setReturnURL("http://localhost:8080/BookWeb/bkCheckout");
-		obj.setNeedExtraPaidInfo("N");
-		String form = all.aioCheckOut(obj, null);
-		return form;
-	}
-	@PostMapping("bkCheckout")
-	public String bkCheckout() {
-		return "/Transation/bkCheckout";
-	}
-	
 	// 測試用
 //	@PostMapping("checkout")
 //	public String checkoutTest(Model model, @RequestParam String bko_Name, @RequestParam String bko_Add,

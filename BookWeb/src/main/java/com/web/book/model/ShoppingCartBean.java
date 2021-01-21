@@ -34,16 +34,12 @@ public class ShoppingCartBean {
 	@ManyToOne
 	@JoinColumn(name = "bs_ID")
 	private MemberBean memberSel;
+	
+	//不連接賣場編號
+	private Integer bks_ID;
 
-	public MemberBean getMemberSel() {
-		return memberSel;
-	}
-
-	public ShoppingCartBean() {
-		super();
-	}
-
-	public ShoppingCartBean(Integer cart_ID, Integer cart_Num, Integer cart_Price, BookBean book, MemberBean member, MemberBean memberSel) {
+	public ShoppingCartBean(Integer cart_ID, Integer cart_Num, Integer cart_Price, BookBean book, MemberBean member,
+			MemberBean memberSel, Integer bks_ID) {
 		super();
 		this.cart_ID = cart_ID;
 		this.cart_Num = cart_Num;
@@ -51,6 +47,19 @@ public class ShoppingCartBean {
 		this.book = book;
 		this.member = member;
 		this.memberSel = memberSel;
+		this.bks_ID = bks_ID;
+	}
+
+	public Integer getBks_ID() {
+		return bks_ID;
+	}
+
+	public void setBks_ID(Integer bks_ID) {
+		this.bks_ID = bks_ID;
+	}
+
+	public ShoppingCartBean() {
+		super();
 	}
 
 	public Integer getCart_ID() {
@@ -92,7 +101,11 @@ public class ShoppingCartBean {
 	public void setMember(MemberBean member) {
 		this.member = member;
 	}
-	
+
+	public MemberBean getMemberSel() {
+		return memberSel;
+	}
+
 	public void setMemberSel(MemberBean memberSel) {
 		this.memberSel = memberSel;
 	}
@@ -112,8 +125,9 @@ public class ShoppingCartBean {
 		builder.append(member);
 		builder.append(", memberSel=");
 		builder.append(memberSel);
+		builder.append(", bks_ID=");
+		builder.append(bks_ID);
 		builder.append("]");
 		return builder.toString();
 	}
-
 }

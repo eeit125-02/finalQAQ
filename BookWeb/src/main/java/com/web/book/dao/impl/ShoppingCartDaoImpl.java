@@ -22,19 +22,19 @@ public class ShoppingCartDaoImpl implements ShoppingCartDao {
 	
 	//新增一筆購物車資料
 	@Override
-	public void addToCart(Integer cart_Num, Integer cart_Price, Integer bk_ID, Integer bb_ID, Integer bs_ID) {
+	public void addToCart(Integer cart_Num, Integer cart_Price, Integer bk_ID, Integer bb_ID, Integer bs_ID, Integer bks_ID) {
 		Session session = factory.getCurrentSession();
-		MemberBean member = session.load(MemberBean.class, bb_ID);
-		MemberBean memberSel = session.load(MemberBean.class, bs_ID);
-		BookBean book = session.load(BookBean.class, bk_ID);
-		ShoppingCartBean shoppingCart = new ShoppingCartBean(null, cart_Num, cart_Price, book, member, memberSel);
+		BookBean book = session.get(BookBean.class, bk_ID);
+		MemberBean member = session.get(MemberBean.class, bb_ID);
+		MemberBean memberSel = session.get(MemberBean.class, bs_ID);
+		ShoppingCartBean shoppingCart = new ShoppingCartBean(null, cart_Num, cart_Price, book, member, memberSel, bks_ID);
 		session.save(shoppingCart);
 	}
 	//刪除一筆購物車資料
 	@Override
 	public void deleteCart(Integer cart_ID) {
 		Session session = factory.getCurrentSession();
-		ShoppingCartBean shoppingCart = session.load(ShoppingCartBean.class, cart_ID);
+		ShoppingCartBean shoppingCart = session.get(ShoppingCartBean.class, cart_ID);
 		session.delete(shoppingCart);
 	}
 	//查詢所有購物車資料
@@ -43,7 +43,7 @@ public class ShoppingCartDaoImpl implements ShoppingCartDao {
 	public List<ShoppingCartBean> searchCart(Integer bb_ID) {
 		Session session = factory.getCurrentSession();
 		String hql = "FROM ShoppingCartBean a where a.member = :member";
-		MemberBean member = session.load(MemberBean.class, bb_ID);
+		MemberBean member = session.get(MemberBean.class, bb_ID);
 		List<ShoppingCartBean> list = session.createQuery(hql).setParameter("member", member).getResultList();
 		return list;
 	}
@@ -72,7 +72,7 @@ public class ShoppingCartDaoImpl implements ShoppingCartDao {
 	@Override
 	public void updateBookStore(Integer bks_ID, Integer bs_Num) {
 		Session session = factory.getCurrentSession();
-		BookStoreBean bookStore = session.load(BookStoreBean.class, bks_ID);
+		BookStoreBean bookStore = session.get(BookStoreBean.class, bks_ID);
 		bookStore.setBs_Num(bs_Num);
 	}
 
