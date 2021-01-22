@@ -281,8 +281,36 @@ legend {
 			  } 
 			});
 		}
-			
+/* 		 "<div id=\"change123\" class=\"container\" style=\"text-align:center\">"
+        +"<fieldset id=\"mb_inf\">"
+        +"<legend>會員資料</legend>"
+        +"<form>"
+        +"<div>"
+        +"<img src=\""+${login.mb_pic}+"\" style=\"width: 200px; height: 200px; text-align:center; border-radius: 50%;\"/>"
+        +"</div>"
+        +"<br>"
+        +"<table class=\"table\" >"
+        +"<tr class=\"tr1\" style=\"background-color:#68b0ab\">"
+        +"<th scope=\"col\" >帳號</th>"
+        +"<th scope=\"col\" >姓名</th>"
+        +"</tr>"
+        +"<tr class=\"table-light\">"
+        +"<td>"+${login.mb_Account}+"</td>"
+        +"<td>+"${login.mb_Name}+"</td>"
+        +"</tr>"
+	    +"<tr class=\"tr2\" style=\"background-color:#e0ece4\">"
+	        +"<th scope=\"col\">性別</th>"
+	        +"<th scope=\"col\">電話</th>"
+	    +"</tr>"
+	    +"<tr class=\"table-light\">"
+	        +"<td>"+${login.mb_Sex}+"</td>" */
 		
+        /* <div style="border: #ADADAD 2px solid; border-radius: 5px; text-align: left; padding: 10px; margin: 0px 10px">
+        <p>貼文會員<br>貼文時間</p>
+        <h3><strong>貼文標題</strong></h3>
+        <p>貼文內容</p>
+   		</div> */
+      
 	</script>
 
 </html>

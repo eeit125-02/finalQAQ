@@ -58,13 +58,14 @@
 <br>
 <br>
 <div>
-	<table id="bookReport_Table" class="display">
+	<table id="bookReport_Table" class="display" >
 	    <thead>
 	        <tr>
-	            <th>會員帳號</th>
-	            <th>心得編號</th>
-	            <th>標題</th>
-	            <th>撰寫日期</th>
+	            <th style="width:50px;">編號</th>
+	            <th style="width:200px;">書名</th>
+	            <th style="width:100px;">作者</th>
+	            <th>出版社</th>
+	            <th>出版日期</th>
 	            <th>操作</th>
 	        </tr>
 	    </thead>
@@ -170,16 +171,17 @@
 	function getDataTable(){
 		reportTable = $('#bookReport_Table').DataTable({
 			"ajax": {
-	            "url": "http://localhost:8080/BookWeb/Admin/getAllBookReport",
+	            "url": "http://localhost:8080/BookWeb/Admin/getAllBook",
 	            "type": "POST",
 	            "dataSrc": ""
 	        },
 	        "columns": [
-	            { "data": "mbAccount" },
-	            { "data": "brId" },
-	            { "data": "brName" },
-	            { "data": "brTime" },
-	            { data: "brId",
+	            { "data": "bkId" },
+	            { "data": "bkName" },
+	            { "data": "bkAuthor" },
+	            { "data": "bkPublish" },
+	            { "data": "bkDate"},
+	            { data: "bkId",
 	              render: function (data, type, row, meta) { 
 	                    return "<button type=\"button\" class=\"btn btn-outline-primary\" onclick='viewData(" + data + ")' value = \""+ data +"\">查看</button>"
 			               + "<button type=\"button\" class=\"btn btn-outline-danger ml-3\" onclick='DelData(" + data + ")' value = \""+ data +"\">刪除</button>";
