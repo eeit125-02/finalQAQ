@@ -1,12 +1,10 @@
 package com.web.book.model;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+
 import javax.persistence.Table;
 
 @Entity
@@ -29,19 +27,22 @@ public class ActBean {
 	private String act_Rule;
 	private String act_Tag;
 	private String act_Place;
+	private Integer mb_ID;
 	private Integer act_Differentpax;
-	
-	
-	public ActBean(Integer act_ID, String act_Image, String act_Name, String act_Theme, String act_Date,String act_Time,
-			String act_Loc, String act_Intro, String act_Guest, String act_Pax, String act_Rule, String act_Tag,
-			String act_Place) {
+
+
+
+	public ActBean(Integer act_ID, String act_Image, String act_Name, String act_Theme, String act_Date,
+			String act_Time, String act_Loc, String act_Intro, String act_Guest,
+			String act_Pax, String act_Rule, String act_Tag, String act_Place, Integer mb_ID,
+			Integer act_Differentpax) {
 		super();
 		this.act_ID = act_ID;
 		this.act_Image = act_Image;
 		this.act_Name = act_Name;
 		this.act_Theme = act_Theme;
-		this.act_Time = act_Time;
 		this.act_Date = act_Date;
+		this.act_Time = act_Time;
 		this.act_Loc = act_Loc;
 		this.act_Intro = act_Intro;
 		this.act_Guest = act_Guest;
@@ -49,8 +50,18 @@ public class ActBean {
 		this.act_Rule = act_Rule;
 		this.act_Tag = act_Tag;
 		this.act_Place = act_Place;
-		
+		this.mb_ID = mb_ID;
+		this.act_Differentpax = act_Differentpax;
+	}
 
+
+	public Integer getMb_ID() {
+		return mb_ID;
+	}
+
+
+	public void setMb_ID(Integer mb_ID) {
+		this.mb_ID = mb_ID;
 	}
 
 
