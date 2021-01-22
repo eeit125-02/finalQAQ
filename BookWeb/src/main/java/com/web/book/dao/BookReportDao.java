@@ -44,4 +44,5 @@ public interface BookReportDao {
 	 
 	void deletReportMessage(Integer bmId);
 	
+	
 }

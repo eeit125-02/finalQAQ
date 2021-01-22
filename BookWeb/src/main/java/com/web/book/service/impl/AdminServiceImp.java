@@ -11,6 +11,7 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.web.book.dao.AdminDao;
 import com.web.book.dao.BookReportDao;
 import com.web.book.model.BookReportBean;
 import com.web.book.service.AdminService;
@@ -21,6 +22,10 @@ public class AdminServiceImp implements AdminService {
 
 	@Autowired
 	BookReportDao bookReportDao;
+	
+	@Autowired
+	AdminDao adminDao;
+	
 	
 	@Override
 	public List<Map<String, Object>> getAllBookReport() {
@@ -53,6 +58,50 @@ public class AdminServiceImp implements AdminService {
 		bookReportDao.deleteBookReport(brId);
 		
 		return true;
+	}
+
+	@Override
+	public Map<String,Object> getMonthReportWrite() {
+		
+		List<Object> selectData = adminDao.getMonthReportWrite();
+		Map<String, Object> returnData = new HashMap<>();
+		
+		List<String> monthList = new ArrayList<>();
+		List<Integer> monthNumberList = new ArrayList<>();
+		for(int i= 1; i <= 6; i++ ){
+		
+			
+		   Object[] value = (Object[]) selectData.get(selectData.size()- i);
+		   monthList.add(value[0]+ "-" + value[1]);
+		   monthNumberList.add(Integer.valueOf(value[2].toString()));
+			  
+		}
+		
+		returnData.put("month", monthList);
+		returnData.put("monthNumber", monthNumberList);
+		
+		return returnData;
+	}
+
+	@Override
+	public Map<String,Object> getMonthReportView() {
+		
+		List<Object> selectData = adminDao.getMonthReportViews();
+		Map<String, Object> returnData = new HashMap<>();
+		
+		List<String> monthList = new ArrayList<>();
+		List<Integer> monthNumberList = new ArrayList<>();
+		for(int i= 1; i <= selectData.size(); i++ ){
+		   Object[] value = (Object[]) selectData.get(selectData.size()- i);
+		   monthList.add(value[0]+ "-" + value[1]);
+		   monthNumberList.add(Integer.valueOf(value[2].toString()));
+			  
+		}
+		
+		returnData.put("month", monthList);
+		returnData.put("viewNumber", monthNumberList);
+		
+		return returnData;
 	}
 
 }
