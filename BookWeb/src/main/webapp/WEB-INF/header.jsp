@@ -55,8 +55,8 @@ color:white
 
 <nav class="menu" style="background-color:#f7efe8;height:110px" >
 
-  <ol>  
-    <li class="menu-item" style="padding-right:35px"><a class="blog-header-logo text-dark" href="//localhost:8080/BookWeb">
+  <ol style="margin-right:550px">  
+    <li class="menu-item" style="padding-right:100px"><a class="blog-header-logo text-dark" href="//localhost:8080/BookWeb">
 			<img alt="LOGO"
 			src="${pageContext.request.contextPath}/image/logo1.png"
 			id="Img/logo" height="75px">

@@ -108,21 +108,24 @@
 	
 	<!-- body -->
 
-<div class="container" style="position: relative; font-family: 'Noto Serif TC', serif;">
+<div class="container" style="position: relative; font-family: 'Noto Serif TC', serif;color:#C68463">
 	<fieldset style="background-color:#f7efe8; width:800px; height:1000px">
 	<legend>　　　功能清單</legend>
-	<div style="position: absolute;top:100px;left:100px;width:250px; height:150px;background-color:black">
-
+	<div style="position: absolute;top:100px;left:110px;width:250px; height:150px;background-color:black;
+	background-image: url('${pageContext.request.contextPath}/image/index1.jpg');background-size:contain">
 	</div>
-	<div style="position: absolute;top:100px;left:450px;width:250px; height:150px;background-color:green">
-
+<div style="position: absolute;top:250px;left:200px;">閱讀履歷</div>
+	<div style="position: absolute;top:100px;left:460px;width:250px; height:150px;background-color:green;
+	background-image: url('${pageContext.request.contextPath}/image/index2.png');background-size:contain">
 	</div>
-	<div style="position: absolute;top:350px;left:100px;width:250px; height:150px;background-color:yellow">
-
+<div style="position: absolute;top:250px;left:550px;">共樂聚落</div>
+	<div style="position: absolute;top:350px;left:110px;width:250px; height:150px;background-color:yellow;
+	background-image: url('${pageContext.request.contextPath}/image/index3.jpg');background-size:contain">
 	</div>
-	<div style="position: absolute;top:350px;left:450px;width:250px; height:150px;background-color:pink">
-
+<div style="position: absolute;top:500px;left:200px;">二手圖書</div>
+	<div style="position: absolute;top:350px;left:460px;width:250px; height:150px;background-color:pink">
 	</div>
+<div style="position: absolute;top:500px;left:550px;">書適論壇</div>
 	
 	
 	</fieldset>
