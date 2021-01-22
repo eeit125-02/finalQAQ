@@ -6,6 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
@@ -23,6 +24,9 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@200&display=swap" rel="stylesheet">
 <link rel="icon" href="${pageContext.request.contextPath}/image/logo1.ico" type="image/x-icon" />	
 <style>
+
+@import url('https://fonts.googleapis.com/css2?family=Lobster+Two&display=swap');
+
 .bd-placeholder-img {
 	font-size: 1. 125rem;
 	text-anchor: middle;
@@ -72,6 +76,35 @@ overflow-x: hidden;
 /* 		font-size: 3.5rem; */
 /* 	} */
 /* } */
+
+
+.img_div {
+    margin: 20px 400px 0 400px;
+    position: relative;
+    width: 531px;
+    height: 354px;
+}
+.mask {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 400px;
+    height: 300px;
+    background: rgba(101, 101, 101, 0.6);
+    color: #ffffff;
+    opacity: 0;
+}
+.mask h3 {
+    text-align: center;
+}
+
+
+.img_div a:hover .mask {
+    opacity: 1;           
+}
+
+
+
 </style>
 <title>書適圈</title>
 </head>
@@ -100,8 +133,8 @@ overflow-x: hidden;
         </p>
         </div>
         
-        <div style="width:115px;height:45px;background-color:#C68463;margin-left:230px;margin-top:0px;">
-        <a style="color:white;font-size:25px;">登入會員</a>
+        <div style="width:100px;height:45px;background-color:#C68463;margin-left:230px;margin-top:0px;">
+        <a style="color:white;font-size:18px;">登入會員</a>
         </div>
         
        </div> 
@@ -120,39 +153,67 @@ overflow-x: hidden;
 	<!-- body -->
 
 <div class="container" style="position: relative; font-family: 'Noto Serif TC', serif;color:#C68463">
-	<fieldset style="background-color:#f7efe8; width:800px; height:630px">
-	<legend style="font-size:25px;">　　　功能清單</legend>
-	<div style="position: absolute;top:75px;left:80px;width:300px; height:200px;background-color:black;
-	background-image: url('${pageContext.request.contextPath}/image/index1.jpg');background-size:contain;
-	box-shadow:3px 3px 12px gray;padding:3px;">
-	</div>
-<!-- <div style="position: absolute;top:280px;left:180px;font-size:20px;">閱讀履歷</div> -->
-	<div style="position: absolute;top:75px;left:450px;width:300px; height:200px;background-color:green;
-	background-image: url('${pageContext.request.contextPath}/image/index3.jpg');background-size:contain;
-	box-shadow:3px 3px 12px gray;padding:3px;">
-	</div>
-<!-- <div style="position: absolute;top:280px;left:560px;font-size:20px;">共樂聚落</div> -->
-	<div style="position: absolute;top:350px;left:80px;width:300px; height:200px;background-color:yellow;
-	background-image: url('${pageContext.request.contextPath}/image/index3.jpg');background-size:contain;
-	box-shadow:3px 3px 12px gray;padding:3px;">
-	</div>
-<!-- <div style="position: absolute;top:500px;left:200px;">二手圖書</div> -->
-	<div style="position: absolute;top:350px;left:450px;width:300px; height:200px;background-color:pink;
-	background-image: url('${pageContext.request.contextPath}/image/index3.jpg');background-size:contain;
-	box-shadow:3px 3px 12px gray;padding:3px;">
-	</div>
+	<fieldset style="background-color:#f7efe8; width:950px; height:800px">
+	<legend style="font-size:35px;font-family: 'Lobster Two', cursive;font-style:italic">Our Services</legend>
+		
+	
 
-<!-- <div style="position: absolute;top:500px;left:550px;">書適論壇</div> -->
 
+<div class="img_div" style="position: absolute;top:80px;right:270px;width:400px; height:300px">
+   <img src="${pageContext.request.contextPath}/image/shop.jpg"  width="400px" height="300px">        
+            <a href='<c:url value="/qaqTest"/>'>
+            <div class="mask">
+              <h3 style=";text-align:center;line-height:300px">二手書圖</h3>
+                </div>
+        </a>
+</div>
+
+
+<div class="img_div" style="position: absolute;top:80px;left:100px;width:400px; height:300px;">
+   <img src="${pageContext.request.contextPath}/image/bookreport1111.jpg"  width="400px" height="300px">        
+            <a href='//localhost:8080/BookWeb/BookReport/searchBookReport/all/1'>
+            <div class="mask"> 
+              <h3 style=";text-align:center;line-height:300px">閱讀履歷</h3>
+                </div>
+        </a>
+</div>
+
+
+<div class="img_div" style="position: absolute;top:420px;right:270px;width:400px; height:300px;">
+    <img src="${pageContext.request.contextPath}/image/act2.jpg"  width="400px" height="300px">        
+            <a href='<c:url value="/showActs"/>'>
+            <div class="mask">
+              <h3 style=";text-align:center;line-height:300px">共樂聚落</h3>
+                </div>
+        </a>
+</div>
+
+<div class="img_div" style="position: absolute;top:420px;left:100px;width:400px; height:300px">
+    <img src="${pageContext.request.contextPath}/image/discuss.jpg"  width="400px" height="300px">        
+            <a href='<c:url value="/Discussion/mainpage"/>'>
+            <div class="mask">
+              <h3 style=";text-align:center;line-height:300px">書適論壇</h3>
+                </div>
+        </a>
+</div>
 	
 	
-<!-- 	<div class="hover11 column"> -->
-<!--   <div> -->
-<!--     <figure><img src="https://picsum.photos/300/200?image=244" /></figure> -->
-<!--     <span>Hover</span> -->
-<!--   </div> -->
-<!--   </div> -->
-	
+
+<%-- 	<div style="position: absolute;top:350px;left:80px;width:350px; height:250px;background-color:yellow; --%>
+<%-- 	background-image: url('${pageContext.request.contextPath}/image/discussion.jpg');background-size:100% 100%; --%>
+<!-- 	box-shadow:3px 3px 12px gray;padding:3px; -->
+<%-- 	background-repeat: no-repeat"> --%>
+<!-- 	</div> -->
+
+
+<%-- 	<div style="position: absolute;top:350px;left:450px;width:350px; height:250px;background-color:pink; --%>
+<%-- 	background-image: url('${pageContext.request.contextPath}/image/br1.jpg');background-size:100% 100%; --%>
+<!-- 	box-shadow:3px 3px 12px gray;padding:3px; -->
+<%-- 	background-repeat: no-repeat"> --%>
+<!-- 	</div> -->
+
+
+
 	
 	</fieldset>
 </div>

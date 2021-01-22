@@ -14,9 +14,13 @@
 <link rel="icon"
 	href="${pageContext.request.contextPath}/image/logo1.ico"
 	type="image/x-icon" />
+
 <title>書適圈</title>
 
 <style>
+
+
+
 .text-muted{
 color:white
 }
@@ -58,24 +62,24 @@ color:white
 
   <ol style="margin-right:550px">  
 
-    <li class="menu-item" style="padding-right:100px;margin-right:100px"><a class="blog-header-logo text-dark" href="//localhost:8080/BookWeb">
+    <li class="menu-item" style="padding-right:100px;margin-right:25px"><a class="blog-header-logo text-dark" href="//localhost:8080/BookWeb">
 
-    <li class="menu-item" style="padding-right:30px;margin-right:50px"><a class="blog-header-logo text-dark" href="//localhost:8080/BookWeb">
+<!--     <li class="menu-item" style="padding-right:30px;margin-right:50px"><a class="blog-header-logo text-dark" href="//localhost:8080/BookWeb"> -->
 
 			<img alt="LOGO"
 			src="${pageContext.request.contextPath}/image/logo1.png"
 			id="Img/logo" height="75px">
 		</a></li>
-    <li class="menu-item" style="padding:35px"><a href='<c:url value="/SearchBook/Search"/>' style="font-size:20px">圖書漂流瓶</a></li>
-    <li class="menu-item" style="padding:35px"><a href='<c:url value="/qaqTest"/>' style="font-size:20px">二手書圖</a></li>
+    <li class="menu-item" style="padding:35px"><a href='<c:url value="/SearchBook/Search"/>' style="font-size:20px;font-family: 'Noto Serif TC';color:#8E8E8E;font-weight:bold">圖書漂流瓶</a></li>
+    <li class="menu-item" style="padding:35px"><a href='<c:url value="/qaqTest"/>' style="font-size:20px;font-family: 'Noto Serif TC';color:#8E8E8E;font-weight:bold">二手書圖</a></li>
     <li class="menu-item" style="padding:35px">
-      <a href='<c:url value="/showActs"/>' style="font-size:20px">共樂聚落</a>
+      <a href='<c:url value="/showActs"/>' style="font-size:20px;font-family: 'Noto Serif TC';color:#8E8E8E;font-weight:bold">共樂聚落</a>
     </li>
-    <li class="menu-item" style="padding:35px">
-      <a href='<c:url value="/Discussion/mainpage"/>' style="font-size:20px">書適論壇</a>
+    <li class="menu-item" style="padding:35px;font-family: 'Noto Serif TC';color:#8E8E8E;font-weight:bold">
+      <a href='<c:url value="/Discussion/mainpage"/>' style="font-size:20px;font-family: 'Noto Serif TC';color:#8E8E8E;font-weight:bold">書適論壇</a>
     </li >
-    <li class="menu-item" style="padding:35px"><a href='//localhost:8080/BookWeb/BookReport/searchBookReport/all/1' style="font-size:20px">閱讀履歷</a></li>
-      <li class="menu-item" style="padding:35px"><a href='//localhost:8080/BookWeb/toCity' style="font-size:20px">會員專區</a></li>
+    <li class="menu-item" style="padding:35px"><a href='//localhost:8080/BookWeb/BookReport/searchBookReport/all/1' style="font-size:20px;font-family:'Noto Serif TC';color:#8E8E8E;font-weight:bold">閱讀履歷</a></li>
+      <li class="menu-item" style="padding:35px"><a href='//localhost:8080/BookWeb/toCity' style="font-size:20px;font-family: 'Noto Serif TC';color:#8E8E8E;font-weight:bold">會員專區</a></li>
   </ol>
 </nav>	
 	
