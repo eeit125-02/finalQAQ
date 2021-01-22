@@ -30,6 +30,7 @@
 	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
 	crossorigin="anonymous">
 <link rel="icon" href="${pageContext.request.contextPath}/image/logo1.ico" type="image/x-icon" />
+
 <script>
 	$(document).ready(function() {
 		$("#bookWebheader").load("//localhost:8080/BookWeb/header");
@@ -112,17 +113,21 @@
 						</div>
 						
 						<div class="form-row">
-							<div class="form-group col-md-6">
+							<div class="form-group col-md-5" style="margin:auto">
 								<label >活動嘉賓:</label>
 								<form:input path="act_Guest" class="form-control" placeholder="必填" />
 								<form:errors path="act_Guest" cssStyle="color:#FF0000;"/>	
 							</div>
-							<div class="form-group col-md-6 custom-file">
-								<label >活動圖片:</label> 
-								<input name="file" type="file" class="form-control" />
-								<form:errors path="act_Image" cssStyle="color:#FF0000;"/>
+							<div class="form-group col-md-5" style="margin:auto">
+							<label >活動圖片:</label>
+							<input class="form-control" id="myfile" type="file" name="file" style="overflow:hidden">
 							</div>
-						</div>
+							<div class="form-group col-md-2">
+							<img src="${ab.act_Image}" id="show" width="100%">
+							</div>	
+							</div>
+								<form:errors path="act_Image" cssStyle="color:#FF0000;"/>
+
 						
 						<div class="form-row">
 							<div class="form-group col-md-6">

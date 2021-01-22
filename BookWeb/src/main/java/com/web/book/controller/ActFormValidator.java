@@ -26,13 +26,13 @@ public class ActFormValidator implements Validator {
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "act_Tag"  , "actbean.acttag.empty"  , "請選擇活動標籤");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "act_Rule" , "actbean.actrule.empty" , "請輸入活動規則");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "act_Intro", "actbean.actintro.empty", "請輸入活動簡介");
-
+		System.out.println("5151561561561");
 		ActBean actbean = (ActBean) target;
 //		String name = customer.getName();
 //		if (name == null || name.trim().length() == 0) {
 //			errors.rejectValue("name", "customerBean.name.size");
 //		}	
-		
+		System.out.println("515156++++++++++++++++++");
 		if (actbean.getact_Name() != null && actbean.getact_Name().length() < 2 && actbean.getact_Name().contains(" ")) {
 			errors.rejectValue("act_Name", " ", "請填寫活動名稱");
 		}
@@ -45,12 +45,12 @@ public class ActFormValidator implements Validator {
 			errors.rejectValue("act_Guest", " ", "請填寫活動嘉賓");
 		}		
 		
-		if (actbean.getact_Image().isEmpty()) {
+		if (actbean.getact_Image().isEmpty() && actbean.getact_Image() != null) {
 			errors.rejectValue("act_Image", " ", "actbean.actimage.empty");			
 		}
 		
 		try {
-			
+			System.out.println("41414144++++++++++++++");
 			Integer act_Pax = Integer.valueOf(actbean.getact_Pax());
 			if (act_Pax<1) {
 				errors.rejectValue("act_Pax", " ", "人數必須大於0");
@@ -58,7 +58,7 @@ public class ActFormValidator implements Validator {
 		} catch (Exception e) {
 			errors.rejectValue("act_Pax", " ", "請填寫數字");	
 		}
-		
+		System.out.println("515156+----------------");
 		
 //		if (actbean.getact_Pax() != null && actbean.getact_Pax().isEmpty() && actbean.getact_Pax() <= 0) {
 //			errors.rejectValue("act_Pax", " ", "actbean.actpax.empty");
@@ -93,7 +93,7 @@ public class ActFormValidator implements Validator {
 		if (actbean.getact_Intro() != null && actbean.getact_Intro().isEmpty()) {
 			errors.rejectValue("act_Intro", " ", "actbean.actimage.empty");
 		}
-				
+		System.out.println("578967867856786786+++++++++");	
 	}
 
 }

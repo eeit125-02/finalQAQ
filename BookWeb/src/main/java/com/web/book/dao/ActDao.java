@@ -5,6 +5,7 @@ import java.util.List;
 import org.hibernate.query.Query;
 
 import com.web.book.model.ActBean;
+import com.web.book.model.ActJoinBean;
 
 public interface ActDao {
 
@@ -13,7 +14,7 @@ public interface ActDao {
 
 	//查詢活動關鍵字
 	List<ActBean> searchKeyword(String keyword);
-
+	
 	// 經由活動ID查詢單筆資料
 	ActBean getAct(Integer act_ID);
 
@@ -25,6 +26,8 @@ public interface ActDao {
 
 	// 刪除活動
 	int deleteAct(Integer act_ID);
+
+	List<ActBean> getActRecords(Integer mb_ID);
 
 
 //	// 會員的報名活動清單

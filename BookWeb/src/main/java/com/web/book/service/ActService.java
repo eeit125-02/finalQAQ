@@ -3,6 +3,7 @@ package com.web.book.service;
 import java.util.List;
 
 import com.web.book.model.ActBean;
+import com.web.book.model.ActJoinBean;
 
 public interface ActService {	
 
@@ -11,6 +12,9 @@ public interface ActService {
 			
 			//查詢活動關鍵字
 			List<ActBean> searchKeyword(String keyword);
+			
+			//經由會員ID查詢報名資料
+			List<ActBean> getActRecords(Integer mb_ID);
 			
 			//經由活動ID查詢單筆資料
 			ActBean getAct(Integer act_ID);
