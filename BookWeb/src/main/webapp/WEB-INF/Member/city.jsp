@@ -131,17 +131,17 @@ legend {
 				</div>
 				<form name=a3 class=a3 action="<c:url value='/collectlist' />" method="get">
 				<div>
-				<button type="submit" name="list" class="btn btn-outline-secondary">收藏清單</button>
+				<button type="submit" name="list" id="bookEdit" class="btn btn-outline-secondary">收藏清單</button>
 				</div>
 				</form>
 				<form name=a3 class=a3 action="<c:url value='/myStore' />" method="get">
 				<div>
-				<button type="submit" name="sell" class="btn btn-outline-secondary">我的賣場</button>
+				<button type="submit" name="sell" id="sellEdit" class="btn btn-outline-secondary">我的賣場</button>
 				</div>
 				</form>	
 				<form name=a3 class=a3 action="<c:url value='/showJoinbyID' />" method="get">
 				<div>
-				<button type="submit" name="getjoinrecords" class="btn btn-outline-secondary">報名紀錄</button>
+				<button type="submit" name="getjoinrecords" id="actEdit" class="btn btn-outline-secondary">報名紀錄</button>
 				</div>
 				</form>
 				<div>
@@ -343,6 +343,13 @@ legend {
 			$("#pwdModify").hide();
 			$("#admin1").hide();
 		}else if(check=="admin"){
+			$('#bookEdit').html('書本管理')
+			$('#bookEdit').removeAttr("type").attr("type", "button");
+			$('#sellEdit').html('賣場管理')
+			$('#sellEdit').removeAttr("type").attr("type", "button");
+			$('#actEdit').html('活動管理')
+			$('#actEdit').removeAttr("type").attr("type", "button");
+			$('#editBookReport').html('心得管理')
 			$("#pwdModify").hide();
 			$("#Modify").hide();
 			$("#inf").hide();
@@ -665,65 +672,6 @@ legend {
 			})
 		})	 
 			 
-// 			$('#admin1').click(function(){
-// 				 $.ajax({
-// 						async : false,
-// 						cache : false,
-// 						url : "mb_inf",
-// 						type : 'POST',
-// 						dataType : "json",
-// 						contentType : "application/json;charset=utf-8",
-// 						success : function(data) {
-// 							console.log(data)
-							
-// 								insertData += 	<div class="container media">
-// 							<br>
-// 							<fieldset id="admin">
-// 								<legend>會員清單</legend>
-// 					<label for="site-search" style="align:left">Search the site:</label>
-// 					<input type="search" id="site-search" name="search" aria-label="Search through site content">
-// 					<button id="searchbtn" name="searchbtn">Search</button>
-// 						<form action="<c:url value='/delete' />" method="post">
-// 								<table class="table"  width="100%"  id="change">
-// 									<c:forEach items="${memberall}" var="u" varStatus="loop">
-// 										<c:if test="${loop.index == 0}">
-// 											<tr>
-// 												<th>帳號</th>
-// 												<th>密碼</th>
-// 												<th>姓名</th>
-// 												<th>註冊日期</th>
-// 												<th></th>
-// 												<th></th>
-// 											</tr>
-// 										</c:if>
-// 										<tr>
-// 											<td>${u.getMb_Account()}</td>
-// 											<td>${u.getMb_Password()}</td>
-// 											<td>${u.getMb_Name()}</td>
-// 											<td>${u.getMb_Date()}</td>
-// 											<td><button type="submit" name="delete"
-// 													class="btn btn-outline-secondary" value="${u.getMb_ID()}">刪除</button>
-// 													<button type="submit" name="update"
-// 														class="btn btn-outline-secondary" value="${u.getMb_Account()}">修改</button></td>
-														
-// 											<td><label class="switch"> <input type="checkbox">
-// 													<span id="ball" class="slider" check="${u.checkColume}"></span>
-// 											</label>
-// 											</td>
-// 										</tr>
-// 									</c:forEach>
-// 								</table>
-// 							</form>
-// 								<a href="<c:url value='/toCity'/>">返回</a>
-// 							</fieldset>
-// 					</div>
-		
-// 						}
-// 						})	 
-// 			})
-			 
-			 
-			 
 		function showImage(){
         	$(document).ready(function() {
         		$("#bookWebheader").load("<c:url value='/header'/>");
@@ -897,7 +845,7 @@ legend {
 		
 		$('#editBookReport').click(function(){
 			
-			if("${login.mb_Account}" == "a123456"){
+			if(check=="admin"){
 				
 				$('#change123').load("//localhost:8080/BookWeb/Admin/BookReport")
 			}else{
@@ -905,6 +853,32 @@ legend {
 				window.location.href = "http://localhost:8080/BookWeb/BookReport/EditBookReport";
 			}
 		});
+		
+		$('#bookEdit').click(function(){
+			
+			if(check=="admin"){
+				
+				$('#change123').load("//localhost:8080/BookWeb/Admin/Book")
+			}
+		});
+		
+		$('#sellEdit').click(function(){
+			
+			if(check=="admin"){
+				
+				$('#change123').load("//localhost:8080/BookWeb/Admin/BookReport")
+			}
+		});
+		
+		$('#actEdit').click(function(){
+			
+			if(check=="admin"){
+				
+				$('#change123').load("//localhost:8080/BookWeb/Admin/BookReport")
+			}
+		});
+		
+		
 		
 	</script>
 	

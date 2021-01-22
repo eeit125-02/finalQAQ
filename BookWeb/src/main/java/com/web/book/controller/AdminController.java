@@ -27,6 +27,12 @@ public class AdminController {
 		return "Admin/adminBookReport";
 	}
 	
+	@GetMapping("/Book")
+	public String bookAdmin() {
+		
+		return "Admin/adminBook";
+	}
+	
 	// 回傳所有心得資訊
 	@PostMapping("/getAllBookReport")
 	@ResponseBody
@@ -59,6 +65,15 @@ public class AdminController {
 	public Map<String, Object> getMonthReportViews(){
 		
 		return adminservice.getMonthReportView();
+	}
+	
+	// 回傳所有心得資訊
+	@PostMapping("/getAllBook")
+	@ResponseBody
+	public List<Map<String, Object>> getAllBook(){
+		
+		
+		return adminservice.getAllBook();
 	}
 	
 }
