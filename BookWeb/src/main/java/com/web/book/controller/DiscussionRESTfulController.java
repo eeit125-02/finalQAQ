@@ -99,6 +99,7 @@ public class DiscussionRESTfulController {
 		return new_cb;
 	}
 	
+	//新增巢狀留言
 	@PostMapping("/Discussion/add_nested_command_ajax")
 	@ResponseBody
 	public Map<String, Object> addNestedCommandAjax(Model model,

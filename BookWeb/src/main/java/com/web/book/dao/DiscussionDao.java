@@ -19,13 +19,15 @@ public interface DiscussionDao {
 	NestedCommandBean addNestedCommand(NestedCommandBean new_nested_command);	
 	//加一次點擊
 	void addClick(Integer post_ID);
-	//用ID取出Post資料
+	
+	//用post ID取出Post資料
 	PostBean getPostBeanById(Integer pb_ID);
-	//用ID取出Member資料
+	//用member ID取出Member資料
 	MemberBean getMemberBeanById(Integer mb_ID);
-	//用ID取出Command資料
+	//用command ID取出Command資料
 	CommandBean getCommandBeanById(Integer command_ID);
-	//用post id取出command資料
+	
+	//用post id取出所有留言
 	List<CommandBean> getCommandBeanByPostId(Integer pb_ID);
 	//依時間排序列出所有貼文
 	List<PostBean> getAllPost();
@@ -37,17 +39,19 @@ public interface DiscussionDao {
 	List<CommandBean> getAllCommand();
 	//依時間排序列出所有巢狀留言
 	List<NestedCommandBean> getAllNestedCommand();
-	//列出貼文內容
+	//列出版規內容
 	List<RuleBean> getRule();
 	//列出會員內容
 	List<MemberBean> getAllMember();
+	//查詢貼文關鍵字
+	List<PostBean> getPostByKeyword(String keyword);
+	
 	//修改貼文
 	void editPost(Integer edit_post_id,  String edit_post_title,
 			String edit_post_content, String edit_post_time);
 	//刪除貼文
 	void deletPost(Integer delete_post_id);
+	
 	//修改板規
 	RuleBean updateRule(RuleBean rb);
-	//查詢貼文關鍵字
-	List<PostBean> getPostByKeyword(String keyword);
 }

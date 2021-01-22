@@ -110,6 +110,11 @@ margin-right:10px;
 <!--       </li> -->
 <!-- 	</ul>						 -->
 							<form class="form-inline">
+							
+<!-- 	<div> -->
+		<a href="<c:url value='/download1'/>">下載收藏書單</a>
+<!-- 	</div>			 -->
+							
 									<button class="btn btn btn-link"
 									type="button" onclick="loadBookCollectList();">顯示全部收藏</button>
 								<input class="form-control mr-sm-2" type="search" id="keyword"

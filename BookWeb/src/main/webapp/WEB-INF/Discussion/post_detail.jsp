@@ -65,12 +65,15 @@
 			
 			<!-- side area -->
 			<div class="col-2 text-center">
-				<h2>書適論壇</h2>
+				<h2>書適論壇</h2><br><br>
+				<button id="lazy_command" class="btn btn-outline-info" style="border-radius:50%;margin-bottom:10px">command</button><br>
+				<button id="lazy_nested_command" class="btn btn-outline-info" style="border-radius:50%;">nested_command</button>
 			</div>
 
 			<div class="col-10" style='text-align: center;'>
 
-				<h3>詳細貼文</h3>
+				<h3>詳細貼文
+				</h3>
 				<br>
 				<div
 					style="border: #ADADAD 2px solid; border-radius: 5px; text-align: left; padding: 10px; margin: 0px 10px">
@@ -114,7 +117,7 @@
 								<div style="height: 40px">
 									<div class=" input-group" style="width: 80%; float: right;">
 
-										<input type="text" class="form-control" id="nested_command_input${stored_command.command_id}"  placeholder="回覆   ${stored_command.command_content}" /> 
+										<input type="text" class="form-control nc_input" id="nested_command_input${stored_command.command_id}"  placeholder="回覆   ${stored_command.command_content}" /> 
 										<span class="input-group-append">
 											<button class="btn btn-outline-secondary nestcommand " 
 												id="nested_command_btn${stored_command.command_id}" value="${stored_command.command_id}" >
@@ -149,6 +152,15 @@
 
 
 					<script>
+					
+					$(document).on("click", '#lazy_command', function(){
+						$('#command_input').val('自動帶入留言');
+					})
+					
+					$(document).on("click", '#lazy_nested_command', function(){
+						$('.nc_input').val('自動帶入巢狀留言');
+					})
+					
 						$(document).on("click", '.nestcommand', function(){
 							
 							if (typeof ($.cookie('Member_ID')) != "undefined") {
@@ -211,7 +223,7 @@
 																							+ '<div class="collapse" id="nested_command'+new_cb.cb_id+'">'
 																							+ '<div style="height: 40px">'
 																							+ '<div class=" input-group" style="width: 80%; float: right;">'
-																							+ '<input type="text" class="form-control" id="command_input'+new_cb.cb_id+'" placeholder="回覆   '+new_cb.cb_content+'" />'
+																							+ '<input type="text" class="form-control nc_input" id="command_input'+new_cb.cb_id+'" placeholder="回覆   '+new_cb.cb_content+'" />'
 																							+ ' <span class="input-group-append">'
 																							+ '<button class="btn btn-outline-secondary nestcommand" id="nested_command_btn'+new_cb.cb_id+'" value="'+new_cb.cb_id+'">'
 																							+ '回覆</button>'

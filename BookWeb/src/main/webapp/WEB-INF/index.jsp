@@ -19,11 +19,41 @@
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
 	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
 	crossorigin="anonymous">
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@200&display=swap" rel="stylesheet">
 <link rel="icon" href="${pageContext.request.contextPath}/image/logo1.ico" type="image/x-icon" />	
 <style>
 .bd-placeholder-img {
 	font-size: 1. 125rem;
 	text-anchor: middle;
+}
+
+/* -------- */
+.Product_block_hot{
+	width: 500px;
+    height: 400px;
+    position: relative;
+    text-align: center;
+/*     border:2px solid black; */
+}
+
+.leftone{
+	font-size:25px;
+    position: absolute;//設為絕對定位(absolute)
+    font-weight: bold;
+    top: 50px;
+    right : 400px; 
+/*     右邊上面都設0，則出現在右上方 */
+    color: #BB7857;
+    display: block;
+    background: white;
+    width: 400px;
+    height: 319px;
+    text-align: center;
+/*     border-style:outset; */
+    box-shadow:-6px 6px rgba(247,239,232,1);
+    font-family: 'Noto Serif TC', serif;
+
 }
 
 /* @media ( min-width : 768px) { */
@@ -42,9 +72,72 @@
 
 	<div class="container">
 	<!-- body -->
-		
-	<!-- body -->
+	<br>
+
+	
+					<div class="form-row">
+						<div class="form-group col-md-1">	
+						</div>	
+						<div class="form-group col-md-9">	
+	
+	 <div class="Product_block_hot" style="float:right">
+	 <div class="leftone">
+        <div>
+        <span><br>歡迎來到 屬於你的　書‧適圈</span>
+        <p style="font-size:16px;color:#808080;word-break: break-all;padding:15px 5px">
+        　我們期望為每個人打造出專屬的書籍網站，除了基本的查詢功能，可自訂個人化收藏清單、撰寫與閱讀書籍評論，也提供二手書的交流平台；同時能舉辦或參與書籍為主的活動，並在本站論壇進行各種相關討論。本站集中以書籍為主題，延伸出兼具動與靜等多方面的功能，讓愛好書籍的人可以獲得深入與全面的使用體驗。
+        </p>
+        </div>
+        
+        <div style="width:115px;height:45px;background-color:#C68463;margin-left:230px;margin-top:0px;">
+        <a style="color:white;font-size:16px;">登入會員</a>
+        </div>
+        
+       </div> 
+        <div class="color" style="width:667px;height:444px;background-color:green;
+        box-shadow:4px 4px #BB7857;
+        background-image: url('${pageContext.request.contextPath}/image/a.jpg');">
+        </div>
+    </div>
+	
+					</div>
+						<div class="form-group col-md-1">	
+						</div>
 	</div>
+	</div>
+	
+	<!-- body -->
+
+<div class="container" style="position: relative; font-family: 'Noto Serif TC', serif;color:#C68463">
+	<fieldset style="background-color:#f7efe8; width:800px; height:1000px">
+	<legend>　　　功能清單</legend>
+	<div style="position: absolute;top:100px;left:110px;width:250px; height:150px;background-color:black;
+	background-image: url('${pageContext.request.contextPath}/image/index1.jpg');background-size:contain">
+	</div>
+<div style="position: absolute;top:250px;left:200px;">閱讀履歷</div>
+	<div style="position: absolute;top:100px;left:460px;width:250px; height:150px;background-color:green;
+	background-image: url('${pageContext.request.contextPath}/image/index2.png');background-size:contain">
+	</div>
+<div style="position: absolute;top:250px;left:550px;">共樂聚落</div>
+	<div style="position: absolute;top:350px;left:110px;width:250px; height:150px;background-color:yellow;
+	background-image: url('${pageContext.request.contextPath}/image/index3.jpg');background-size:contain">
+	</div>
+<div style="position: absolute;top:500px;left:200px;">二手圖書</div>
+	<div style="position: absolute;top:350px;left:460px;width:250px; height:150px;background-color:pink">
+	</div>
+<div style="position: absolute;top:500px;left:550px;">書適論壇</div>
+	
+	
+	</fieldset>
+</div>
+
+
+
+
+
+
+
+
 
 	<!-- footer -->
 	<footer class="container py-5" id="bookWebFooter"></footer>

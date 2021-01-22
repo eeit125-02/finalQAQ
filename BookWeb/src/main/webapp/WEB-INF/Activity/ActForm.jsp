@@ -128,7 +128,7 @@
 							<div class="form-group col-md-6">
 								<label >活動人數:</label>
 								<form:input path="act_Pax" class="form-control" placeholder="必填" />
-								<form:errors path="act_Image" cssStyle="color:#FF0000;"/>
+								<form:errors path="act_Pax" cssStyle="color:#FF0000;"/>
 							</div>
 							<div class="form-group col-md-6">
 								<label >活動場所:</label>							
@@ -175,67 +175,67 @@
                         <div class="btn-group-toggle" data-toggle="buttons">
 						    <label >活動標籤:</label><br>
 							<p class="btn btn-info"style="margin:3px">
-								<input type="checkbox" name="b" value="2" /> 戶外體驗
+								<form:checkbox path="act_Tag" name="b" value="戶外體驗" /> 戶外體驗
 							</p>
 							<p class="btn btn-info"style="margin:3px">
-								<input type="checkbox" name="b" value="3" /> 學習
+								<form:checkbox path="act_Tag" name="b" value="學習" /> 學習
 							</p>
 							<p class="btn btn-info"style="margin:3px">
-								<input type="checkbox" name="b" value="4" /> 親子
+								<form:checkbox path="act_Tag" name="b" value="親子" /> 親子
 							</p>
 							<p class="btn btn-info"style="margin:3px">
-								<input type="checkbox" name="b" value="5" /> 寵物
+								<form:checkbox path="act_Tag" name="b" value="寵物" /> 寵物
 							</p>
 							<p class="btn btn-info"style="margin:3px">
-								<input type="checkbox" name="b" value="6" /> 科技
+								<form:checkbox path="act_Tag" name="b" value="科技" /> 科技
 							</p>
 							<p class="btn btn-info"style="margin:3px">
-								<input type="checkbox" name="b" value="7" /> 商業
+								<form:checkbox path="act_Tag" name="b" value="商業" /> 商業
 							</p>
 							<p class="btn btn-info"style="margin:3px">
-								<input type="checkbox" name="b" value="8" /> 創業
+								<form:checkbox path="act_Tag" name="b" value="創業" /> 創業
 							</p>
 							<p class="btn btn-info"style="margin:3px">
-								<input type="checkbox" name="b" value="9" /> 投資
+								<form:checkbox path="act_Tag" name="b" value="投資" /> 投資
 							</p>
 							<p class="btn btn-info"style="margin:3px">
-								<input type="checkbox" name="b" value="9" /> 設計
+								<form:checkbox path="act_Tag" name="b" value="設計" /> 設計
 							</p>
 							<p class="btn btn-info"style="margin:3px">
-								<input type="checkbox" name="b" value="9" /> 藝文
+								<form:checkbox path="act_Tag" name="b" value="藝文" /> 藝文
 							</p>
 							<p class="btn btn-info"style="margin:3px">
-								<input type="checkbox" name="b" value="9" /> 手作
+								<form:checkbox path="act_Tag" name="b" value="手作" /> 手作
 							</p>
 							<p class="btn btn-info"style="margin:3px">
-								<input type="checkbox" name="b" value="9" /> 美食
+								<form:checkbox path="act_Tag" name="b" value="美食" /> 美食
 							</p>
 							<p class="btn btn-info"style="margin:3px">
-								<input type="checkbox" name="b" value="9" /> 攝影
+								<form:checkbox path="act_Tag" name="b" value="攝影" /> 攝影
 							</p>
 							<p class="btn btn-info"style="margin:3px">
-								<input type="checkbox" name="b" value="9" /> 遊戲
+								<form:checkbox path="act_Tag" name="b" value="遊戲" /> 遊戲
 							</p>
 							<p class="btn btn-info"style="margin:3px">
-								<input type="checkbox" name="b" value="9" /> 運動
+								<form:checkbox path="act_Tag" name="b" value="運動" /> 運動
 							</p>
 							<p class="btn btn-info"style="margin:3px">
-								<input type="checkbox" name="b" value="9" /> 健康
+								<form:checkbox path="act_Tag" name="b" value="健康" /> 健康
 							</p>
 							<p class="btn btn-info"style="margin:3px">
-								<input type="checkbox" name="b" value="9" /> 音樂
+								<form:checkbox path="act_Tag" name="b" value="音樂" /> 音樂
 							</p>
 							<p class="btn btn-info"style="margin:3px">
-								<input type="checkbox" name="b" value="9" /> 電影
+								<form:checkbox path="act_Tag" name="b" value="電影" /> 電影
 							</p>
 							<p class="btn btn-info"style="margin:3px">
-								<input type="checkbox" name="b" value="9" /> 娛樂
+								<form:checkbox path="act_Tag" name="b" value="娛樂" /> 娛樂
 							</p>
 							<p class="btn btn-info"style="margin:3px">
-								<input type="checkbox" name="b" value="9" /> 時尚
+								<form:checkbox path="act_Tag" name="b" value="時尚" /> 時尚
 							</p>
 							<p class="btn btn-info"style="margin:3px">
-								<input type="checkbox" name="b" value="9" /> 公益
+								<form:checkbox path="act_Tag" name="b" value="公益" /> 公益
 							</p>
 							<div><form:errors path="act_Tag" cssStyle="color:#FF0000;"/>
 							</div>
