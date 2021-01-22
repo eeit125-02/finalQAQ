@@ -30,6 +30,7 @@ public class AdminServiceImp implements AdminService {
 	@Autowired
 	AdminDao adminDao;
 	
+	
 	// 取得所有心得資訊
 	@Override
 	public List<Map<String, Object>> getAllBookReport() {
@@ -227,6 +228,36 @@ public class AdminServiceImp implements AdminService {
 		}
 		
 		return storeTable;
+	}
+
+	// 取得資訊並轉換為Json
+	@Override
+	public Map<String, Object> getBookInfo(Integer bkId) {
+		
+		BookBean book = adminDao.getBook(bkId);
+		
+		Map<String, Object> returnJson = new HashMap<>();
+		returnJson.put("bkDate", String.valueOf(book.getBk_Date()));
+		returnJson.put("bkType", book.getBk_BookType());
+		returnJson.put("bkPic", book.getBk_Pic());
+		returnJson.put("bkLan", book.getBk_Language());
+		returnJson.put("bkISBN", book.getBk_ISBN());
+		returnJson.put("bkPublish", book.getBk_Publish());
+		returnJson.put("bkAuthor", book.getBk_Author());
+		returnJson.put("bkContent", book.getBk_Content());
+		returnJson.put("bkName", book.getBk_Name());
+		returnJson.put("bkPage", book.getBk_Page());
+		returnJson.put("bkTranslator", book.getBk_Translator());
+		returnJson.put("bkPublisherPlace", book.getBk_Publisher_Place());
+		
+		return returnJson;
+	}
+	
+	// 刪除圖書資料
+	@Override
+	public Boolean deleteBook(Integer bkID) {
+		
+		return adminDao.deleteBook(bkID);
 	}
 	
 }

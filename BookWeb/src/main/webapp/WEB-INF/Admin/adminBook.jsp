@@ -43,6 +43,44 @@
 .unchecked {
 	font-size: 30px;
 }
+
+.detail{
+text-align:right;
+font-size:16px;
+}
+.a3 {
+	margin: 0px;
+	display: inline
+}
+.row2{
+	margin:0 auto;
+	text-align:center;
+	display: block;
+}
+.collectindex {
+	float: right;
+}
+.s-corner {
+   text-align: center;
+   width: auto;
+   height: 400px;
+   box-shadow: 0px 0px 10px #95CACA;
+   background: linear-gradient(#95CACA,#95CACA) left top,
+   linear-gradient(#95CACA,#95CACA) left bottom,
+   linear-gradient(#95CACA,#95CACA) right top,
+   linear-gradient(#95CACA,#95CACA) right bottom;
+   background-size: 4px 4px;
+   background-repeat: no-repeat;
+   float: auto;
+}
+.col-sm-3 {
+    text-align: center;
+}
+#border{
+  border: 10px solid transparent;
+  padding: 35px;
+  border-image: url("${pageContext.request.contextPath}/image/border-image.png") 30 round;
+}
 </style>
 
 <br>
@@ -58,30 +96,32 @@
 <br>
 <br>
 <div>
-	<table id="bookReport_Table" class="display" >
-	    <thead>
-	        <tr>
-	            <th style="width:50px;">編號</th>
-	            <th style="width:200px;">書名</th>
-	            <th style="width:100px;">作者</th>
-	            <th>出版社</th>
-	            <th>出版日期</th>
-	            <th>操作</th>
-	        </tr>
-	    </thead>
-	    <tbody id="bookReportList">
-	        <tr>
-	            <td>帳號</td>
-	            <td>撰寫編號</td>
-	            <td>閱讀標題</td>
-	            <td>撰寫時間</td>
-	            <td>
-	            	<button type="button" class="btn btn-outline-primary" value = "brID">查看</button>
-	            	<button type="button" class="btn btn-outline-danger ml-3" value = "brId">刪除</button>
-	            </td>
-	        </tr>
-	    </tbody>
-	</table>
+	<form id="myForm" action="http://localhost:8080/BookWeb/updatebook" method="get"> 
+		<table id="bookReport_Table" class="display" >
+		    <thead>
+		        <tr>
+		            <th style="width:50px;">編號</th>
+		            <th style="width:200px;">書名</th>
+		            <th style="width:100px;">作者</th>
+		            <th style="width:100px;">出版社</th>
+		            <th>出版日期</th>
+		            <th style="width:200px;">操作</th>
+		        </tr>
+		    </thead>
+		    <tbody id="bookReportList">
+		        <tr>
+		            <td>帳號</td>
+		            <td>撰寫編號</td>
+		            <td>閱讀標題</td>
+		            <td>撰寫時間</td>
+		            <td>
+		            	<button type="button" class="btn btn-outline-primary" value = "brID">查看</button>
+		            	<button type="button" class="btn btn-outline-danger ml-3" value = "brId">刪除</button>
+		            </td>
+		        </tr>
+		    </tbody>
+		</table>
+	</form>
 </div>
 
 
@@ -162,7 +202,6 @@
 	});
 	
 	var reportTable;
-	var star = 0;
 
 	$(document).ready( function () {
 		getDataTable();
@@ -183,8 +222,9 @@
 	            { "data": "bkDate"},
 	            { data: "bkId",
 	              render: function (data, type, row, meta) { 
-	                    return "<button type=\"button\" class=\"btn btn-outline-primary\" onclick='viewData(" + data + ")' value = \""+ data +"\">查看</button>"
-			               + "<button type=\"button\" class=\"btn btn-outline-danger ml-3\" onclick='DelData(" + data + ")' value = \""+ data +"\">刪除</button>";
+	                    return "<button type=\"button\" class=\"btn btn-outline-dark\" onclick='viewData(" + data + ")' value = \""+ data +"\">查看</button>"
+			               + "<button type=\"submit\" class=\"btn btn-outline-primary ml-2\" name = \"update\"  value = \""+ data +"\">修改</button>"
+			               + "<button type=\"button\" class=\"btn btn-outline-danger ml-2\" onclick='DelData(" + data + ")' value = \""+ data +"\">刪除</button>";
 
                   }
 	            }
@@ -215,63 +255,75 @@
         }); 
 	}
 	
-	function viewData(reportId){
+	function viewData(bookId){
 		var insertHtml;
 		$.ajax({
 			async : false,
 			type : 'POST',
-			url : "http://localhost:8080/BookWeb/BookReport/viewBookReport/"+reportId,
+			url : "http://localhost:8080/BookWeb/Admin/getBook",
+			data :{ bkId : bookId },
 			dataType : "json",
-			contentType : "application/json;charset=utf-8",
 			success : function(data) {
 				
-				insertHtml = "<div class=\"media\">"
-						   + "<img id=\"bkPic\" src=\""+ data.bk_Pic +"\" class=\"w-25 h-25 p-2\">"
-						   + "<div class=\"media-body ml-5\">"
-						   + "<form class=\"col-ml-4\">"
-						   + "<br>"
-						   + "<div class=\"form-inline\">"
-						   + "<p class=\"messageSize\" id=\"brTitel\">閱讀標題："+ data.br_Name +"</p> "
-						   + "</div>"
-						   + "<div class=\"form-inline\">"
-						   + "<p class=\"messageSize\" id=\"userAccount\">撰寫者："+ data.userAccount +"</p>"
-						   + "</div>"
-						   + "<div class=\"form-inline\">"
-						   + "<p class=\"messageSize ellipsis\" id=\"bkName\">書名："+ data.bk_Name +"</p>"
-						   + "</div>"
-						   + "<div id=\"bookWriter\" class=\"form-inline\">"
-						   + "<p class=\"messageSize\" id=\"bkAuthor\">作者："+ data.bk_Author +"</p>"
-						   + "</div>"
-						   + "<div class=\"form-inline\">"
-						   + "<p class=\"messageSize\" id=\"bkPublish\">出版社："+ data.bk_Publish +"</p>"
-						   + "</div>"
-						   + "<div class=\"form-inline\">"
-						   + "<lable class=\"messageSize\">評分：</lable>"
-						   
-						   for(let i = 0; i < data.br_Score; i++){
-							   
-							   insertHtml += "<span class=\"fa fa-star checked ml-2\"></span>"
-						   }
-						   for(let i = 0; i < 5-data.br_Score; i++){
-							   
-							   insertHtml += "<span class=\"fa fa-star unchecked ml-2\"></span>"
-						   }
-						   
-			   insertHtml += "</div>"
-						   + "</form>"
-						   + "</div>"
-						   + "</div>"
-						   + "<br>"
-						   + "<h3>心得:</h3>"
-						   + "<hr>"
-						   + "<p>"+ data.br_Content +"</p>"
-						   
-			   star = data.br_Score
-			   swal.fire({
-					  width: '850px',
+				insertHtml = "<div class=\"container\">"
+							+ "<div class=\"row\">"
+							+ "<div class=\"col-sm-5\" style=\"margin:0 auto;\">"
+							+ "<p class=\"s-corner\">"
+							+ "<img class=\"mainpic\" alt=\"\" src=\"" + data.bkPic + "\" height=\"390\">"
+							+ "</p>"
+							+ "</div>"
+							+ "<div class=\"col-sm-7\">"
+							+ "<div class=\"back\">"
+							+ "<h2 class=\"title\" align=\"center\">" + data.bkName + "</h2>"
+							+ "<hr>"
+							+ "<br>"
+							+ "<div class=\"row\" style=\"margin-bottom:15px\"> "
+							+ "<div class=\"col-sm-2 detail detail2\">作者：</div>"
+							+ "<div class=\"col-sm-4 detail2\">" + data.bkAuthor + "</div>"
+							+ "<div class=\"col-sm-6\">　譯者：" + data.bkTranslator + "</div>"
+							+ "</div>"
+							+ "<div class=\"row\" style=\"margin-bottom:15px\"> "
+							+ "<div class=\"col-sm-2 detail\">出版社：</div>"
+							+ "<div class=\"col-sm-4\">" + data.bkPublish + "</div>"
+							+ "<div class=\"col-sm-6 detail2\">" + data.bkPublisherPlace + "</div>"
+							+ "</div>"					
+							+ "<div class=\"row\" style=\"margin-bottom:15px\"> "
+							+ "<div class=\"col-sm-2 detail\">出版日期：</div>"
+							+ "<div class=\"col-sm-4\">" + data.bkDate + "</div>"
+							+ "<div class=\"col-sm-6\">　語言：" + data.bkLan + "</div>"
+							+ "</div>"
+							+ "<div class=\"row\" style=\"margin-bottom:15px\"> "
+							+ "<div class=\"col-sm-2 detail\">ISBN：</div>"
+							+ "<div class=\"col-sm-4\">" + data.bkISBN + "</div>"
+							+ "<div class=\"col-sm-6\">　頁數：" + data.bkPage + "</div>"
+							+ "</div>"
+							+ "<div class=\"row\"> "
+							+ "<div class=\"col-sm-2 detail\">類型：</div>"
+							+ "<div class=\"col-sm-9\">"
+							+ "<a href=\"#\" class=\"badge badge-info\" style=\"font-size:1em\">" + data.bkType + "</a>"
+							+ "</div>"
+							+ "</div>"
+							+ "</div>"
+							+ "</div>"
+							+ "</div>"
+							+ "<br>"
+							+ "<br>"
+							+ "<div class=\"row\">"
+							+ "<div class=\"col-sm-12\" id=\"border\">"
+							+ "<h5 align=\"center\">內容簡介</h5>"
+							+ "<hr>"
+							+ "<p style=\"text-indent: 2em;word-wrap:break-word;white-space: pre-wrap;\"contenteditable=\"false\">"
+							+ data.bkContent
+							+ "</p>"
+							+ "</div>"
+							+ "</div>"
+							+ "</div>"
+				swal.fire({
+					  width: '1200px',
 					  html: insertHtml,  
 					  confirmButtonText: "ok"
 				});
+				
 			}
 		});
 		
@@ -279,7 +331,8 @@
 	
 	
 	
-	function DelData(deleteBrId){
+	function DelData(deleteBkId){
+		console.log(deleteBkId)
 		swal.fire({
 			  title: "確定要刪除",
 			  icon: "warning",
@@ -293,8 +346,8 @@
 				 $.ajax({
 					async : false,
 					type : 'POST',
-					url : "http://localhost:8080/BookWeb/Admin/deleteBookReport",
-					data : {brId:deleteBrId},
+					url : "http://localhost:8080/BookWeb/Admin/deleteBook",
+					data : {bkId : deleteBkId},
 					dataType : "json",
 					success : function(data) {
 						if(data && typeof(data) == "boolean"){								
@@ -309,6 +362,6 @@
 				});
 			  }
 		});
-	}
+	  }
     	
 </Script>

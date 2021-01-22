@@ -617,6 +617,7 @@ public class SearchBookController {
 	@GetMapping("/updatebook")
 	public String gotoUpdate(Model model, 
 			@RequestParam(value = "update",required=false) Integer bk_id) {
+		System.out.print(bk_id);
 		BookBean result = searchService.getBook(bk_id);
 		List<SearchTypeBean> alltype= searchService.getAllBookType();
 		List<BookTypeBean> result2=searchService.getBookType(bk_id);

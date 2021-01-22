@@ -8,6 +8,9 @@ public interface AdminService {
 	//  刪除指定心得
 	Boolean deleteBookReport(Integer brId);
 	
+	// 刪除指定書書籍
+	Boolean deleteBook(Integer bkID);
+	
 	// 獲得近半年心得撰寫報表
 	Map<String, Object> getMonthReportWrite();
 	
@@ -28,4 +31,7 @@ public interface AdminService {
 	
 	// 獲得所有購物資料
 	List<Map<String, Object>> getAllStrore();
+	
+	// 獲取單一書本資訊
+	Map<String, Object> getBookInfo(Integer bkId);
 }

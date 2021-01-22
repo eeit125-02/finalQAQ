@@ -26,4 +26,11 @@ public interface AdminDao {
 	
 	// 獲得所有購物資料
 	List<BookStoreBean> getAllStrore();
+	
+	// 獲取書籍資料
+	BookBean getBook(Integer bkId);
+	
+	// 刪除書籍資料
+	Boolean deleteBook(Integer bkId);
+	
 }

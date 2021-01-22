@@ -103,4 +103,27 @@ public class AdminDaoImpl implements AdminDao {
 		return query.getResultList();
 	}
 
+	// 取得讀書資料
+	@SuppressWarnings("unchecked")
+	@Override
+	public BookBean getBook(Integer bkId) {
+		Session session = factory.getCurrentSession();
+		String hql = "From BookBean bk Where bk.bk_ID =  :bkId";
+		Query<BookBean> query = session.createQuery(hql);
+		query.setParameter("bkId", bkId);
+		
+		return query.getSingleResult();
+	}
+
+	//  刪除圖書資料
+	@Override
+	public Boolean deleteBook(Integer bkId) {
+		
+		Session session = factory.getCurrentSession();
+		String hql = "Delete BookBean bk Where bk.bk_ID = :bk_ID";
+		//session.createQuery(hql).setParameter("bk_ID", bkId).executeUpdate();
+		System.out.println(session.createQuery(hql).setParameter("bk_ID", bkId).executeUpdate());
+		return true;
+	}
+
 }
