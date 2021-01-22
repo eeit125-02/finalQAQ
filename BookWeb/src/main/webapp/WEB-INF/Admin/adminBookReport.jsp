@@ -8,37 +8,162 @@
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.css">
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-<script src="${pageContext.request.contextPath}/js/jquery.rateyo.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 
+<style>
+.bd-placeholder-img {
+	font-size: 1. 125rem;
+	text-anchor: middle;
+}
 
-<table id="bookReport_Table" class="display">
-    <thead>
-        <tr>
-            <th>會員帳號</th>
-            <th>心得編號</th>
-            <th>標題</th>
-            <th>撰寫日期</th>
-            <th>操作</th>
-        </tr>
-    </thead>
-    <tbody id="bookReportList">
-        <tr>
-            <td>帳號</td>
-            <td>撰寫編號</td>
-            <td>閱讀標題</td>
-            <td>撰寫時間</td>
-            <td>
-            	<button type="button" class="btn btn-outline-primary" value = "brID">查看</button>
-            	<button type="button" class="btn btn-outline-danger ml-3" value = "brId">刪除</button>
-            </td>
-        </tr>
-    </tbody>
-</table>
+@media ( min-width : 768px) {
+	.bd-placeholder-img-lg {
+		font-size: 3.5rem;
+	}
+}
+
+.ellipsis {
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
+.messageSize{
+	 font-size: 20px;
+}
+.starSize{
+	 font-size: 30px;
+	 collor: yellow;
+}
+.checked {
+  font-size: 30px;
+  color: orange;
+}
+.unchecked {
+	font-size: 30px;
+}
+</style>
+
+<br>
+<div class="form-inline">
+<div style="width:48%;" class = "ml-1">
+	<canvas id="writeChart" width="400" height="400"></canvas>
+</div>
+<div style="width:48%;" class = "ml-3">
+	<canvas id="viewChart" width="400" height="400"></canvas>
+</div>
+</div>
+
+<br>
+<br>
+<div>
+	<table id="bookReport_Table" class="display">
+	    <thead>
+	        <tr>
+	            <th>會員帳號</th>
+	            <th>心得編號</th>
+	            <th>標題</th>
+	            <th>撰寫日期</th>
+	            <th>操作</th>
+	        </tr>
+	    </thead>
+	    <tbody id="bookReportList">
+	        <tr>
+	            <td>帳號</td>
+	            <td>撰寫編號</td>
+	            <td>閱讀標題</td>
+	            <td>撰寫時間</td>
+	            <td>
+	            	<button type="button" class="btn btn-outline-primary" value = "brID">查看</button>
+	            	<button type="button" class="btn btn-outline-danger ml-3" value = "brId">刪除</button>
+	            </td>
+	        </tr>
+	    </tbody>
+	</table>
+</div>
+
 
 <Script>
 	
+	var writeChart = document.getElementById("writeChart");
+	var viewChart = document.getElementById("viewChart");
+	
+	var monthWriteName;
+	var monthWriteNum;
+	
+	var monthViewName;
+	var monthViewNum;
+	
+	
+	$.ajax({
+		async : false,
+		type : 'POST',
+		url : "http://localhost:8080/BookWeb/Admin/getMonthReportWrite",
+		dataType : "json",
+		success : function(data) {
+			monthWriteName = data.month
+			console.log(monthWriteName)
+			monthWriteNum = data.monthNumber
+			console.log(monthWriteNum)
+		}
+	});
+	
+	$.ajax({
+		async : false,
+		type : 'POST',
+		url : "http://localhost:8080/BookWeb/Admin/getMonthReportViews",
+		dataType : "json",
+		success : function(data) {
+			monthViewName = data.month
+			console.log(monthViewName)
+			monthViewNum = data.viewNumber
+			console.log(monthViewNum)
+		}
+	});
+	
+	var myChart = new Chart(writeChart, {
+	    type: 'line',
+	    data: {
+	        labels: monthWriteName,
+	        datasets: [{
+	        	label: '人數',
+	            data: monthWriteNum,
+	            fill: false,
+	            backgroundColor: 'rgba(255, 99, 132)',
+	            borderColor: 'rgba(255, 99, 132)'
+	        }],
+	    },
+	    options: {
+			title: {
+				display: true,
+				text: '每月撰寫心得數量'
+			}
+		}
+	});
+	
+	var myChart = new Chart(viewChart, {
+	    type: 'bar',
+	    data: {
+	        labels: monthViewName,
+	        datasets: [{
+	        	label: '人數',
+	            data: monthViewNum,
+	            fill: false,
+	            backgroundColor: 'rgba(54, 162, 235, 1)',
+	            borderColor: 'rgba(54, 162, 235, 1)'
+	        }],
+	    },
+	    options: {
+			title: {
+				display: true,
+				text: '每月瀏覽心得數量'
+			}
+		}
+	});
+	
 	var reportTable;
+	var star = 0;
 
 	$(document).ready( function () {
 		getDataTable();
@@ -112,7 +237,7 @@
 						   + "<p class=\"messageSize\" id=\"userAccount\">撰寫者："+ data.userAccount +"</p>"
 						   + "</div>"
 						   + "<div class=\"form-inline\">"
-						   + "<p class=\"messageSize\" id=\"bkName\">書名："+ data.bk_Name +"</p>"
+						   + "<p class=\"messageSize ellipsis\" id=\"bkName\">書名："+ data.bk_Name +"</p>"
 						   + "</div>"
 						   + "<div id=\"bookWriter\" class=\"form-inline\">"
 						   + "<p class=\"messageSize\" id=\"bkAuthor\">作者："+ data.bk_Author +"</p>"
@@ -121,9 +246,18 @@
 						   + "<p class=\"messageSize\" id=\"bkPublish\">出版社："+ data.bk_Publish +"</p>"
 						   + "</div>"
 						   + "<div class=\"form-inline\">"
-						   + "<p class=\"messageSize\">評分：</p>"
-						   + "<div id=\"rateYo\"></div>"
-						   + "</div>"
+						   + "<lable class=\"messageSize\">評分：</lable>"
+						   
+						   for(let i = 0; i < data.br_Score; i++){
+							   
+							   insertHtml += "<span class=\"fa fa-star checked ml-2\"></span>"
+						   }
+						   for(let i = 0; i < 5-data.br_Score; i++){
+							   
+							   insertHtml += "<span class=\"fa fa-star unchecked ml-2\"></span>"
+						   }
+						   
+			   insertHtml += "</div>"
 						   + "</form>"
 						   + "</div>"
 						   + "</div>"
@@ -132,32 +266,30 @@
 						   + "<hr>"
 						   + "<p>"+ data.br_Content +"</p>"
 						   
+			   star = data.br_Score
 			   swal.fire({
 					  width: '850px',
 					  html: insertHtml,  
-					  confirmButtonText: "ok", 
-				});
-						   
-				$("#rateYo").rateYo({
-					rating: data.br_Score,
-				    spacing: "10px",
-				    readOnly: true
-				    
+					  confirmButtonText: "ok"
 				});
 			}
 		});
 		
 	}
 	
+	
+	
 	function DelData(deleteBrId){
-		console.log(deleteBrId)
-		swal({
+		swal.fire({
 			  title: "確定要刪除",
 			  icon: "warning",
-			  buttons: true,
-			  dangerMode: true,
+			  showCancelButton: true,
+			  confirmButtonColor: '#3085d6',
+			  cancelButtonColor: '#d33',
+			  confirmButtonText: 'Yes',
+			  cancelButtonText: 'No'
 			}).then((willDelete) => {
-			  if (willDelete) {
+			  if (willDelete.isConfirmed) {
 				 $.ajax({
 					async : false,
 					type : 'POST',

@@ -32,6 +32,7 @@ public class AdminController {
 	@ResponseBody
 	public List<Map<String, Object>> getAllBookReport(){
 		
+		
 		return adminservice.getAllBookReport();
 	}
 	
@@ -40,7 +41,24 @@ public class AdminController {
 	@ResponseBody
 	public Boolean deleteBookReport(
 			@RequestParam(value = "brId" , required = true) Integer brId) {
+		
 		return adminservice.deleteBookReport(brId);
+	}
+	
+	// 取得每月心得撰寫數量
+	@PostMapping("/getMonthReportWrite")
+	@ResponseBody
+	public Map<String, Object> getMonthReportWrite(){
+		
+		return adminservice.getMonthReportWrite();
+	}
+	
+	// 取得每月心得瀏覽數量
+	@PostMapping("/getMonthReportViews")
+	@ResponseBody
+	public Map<String, Object> getMonthReportViews(){
+		
+		return adminservice.getMonthReportView();
 	}
 	
 }

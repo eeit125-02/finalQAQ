@@ -28,6 +28,7 @@
 <script src="${pageContext.request.contextPath}/js/jquery.rateyo.js"></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script src="${pageContext.request.contextPath}/js/ckeditor/ckeditor.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 <style>
 .bd-placeholder-img {
@@ -48,7 +49,15 @@
 }
 
 .messageSize{
-	 font-size: 20px;
+	 font-size: 17px;
+}
+
+.checked {
+  font-size: 30px;
+  color: orange;
+}
+.unchecked {
+	font-size: 30px;
 }
 
 </style>
@@ -440,9 +449,17 @@
 								+ "</p>"
 								+ "<div class=\"form-inline\">"
 								+ "<label class=\"card-text messageSize\">評分："
-								+ "<div id=rateYo"+ data[i].br_ID +"></div>"
 								+ "</label>"
-								+ "</div>"
+								let startNum = data[i].br_Score
+								for(let i = 0; i < startNum; i++){
+									   
+									insertData += "<span class=\"fa fa-star checked ml-2\"></span>"
+							   }
+							   for(let i = 0; i < 5-startNum; i++){
+								   
+								   insertData += "<span class=\"fa fa-star unchecked ml-2\"></span>"
+							   }
+					insertData += "</div>"
 								+ "<br>"
 								+ "<div class=\"d-flex justify-content-between align-items-center\">"
 								+ "<div class=\"btn-group\">"
@@ -460,15 +477,6 @@
 					}
 					insertData += "</div>"
 					$('#bookReportList').html(insertData);
-					
-					for(var i = 0; i < data.length; i++){	
-						$("#rateYo"+ data[i].br_ID).rateYo({
-							rating: data[i].br_Score,
-						    spacing: "5px",
-						    starWidth: "20px",
-						    readOnly: true
-						});
-					}	
 				}
 			});
 			$('.btn-outline-secondary').click(function() {
