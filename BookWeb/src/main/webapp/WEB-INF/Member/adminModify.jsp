@@ -135,7 +135,7 @@ legend {
 
 </style>
 </head>
-<body>
+<body id="abc">
 	<div class="container media">
 		<br>
 			<fieldset id="admin" style="text-align:center">
@@ -159,8 +159,7 @@ legend {
 							<td>${u.mb_Date}</td>
 							<td><button type="button" id="delete${u.mb_ID}"
 									class="btn btn-outline-secondary" >刪除</button>								
-						<input type="hidden" id="dl" name="dl" value="${u.mb_ID}"></td>
-<!-- //aaa	 -->
+						<input type="hidden" id="dl${u.mb_ID}" name="dl" value="${u.mb_ID}"></td>	
 							<td><label class="switch"> <input type="checkbox">
 									<span id="ball" class="slider" check="${u.checkColume}"></span>
 							</label>
@@ -168,10 +167,11 @@ legend {
 <!-- aaa -->
 						</tr>
 						<script>
-						$('#delete${u.getMb_ID()}').click(function(){
-							console.log($('#dl').val())
+						$('#delete${u.mb_ID}').click(function(){
+							let a = $('#dl${u.mb_ID}').val()
 							alert("確定刪除")
-							$('#admindelete').submit();
+							$('#abc').load("//localhost:8080/BookWeb/admindelete?dl="+a)
+									console.log("+++++++++")
 						})
 						</script>
 					</c:forEach>

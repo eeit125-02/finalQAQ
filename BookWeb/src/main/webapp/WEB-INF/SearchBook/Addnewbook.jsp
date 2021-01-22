@@ -66,7 +66,7 @@ span{
 <body>
 
 	<!-- header -->
-	<header class="container blog-header py-3" id="bookWebheader"></header>
+	<header class="blog-header py-3" id="bookWebheader"></header>
 	<!-- header -->
 
 	<!-- body -->
@@ -79,7 +79,6 @@ span{
 			<div class="back">
 				<h2 class="check">新增書目資訊</h2>
 				<hr>
-
 				<form:hidden path="bk_ID" name="page"/>
 				<form:hidden path="bk_BookType" />
 				<form:hidden path="bk_Price" />
@@ -159,8 +158,12 @@ span{
 						<label>書籍類型（主）</label>
 <%-- 						<form:select path="" class="form-control selectCategory" name="types"> --%>
 						<form:select path="" class="form-control selectCategory" name="types" id="a0">
+<!-- 								<select class='form-control selectCategory'id=a name='types'> -->
+<!-- 								<option value='NONE'>請選擇主類別</option> -->
+<!-- 								</select> -->
 							<form:option path="" value="0" label="請選擇主類別" />                   
                         	<form:options items="${maintype}" itemLabel="sty_Name" itemValue="sty_ID" />
+
 						</form:select>
 						</div>
 						
@@ -238,7 +241,8 @@ $(document).on('change', ".selectCategory", function() {
       for(var i=0; i<data.length; i++){ 
        option = option + "<option value='"+data[i].sty_ID + "'>"+data[i].sty_Name + "</option>"; 
       } 
-      slctSubcat.append(option); 
+      slctSubcat.html(option); 
+//       slctSubcat.append(option); 
 
      }, 
 
@@ -273,7 +277,7 @@ $("#newtype").click(function(){
 			"<div class=\"form-group col-md-5\">"
 			+"<label>書籍類型（主）</label>"
 			+"<select class='form-control selectCategory'id=a"+sbmcount+" name='types'>"
-			+"<option value='NONE'>請選擇主類別</option>"
+			+"<option value='0'>請選擇主類別</option>"
 			+"<option value='1'>文學創作</option>"
 			+"<option value='10'>圖文漫畫</option>"
 			+"<option value='18'>商業/理財</option>"

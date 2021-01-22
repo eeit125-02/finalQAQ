@@ -53,30 +53,10 @@ public class ActServiceImpl implements ActService {
 		return actDao.deleteAct(act_ID);
 	}
 
-
-
-//	// 會員的報名活動清單
-//	@Override
-//	public List<ActJoinBean> getJoinRecords(Integer mb_ID) {
-//		return actDao.getJoinRecords(mb_ID);		
-//	}
-//
-//	// 報名活動
-//	@Override
-//	public void createActReg(Integer act_ID, Integer mb_ID) {
-//		actDao.createActReg(act_ID,mb_ID);
-//	}
-//
-//	// 取消報名活動
-//	@Override
-//	public void cancelJoinAct(Integer join_ID) {
-//		actDao.cancelJoinAct(join_ID);
-//	}
-//
-//	// 修改報名資料
-//	@Override
-//	public ActJoinBean updateJoinAct(Integer mb_ID) {
-//		return actDao.updateJoinAct(mb_ID);
-//	}
+	//經由會員ID查詢會於活動資料
+	@Override
+	public List<ActBean> getActRecords(Integer mb_ID) {
+		return actDao.getActRecords(mb_ID);
+	}
 
 }

@@ -1,10 +1,7 @@
 package com.web.book.controller;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 
@@ -28,7 +25,6 @@ import com.web.book.model.MemberBean;
 import com.web.book.service.ActJoinService;
 import com.web.book.service.ActService;
 import com.web.book.service.GlobalService;
-import com.web.book.service.MemberService;
 
 @Controller
 @SessionAttributes(value = { "loginUser" })
@@ -56,6 +52,22 @@ public class ActController {
 		model.addAttribute("check","");
 		return "Activity/ActHomepage";
 	}
+	
+	
+	//取得單一會員的活動創建紀錄
+		@GetMapping("/showActbyID")
+		public String showActbyID(
+				Model model
+				,@ModelAttribute("loginUser") MemberBean loginUser
+				) {
+			List<ActBean> mbactlist = actService.getActRecords(loginUser.getMb_ID());
+			model.addAttribute("mbactlist", mbactlist);	
+			model.addAttribute("aib",loginUser);
+			return "Activity/showActbyID";
+			
+		}
+		
+	
 
 	// 搜尋關鍵字
 	@GetMapping("/searchkeyword")
@@ -87,20 +99,24 @@ public class ActController {
 							, @ModelAttribute("loginUser") MemberBean loginUser
 							, @RequestParam(value = "file", required = false) CommonsMultipartFile file
 							, HttpServletRequest request
-							, @RequestParam(value = "mb_ID", required = false) Integer mb_ID
 							, RedirectAttributes attr) throws Exception {
-		
-		
-		// 圖片上傳用
+		System.out.println("++++++++++++++++++++++");
+		if (file.isEmpty()) {
+			bindingResult.rejectValue("act_Image", "", "請上傳圖片");
+			return "Activity/ActForm";
+		}
+		System.out.println(file);
+		System.out.println("++++++++++++++++++++++");
+		System.out.println(ab.getact_Image());
 		GlobalService.saveImage("active", file, ab.getact_Name());
-		ab.setAct_Differentpax(0);
+		System.out.println(ab.getact_Image());
 		ab.setact_Image(GlobalService.saveImage("active", file, ab.getact_Name()));
-		actService.createAct(ab);
-
-		
-		
-		new ActFormValidator().validate(ab, bindingResult);		
+		System.out.println("++++++++++++++++++++++");
+		System.out.println(ab.getact_Image());
+		new ActFormValidator().validate(ab, bindingResult);	
+		System.out.println("51456156156");
 		if (bindingResult.hasErrors()) {
+		// 圖片上傳用
 			System.out.println("======================");
 			List<ObjectError> list = bindingResult.getAllErrors();
 			for(ObjectError error : list) {
@@ -109,8 +125,10 @@ public class ActController {
 			System.out.println("======================");
 			return "Activity/ActForm";
 		}
-
-		
+		System.out.println("--------------------------");
+		ab.setMb_ID(loginUser.getMb_ID());
+		ab.setAct_Differentpax(0);
+		actService.createAct(ab);	
 		
 		return "redirect:/showActs";
 	}
@@ -160,34 +178,13 @@ public class ActController {
 		return "redirect:/showActs";
 	}
 	
+	// 刪除活動後redirect所有活動紀錄
+		@GetMapping("/deleteAct1")
+		public String deleteAct1(@RequestParam("act_ID") Integer act_ID) {
+			actService.deleteAct(act_ID);
+			return "redirect:/showActbyID";
+		}
 	
-	 @ModelAttribute("TagList")
-	 public List<String> getTagList(){
-	      List<String> TagList = new ArrayList<String>();
-	      TagList.add("戶外體驗");
-	      TagList.add("學習");
-	      TagList.add("親子");
-	      TagList.add("寵物");
-	      TagList.add("科技");
-	      TagList.add("商業");
-	      TagList.add("創業");
-	      TagList.add("投資");
-	      TagList.add("設計");
-	      TagList.add("藝文");
-	      TagList.add("手作");
-	      TagList.add("美食");
-	      TagList.add("攝影");
-	      TagList.add("遊戲");
-	      TagList.add("運動");
-	      TagList.add("健康");
-	      TagList.add("音樂");
-	      TagList.add("電影");
-	      TagList.add("娛樂");
-	      TagList.add("時尚");
-	      TagList.add("公益");
-
-	      return TagList;
-	   }
-
+	
 
 }

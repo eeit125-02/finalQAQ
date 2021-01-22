@@ -164,6 +164,8 @@ td {
 					<div>
 						<div class="container" style="text-align: center">
 							<h1 >活動清單</h1>
+							<div class="line-it-button" data-lang="zh_Hant" data-type="share-a" data-ver="3" data-url="http://localhost:8080/BookWeb/toLogin" data-color="default" data-size="large" data-count="true" style="display: none;"></div>
+ <script src="https://www.line-website.com/social-plugins/js/thirdparty/loader.min.js" async="async" defer="defer"></script>
 						</div>
 					</div>
 				</section>
@@ -184,7 +186,8 @@ td {
     									  <div class="modal-header">
 <!--     									  //標頭 -->
       										  <h5 class="modal-title" id="#exampleModalCenter${act.act_Name}">${act.act_Name}</h5>
-      										  
+												<div class="line-it-button" data-lang="zh_Hant" data-type="share-a" data-ver="3" data-url="http://localhost:8080/BookWeb/toLogin" data-color="default" data-size="large" data-count="true" style="display: none;"></div>
+ 													<script src="https://www.line-website.com/social-plugins/js/thirdparty/loader.min.js" async="async" defer="defer"></script>
        											 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
      											     <span aria-hidden="true">&times;</span>
      												   </button>
@@ -203,11 +206,11 @@ td {
         									<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         									<input type="hidden" id="check" value="${check}">
       										 <a href="<c:url value='/showJoinForm'/>?act_ID=${act.act_ID}"><button type="button" id="joinact" class="btn btn-primary">報名</button></a> 
-     										    </div>
+     										   </div>
   											  </div>
  											 </div>
 											</div>				
-									</div>
+										   </div>
 									<div class="caption">
 										<p>${act.act_Theme}</p>
 										<p>${act.act_Date}</p>
@@ -263,6 +266,7 @@ td {
 <%-- 	    </form> --%>
 	    
 	    <a href="<c:url value='/showJoins'/>"><button class="btn btn-outline-info">查看報名紀錄</button></a>
+	    <a href="<c:url value='/showActbyID'/>"><button class="btn btn-outline-info">查看會員報名紀錄</button></a>
 	    
 	</div>
 
