@@ -35,7 +35,7 @@ public class Login {
 
 	@Autowired
 	MemberService ms;
-	String mail;
+//	String mail;
 //	String Account;
 	String logincheck =null;
 //	MemberBean checkMember;
@@ -315,10 +315,11 @@ public class Login {
 	// 管理員會員刪除
 	@PostMapping("/admindelete")
 	public String Delete(Model model, @RequestParam(value = "dl" ,required = false) Integer deleteId) {
-		System.out.println(deleteId);
+		System.out.println("++++++++++++++++++++++++++"+deleteId);
 			ms.deleteMember(deleteId);
 			List<MemberBean> inf = ms.adminselect();
 			model.addAttribute("memberall", inf);
+			logincheck="a";
 			return "redirect:toCity";
 	}
 	// 管理員更新
@@ -375,7 +376,9 @@ public class Login {
 	@GetMapping("/toCity")
 	public String tocity(Model model) {
 		MemberBean loginUser = (MemberBean)model.getAttribute("loginUser");
-		System.out.println(loginUser);
+		if(loginUser==null) {
+			return "redirect:toLogin";
+		}
 		MemberBean inf = ms.select(loginUser.getMb_Account());
 		System.out.println(inf);
 		model.addAttribute("login",inf);
