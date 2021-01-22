@@ -41,6 +41,11 @@ background-color:#B3D9D9;
 color:#3C3C3C;
 }
 
+.ck-editor__editable_inline {
+	/* 設定最低高度 */
+    min-height: 215px;
+}
+
 </style>
 <script>
 	$(document).ready(function() {
