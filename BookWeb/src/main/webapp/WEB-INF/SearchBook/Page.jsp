@@ -287,15 +287,16 @@ font-size:16px;
 		<div id="collect1"></div>
 		
 	<!-- 內容簡介 -->
+	<div class="container">
 				<div class="row"> 
-					<div class="col-sm-12" id="border">
+					<div class="col-sm-12" id="border"contenteditable="true">
 					<h5 align="center">內容簡介</h5>
 					<hr>
-						<p>
+						<p style="text-indent: 2em;word-wrap:break-word;white-space: pre-wrap;">
 <!-- 						<textarea style="border-style:none;"rows='20' cols='150' id="t1"> -->
-						<textarea style="border-style:none;white-space:pre-wrap;"rows='20' cols='150' id="t1" readonly="readonly">
+<!-- 						<textarea style="border-style:none;white-space:pre-wrap;word-wrap:break-word;"rows='20'> -->
 						${pageresult.bk_Content}
-						</textarea>
+<!-- 						</textarea> -->
 						</p>
 					</div>
 				</div>

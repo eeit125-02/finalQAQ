@@ -132,16 +132,26 @@ form {
 					<a href="<c:url value='/toforget'/>">忘記密碼?</a>
 				</div>
 			</fieldset>
+	<button id="insert">註冊會員</button>
+	<button id='admininsert'>管理員</button>
+	<button id='JUN'>JUN</button>
+	<button id='dragon'>阿瓏</button>
 		<input type="hidden" id="file" name="file" value="https://firebasestorage.googleapis.com/v0/b/bookweb-50d11.appspot.com/o/member%2Fa123456?alt=media"/>
 		</form>	
 	</div>
 	<form action="<c:url value='/toCity'/>" id="fm"></form>
-	<button id="insert">一鍵輸入</button>
-	<button id='admininsert'>管理員</button>
 	<!-- footer -->
 	<footer class="container py-5" id="bookWebFooter"></footer>
 	<!-- footer -->
 	<script>
+	$('#dragon').click(function(){
+		$('#account').val('a265444');
+		$('#pwd').val('a265444');
+	})
+	$('#JUN').click(function(){
+		$('#account').val('aaa123');
+		$('#pwd').val('aaa123');
+	})
 	$('#insert').click(function(){
 		$('#account').val('qsxazqoo159');
 		$('#pwd').val('aaa111');

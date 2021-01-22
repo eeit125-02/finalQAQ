@@ -55,218 +55,23 @@
     font-family: 'Noto Serif TC', serif;
 
 }
-
-.text {
-  background-color: #4CAF50;
-  color: white;
-  font-size: 16px;
-  padding: 16px 32px;
+.loader {
+bottom: 0;
+height: 100%;
+left: 0;
+position: fixed;
+right: 0;
+top: 0;
+width: 100%;
+z-index: 1111;
+background: #FFFFFF;
+overflow-x: hidden;
 }
-
 /* @media ( min-width : 768px) { */
 /* 	.bd-placeholder-img-lg { */
 /* 		font-size: 3.5rem; */
 /* 	} */
 /* } */
-
-/* Opacity #1 */
-/* .hover11 figure img { */
-/* 	opacity: 1; */
-/* 	-webkit-transition: .3s ease-in-out; */
-/* 	transition: .3s ease-in-out; */
-/* } */
-/* .hover11 figure:hover img { */
-/* 	opacity: .5; */
-/* } */
-
-
-CSS
-.hvrbox,
-.hvrbox * {
-	box-sizing: border-box;
-}
-.hvrbox {
-	position: relative;
-	display: inline-block;
-	overflow: hidden;
-	max-width: 100%;
-	height: auto;
-}
-.hvrbox img {
-	max-width: 100%;
-}
-.hvrbox .hvrbox-layer_bottom {
-	display: block;
-}
-.hvrbox .hvrbox-layer_top {
-	opacity: 0;
-	position: absolute;
-	top: 0;
-	left: 0;
-	right: 0;
-	bottom: 0;
-	width: 100%;
-	height: 100%;
-	background: rgba(0, 0, 0, 0.6);
-	color: #fff;
-	padding: 15px;
-	-moz-transition: all 0.4s ease-in-out 0s;
-	-webkit-transition: all 0.4s ease-in-out 0s;
-	-ms-transition: all 0.4s ease-in-out 0s;
-	transition: all 0.4s ease-in-out 0s;
-}
-.hvrbox:hover .hvrbox-layer_top,
-.hvrbox.active .hvrbox-layer_top {
-	opacity: 1;
-}
-.hvrbox .hvrbox-text {
-	text-align: center;
-	font-size: 18px;
-	display: inline-block;
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	-moz-transform: translate(-50%, -50%);
-	-webkit-transform: translate(-50%, -50%);
-	-ms-transform: translate(-50%, -50%);
-	transform: translate(-50%, -50%);
-}
-.hvrbox .hvrbox-text_mobile {
-	font-size: 15px;
-	border-top: 1px solid rgb(179, 179, 179); /* for old browsers */
-	border-top: 1px solid rgba(179, 179, 179, 0.7);
-	margin-top: 5px;
-	padding-top: 2px;
-	display: none;
-}
-.hvrbox.active .hvrbox-text_mobile {
-	display: block;
-}
-1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-30
-31
-32
-33
-34
-35
-36
-37
-38
-39
-40
-41
-42
-43
-44
-45
-46
-47
-48
-49
-50
-51
-52
-53
-54
-55
-56
-57
-58
-59
-60
-61
-.hvrbox,
-.hvrbox * {
-	box-sizing: border-box;
-}
-.hvrbox {
-	position: relative;
-	display: inline-block;
-	overflow: hidden;
-	max-width: 100%;
-	height: auto;
-}
-.hvrbox img {
-	max-width: 100%;
-}
-.hvrbox .hvrbox-layer_bottom {
-	display: block;
-}
-.hvrbox .hvrbox-layer_top {
-	opacity: 0;
-	position: absolute;
-	top: 0;
-	left: 0;
-	right: 0;
-	bottom: 0;
-	width: 100%;
-	height: 100%;
-	background: rgba(0, 0, 0, 0.6);
-	color: #fff;
-	padding: 15px;
-	-moz-transition: all 0.4s ease-in-out 0s;
-	-webkit-transition: all 0.4s ease-in-out 0s;
-	-ms-transition: all 0.4s ease-in-out 0s;
-	transition: all 0.4s ease-in-out 0s;
-}
-.hvrbox:hover .hvrbox-layer_top,
-.hvrbox.active .hvrbox-layer_top {
-	opacity: 1;
-}
-.hvrbox .hvrbox-text {
-	text-align: center;
-	font-size: 18px;
-	display: inline-block;
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	-moz-transform: translate(-50%, -50%);
-	-webkit-transform: translate(-50%, -50%);
-	-ms-transform: translate(-50%, -50%);
-	transform: translate(-50%, -50%);
-}
-.hvrbox .hvrbox-text_mobile {
-	font-size: 15px;
-	border-top: 1px solid rgb(179, 179, 179); /* for old browsers */
-	border-top: 1px solid rgba(179, 179, 179, 0.7);
-	margin-top: 5px;
-	padding-top: 2px;
-	display: none;
-}
-.hvrbox.active .hvrbox-text_mobile {
-	display: block;
-}
-
-
-
 </style>
 <title>書適圈</title>
 </head>
@@ -289,14 +94,14 @@ CSS
 	 <div class="Product_block_hot" style="float:right">
 	 <div class="leftone">
         <div>
-        <span><br>歡迎來到 屬於你的　書‧適圈</span>
-        <p style="font-size:16px;color:#808080;word-break: break-all;padding:15px 5px">
+        <br><span style="font-size:30px;">歡迎來到屬於你的 書‧適圈</span>
+        <p style="font-size:16px;color:#808080;word-break: break-all;padding:10px 8px">
         　我們期望為每個人打造出專屬的書籍網站，除了基本的查詢功能，可自訂個人化收藏清單、撰寫與閱讀書籍評論，也提供二手書的交流平台；同時能舉辦或參與書籍為主的活動，並在本站論壇進行各種相關討論。本站集中以書籍為主題，延伸出兼具動與靜等多方面的功能，讓愛好書籍的人可以獲得深入與全面的使用體驗。
         </p>
         </div>
         
         <div style="width:115px;height:45px;background-color:#C68463;margin-left:230px;margin-top:0px;">
-        <a style="color:white;font-size:16px;">登入會員</a>
+        <a style="color:white;font-size:25px;">登入會員</a>
         </div>
         
        </div> 
@@ -314,28 +119,27 @@ CSS
 	
 	<!-- body -->
 
-<div class="container" style="position: relative; font-family: 'Noto Serif TC', serif;">
-	<fieldset style="background-color:#f7efe8; width:800px; height:1000px">
-	<legend>　　　功能清單</legend>
-	<div class=text style="position: absolute;top:100px;left:100px;width:350px; height:250px;background-color:black;
-	background-image: url('${pageContext.request.contextPath}/image/act2.jpg');background-size: 100% 100%;
-    background-repeat: no-repeat">
-
+<div class="container" style="position: relative; font-family: 'Noto Serif TC', serif;color:#C68463">
+	<fieldset style="background-color:#f7efe8; width:800px; height:630px">
+	<legend style="font-size:25px;">　　　功能清單</legend>
+	<div style="position: absolute;top:75px;left:80px;width:300px; height:200px;background-color:black;
+	background-image: url('${pageContext.request.contextPath}/image/index1.jpg');background-size:contain;
+	box-shadow:3px 3px 12px gray;padding:3px;">
 	</div>
-	<div style="position: absolute;top:100px;left:450px;width:350px; height:250px;background-color:green;
-	background-image: url('${pageContext.request.contextPath}/image/discussion.jpg');background-size: 100% 100%;
-    background-repeat: no-repeat">
-
+<!-- <div style="position: absolute;top:280px;left:180px;font-size:20px;">閱讀履歷</div> -->
+	<div style="position: absolute;top:75px;left:450px;width:300px; height:200px;background-color:green;
+	background-image: url('${pageContext.request.contextPath}/image/index3.jpg');background-size:contain;
+	box-shadow:3px 3px 12px gray;padding:3px;">
 	</div>
-	<div style="position: absolute;top:350px;left:100px;width:350px; height:250px;background-color:yellow;
-	background-image: url('${pageContext.request.contextPath}/image/act2.jpg');background-size: 100% 100%;
-    background-repeat: no-repeat">
-
+<!-- <div style="position: absolute;top:280px;left:560px;font-size:20px;">共樂聚落</div> -->
+	<div style="position: absolute;top:350px;left:80px;width:300px; height:200px;background-color:yellow;
+	background-image: url('${pageContext.request.contextPath}/image/index3.jpg');background-size:contain;
+	box-shadow:3px 3px 12px gray;padding:3px;">
 	</div>
-	<div style="position: absolute;top:350px;left:450px;width:350px; height:250px;background-color:pink;
-	background-image: url('${pageContext.request.contextPath}/image/act2.jpg');background-size: 100% 100%;
-    background-repeat: no-repeat">
-
+<!-- <div style="position: absolute;top:500px;left:200px;">二手圖書</div> -->
+	<div style="position: absolute;top:350px;left:450px;width:300px; height:200px;background-color:pink;
+	background-image: url('${pageContext.request.contextPath}/image/index3.jpg');background-size:contain;
+	box-shadow:3px 3px 12px gray;padding:3px;">
 	</div>
 	
 	
@@ -345,6 +149,7 @@ CSS
 <!--     <span>Hover</span> -->
 <!--   </div> -->
 <!--   </div> -->
+<!-- <div style="position: absolute;top:500px;left:550px;">書適論壇</div> -->
 	
 	
 	</fieldset>
@@ -361,10 +166,16 @@ CSS
 	<!-- footer -->
 	<footer class="container py-5" id="bookWebFooter"></footer>
 	<!-- footer -->
-
+<div class = "loader" style="height: 100%;width:100%">
+</div>
 	<script>
 		$("#bookWebheader").load("//localhost:8080/BookWeb/header");
 		$("#bookWebFooter").load("//localhost:8080/BookWeb/footer");
+		
+jQuery(window).on("load",function(){
+	jQuery(".loader").fadeOut(1000)});
+	
+	
 	</script>
 
 </body>
