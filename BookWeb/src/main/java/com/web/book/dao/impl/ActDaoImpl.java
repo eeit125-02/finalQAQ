@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import com.web.book.dao.ActDao;
 import com.web.book.model.ActBean;
+import com.web.book.model.ActJoinBean;
 
 
 @Repository
@@ -81,6 +82,17 @@ public class ActDaoImpl implements ActDao {
 		Query<ActBean> query = session.createQuery(hql);
 		return query.setParameter("searchkw","%"+ keyword +"%").getResultList();
 	}
+
+	
+	//經由會員ID查詢報名資料
+	@Override
+	public List<ActBean> getActRecords(Integer mb_ID) {
+		Session session = factory.getCurrentSession();
+		String hql = "FROM ActBean WHERE mb_ID="+mb_ID;
+		List<ActBean> list = session.createQuery(hql).getResultList();
+		return list;
+	}
+
 
 	
 }

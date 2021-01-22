@@ -47,6 +47,15 @@
 	<header class="container blog-header py-3" id="bookWebheader"></header>
 	<!-- header -->
 	<div class="container">
+			<!-- 偷偷放購物車QAQ start -->
+		  <a href="#" style="float: right; margin-right: 20px"
+   onclick="cartCheck()"><img alt="wtf..."
+   src="${pageContext.request.contextPath}/image/shoppingCart1.png"
+   width="35px" height="35px"></a>
+		<!-- 偷偷放購物車QAQ end -->
+		<form action='<c:url value="/testPage" />'>
+			<button type="submit" class="btn btn-primary">測試頁面</button>
+		</form>
 	<!-- 灌值 -->
 <%-- 			<form action="<c:url value='/boobplay'/>" method="get"> --%>
 <!-- 				<button type="submit">不要隨便亂按會爆炸</button> -->
@@ -186,6 +195,14 @@
 				window.location.href = "//localhost:8080/BookWeb/toLogin";
 			}
 			;
+		}
+		//車子判斷
+		function cartCheck() {
+			if (typeof ($.cookie('Member_ID')) != "undefined") {
+				$('.shop').submit();
+			} else {
+				window.location.href = "//localhost:8080/BookWeb/toLogin";
+			}
 		}
 	</script>
 </body>

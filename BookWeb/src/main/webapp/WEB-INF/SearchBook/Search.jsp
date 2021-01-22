@@ -47,7 +47,7 @@ white-space:pre-wrap;
 text-decoration: none;
 }
 body{
- background-image: url('${pageContext.request.contextPath}/image/ex2.png');
+/*  background-image: url('${pageContext.request.contextPath}/image/ex2.png'); */
 } 
 </style>
 
@@ -84,21 +84,21 @@ body{
 
 	<div class="carousel slide" style="text-align:center;margin: auto;">
 	
- <div class="card-deck">
+ <div class="card-deck"style="border:none;">
 <c:forEach items="${allbookfive}" var="all">		
-  <div class="card">
-    <img src="${all.getBk_Pic()}" class="card-img-top" alt="熱門瀏覽" height="200px">
+  <div class="card"style="border:none;">
+    <img src="${all.getBk_Pic()}" class="card-img-top" alt="熱門瀏覽" height="250px"style="box-shadow:3px 3px 12px gray;padding:3px;">
    <form name=ppp action="<c:url value='/bookpage' />" method="get">
-		<button type="submit" name="page" class="btn btn-link btn-block bkname" value="${all.getBk_ID()}"style="text-decoration: none;">${all.getBk_Name()}</button>
+		<button type="submit" name="page" class="btn btn-link btn-block bkname" value="${all.getBk_ID()}"style="text-decoration: none;border:none;">${all.getBk_Name()}</button>
 	</form>
   </div>
 </c:forEach>
 </div>
 	
 	</div>
-		<br><br>
+		<br>
 <!-- 三種關鍵字查詢（書名＆作者＆出版社） -->
-<div class="row" style="background: #FFDDD2">
+<div class="row">
 	<div class="col-sm-4">		
 		<form action="<c:url value='/searchtype' />" method="get">
 			<h4>輸入書名關鍵字：</h4>
@@ -109,7 +109,6 @@ body{
 			</div>
 		</form>
 	</div>
-			
 	<div class="col-sm-4">		
 		<form action="<c:url value='/searchtype' />" method="get">
 			<h4>輸入作者關鍵字：</h4>

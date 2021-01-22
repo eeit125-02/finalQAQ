@@ -118,7 +118,6 @@
 				<c:forEach items="${listCart}" var="v" varStatus="vs">
 					<input type="hidden" value="${v.bks_ID}">
 					<input type="hidden" value="${v.cart_ID}" id="${vs.index}">
-					
 					<div class="row">
 						<div class="col-12 col-sm-12 col-md-2 text-center">
 							<img class="img-responsive" src="${v.book.bk_Pic}" alt="prewiew"
@@ -167,6 +166,7 @@
 						</div>
 					</div>
 					<hr>
+
 				</c:forEach>
 				<!-- END PRODUCT -->
 				<div class="pull-right">
@@ -195,6 +195,7 @@
 		</div>
 	</div>
 
+	
 	<!-- 結帳後的資訊 -->
 	<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
 		aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -211,17 +212,18 @@
 					<div class="modal-body">
 						<div class="form-group">
 							<label for="recipient-name" class="col-form-label">收件人:</label> <input
-								name="bko_Name" type="text" class="form-control"
+								name="bo_Name" type="text" class="form-control" required="required"
 								id="recipient-name">
 						</div>
 						<div class="form-group">
 							<label for="message-text" class="col-form-label">電話:</label> <input
-								name="bko_Cel" type="tel" class="form-control"
+								name="bo_Cel" type="tel" class="form-control" required="required"
 								id="recipient-name">
 						</div>
 						<div class="form-group">
 							<label for="message-text" class="col-form-label">送貨地址:</label>
-							<textarea name="bko_Add" class="form-control" id="recipient-name"></textarea>
+							<textarea name="bo_Add" class="form-control" id="recipient-name"
+							required="required"></textarea>
 						</div>
 					</div>
 					<div class="modal-footer">
@@ -233,7 +235,7 @@
 			</div>
 		</div>
 	</div>
-	<!-- 結帳後的資訊 -->
+<!-- 結帳後的資訊 -->
 
 	<!-- body -->
 
@@ -278,6 +280,7 @@
 							total+=parseInt($(this).val());
 						})
 						$('#total').html(total);
+						$('#sum').val(total);
 					}
 
 					$('.qty').each(function() {

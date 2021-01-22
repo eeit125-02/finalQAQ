@@ -81,6 +81,9 @@ font-size:16px;
   padding: 35px;
   border-image: url("${pageContext.request.contextPath}/image/border-image.png") 30 round;
 }
+p:focus, textarea:focus {
+    outline: none;
+}
 </style>
 
 
@@ -111,8 +114,6 @@ font-size:16px;
 		<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <!-- 第一列（搜尋首頁＆收藏清單&新增書籍&修改書籍） -->
-		<br>
-		<hr>
 		<div class="collectindex">
 
 			<a class="btn btn-outline-dark" href="<c:url value='SearchBook/Search' />" role="button">搜尋首頁</a>
@@ -287,12 +288,11 @@ font-size:16px;
 		<div id="collect1"></div>
 		
 	<!-- 內容簡介 -->
-	<div class="container">
 				<div class="row"> 
 					<div class="col-sm-12" id="border"contenteditable="true">
 					<h5 align="center">內容簡介</h5>
 					<hr>
-						<p style="text-indent: 2em;word-wrap:break-word;white-space: pre-wrap;">
+						<p style="text-indent: 2em;word-wrap:break-word;white-space: pre-wrap;"contenteditable="false">
 <!-- 						<textarea style="border-style:none;"rows='20' cols='150' id="t1"> -->
 <!-- 						<textarea style="border-style:none;white-space:pre-wrap;word-wrap:break-word;"rows='20'> -->
 						${pageresult.bk_Content}
@@ -302,7 +302,6 @@ font-size:16px;
 				</div>
 
 </div>
-
 	<!-- 		內容結束 -->
 
 	<!-- body -->
