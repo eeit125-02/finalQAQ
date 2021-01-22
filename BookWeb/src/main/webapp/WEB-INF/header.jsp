@@ -17,7 +17,9 @@
 <title>書適圈</title>
 
 <style>
-
+.text-muted{
+color:white
+}
 /*  body{  */
 /*  background-image: url('${pageContext.request.contextPath}/image/ex2.png');  */
 
@@ -27,53 +29,47 @@
 </head>
 
 <body>
-<!-- <div class="container"> -->
-<div style="background-color:#bb7857">
-	<div class="row flex-nowrap justify-content-between align-items-center" style="background-color:#bb7857">
-	<div id="loginButton" style="float: right;background-color:#bb7857"></div>
-	<form action="<c:url value='/shopping' />" method="get" class="shop">
-<!-- 		<!-- 偷偷放購物車QAQ start --> 
-		<a href="#" style="float: right; margin-right: 20px"
-			onclick="cartCheck()"><img alt="wtf..."
-			src="${pageContext.request.contextPath}/image/shoppingCart1.png"
-			width="35px" height="35px"></a>
+	<div style="width:100%;background-color:#c68463">
+	<!-- 		<!-- 偷偷放購物車QAQ start --> 
+<!-- 		  <a href="#" style="float: right; margin-right: 20px" -->
+<!--    onclick="cartCheck()"><img alt="wtf..." -->
+<%--    src="${pageContext.request.contextPath}/image/shoppingCart1.png" --%>
+<!--    width="35px" height="35px"></a> -->
 <!-- 		<!-- 偷偷放購物車QAQ end --> 
+		<div id="loginButton" style="margin-left:87%;color:white;height:50px;padding:8px" ></div></div>
+<div class="" style="background-color:#f7efe8">
+<!-- 	<div  style="float: right; margin-right:270px; margin-top:20px;" ></div> -->
+	<form action="<c:url value='/shopping' />" method="get" class="shop">
 	</form>
+	<div class="row flex-nowrap justify-content-between align-items-center">
 
 <!-- 		<a class="blog-header-logo text-dark" href="//localhost:8080/BookWeb"> -->
-<!-- 			<img alt="LOGO" -->
+<!-- 			<img alt="LOGO" style="margin-left:270px" -->
 <%-- 			src="${pageContext.request.contextPath}/image/logo1.png" --%>
 <!-- 			id="Img/logo" height="75px"> -->
 <!-- 		</a> -->
+		
 	</div>
-<<<<<<< Updated upstream
-	</div>
-<!-- </div> -->
-<nav class="menu">
-  <a class="blog-header-logo text-dark" href="//localhost:8080/BookWeb">
-=======
 </div>
 
 
 <nav class="menu" style="background-color:#f7efe8;height:110px" >
 
-  <ol style="margin-right:550px">  
-    <li class="menu-item" style="padding-right:100px"><a class="blog-header-logo text-dark" href="//localhost:8080/BookWeb">
->>>>>>> Stashed changes
+  <ol>  
+    <li class="menu-item" style="padding-right:35px"><a class="blog-header-logo text-dark" href="//localhost:8080/BookWeb">
 			<img alt="LOGO"
 			src="${pageContext.request.contextPath}/image/logo1.png"
 			id="Img/logo" height="75px">
-		</a>
-  <ol>
-    <li class="menu-item"><a href='<c:url value="/SearchBook/Search"/>'>圖書漂流瓶</a></li>
-    <li class="menu-item"><a href='<c:url value="/qaqTest"/>'>二手書圖</a></li>
-    <li class="menu-item">
+		</a></li>
+    <li class="menu-item" style="padding:35px"><a href='<c:url value="/SearchBook/Search"/>'>圖書漂流瓶</a></li>
+    <li class="menu-item" style="padding:35px"><a href='<c:url value="/qaqTest"/>'>二手書圖</a></li>
+    <li class="menu-item" style="padding:35px">
       <a href='<c:url value="/showActs"/>'>共樂聚落</a>
     </li>
-    <li class="menu-item">
+    <li class="menu-item" style="padding:35px">
       <a href='<c:url value="/Discussion/mainpage"/>'>書適論壇</a>
-    </li>
-    <li class="menu-item"><a href='//localhost:8080/BookWeb/BookReport/searchBookReport/all/1'>閱讀履歷</a></li>
+    </li >
+    <li class="menu-item" style="padding:35px"><a href='//localhost:8080/BookWeb/BookReport/searchBookReport/all/1'>閱讀履歷</a></li>
   </ol>
 </nav>	
 	
@@ -92,7 +88,7 @@
 										.html(
 												"<img src=\""
 														+ pic
-														+ "\" style=\"width: 35px; height: 35px; text-align:center; border-radius: 50%;\"/>&nbsp;"
+														+ "\" style=\"width: 35px; height: 35px; text-align:center; border-radius: 50%\"/>&nbsp;"
 														+ "<a href=\"//localhost:8080/BookWeb/toCity\">"
 														+ name
 														+ "</a>&nbsp;"

@@ -111,15 +111,14 @@
 			<div class="card-header bg-dark text-light">
 				<i class="fa fa-shopping-cart" aria-hidden="true"></i>
 				${loginUser.mb_Name} 的 購 物 車
-				<%-- 				<a href='<c:url value="/qaqTest" />' --%>
-				<!-- 					class="btn btn-outline-info btn-sm pull-right"> 繼 續 購 物 </a> -->
 				<div class="clearfix"></div>
 			</div>
 			<div class="card-body">
 				<!-- PRODUCT -->
-				<c:forEach items="${listCart}" var="v">
+				<c:forEach items="${listCart}" var="v" varStatus="vs">
 					<input type="hidden" value="${v.bks_ID}">
-					<input type="hidden" value="${v.cart_ID}">
+					<input type="hidden" value="${v.cart_ID}" id="${vs.index}">
+					
 					<div class="row">
 						<div class="col-12 col-sm-12 col-md-2 text-center">
 							<img class="img-responsive" src="${v.book.bk_Pic}" alt="prewiew"
@@ -133,7 +132,6 @@
 								<small>${v.book.bk_Name}</small>
 							</h4>
 						</div>
-						<!-- 						測試 -->
 						<div class="col-12 text-sm-center col-sm-12 text-md-left col-md-3">
 							<h4 class="product-name">
 								<strong> 賣家 </strong>
@@ -142,7 +140,6 @@
 								<small>${v.memberSel.mb_Name}</small>
 							</h4>
 						</div>
-						<!-- 						測試 -->
 						<div
 							class="col-12 col-sm-12 text-sm-center col-md-4 text-md-right row">
 							<div class="col-3 col-sm-3 col-md-6 text-md-right"
@@ -155,25 +152,17 @@
 							<div class="col-4 col-sm-4 col-md-4">
 								<div class="quantity">
 									<input type="button" value="+" class="plus"> 
-									<input id="carNum" type="number" step="1" max="99" min="1"
-										value="${v.cart_Num}" title="Qty" class="qty" size="4">
+									<input id="carNum" type="number" step="1" max="99" min="1" value="${v.cart_Num}" title="Qty" class="qty" size="4">
 									<input type="button" value="-" class="minus">
 								</div>
-								<!-- 								測試區 -->
 								<input type="hidden" class="result"
 									value="${v.cart_Num*v.cart_Price}">
-								<!-- 								測試區 -->
 							</div>
 							<div class="col-2 col-sm-2 col-md-2 text-right">
-
-								<!-- 																<button type="submit" class="btn btn-outline-danger btn-xs"  -->
-								<form action="<c:url value='/deleteCart'/>" method="post">
-									<button type="submit" class="btn btn-outline-danger btn-xs"
+									<button type="button" class="btn btn-outline-danger btn-xs"
 										id="qaq" name="cart_ID" value="${v.cart_ID}">
-										<%-- 								id="qaq" name="cart_ID" value="${v.cart_ID}" onclick="confirmDelete(${v.cart_ID})"> --%>
 										<i class="fa fa-trash" aria-hidden="true"></i>
 									</button>
-								</form>
 							</div>
 						</div>
 					</div>
@@ -181,8 +170,6 @@
 				</c:forEach>
 				<!-- END PRODUCT -->
 				<div class="pull-right">
-					<!-- 					<a href="" class="btn btn-outline-secondary pull-right"> Update -->
-					<!-- 						shopping cart </a> -->
 				</div>
 			</div>
 			<div class="card-footer">
@@ -191,15 +178,12 @@
 						<div class="col-6">
 							<a href='<c:url value="/qaqTest" />'
 								class="btn btn-outline-info btn-sm pull-left"> 繼 續 購 物 </a>
-							<!-- 							<input type="text" class="form-control" placeholder="cupone code"> -->
 						</div>
 						<div class="col-6">
-							<!-- 							<input type="submit" class="btn btn-default" value="Use cupone"> -->
 						</div>
 					</div>
 				</div>
 				<div class="pull-right" style="margin: 10px">
-					<!-- 						<a href="" class="btn btn-success pull-right" > 結 帳  </a> -->
 					<button type="button" class="btn btn-primary pull-right"
 						data-toggle="modal" data-target="#exampleModal"
 						data-whatever="@mdo">結帳</button>
@@ -210,7 +194,6 @@
 			</div>
 		</div>
 	</div>
-	<!--測試用 -->
 
 	<!-- 結帳後的資訊 -->
 	<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
@@ -241,14 +224,11 @@
 							<textarea name="bko_Add" class="form-control" id="recipient-name"></textarea>
 						</div>
 					</div>
-					<%-- 					${sessionScope.list} --%>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-secondary"
 							data-dismiss="modal">取消</button>
 						<button type="submit" class="btn btn-primary">確認</button>
 					</div>
-					<%-- 					${totalCart} --%>
-					<%-- 					${sessionScope.list} --%>
 				</form>
 			</div>
 		</div>
@@ -264,9 +244,6 @@
 					$(document).ready(function() {
 						$("#bookWebheader").load("//localhost:8080/BookWeb/header");
 						$("#bookWebFooter").load("//localhost:8080/BookWeb/footer");
-	
-						
-						
 						
 						$('.result').each(function(){
 							$(this).prev().children("input").eq(1).change(function(){
@@ -278,14 +255,14 @@
 								setTotalMoney();
 							}).prev().click(function () {
 								let stay1 = $(this);
-								let varNum1 = $(this).next().val(parseInt($(this).next().val()) + parseInt(1));
+								let varNum1 = parseInt($(this).next().val())
 								let itemPrice1 = $(this).parents("div").eq(1).prev().children("h6").eq(0).children("strong").eq(0).html().split(" \<span")[0];
 								let totalPrice1 = parseInt(itemPrice1)*parseInt(varNum1);
 								stay1.parent().next().val(totalPrice1);
 								setTotalMoney();
 							}).next().next().click(function () {
 								let stay2 = $(this);
-								let varNum2 = $(this).next().val(parseInt($(this).prev().val()) - parseInt(1));
+								let varNum2 = parseInt($(this).prev().val())
 								let itemPrice2 = $(this).parents("div").eq(1).prev().children("h6").eq(0).children("strong").eq(0).html().split(" \<span")[0];
 								let totalPrice2 = parseInt(itemPrice2)*parseInt(varNum2);
 								stay2.parent().next().val(totalPrice2);
@@ -294,6 +271,7 @@
 						})
 						setTotalMoney();
 					});
+					
 					function setTotalMoney(){
 						let total = 0;
 						$('.result').each(function(){
@@ -304,69 +282,138 @@
 
 					$('.qty').each(function() {
 						$(this).change(function() {
-							console.log("231232")
+							var qty = $(this);
+							if($(this).val()<=1){
+								$.ajax({
+									async : false,
+									type : 'POST',
+									data : { cartNum : $(this).val(), bksID : $(this).parent().parent().parent().parent().prev().prev().val()
+										, cartID : $(this).parent().parent().parent().parent().prev().val()}, 
+									url : "<c:url value='/updateCart'/>",
+									dataType : "json",
+									error : function() {
+										alert("你做錯了喔!!!");
+									},
+									success : function(lsm) {
+										qty.val(lsm.minnum);
+										console.log(qty.val(lsm.minnum));
+									}
+								})
+							}else{
+								$.ajax({
+									async : false,
+									type : 'POST',
+									data : { cartNum : $(this).val(), bksID : $(this).parent().parent().parent().parent().prev().prev().val()
+										, cartID : $(this).parent().parent().parent().parent().prev().val()}, 
+									url : "<c:url value='/updateCart'/>",
+									dataType : "json",
+									error : function() {
+										alert("你做錯了喔!!!");
+									},
+									success : function(lsm1) {
+										if(qty.val() > lsm1.maxnum){
+											Swal.fire({
+												  icon: 'info',
+												  title: '警告',
+												  text: '不能超過庫存最大值!',
+												}).then((result) => {
+													qty.val(lsm1.maxnum)
+												})
+										} else{
+											qty.val(lsm1.buynum);
+										}
+									}
+								})
+							}
 						}).prev().click(function() {
 							var qaq = parseInt($(this).next().val())+parseInt(1);
-							$(this).next().val(qaq);
+							var addclick = $(this).next();
+								$(this).next().val(qaq);
+								$.ajax({
+									async : false,
+									type : 'POST',
+									data : { cartNum : $(this).next().val(), bksID : $(this).parent().parent().parent().parent().prev().prev().val()
+										, cartID : $(this).parent().parent().parent().parent().prev().val()}, 
+									url : "<c:url value='/updateCart'/>",
+									dataType : "json",
+									error : function() {
+										alert("你做錯了喔!!!");
+									},
+									success : function(lsm1) {
+										if(addclick.val() > lsm1.maxnum){
+											Swal.fire({
+												  icon: 'info',
+												  title: '警告',
+												  text: '不能超過庫存最大值!',
+												}).then((result) => {
+													addclick.val(lsm1.maxnum)
+												})
+										} else{
+											addclick.val(lsm1.buynum);
+										}
+									}
+								})
 						}).next().next().click(function () {
 							var qaq1 = parseInt($(this).prev().val())-parseInt(1);
+							var subclick = $(this).prev();
 							$(this).prev().val(qaq1)
+							if(qaq1<=1){
+								$.ajax({
+									async : false,
+									type : 'POST',
+									data : { cartNum : $(this).prev().val(), bksID : $(this).parent().parent().parent().parent().prev().prev().val()
+										, cartID : $(this).parent().parent().parent().parent().prev().val()}, 
+									url : "<c:url value='/updateCart'/>",
+									dataType : "json",
+									error : function() {
+										alert("你做錯了喔!!!");
+									},
+									success : function(lsm) {
+										subclick.val(lsm.minnum);
+										console.log(qty.val(lsm.minnum));
+									}
+								})
+							}			
 						})
 					})
-					
-// 					$('.qty').each(function() {
-// 							$(this).change(function() {
-// 								$.ajax({
-// 									async : false,
-// 									type : 'POST',
-// 									data : { cartNum : $(this).val(), bksID : $(this).parent().parent().parent().parent().prev().prev().val()
-// 										, cartID : $(this).parent().parent().parent().parent().prev().val()}, 
-// 									url : "<c:url value='/updateCart'/>",
-// 									dataType : "json",
-// 									error : function() {
-// 										alert("你做錯了喔!!!");
-// 									},
-// 									success : function(data) {
-// 				// 						$('')
-// 				console.log(data.work);
-// // 										Swal.fire({
-// // 											  position: 'top-center',
-// // 											  icon: 'success',
-// // 											  title: data.work,
-// // 											  showConfirmButton: false,
-// // 											  timer: 1500
-// // 											})
-// 									}
-// 								})
-// 							});
-// 						})
-					
-					
-		// 	$('.btn.btn-outline-danger.btn-xs').click(function() {
-
-		// 		Swal.fire({
-		// 			  title: 'Are you sure?',
-		// 			  text: "You won't be able to revert this!",
-		// 			  icon: 'warning',
-		// 			  showCancelButton: true,
-		// 			  confirmButtonColor: '#3085d6',
-		// 			  cancelButtonColor: '#d33',
-		// 			  confirmButtonText: 'Yes, delete it!'
-		// 		}).then((result) => {
-		// 			  if (result.isConfirmed) {
-		// 			    Swal.fire(
-		// 			      'Deleted!',
-		// 			      'Your file has been deleted.',
-		// 			      'success'
-		// 				).then((result) => {
-
-		// 			    })
-		// 			  }
-		// 		})
-		// 	}
-		// 	)
-
-
+		
+	$('.btn.btn-outline-danger.btn-xs').each(function() {
+		$(this).click(function() {
+			Swal.fire({
+				title: '你確定嗎?',
+				text: "你將無法回復喔!!!",
+				icon: '警告!!!',
+				showCancelButton: true,
+				confirmButtonColor: '#3085d6',
+				cancelButtonColor: '#d33',
+				confirmButtonText: 'Yes, delete it!'
+			}).then((result) => {
+				if (result.isConfirmed) {
+					$.ajax({
+						async : false,
+						type : 'POST',
+						data : { cartID : $(this).parent().parent().parent().prev().val()}, 
+						url : "<c:url value='/deleteCart'/>",
+						dataType : "json",
+						error : function() {
+							alert("你做錯了喔!!!");
+						},
+						success : function(data) {
+							Swal.fire(
+									'刪除!',
+									'你購買的商品已經刪除',
+									'刪除成功!'
+									).then((result) => {
+										window.location.reload();
+									})
+						}
+					})
+					}
+				})
+			
+		})
+	})
+	
 	</script>
 </body>
 </html>

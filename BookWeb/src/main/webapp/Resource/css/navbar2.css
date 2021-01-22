@@ -1,7 +1,7 @@
 .menu {
 /*   background: #F67280; */
-  background: #f7efe8;
-/*   height: 4rem; */
+  background-color: #f7efe8;
+  height: 16rem;
   dispaly:flex;
 }
 .menu ol {
