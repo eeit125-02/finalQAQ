@@ -89,10 +89,10 @@ color:white
 												"<img src=\""
 														+ pic
 														+ "\" style=\"width: 35px; height: 35px; text-align:center; border-radius: 50%\"/>&nbsp;"
-														+ "<a href=\"//localhost:8080/BookWeb/toCity\">"
+														+ "<a href=\"//localhost:8080/BookWeb/toCity\" style=\"color:white\">"
 														+ name
 														+ "</a>&nbsp;"
-														+ "<a id=\"logout\" href=\"//localhost:8080/BookWeb/toLogin\">登出</a>");
+														+ "<a id=\"logout\" href=\"//localhost:8080/BookWeb/toLogin\" style=\"color:white\">登出</a>");
 								$("#logout").click(function() {
 									console.log("123")
 									$.removeCookie('Member_ID', {
@@ -105,7 +105,7 @@ color:white
 							} else {
 								$('#loginButton')
 										.html(
-												"<a id=\"login\" href=\"//localhost:8080/BookWeb/toLogin\">登入</a>");
+												"<a id=\"login\" href=\"//localhost:8080/BookWeb/toLogin\" style=\"color:white\">登入</a>");
 								// 								if(window.location.href !="http://localhost:8080/BookWeb/toLogin"){ 								 
 								// 								window.location.replace("//localhost:8080/BookWeb/toLogin");}
 							}
