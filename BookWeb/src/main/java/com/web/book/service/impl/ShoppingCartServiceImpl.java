@@ -1,5 +1,6 @@
 package com.web.book.service.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.web.book.dao.ShoppingCartDao;
+import com.web.book.model.BookOrderBean;
 import com.web.book.model.ShoppingCartBean;
 import com.web.book.service.ShoppingCartService;
 
@@ -45,6 +47,27 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 	@Override
 	public void updateBookStore(Integer bks_ID, Integer bs_Num) {
 		dao.updateBookStore(bks_ID, bs_Num);		
+	}
+
+	@Override
+	public void insertOrder(Date bo_Date, Integer bo_Total, String bo_Name, String bo_Add, Integer bo_Cel,
+			Integer bb_ID, String bo_Status) {
+		dao.insertOrder(bo_Date, bo_Total, bo_Name, bo_Add, bo_Cel, bb_ID, bo_Status);
+	}
+
+	@Override
+	public void insertItem(Integer bo_ID, Integer bs_ID, Integer bk_ID, Integer oi_Qty, Integer oi_Price) {
+		dao.insertItem(bo_ID, bs_ID, bk_ID, oi_Qty, oi_Price);
+	}
+
+	@Override
+	public BookOrderBean searchOrder(Date bo_Date, Integer bb_ID) {
+		return dao.searchOrder(bo_Date, bb_ID);
+	}
+
+	@Override
+	public void deleteAllCart(Integer bb_ID) {
+		dao.deleteAllCart(bb_ID);
 	}
 	
 	

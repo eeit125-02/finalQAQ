@@ -38,6 +38,7 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 <!-- 	crossorigin="anonymous"> -->
 	
 <style>
+/* //aaaa */
 .switch {
 position: relative;
 display: inline-block;
@@ -89,6 +90,7 @@ input:checked + .slider:before {
 -ms-transform: translateX(26px);
 transform: translateX(26px);
 }
+/* aaaa */
 #admin {
 	border-radius: 25px;
 	padding: 20px;
@@ -157,11 +159,13 @@ legend {
 							<td>${u.mb_Date}</td>
 							<td><button type="button" id="delete${u.mb_ID}"
 									class="btn btn-outline-secondary" >刪除</button>								
-						<input type="hidden" id="dl" name="dl" value="${u.mb_ID}"></td>	
+						<input type="hidden" id="dl" name="dl" value="${u.mb_ID}"></td>
+<!-- //aaa	 -->
 							<td><label class="switch"> <input type="checkbox">
 									<span id="ball" class="slider" check="${u.checkColume}"></span>
 							</label>
 							</td>
+<!-- aaa -->
 						</tr>
 						<script>
 						$('#delete${u.getMb_ID()}').click(function(){
@@ -217,7 +221,7 @@ legend {
 			dataTable();
 
 		});
-		
+// aaaa
 		function already(){
 		console.log("AAA")
 		$(".slider").each(function(){
@@ -244,7 +248,7 @@ legend {
 		})
 		})
 		}
-		
+// aaaa	
 		function dataTable() {
 			
 			    $('#change').DataTable({
