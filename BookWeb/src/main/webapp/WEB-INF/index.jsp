@@ -141,7 +141,18 @@ overflow-x: hidden;
 	background-image: url('${pageContext.request.contextPath}/image/index3.jpg');background-size:contain;
 	box-shadow:3px 3px 12px gray;padding:3px;">
 	</div>
+
 <!-- <div style="position: absolute;top:500px;left:550px;">書適論壇</div> -->
+
+	
+	
+<!-- 	<div class="hover11 column"> -->
+<!--   <div> -->
+<!--     <figure><img src="https://picsum.photos/300/200?image=244" /></figure> -->
+<!--     <span>Hover</span> -->
+<!--   </div> -->
+<!--   </div> -->
+
 	
 	
 	</fieldset>
