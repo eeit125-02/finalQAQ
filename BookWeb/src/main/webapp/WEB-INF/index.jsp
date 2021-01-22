@@ -339,12 +339,12 @@ CSS
 	</div>
 	
 	
-	<div class="hover11 column">
-  <div>
-    <figure><img src="https://picsum.photos/300/200?image=244" /></figure>
-    <span>Hover</span>
-  </div>
-  </div>
+<!-- 	<div class="hover11 column"> -->
+<!--   <div> -->
+<!--     <figure><img src="https://picsum.photos/300/200?image=244" /></figure> -->
+<!--     <span>Hover</span> -->
+<!--   </div> -->
+<!--   </div> -->
 	
 	
 	</fieldset>
