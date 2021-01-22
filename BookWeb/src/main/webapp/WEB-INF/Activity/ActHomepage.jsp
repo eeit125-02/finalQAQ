@@ -164,6 +164,8 @@ td {
 					<div>
 						<div class="container" style="text-align: center">
 							<h1 >活動清單</h1>
+							<div class="line-it-button" data-lang="zh_Hant" data-type="share-a" data-ver="3" data-url="http://localhost:8080/BookWeb/toLogin" data-color="default" data-size="large" data-count="true" style="display: none;"></div>
+ <script src="https://www.line-website.com/social-plugins/js/thirdparty/loader.min.js" async="async" defer="defer"></script>
 						</div>
 					</div>
 				</section>
@@ -184,7 +186,8 @@ td {
     									  <div class="modal-header">
 <!--     									  //標頭 -->
       										  <h5 class="modal-title" id="#exampleModalCenter${act.act_Name}">${act.act_Name}</h5>
-      										  
+												<div class="line-it-button" data-lang="zh_Hant" data-type="share-a" data-ver="3" data-url="http://localhost:8080/BookWeb/toLogin" data-color="default" data-size="large" data-count="true" style="display: none;"></div>
+ 													<script src="https://www.line-website.com/social-plugins/js/thirdparty/loader.min.js" async="async" defer="defer"></script>
        											 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
      											     <span aria-hidden="true">&times;</span>
      												   </button>

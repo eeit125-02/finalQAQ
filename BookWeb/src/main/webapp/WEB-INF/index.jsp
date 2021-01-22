@@ -6,6 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
@@ -23,6 +24,9 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@200&display=swap" rel="stylesheet">
 <link rel="icon" href="${pageContext.request.contextPath}/image/logo1.ico" type="image/x-icon" />	
 <style>
+
+@import url('https://fonts.googleapis.com/css2?family=Lobster+Two&display=swap');
+
 .bd-placeholder-img {
 	font-size: 1. 125rem;
 	text-anchor: middle;
@@ -55,12 +59,52 @@
     font-family: 'Noto Serif TC', serif;
 
 }
-
+.loader {
+bottom: 0;
+height: 100%;
+left: 0;
+position: fixed;
+right: 0;
+top: 0;
+width: 100%;
+z-index: 1111;
+background: #FFFFFF;
+overflow-x: hidden;
+}
 /* @media ( min-width : 768px) { */
 /* 	.bd-placeholder-img-lg { */
 /* 		font-size: 3.5rem; */
 /* 	} */
 /* } */
+
+
+.img_div {
+    margin: 20px 400px 0 400px;
+    position: relative;
+    width: 531px;
+    height: 354px;
+}
+.mask {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 400px;
+    height: 300px;
+    background: rgba(101, 101, 101, 0.6);
+    color: #ffffff;
+    opacity: 0;
+}
+.mask h3 {
+    text-align: center;
+}
+
+
+.img_div a:hover .mask {
+    opacity: 1;           
+}
+
+
+
 </style>
 <title>書適圈</title>
 </head>
@@ -83,14 +127,14 @@
 	 <div class="Product_block_hot" style="float:right">
 	 <div class="leftone">
         <div>
-        <span><br>歡迎來到 屬於你的　書‧適圈</span>
-        <p style="font-size:16px;color:#808080;word-break: break-all;padding:15px 5px">
+        <br><span style="font-size:30px;">歡迎來到屬於你的 書‧適圈</span>
+        <p style="font-size:16px;color:#808080;word-break: break-all;padding:10px 8px">
         　我們期望為每個人打造出專屬的書籍網站，除了基本的查詢功能，可自訂個人化收藏清單、撰寫與閱讀書籍評論，也提供二手書的交流平台；同時能舉辦或參與書籍為主的活動，並在本站論壇進行各種相關討論。本站集中以書籍為主題，延伸出兼具動與靜等多方面的功能，讓愛好書籍的人可以獲得深入與全面的使用體驗。
         </p>
         </div>
         
-        <div style="width:115px;height:45px;background-color:#C68463;margin-left:230px;margin-top:0px;">
-        <a style="color:white;font-size:16px;">登入會員</a>
+        <div style="width:100px;height:45px;background-color:#C68463;margin-left:230px;margin-top:0px;">
+        <a style="color:white;font-size:18px;">登入會員</a>
         </div>
         
        </div> 
@@ -108,22 +152,68 @@
 	
 	<!-- body -->
 
-<div class="container" style="position: relative; font-family: 'Noto Serif TC', serif;">
-	<fieldset style="background-color:#f7efe8; width:800px; height:1000px">
-	<legend>　　　功能清單</legend>
-	<div style="position: absolute;top:100px;left:100px;width:250px; height:150px;background-color:black">
-
-	</div>
-	<div style="position: absolute;top:100px;left:450px;width:250px; height:150px;background-color:green">
-
-	</div>
-	<div style="position: absolute;top:350px;left:100px;width:250px; height:150px;background-color:yellow">
-
-	</div>
-	<div style="position: absolute;top:350px;left:450px;width:250px; height:150px;background-color:pink">
-
-	</div>
+<div class="container" style="position: relative; font-family: 'Noto Serif TC', serif;color:#C68463">
+	<fieldset style="background-color:#f7efe8; width:950px; height:800px">
+	<legend style="font-size:35px;font-family: 'Lobster Two', cursive;font-style:italic">Our Services</legend>
+		
 	
+
+
+<div class="img_div" style="position: absolute;top:80px;right:270px;width:400px; height:300px">
+   <img src="${pageContext.request.contextPath}/image/shop.jpg"  width="400px" height="300px">        
+            <a href='<c:url value="/qaqTest"/>'>
+            <div class="mask">
+              <h3 style=";text-align:center;line-height:300px">二手書圖</h3>
+                </div>
+        </a>
+</div>
+
+
+<div class="img_div" style="position: absolute;top:80px;left:100px;width:400px; height:300px;">
+   <img src="${pageContext.request.contextPath}/image/bookreport1111.jpg"  width="400px" height="300px">        
+            <a href='//localhost:8080/BookWeb/BookReport/searchBookReport/all/1'>
+            <div class="mask"> 
+              <h3 style=";text-align:center;line-height:300px">閱讀履歷</h3>
+                </div>
+        </a>
+</div>
+
+
+<div class="img_div" style="position: absolute;top:420px;right:270px;width:400px; height:300px;">
+    <img src="${pageContext.request.contextPath}/image/act2.jpg"  width="400px" height="300px">        
+            <a href='<c:url value="/showActs"/>'>
+            <div class="mask">
+              <h3 style=";text-align:center;line-height:300px">共樂聚落</h3>
+                </div>
+        </a>
+</div>
+
+<div class="img_div" style="position: absolute;top:420px;left:100px;width:400px; height:300px">
+    <img src="${pageContext.request.contextPath}/image/discuss.jpg"  width="400px" height="300px">        
+            <a href='<c:url value="/Discussion/mainpage"/>'>
+            <div class="mask">
+              <h3 style=";text-align:center;line-height:300px">書適論壇</h3>
+                </div>
+        </a>
+</div>
+	
+	
+
+<%-- 	<div style="position: absolute;top:350px;left:80px;width:350px; height:250px;background-color:yellow; --%>
+<%-- 	background-image: url('${pageContext.request.contextPath}/image/discussion.jpg');background-size:100% 100%; --%>
+<!-- 	box-shadow:3px 3px 12px gray;padding:3px; -->
+<%-- 	background-repeat: no-repeat"> --%>
+<!-- 	</div> -->
+
+
+<%-- 	<div style="position: absolute;top:350px;left:450px;width:350px; height:250px;background-color:pink; --%>
+<%-- 	background-image: url('${pageContext.request.contextPath}/image/br1.jpg');background-size:100% 100%; --%>
+<!-- 	box-shadow:3px 3px 12px gray;padding:3px; -->
+<%-- 	background-repeat: no-repeat"> --%>
+<!-- 	</div> -->
+
+
+
 	
 	</fieldset>
 </div>
@@ -139,10 +229,16 @@
 	<!-- footer -->
 	<footer class="container py-5" id="bookWebFooter"></footer>
 	<!-- footer -->
-
+<div class = "loader" style="height: 100%;width:100%">
+</div>
 	<script>
 		$("#bookWebheader").load("//localhost:8080/BookWeb/header");
 		$("#bookWebFooter").load("//localhost:8080/BookWeb/footer");
+		
+jQuery(window).on("load",function(){
+	jQuery(".loader").fadeOut(1000)});
+	
+	
 	</script>
 
 </body>
