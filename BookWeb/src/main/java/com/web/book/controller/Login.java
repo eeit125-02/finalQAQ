@@ -376,7 +376,9 @@ public class Login {
 	@GetMapping("/toCity")
 	public String tocity(Model model) {
 		MemberBean loginUser = (MemberBean)model.getAttribute("loginUser");
-		System.out.println(loginUser);
+		if(loginUser==null) {
+			return "redirect:toLogin";
+		}
 		MemberBean inf = ms.select(loginUser.getMb_Account());
 		System.out.println(inf);
 		model.addAttribute("login",inf);

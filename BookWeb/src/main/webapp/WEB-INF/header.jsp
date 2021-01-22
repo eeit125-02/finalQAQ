@@ -30,13 +30,14 @@ color:white
 
 <body>
 	<div style="width:100%;background-color:#c68463">
-	<!-- 		<!-- 偷偷放購物車QAQ start --> 
-<!-- 		  <a href="#" style="float: right; margin-right: 20px" -->
-<!--    onclick="cartCheck()"><img alt="wtf..." -->
-<%--    src="${pageContext.request.contextPath}/image/shoppingCart1.png" --%>
-<!--    width="35px" height="35px"></a> -->
-<!-- 		<!-- 偷偷放購物車QAQ end --> 
-		<div id="loginButton" style="margin-left:87%;color:white;height:50px;padding:8px" ></div></div>
+	 		<!-- 偷偷放購物車QAQ start --> 
+	 		<div id="loginButton" style="margin-left:87%;color:white;height:50px;padding:8px" >
+		  <a href="#" style="margin-left:0%"
+   onclick="cartCheck()"><img alt="wtf..."
+   src="${pageContext.request.contextPath}/image/shoppingCart5.png"
+   width="35px" height="35px"></a>
+		<!-- 偷偷放購物車QAQ end --> 
+		</div></div>
 <div class="" style="background-color:#f7efe8">
 <!-- 	<div  style="float: right; margin-right:270px; margin-top:20px;" ></div> -->
 	<form action="<c:url value='/shopping' />" method="get" class="shop">
@@ -56,20 +57,21 @@ color:white
 <nav class="menu" style="background-color:#f7efe8;height:110px" >
 
   <ol style="margin-right:550px">  
-    <li class="menu-item" style="padding-right:100px"><a class="blog-header-logo text-dark" href="//localhost:8080/BookWeb">
+    <li class="menu-item" style="padding-right:30px;margin-right:50px"><a class="blog-header-logo text-dark" href="//localhost:8080/BookWeb">
 			<img alt="LOGO"
 			src="${pageContext.request.contextPath}/image/logo1.png"
 			id="Img/logo" height="75px">
 		</a></li>
-    <li class="menu-item" style="padding:35px"><a href='<c:url value="/SearchBook/Search"/>'>圖書漂流瓶</a></li>
-    <li class="menu-item" style="padding:35px"><a href='<c:url value="/qaqTest"/>'>二手書圖</a></li>
+    <li class="menu-item" style="padding:35px"><a href='<c:url value="/SearchBook/Search"/>' style="font-size:20px">圖書漂流瓶</a></li>
+    <li class="menu-item" style="padding:35px"><a href='<c:url value="/qaqTest"/>' style="font-size:20px">二手書圖</a></li>
     <li class="menu-item" style="padding:35px">
-      <a href='<c:url value="/showActs"/>'>共樂聚落</a>
+      <a href='<c:url value="/showActs"/>' style="font-size:20px">共樂聚落</a>
     </li>
     <li class="menu-item" style="padding:35px">
-      <a href='<c:url value="/Discussion/mainpage"/>'>書適論壇</a>
+      <a href='<c:url value="/Discussion/mainpage"/>' style="font-size:20px">書適論壇</a>
     </li >
-    <li class="menu-item" style="padding:35px"><a href='//localhost:8080/BookWeb/BookReport/searchBookReport/all/1'>閱讀履歷</a></li>
+    <li class="menu-item" style="padding:35px"><a href='//localhost:8080/BookWeb/BookReport/searchBookReport/all/1' style="font-size:20px">閱讀履歷</a></li>
+      <li class="menu-item" style="padding:35px"><a href='//localhost:8080/BookWeb/toCity' style="font-size:20px">會員專區</a></li>
   </ol>
 </nav>	
 	
@@ -85,8 +87,7 @@ color:white
 							var name=$('#name').val();
 							if (typeof ($.cookie('Member_ID')) != "undefined") {
 								$('#loginButton')
-										.html(
-												"<img src=\""
+										.append("<img src=\""
 														+ pic
 														+ "\" style=\"width: 35px; height: 35px; text-align:center; border-radius: 50%\"/>&nbsp;"
 														+ "<a href=\"//localhost:8080/BookWeb/toCity\" style=\"color:white\">"
@@ -104,7 +105,7 @@ color:white
 								});
 							} else {
 								$('#loginButton')
-										.html(
+										.append(
 												"<a id=\"login\" href=\"//localhost:8080/BookWeb/toLogin\" style=\"color:white\">登入</a>");
 								// 								if(window.location.href !="http://localhost:8080/BookWeb/toLogin"){ 								 
 								// 								window.location.replace("//localhost:8080/BookWeb/toLogin");}
