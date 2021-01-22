@@ -31,11 +31,11 @@ color:white
 <body>
 	<div style="width:100%;background-color:#c68463">
 	 		<!-- 偷偷放購物車QAQ start --> 
-	 		<div id="loginButton" style="margin-left:87%;color:white;height:50px;padding:8px" >
-		  <a href="#" style="margin-left:0%"
+	 		<div id="loginButton" style="margin-left:87%;color:white;height:50px;padding:15px" >
+		  <a href="#" style="margin-bottom:4px"
    onclick="cartCheck()"><img alt="wtf..."
-   src="${pageContext.request.contextPath}/image/shoppingCart5.png"
-   width="35px" height="35px"></a>
+   src="${pageContext.request.contextPath}/image/321123.png"
+   style="margin-bottom:5px;width:25px;height:25px;margin-right:10px"></a>
 		<!-- 偷偷放購物車QAQ end --> 
 		</div></div>
 <div class="" style="background-color:#f7efe8">
@@ -46,7 +46,7 @@ color:white
 
 <!-- 		<a class="blog-header-logo text-dark" href="//localhost:8080/BookWeb"> -->
 <!-- 			<img alt="LOGO" style="margin-left:270px" -->
-<%-- 			src="${pageContext.request.contextPath}/image/logo1.png" --%>
+<%-- 			src="${pageContext.request.contextPath}/image/321123.png" --%>
 <!-- 			id="Img/logo" height="75px"> -->
 <!-- 		</a> -->
 		
@@ -106,7 +106,9 @@ color:white
 							} else {
 								$('#loginButton')
 										.append(
-												"<a id=\"login\" href=\"//localhost:8080/BookWeb/toLogin\" style=\"color:white\">登入</a>");
+												"<a id=\"login\" href=\"//localhost:8080/BookWeb/toLogin\" style=\"color:white;font-size:20px\"><img src=\""
+												+ "${pageContext.request.contextPath}/image/login1.png"
+												+ "\" style=\"width: 25px; height: 25px; text-align:center; border-radius: 50%\"/></a>");
 								// 								if(window.location.href !="http://localhost:8080/BookWeb/toLogin"){ 								 
 								// 								window.location.replace("//localhost:8080/BookWeb/toLogin");}
 							}

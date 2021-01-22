@@ -90,7 +90,7 @@
         </div>
         
         <div style="width:115px;height:45px;background-color:#C68463;margin-left:230px;margin-top:0px;">
-        <a style="color:white;font-size:16px;">登入會員</a>
+        <a style="color:white;font-size:25px;">登入會員</a>
         </div>
         
        </div> 
