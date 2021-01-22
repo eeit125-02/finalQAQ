@@ -55,7 +55,18 @@
     font-family: 'Noto Serif TC', serif;
 
 }
-
+.loader {
+bottom: 0;
+height: 100%;
+left: 0;
+position: fixed;
+right: 0;
+top: 0;
+width: 100%;
+z-index: 1111;
+background: #FFFFFF;
+overflow-x: hidden;
+}
 /* @media ( min-width : 768px) { */
 /* 	.bd-placeholder-img-lg { */
 /* 		font-size: 3.5rem; */
@@ -83,8 +94,8 @@
 	 <div class="Product_block_hot" style="float:right">
 	 <div class="leftone">
         <div>
-        <span><br>歡迎來到 屬於你的　書‧適圈</span>
-        <p style="font-size:16px;color:#808080;word-break: break-all;padding:15px 5px">
+        <br><span style="font-size:30px;">歡迎來到屬於你的 書‧適圈</span>
+        <p style="font-size:16px;color:#808080;word-break: break-all;padding:10px 8px">
         　我們期望為每個人打造出專屬的書籍網站，除了基本的查詢功能，可自訂個人化收藏清單、撰寫與閱讀書籍評論，也提供二手書的交流平台；同時能舉辦或參與書籍為主的活動，並在本站論壇進行各種相關討論。本站集中以書籍為主題，延伸出兼具動與靜等多方面的功能，讓愛好書籍的人可以獲得深入與全面的使用體驗。
         </p>
         </div>
@@ -109,23 +120,28 @@
 	<!-- body -->
 
 <div class="container" style="position: relative; font-family: 'Noto Serif TC', serif;color:#C68463">
-	<fieldset style="background-color:#f7efe8; width:800px; height:1000px">
-	<legend>　　　功能清單</legend>
-	<div style="position: absolute;top:100px;left:110px;width:250px; height:150px;background-color:black;
-	background-image: url('${pageContext.request.contextPath}/image/index1.jpg');background-size:contain">
+	<fieldset style="background-color:#f7efe8; width:800px; height:630px">
+	<legend style="font-size:25px;">　　　功能清單</legend>
+	<div style="position: absolute;top:75px;left:80px;width:300px; height:200px;background-color:black;
+	background-image: url('${pageContext.request.contextPath}/image/index1.jpg');background-size:contain;
+	box-shadow:3px 3px 12px gray;padding:3px;">
 	</div>
-<div style="position: absolute;top:250px;left:200px;">閱讀履歷</div>
-	<div style="position: absolute;top:100px;left:460px;width:250px; height:150px;background-color:green;
-	background-image: url('${pageContext.request.contextPath}/image/index2.png');background-size:contain">
+<!-- <div style="position: absolute;top:280px;left:180px;font-size:20px;">閱讀履歷</div> -->
+	<div style="position: absolute;top:75px;left:450px;width:300px; height:200px;background-color:green;
+	background-image: url('${pageContext.request.contextPath}/image/index3.jpg');background-size:contain;
+	box-shadow:3px 3px 12px gray;padding:3px;">
 	</div>
-<div style="position: absolute;top:250px;left:550px;">共樂聚落</div>
-	<div style="position: absolute;top:350px;left:110px;width:250px; height:150px;background-color:yellow;
-	background-image: url('${pageContext.request.contextPath}/image/index3.jpg');background-size:contain">
+<!-- <div style="position: absolute;top:280px;left:560px;font-size:20px;">共樂聚落</div> -->
+	<div style="position: absolute;top:350px;left:80px;width:300px; height:200px;background-color:yellow;
+	background-image: url('${pageContext.request.contextPath}/image/index3.jpg');background-size:contain;
+	box-shadow:3px 3px 12px gray;padding:3px;">
 	</div>
-<div style="position: absolute;top:500px;left:200px;">二手圖書</div>
-	<div style="position: absolute;top:350px;left:460px;width:250px; height:150px;background-color:pink">
+<!-- <div style="position: absolute;top:500px;left:200px;">二手圖書</div> -->
+	<div style="position: absolute;top:350px;left:450px;width:300px; height:200px;background-color:pink;
+	background-image: url('${pageContext.request.contextPath}/image/index3.jpg');background-size:contain;
+	box-shadow:3px 3px 12px gray;padding:3px;">
 	</div>
-<div style="position: absolute;top:500px;left:550px;">書適論壇</div>
+<!-- <div style="position: absolute;top:500px;left:550px;">書適論壇</div> -->
 	
 	
 	</fieldset>
@@ -142,10 +158,16 @@
 	<!-- footer -->
 	<footer class="container py-5" id="bookWebFooter"></footer>
 	<!-- footer -->
-
+<div class = "loader" style="height: 100%;width:100%">
+</div>
 	<script>
 		$("#bookWebheader").load("//localhost:8080/BookWeb/header");
 		$("#bookWebFooter").load("//localhost:8080/BookWeb/footer");
+		
+jQuery(window).on("load",function(){
+	jQuery(".loader").fadeOut(1000)});
+	
+	
 	</script>
 
 </body>

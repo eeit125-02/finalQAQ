@@ -21,7 +21,7 @@
 				<line x1="9.69" y1="16" x2="3.95" y2="6.06"></line>
 				<line x1="14.31" y1="16" x2="2.83" y2="16"></line>
 				<line x1="16.62" y1="12" x2="10.88" y2="21.94"></line></svg>
-			<small class="d-block mb-3 text-muted">Â© 2017-2018</small>
+			<small class="d-block mb-3 text-muted">U-Book © 2020-2021</small>
 		</div>
 		<div class="col-6 col-md">
 			<h5>Features</h5>
