@@ -206,11 +206,11 @@ td {
         									<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         									<input type="hidden" id="check" value="${check}">
       										 <a href="<c:url value='/showJoinForm'/>?act_ID=${act.act_ID}"><button type="button" id="joinact" class="btn btn-primary">報名</button></a> 
-     										    </div>
+     										   </div>
   											  </div>
  											 </div>
 											</div>				
-									</div>
+										   </div>
 									<div class="caption">
 										<p>${act.act_Theme}</p>
 										<p>${act.act_Date}</p>
@@ -266,6 +266,7 @@ td {
 <%-- 	    </form> --%>
 	    
 	    <a href="<c:url value='/showJoins'/>"><button class="btn btn-outline-info">查看報名紀錄</button></a>
+	    <a href="<c:url value='/showActbyID'/>"><button class="btn btn-outline-info">查看會員報名紀錄</button></a>
 	    
 	</div>
 

@@ -38,6 +38,7 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 <!-- 	crossorigin="anonymous"> -->
 	
 <style>
+/* //aaaa */
 .switch {
 position: relative;
 display: inline-block;
@@ -89,6 +90,7 @@ input:checked + .slider:before {
 -ms-transform: translateX(26px);
 transform: translateX(26px);
 }
+/* aaaa */
 #admin {
 	border-radius: 25px;
 	padding: 20px;
@@ -162,6 +164,7 @@ legend {
 									<span id="ball" class="slider" check="${u.checkColume}"></span>
 							</label>
 							</td>
+<!-- aaa -->
 						</tr>
 						<script>
 						$('#delete${u.mb_ID}').click(function(){
@@ -218,7 +221,7 @@ legend {
 			dataTable();
 
 		});
-		
+// aaaa
 		function already(){
 		console.log("AAA")
 		$(".slider").each(function(){
@@ -245,7 +248,7 @@ legend {
 		})
 		})
 		}
-		
+// aaaa	
 		function dataTable() {
 			
 			    $('#change').DataTable({
