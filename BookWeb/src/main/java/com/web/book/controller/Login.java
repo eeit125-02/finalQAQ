@@ -145,6 +145,9 @@ public class Login {
 	@PostMapping("/toLogin/checkColume/{mb_Account}")
 	@ResponseBody
 	public boolean checkColume(@PathVariable("mb_Account") String account) {
+		if(account.equals("a123456")) {
+			return true;
+		}
 		boolean check = ms.checkColume(account);
 		return check;
 	}
@@ -313,7 +316,7 @@ public class Login {
 	}
 
 	// 管理員會員刪除
-	@PostMapping("/admindelete")
+	@GetMapping("/admindelete")
 	public String Delete(Model model, @RequestParam(value = "dl" ,required = false) Integer deleteId) {
 		System.out.println("++++++++++++++++++++++++++"+deleteId);
 			ms.deleteMember(deleteId);
@@ -322,24 +325,24 @@ public class Login {
 			logincheck="a";
 			return "redirect:toCity";
 	}
-	// 管理員更新
-	@PostMapping("/adminupdate")
-	public String toadminupdate(Model model, @RequestParam(value = "pwd") String mb_Password,
-			@RequestParam(value = "name") String mb_Name, @RequestParam(value = "mail") String mb_Mail,
-			@RequestParam(value = "tel") String mb_Tel, @RequestParam(value = "address") String mb_Address,
-			@RequestParam(value = "account") String account) {
-		MemberBean mb_inf = ms.select(account);
-		String encryption = GlobalService.getMemberEncoder(mb_Password);
-		mb_inf.setMb_Password(encryption);
-		mb_inf.setMb_Name(mb_Name);
-		mb_inf.setMb_Mail(mb_Mail);
-		mb_inf.setMb_Tel(mb_Tel);
-		mb_inf.setMb_Address(mb_Address);
-		boolean update = ms.update(mb_inf);
-		List<MemberBean> inf = ms.adminselect();
-		model.addAttribute("memberall", inf);
-		return "Member/adminModify";
-	}
+//	// 管理員更新
+//	@PostMapping("/adminupdate")
+//	public String toadminupdate(Model model, @RequestParam(value = "pwd") String mb_Password,
+//			@RequestParam(value = "name") String mb_Name, @RequestParam(value = "mail") String mb_Mail,
+//			@RequestParam(value = "tel") String mb_Tel, @RequestParam(value = "address") String mb_Address,
+//			@RequestParam(value = "account") String account) {
+//		MemberBean mb_inf = ms.select(account);
+//		String encryption = GlobalService.getMemberEncoder(mb_Password);
+//		mb_inf.setMb_Password(encryption);
+//		mb_inf.setMb_Name(mb_Name);
+//		mb_inf.setMb_Mail(mb_Mail);
+//		mb_inf.setMb_Tel(mb_Tel);
+//		mb_inf.setMb_Address(mb_Address);
+//		boolean update = ms.update(mb_inf);
+//		List<MemberBean> inf = ms.adminselect();
+//		model.addAttribute("memberall", inf);
+//		return "Member/adminModify";
+//	}
 
 	//管理員權限
 	@PostMapping("/adminchange")

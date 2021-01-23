@@ -10,7 +10,7 @@
 
 <!-- sidemenu -->
 
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/navbar.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/navbar2.css">
 <!-- sidemenu -->
 
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
@@ -41,13 +41,13 @@ background-color:#68b0ab
 background-color:#e0ece4
 }
 
- #city { 
- 	border-radius: 25px; 
- 	padding: 20px; 
- 	background-color: 	#F0F0F0; 
- 	height:auto; 
+  #city {  
+  	border-radius: 25px;  
+  	padding: 20px; 
+  	background-color: 	#F0F0F0; 
+  	height:auto; 
 	width: 200px; 
- 	float:left; 
+ 	float:left;
  } 
  
 legend {
@@ -112,9 +112,10 @@ legend {
 </head>
 <body>
 <!-- header -->
-	<header class="container blog-header py-3" id="bookWebheader"></header>
+<header class=" blog-header py-3" id="bookWebheader"></header>
 	<!-- header -->
 	<div class="container media" >
+	
 	<div id="city" >
 	
 	<div class="dropdown">	
@@ -142,13 +143,18 @@ legend {
 				<button type="submit" name="getjoinrecords" class="btn btn-outline-secondary">報名紀錄</button>
 				</div>
 				</form>
+				<form name=a3 class=a3 action="<c:url value='/showActbyID' />" method="get">
+				<div>
+				<button type="submit" name="getactrecords" class="btn btn-outline-secondary">活動紀錄</button>
+				</div>
+				</form>
 				<div>
 				<button type="button" id="editBookReport" name="getjoinrecords" class="btn btn-outline-secondary">讀書心得</button>
 				</div>
 		
 	</div>
 	
-	
+
 
 <!-- 新的會員CITY -->
 <!-- <div class="row"> -->
@@ -235,7 +241,7 @@ legend {
 <!--     </div>/.navbar-collapse -->
 <!-- </nav> -->
     
-<!--     </div> -->
+<!-- </div> -->
 <!-- </div> -->
 <!-- </div> -->
 <!-- 新的會員CITY -->	

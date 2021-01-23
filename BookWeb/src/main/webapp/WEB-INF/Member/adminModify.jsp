@@ -138,7 +138,7 @@ legend {
 		<br>
 			<fieldset id="admin" style="text-align:center">
 				<legend>會員清單</legend>
-		<form action="<c:url value='admindelete' />" method="post" id="admindelete">
+<%-- 		<form action="<c:url value='admindelete' />" method="post" id="admindelete"> --%>
 				<table class="table"  width="100%"  id="change">
 					<c:forEach items="${memberall}" var="u" varStatus="loop">
 						<c:if test="${loop.index == 0}">
@@ -165,15 +165,16 @@ legend {
 						</tr>
 						<script>
 						$('#delete${u.mb_ID}').click(function(){
+							console.log("123")
 							let a = $('#dl${u.mb_ID}').val()
 							alert("確定刪除")
-							$('#abc').load("//localhost:8080/BookWeb/admindelete?dl="+a)
+							window.location.href="http://localhost:8080/BookWeb/admindelete?dl="+a
 									console.log("+++++++++")
 						})
 						</script>
 					</c:forEach>
 				</table>
-			</form>
+<!-- 			</form> -->
 			</fieldset>
 	</div>
 </body>
