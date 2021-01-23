@@ -26,8 +26,10 @@ public interface SearchService {
 	//取得全部類型
 	List<SearchTypeBean> getAllBookType();
 
-	// 刪除收藏項目
+	// 刪除收藏項目(單筆)
 	boolean delete(int bcid);
+	// 刪除收藏項目(多筆)
+	boolean deletebkbc(int bkid);
 
 	// 新增收藏項目
 	boolean savebc(int bk_ID, int mb_ID);
@@ -96,6 +98,7 @@ public interface SearchService {
 	List<BookBean> searchOrderBookTypeClick(List<Integer> reslist, Integer page);
 
 	List<BookBean> getAllBook();
+
 
 
 

@@ -94,10 +94,15 @@ import com.web.book.service.SearchService;
 			return searchBookDAO.getKeyCollect(id, key);	
 		}
 		
-		// 刪除收藏項目
+		// 刪除收藏項目(單筆)
 		@Override
 		public boolean delete(int bcid) {
 			return searchBookDAO.deletebc(bcid);
+		}
+		// 刪除收藏項目(多筆)
+		@Override
+		public boolean deletebkbc(int bkid) {
+			return searchBookDAO.deletebkbc(bkid);
 		}
 		
 		// 新增收藏項目
