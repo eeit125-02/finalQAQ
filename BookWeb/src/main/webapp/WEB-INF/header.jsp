@@ -33,13 +33,11 @@ color:white
 </head>
 
 <body>
-	<div style="width:100%;background-color:#c68463">
+	<div style="width:100%;background-color:#c68463" >
 	 		<!-- 偷偷放購物車QAQ start --> 
-	 		<div id="loginButton" style="margin-left:87%;color:white;height:50px;padding:15px" >
-		  <a href="#" style="margin-bottom:4px"
-   onclick="cartCheck()"><img alt="wtf..."
-   src="${pageContext.request.contextPath}/image/321123.png"
-   style="margin-bottom:5px;width:25px;height:25px;margin-right:10px"></a>
+	 		<div id="loginButton" class="container" style="margin-left:83%;color:white;height:50px;padding:8px" >
+		  <a href="#" style="margin-bottom:4px" onclick="cartCheck()"><img alt="wtf..." src="${pageContext.request.contextPath}/image/321123.png"
+   style="margin-botto:10px;width:25px;height:25px;margin-right:10px"></a>
 		<!-- 偷偷放購物車QAQ end --> 
 		</div></div>
 <div class="" style="background-color:#f7efe8">

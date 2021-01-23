@@ -114,7 +114,7 @@ legend {
 </head>
 <body>
 <!-- header -->
-<header class=" blog-header py-3" id="bookWebheader"></header>
+<header class=" blog-header" id="bookWebheader"></header>
 	<!-- header -->
 	<div class="container media" >
 	
