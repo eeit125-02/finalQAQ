@@ -63,7 +63,7 @@
 	        <tr>
 	            <th>會員帳號</th>
 	            <th>心得編號</th>
-	            <th>標題</th>
+	            <th>標題</th>
 	            <th>撰寫日期</th>
 	            <th>操作</th>
 	        </tr>
@@ -140,7 +140,7 @@
 	});
 	
 	var myChart = new Chart(viewChart, {
-	    type: 'pie',
+	    type: 'bar',
 	    data: {
 	        labels: monthViewName,
 	        datasets: [{

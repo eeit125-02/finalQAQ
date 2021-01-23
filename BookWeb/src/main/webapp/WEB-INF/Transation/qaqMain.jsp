@@ -144,8 +144,8 @@
 			<c:choose>
 				<c:when test="${pageSize != 0}">
 					<div class="row">
-						<div class="col-sm-4"></div>
-						<div class="col-sm-8">
+						<div class="col-sm-5"></div>
+						<div class="col-sm-7">
 							<nav aria-label="Page navigation example">
 								<ul class="pagination">
 									<!-- 組左邊符號 start-->
