@@ -210,7 +210,7 @@ maxpage=query.getResultList().size();
 		return list;
 	}
 
-	// 刪除收藏項目
+	// 刪除收藏項目(單筆)
 	@Override
 	public boolean deletebc(int bcid) {
 		int count = 0;
@@ -224,6 +224,21 @@ maxpage=query.getResultList().size();
 		}
 		return result2;
 	}
+	
+	//刪除收藏項目(多筆)
+	@SuppressWarnings("unchecked")
+	@Override
+	public boolean deletebkbc(int bk_id) {
+		Session session = factory.getCurrentSession();
+		BookBean book = session.get(BookBean.class, bk_id);
+		String hql = "DELETE From BookCollectBean bc Where bc.book = :bkid";
+		Query<BookCollectBean> query = session.createQuery(hql);
+		int list=query.setParameter("bkid", book).executeUpdate();
+		if(list>0) {
+			return true;
+		}
+		return false;
+	}	
 
 	// 新增or刪除收藏項目
 	@SuppressWarnings("unchecked")
@@ -264,9 +279,6 @@ maxpage=query.getResultList().size();
 	public BookCollectBean setbctag(int bc_ID, String tag1, String tag2, String tag3) {
 		Session session = factory.getCurrentSession();
 		BookCollectBean bc=session.get(BookCollectBean.class, bc_ID);
-		System.out.println("+++++++++++++++++++"+tag1);
-		System.out.println("+++++++++++++++++++"+tag2);
-		System.out.println("+++++++++++++++++++"+tag3);
 		if(tag1!=null && ""!=tag1) {
 			bc.setBc_Tag_one(tag1);
 		}
@@ -285,9 +297,6 @@ maxpage=query.getResultList().size();
 	public BookCollectBean deletebctag(int bc_ID, String tag1, String tag2, String tag3) {
 		Session session = factory.getCurrentSession();
 		BookCollectBean bc=session.get(BookCollectBean.class, bc_ID);
-		System.out.println("-------------------"+tag1);
-		System.out.println("-------------------"+tag2);
-		System.out.println("-------------------"+tag3);
 		if(tag1!=null && ""!=tag1) {
 			bc.setBc_Tag_one(null);
 		}

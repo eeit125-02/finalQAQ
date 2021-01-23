@@ -85,6 +85,8 @@
 				<div class="col-lg-4">
 					<button type="button" class="btn btn-outline-secondary"
 						onclick="storeCheck()">我的賣場</button>
+				<button type="button" class="btn btn-outline-secondary"
+						id="search1">一鍵輸入</button>
 				</div>
 			</div>
 
@@ -97,18 +99,19 @@
 				<c:when test="${not empty store}">
 					<div class="row">
 						<c:forEach items="${store}" var="v">
-							<div class="card col-sm-3"
-								style="margin: 20px 40px; width: 500px; padding: 15px">
+						<div class="col-sm-3">
+							<div class="card"
+								style="margin: 10px; border:none">
 								<!-- 圖片跟連結 -->
 								<a href="<c:url value='/qaqBookDetail/${v.bks_ID}'/>"
 									style="align: center;"> <img
 									src="<c:url value=" ${v.book.bk_Pic} " />" class="card-img-top"
-									alt="..." style="height: 18rem; width: 250px;">
+									alt="..." style="height: 280px;">
 								</a>
 								<!-- 圖片跟連結 -->
 								<div class="card-body">
 									<!-- 書名連結 -->
-									<a href="<c:url value='/qaqBookDetail/${v.bks_ID}'/>">${v.book.bk_Name }</a>
+									<a style="font-size:20px"href="<c:url value='/qaqBookDetail/${v.bks_ID}'/>">${v.book.bk_Name }</a>
 									<!-- 書名連結 -->
 									<br> <span class="card-text">作者: ${ v.book.bk_Author }</span>
 									<br> <span class="card-text">出版社: ${ v.book.bk_Publish }</span>
@@ -121,6 +124,7 @@
 									<!-- 比價連結 -->
 								</div>
 							</div>
+						</div>
 						</c:forEach>
 					</div>
 					<br>
@@ -204,6 +208,9 @@
 				window.location.href = "//localhost:8080/BookWeb/toLogin";
 			}
 		}
+		$('#search1').click(function() {
+			$('.form-control').val("心靈");
+		})
 	</script>
 </body>
 </html>

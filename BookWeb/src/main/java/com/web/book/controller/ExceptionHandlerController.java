@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 //攔截錯誤
-//@ControllerAdvice
+@ControllerAdvice
 public class ExceptionHandlerController {
 
     @ExceptionHandler(Throwable.class)

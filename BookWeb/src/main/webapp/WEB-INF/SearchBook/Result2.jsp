@@ -78,8 +78,6 @@ white-space:pre-wrap;
 
 		<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-		<br>
-		<hr>
 		<div class="collectindex">
 			<a class="btn btn-outline-dark" href="<c:url value='SearchBook/Search' />" role="button">搜尋首頁</a>
 			
