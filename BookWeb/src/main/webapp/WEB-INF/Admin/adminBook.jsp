@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-    
+<meta charset="UTF-8">
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
@@ -100,9 +100,9 @@ font-size:16px;
 		<table id="bookReport_Table" class="display" >
 		    <thead>
 		        <tr>
-		            <th style="width:50px;">編號</th>
-		            <th style="width:200px;">書名</th>
-		            <th style="width:100px;">作者</th>
+		            <th style="width:50px;">編號</th>
+		            <th style="width:200px;">書名</th>
+		            <th style="width:100px;">作者</th>
 		            <th style="width:100px;">出版社</th>
 		            <th>出版日期</th>
 		            <th style="width:200px;">操作</th>
