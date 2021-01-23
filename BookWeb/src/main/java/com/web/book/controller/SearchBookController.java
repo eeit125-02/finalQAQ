@@ -475,6 +475,7 @@ public class SearchBookController {
 	public String gotoDeleteBook(Model model, @RequestParam(value = "delete") Integer bk_id) {
 		BookBean result = searchService.getBook(bk_id);
 		searchService.deletebkty(bk_id);
+		searchService.deletebkbc(bk_id);
 		boolean result2 = searchService.deletebk(result);
 		return "redirect:/SearchBook/Search";
 	}

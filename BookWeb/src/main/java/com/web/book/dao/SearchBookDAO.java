@@ -31,9 +31,10 @@ public interface SearchBookDAO {
 	//取得全部類型
 	List<SearchTypeBean> getAllBookType();
 
-	// 刪除收藏項目
-	boolean deletebc(int bcid);
-
+	// 刪除收藏項目(單筆)
+	boolean deletebc(int bcid);	
+	// 刪除收藏項目(多筆)
+	boolean deletebkbc(int bk_id);
 	// 新增收藏項目
 	boolean savebc(int bk_id, int mb_id);
 
