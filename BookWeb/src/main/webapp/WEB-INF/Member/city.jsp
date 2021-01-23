@@ -163,8 +163,7 @@ legend {
 			<div class="col-2 text-center container">
 
 				<!-- ====================================================sidebar==================================================== -->
-				<h2>會員中心</h2>
-				<br>
+				<h3>會員中心</h3>
 				<div class="list-group" id="list-tab" role="tablist">
 					<a class="list-group-item list-group-item-action active"
 						id="admin1" name="admin" data-toggle="list" href="#list-novel"
@@ -192,31 +191,31 @@ legend {
 						
 					<form name=a3 class=a3 action="<c:url value='/collectlist' />" method="get">
 					<div>
-					<button type="submit" name="list" id="bookEdit" >收藏清單</button>
+					<button type="submit" name="list" id="bookEdit" class="list-group-item list-group-item-action">收藏清單</button>
 					</div>
-					</form>
+					</form>	
 					<form name=a3 class=a3 action="<c:url value='/myStore' />" method="get">
 					<div>
-					<button type="submit" name="sell" id="sellEdit" class="btn btn-outline-secondary">我的賣場</button>
+					<button type="submit" name="sell" id="sellEdit" class="list-group-item list-group-item-action">我的賣場</button>
 					</div>
 					</form>	
 					<form name=a3 class=a3 action="<c:url value='/showJoinbyID' />" method="get">
 					<div>
-					<button type="submit" name="getjoinrecords" id="joinEdit" class="btn btn-outline-secondary">報名紀錄</button>
+					<button type="submit" name="getjoinrecords" id="joinEdit" class="list-group-item list-group-item-action">報名紀錄</button>
 					</div>
 					</form>
 					<form name=a3 class=a3 action="<c:url value='/showActbyID' />" method="get">
 					<div>
-					<button type="submit" name="getactrecords" id="actEdit" class="btn btn-outline-secondary">活動紀錄</button>
+					<button type="submit" name="getactrecords" id="actEdit" class="list-group-item list-group-item-action">活動紀錄</button>
 					</div>
 					</form>
 					<div>
-					<button type="button" id="editBookReport" name="getjoinrecords" class="btn btn-outline-secondary">讀書心得</button>
+					<button type="button" id="editBookReport" name="getjoinrecords" class="list-group-item list-group-item-action">讀書心得</button>
 					</div>
 					<div>
-					<button type="button" id="editDiscussion" name="getjoinrecords" class="btn btn-outline-secondary">討論管理</button>
+					<button type="button" id="editDiscussion" name="getjoinrecords" class="list-group-item list-group-item-action">討論管理</button>
 					</div>
-							
+						
 					</div>
 					</div>
 
