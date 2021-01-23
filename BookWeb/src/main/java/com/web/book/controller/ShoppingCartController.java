@@ -1,12 +1,10 @@
 package com.web.book.controller;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -47,14 +45,14 @@ public class ShoppingCartController {
 
 	}
 	
-	public static String genAioCheckOutOneTime(Integer bo_ID, String date, Integer total,String itemName, String url){
+	public static String genAioCheckOutOneTime(Integer bo_ID, String date, Integer total,String product, String url){
 		AllInOne all = new AllInOne("");
 		AioCheckOutOneTime obj = new AioCheckOutOneTime();
 		obj.setMerchantTradeNo("bookTransation" + bo_ID);
 		obj.setMerchantTradeDate(date);
 		obj.setTotalAmount(total.toString());
-		obj.setTradeDesc("test Description");
-		obj.setItemName(itemName);
+		obj.setTradeDesc("書適圈");
+		obj.setItemName(product);
 		obj.setReturnURL(url);
 		obj.setClientBackURL(url);
 		obj.setNeedExtraPaidInfo("N");
@@ -63,78 +61,72 @@ public class ShoppingCartController {
 		return form;
 	}
 	
-	// 套用綠界
+	// 套用綠界 List<String>
 	@PostMapping("checkout")
-	@ResponseBody
 	public String checkoutTest(Model model, 
 			@RequestParam String bo_Name, 
 			@RequestParam String bo_Add,
 			@RequestParam Integer bo_Cel
 			) {
+//		List<String> relist = new ArrayList<String>();
 		System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++");
 		System.out.println("bo_Name= " + bo_Name);
 		System.out.println("bo_Cel= " + bo_Cel);
 		System.out.println("bo_Add= " + bo_Add);
 		System.out.println("---------------------------------------------------");
-		if (loginUser.equals(null)) {
-			return "/Member/login";
+//			relist.add("/Member/login");
+//			return relist;
+		if (loginUser == null) {
+			return "redirect:/toLogin";
 		}
 		int total = 0;
 		int count = 0;
+		int mb_Delete = 0;
 		String success = "已結帳";
 		String fail = "未結帳";
 		Date date = new Date();
-		String url = "http://localhost:8080/BookWeb/Transation/bkCheckout";
+		String url = "http://localhost:8080/BookWeb/qaqTest";
 		StringBuilder product = new StringBuilder();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+// 總價錢計算
 		List<ShoppingCartBean> list = scService.searchCart(loginUser.getMb_ID());
 		for (ShoppingCartBean cart : list) {
 			total += cart.getCart_Num()*cart.getCart_Price();
 		}
+// 建立訂單
 		scService.insertOrder(date, total, bo_Name, bo_Add, bo_Cel, loginUser.getMb_ID(), success);
+// 建立訂單明細
 		BookOrderBean oreder = scService.searchOrder(date, loginUser.getMb_ID());
 		for (ShoppingCartBean cart : list) {
 			scService.insertItem(oreder.getBo_ID(), cart.getMemberSel().getMb_ID(), cart.getBook().getBk_ID(), cart.getCart_Num(), cart.getCart_Price());
 			if (count == 0) {
-				product.append(cart.getBook().getBk_Name());	
+				product.append(cart.getBook().getBk_Name());
+				product.append("   單價: " + cart.getCart_Price()+"      數量: " + cart.getCart_Num() + "      賣家: " + cart.getMemberSel().getMb_Name());
 				count++;
 			} else {
-				product.append("#" + cart.getBook().getBk_Name());					
+				product.append("#" + cart.getBook().getBk_Name());			
+				product.append("   單價: " + cart.getCart_Price()+"      數量: " + cart.getCart_Num() + "      賣家: " + cart.getMemberSel().getMb_Name());
 			}
 		}
-//		model.addAttribute("order", oreder);
-//		model.addAttribute("form", genAioCheckOutOneTime(oreder.getBo_ID(), sdf.format(date), total, product.toString(), url));
-//		String form = genAioCheckOutOneTime(oreder.getBo_ID(), sdf.format(date), total, product.toString(), url);
-//		return form;
-		System.out.println("+++++++++++++++++++++++++++++");
-		System.out.println(product.toString());
-		String aaa = product.toString();
-		AllInOne all = new AllInOne("");
-		AioCheckOutOneTime obj = new AioCheckOutOneTime();
-		obj.setMerchantTradeNo("bookTransation" + oreder.getBo_ID());
-		obj.setMerchantTradeDate(sdf.format(date));
-		obj.setTotalAmount(String.valueOf(total));
-		obj.setTradeDesc("test Description");
-		obj.setItemName("book1#book2");
-		obj.setReturnURL("http://localhost:8080/BookWeb/qaqTest");
-		obj.setClientBackURL("http://localhost:8080/BookWeb/qaqTest");
-		obj.setNeedExtraPaidInfo("N");
-		obj.setRedeem("N");
-		String form = all.aioCheckOut(obj, null);
+// 把購物車資料清掉
+		scService.deleteAllCart(loginUser.getMb_ID());
+		String form = genAioCheckOutOneTime(oreder.getBo_ID(), sdf.format(date), total, product.toString(), url);
 		model.addAttribute("obj", form);
-		return form;
-		
-//		return "/Transation/bkCheckout";
-	}
-	
-	@GetMapping(value = "/bkCheckout")
-	public String backtomain(Model model) {
+//		return relist;
 		return "/Transation/bkCheckout";
 	}
+	
+//	@GetMapping(value = "/bkCheckout")
+//	public String backtomain(Model model) {
+//		return "/Transation/bkCheckout";
+//	}
 
 	// 點擊購物車
 	@GetMapping("/shopping")
 	public String cartMain(Model model) {
+		if (loginUser == null) {
+			return "redirect:/toLogin";
+		}
 		List<ShoppingCartBean> list = scService.searchCart(loginUser.getMb_ID());
 		model.addAttribute("listCart", list);
 		return "Transation/shoppingCart";
@@ -150,6 +142,9 @@ public class ShoppingCartController {
 			@RequestParam(value = "bks_ID", required = false) int bks_ID) {
 //		System.out.println("++++++++++++++++++++++++++++++++++++++++++");
 //		System.out.println("------------------------------------------");
+		if (loginUser == null) {
+			return "redirect:/toLogin";
+		}
 		Boolean qaq = true;
 		List<ShoppingCartBean> list = scService.searchCart(loginUser.getMb_ID());
 		for (ShoppingCartBean shoppingCartBean : list) {
@@ -208,6 +203,9 @@ public class ShoppingCartController {
 	@PostMapping("/dctyBuy")
 	public String cartDetail(Model model, @RequestParam(value = "bks_ID", required = false) Integer bks_ID,
 			@RequestParam(value = "cart_Num", required = false) Integer cart_Num) {
+		if (loginUser == null) {
+			return "redirect:/toLogin";
+		}
 //		System.out.println("----------------------------------------------");
 //		System.out.println(cart_Num);
 		// 先搜尋購物車裡的內容
@@ -268,11 +266,11 @@ public class ShoppingCartController {
 				map.put("buynum", cartNum);
 			}
 		}
-		System.out.println("++++++++++++++++++++++++++++++++++++++++");
-		System.out.println(cartNum);
-		System.out.println(bksID);
-		System.out.println(cartID);
-		System.out.println("----------------------------------------");
+//		System.out.println("++++++++++++++++++++++++++++++++++++++++");
+//		System.out.println(cartNum);
+//		System.out.println(bksID);
+//		System.out.println(cartID);
+//		System.out.println("----------------------------------------");
 		return map;
 	}
 

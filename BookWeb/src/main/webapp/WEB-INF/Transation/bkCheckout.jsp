@@ -49,7 +49,7 @@
 
 	<!-- body -->
 	<div class="container media">
-<%-- ${ obj} --%>
+${ obj}
 		<h1>
 			<BR> 親愛的會員  您好： <BR> <FONT
 				COLOR='RED'>二手書圖</FONT><BR> 感謝您的訂購<BR> 期待您再度光臨
