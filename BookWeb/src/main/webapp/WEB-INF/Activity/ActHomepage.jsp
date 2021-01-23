@@ -108,55 +108,39 @@ td {
 
 
 				<main>
-				<!--? Hero Area Start-->
-				<div class="slider-area hero-bg1 hero-overly">
-					<div
-						class="single-slider hero-overly  slider-height1 d-flex align-items-center">
-						<div class="container">
-							<div class="row justify-content-center">
-								<div class="col-xl-10 col-lg-10">
-									<!-- Hero Caption -->
-									<div class="hero__caption pt-100">
-										<h1>活動探索</h1>
-										<!--                                 <p>Let's uncover the best places to eat, drink, and shop nearest to you.</p> -->
-									</div>
-									<!--Hero form -->
-									<form action="#" class="search-box mb-100">
-										<div class="input-form form-inline">
-											<input type="text" id="enter1" placeholder="What are you finding?">
-										</div>
-										<div class="select-form form-inline">
-											<div class="select-itms form-inline">
-												<select name="select" id="select1">
-													<option value="">In where?</option>
-													<option value="">Catagories One</option>
-													<option value="">Catagories Two</option>
-													<option value="">Catagories Three</option>
-													<option value="">Catagories Four</option>
-												</select>
-											</div>
-										</div>
-										<div class="search-form">
-											<button class="btn btn-outline-info" id="search">
-												<a href="#" ><i class="ti-search"></i> Search</a>
-											</button>
-										</div>
-									</form>
-									<!-- hero category1 img -->
-									<div class="category-img text-center">
-										<a href="listing.html"> <img
-											src="assets/img/gallery/hero_category1.png" alt=""></a> <a
-											href="listing.html"> <img
-											src="assets/img/gallery/hero_category2.png" alt=""></a> <a
-											href="listing.html"> <img
-											src="assets/img/gallery/hero_category3.png" alt=""></a>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<!--Hero Area End-->
+				
+				<nav class="navbar navbar-expand-lg navbar-light bg-light">
+				  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+				    <span class="navbar-toggler-icon"></span>
+				  </button>
+				  <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+				    <form action="showCreateForm" id="test">
+					<button type="button" class="btn btn-outline-info" id="create">新增活動</button>
+				    </form>	
+				    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+				      <li class="nav-item active">
+				        <a href="<c:url value='/showJoins'/>"><button class="btn btn-outline-info">查看報名紀錄</button></a>
+				      </li>
+				      <li class="nav-item">
+				        <a href="<c:url value='/showActbyID'/>"><button class="btn btn-outline-info">查看會員報名紀錄</button></a>
+				      </li>
+				    </ul>	    			
+				    
+		
+				      <input class="form-control mr-sm-2" id="enter1" type="search" placeholder="Search" aria-label="Search">
+				      <button class="btn btn-outline-success my-2 my-sm-0" type="button">Search</button>
+				  </div>
+				</nav>
+				
+				<br>
+
+
+
+    
+	    
+
+
+
 
 
 				<hr>
@@ -165,7 +149,7 @@ td {
 						<div class="container" style="text-align: center">
 							<h1 >活動清單</h1>
 							<div class="line-it-button" data-lang="zh_Hant" data-type="share-a" data-ver="3" data-url="http://localhost:8080/BookWeb/toLogin" data-color="default" data-size="large" data-count="true" style="display: none;"></div>
- <script src="https://www.line-website.com/social-plugins/js/thirdparty/loader.min.js" async="async" defer="defer"></script>
+ 							<script src="https://www.line-website.com/social-plugins/js/thirdparty/loader.min.js" async="async" defer="defer"></script>
 						</div>
 					</div>
 				</section>
@@ -184,7 +168,7 @@ td {
   										<div class="modal-dialog modal-dialog-centered" role="document">
    										 <div class="modal-content">
     									  <div class="modal-header">
-<!--     									  //標頭 -->
+<!--     									  //彈跳視窗標頭 -->
       										  <h5 class="modal-title" id="#exampleModalCenter${act.act_Name}">${act.act_Name}</h5>
 												<div class="line-it-button" data-lang="zh_Hant" data-type="share-a" data-ver="3" data-url="http://localhost:8080/BookWeb/toLogin" data-color="default" data-size="large" data-count="true" style="display: none;"></div>
  													<script src="https://www.line-website.com/social-plugins/js/thirdparty/loader.min.js" async="async" defer="defer"></script>
@@ -194,14 +178,16 @@ td {
      														 </div>
 <!--      									//彈跳視窗內容 -->
      										 <div class="modal-body">
-     										 <p>${act.act_Theme}</p>
-										     <p>${act.act_Date}</p>										     
-										     <p>${act.act_Loc}</p>     
-										     <p>${act.act_Intro}</p>
-										     <span>${act.act_Differentpax}</span><span>/</span><span>${act.act_Pax}</span>			
+     										 <p><input type ="image" src="${act.act_Image}"  style="width: 300px; height: 380px; align:center"></p>
+     										 <p>${act.act_Tag}</p>
+     										 <p>活動主題:${act.act_Theme}</p>
+										     <p><img src=${pageContext.request.contextPath}/image/date.png style="width:22px;height:22px">${act.act_Date}</p>
+											 <p><img src=${pageContext.request.contextPath}/image/time.png style="width:22px;height:22px">${act.act_Time}</p>										     									     
+										     <p><button class="mapbutton" style="background-color:white" id="myModal"  value="${act.act_Loc}" data-toggle="modal"  title="Google地圖" data-target="#myModal1"><img src=${pageContext.request.contextPath}/image/map1.png style="width:25px;height:25px" title="Google地圖">${act.act_Loc}</button></p>     
+										     <p>活動簡介:<br>${act.act_Intro}</p>
+										     <p>活動名額:${act.act_Differentpax}/${act.act_Pax}</p>		
 										     <hr>
       										 </div>
-<!--       										//頁尾 -->
      									 <div class="modal-footer">
         									<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         									<input type="hidden" id="check" value="${check}">
@@ -211,12 +197,15 @@ td {
  											 </div>
 											</div>				
 										   </div>
+<!--       										//頁尾 -->
+
+<!-- 									大視窗的內容 -->
 									<div class="caption">
 										<p>${act.act_Theme}</p>
-										<p>${act.act_Date}</p>
+										<p><img src=${pageContext.request.contextPath}/image/date.png style="width:22px;height:22px">${act.act_Date}</p>
 										<p></p>
-										<p><img src=${pageContext.request.contextPath}/image/iconfinder_clock_1814097.png style="width:22px;height:22px">${act.act_Time}</p>
-										<p><button class="mapbutton" style="background-color:white" id="myModal"  value="${act.act_Loc}" data-toggle="modal"  title="Google地圖" data-target="#myModal1"><img src=${pageContext.request.contextPath}/image/iconfinder_location_1814106.png style="width:25px;height:25px" title="Google地圖">${act.act_Loc}</button></p>
+										<p><img src=${pageContext.request.contextPath}/image/time.png style="width:22px;height:22px">${act.act_Time}</p>
+										<p><button class="mapbutton" style="background-color:white" id="myModal"  value="${act.act_Loc}" data-toggle="modal"  title="Google地圖" data-target="#myModal1"><img src=${pageContext.request.contextPath}/image/map1.png style="width:25px;height:25px" title="Google地圖">${act.act_Loc}</button></p>
 										<hr>
 										<p>
 										
@@ -257,16 +246,9 @@ td {
 				</div>
 		</div>
 
-		<form action="showCreateForm" id="test">
-		<button type="button" class="btn btn-outline-info" id="create">新增活動</button>
-	    </form>
-	    
-<%-- 	    <form action="showJoins" id="test1"> --%>
-<!-- 		<button type="button" class="btn btn-outline-info" id="showjoin">查看報名紀錄</button> -->
-<%-- 	    </form> --%>
-	    
-	    <a href="<c:url value='/showJoins'/>"><button class="btn btn-outline-info">查看報名紀錄</button></a>
-	    <a href="<c:url value='/showActbyID'/>"><button class="btn btn-outline-info">查看會員報名紀錄</button></a>
+
+
+
 	    
 	</div>
 
