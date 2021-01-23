@@ -118,46 +118,110 @@ legend {
 	<!-- header -->
 	<div class="container media" >
 	
-	<div id="city" >
+<!-- 	<div id="city" > -->
 	
-	<div class="dropdown">	
-		<button class="btn btn-outline-secondary dropbtn" >會員中心</button>
-				<div class="dropdown-content">
-				<button  id="admin1" name="admin" class="btn btn-outline-secondary">會員資訊</button>				
-				<button  id="inf" name="mb_inf" class="btn btn-outline-secondary">會員資訊</button>				
-				<button  id="third" name="third" class="btn btn-outline-secondary">會員資訊</button>				
-				<button  id="Modify" name="Modify" class="btn btn-outline-secondary">會員修改</button>				
-				<button  id="pwdModify" name="pwdModify" class="btn btn-outline-secondary">密碼修改</button>
-				</div>
-				</div>
-				<form name=a3 class=a3 action="<c:url value='/collectlist' />" method="get">
-				<div>
-				<button type="submit" name="list" id="bookEdit" class="btn btn-outline-secondary">收藏清單</button>
-				</div>
-				</form>
-				<form name=a3 class=a3 action="<c:url value='/myStore' />" method="get">
-				<div>
-				<button type="submit" name="sell" id="sellEdit" class="btn btn-outline-secondary">我的賣場</button>
-				</div>
-				</form>	
-				<form name=a3 class=a3 action="<c:url value='/showJoinbyID' />" method="get">
-				<div>
-				<button type="submit" name="getjoinrecords" id="actEdit" class="btn btn-outline-secondary">報名紀錄</button>
-				</div>
-				</form>
-				<form name=a3 class=a3 action="<c:url value='/showActbyID' />" method="get">
-				<div>
-				<button type="submit" name="getactrecords" class="btn btn-outline-secondary">活動紀錄</button>
-				</div>
-				</form>
-				<div>
-				<button type="button" id="editBookReport" name="getjoinrecords" class="btn btn-outline-secondary">讀書心得</button>
-				</div>
-				<div>
-				<button type="button" id="editDiscussion" name="getjoinrecords" class="btn btn-outline-secondary">討論管理</button>
-				</div>
-	</div>
+<!-- 	<div class="dropdown">	 -->
+<!-- 		<button class="btn btn-outline-secondary dropbtn" >會員中心</button> -->
+<!-- 				<div class="dropdown-content"> -->
+<!-- 				<button  id="admin1" name="admin" class="btn btn-outline-secondary">會員資訊</button>				 -->
+<!-- 				<button  id="inf" name="mb_inf" class="btn btn-outline-secondary">會員資訊</button>				 -->
+<!-- 				<button  id="third" name="third" class="btn btn-outline-secondary">會員資訊</button>				 -->
+<!-- 				<button  id="Modify" name="Modify" class="btn btn-outline-secondary">會員修改</button>				 -->
+<!-- 				<button  id="pwdModify" name="pwdModify" class="btn btn-outline-secondary">密碼修改</button> -->
+<!-- 				</div> -->
+<!-- 				</div> -->
+<%-- 				<form name=a3 class=a3 action="<c:url value='/collectlist' />" method="get"> --%>
+<!-- 				<div> -->
+<!-- 				<button type="submit" name="list" id="bookEdit" class="btn btn-outline-secondary">收藏清單</button> -->
+<!-- 				</div> -->
+<!-- 				</form> -->
+<%-- 				<form name=a3 class=a3 action="<c:url value='/myStore' />" method="get"> --%>
+<!-- 				<div> -->
+<!-- 				<button type="submit" name="sell" id="sellEdit" class="btn btn-outline-secondary">我的賣場</button> -->
+<!-- 				</div> -->
+<!-- 				</form>	 -->
+<%-- 				<form name=a3 class=a3 action="<c:url value='/showJoinbyID' />" method="get"> --%>
+<!-- 				<div> -->
+<!-- 				<button type="submit" name="getjoinrecords" id="joinEdit" class="btn btn-outline-secondary">報名紀錄</button> -->
+<!-- 				</div> -->
+<!-- 				</form> -->
+<%-- 				<form name=a3 class=a3 action="<c:url value='/showActbyID' />" method="get"> --%>
+<!-- 				<div> -->
+<!-- 				<button type="submit" name="getactrecords" id="actEdit" class="btn btn-outline-secondary">活動紀錄</button> -->
+<!-- 				</div> -->
+<!-- 				</form> -->
+<!-- 				<div> -->
+<!-- 				<button type="button" id="editBookReport" name="getjoinrecords" class="btn btn-outline-secondary">讀書心得</button> -->
+<!-- 				</div> -->
+<!-- 				<div> -->
+<!-- 				<button type="button" id="editDiscussion" name="getjoinrecords" class="btn btn-outline-secondary">討論管理</button> -->
+<!-- 				</div> -->
+<!-- 	</div> -->
 	
+
+<!-- sidebar area -->
+			<div class="col-2 text-center container">
+
+				<!-- ====================================================sidebar==================================================== -->
+				<h2>會員中心</h2>
+				<br>
+				<div class="list-group" id="list-tab" role="tablist">
+					<a class="list-group-item list-group-item-action active"
+						id="admin1" name="admin" data-toggle="list" href="#list-novel"
+						role="tab">會員資訊</a> 
+						
+					<a class="list-group-item list-group-item-action"
+						id="inf" name="mb_inf" data-toggle="list" href="#list-member"
+						role="tab">會員資訊</a> 
+						
+					<a class="list-group-item list-group-item-action"
+						id="third" name="third" data-toggle="list" href="#list-manager"
+						role="tab">會員資訊</a>
+						
+					<a class="list-group-item list-group-item-action"
+						id="Modify" name="Modify" data-toggle="list" href="#list-manager"
+						role="tab">會員修改</a>
+						
+					<a class="list-group-item list-group-item-action"
+						id="pwdModify" name="pwdModify" data-toggle="list" href="#list-manager"
+						role="tab">密碼修改</a>
+						
+					<a class="list-group-item list-group-item-action"
+						id="Modify" name="Modify" data-toggle="list" href="#list-manager"
+						role="tab">會員修改</a>
+						
+					<form name=a3 class=a3 action="<c:url value='/collectlist' />" method="get">
+					<div>
+					<button type="submit" name="list" id="bookEdit" >收藏清單</button>
+					</div>
+					</form>
+					<form name=a3 class=a3 action="<c:url value='/myStore' />" method="get">
+					<div>
+					<button type="submit" name="sell" id="sellEdit" class="btn btn-outline-secondary">我的賣場</button>
+					</div>
+					</form>	
+					<form name=a3 class=a3 action="<c:url value='/showJoinbyID' />" method="get">
+					<div>
+					<button type="submit" name="getjoinrecords" id="joinEdit" class="btn btn-outline-secondary">報名紀錄</button>
+					</div>
+					</form>
+					<form name=a3 class=a3 action="<c:url value='/showActbyID' />" method="get">
+					<div>
+					<button type="submit" name="getactrecords" id="actEdit" class="btn btn-outline-secondary">活動紀錄</button>
+					</div>
+					</form>
+					<div>
+					<button type="button" id="editBookReport" name="getjoinrecords" class="btn btn-outline-secondary">讀書心得</button>
+					</div>
+					<div>
+					<button type="button" id="editDiscussion" name="getjoinrecords" class="btn btn-outline-secondary">討論管理</button>
+					</div>
+							
+					</div>
+					</div>
+
+
+
 
 
 <!-- 新的會員CITY -->
@@ -252,7 +316,7 @@ legend {
 	
 	
 	
-	<div id="change123" style="width:1500px;margin-left:10px ">
+	<div  id="change123" style="width:1500px;margin-left:10px ">
 									<fieldset id="mb_inf">
 									<legend>會員資料</legend>
 									<form>
@@ -355,6 +419,8 @@ legend {
 			$('#bookEdit').removeAttr("type").attr("type", "button");
 			$('#sellEdit').html('賣場管理')
 			$('#sellEdit').removeAttr("type").attr("type", "button");
+			$('#joinEdit').html('報名管理')
+			$('#joinEdit').removeAttr("type").attr("type", "button");
 			$('#actEdit').html('活動管理')
 			$('#actEdit').removeAttr("type").attr("type", "button");
 			$('#editBookReport').html('心得管理')
