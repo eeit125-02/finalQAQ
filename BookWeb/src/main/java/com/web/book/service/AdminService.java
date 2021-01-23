@@ -5,18 +5,6 @@ import java.util.Map;
 
 public interface AdminService {
 	
-	//  刪除指定心得
-	Boolean deleteBookReport(Integer brId);
-	
-	// 刪除指定書書籍
-	Boolean deleteBook(Integer bkID);
-	
-	// 獲得近半年心得撰寫報表
-	Map<String, Object> getMonthReportWrite();
-	
-	// 獲得近半年心得瀏覽報表
-	Map<String,Object> getMonthReportView();
-	
 	// 取得所有心得數量
 	List<Map<String, Object>> getAllBookReport();
 	
@@ -34,4 +22,18 @@ public interface AdminService {
 	
 	// 獲取單一書本資訊
 	Map<String, Object> getBookInfo(Integer bkId);
+	
+	// 獲得近半年心得撰寫報表
+	Map<String, Object> getMonthReportWrite();
+	
+	// 獲得近半年心得瀏覽報表
+	Map<String,Object> getMonthReportView();
+	
+	// 刪除指定心得
+	Boolean deleteBookReport(Integer brId);
+	
+	// 刪除指定書書籍
+	Boolean deleteBook(Integer bkID);
+	
+	
 }

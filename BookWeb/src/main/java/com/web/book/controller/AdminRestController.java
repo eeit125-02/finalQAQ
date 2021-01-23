@@ -25,6 +25,33 @@ public class AdminRestController {
 		return adminservice.getAllBookReport();
 	}
 	
+	// 回傳所有書籍資訊
+	@PostMapping("/getAllBook")
+	public List<Map<String, Object>> getAllBook(){
+		
+		return adminservice.getAllBook();
+	}
+	
+	// 回傳所有活動
+	@PostMapping("/getAllAct")
+	public List<Map<String, Object>> getAllAct(){
+		
+		return adminservice.getAllAct();
+	}
+	
+	// 回傳所有討論
+	@PostMapping("/getAllPost")
+	public List<Map<String, Object>> getAllPost(){
+		
+		return adminservice.getAllPost();
+	}
+	
+	@PostMapping("/getAllStrore")
+	public List<Map<String, Object>> getAllStrore(){
+		
+		return adminservice.getAllStrore();
+	}
+	
 	// 刪除心得並回傳是否新增成功
 	@PostMapping("/deleteBookReport")
 	public Boolean deleteBookReport(
@@ -47,14 +74,7 @@ public class AdminRestController {
 		return adminservice.getMonthReportView();
 	}
 	
-	// 回傳所有心得資訊
-	@PostMapping("/getAllBook")
-	public List<Map<String, Object>> getAllBook(){
-		
-		return adminservice.getAllBook();
-	}
-	
-	// 回傳所有心得資訊
+	// 回傳單一圖書資訊
 	@PostMapping("/getBook")
 	public Map<String, Object> getAllBook( @RequestParam(value = "bkId" , required = true) Integer bkId){
 		

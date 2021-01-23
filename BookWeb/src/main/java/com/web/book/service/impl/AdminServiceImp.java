@@ -180,7 +180,7 @@ public class AdminServiceImp implements AdminService {
 			
 			Map<String, Object> data = new HashMap<>();
 			data.put("actName",act.getact_Name());
-			data.put("actTime", act.getact_Date() + " " + act.getact_Time());
+			data.put("actTime", String.valueOf(act.getact_Date()));
 			data.put("actId", act.getact_ID());
 			
 			actTable.add(data);
@@ -259,5 +259,5 @@ public class AdminServiceImp implements AdminService {
 		
 		return adminDao.deleteBook(bkID);
 	}
-	
+
 }

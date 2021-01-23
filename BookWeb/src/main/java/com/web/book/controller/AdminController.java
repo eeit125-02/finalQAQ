@@ -22,4 +22,26 @@ public class AdminController {
 		return "Admin/adminBook";
 	}
 	
+	// 導向商店管理
+	@GetMapping("/Stroe")
+	public String stroeAdmin() {
+		
+		return "Admin/adminStore";
+	}
+	
+	// 導向活動管理
+	@GetMapping("/Act")
+	public String actAdmin() {
+		
+		return "Admin/adminAct";
+	}
+	
+	// 導向討論區管理
+	@GetMapping("/Discussion")
+	public String discussionAdmin() {
+		
+		return "Admin/adminDiscussion";
+	}
+	
+	
 }
