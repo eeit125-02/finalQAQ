@@ -23,9 +23,11 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import com.web.book.model.BookBean;
 import com.web.book.model.BookStoreBean;
 import com.web.book.model.MemberBean;
+import com.web.book.model.ShoppingCartBean;
 import com.web.book.service.BookStoreService;
 import com.web.book.service.GlobalService;
 import com.web.book.service.SearchService;
+import com.web.book.service.ShoppingCartService;
 
 @Controller
 @SessionAttributes(value = { "loginUser" })
@@ -36,6 +38,10 @@ public class StoreController {
 
 	@Autowired
 	BookStoreService bookStoreService;
+	
+	@Autowired
+	ShoppingCartService cartService;
+	
 	@Autowired
 	SearchService searchService;
 
@@ -44,6 +50,16 @@ public class StoreController {
 	@ModelAttribute
 	public void setLoginUser(Model model, SessionStatus status) {
 		loginUser = (MemberBean) model.getAttribute("loginUser");
+	}
+	
+	@GetMapping(value = "testPage")
+	public String testPage(Model model) {
+		cartService.deleteAllCart(loginUser.getMb_ID());
+//管理者測試頁面
+//		BookStoreBean store = bookStoreService.getOneBookStore(13061);
+//		model.addAttribute("qaq", store);
+//管理者測試頁面
+		return "Transation/shoppingCart";
 	}
 
 	// 最終呈現首頁, 管理員a123456, ID=14

@@ -136,6 +136,7 @@ form {
 	<button id='admininsert'>管理員</button>
 	<button id='JUN'>JUN</button>
 	<button id='dragon'>阿瓏</button>
+	<input type="button" id="line" value="asb">
 		<input type="hidden" id="file" name="file" value="https://firebasestorage.googleapis.com/v0/b/bookweb-50d11.appspot.com/o/member%2Fa123456?alt=media"/>
 		</form>	
 	</div>

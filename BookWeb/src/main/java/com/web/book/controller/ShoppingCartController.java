@@ -1,6 +1,7 @@
 package com.web.book.controller;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
+import com.web.book.model.BookOrderBean;
 import com.web.book.model.BookStoreBean;
 import com.web.book.model.MemberBean;
 import com.web.book.model.ShoppingCartBean;
@@ -25,9 +27,7 @@ import com.web.book.service.BookStoreService;
 import com.web.book.service.ShoppingCartService;
 
 import ecpay.payment.integration.AllInOne;
-import ecpay.payment.integration.domain.AioCheckOutALL;
-import ecpay.payment.integration.domain.AioCheckOutCVS;
-import ecpay.payment.integration.domain.InvoiceObj;
+import ecpay.payment.integration.domain.AioCheckOutOneTime;
 
 @Controller
 @SessionAttributes(value = { "loginUser", "listCart" })
@@ -40,51 +40,96 @@ public class ShoppingCartController {
 	BookStoreService bsService;
 
 	MemberBean loginUser;
-	public static AllInOne all;
 
 	@ModelAttribute
 	public void setLoginUser(Model model, SessionStatus status) {
 		loginUser = (MemberBean) model.getAttribute("loginUser");
 
 	}
-
-	private static void initial() {
-		all = new AllInOne("");
+	
+	public static String genAioCheckOutOneTime(Integer bo_ID, String date, Integer total,String itemName, String url){
+		AllInOne all = new AllInOne("");
+		AioCheckOutOneTime obj = new AioCheckOutOneTime();
+		obj.setMerchantTradeNo("bookTransation" + bo_ID);
+		obj.setMerchantTradeDate(date);
+		obj.setTotalAmount(total.toString());
+		obj.setTradeDesc("test Description");
+		obj.setItemName(itemName);
+		obj.setReturnURL(url);
+		obj.setClientBackURL(url);
+		obj.setNeedExtraPaidInfo("N");
+		obj.setRedeem("N");
+		String form = all.aioCheckOut(obj, null);
+		return form;
 	}
 	
-	public static String genAioCheckOutCVS(){
-		AioCheckOutCVS obj = new AioCheckOutCVS();
-		InvoiceObj invoice = new InvoiceObj();
-		UUID uid = UUID.randomUUID();
-		obj.setMerchantTradeNo(uid.toString().replaceAll("-", "").substring(0, 20));
-		obj.setMerchantTradeDate("2017/01/01 08:05:23");
-		obj.setTotalAmount("50");
+	// 套用綠界
+	@PostMapping("checkout")
+	@ResponseBody
+	public String checkoutTest(Model model, 
+			@RequestParam String bo_Name, 
+			@RequestParam String bo_Add,
+			@RequestParam Integer bo_Cel
+			) {
+		System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++");
+		System.out.println("bo_Name= " + bo_Name);
+		System.out.println("bo_Cel= " + bo_Cel);
+		System.out.println("bo_Add= " + bo_Add);
+		System.out.println("---------------------------------------------------");
+		if (loginUser.equals(null)) {
+			return "/Member/login";
+		}
+		int total = 0;
+		int count = 0;
+		String success = "已結帳";
+		String fail = "未結帳";
+		Date date = new Date();
+		String url = "http://localhost:8080/BookWeb/Transation/bkCheckout";
+		StringBuilder product = new StringBuilder();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		List<ShoppingCartBean> list = scService.searchCart(loginUser.getMb_ID());
+		for (ShoppingCartBean cart : list) {
+			total += cart.getCart_Num()*cart.getCart_Price();
+		}
+		scService.insertOrder(date, total, bo_Name, bo_Add, bo_Cel, loginUser.getMb_ID(), success);
+		BookOrderBean oreder = scService.searchOrder(date, loginUser.getMb_ID());
+		for (ShoppingCartBean cart : list) {
+			scService.insertItem(oreder.getBo_ID(), cart.getMemberSel().getMb_ID(), cart.getBook().getBk_ID(), cart.getCart_Num(), cart.getCart_Price());
+			if (count == 0) {
+				product.append(cart.getBook().getBk_Name());	
+				count++;
+			} else {
+				product.append("#" + cart.getBook().getBk_Name());					
+			}
+		}
+//		model.addAttribute("order", oreder);
+//		model.addAttribute("form", genAioCheckOutOneTime(oreder.getBo_ID(), sdf.format(date), total, product.toString(), url));
+//		String form = genAioCheckOutOneTime(oreder.getBo_ID(), sdf.format(date), total, product.toString(), url);
+//		return form;
+		System.out.println("+++++++++++++++++++++++++++++");
+		System.out.println(product.toString());
+		String aaa = product.toString();
+		AllInOne all = new AllInOne("");
+		AioCheckOutOneTime obj = new AioCheckOutOneTime();
+		obj.setMerchantTradeNo("bookTransation" + oreder.getBo_ID());
+		obj.setMerchantTradeDate(sdf.format(date));
+		obj.setTotalAmount(String.valueOf(total));
 		obj.setTradeDesc("test Description");
-		obj.setItemName("TestItem");
-		obj.setReturnURL("http://211.23.128.214:5000");
+		obj.setItemName("book1#book2");
+		obj.setReturnURL("http://localhost:8080/BookWeb/qaqTest");
+		obj.setClientBackURL("http://localhost:8080/BookWeb/qaqTest");
 		obj.setNeedExtraPaidInfo("N");
-		obj.setStoreExpireDate("3");
-		obj.setInvoiceMark("Y");
-		invoice.setRelateNumber("test202017test");
-		invoice.setCustomerID("123456");
-		invoice.setCarruerType("1");
-		invoice.setTaxType("1");
-		invoice.setCarruerNum("");
-		invoice.setDonation("0");
-		invoice.setLoveCode("X123456");
-		invoice.setPrint("0");
-		invoice.setCustomerName("Mark");
-		invoice.setCustomerAddr("台北市南港區三重路");
-		invoice.setCustomerPhone("0911429215");
-		invoice.setDelayDay("1");
-		invoice.setInvType("07");
-		invoice.setInvoiceItemName("測試");
-		invoice.setInvoiceItemCount("1");
-		invoice.setInvoiceItemWord("個");
-		invoice.setInvoiceItemPrice("50");
-		invoice.setInvoiceItemTaxType("1");
-		String form = all.aioCheckOut(obj, invoice);
+		obj.setRedeem("N");
+		String form = all.aioCheckOut(obj, null);
+		model.addAttribute("obj", form);
 		return form;
+		
+//		return "/Transation/bkCheckout";
+	}
+	
+	@GetMapping(value = "/bkCheckout")
+	public String backtomain(Model model) {
+		return "/Transation/bkCheckout";
 	}
 
 	// 點擊購物車
@@ -231,43 +276,6 @@ public class ShoppingCartController {
 		return map;
 	}
 
-	// 套用綠界
-	@PostMapping("checkout")
-	@ResponseBody
-	public String checkoutTest(Model model, @RequestParam String bko_Name, @RequestParam String bko_Add,
-			@RequestParam String bko_Cel) {
-		System.out.println(bko_Name);
-		System.out.println(bko_Add);
-		System.out.println(bko_Cel);
-		initial();
-		int qaqQty = (int) (Math.random() * (4000)) + 1000;
-		Date date = new Date();
-		SimpleDateFormat sdf = new SimpleDateFormat ("yyyy/MM/dd hh:mm:ss");
-		String now = sdf.format(date);
-//		"2017/01/01 08:05:23"
-		AioCheckOutALL obj = new AioCheckOutALL();
-		obj.setMerchantTradeNo("book" + qaqQty);
-		obj.setMerchantTradeDate(now);
-		obj.setTotalAmount("50");
-		obj.setTradeDesc("test Description");
-		obj.setItemName("TestItem");
-		obj.setReturnURL("http://localhost:8080/BookWeb/bkCheckout");
-		obj.setClientBackURL("http://localhost:8080/BookWeb/bkCheckout");
-		obj.setNeedExtraPaidInfo("N");
-		String form = all.aioCheckOut(obj, null);
-		return form;
-	}
 
-	@PostMapping("bkCheckout")
-	public String bkCheckout() {
-		return "/Transation/bkCheckout";
-	}
-
-	// 測試用
-//	@PostMapping("checkout")
-//	public String checkoutTest(Model model, @RequestParam String bko_Name, @RequestParam String bko_Add,
-//			@RequestParam String bko_Cel) {
-//		return "/Transation/bkCheckout";
-//	}
 
 }

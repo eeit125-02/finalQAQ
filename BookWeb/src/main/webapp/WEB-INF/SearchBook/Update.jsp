@@ -125,7 +125,7 @@
 
 						<div class="form-group col-md-5" style="margin:auto">
 							<form:label path="bk_Pic">封面圖片</form:label>
-							<input class="form-control" name="file" type="file" id="imgInp" required="required"/>
+							<input class="form-control" name="file" type="file" id="imgInp"/>
 <%-- 							<form:input path="" class="form-control" type="file" /> --%>
 <%-- 							<form:hidden path="bk_Pic" /> --%>
 						</div>

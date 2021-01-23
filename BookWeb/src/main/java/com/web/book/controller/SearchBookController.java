@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -59,7 +60,15 @@ public class SearchBookController {
 	
 	@Autowired
 	SearchService searchService;
+	
+	MemberBean loginUser;
 
+	// 抓取當前登入的會員資訊
+	@ModelAttribute
+	public void setLoginUser(Model model, SessionStatus status) {
+		loginUser = (MemberBean) model.getAttribute("loginUser");
+		
+	}
 	
 	// 關鍵字+類型搜尋結果(Page)
 	@GetMapping("/searchtypebypage")
@@ -341,7 +350,9 @@ public class SearchBookController {
 		
 	// 在查詢結果頁判斷收藏
 	@GetMapping("/searchbook/checkcollect/{bk_ID}")
-	public @ResponseBody boolean gotoCheckCollect(@PathVariable("bk_ID") Integer bk_id, @ModelAttribute("loginUser") MemberBean loginUser) {
+	public @ResponseBody boolean gotoCheckCollect(@PathVariable("bk_ID") Integer bk_id
+//			, @ModelAttribute("loginUser") MemberBean loginUser
+			) {
 		boolean result2=searchService.checkbc(bk_id, loginUser.getMb_ID());
 		return result2;
 	}
@@ -357,13 +368,15 @@ public class SearchBookController {
 	// 取得單一本書的詳細資訊(含類型)
 	@GetMapping("/bookpage")
 	public String gotoPage(Model model, @RequestParam(value = "page") Integer bk_id
-			, @ModelAttribute("loginUser") MemberBean loginUser) {
+//			, @ModelAttribute("loginUser") MemberBean loginUser
+			) {
 		BookBean result = searchService.getBook(bk_id);
 		model.addAttribute("pageresult", result);
 		List<BookTypeBean> result2=searchService.getBookType(bk_id);
 		model.addAttribute("pageresulttype", result2);		
 		searchService.addclick(bk_id);
-		boolean a=gotoCheckCollect(bk_id, loginUser);
+//		boolean a=gotoCheckCollect(bk_id, loginUser);
+		boolean a=gotoCheckCollect(bk_id);
 		if(a==true) {
 			model.addAttribute("havebc", a);					
 		}			
@@ -440,10 +453,6 @@ public class SearchBookController {
 			@RequestParam(value = "c", required = false) String tag2 ,
 			@RequestParam(value = "d", required = false) String tag3 ,
 			@RequestParam(value = "b", required = false) Integer bcId) {			
-		System.out.println("************************"+tag1);
-		System.out.println("************************"+tag2);
-		System.out.println("************************"+tag3);
-		System.out.println("************************"+bcId);
 		BookCollectBean data=searchService.setbctag(bcId, tag1, tag2, tag3);
 		return data;
 	}
@@ -455,10 +464,6 @@ public class SearchBookController {
 			@RequestParam(value = "c", required = false) String tag2 ,
 			@RequestParam(value = "d", required = false) String tag3 ,
 			@RequestParam(value = "b", required = false) Integer bcId) {			
-		System.out.println("========================"+tag1);
-		System.out.println("************************"+tag2);
-		System.out.println("************************"+tag3);
-		System.out.println("************************"+bcId);
 		BookCollectBean data=searchService.deletebctag(bcId, tag1, tag2, tag3);
 		return data;
 	}
@@ -488,18 +493,19 @@ public class SearchBookController {
 	@GetMapping("/addnewbook")
 	public String gotoAddnewbook(Model model) {
 		BookBean result = new BookBean();
+		List<SearchTypeBean> maintype1= new ArrayList<SearchTypeBean>();
 		List<SearchTypeBean> alltype= searchService.getAllBookType();
-		maintype.add(alltype.get(0));
-		maintype.add(alltype.get(9));
-		maintype.add(alltype.get(17));
-		maintype.add(alltype.get(27));
-		maintype.add(alltype.get(36));
-		maintype.add(alltype.get(46));
-		maintype.add(alltype.get(56));
-		maintype.add(alltype.get(62));
-		maintype.add(alltype.get(69));
+		maintype1.add(alltype.get(0));
+		maintype1.add(alltype.get(9));
+		maintype1.add(alltype.get(17));
+		maintype1.add(alltype.get(27));
+		maintype1.add(alltype.get(36));
+		maintype1.add(alltype.get(46));
+		maintype1.add(alltype.get(56));
+		maintype1.add(alltype.get(62));
+		maintype1.add(alltype.get(69));
 
-		model.addAttribute("maintype", maintype);
+		model.addAttribute("maintype", maintype1);
 		model.addAttribute("newonebook", result);
 		return "SearchBook/Addnewbook";
 	}
@@ -617,21 +623,23 @@ public class SearchBookController {
 	@GetMapping("/updatebook")
 	public String gotoUpdate(Model model, 
 			@RequestParam(value = "update",required=false) Integer bk_id) {
+		System.out.print(bk_id);
 		BookBean result = searchService.getBook(bk_id);
+		List<SearchTypeBean> maintype2= new ArrayList<SearchTypeBean>();
 		List<SearchTypeBean> alltype= searchService.getAllBookType();
 		List<BookTypeBean> result2=searchService.getBookType(bk_id);
 		model.addAttribute("pageresult", result);
 		model.addAttribute("pageresulttype", result2);
-		maintype.add(alltype.get(0));
-		maintype.add(alltype.get(9));
-		maintype.add(alltype.get(17));
-		maintype.add(alltype.get(27));
-		maintype.add(alltype.get(36));
-		maintype.add(alltype.get(46));
-		maintype.add(alltype.get(56));
-		maintype.add(alltype.get(62));
-		maintype.add(alltype.get(69));
-		model.addAttribute("maintype", maintype);
+		maintype2.add(alltype.get(0));
+		maintype2.add(alltype.get(9));
+		maintype2.add(alltype.get(17));
+		maintype2.add(alltype.get(27));
+		maintype2.add(alltype.get(36));
+		maintype2.add(alltype.get(46));
+		maintype2.add(alltype.get(56));
+		maintype2.add(alltype.get(62));
+		maintype2.add(alltype.get(69));
+		model.addAttribute("maintype", maintype2);
 		return "SearchBook/Update";
 	}
 	
@@ -681,26 +689,7 @@ public class SearchBookController {
 		List<BookBean> allbookfive = allbook.subList(0, 5);
 		model.addAttribute("allbookfive", allbookfive);
 		ClassLoader classloader = Thread.currentThread().getContextClassLoader();
-		System.out.println("-----------------------------------"+classloader.getResource("")+"++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
 		return "SearchBook/Search";
 	}
-	
-	
-//	@GetMapping("/showPDF")
-//	public ResponseEntity<byte[]> pdfDownload(
-//	        HttpServletRequest httpServletRequest
-//	) throws IOException
-//	{
-//	    String path = "C:\\Users";
-//	    File file = new File(path);
-//	    HttpHeaders httpHeaders = new HttpHeaders();
-//	    String fileName = "收藏清單";
-//	    httpHeaders.setContentDispositionFormData("attachment",java.net.URLEncoder.encode(fileName,"UTF-8"));
-//	    httpHeaders.setContentType(MediaType.parseMediaType("application/pdf"));
-//	    return new ResponseEntity<byte[]>(FileUtils.readFileToByteArray(file),
-//	            httpHeaders,
-//	            HttpStatus.CREATED);
-//	}
-
 	
 }

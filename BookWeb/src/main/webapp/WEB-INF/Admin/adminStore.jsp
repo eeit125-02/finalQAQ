@@ -61,9 +61,10 @@
 	<table id="bookReport_Table" class="display">
 	    <thead>
 	        <tr>
-	            <th>會員帳號</th>
-	            <th>心得編號</th>
+	            <th>編號</th>
+	            <th>會員帳號</th>
 	            <th>標題</th>
+	            <th>價格</th>
 	            <th>撰寫日期</th>
 	            <th>操作</th>
 	        </tr>
@@ -170,15 +171,16 @@
 	function getDataTable(){
 		reportTable = $('#bookReport_Table').DataTable({
 			"ajax": {
-	            "url": "http://localhost:8080/BookWeb/Admin/getAllBookReport",
+	            "url": "http://localhost:8080/BookWeb/Admin/getAllStrore",
 	            "type": "POST",
 	            "dataSrc": ""
 	        },
 	        "columns": [
-	            { "data": "mbAccount" },
-	            { "data": "brId" },
-	            { "data": "brName" },
-	            { "data": "brTime" },
+	        	 { "data": "bsId" },
+	            { "data": "bsAccount" },
+	            { "data": "bkName" },
+	            { "data": "bsPrice" },
+	            { "data": "bsDate" },
 	            { data: "brId",
 	              render: function (data, type, row, meta) { 
 	                    return "<button type=\"button\" class=\"btn btn-outline-primary\" onclick='viewData(" + data + ")' value = \""+ data +"\">查看</button>"

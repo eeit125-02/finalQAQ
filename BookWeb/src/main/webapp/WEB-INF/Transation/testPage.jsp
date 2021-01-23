@@ -19,7 +19,9 @@
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
 	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
 	crossorigin="anonymous">
-<link rel="icon" href="${pageContext.request.contextPath}/image/logo1.ico" type="image/x-icon" />
+<link rel="icon"
+	href="${pageContext.request.contextPath}/image/logo1.ico"
+	type="image/x-icon" />
 <style>
 .bd-placeholder-img {
 	font-size: 1. 125rem;
@@ -48,24 +50,42 @@
 	<!-- header -->
 
 	<!-- body -->
-	<div class="container media">
-<%-- ${ obj} --%>
-		<h1>
-			<BR> 親愛的會員  您好： <BR> <FONT
-				COLOR='RED'>二手書圖</FONT><BR> 感謝您的訂購<BR> 期待您再度光臨
-		</h1>
-		<BR>
-
-
-
-
-
+	<div class="container">
+	
+	
+	
+	
+	
+	
+	
+<!-- 	管理者頁面試做 -->
+<!-- 		<div class="row"> -->
+<!-- 			<div class="col-lg-4"> -->
+<!-- 				<label for="url"></label> <img alt="圖勒?" width="300px" -->
+<%-- 					height="400px" src="<c:url value='${qaq.book.bk_Pic}'/>"> --%>
+<!-- 			</div> -->
+<!-- 			<div class="col-lg-8"> -->
+<!-- 				<h5>賣場編號:</h5> -->
+<%-- 				<span> ${qaq.bks_ID}</span> --%>
+<!-- 				<hr> -->
+<!-- 				<h5>賣家編號:</h5> -->
+<%-- 				<span> ${qaq.member.mb_ID}</span> --%>
+<!-- 				<hr> -->
+<!-- 				<h5>賣家名子:</h5> -->
+<%-- 				<span> ${qaq.member.mb_Name}</span> --%>
+<!-- 				<hr> -->
+<!-- 				<h5>上架時間:</h5> -->
+<%-- 				<span> ${qaq.bs_Date}</span> --%>
+<!-- 				<hr> -->
+<!-- 				<h5>書本價格:</h5> -->
+<%-- 				<span> ${qaq.bs_Price}</span> --%>
+<!-- 				<hr> -->
+<!-- 				<h5>庫存:</h5> -->
+<%-- 				<span>${qaq.bs_Num}</span> --%>
+<!-- 			</div> -->
+<!-- 		</div> -->
+<!-- 	管理者頁面試做 -->
 	</div>
-	
-	
-	
-	
-
 	<!-- body -->
 
 	<!-- footer -->
