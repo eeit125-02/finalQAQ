@@ -73,7 +73,8 @@
 					</span>
 				</div>
 				<div class=col-lg-3>
-					<button type="button" class="btn btn-outline-dark">一鍵輸入</button>
+					<button type="button" class="btn btn-outline-dark" id="yepData">有資料</button>
+					<button type="button" class="btn btn-outline-dark" id="noData">無資料</button>
 				</div>
 			</div>
 			
@@ -102,8 +103,11 @@
 	<!-- footer -->
 	<script type="text/javascript">
 	
-	$('.btn.btn-outline-dark').click(function () {
-		$('.form-control.test').val("Spring MVC 動態網站開發實務");
+	$('#noData').click(function () {
+		$('#bkName').val("Spring MVC 動態網站開發實務");
+	})
+	$('#yepData').click(function() {
+		$('#bkName').val("科技")
 	})
 	
 	function searchBookName() {

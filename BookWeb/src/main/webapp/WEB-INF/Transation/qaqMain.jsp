@@ -85,6 +85,8 @@
 				<div class="col-lg-4">
 					<button type="button" class="btn btn-outline-secondary"
 						onclick="storeCheck()">我的賣場</button>
+				<button type="button" class="btn btn-outline-secondary"
+						id="search1">一鍵輸入</button>
 				</div>
 			</div>
 
@@ -204,6 +206,9 @@
 				window.location.href = "//localhost:8080/BookWeb/toLogin";
 			}
 		}
+		$('#search1').click(function() {
+			$('.form-control').val("心靈");
+		})
 	</script>
 </body>
 </html>

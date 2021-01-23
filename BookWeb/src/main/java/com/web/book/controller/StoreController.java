@@ -144,6 +144,9 @@ public class StoreController {
 	// 前往單一賣家的賣場
 	@GetMapping("/myStore")
 	public String myStore(Model model) {
+		if (loginUser == null) {
+			return "redirect:/toLogin";
+		}
 		List<BookStoreBean> list = bookStoreService.searchMemberStore(loginUser.getMb_ID());
 		model.addAttribute("myBookList", list);
 		return "/Transation/myStore";
@@ -154,6 +157,9 @@ public class StoreController {
 	public String addOneBook(Model model, @RequestParam(value = "qaqBkID", required = false) Integer bk_ID,
 			@RequestParam(value = "qtyNew", required = false) Integer bs_Num,
 			@RequestParam(value = "priceNew", required = false) Integer bs_Price) {
+		if (loginUser.equals(null)) {
+			return "redirect:/toLogin";
+		}
 		bookStoreService.insertSearchBookName(bs_Num, bs_Price, bk_ID, loginUser.getMb_ID());
 		List<BookStoreBean> list = bookStoreService.searchMemberStore(loginUser.getMb_ID());
 		model.addAttribute("myBookList", list);
@@ -163,6 +169,9 @@ public class StoreController {
 	// 點擊我要賣東西
 	@PostMapping("addMyStore")
 	public String goToStore(Model model) {
+		if (loginUser == null) {
+			return "redirect:/toLogin";
+		}
 		return "/Transation/addMyStore";
 	}
 
@@ -225,6 +234,9 @@ public class StoreController {
 	// 新增書本 form:form
 	@GetMapping("/addMyBookA")
 	public String addMyBookA(Model model) {
+		if (loginUser == null) {
+			return "redirect:/toLogin";
+		}
 		BookBean book = new BookBean();
 		model.addAttribute("newBook", book);
 		return "/Transation/addMyBook";
@@ -234,6 +246,9 @@ public class StoreController {
 	@PostMapping("/addMyBookB")
 	public String addMyBookB(Model model, @ModelAttribute("newBook") BookBean book, @RequestParam("price") Integer qwe,
 			@RequestParam("qty") Integer asd, @RequestParam CommonsMultipartFile file) {
+		if (loginUser == null) {
+			return "redirect:/toLogin";
+		}
 		// 圖片上傳用
 		try {
 			book.setBk_Pic(GlobalService.saveImage("Shopping", file, book.getBk_Name()));
@@ -250,6 +265,9 @@ public class StoreController {
 	// 會員商店刪除自己商品
 	@PostMapping("/deletebk")
 	public String deletebk(Model model, @RequestParam(value = "bks_ID") Integer bks_ID) {
+		if (loginUser == null) {
+			return "redirect:/toLogin";
+		}
 		bookStoreService.deleteBookStore(bks_ID);
 		List<BookStoreBean> list = bookStoreService.searchMemberStore(loginUser.getMb_ID());
 		model.addAttribute("myBookList", list);
@@ -261,6 +279,9 @@ public class StoreController {
 	public String updatebk(Model model, @RequestParam(value = "updateBk", required = false) Integer bks_ID,
 			@RequestParam(value = "bsPrice", required = false) Integer bs_Price,
 			@RequestParam(value = "bsNum", required = false) Integer bs_Num) {
+		if (loginUser == null) {
+			return "redirect:/toLogin";
+		}
 		bookStoreService.updateBookStore(bks_ID, bs_Num, bs_Price);
 		List<BookStoreBean> list = bookStoreService.searchMemberStore(loginUser.getMb_ID());
 		model.addAttribute("myBookList", list);
