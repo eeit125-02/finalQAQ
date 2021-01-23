@@ -114,7 +114,7 @@ legend {
 </head>
 <body>
 <!-- header -->
-<header class=" blog-header py-3" id="bookWebheader"></header>
+<header class=" blog-header " id="bookWebheader"></header>
 	<!-- header -->
 	<div class="container media" >
 	
@@ -184,10 +184,6 @@ legend {
 					<a class="list-group-item list-group-item-action"
 						id="pwdModify" name="pwdModify" data-toggle="list" href="#list-manager"
 						role="tab">密碼修改</a>
-						
-					<a class="list-group-item list-group-item-action"
-						id="Modify" name="Modify" data-toggle="list" href="#list-manager"
-						role="tab">會員修改</a>
 						
 					<form name=a3 class=a3 action="<c:url value='/collectlist' />" method="get">
 					<div>

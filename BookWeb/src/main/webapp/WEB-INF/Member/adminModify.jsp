@@ -108,10 +108,6 @@ transform: translateX(26px);
 	border-radius: 20px;
 }
 
-form {
-	margin: auto
-}
-
 button {
 	margin-right: 10px;
 }
@@ -121,22 +117,11 @@ legend {
 	font-size: 18px;
 }
 
-.bd-placeholder-img {
-	font-size: 1. 125rem;
-	text-anchor: middle;
-}
-
-@media ( min-width : 768px) {
-	.bd-placeholder-img-lg {
-		font-size: 3.5rem;
-	}
-}
-
 
 </style>
 </head>
 <body id="abc">
-	<div class="container media">
+	<div class="container">
 		<br>
 			<fieldset id="admin" style="text-align:center">
 				<legend>會員清單</legend>

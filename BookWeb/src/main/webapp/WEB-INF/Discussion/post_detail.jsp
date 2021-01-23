@@ -57,7 +57,7 @@
 	%>
 
 	<!-- header -->
-	<header class="blog-header py-3" id="bookWebheader"></header>
+	<header class="blog-header" id="bookWebheader"></header>
 	<!-- header -->
 
 	<div class="container">
@@ -65,15 +65,15 @@
 			
 			<!-- side area -->
 			<div class="col-2 text-center">
-				<h2>書適論壇</h2><br><br>
+			<br>
+				<h2><a href='<c:url value="/Discussion/mainpage"/>'>回到論壇</a></h2><br><br>
 				<button id="lazy_command" class="btn btn-outline-info" style="border-radius:50%;margin-bottom:10px">command</button><br>
 				<button id="lazy_nested_command" class="btn btn-outline-info" style="border-radius:50%;">nested_command</button>
 			</div>
 
 			<div class="col-10" style='text-align: center;'>
-
-				<h3>詳細貼文
-				</h3>
+				<br>
+				<h3>詳細貼文</h3>
 				<br>
 				<div
 					style="border: #ADADAD 2px solid; border-radius: 5px; text-align: left; padding: 10px; margin: 0px 10px">
