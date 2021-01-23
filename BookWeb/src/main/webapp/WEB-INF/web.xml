@@ -9,6 +9,11 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
+  
+  <error-page>
+    <error-code>404</error-code>
+    <location>/WEB-INF/ErrorPage.jsp</location>
+</error-page>
 <!--   <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">   -->
 <!--     <property name="defaultEncoding" value="utf-8"/>   -->
 <!--     最大記憶體大小   -->
