@@ -64,9 +64,6 @@ legend {
 	width: 115px;
 }
 
-.sp {
-	font-size: 16px;
-}
 
 form {
 	margin: auto;
