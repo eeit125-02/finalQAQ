@@ -46,7 +46,7 @@
 	<form></form>
 
 	<div style="text-align: center">
-		<h2>二手書圖</h2>
+<!-- 		<h2>二手書圖</h2> -->
 	</div>
 	<div class="container">
 		<input type="hidden" id="bks_ID"
@@ -58,53 +58,69 @@
 					height="400px" src="<c:url value='${bookdetail.book.bk_Pic}'/>">
 			</div>
 			<div class="col-lg-8">
-				<h3>書名:</h3>
-				<span> ${bookdetail.book.bk_Name}</span>
+				<h3>
+				<span> ${bookdetail.book.bk_Name}</span></h3>
 				<hr>
-				<h5>作者:</h5>
-				<span> ${bookdetail.book.bk_Author}</span>
+				<h5>作者：
+				<span> ${bookdetail.book.bk_Author}</span></h5>
 				<hr>
-				<h5>出版社:</h5>
-				<span> ${bookdetail.book.bk_Publish}</span>
+				<h5>出版社：
+				<span> ${bookdetail.book.bk_Publish}</span></h5>
 				<hr>
-				<h5>出版日:</h5>
-				<span> ${bookdetail.book.bk_Date}</span>
+				<h5>出版日：
+				<span> ${bookdetail.book.bk_Date}</span></h5>
 				<hr>
-				<h5>價錢:</h5>
+				<h5>價錢：
 				<span> ${bookdetail.bs_Price}</span> <a
 					href="<c:url value='/qaqManyPrice?ID=${bookdetail.book.bk_ID}'/>"
-					style="margin-left: 50px;">查看其他價格 </a>
+					style="margin-left: 50px;font-size:16px">查看其他價格 </a></h5>
 				<hr>
-				<h5>庫存:</h5>
-				<span id="amount">${bookdetail.bs_Num}</span>
+				<h5>庫存：
+				<span id="amount">${bookdetail.bs_Num}</span></h5>
 <%-- 				<input type="text" value="${bookdetail.bs_Num}" disabled="disabled"> --%>
+<hr>
+<div class="row">
+<div class="col-sm-6">
+<p class="h5">購買數量：
+<input type="number" class="form-control" id="buyNum"
+						aria-label="Dollar amount (with dot and two decimal places)"
+						value="1" min="1"  ></p>
+					<span id="sp" style="color: red"></span>
+</div>
+<div class="col-sm-6">
+					<button type="submit" class="btn btn-outline-success" style="float:right;margin-top:15px;margin-right:15px"
+					onclick="goToCart(${bookdetail.bks_ID})">直接購買</button>
+					<button type="submit" class="btn btn-outline-success" style="float:right;margin-top:15px"
+					onclick="addCart(${bookdetail.book.bk_ID},${bookdetail.bs_Price})">放入購物車</button>
+</div>
+</div>
 			</div>
 		</div>
 		<br>
 		<!-- 		qaq -->
 
-		<div class="row">
-			<div class="col-sm-4"></div>
-			<div class="input-group col-sm-4">
-				<div class="col-sm-4">
-					<p class="h5">購買數量:</p>
-				</div>
-				<div class="col-sm-6">
-					<input type="number" class="form-control" id="buyNum"
-						aria-label="Dollar amount (with dot and two decimal places)"
-						value="1" min="1"  >
-					<span id="sp" style="color: red"></span>
+<!-- 		<div class="row"> -->
+<!-- 			<div class="col-sm-4"></div> -->
+<!-- 			<div class="input-group col-sm-4"> -->
+<!-- 				<div class="col-sm-4"> -->
+<!-- 					<p class="h5">購買數量:</p> -->
+<!-- 				</div> -->
+<!-- 				<div class="col-sm-6"> -->
+<!-- 					<input type="number" class="form-control" id="buyNum" -->
+<!-- 						aria-label="Dollar amount (with dot and two decimal places)" -->
+<!-- 						value="1" min="1"  > -->
+<!-- 					<span id="sp" style="color: red"></span> -->
 <!-- 					onblur="checkBuy()" -->
-				</div>
-			</div>
-			<div class="col-sm-1">
-				<button type="submit" class="btn btn-outline-success"
-					onclick="goToCart(${bookdetail.bks_ID})">直接購買</button>
-			</div>
-			<div class="col-sm-1">
-				<button type="submit" class="btn btn-outline-success"
-					onclick="addCart(${bookdetail.book.bk_ID},${bookdetail.bs_Price})">放入購物車</button>
-			</div>
+<!-- 				</div> -->
+<!-- 			</div> -->
+<!-- 			<div class="col-sm-1"> -->
+<!-- 				<button type="submit" class="btn btn-outline-success" -->
+<%-- 					onclick="goToCart(${bookdetail.bks_ID})">直接購買</button> --%>
+<!-- 			</div> -->
+<!-- 			<div class="col-sm-1"> -->
+<!-- 				<button type="submit" class="btn btn-outline-success" -->
+<%-- 					onclick="addCart(${bookdetail.book.bk_ID},${bookdetail.bs_Price})">放入購物車</button> --%>
+<!-- 			</div> -->
 		</div>
 	</div>
 
