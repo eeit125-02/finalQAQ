@@ -140,7 +140,7 @@
 	});
 	
 	var myChart = new Chart(viewChart, {
-	    type: 'bar',
+	    type: 'pie',
 	    data: {
 	        labels: monthViewName,
 	        datasets: [{

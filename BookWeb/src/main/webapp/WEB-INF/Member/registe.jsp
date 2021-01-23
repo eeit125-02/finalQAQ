@@ -100,7 +100,7 @@ form {
 <body>
 
 	<!-- header -->
-	<header class="container blog-header py-3" id="bookWebheader"></header>
+	<header class=" blog-header py-3" id="bookWebheader"></header>
 	<!-- header -->
 	<div class="container media">
 		<br>
@@ -158,7 +158,7 @@ form {
 			$('#pwd1').val("aaa111");
 			$('#name1').val("陳昱豪");
 			$('#birthday').val("1994-04-19");
-			$('#mail').val("qsxazqoo@gmail.com");
+			$('#mail').val("pgame6721@gmail.com");
 		})
 		
 		$(document).ready(function() {
