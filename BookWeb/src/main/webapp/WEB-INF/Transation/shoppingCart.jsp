@@ -102,7 +102,7 @@
 <body>
 
 	<!-- header -->
-	<header class="container blog-header py-3" id="bookWebheader"></header>
+	<header class="blog-header py-3" id="bookWebheader"></header>
 	<!-- header -->
 	<!-- body -->
 	<!--測試用 -->
@@ -212,20 +212,22 @@
 					<div class="modal-body">
 						<div class="form-group">
 							<label for="recipient-name" class="col-form-label">收件人:</label> <input
-								name="bo_Name" type="text" class="form-control" required="required"
+								name="bo_Name" type="text" class="form-control a" required="required"
 								id="recipient-name">
 						</div>
 						<div class="form-group">
-							<label for="message-text" class="col-form-label">電話:</label> <input
-								name="bo_Cel" type="tel" class="form-control" required="required"
+							<label for="message-text" class="col-form-label">電話:<span id="sp"></span></label><input
+								name="bo_Cel" type="tel" class="form-control b" required="required"
 								id="recipient-name">
+								
 						</div>
 						<div class="form-group">
 							<label for="message-text" class="col-form-label">送貨地址:</label>
-							<textarea name="bo_Add" class="form-control" id="recipient-name"
+							<textarea name="bo_Add" class="form-control c" id="recipient-name"
 							required="required"></textarea>
 						</div>
 					</div>
+					<button type="button" class="btn btn-outline-dark" id="userInput">一鍵輸入</button>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-secondary"
 							data-dismiss="modal">取消</button>
@@ -416,6 +418,28 @@
 			
 		})
 	})
+	
+	$('#userInput').click(function() {
+		$('.form-control.a').val("李新民");
+		$('.form-control.b').val("0987654321");
+		$('.form-control.c').val("328桃園市觀音區忠愛路一段3號");
+	})
+	
+	$('.form-control.b').change(function() {
+		ckeckInput();
+	})
+	
+	function ckeckInput() {
+		var celNum = $('.form-control.b');
+		var celNumVal = $('.form-control.b').val();
+		let re = /[0-9]/gi;
+		if(!re.test(celNumVal)){
+			$('#sp').css('color','red');
+			$('#sp').html("請輸入數字!");
+		} else{
+			$('#sp').html("");
+		}
+	}
 	
 	</script>
 </body>
