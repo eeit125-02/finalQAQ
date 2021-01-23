@@ -89,7 +89,7 @@ response.setDateHeader("Expires", 0);
 		<div class="row">
 			<!-- sidebar area -->
 			<div class="col-2 text-center">
-
+				<br>
 				<!-- ====================================================sidebar==================================================== -->
 				<h2>書適論壇</h2>
 				<br>
@@ -134,6 +134,7 @@ response.setDateHeader("Expires", 0);
 
 			<!-- content area -->
 			<div class="col-10" style='text-align: center;'>
+			<br>
 				<!-- content connect to sidebar -->
 				<div class="tab-content" id="nav-tabContent">
 
@@ -162,9 +163,9 @@ response.setDateHeader("Expires", 0);
 
 						<!-- discussion board top tab -->
 						<ul class="nav nav-tabs nav-fill" id="novelTab" role="tablist">
-							<li class="nav-item"><a class="nav-link active" id="novel_rule-tab"
+							<li class="nav-item"><a class="nav-link" id="novel_rule-tab"
 								data-toggle="tab" href="#novel_rule" role="tab">板規</a></li>
-							<li class="nav-item"><a class="nav-link"
+							<li class="nav-item"><a class="nav-link active"
 								id="novel_latest-tab" data-toggle="tab" href="#novel_latest"
 								role="tab">最新貼文</a></li>
 							<li class="nav-item"><a class="nav-link" id="novel_hot-tab"
@@ -177,14 +178,14 @@ response.setDateHeader("Expires", 0);
 						<!-- content connect to top tab -->
 						<div class="tab-content" id="novelTabContent">
 							<!-- content of rule tab -->
-							<div class="tab-pane fade show active" id="novel_rule" role="tabpanel">
+							<div class="tab-pane fade" id="novel_rule" role="tabpanel">
 								<div id="show_rule">
 									<c:forEach var="rule" items="${rule}">${rule.rule_content}</c:forEach>
 								</div>
 							</div>
 
 							<!-- content of latest post tab -->
-							<div class="tab-pane fade" id="novel_latest"
+							<div class="tab-pane fade show active" id="novel_latest"
 								role="tabpanel">
 
 								<!-- post and command table -->
@@ -418,7 +419,11 @@ response.setDateHeader("Expires", 0);
 												   post_content:CKEDITOR.instances["post_content"].getData()},
 									dataType : "json",
 									success:function(){
-										alert("貼文新增成功");	
+										swal({
+											  title: "貼文新增成功",
+											  icon: "success",
+											  button: "ok",
+										});
 										window.location.hash = 'add_post_reload';
 										window.location.reload();
 										}										
@@ -460,23 +465,30 @@ response.setDateHeader("Expires", 0);
 										</form>
 										
 										<script>
-											$('#member_delete_btn${stored_post.post_id}').click(function(){
-												var yes = confirm('確定刪除 ${stored_post.post_title} 嗎？');
-												if(!yes){
-													event.preventDefault()
-												}else{
+											$('#member_delete_btn${stored_post.post_id}').click(function(e){
+												e.preventDefault();
+												swal({
+													  title: "確定刪除 ${stored_post.post_title} 嗎？",
+													  icon: "warning",
+													  buttons: true,
+													  dangerMode: true,
+													}).then((godelete)=>{
+														if(godelete){
 													$.ajax({
 														url : '<c:url value="/Discussion/delete_ajax"/>',
 														type : 'POST',
 														data : {delete_post_id : $(this).val()},
 														dataType : "json",
 														success:function(delete_post_id){
-															alert('貼文刪除成功');
+															swal({
+															      title: "貼文刪除成功",
+															      icon: "success"
+															 });
 															window.location.hash = 'delete_post_reload';
 															window.location.reload();
 															}
-													})	
-												}
+													})
+												}})													
 											})
 											
 											document.addEventListener("DOMContentLoaded", function() { 
@@ -843,23 +855,30 @@ response.setDateHeader("Expires", 0);
 										$('keyword_manager').attr("placeholder","請輸入關鍵字");
 										})
 										
-										$(document).on("click", '.manager_delete', function(){
-											var yes = confirm('確定刪除 '+$(this).parent().prev().html()+' 嗎？');
-											if(!yes){
-												event.preventDefault()
-											}else{
+										$(document).on("click", '.manager_delete', function(e){
+											e.preventDefault();
+											swal({
+												  title: "確定刪除 "+ $(this).parent().prev().html()+" 嗎？",
+												  icon: "warning",
+												  buttons: true,
+												  dangerMode: true,
+												}).then((godelete)=>{
+													if(godelete){
 												$.ajax({
 													url : '<c:url value="/Discussion/delete_ajax"/>',
 													type : 'POST',
 													data : {delete_post_id : $(this).val()},
 													dataType : "json",
 													success:function(delete_post_id){
-														alert('貼文刪除成功');
+														swal({
+														      title: "貼文刪除成功",
+														      icon: "success",
+														 });
 														window.location.hash = 'manager_delete_post_reload';
 														window.location.reload();
 													}
 												})	
-											}
+											}})
 										})
 										
 										document.addEventListener("DOMContentLoaded", function() { 
@@ -891,23 +910,30 @@ response.setDateHeader("Expires", 0);
 											</form>
 											
 											<script>											
-													$('#manager_delete_btn${stored_post.post_id}').click(function(){
-														var yes = confirm('確定刪除 ${stored_post.post_title} 嗎？');
-														if(!yes){
-															event.preventDefault()
-														}else{
+													$('#manager_delete_btn${stored_post.post_id}').click(function(e){
+														e.preventDefault();
+														swal({
+															  title: "確定刪除 ${stored_post.post_title} 嗎？",
+															  icon: "warning",
+															  buttons: true,
+															  dangerMode: true,
+															}).then((godelete)=>{
+																if(godelete){
 															$.ajax({
 																url : '<c:url value="/Discussion/delete_ajax"/>',
 																type : 'POST',
 																data : {delete_post_id : $(this).val()},
 																dataType : "json",
 																success:function(delete_post_id){
-																	alert('貼文刪除成功');
+																	swal({
+																	      title: "貼文刪除成功",
+																	      icon: "success",
+																	 });
 																	window.location.hash = 'manager_ajax_delete_post_reload';
 																	window.location.reload();
 																	}
 															})	
-														}
+														}})
 													})
 													
 													document.addEventListener("DOMContentLoaded", function() { 

@@ -43,8 +43,9 @@
 	<div class="container">
 	<!-- body -->
 	<div class="text-center">
+		<br><br>
 		<h1>出現了一點錯誤...</h1>
-		<img src="${pageContext.request.contextPath}/image/error.png"/>
+		<img style="width:300px" src="${pageContext.request.contextPath}/image/error.png"/>
 		<h5>  ${exception}</h5>
 		<br><br>
 		<input class="btn btn-outline-primary" name="Submit" type="button" id="Submit" onClick="javascript:history.back(1)" value="回一上頁" />
