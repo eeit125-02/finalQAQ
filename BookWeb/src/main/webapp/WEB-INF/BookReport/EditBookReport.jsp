@@ -67,7 +67,7 @@
 <body>
 
 	<!-- header -->
-	<header class="container blog-header py-3" id="bookWebheader"></header>
+	<header class="blog-header py-3" id="bookWebheader"></header>
 	<!-- header -->
 
 	<!-- 版主介紹 -->

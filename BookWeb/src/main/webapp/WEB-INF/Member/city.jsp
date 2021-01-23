@@ -114,7 +114,7 @@ legend {
 </head>
 <body>
 <!-- header -->
-	<header class="container blog-header py-3" id="bookWebheader"></header>
+	<header class="blog-header py-3" id="bookWebheader"></header>
 	<!-- header -->
 	<div class="container media" >
 	<div id="city" >
@@ -147,7 +147,9 @@ legend {
 				<div>
 				<button type="button" id="editBookReport" name="getjoinrecords" class="btn btn-outline-secondary">讀書心得</button>
 				</div>
-		
+				<div>
+				<button type="button" id="editDiscussion" name="getjoinrecords" class="btn btn-outline-secondary">討論管理</button>
+				</div>
 	</div>
 	
 	
@@ -866,7 +868,7 @@ legend {
 			
 			if(check=="admin"){
 				
-				$('#change123').load("//localhost:8080/BookWeb/Admin/BookReport")
+				$('#change123').load("//localhost:8080/BookWeb/Admin/Stroe")
 			}
 		});
 		
@@ -874,11 +876,17 @@ legend {
 			
 			if(check=="admin"){
 				
-				$('#change123').load("//localhost:8080/BookWeb/Admin/BookReport")
+				$('#change123').load("//localhost:8080/BookWeb/Admin/Act")
 			}
 		});
 		
-		
+		$('#editDiscussion').click(function(){
+			
+			if(check=="admin"){
+				
+				$('#change123').load("//localhost:8080/BookWeb/Admin/Discussion")
+			}
+		});
 		
 	</script>
 	
