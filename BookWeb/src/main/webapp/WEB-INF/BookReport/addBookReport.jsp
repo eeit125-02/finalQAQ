@@ -14,7 +14,6 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/jquery.rateyo.css"/>
 <script src="${pageContext.request.contextPath}/js/jquery.rateyo.js"></script>
 <script src="${pageContext.request.contextPath}/js/ckeditor/ckeditor.js"></script>
-<!-- <script src="http://cdn.ckeditor.com/4.6.1/standard/ckeditor.js"></script> -->
 
 <style>
 .bd-placeholder-img {
@@ -27,12 +26,17 @@
 		font-size: 3.5rem;
 	}
 }
+
+.messageSize{
+	 font-size: 16px;
+}
+
 </style>
 </head>
 <body>
 
 	<!-- header -->
-	<header class="container blog-header" id="bookWebheader"></header>
+	<header class="blog-header" id="bookWebheader"></header>
 	<!-- header -->
 
 	<div class="container">
@@ -42,21 +46,22 @@
 
 				<form  class="col-ml-4">
 					<br>
+					<br>
 					<div class="form-group">
-						<label id="userAccount" id="bkName">撰寫者：</label> 
+						<label id="userAccount" class= "messageSize" id="bkName">撰寫者：</label> 
 					</div>
 					<div class="form-group">
-						<label id="bkName">書名：</label> 
+						<label id="bkName" class= "messageSize">書名：</label> 
 					</div>
 					<div id = "bookWriter" class="form-group">
-						<label id="bkAuthor" class = "mr-5">作者：12232</label> 
+						<label id="bkAuthor" class = "mr-5" class= "messageSize">作者：12232</label> 
 					</div>
 					<div class="form-group">
-						<label id="bkPublish">出版社：</label> 
+						<label id="bkPublish" class= "messageSize">出版社：</label> 
 					</div>
 					<div class="form-group">
 						<label>閱讀標題：</label> 
-						<input type="text" class="form-control" id="brTitle">
+						<input type="text" class="form-control" id="brTitle" >
 					</div>
 					
 					<div class="form-inline">
@@ -66,12 +71,13 @@
 				</form>
 			</div>
 		</div>
-		<label for="message-text" class="col-form-label">心得:</label>
+		<label for="message-text" class="col-form-label" >心得:</label>
 		<textarea id="brContent" class="form-control" style="height: 350px;"></textarea>
 		<br>
 		
 		<button type="button" id="backButton" class="btn btn-outline-danger btn-mi float-right">刪除</button>
 		<button type="button" id="addBookReport" class="btn btn-outline-primary btn-mi float-right mr-4">新增</button>
+		<button type="button" id="insertData" class="btn btn-outline-info btn-mi float-right mr-4">輸入</button>
 		<br>
 	</div>
 
@@ -168,6 +174,11 @@
 			history.go(-1);
 		});
 
+		$('#insertData').click(function(){
+			$('#brTitle').val('這本書誰十分好看推快速輸入')
+			
+			editor.setData( "這本書誰十分好看推，在這裡推薦給各位" )
+		})
 		
 	</script>
 </body>

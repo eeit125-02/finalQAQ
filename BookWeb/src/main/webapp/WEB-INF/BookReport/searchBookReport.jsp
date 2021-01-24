@@ -25,6 +25,15 @@
 		font-size: 3.5rem;
 	}
 }
+.p-width {
+
+	max-width: 400px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+
+}
+
 </style>
 
 <title>Insert title here</title>
@@ -35,6 +44,7 @@
 	<header class="blog-header" id="bookWebheader"></header>
 	<!-- header -->
 
+	<br>
 	<div class="container media">
 		<!-- body -->
 		<div class="row">
@@ -190,17 +200,18 @@
 							}
 							insertData +=	"<div class=\"card mb-4\">"
 									    + 	"<div class=\"row g-0\">"
-									    + 	"<img class=\"ml-4\" width=\"130px\" height=\"150px\" src=\""+ data.searchData[i].bk_Pic+ "\">"
+									    + 	"<img class=\"ml-4 mt-3\" width=\"130px\" height=\"200px\" src=\""+ data.searchData[i].bk_Pic+ "\">"
 									    + 	"<div class=\"col-md-8\">"
 									    + 	"<div class=\"card-body\">"
 									    + 	"<h4 class=\"card-title\">"
 									    +	"<a class=\"\" href=\"http://localhost:8080/BookWeb/BookReport/"+data.searchData[i].br_ID+"\">"+data.searchData[i].br_Name+"</a>"
 									    +	"</h4>"
-									   	+	"<p class=\"card-title\"> 撰寫者："+ data.searchData[i].loginUser+ ", 撰寫日期：" + data.searchData[i].br_DateTime+ "</p>"
+									   	+	"<p class=\"card-title \"> 撰寫者："+ data.searchData[i].loginUser + "</p>"
+									   	+   "<p class=\"card-text \"> 撰寫日期：" + data.searchData[i].br_DateTime+ "</p>"
 									    + 	"<div>"
-									    + 	"<p class=\"card-text mb-auto\"> 書名："+data.searchData[i].bk_Name+ "</p>"
-									    +	"<p class=\"card-text mb-auto\"> 作者："+data.searchData[i].bk_Author+ "</p>"
-									    +	"<p class=\"card-text mb-auto\"> 出版社："+data.searchData[i].bk_Publish+ "</p>"
+									    + 	"<p class=\"card-text mb-1 p-width \"> 書名："+data.searchData[i].bk_Name+ "</p>"
+									    +	"<p class=\"card-text mb-1 p-width \"> 作者："+data.searchData[i].bk_Author+ "</p>"
+									    +	"<p class=\"card-text mb-1\"> 出版社："+data.searchData[i].bk_Publish+ "</p>"
 									    + 	"</div>"
 									    + 	"<div class=\"d-flex justify-content-between align-items-center\">"
 									    + 	"</div>"

@@ -184,6 +184,7 @@ public class BookReportController {
 	public Boolean deletCollectReport(
 			@PathVariable("rcId") Integer rcId){
 		
+		System.out.println(rcId);
 		return bookReportService.deleteCollectReport(rcId);
 	}
 	

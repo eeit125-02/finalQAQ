@@ -7,22 +7,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<script
-	src="${pageContext.request.contextPath}/js/jQuery/jquery-3.5.1.min.js"></script>
-<script
-	src="${pageContext.request.contextPath}/js/jQuery/jquery.cookie.js"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
-	integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
-	crossorigin="anonymous"></script>
-<script
-	src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
-	integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
-	crossorigin="anonymous"></script>
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
-	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
-	crossorigin="anonymous">
+<script src="${pageContext.request.contextPath}/js/jQuery/jquery-3.5.1.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/jQuery/jquery.cookie.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 	
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/jquery.rateyo.css"/>
 <script src="${pageContext.request.contextPath}/js/jquery.rateyo.js"></script>
@@ -42,6 +31,15 @@
 	text-overflow: ellipsis;
 }
 
+.p-width {
+
+	max-width: 300px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+
+}
+
 @media ( min-width : 768px) {
 	.bd-placeholder-img-lg {
 		font-size: 3.5rem;
@@ -49,7 +47,7 @@
 }
 
 .messageSize{
-	 font-size: 17px;
+	 font-size: 16px;
 }
 
 .checked {
@@ -71,6 +69,7 @@
 	<!-- header -->
 
 	<!-- 版主介紹 -->
+	<br>
 	<div class="container media">
 		<div class="media-body">
 			<h2 class="mt-0" id="memberName">閱讀履歷管理</h2>
@@ -163,7 +162,7 @@
 			          <div id="rateYo"></div>
 			          <br>
 			          <p class="card-text mb-auto">書名</p>
-			          <p class="card-text mb-auto">作者</p>
+			          <p class="card-text p-width  mb-auto">作者</p>
 			          <p class="card-text mb-auto">出版社</p>
 			          <br>
 			          <button type="button" class="btn btn-outline-danger"  value="" id="deletSub" >取消收藏</button>
@@ -288,7 +287,6 @@
 			loadCollectReport();
 			loadReportMessageList();
 			
-			
 		});
 		
 		var $rateYo = $("#rateYoEdit").rateYo({
@@ -297,18 +295,6 @@
 		    spacing: "10px"
 		});
 		
-		
-		/* $('#deleteSecond').click(function() {
-			if($('#deleteInfo').html() == "是否要刪除心得"){
-				deleteReport($(this).val());			
-			}
-			if($('#deleteInfo').html() == "是否要取消收藏"){
-				
-				deleteCollect($(this).val());
-			}
-			
-		}); */
-
 		$('#editButton').click(function() {
 			
 			var editData = {
@@ -332,25 +318,69 @@
 			});
 		});
 		
+		function deleteMessage(deleteId) {
+			var deleteURL = "http://localhost:8080/BookWeb/BookReport/deleteReportMessage";
+			swal({
+				  title: "是否要刪除留言",
+				  icon: "warning",
+				  buttons: true,
+				  dangerMode: true,
+				}).then((willDelete) => {
+				  if (willDelete) {
+					 $.ajax({
+						async : false,
+						type : 'POST',
+						url : deleteURL,
+						data :{bmId:deleteId},
+						dataType : "json",
+						success : function(data) {
+							if(data && typeof(data) == "boolean"){								
+								swal({
+								      title: "刪除成功",
+								      icon: "success",
+								 }).then((willDelete) => {
+									 loadReportMessageList();
+								 });
+								 
+							}
+						}
+					});
+				  }
+			});
+		};
+		
 		function deleteCollect(rc_ID) {
-			var deleteURL = location.href + "/deleteCollectReport/" + rc_ID;
-			$.ajax({
-				async : false,
-				type : 'POST',
-				url : deleteURL,
-				dataType : "json",
-				success : function(data) {
-					console.log(data)
-					if (data) {
-						loadCollectReport();
-					}
-				}
+			var deleteURL = "http://localhost:8080/BookWeb/BookReport/EditBookReport/deleteCollectReport/" + rc_ID;
+			swal({
+				  title: "是否要取消收藏",
+				  icon: "warning",
+				  buttons: true,
+				  dangerMode: true,
+				}).then((willDelete) => {
+				  if (willDelete) {
+					 $.ajax({
+						async : false,
+						type : 'POST',
+						url : deleteURL,
+						dataType : "json",
+						success : function(data) {
+							if(data && typeof(data) == "boolean"){								
+								swal({
+								      title: "刪除成功",
+								      icon: "success",
+								 }).then((willDelete) => {
+									 loadCollectReport();
+								 });
+								 
+							}
+						}
+					});
+				  }
 			});
 		};
 
 		function deleteReport(br_ID) {
-			console.log(br_ID)
-			var deleteURL = location.href + "/deleteBookReport/" + br_ID;
+			var deleteURL = "http://localhost:8080/BookWeb/BookReport/EditBookReport/deleteBookReport/" + br_ID;
 			swal({
 				  title: "確定要刪除",
 				  icon: "warning",
@@ -362,7 +392,6 @@
 						async : false,
 						type : 'POST',
 						url : deleteURL,
-						data : {bmId:$(this).val()},
 						dataType : "json",
 						success : function(data) {
 							if(data && typeof(data) == "boolean"){								
@@ -388,27 +417,40 @@
 				type : 'POST',
 				dataType : "json",
 				success : function(data){
-					var inserData = "";
+					var insertData = "";
 					for(var i = 0; i < data.length; i++){						
-						inserData += "<div class=\"col-md-6\">"
+						insertData += "<div class=\"col-md-6\">"
 								  	+ "<div class=\"card flex-md-row mb-4 shadow-sm h-md-250\">"
 								  	+ "<div class=\"card-body d-flex flex-column align-items-start\">"
-						      	  	+ "<h3 class=\"mb-0\">"
-						      	  	+ "<a class=\"text-dark \" href=\"http://localhost:8080/BookWeb/BookReport/"+ data[i].brId +"\">"+ data[i].brName +"</a>"
-								  	+ "</h3>"
+						      	  	+ "<h4 class=\"mb-2\">"
+						      	  	+ "<a href=\"http://localhost:8080/BookWeb/BookReport/"+ data[i].brId +"\">"+ data[i].brName +"</a>"
+								  	+ "</h4>"
 									+ "<div class=\"mb-1 text-muted\">"
 									+ "撰寫者："+ data[i].mbAccount
 									+ "</div>"
 									+ "<div class=\"mb-1 text-muted\">"
 									+ "創建日期："+ data[i].brDate
 									+ "</div>"
-									+ "<div id=rateYo"+ data[i].rcId +"></div>"
+									+ "<div class=\"form-inline\">"
+									+ "<label class=\"card-text messageSize\">評分："
+									+ "</label>"
+									
+									let startNum = data[i].brScore
+									for(let i = 0; i < startNum; i++){
+										   
+										insertData += "<span class=\"fa fa-star checked ml-2\"></span>"
+								    }
+								    for(let i = 0; i < 5-startNum; i++){
+									   
+									   insertData += "<span class=\"fa fa-star unchecked ml-2\"></span>"
+								    }
+									
+						insertData += "</div>"
 									+ "<br>"
-									+ "<p class=\"card-text mb-auto\">書名："+ data[i].bkName +"</p>"
-									+ "<p class=\"card-text mb-auto\">作者："+ data[i].bkAuthor +"</p>"
-									+ "<p class=\"card-text mb-auto\">出版社："+ data[i].bkPublish +"</p>"
-									+ "<br>"
-									+ "<button type=\"button\" class=\"btn btn-outline-danger\"  data-toggle=\"modal\" data-target=\"#deletModal\" id=\"deletSub\" value=\""+ data[i].rcId +"\" >取消收藏</button>"
+									+ "<p class=\"card-text p-width messageSize mb-3\">書名："+ data[i].bkName +"</p>"
+									+ "<p class=\"card-text p-width messageSize mb-3\">作者："+ data[i].bkAuthor +"</p>"
+									+ "<p class=\"card-text messageSize mb-3\">出版社："+ data[i].bkPublish +"</p>"
+									+ "<button type=\"button\" class=\"btn btn-outline-danger\" id=\"deletSub\" value=\""+ data[i].rcId +"\" onclick=\"deleteCollect(" + data[i].rcId +")\" >取消收藏</button>"
 									+ "</div>"
 									+ " <svg class=\"bd-placeholder-img card-img-right flex-auto d-none d-lg-block mr-4 mt-4\" width=\"150\" height=\"250\" xmlns=\"http://www.w3.org/2000/svg\" preserveAspectRatio=\"xMidYMid slice\" focusable=\"false\" role=\"img\" aria-label=\"Placeholder: Thumbnail\">"
 									+ "<image xlink:href=\""+ data[i].bkPic +"\"width=\"100%\" height=\"100%\"/>"
@@ -416,24 +458,9 @@
 									+ "</div>"
 									+ "</div>"
 					}
-					$('#collectReport').html(inserData);
-					
-					/* for(var i = 0; i < data.length; i++){	
-						$("#rateYo"+ data[i].rcId).rateYo({
-							rating: data[i].brScore,
-						    spacing: "5px",
-						    starWidth: "20px",
-						    readOnly: true
-						});
-					}	 */			
+					$('#collectReport').html(insertData);
 				}
 			});
-			
-			$(".btn-outline-danger").click(function(){
-				$('#deleteInfo').html("是否要取消收藏");
-				$('#deleteSecond').val($(this).val());
-				console.log($('#deleteInfo').html());
-			});	
 		}
 		
 		function loadBookReportList() {
@@ -577,21 +604,19 @@
 						insertData += "<li class=\"media my-4 messageSize\">"
 					    			+ "<img src=\""+ data[i].bkPic +"\" class=\"mr-3\" width=\"150px\">"
 					    			+ "<div class=\"media-body\">"
-					    			+ "<h2 class=\"mt-0 mb-1 messageSize\"><a style=\" color:#146; font-size:20px;\" href=\""+ data[i].brId + "\">"
-					    			+ "<p class = \"messageSize\" >"
+					    			+ "<h4 class=\"mt-0 mb-2\"><a href=\""+ data[i].brId + "\">"
 					    			+ data[i].brName
-					    			+ "</p>"
-					    			+ "</a></h2>"
+					    			+ "</a></h4>"
 					    			+ "<p>留言日期："
 					    			+ data[i].bmDate
 					    			+ "</p>"
-					    			+ "<label class=\"mr-4\">書名："
+					    			+ "<label class=\"mr-4 p-width messageSize\">書名："
 					    			+ data[i].bkName
-					    			+ "</label><label class=\"ml-4\">作者："
+					    			+ "</label><label class=\"ml-4 p-width messageSize\">作者："
 					    			+ data[i].bkAuthor
 					    			+ "</label>"
-					    			+ "<br>"
-					    			+ "<label class = \"ml-2\" >留言：</label>"
+					    			+ "<hr>"
+					    			+ "<label class = \"ml-2 messageSize\" >留言：</label>"
 					    			+ "<div class=\"btn-toolbar justify-content-between btn-sm ml-3 \">"
 					    			+ "<label class = \"messageSize\">"
 					    			+ data[i].bmContent
@@ -599,7 +624,7 @@
 					    			+ "<div class=\"input-group\">"
 					    			+ "<button id=\"deleteMessage\" type=\"button\" class=\"btn btn-outline-danger mr-4 md-3\" value = \""
 					    			+ data[i].bmId
-					    			+ "\">刪除</button>"
+					    			+ "\" onclick=\"deleteMessage(" + data[i].bmId +")\">刪除</button>"
 					    			+ "</div>"
 					    			+ "</div>"
 					    			+ "</div>"
@@ -608,35 +633,6 @@
 					$('#message').html(insertData);
 				}
 			});
-			$('.btn-outline-danger').click(function(){
-				swal({
-					  title: "確定要刪除",
-					  icon: "warning",
-					  buttons: true,
-					  dangerMode: true,
-					}).then((willDelete) => {
-					  if (willDelete) {
-						 $.ajax({
-							async : false,
-							type : 'POST',
-							url : "http://localhost:8080/BookWeb/BookReport/deleteReportMessage",
-							data : {bmId:$(this).val()},
-							dataType : "json",
-							success : function(data) {
-								if(data && typeof(data) == "boolean"){								
-									swal({
-									      title: "刪除成功",
-									      icon: "success",
-									 }).then((willDelete) => {
-										 loadReportMessageList();
-									 });
-									 
-								}
-							}
-						});
-					  }
-				});
-			})
 		};
 		
 	</script>
