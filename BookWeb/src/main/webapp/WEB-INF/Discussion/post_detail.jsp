@@ -67,8 +67,12 @@
 			<div class="col-2 text-center">
 			<br>
 				<h2><a href='<c:url value="/Discussion/mainpage"/>'>回到論壇</a></h2><br><br>
-				<button id="lazy_command" class="btn btn-outline-info" style="border-radius:50%;margin-bottom:10px">command</button><br>
-				<button id="lazy_nested_command" class="btn btn-outline-info" style="border-radius:50%;">nested_command</button>
+			<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+				<button id="lazy_command" class="btn btn-outline-info" style="border-radius:50%;margin-bottom:10px">command_1</button><br>
+				<button id="lazy_command2" class="btn btn-outline-info" style="border-radius:50%;margin-bottom:10px">command_2</button><br>
+				<button id="lazy_command3" class="btn btn-outline-info" style="border-radius:50%;margin-bottom:10px">command_3</button><br>
+				<button id="lazy_nested_command1" class="btn btn-outline-info" style="border-radius:50%;margin-bottom:10px">nested_command_1</button>
+				<button id="lazy_nested_command2" class="btn btn-outline-info" style="border-radius:50%;">nested_command_2</button>
 			</div>
 
 			<div class="col-10" style='text-align: center;'>
@@ -154,11 +158,20 @@
 					<script>
 					
 					$(document).on("click", '#lazy_command', function(){
-						$('#command_input').val('自動帶入留言');
+						$('#command_input').val('魔戒吧，挺有名的');
+					})
+					$(document).on("click", '#lazy_command2', function(){
+						$('#command_input').val('格列佛遊記......');
+					})
+					$(document).on("click", '#lazy_command3', function(){
+						$('#command_input').val('綠野仙蹤?哈利波特?');
 					})
 					
-					$(document).on("click", '#lazy_nested_command', function(){
-						$('.nc_input').val('自動帶入巢狀留言');
+					$(document).on("click", '#lazy_nested_command1', function(){
+						$('.nc_input').val('謝謝喔...有沒有比較適合大人讀的?');
+					})
+					$(document).on("click", '#lazy_nested_command2', function(){
+						$('.nc_input').val('這個電影我有看過，還不錯');
 					})
 					
 						$(document).on("click", '.nestcommand', function(){
