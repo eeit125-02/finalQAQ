@@ -18,10 +18,10 @@
 <!-- <!-- search bar的東東 --> 
 
 
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"> -->
+<!-- <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script> -->
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script> -->
+<!-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script> -->
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 
@@ -111,6 +111,16 @@ td {
   width:740px;
 }
 
+h6{
+font-size:25px;
+font-weight:bold;
+align:center
+}
+
+.line{
+align:center
+}
+
 </style>
 </head>
 
@@ -159,8 +169,8 @@ td {
 					<div>
 						<div class="container" style="text-align: center">
 							<h1 >活動清單</h1>
-							<div class="line-it-button" data-lang="zh_Hant" data-type="share-a" data-ver="3" data-url="http://localhost:8080/BookWeb/toLogin" data-color="default" data-size="large" data-count="true" style="display: none;"></div>
- 							<script src="https://www.line-website.com/social-plugins/js/thirdparty/loader.min.js" async="async" defer="defer"></script>
+<!-- 							<div class="line-it-button" data-lang="zh_Hant" data-type="share-a" data-ver="3" data-url="http://localhost:8080/BookWeb/toLogin" data-color="default" data-size="large" data-count="true" style="display: none;"></div> -->
+<!--  							<script src="https://www.line-website.com/social-plugins/js/thirdparty/loader.min.js" async="async" defer="defer"></script> -->
 						</div>
 					</div>
 				</section>
@@ -180,7 +190,7 @@ td {
    										 <div class="modal-content" style="width:800px; height:900px">
     									  <div class="modal-header" >
 <!--     									  //彈跳視窗標頭 -->
-      										  <h5 class="modal-title"  id="#exampleModalCenter${act.act_Name}">${act.act_Name}</h5>
+      										  <h3 class="modal-title"  id="#exampleModalCenter${act.act_Name}">${act.act_Name}</h3>
 												<div class="line-it-button" data-lang="zh_Hant" data-type="share-a" data-ver="3" data-url="http://localhost:8080/BookWeb/toLogin" data-color="default" data-size="large" data-count="true" style="display: none;"></div>
  													<script src="https://www.line-website.com/social-plugins/js/thirdparty/loader.min.js" async="async" defer="defer"></script>
        											 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -220,7 +230,8 @@ td {
 										     
 										     <div class="form-group">
 										     <div>活動名額:${act.act_Differentpax}/${act.act_Pax}</div>
-										     </div>
+										     </div>										  
+										     
       										 </form>
 										     </div>
 										     		
@@ -232,11 +243,13 @@ td {
 											<div>${act.act_Intro}</div>
 											<br>
 											
+											
+											
      									 <div class="modal-footer">
         									<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         									<input type="hidden" id="ID" value="${act.act_ID}">
         									<input type="hidden" id="check" value="${check}">
-      										 <a href="<c:url value='/showJoinForm'/>?act_ID=${act.act_ID}"><button type="button" id="joinact" class="btn btn-primary">報名</button></a> 
+      										 <a href="<c:url value='/showJoinForm'/>?act_ID=${act.act_ID}"><button type="button" id="joinact" class="btn btn-primary">報名</button></a>       										 
      										   </div>
   											  </div>
  											 </div>
@@ -247,6 +260,8 @@ td {
 <!--       										//頁尾 -->
 
 <!-- 									大視窗的內容 -->
+										   <div class="line-it-button line" data-lang="zh_Hant" data-type="share-a" data-ver="3" data-url="http://localhost:8080/BookWeb/toLogin" data-color="default" data-size="large" data-count="true" style="display: none;"></div>
+ 											<script src="https://www.line-website.com/social-plugins/js/thirdparty/loader.min.js" async="async" defer="defer"></script>
 									<div class="caption">
 										<p>${act.act_Theme}</p>
 										<p><img src=${pageContext.request.contextPath}/image/date.png style="width:22px;height:22px">${act.act_Date}</p>
@@ -254,6 +269,7 @@ td {
 										<p><img src=${pageContext.request.contextPath}/image/time.png style="width:22px;height:22px">${act.act_Time}</p>
 										<p><button class="mapbutton" style="background-color:white" id="myModal"  value="${act.act_Loc}" data-toggle="modal"  title="Google地圖" data-target="#myModal1"><img src=${pageContext.request.contextPath}/image/map1.png style="width:25px;height:25px" title="Google地圖">${act.act_Loc}</button></p>
 										<hr>
+
 										<p>
 										
 										<!-- Trigger the modal with a button -->

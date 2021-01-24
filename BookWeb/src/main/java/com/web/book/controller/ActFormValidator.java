@@ -90,7 +90,7 @@ public class ActFormValidator implements Validator {
 			errors.rejectValue("act_Rule", " ", "actbean.actrule.empty");
 		}
 		
-		if (actbean.getact_Intro() != null && actbean.getact_Intro().isEmpty()) {
+		if (actbean.getact_Intro().isEmpty()) {
 			errors.rejectValue("act_Intro", " ", "actbean.actimage.empty");
 		}
 		System.out.println("578967867856786786+++++++++");	
