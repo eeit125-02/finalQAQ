@@ -80,7 +80,7 @@ public class ActJoinController {
 			,Model model
 			,@RequestParam("act_ID")Integer act_ID
 			) {
-		if(actjoinService.check(loginUser.getMb_ID(), act_ID)==false) {
+		if(actjoinService.check(loginUser.getMb_ID(),act_ID)==false) {
 		String act_Name = actService.getAct(act_ID).getact_Name();
 		ActJoinBean ajb = new ActJoinBean();
 		model.addAttribute("act_Name", act_Name);
