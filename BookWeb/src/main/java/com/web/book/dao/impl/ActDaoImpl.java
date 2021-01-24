@@ -1,14 +1,15 @@
 package com.web.book.dao.impl;
 
 import java.util.List;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
 import com.web.book.dao.ActDao;
 import com.web.book.model.ActBean;
-import com.web.book.model.ActJoinBean;
 
 
 @Repository
@@ -85,6 +86,7 @@ public class ActDaoImpl implements ActDao {
 
 	
 	//經由會員ID查詢報名資料
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<ActBean> getActRecords(Integer mb_ID) {
 		Session session = factory.getCurrentSession();

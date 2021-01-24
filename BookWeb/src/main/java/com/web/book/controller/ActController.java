@@ -1,7 +1,7 @@
 package com.web.book.controller;
 
-import java.util.ArrayList;
 import java.util.List;
+
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 
@@ -20,7 +20,6 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.web.book.model.ActBean;
-import com.web.book.model.ActJoinBean;
 import com.web.book.model.MemberBean;
 import com.web.book.service.ActJoinService;
 import com.web.book.service.ActService;

@@ -60,14 +60,15 @@ public class AdminRestController {
 		return adminservice.deleteBookReport(brId);
 	}
 	
-	// 取得每月心得撰寫數量
+	// 取得每半年心得撰寫數量
 	@PostMapping("/getMonthReportWrite")
 	public Map<String, Object> getMonthReportWrite(){
 		
+		System.out.println(adminservice.getMonthReportWrite());
 		return adminservice.getMonthReportWrite();
 	}
 	
-	// 取得每月心得瀏覽數量
+	// 取得每半年心得瀏覽數量
 	@PostMapping("/getMonthReportViews")
 	public Map<String, Object> getMonthReportViews(){
 		
@@ -81,10 +82,38 @@ public class AdminRestController {
 		return adminservice.getBookInfo(bkId);
 	}
 	
+	// 回傳單一貼文資訊
+	@PostMapping("/getPost")
+	public Map<String, Object> getAllPost( @RequestParam(value = "postId" , required = true) Integer postId){
+		System.out.println(postId);
+		return adminservice.getPostInfo(postId);
+	}
+	
+	// 回傳單一活動資訊
+	@PostMapping("/getAct")
+	public Map<String, Object> getAllAct( @RequestParam(value = "actId" , required = true) Integer actId){
+		
+		return adminservice.getActInfo(actId);
+	}
+	
 	// 刪除圖書資料
 	@PostMapping("/deleteBook")
 	public Boolean deleteBook(@RequestParam(value = "bkId", required = true) Integer bkId) {
-		System.out.println(bkId);
+		
 		return adminservice.deleteBook(bkId);
+	}
+	
+	// 刪除活動資料
+	@PostMapping("/deleteAct")
+	public Boolean deleteAct(@RequestParam(value = "actId", required = true) Integer actId) {
+		
+		return adminservice.deleteAct(actId);
+	}
+	
+	// 刪除貼文資料
+	@PostMapping("/deletePost")
+	public Boolean deletePost(@RequestParam(value = "postId", required = true) Integer postId) {
+		
+		return adminservice.deletePost(postId);
 	}
 }

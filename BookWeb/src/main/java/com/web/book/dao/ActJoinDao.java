@@ -2,8 +2,6 @@ package com.web.book.dao;
 
 import java.util.List;
 
-import org.hibernate.query.Query;
-
 import com.web.book.model.ActJoinBean;
 
 public interface ActJoinDao {

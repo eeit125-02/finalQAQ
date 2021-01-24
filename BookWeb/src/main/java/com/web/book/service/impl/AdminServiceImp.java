@@ -11,8 +11,10 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.web.book.dao.ActDao;
 import com.web.book.dao.AdminDao;
 import com.web.book.dao.BookReportDao;
+import com.web.book.dao.DiscussionDao;
 import com.web.book.model.ActBean;
 import com.web.book.model.BookBean;
 import com.web.book.model.BookReportBean;
@@ -29,6 +31,12 @@ public class AdminServiceImp implements AdminService {
 	
 	@Autowired
 	AdminDao adminDao;
+	
+	@Autowired
+	DiscussionDao discussionDao;
+	
+	@Autowired
+	ActDao actDao;
 	
 	
 	// 取得所有心得資訊
@@ -71,15 +79,7 @@ public class AdminServiceImp implements AdminService {
 		
 		return bookTable;
 	}
-	
-	// 刪處指定心得
-	@Override
-	public Boolean deleteBookReport(Integer brId) {
-		
-		bookReportDao.deleteBookReport(brId);
-		
-		return true;
-	}
+
 
 	// 製作近半年撰寫報表
 	@Override
@@ -105,9 +105,13 @@ public class AdminServiceImp implements AdminService {
 				thisYear = Integer.valueOf(maxDay[0].toString());
 				thisMonth = Integer.valueOf(maxDay[1].toString())-i;
 			}
-			
+			Object[] value;
 			for(int j = 5; 0 <= j; j-- ) {
-				 Object[] value = (Object[]) selectData.get(j);
+				 try {
+						value = (Object[]) selectData.get(j);
+					} catch (Exception e) {
+						value = (Object[]) selectData.get(0);
+					}
 				if( Integer.valueOf( value[0].toString()).equals(thisYear) && Integer.valueOf( value[1].toString()).equals(thisMonth)) {
 					monthList.add(value[0].toString()+ "-" + value[1].toString());
 				    monthNumberList.add(Integer.valueOf(value[2].toString()));
@@ -149,9 +153,14 @@ public class AdminServiceImp implements AdminService {
 				thisYear = Integer.valueOf(maxDay[0].toString());
 				thisMonth = Integer.valueOf(maxDay[1].toString())-i;
 			}
-			
+			Object[] value;
 			for(int j = 5; 0 <= j; j-- ) {
-				 Object[] value = (Object[]) selectData.get(j);
+				try {
+					value = (Object[]) selectData.get(j);
+				} catch (Exception e) {
+					value = (Object[]) selectData.get(0);
+				}
+				
 				if( Integer.valueOf( value[0].toString()).equals(thisYear) && Integer.valueOf( value[1].toString()).equals(thisMonth)) {
 					monthList.add(value[0].toString()+ "-" + value[1].toString());
 				    monthNumberList.add(Integer.valueOf(value[2].toString()));
@@ -230,7 +239,7 @@ public class AdminServiceImp implements AdminService {
 		return storeTable;
 	}
 
-	// 取得資訊並轉換為Json
+	// 取得書本資訊並轉換為JSON格式
 	@Override
 	public Map<String, Object> getBookInfo(Integer bkId) {
 		
@@ -253,6 +262,51 @@ public class AdminServiceImp implements AdminService {
 		return returnJson;
 	}
 	
+
+	// 取得貼文資訊並轉換為JSON格式
+	@Override
+	public Map<String, Object> getPostInfo(Integer postId) {
+		
+		PostBean post =  discussionDao.getPostBeanById(postId);
+		
+		Map<String, Object> returnJson = new HashMap<>();
+		returnJson.put("postContent", post.getPost_content());
+		returnJson.put("postTime", post.getPost_time());
+		returnJson.put("postMember", post.getMemberbean().getMb_Account());
+		returnJson.put("postTitle", post.getPost_title());
+		
+		return returnJson;
+	}
+	
+	// 取得活動資訊並轉換為JSON格式
+	@Override
+	public Map<String, Object> getActInfo(Integer actId) {
+		
+		ActBean act = actDao.getAct(actId);
+		
+		Map<String, Object> returnJson = new HashMap<>();
+		returnJson.put("actImage", act.getact_Image());
+		returnJson.put("actIntro", act.getact_Intro());
+		returnJson.put("actTheme", act.getact_Theme());
+		returnJson.put("actDate", act.getact_Date());
+		returnJson.put("actTime", act.getact_Time());
+		returnJson.put("actLoc", act.getact_Loc());
+		returnJson.put("actName", act.getact_Name());
+		returnJson.put("actPlace", act.getact_Place());
+		returnJson.put("actPax", act.getact_Pax());
+		returnJson.put("actDifferentpax", act.getAct_Differentpax());
+		return returnJson;
+	}
+	
+	// 刪處指定心得
+	@Override
+	public Boolean deleteBookReport(Integer brId) {
+		
+		bookReportDao.deleteBookReport(brId);
+		
+		return true;
+	}
+	
 	// 刪除圖書資料
 	@Override
 	public Boolean deleteBook(Integer bkID) {
@@ -260,4 +314,17 @@ public class AdminServiceImp implements AdminService {
 		return adminDao.deleteBook(bkID);
 	}
 
+	// 刪除貼文資料
+	@Override
+	public Boolean deletePost(Integer postId) {
+		
+		return adminDao.deletePost(postId);
+	}
+
+	// 刪除活動資料
+	@Override
+	public Boolean deleteAct(Integer actId) {
+		
+		return adminDao.deleteAct(actId);
+	}
 }

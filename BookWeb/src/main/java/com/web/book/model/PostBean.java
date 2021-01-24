@@ -1,11 +1,9 @@
 package com.web.book.model;
 
 import java.io.Serializable;
-import java.sql.Timestamp;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;

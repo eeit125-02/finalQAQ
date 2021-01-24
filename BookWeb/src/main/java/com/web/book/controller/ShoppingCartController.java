@@ -68,8 +68,6 @@ public class ShoppingCartController {
 			@RequestParam String bo_Name, 
 			@RequestParam String bo_Add,
 			@RequestParam Integer bo_Cel
-//			@ModelAttribute("item") List<OrderItemBean> item,
-//			@ModelAttribute("total") int total
 			) {
 //		List<String> relist = new ArrayList<String>();
 		System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++");
@@ -88,7 +86,7 @@ public class ShoppingCartController {
 		String success = "已結帳";
 //		String fail = "未結帳";
 		Date date = new Date();
-		String url = "http://localhost:8080/BookWeb/qaqTest";
+		String url = "http://localhost:8080/BookWeb/transation";
 		StringBuilder product = new StringBuilder();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 // 總價錢計算
@@ -112,16 +110,16 @@ public class ShoppingCartController {
 			}
 		}
 // 把購物車資料清掉
-//		scService.deleteAllCart(loginUser.getMb_ID());
-//		String form = genAioCheckOutOneTime(oreder.getBo_ID(), sdf.format(date), total, product.toString(), url);
+		scService.deleteAllCart(loginUser.getMb_ID());
+		String form = genAioCheckOutOneTime(oreder.getBo_ID(), sdf.format(date), total, product.toString(), url);
 		List<OrderItemBean> item = scService.orderDetail(oreder.getBo_ID());
-//		model.addAttribute("obj", form);
+		model.addAttribute("obj", form);
 		model.addAttribute("item", item);
 		model.addAttribute("total", oreder.getBo_Total());
 		model.addAttribute("tstime", date);
 //		return relist;   
-//		return "/Transation/bkCheckout";
-		return "/Transation/transationDetail";
+		return "/Transation/bkCheckout";
+//		return "/Transation/transationDetail";
 	}
 	
 	@GetMapping(value = "/transation")
@@ -240,6 +238,7 @@ public class ShoppingCartController {
 		return "Transation/shoppingCart";
 	}
 
+//  刪除購物車資料
 	@PostMapping("/deleteCart")
 	@ResponseBody
 	public Map<String, Object> deleteCart(@RequestParam(value = "cartID", required = false) Integer cart_ID) {

@@ -1,13 +1,12 @@
 package com.web.book.dao;
 
-import java.sql.Timestamp;
 import java.util.List;
 
 import com.web.book.model.CommandBean;
-import com.web.book.model.PostBean;
-import com.web.book.model.RuleBean;
 import com.web.book.model.MemberBean;
 import com.web.book.model.NestedCommandBean;
+import com.web.book.model.PostBean;
+import com.web.book.model.RuleBean;
 
 public interface DiscussionDao {
 	

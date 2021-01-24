@@ -13,9 +13,6 @@ import javax.mail.internet.MimeMessage.RecipientType;
 
 import org.springframework.web.bind.annotation.SessionAttributes;
 
-import com.mchange.util.impl.StringEnumerationHelperBase;
-import com.web.book.dao.SearchBookDAO;
-
 @SessionAttributes(value = { "loginUser" })
 public class JavaMail_report {
 // ---------------------------------------------------------基本資料
