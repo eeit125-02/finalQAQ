@@ -334,9 +334,9 @@ public class SearchBookController {
 				finaldata.put("bk_Content", bookBean.getBk_Content());
 				finaldata.put("bk_Page", bookBean.getBk_Page());
 				finaldata.put("bk_Click", bookBean.getBk_Click());
-				if(bookBean.getBk_Page().equals(null)) {
-					finaldata.put("bk_Page","無資料");
-				}
+//				if(bookBean.getBk_Page().equals(null)) {
+//					finaldata.put("bk_Page","無資料");
+//				}
 				book.add(finaldata);
 			}
 			data.put("totalpage", totalpage);
