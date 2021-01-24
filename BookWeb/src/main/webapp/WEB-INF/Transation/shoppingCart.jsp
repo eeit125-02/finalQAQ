@@ -154,8 +154,7 @@
 									<input id="carNum" type="text" step="1" max="99" min="1" value="${v.cart_Num}" title="Qty" class="qty" size="4">
 									<input type="button" value="-" class="minus">
 								</div>
-								<input type="hidden" class="result"
-									value="0">
+								<input type="hidden" class="result" value="${v.cart_Price*v.cart_Num}">
 							</div>
 							<div class="col-2 col-sm-2 col-md-2 text-right">
 									<button type="button" class="btn btn-outline-danger btn-xs"
@@ -401,7 +400,8 @@
 				showCancelButton: true,
 				confirmButtonColor: '#3085d6',
 				cancelButtonColor: '#d33',
-				confirmButtonText: 'Yes, delete it!'
+				confirmButtonText: '確定',
+				cancelButtonText: '取消'
 			}).then((result) => {
 				if (result.isConfirmed) {
 					$.ajax({
@@ -419,7 +419,7 @@
 									'你購買的商品已經刪除',
 									'刪除成功!'
 									).then((result) => {
-										window.location.reload();
+										window.location.assign("<c:url value='/shopping'/>")
 									})
 						}
 					})
