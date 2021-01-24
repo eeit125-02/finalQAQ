@@ -186,19 +186,19 @@ legend {
 						role="tab">密碼修改</a>
 						
 					<a class="list-group-item list-group-item-action"
-						data-toggle="list" href="" id="bookEdit"
+						data-toggle="list" href="#" id="bookEdit"
 						role="tab">收藏清單</a>	
 
 					<a class="list-group-item list-group-item-action"
-						data-toggle="list" href="" id="sellEdit"
+						data-toggle="list" href="#" id="sellEdit"
 						role="tab">我的賣場</a>
 						
 					<a class="list-group-item list-group-item-action"
-						data-toggle="list" href="" id="join"
+						data-toggle="list" href="#" id="join"
 						role="tab">報名紀錄</a>
 						
 					<a class="list-group-item list-group-item-action"
-						data-toggle="list" href="" id="act"
+						data-toggle="list" href="#" id="act"
 						role="tab">活動紀錄</a>
 						
 					<a class="list-group-item list-group-item-action"
@@ -206,7 +206,7 @@ legend {
 						role="tab">讀書心得</a>
 						
 					<a class="list-group-item list-group-item-action"
-						data-toggle="list" href="" id="editDiscussion"
+						data-toggle="list" href="#" id="editDiscussion"
 						role="tab">討論管理</a>		
 
 
