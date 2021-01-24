@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import com.web.book.model.BookOrderBean;
+import com.web.book.model.OrderItemBean;
 import com.web.book.model.ShoppingCartBean;
 
 public interface ShoppingCartDao {
@@ -37,5 +38,8 @@ public interface ShoppingCartDao {
 	
 	//成功產生訂單後刪除購物車資料
 	void deleteAllCart(Integer bb_ID);
+	
+	//顯示訂單內所有商品
+	List<OrderItemBean> orderDetail(Integer bo_ID);
 
 }

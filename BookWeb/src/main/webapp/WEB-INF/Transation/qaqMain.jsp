@@ -44,7 +44,7 @@
 </head>
 <body>
 	<!-- header -->
-	<header class="blog-header py-3" id="bookWebheader"></header>
+	<header class="blog-header" id="bookWebheader"></header>
 	<!-- header -->
 	<div class="container">
 			<!-- 偷偷放購物車QAQ start -->
@@ -53,9 +53,9 @@
 <%--    src="${pageContext.request.contextPath}/image/shoppingCart1.png" --%>
 <!--    width="35px" height="35px"></a> -->
 		<!-- 偷偷放購物車QAQ end -->
-<%-- 		<form action='<c:url value="/testPage" />'> --%>
-<!-- 			<button type="submit" class="btn btn-primary">測試頁面</button> -->
-<!-- 		</form> -->
+		<form action='<c:url value="/testPage" />'>
+			<button type="submit" class="btn btn-primary">測試頁面</button>
+		</form>
 	<!-- 灌值 -->
 <%-- 			<form action="<c:url value='/boobplay'/>" method="get"> --%>
 <!-- 				<button type="submit">不要隨便亂按會爆炸</button> -->
@@ -152,7 +152,7 @@
 									<c:if test="${pageNow != 1}">
 										<li class="page-item"><a class="page-link"
 											href="<c:url value='/qaqTest/${pageType}/1'/>"
-											aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
+											aria-label="Previous"> <span aria-hidden="true">首頁</span>
 										</a></li>
 										<li class="page-item"><a class="page-link"
 											href="<c:url value='/qaqTest/${pageType}/${pageNow-1}'/>">
@@ -168,7 +168,7 @@
 												${pageNow+1} </a></li>
 										<li class="page-item"><a class="page-link"
 											href="<c:url value='/qaqTest/${pageType}/${pageSize}'/>"
-											aria-label="Next"> <span aria-hidden="true">&raquo;</span>
+											aria-label="Next"> <span aria-hidden="true">最後一頁</span>
 										</a></li>
 									</c:if>
 									<!-- 組右邊符號 end-->

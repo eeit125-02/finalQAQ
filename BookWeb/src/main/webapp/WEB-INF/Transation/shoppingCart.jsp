@@ -102,7 +102,7 @@
 <body>
 
 	<!-- header -->
-	<header class="blog-header py-3" id="bookWebheader"></header>
+	<header class="blog-header" id="bookWebheader"></header>
 	<!-- header -->
 	<!-- body -->
 	<!--測試用 -->
@@ -151,11 +151,11 @@
 							<div class="col-4 col-sm-4 col-md-4">
 								<div class="quantity">
 									<input type="button" value="+" class="plus"> 
-									<input id="carNum" type="number" step="1" max="99" min="1" value="${v.cart_Num}" title="Qty" class="qty" size="4">
+									<input id="carNum" type="text" step="1" max="99" min="1" value="${v.cart_Num}" title="Qty" class="qty" size="4">
 									<input type="button" value="-" class="minus">
 								</div>
 								<input type="hidden" class="result"
-									value="${v.cart_Num*v.cart_Price}">
+									value="0">
 							</div>
 							<div class="col-2 col-sm-2 col-md-2 text-right">
 									<button type="button" class="btn btn-outline-danger btn-xs"
@@ -201,7 +201,7 @@
 		aria-labelledby="exampleModalLabel" aria-hidden="true">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
-				<form action="<c:url value='checkout'/>" method="post">
+				<form action="<c:url value='/checkout'/>" method="post">
 					<div class="modal-header">
 						<h5 class="modal-title" id="exampleModalLabel">請輸入您的資訊</h5>
 						<button type="button" class="close" data-dismiss="modal"
@@ -287,48 +287,58 @@
 
 					$('.qty').each(function() {
 						$(this).change(function() {
+							var re = /[0-9]/gi;
 							var qty = $(this);
-							if($(this).val()<=1){
-								$.ajax({
-									async : false,
-									type : 'POST',
-									data : { cartNum : $(this).val(), bksID : $(this).parent().parent().parent().parent().prev().prev().val()
-										, cartID : $(this).parent().parent().parent().parent().prev().val()}, 
-									url : "<c:url value='/updateCart'/>",
-									dataType : "json",
-									error : function() {
-										alert("你做錯了喔!!!");
-									},
-									success : function(lsm) {
-										qty.val(lsm.minnum);
-										console.log(qty.val(lsm.minnum));
-									}
-								})
-							}else{
-								$.ajax({
-									async : false,
-									type : 'POST',
-									data : { cartNum : $(this).val(), bksID : $(this).parent().parent().parent().parent().prev().prev().val()
-										, cartID : $(this).parent().parent().parent().parent().prev().val()}, 
-									url : "<c:url value='/updateCart'/>",
-									dataType : "json",
-									error : function() {
-										alert("你做錯了喔!!!");
-									},
-									success : function(lsm1) {
-										if(qty.val() > lsm1.maxnum){
-											Swal.fire({
-												  icon: 'info',
-												  title: '警告',
-												  text: '不能超過庫存最大值!',
-												}).then((result) => {
-													qty.val(lsm1.maxnum)
-												})
-										} else{
-											qty.val(lsm1.buynum);
+							if(!re.test($(this).val())){
+								Swal.fire({
+									title: '警告!',
+									text: "請輸入數字!",
+									icon: 'warning',
+									confirmButtonText: "確定"
+									})						
+							} else{
+								if($(this).val()<=1){
+									$.ajax({
+										async : false,
+										type : 'POST',
+										data : { cartNum : $(this).val(), bksID : $(this).parent().parent().parent().parent().prev().prev().val()
+											, cartID : $(this).parent().parent().parent().parent().prev().val()}, 
+										url : "<c:url value='/updateCart'/>",
+										dataType : "json",
+										error : function() {
+											alert("你做錯了喔!!!");
+										},
+										success : function(lsm) {
+											qty.val(lsm.minnum);
+											console.log(qty.val(lsm.minnum));
 										}
-									}
-								})
+									})
+								}else{
+									$.ajax({
+										async : false,
+										type : 'POST',
+										data : { cartNum : $(this).val(), bksID : $(this).parent().parent().parent().parent().prev().prev().val()
+											, cartID : $(this).parent().parent().parent().parent().prev().val()}, 
+										url : "<c:url value='/updateCart'/>",
+										dataType : "json",
+										error : function() {
+											alert("你做錯了喔!!!");
+										},
+										success : function(lsm1) {
+											if(qty.val() > lsm1.maxnum){
+												Swal.fire({
+													  icon: 'info',
+													  title: '警告',
+													  text: '不能超過庫存最大值!',
+													}).then((result) => {
+														qty.val(lsm1.maxnum)
+													})
+											} else{
+												qty.val(lsm1.buynum);
+											}
+										}
+									})
+								}
 							}
 						}).prev().click(function() {
 							var qaq = parseInt($(this).next().val())+parseInt(1);

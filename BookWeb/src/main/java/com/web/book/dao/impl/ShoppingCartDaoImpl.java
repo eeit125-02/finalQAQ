@@ -119,5 +119,16 @@ public class ShoppingCartDaoImpl implements ShoppingCartDao {
 		query.setParameter("bb_ID", bb_ID);
 		query.executeUpdate();
 	}
+	
+	//顯示訂單內所有商品
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<OrderItemBean> orderDetail(Integer bo_ID) {
+		Session session = factory.getCurrentSession();
+		String hql = "From OrderItemBean where bo_ID = :bo_ID";
+		Query<OrderItemBean> query = session.createQuery(hql);
+		query.setParameter("bo_ID", bo_ID);
+		return query.getResultList();
+	}
 
 }

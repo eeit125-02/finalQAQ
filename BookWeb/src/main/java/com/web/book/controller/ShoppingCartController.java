@@ -20,6 +20,7 @@ import org.springframework.web.bind.support.SessionStatus;
 import com.web.book.model.BookOrderBean;
 import com.web.book.model.BookStoreBean;
 import com.web.book.model.MemberBean;
+import com.web.book.model.OrderItemBean;
 import com.web.book.model.ShoppingCartBean;
 import com.web.book.service.BookStoreService;
 import com.web.book.service.ShoppingCartService;
@@ -28,7 +29,7 @@ import ecpay.payment.integration.AllInOne;
 import ecpay.payment.integration.domain.AioCheckOutOneTime;
 
 @Controller
-@SessionAttributes(value = { "loginUser", "listCart" })
+@SessionAttributes(value = { "loginUser", "item", "total", "tstime"})
 public class ShoppingCartController {
 
 	@Autowired
@@ -62,11 +63,13 @@ public class ShoppingCartController {
 	}
 	
 	// 套用綠界 List<String>
-	@PostMapping("checkout")
+	@PostMapping("/checkout")
 	public String checkoutTest(Model model, 
 			@RequestParam String bo_Name, 
 			@RequestParam String bo_Add,
 			@RequestParam Integer bo_Cel
+//			@ModelAttribute("item") List<OrderItemBean> item,
+//			@ModelAttribute("total") int total
 			) {
 //		List<String> relist = new ArrayList<String>();
 		System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++");
@@ -81,9 +84,9 @@ public class ShoppingCartController {
 		}
 		int total = 0;
 		int count = 0;
-		int mb_Delete = 0;
+//		int mb_Delete = 0;
 		String success = "已結帳";
-		String fail = "未結帳";
+//		String fail = "未結帳";
 		Date date = new Date();
 		String url = "http://localhost:8080/BookWeb/qaqTest";
 		StringBuilder product = new StringBuilder();
@@ -109,17 +112,22 @@ public class ShoppingCartController {
 			}
 		}
 // 把購物車資料清掉
-		scService.deleteAllCart(loginUser.getMb_ID());
-		String form = genAioCheckOutOneTime(oreder.getBo_ID(), sdf.format(date), total, product.toString(), url);
-		model.addAttribute("obj", form);
-//		return relist;
-		return "/Transation/bkCheckout";
+//		scService.deleteAllCart(loginUser.getMb_ID());
+//		String form = genAioCheckOutOneTime(oreder.getBo_ID(), sdf.format(date), total, product.toString(), url);
+		List<OrderItemBean> item = scService.orderDetail(oreder.getBo_ID());
+//		model.addAttribute("obj", form);
+		model.addAttribute("item", item);
+		model.addAttribute("total", oreder.getBo_Total());
+		model.addAttribute("tstime", date);
+//		return relist;   
+//		return "/Transation/bkCheckout";
+		return "/Transation/transationDetail";
 	}
 	
-//	@GetMapping(value = "/bkCheckout")
-//	public String backtomain(Model model) {
-//		return "/Transation/bkCheckout";
-//	}
+	@GetMapping(value = "/transation")
+	public String tsDetail(Model model) {
+		return "/Transation/transationDetail";
+	}
 
 	// 點擊購物車
 	@GetMapping("/shopping")

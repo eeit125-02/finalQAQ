@@ -23,7 +23,6 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import com.web.book.model.BookBean;
 import com.web.book.model.BookStoreBean;
 import com.web.book.model.MemberBean;
-import com.web.book.model.ShoppingCartBean;
 import com.web.book.service.BookStoreService;
 import com.web.book.service.GlobalService;
 import com.web.book.service.SearchService;
@@ -59,7 +58,7 @@ public class StoreController {
 //		BookStoreBean store = bookStoreService.getOneBookStore(13061);
 //		model.addAttribute("qaq", store);
 //管理者測試頁面
-		return "Transation/shoppingCart";
+		return "Transation/testPage";
 	}
 
 	// 最終呈現首頁, 管理員a123456, ID=14
@@ -148,7 +147,23 @@ public class StoreController {
 			return "redirect:/toLogin";
 		}
 		List<BookStoreBean> list = bookStoreService.searchMemberStore(loginUser.getMb_ID());
-		model.addAttribute("myBookList", list);
+		List<Map<String, Object>> map = new ArrayList<>();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+		for (BookStoreBean store : list) {
+			Map<String, Object> data = new HashMap<>();
+			data.put("bks_ID", store.getBks_ID());
+			data.put("bk_Pic", store.getBook().getBk_Pic());
+			data.put("bs_Date", sdf1.format(store.getBs_Date()));
+			data.put("bk_Name", store.getBook().getBk_Name());
+			data.put("bk_Author", store.getBook().getBk_Author());
+			data.put("bk_Publish", store.getBook().getBk_Publish());
+			data.put("bk_Date", sdf.format(store.getBook().getBk_Date()));
+			data.put("bs_Price", store.getBs_Price());
+			data.put("bs_Num", store.getBs_Num());
+			map.add(data);
+		}
+		model.addAttribute("myBookList", map);
 		return "/Transation/myStore";
 	}
 
@@ -162,7 +177,23 @@ public class StoreController {
 		}
 		bookStoreService.insertSearchBookName(bs_Num, bs_Price, bk_ID, loginUser.getMb_ID());
 		List<BookStoreBean> list = bookStoreService.searchMemberStore(loginUser.getMb_ID());
-		model.addAttribute("myBookList", list);
+		List<Map<String, Object>> map = new ArrayList<>();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+		for (BookStoreBean store : list) {
+			Map<String, Object> data = new HashMap<>();
+			data.put("bks_ID", store.getBks_ID());
+			data.put("bk_Pic", store.getBook().getBk_Pic());
+			data.put("bs_Date", sdf1.format(store.getBs_Date()));
+			data.put("bk_Name", store.getBook().getBk_Name());
+			data.put("bk_Author", store.getBook().getBk_Author());
+			data.put("bk_Publish", store.getBook().getBk_Publish());
+			data.put("bk_Date", sdf.format(store.getBook().getBk_Date()));
+			data.put("bs_Price", store.getBs_Price());
+			data.put("bs_Num", store.getBs_Num());
+			map.add(data);
+		}
+		model.addAttribute("myBookList", map);
 		return "/Transation/myStore";
 	}
 
@@ -186,6 +217,7 @@ public class StoreController {
 		Map<String, Object> data = new HashMap<>();
 		List<Map<String, Object>> bookList = new ArrayList<>();
 		List<BookStoreBean> list = bookStoreService.searchStoreBookName(bk_Name, page, 14);
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		for (BookStoreBean bookStoreBean : list) {
 			Map<String, Object> searchData = new HashMap<>();
 			searchData.put("bk_ID", bookStoreBean.getBook().getBk_ID());
@@ -193,7 +225,7 @@ public class StoreController {
 			searchData.put("bk_Name", bookStoreBean.getBook().getBk_Name());
 			searchData.put("bk_Author", bookStoreBean.getBook().getBk_Author());
 			searchData.put("bk_Publish", bookStoreBean.getBook().getBk_Publish());
-			searchData.put("bk_Date", bookStoreBean.getBook().getBk_Date());
+			searchData.put("bk_Date", sdf.format(bookStoreBean.getBook().getBk_Date()));
 			bookList.add(searchData);
 		}
 		data.put("pageSize", bookStoreService.getSearchStoreBookNameSize(bk_Name, 14));
@@ -270,7 +302,23 @@ public class StoreController {
 		}
 		bookStoreService.deleteBookStore(bks_ID);
 		List<BookStoreBean> list = bookStoreService.searchMemberStore(loginUser.getMb_ID());
-		model.addAttribute("myBookList", list);
+		List<Map<String, Object>> map = new ArrayList<>();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+		for (BookStoreBean store : list) {
+			Map<String, Object> data = new HashMap<>();
+			data.put("bks_ID", store.getBks_ID());
+			data.put("bk_Pic", store.getBook().getBk_Pic());
+			data.put("bs_Date", sdf1.format(store.getBs_Date()));
+			data.put("bk_Name", store.getBook().getBk_Name());
+			data.put("bk_Author", store.getBook().getBk_Author());
+			data.put("bk_Publish", store.getBook().getBk_Publish());
+			data.put("bk_Date", sdf.format(store.getBook().getBk_Date()));
+			data.put("bs_Price", store.getBs_Price());
+			data.put("bs_Num", store.getBs_Num());
+			map.add(data);
+		}
+		model.addAttribute("myBookList", map);
 		return "/Transation/myStore";
 	}
 
@@ -283,8 +331,25 @@ public class StoreController {
 			return "redirect:/toLogin";
 		}
 		bookStoreService.updateBookStore(bks_ID, bs_Num, bs_Price);
+		List<Map<String, Object>> map = new ArrayList<>();
 		List<BookStoreBean> list = bookStoreService.searchMemberStore(loginUser.getMb_ID());
-		model.addAttribute("myBookList", list);
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+		for (BookStoreBean store : list) {
+			Map<String, Object> data = new HashMap<>();
+			data.put("bks_ID", store.getBks_ID());
+			data.put("bk_Pic", store.getBook().getBk_Pic());
+			data.put("bs_Date", sdf1.format(store.getBs_Date()));
+			data.put("bk_Name", store.getBook().getBk_Name());
+			data.put("bk_Author", store.getBook().getBk_Author());
+			data.put("bk_Publish", store.getBook().getBk_Publish());
+			data.put("bk_Date", sdf.format(store.getBook().getBk_Date()));
+			data.put("bs_Price", store.getBs_Price());
+			data.put("bs_Num", store.getBs_Num());
+			map.add(data);
+		}
+		
+		model.addAttribute("myBookList", map);
 		return "/Transation/myStore";
 	}
 

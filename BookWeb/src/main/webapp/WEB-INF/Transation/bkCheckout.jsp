@@ -44,17 +44,19 @@
 <body>
 
 	<!-- header -->
-	<header class="blog-header py-3" id="bookWebheader"></header>
+	<header class="blog-header" id="bookWebheader"></header>
 	<!-- header -->
 
 	<!-- body -->
 	<div class="container media">
 ${ obj}
-		<h1>
-			<BR> 親愛的會員  您好： <BR> <FONT
-				COLOR='RED'>二手書圖</FONT><BR> 感謝您的訂購<BR> 期待您再度光臨
-		</h1>
-		<BR>
+<%-- ${sessionScope.total} --%>
+<%-- ${sessionScope.item} --%>
+<!-- 		<h1> -->
+<!-- 			<BR> 親愛的會員  您好： <BR> <FONT -->
+<!-- 				COLOR='RED'>二手書圖</FONT><BR> 感謝您的訂購<BR> 期待您再度光臨 -->
+<!-- 		</h1> -->
+<!-- 		<BR> -->
 
 
 

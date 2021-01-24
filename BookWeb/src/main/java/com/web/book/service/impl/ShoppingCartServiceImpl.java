@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.web.book.dao.ShoppingCartDao;
 import com.web.book.model.BookOrderBean;
+import com.web.book.model.OrderItemBean;
 import com.web.book.model.ShoppingCartBean;
 import com.web.book.service.ShoppingCartService;
 
@@ -68,6 +69,11 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 	@Override
 	public void deleteAllCart(Integer bb_ID) {
 		dao.deleteAllCart(bb_ID);
+	}
+
+	@Override
+	public List<OrderItemBean> orderDetail(Integer bo_ID) {
+		return dao.orderDetail(bo_ID);
 	}
 	
 	

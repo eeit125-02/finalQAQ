@@ -48,7 +48,7 @@
 </head>
 <body>
 	<!-- header -->
-	<header class="blog-header py-3" id="bookWebheader"></header>
+	<header class="blog-header" id="bookWebheader"></header>
 	<!-- header -->
 	<!-- body -->
 	<!-- 	我是測試線 -->

@@ -48,10 +48,9 @@
 	<!-- header -->
 	<header class="blog-header" id="bookWebheader"></header>
 	<!-- header -->
-	<%-- ${sessionScope.total} --%>
-	<%-- ${sessionScope.item} --%>
+
 	<!-- body -->
-	<div class="container">
+	<div class="container media">
 
 		<div class="card" style="font-size: 16px">
 			<div class="card-header text-center">二手書圖感謝您的購買歡迎再次光臨</div>
@@ -72,37 +71,6 @@
 			</div>
 		</div>
 
-
-
-
-
-		<!-- 	管理者頁面試做 -->
-		<!-- 		<div class="row"> -->
-		<!-- 			<div class="col-lg-4"> -->
-		<!-- 				<label for="url"></label> <img alt="圖勒?" width="300px" -->
-		<%-- 					height="400px" src="<c:url value='${qaq.book.bk_Pic}'/>"> --%>
-		<!-- 			</div> -->
-		<!-- 			<div class="col-lg-8"> -->
-		<!-- 				<h5>賣場編號:</h5> -->
-		<%-- 				<span> ${qaq.bks_ID}</span> --%>
-		<!-- 				<hr> -->
-		<!-- 				<h5>賣家編號:</h5> -->
-		<%-- 				<span> ${qaq.member.mb_ID}</span> --%>
-		<!-- 				<hr> -->
-		<!-- 				<h5>賣家名子:</h5> -->
-		<%-- 				<span> ${qaq.member.mb_Name}</span> --%>
-		<!-- 				<hr> -->
-		<!-- 				<h5>上架時間:</h5> -->
-		<%-- 				<span> ${qaq.bs_Date}</span> --%>
-		<!-- 				<hr> -->
-		<!-- 				<h5>書本價格:</h5> -->
-		<%-- 				<span> ${qaq.bs_Price}</span> --%>
-		<!-- 				<hr> -->
-		<!-- 				<h5>庫存:</h5> -->
-		<%-- 				<span>${qaq.bs_Num}</span> --%>
-		<!-- 			</div> -->
-		<!-- 		</div> -->
-		<!-- 	管理者頁面試做 -->
 	</div>
 	<!-- body -->
 

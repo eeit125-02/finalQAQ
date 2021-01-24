@@ -45,7 +45,7 @@
 <body>
 
 	<!-- header -->
-	<header class="blog-header py-3" id="bookWebheader"></header>
+	<header class="blog-header" id="bookWebheader"></header>
 	<!-- header -->
 
 	<div class="container media">
@@ -74,13 +74,13 @@
 				</div>
 				<hr>
 				<c:forEach var="v" items="${myBookList}">
-					<input type="hidden" class="myImg" value="${v.book.bk_Pic}">
+					<input type="hidden" class="myImg" value="${v.bk_Pic}">
 					<div class="row">
 						<div class="col-lg-2">${v.bs_Date}</div>
-						<div class="col-lg-2">${v.book.bk_Name}</div>
-						<div class="col-lg-1">${v.book.bk_Author}</div>
-						<div class="col-lg-1">${v.book.bk_Publish}</div>
-						<div class="col-lg-2">${v.book.bk_Date}</div>
+						<div class="col-lg-2">${v.bk_Name}</div>
+						<div class="col-lg-1">${v.bk_Author}</div>
+						<div class="col-lg-1">${v.bk_Publish}</div>
+						<div class="col-lg-2">${v.bk_Date}</div>
 						<div class="col-lg-1">${v.bs_Price}</div>
 						<div class="col-lg-1">${v.bs_Num}</div>
 						<div class="col-lg-2">
@@ -89,7 +89,6 @@
 								data-target="#exampleModalCenter">修改</button>
 							<button type="submit" value="${v.bks_ID}" name="deletebk"
 								onclick="deletebk(${v.bks_ID})" class="btn btn-outline-info">刪除</button>
-							<%-- onclick="update(${v.bks_ID})"	onclick="delete(${v.bks_ID})" --%>
 						</div>
 					</div>
 					<input type="hidden" value="${v.bks_ID}">
@@ -111,10 +110,10 @@
 						<img class="card-img-top" alt="..."
 							style="height: 15rem; width: 10rem">
 						<div class="card-body">
-							<h5 class="card-title">${v.book.bk_Name}</h5>
-							<p class="card-text Author">作者: ${v.book.bk_Author}</p>
-							<p class="card-text Publish">出版社: ${v.book.bk_Publish}</p>
-							<p class="card-text Date">出版日: ${v.book.bk_Date}</p>
+							<h5 class="card-title">${v.bk_Name}</h5>
+							<p class="card-text Author">作者: ${v.bk_Author}</p>
+							<p class="card-text Publish">出版社: ${v.bk_Publish}</p>
+							<p class="card-text Date">出版日: ${v.bk_Date}</p>
 							<form action="<c:url value='/updatebk'/>" method="post">
 								<input type="hidden" name="updateBk" class="updateBk">
 								<p class="card-text">
@@ -205,19 +204,20 @@
 
 		function deletebk(id) {
 			Swal.fire({
-				  title: 'Are you sure?',
-				  text: "You won't be able to revert this!",
+				  title: '你確定嗎?',
+				  text: "你將無法復原!",
 				  icon: 'warning',
 				  showCancelButton: true,
 				  confirmButtonColor: '#3085d6',
 				  cancelButtonColor: '#d33',
-				  confirmButtonText: 'Yes, delete it!'
+				  confirmButtonText: '確定',
+				  cancelButtonText: '取消'
 				}).then((result) => {
 				  if (result.isConfirmed) {
 				    Swal.fire(
-				      'Deleted!',
-				      'Your file has been deleted.',
-				      'success'
+				      '已經刪除!',
+				      '你上架的書籍已經刪除',
+				      '成功'
 				    ).then((result) => {
 				    	document.forms[0].action="<c:url value='/deletebk?bks_ID=" + id + "' />" ;
 			 			document.forms[0].method="post";

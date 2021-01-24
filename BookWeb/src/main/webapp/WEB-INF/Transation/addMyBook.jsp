@@ -53,7 +53,7 @@
 <body>
 
 	<!-- header -->
-	<header class="blog-header py-3" id="bookWebheader"></header>
+	<header class="blog-header" id="bookWebheader"></header>
 	<!-- header -->
 
 	<div class="container">
@@ -115,13 +115,14 @@
 				</div>
 			</div>
 			<div class="row">
-				<div class="form-group col-sm-7"></div>
-				<div class="form-group col-sm-2">
-					<button id="send" type="submit" class="btn btn-outline-success">確認新增</button>
+				<div class="form-group col-sm-10"></div>
+				<div class="form-group col-sm-1" >
+					<button id="send" type="submit" class="btn btn-outline-success" style="float:right;margin-right:15px">確認新增</button>
 				</div>
-				<div class="form-group col-sm-2">
-					<button id="finish" type="button" class="btn btn-outline-dark">一鍵完成</button>
+				<div class="form-group col-sm-1" >
+					<button id="finish" type="button" class="btn btn-outline-dark" style="float:right;margin-right:15px">一鍵完成</button>
 				</div>
+<!-- 				style="margin-right: 100px" -->
 			</div>
 		</form:form>
 	</div>
