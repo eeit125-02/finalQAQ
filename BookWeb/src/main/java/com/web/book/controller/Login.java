@@ -379,7 +379,9 @@ public class Login {
 	@GetMapping("/toCity")
 	public String tocity(Model model) {
 		MemberBean loginUser = (MemberBean)model.getAttribute("loginUser");
+		System.out.println(logincheck);
 		if(loginUser==null) {
+			logincheck=null;
 			return "redirect:toLogin";
 		}
 		MemberBean inf = ms.select(loginUser.getMb_Account());
@@ -387,12 +389,15 @@ public class Login {
 		model.addAttribute("login",inf);
 		if(loginUser.getMb_Account().equals("a123456")) {
 			model.addAttribute("third","admin");
+			System.out.println("99999999");
 			return "Member/city";
-		}else if(logincheck.equals("b")) {
-			model.addAttribute("common","common");
+		}else if(logincheck=="b") {
+			model.addAttribute("third","common");
+			System.out.println("123");
 			return "Member/city";
 		}else {
 			model.addAttribute("third","third");
+			System.out.println("456");
 			return "Member/city";
 		}
 	}

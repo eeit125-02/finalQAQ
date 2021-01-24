@@ -8,11 +8,11 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 @ControllerAdvice
 public class ExceptionHandlerController {
 
-    @ExceptionHandler(Throwable.class)
-    public String ExHandler(Throwable e, Model model) {
-    	model.addAttribute("exception", e);
-    	System.err.println(e.getMessage());
-    	System.err.println(e.getLocalizedMessage());
-        return "/ErrorPage"; 
-    }
+//    @ExceptionHandler(Throwable.class)
+//    public String ExHandler(Throwable e, Model model) {
+//    	model.addAttribute("exception", e);
+//    	System.err.println(e.getMessage());
+//    	System.err.println(e.getLocalizedMessage());
+//        return "/ErrorPage"; 
+//    }
 }
