@@ -25,6 +25,7 @@ public class MemberDaoImpl implements MemberDao {
 		return true;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public boolean Login(String account, String pwd) {
 		boolean result = false;
@@ -38,6 +39,7 @@ public class MemberDaoImpl implements MemberDao {
 		return result;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public boolean checkAccount(String account) {
 		boolean result = false;
@@ -52,6 +54,7 @@ public class MemberDaoImpl implements MemberDao {
 		return result;
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	public boolean checkMail(String email) {
 		boolean result = false;
@@ -66,6 +69,7 @@ public class MemberDaoImpl implements MemberDao {
 		return result;
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	public MemberBean email(String email) {
 		System.out.println(email);
@@ -84,6 +88,7 @@ public class MemberDaoImpl implements MemberDao {
 		return true;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public MemberBean select(String account) {
 		String hql = "FROM MemberBean WHERE mb_Account=:account";
@@ -94,6 +99,7 @@ public class MemberDaoImpl implements MemberDao {
 	}
 	
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<MemberBean> adminselect() {
 		List<MemberBean> dep = new ArrayList<MemberBean>();
@@ -105,6 +111,7 @@ public class MemberDaoImpl implements MemberDao {
 		return dep;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public boolean checkColume(String account) {
 		String hql = "FROM MemberBean WHERE mb_Account=:account";
@@ -115,6 +122,7 @@ public class MemberDaoImpl implements MemberDao {
 		return mb.isCheckColume();
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public void change(String account) {
 		String hql = "FROM MemberBean WHERE mb_Account=:account";

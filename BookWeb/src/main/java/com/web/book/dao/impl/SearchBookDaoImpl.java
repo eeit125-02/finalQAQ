@@ -74,7 +74,6 @@ public class SearchBookDaoImpl implements SearchBookDAO {
 	public List<BookBean> searchBookType(List<Integer> reslist, Integer page) {
 		Session session = factory.getCurrentSession();
 		List<BookBean> res1 = new ArrayList<BookBean>();
-		ArrayList<BookBean> res = new ArrayList<BookBean>();
 
 		String sql = null;
 		System.out.println("uuuuuuuuuuuuuuuuuuuuuuu"+reslist);
