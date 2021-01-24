@@ -3,7 +3,6 @@ package com.web.book.service;
 import java.util.List;
 
 import com.web.book.model.ActBean;
-import com.web.book.model.ActJoinBean;
 
 public interface ActService {	
 

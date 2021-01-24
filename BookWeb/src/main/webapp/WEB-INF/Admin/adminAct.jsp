@@ -2,14 +2,15 @@
 	pageEncoding="UTF-8"%>
 <meta charset="UTF-8">
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.23/datatables.min.css"/>
+<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.23/datatables.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.css">
-<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
+<%-- <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/js/DataTables/datatables.min.css"/>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/DataTables/datatables.min.js"></script> --%>
 
 <style>
 .bd-placeholder-img {
@@ -162,9 +163,9 @@
 	
 	var reportTable;
 	var star = 0;
-
+	getDataTable();
 	$(document).ready( function () {
-		getDataTable();
+		
 	})
 	
 	function getDataTable(){
@@ -213,17 +214,33 @@
         }); 
 	}
 	
-	function viewData(reportId){
+	function viewData(selectId){
 		var insertHtml;
 		$.ajax({
 			async : false,
 			type : 'POST',
-			url : "http://localhost:8080/BookWeb/BookReport/viewBookReport/"+reportId,
+			url : "http://localhost:8080/BookWeb/Admin/getAct",
+			data :{ actId : selectId },
 			dataType : "json",
-			contentType : "application/json;charset=utf-8",
 			success : function(data) {
 				
-				insertHtml = "<div class=\"media\">"
+				/* insertHtml = "<div class=\"modal-body\">"
+		        			+ "<p><input type =\"image\" src=\""+ data.actImage +"\"  style=\"width: 300px; height: 380px; align:center\"></p>"
+		       				+ "<p>活動主題:"+ data.actTheme +"</p>"
+		       				+ "<p><img src="+${pageContext.request.contextPath}+"/image/date.png style=\"width:22px;height:22px\">"+ data.actDate +"</p>"
+		        			+ "<p><img src="+${pageContext.request.contextPath}+"/image/time.png style=\"width:22px;height:22px\">"+ data.actTime +"</p>"                             
+		       				+ "<p><button class=\"mapbutton\" style=\"background-color:white\" id=\"myModal\"  value=\""+ data.actLoc +"\" data-toggle=\"modal\"  title=\"Google地圖\" data-target=\"#myModal1\"><img src="+${pageContext.request.contextPath}+"/image/map1.png style=\"width:25px;height:25px\" title=\"Google地圖\">"+ data.actLoc +"</button></p>"     
+		       				+ "<p>活動簡介:<br>"+ data.actIntro +"</p>"
+		       				+ "<p>活動名額:"+ data.actDifferentpax +"/"+ data.actPax +"</p>"  
+		       				+ "<hr>"
+		       				+ "</div>"
+		    				+ "<div class=\"modal-footer\">"
+		          			+ "</div>"
+		          			+ "</div>"
+		        			+ "</div>"
+		      				+ "</div>"    
+		     				+ "</div>" */
+				/* insertHtml = "<div class=\"media\">"
 						   + "<img id=\"bkPic\" src=\""+ data.bk_Pic +"\" class=\"w-25 h-25 p-2\">"
 						   + "<div class=\"media-body ml-5\">"
 						   + "<form class=\"col-ml-4\">"
@@ -262,7 +279,7 @@
 						   + "<br>"
 						   + "<h3>心得:</h3>"
 						   + "<hr>"
-						   + "<p>"+ data.br_Content +"</p>"
+						   + "<p>"+ data.br_Content +"</p>" */
 						   
 			   star = data.br_Score
 			   swal.fire({
@@ -291,8 +308,8 @@
 				 $.ajax({
 					async : false,
 					type : 'POST',
-					url : "http://localhost:8080/BookWeb/Admin/deleteBookReport",
-					data : {brId:deleteBrId},
+					url : "http://localhost:8080/BookWeb/Admin/deleteAct",
+					data : {actId:deleteBrId},
 					dataType : "json",
 					success : function(data) {
 						if(data && typeof(data) == "boolean"){								

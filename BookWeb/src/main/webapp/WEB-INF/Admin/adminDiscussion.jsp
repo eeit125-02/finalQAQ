@@ -2,13 +2,14 @@
 	pageEncoding="UTF-8"%>
 <meta charset="UTF-8">    
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.23/datatables.min.css"/>
+<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.23/datatables.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.css">
-<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 
 
 <style>
@@ -161,7 +162,6 @@
 	});
 	
 	var reportTable;
-	var star = 0;
 
 	$(document).ready( function () {
 		getDataTable();
@@ -213,58 +213,23 @@
         }); 
 	}
 	
-	function viewData(reportId){
+	function viewData(selectId){
 		var insertHtml;
+		console.log(selectId);
 		$.ajax({
 			async : false,
 			type : 'POST',
-			url : "http://localhost:8080/BookWeb/BookReport/viewBookReport/"+reportId,
+			url : "http://localhost:8080/BookWeb/Admin/getPost",
+			data :{ postId : selectId },
 			dataType : "json",
-			contentType : "application/json;charset=utf-8",
 			success : function(data) {
 				
-				insertHtml = "<div class=\"media\">"
-						   + "<img id=\"bkPic\" src=\""+ data.bk_Pic +"\" class=\"w-25 h-25 p-2\">"
-						   + "<div class=\"media-body ml-5\">"
-						   + "<form class=\"col-ml-4\">"
-						   + "<br>"
-						   + "<div class=\"form-inline\">"
-						   + "<p class=\"messageSize\" id=\"brTitel\">閱讀標題："+ data.br_Name +"</p> "
+				insertHtml = "<div style=\"border: #ADADAD 2px solid; border-radius: 5px; text-align: left; padding: 10px; margin: 0px 10px\">"
+			    		   + "<p>"+ data.postMember +"<br>"+ data.postTime +"</p>"
+			     		   + "<h3><strong>"+ data.postTitle +"</strong></h3>"
+			     		   + "<p>"+ data.postContent +"</p>"
 						   + "</div>"
-						   + "<div class=\"form-inline\">"
-						   + "<p class=\"messageSize\" id=\"userAccount\">撰寫者："+ data.userAccount +"</p>"
-						   + "</div>"
-						   + "<div class=\"form-inline\">"
-						   + "<p class=\"messageSize ellipsis\" id=\"bkName\">書名："+ data.bk_Name +"</p>"
-						   + "</div>"
-						   + "<div id=\"bookWriter\" class=\"form-inline\">"
-						   + "<p class=\"messageSize\" id=\"bkAuthor\">作者："+ data.bk_Author +"</p>"
-						   + "</div>"
-						   + "<div class=\"form-inline\">"
-						   + "<p class=\"messageSize\" id=\"bkPublish\">出版社："+ data.bk_Publish +"</p>"
-						   + "</div>"
-						   + "<div class=\"form-inline\">"
-						   + "<lable class=\"messageSize\">評分：</lable>"
 						   
-						   for(let i = 0; i < data.br_Score; i++){
-							   
-							   insertHtml += "<span class=\"fa fa-star checked ml-2\"></span>"
-						   }
-						   for(let i = 0; i < 5-data.br_Score; i++){
-							   
-							   insertHtml += "<span class=\"fa fa-star unchecked ml-2\"></span>"
-						   }
-						   
-			   insertHtml += "</div>"
-						   + "</form>"
-						   + "</div>"
-						   + "</div>"
-						   + "<br>"
-						   + "<h3>心得:</h3>"
-						   + "<hr>"
-						   + "<p>"+ data.br_Content +"</p>"
-						   
-			   star = data.br_Score
 			   swal.fire({
 					  width: '850px',
 					  html: insertHtml,  
@@ -291,8 +256,8 @@
 				 $.ajax({
 					async : false,
 					type : 'POST',
-					url : "http://localhost:8080/BookWeb/Admin/deleteBookReport",
-					data : {brId:deleteBrId},
+					url : "http://localhost:8080/BookWeb/Admin/deletePost",
+					data : {postId:deleteBrId},
 					dataType : "json",
 					success : function(data) {
 						if(data && typeof(data) == "boolean"){								

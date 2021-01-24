@@ -69,7 +69,6 @@ public class SearchOrderBookDaoImpl implements SearchOrderBookDAO {
 	public List<BookBean> searchOrderBookType(List<Integer> reslist, Integer page) {
 		Session session = factory.getCurrentSession();
 		List<BookBean> res1 = new ArrayList<BookBean>();
-		ArrayList<BookBean> res = new ArrayList<BookBean>();
 
 		String sql = null;
 		System.out.println("uuuuuuuuuuuuuuuuuuuuuuu"+reslist);
@@ -164,7 +163,6 @@ maxpage=query.getResultList().size();
 	public List<BookBean> searchOrderBookTypeDate(List<Integer> reslist, Integer page) {
 		Session session = factory.getCurrentSession();
 		List<BookBean> res1 = new ArrayList<BookBean>();
-		ArrayList<BookBean> res = new ArrayList<BookBean>();
 
 		String sql = null;
 		int count = reslist.size();
@@ -238,7 +236,6 @@ maxpage=query.getResultList().size();
 	public List<BookBean> searchOrderBookTypeClick(List<Integer> reslist, Integer page) {
 		Session session = factory.getCurrentSession();
 		List<BookBean> res1 = new ArrayList<BookBean>();
-		ArrayList<BookBean> res = new ArrayList<BookBean>();
 
 		String sql = null;
 		int count = reslist.size();

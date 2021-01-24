@@ -103,6 +103,7 @@ public class ActJoinDaoImpl implements ActJoinDao {
 		return count;
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	public boolean check(Integer mb_ID,Integer act_ID) {
 		boolean result = false;

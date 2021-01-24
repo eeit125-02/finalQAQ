@@ -23,6 +23,12 @@ public interface AdminService {
 	// 獲取單一書本資訊
 	Map<String, Object> getBookInfo(Integer bkId);
 	
+	// 取得單一討區資料
+	Map<String, Object> getPostInfo(Integer postId);
+	
+	// 取得單一活動資料
+	Map<String, Object> getActInfo(Integer actId);
+	
 	// 獲得近半年心得撰寫報表
 	Map<String, Object> getMonthReportWrite();
 	
@@ -34,6 +40,14 @@ public interface AdminService {
 	
 	// 刪除指定書書籍
 	Boolean deleteBook(Integer bkID);
+	
+	//刪除指定貼文
+	Boolean deletePost(Integer postId);
+	
+	//刪除指定活動
+	Boolean deleteAct(Integer actId);
+
+	
 	
 	
 }
