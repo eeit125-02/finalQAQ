@@ -73,53 +73,53 @@
 		<div class="center">
 			<H1>新增報名資料</H1>
 			<form:form method="POST" modelAttribute="ajb" enctype="multipart/form-data" id="showAlert">
-			  <div>
-				<div class="form-row">
-					<div class="form-group col-md-6">
-					<label class="form-control">會員帳號:${loginUser.mb_Account}</label>
-<%-- 						<td><input type="hidden" name="mb_Account" value="${member.mb_Account}" /></td> --%>
+			<hr>
+			<br>
+			  <fieldset>
+			  <form>
+				
+					<div class="form-group">
+					<label>會員帳號:${loginUser.mb_Account}</label>
 					<form:input type="hidden" path="member.mb_Account" value="${loginUser.mb_Account}"/>
+					</div>
+				
+					<div class="form-group">     
+					<label>活動名稱:${act_Name}</label>				
+					</div>
+				
+
+                	<div class="form-group">
+					<label>會員姓名:${loginUser.getMb_Name()}</label>
+					</div>
+
+					<div class="form-group">
 					
-         
-					<label>活動名稱:${act_Name}</label>
-<%-- 						<td><input type="hidden" name="act_Name" value="${act.act_Name}" /></td> --%>
-				
-
-                 
-						<label>會員姓名:${loginUser.getMb_Name()}</label>
-<%-- 						<td><input type="hidden" name="mb_Name" value="${member.mb_Name}" /></td> --%>
-				
-
-				
-					<form:label path="member.mb_Mail">email:</form:label>
+					<label >email:</label>
 					<form:input path="member.mb_Mail" value="${loginUser.getMb_Mail()}"/>
-					
+					</div>
 
-				
+					<div class="form-group">
 					<form:label path="member.mb_Tel">聯絡電話:</form:label>
 					<form:input path="member.mb_Tel" value="${loginUser.getMb_Tel()}"/>
-				
+					</div>
 
 
-<!-- 					<tr> -->
-<%-- 						<td><form:label path="join_Pax">報名人數:</form:label></td> --%>
-<%-- 						<td><form:input path="join_Pax" /></td> --%>
-<!-- 					</tr> -->
 
+				<hr>
+				<input type='reset' class="btn btn-primary" value='還原' />
+				<button id="cools" class="btn btn-primary" type='button' onclick='cool()' >提交</button>
+	
+				</form>
+				</fieldset>
+				</form:form>
 				</div>
-</div>
-</div>
-<!-- 				<input type='submit' value='提交' id="confirmjoin"/> -->
 				
 				<br>
 				<br>
-			</form:form>
-			</div>
-			<input type='reset' value='還原' />
-			<button id="cools" type='button' onclick='cool()' >提交</button>
 				<a href='${pageContext.request.contextPath}/showActs'>繼續探索活動</a>
+				</div>
 
-</div>
+
 
 		<!-- body -->
 

@@ -33,7 +33,7 @@ public class ActFormValidator implements Validator {
 //			errors.rejectValue("name", "customerBean.name.size");
 //		}	
 		System.out.println("515156++++++++++++++++++");
-		if (actbean.getact_Name() != null && actbean.getact_Name().length() < 2 && actbean.getact_Name().contains(" ")) {
+		if (actbean.getact_Name() != null && actbean.getact_Name().contains(" ")) {
 			errors.rejectValue("act_Name", " ", "請填寫活動名稱");
 		}
 
@@ -45,8 +45,8 @@ public class ActFormValidator implements Validator {
 			errors.rejectValue("act_Guest", " ", "請填寫活動嘉賓");
 		}		
 		
-		if (actbean.getact_Image().isEmpty() && actbean.getact_Image() != null) {
-			errors.rejectValue("act_Image", " ", "actbean.actimage.empty");			
+		if (actbean.getact_Image().isEmpty()) {
+			errors.rejectValue("act_Image", " ", "請上傳圖片");			
 		}
 		
 		try {
@@ -64,34 +64,33 @@ public class ActFormValidator implements Validator {
 //			errors.rejectValue("act_Pax", " ", "actbean.actpax.empty");
 //		}			
 
-		
-		
+				
 		if (actbean.getact_Place() != null && actbean.getact_Place().isEmpty()) {
-			errors.rejectValue("act_Place", " ", "actbean.actplace.empty");
+			errors.rejectValue("act_Place", " ", "請選擇活動場所");
 		}
 
 		if ( actbean.getact_Date().isEmpty()) {
-			errors.rejectValue("act_Date", " ", "actbean.actdate.empty");
+			errors.rejectValue("act_Date", " ", "請選擇活動日期");
 		}
 		
 		if ( actbean.getact_Time().isEmpty()  && actbean.getact_Time().length() < 5 && actbean.getact_Loc().length() > 15) {
-			errors.rejectValue("act_Time", " ", "actbean.acttime.empty");
+			errors.rejectValue("act_Time", " ", "請選擇活動時間");
 		}
 		
 		if (actbean.getact_Loc() != null && actbean.getact_Loc().isEmpty()) {
-			errors.rejectValue("act_Loc", " ", "actbean.actloc.empty");
+			errors.rejectValue("act_Loc", " ", "請輸入活動地點");
 		}
 
 		if (actbean.getact_Tag() != null && actbean.getact_Tag().isEmpty()) {
-			errors.rejectValue("act_Tag", " ", "actbean.acttag.empty");
+			errors.rejectValue("act_Tag", " ", "請選擇活動標籤");
 		}
 
-		if (actbean.getact_Rule() != null && actbean.getact_Rule().isEmpty() && actbean.getact_Rule().contains(" ") && actbean.getact_Rule().length() < 2 || actbean.getact_Rule().length() > 30) {
-			errors.rejectValue("act_Rule", " ", "actbean.actrule.empty");
+		if (actbean.getact_Rule() != null && actbean.getact_Rule().isEmpty() && actbean.getact_Rule().contains(" ") && actbean.getact_Rule().length() < 2 || actbean.getact_Rule().length() > 200) {
+			errors.rejectValue("act_Rule", " ", "清輸入活動摘要");
 		}
 		
-		if (actbean.getact_Intro() != null && actbean.getact_Intro().isEmpty()) {
-			errors.rejectValue("act_Intro", " ", "actbean.actimage.empty");
+		if (actbean.getact_Intro().isEmpty()) {
+			errors.rejectValue("act_Intro", " ", "請輸入活動簡介");
 		}
 		System.out.println("578967867856786786+++++++++");	
 	}

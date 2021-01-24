@@ -58,6 +58,7 @@ public class ActJoinController {
 			) {
 		System.out.println("aaaaaaaa");
 		List<ActJoinBean> mbjoinlist = actjoinService.getJoinRecords(loginUser.getMb_ID());
+		model.addAttribute("name",loginUser.getMb_Name());
 		model.addAttribute("mbjoinlist", mbjoinlist);		
 		return "Activity/showJoinbyID";
 		

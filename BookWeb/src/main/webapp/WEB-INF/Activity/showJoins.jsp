@@ -73,15 +73,15 @@ td{
 		<p>&nbsp;</p>
 		<hr>
 		<div class='center'>
-			<h1>報名紀錄</h1>
+		<br>
+			<h1>所有會員的報名紀錄</h1>
 			<hr><br>
 			<c:if test='${empty alljoinacts}'>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
-			查無報名紀錄<br>
+			查無會員的報名紀錄<br>
 			</c:if>
 			<c:if test='${not empty alljoinacts}'>
-				<%-- 			<c:if test ='${vs.first }'> --%>
-				<%-- 				<c:out value="<table border='1'>" escapeXml='false'/> --%>
-				<%-- 				<c:out value="<tr> --%>
+
+
 				<table border='1' id="myTable" class="display">
 				<thead>
 					<tr>
@@ -90,12 +90,12 @@ td{
 						<th>會員名稱</th>
 						<th>email</th>
 						<th>聯絡電話</th>
-						<th >編輯</th>
+						<th >修改</th>
 						<th >刪除</th>
 					</tr>
 					</thead>
-					<!-- 				</tr>" escapeXml='false'/> -->
-					<%-- 			</c:if> --%>
+
+
 					<c:forEach var='ajb' varStatus='vs' items='${alljoinacts}'>
 			
 						<tbody>
@@ -104,10 +104,8 @@ td{
 							<td>${ajb.member.mb_Account}</td>
 							<td>${ajb.member.mb_Name}</td>
 							<td>${ajb.member.mb_Mail}</td>
-							<td>${ajb.member.mb_Tel}</td>
-
-							
-							<td><a href="<c:url value='/showJoinUpdateForm'/>?join_ID=${ajb.join_ID}">編輯</a>
+							<td>${ajb.member.mb_Tel}</td>							
+							<td><a href="<c:url value='/showJoinUpdateForm'/>?join_ID=${ajb.join_ID}">修改</a>
 							<td><a href="<c:url value='/deleteJoin'/>?join_ID=${ajb.join_ID}&act_ID=${ajb.act.act_ID}">刪除</a>
 			
 						</tr>
