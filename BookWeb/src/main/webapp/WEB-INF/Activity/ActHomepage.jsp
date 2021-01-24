@@ -134,15 +134,6 @@ td {
 				
 				<br>
 
-
-
-    
-	    
-
-
-
-
-
 				<hr>
 				<section>
 					<div>
@@ -190,6 +181,7 @@ td {
       										 </div>
      									 <div class="modal-footer">
         									<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        									<input type="hidden" id="ID" value="${act.act_ID}">
         									<input type="hidden" id="check" value="${check}">
       										 <a href="<c:url value='/showJoinForm'/>?act_ID=${act.act_ID}"><button type="button" id="joinact" class="btn btn-primary">報名</button></a> 
      										   </div>
@@ -261,15 +253,13 @@ console.log("1231456")
 console.log($("#check").val())
 console.log($('#memberid').val())
 $(document).ready(function(){
-if(typeof($.cookie('Member_ID')) != "undefined" ){
-	console.log("123")
-}
-})
-
+	console.log("1231456")
+	console.log($("#check").val())
+	console.log($('#memberid').val())
 if($("#check").val() == "repeat"){
 	alert("你已報名過此活動")
 }
-
+})
 $('button').click(function(){
 	mapId = $(this).val();
 	console.log(mapId);
@@ -309,6 +299,8 @@ $('#create').click(function(){
 	
 	
 	$('#search').click(function(){
+		console.log("123")
+		var act_ID = $('#ID').val();
 	var keyword=$('#enter1').val();
 		$.ajax({
 			async : false,
@@ -317,20 +309,15 @@ $('#create').click(function(){
 			data : {'keyword' : keyword},
 			dataType : "json",
 			contentType : "application/json;charset=utf-8",
-			error : function() {
-				alert('123 ');
-			},
 			success : function(data) {
-				console.log(data)
-				var insertData = "";
-				if(data != null){
+				var insertData="";
 				for (let i = 0; i < data.length; i++) {
 					insertData += "<div class='col-6,col-md-3' style='width: 350px; height: 1000px'>"
 								+"<div class='thumbnail' style='width: 320px; height: 1000px'>"
 									+"<p>"
 										+"<b style='font-size: 25px;'>"+data[i].act_Name+"</b>"
 									+"</p>"
-									+"<div>"
+									+"<div align=\"center\">"
 									+"<input type ='image' src='"+data[i].act_Image+"' data-toggle='modal' data-target='#exampleModalCenter"+data[i].act_Name+"' style='width: 300px; height: 380px;'>"
 										+"<div class='modal fade' id='exampleModalCenter"+data[i].act_Name+"' tabindex=''-1' role='dialog' aria-labelledby='exampleModalCenterTitle' aria-hidden='true'>"
   										+"<div class='modal-dialog modal-dialog-centered' role='document'>"
@@ -342,15 +329,20 @@ $('#create').click(function(){
      												  + "</button>"
      														+ "</div>"
      										+"<div class='modal-body'>"
-     										 +"<p>"+data[i].act_Theme+"</p>"
-										+"<p>"+data[i].act_Date+"</p>"
-										+"<p>"+data[i].act_Loc+"</p>"
-										+"<p>"+data[i].act_Intro+"</p>"			
+     										+"<p><input type=\"image\" src=\""+data[i].act_Image+"\" style=\"width:300px;height:380px;align:center\"></p>"
+     										 +"<p>"+data[i].act_Tag+"</p>"
+     										+"<p>活動主題:"+data[i].act_Theme+"</p>"
+										+"<p><img src=${pageContext.request.contextPath}/image/date.png style=\"width:22px;height:22px\">"+data[i].act_Date+"</p>"
+										+"<p><img src=${pageContext.request.contextPath}/image/time.png style=\"width:22px;height:22px\">"+data[i].act_Time+"</p>"
+										+"<p><button class=\"mapbutton\" style=\"background-color:white\" id=\"myModal\"  value=\""+data[i].act_Loc+"\" data-toggle=\"modal\"  title=\"Google地圖\" data-target=\"#myModal1\"><img src=${pageContext.request.contextPath}/image/map1.png style=\"width:25px;height:25px\" title=\"Google地圖\">"+data[i].act_Loc+"</button></p>"
+										+"<p>活動簡介:<br>"+data[i].act_Intro+"</p>"
+										+"<p>活動名額:"+data[i].act_Differentpax+"/"+data[i].act_Pax+"</p>"			
 										+"<hr>"
       										+"</div>"
      									 +"<div class='modal-footer'>"
         									+"<button type='button' class='btn btn-secondary' data-dismiss='modal'>Close</button>"
-      										  +"<button type='button' class='btn btn-primary'>報名</button>"
+        									+"<input type=\"hidden\" id=\"check\" value=\"${check}\">"
+        									 +"<a href=\"<c:url value='/showJoinForm'/>?act_ID="+data[i].act_ID+"\"><button type=\"button\" id=\"joinact\" class=\"btn btn-primary\">報名</button></a>"
      										   +"</div>"
   											  +"</div>"
  											 +"</div>"
@@ -358,26 +350,23 @@ $('#create').click(function(){
 									+"</div>"
 									+"<div class='caption'>"
 									 +"<p>"+data[i].act_Theme+"</p>"
-										+"<p>"+data[i].act_Date+"</p>"
-										+"<p>"+data[i].act_Loc+"</p>"
-										+"<p>"+data[i].act_Intro+"</p>"					
+									 +"<p><img src=${pageContext.request.contextPath}/image/date.png style=\"width:22px;height:22px\">"+data[i].act_Date+"</p>"
+									 +"<p></p>"
+									 +"<p><img src=${pageContext.request.contextPath}/image/time.png style=\"width:22px;height:22px\">"+data[i].act_Time+"</p>"
+									 +"<p><button class=\"mapbutton\" style=\"background-color:white\" id=\"myModal\"  value=\""+data[i].act_Loc+"\" data-toggle=\"modal\"  title=\"Google地圖\" data-target=\"#myModal1\">"
+									 +"<img src=${pageContext.request.contextPath}/image/map1.png style=\"width:25px;height:25px\" title=\"Google地圖\">"+data[i].act_Loc+"</button></p>"			
 										+"<hr>"
 										+"<p>"
-										+"<button type='button' class='btn btn-info btn-lg' id = 'myModal'  value='"+data[i].act_Loc+"' data-toggle='modal' data-target=''#myModal1'>詳細資料</button>"											
 										+"<p>"
-										+"<button class='btn btn-outline-info'><a href=\"<c:url value='/showUpdateForm'/>?act_ID="+data[i].act_ID+"\" />編輯</a></button>"
-										+"<button class='btn btn-outline-info'><a href=\"<c:url value='deleteAct'/>?act_ID="+data[i].act_ID+"\">刪除</a></button>"
+										+"<a href=\"<c:url value='/showUpdateForm'/>?act_ID="+data[i].act_ID+"\" /><button class='btn btn-outline-info'>編輯</button></a>"
+										+"<a href=\"<c:url value='deleteAct'/>?act_ID="+data[i].act_ID+"\"><button class='btn btn-outline-info'>刪除</button></a>"
 										+"</p>"				
 									+"</div>"
 								+"</div>"
 							+"</div>"
-					+"</div>"
-				}
-				$('#change').html(insertData);
-				}else{
-					$('#change').html(insertData);
-				}
+					$("#change").html(insertData);
 			}
+	}
 		});
 	})
 				

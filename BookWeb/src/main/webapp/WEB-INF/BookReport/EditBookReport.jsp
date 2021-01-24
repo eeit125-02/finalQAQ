@@ -247,7 +247,7 @@
 
 
 	<!--刪除確認-->
-	<div class="modal" id="deletModal" tabindex="-1">
+	<!-- <div class="modal" id="deletModal" tabindex="-1">
 		<div class="modal-dialog modal-dialog-centered">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -267,7 +267,7 @@
 				</div>
 			</div>
 		</div>
-	</div>
+	</div> -->
 	<!--刪除確認-->
 
 	<!-- footer -->
@@ -298,7 +298,7 @@
 		});
 		
 		
-		$('#deleteSecond').click(function() {
+		/* $('#deleteSecond').click(function() {
 			if($('#deleteInfo').html() == "是否要刪除心得"){
 				deleteReport($(this).val());			
 			}
@@ -307,7 +307,7 @@
 				deleteCollect($(this).val());
 			}
 			
-		});
+		}); */
 
 		$('#editButton').click(function() {
 			
@@ -349,17 +349,34 @@
 		};
 
 		function deleteReport(br_ID) {
+			console.log(br_ID)
 			var deleteURL = location.href + "/deleteBookReport/" + br_ID;
-			$.ajax({
-				async : false,
-				type : 'POST',
-				url : deleteURL,
-				dataType : "json",
-				success : function(data) {
-					if (data) {
-						loadBookReportList();
-					}
-				}
+			swal({
+				  title: "確定要刪除",
+				  icon: "warning",
+				  buttons: true,
+				  dangerMode: true,
+				}).then((willDelete) => {
+				  if (willDelete) {
+					 $.ajax({
+						async : false,
+						type : 'POST',
+						url : deleteURL,
+						data : {bmId:$(this).val()},
+						dataType : "json",
+						success : function(data) {
+							if(data && typeof(data) == "boolean"){								
+								swal({
+								      title: "刪除成功",
+								      icon: "success",
+								 }).then((willDelete) => {
+									 loadBookReportList();
+								 });
+								 
+							}
+						}
+					});
+				  }
 			});
 		};
 		
@@ -401,14 +418,14 @@
 					}
 					$('#collectReport').html(inserData);
 					
-					for(var i = 0; i < data.length; i++){	
+					/* for(var i = 0; i < data.length; i++){	
 						$("#rateYo"+ data[i].rcId).rateYo({
 							rating: data[i].brScore,
 						    spacing: "5px",
 						    starWidth: "20px",
 						    readOnly: true
 						});
-					}				
+					}	 */			
 				}
 			});
 			
@@ -465,7 +482,7 @@
 								+ "<div class=\"btn-group\">"
 								+ "<button type=\"button\" class=\"btn  btn-outline-secondary\" id=\"view\" value=\""+data[i].br_ID+"\">view</button>"
 								+ "<button type=\"button\" class=\"btn  btn-outline-secondary\" data-toggle=\"modal\" data-target=\"#editModal\" id=\"edit\" value=\""+data[i].br_ID+"\">Edit</button>"
-								+ "<button type=\"button\" class=\"btn  btn-outline-secondary mr-1\" data-toggle=\"modal\" data-target=\"#deletModal\" id=\"delete\" value=\""+data[i].br_ID+"\">Delete</button>"
+								+ "<button type=\"button\" class=\"btn  btn-outline-secondary mr-1\" id=\"delete\" value=\""+data[i].br_ID+"\" onclick=\"deleteReport(" + data[i].br_ID +")\">Delete</button>"
 								+ "</div>"
 								+ "<small class=\"text-muted\" style=\"font-size:15px;\">創建日期：<br>"
 								+ data[i].br_DateTime
