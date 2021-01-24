@@ -86,9 +86,9 @@ background-color:#e0ece4
 					<button class="btn btn-outline-secondary" type="button" id="Update" name="Update">送出</button>
 					<button class="btn btn-outline-secondary" type="reset">清除</button>
 				</form>
+			<button id="insert">一鍵輸入</button>
 			</fieldset>
 			</div>
-			<button id="insert">一鍵輸入</button>
 			<!-- footer -->
 			<footer class="container py-5" id="bookWebFooter"></footer>
 			<!-- footer -->

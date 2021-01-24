@@ -144,10 +144,10 @@ form {
 					<button type="button" id="send" class="btn btn-outline-secondary">送出</button>
 					<button type="reset" class="btn btn-outline-secondary">清除</button>
 				</div>
+				<button id="insert" type="button">一鍵輸入</button>
 			</fieldset>
 		</form>
 	</div>
-	<button id="insert">一鍵輸入</button>
 	<!-- footer -->
 	<footer class="container py-5" id="bookWebFooter"></footer>
 	<!-- footer -->
@@ -157,7 +157,7 @@ form {
 			$('#pwd').val("aaa111");
 			$('#pwd1').val("aaa111");
 			$('#name1').val("陳昱豪");
-			$('#birthday').val("1994-04-19");
+			$('#birthday').val("2021-01-20");
 			$('#mail').val("pgame6721@gmail.com");
 		})
 		
