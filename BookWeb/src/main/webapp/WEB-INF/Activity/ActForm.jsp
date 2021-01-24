@@ -269,6 +269,7 @@
 						<hr>
 						<button type="submit" class="btn btn-primary">提交</button>
 						<button type="reset" class="btn btn-primary">還原</button>
+						<button id="finish" type="button"  class="btn btn-primary">一鍵完成</button>
 					</form>
 			  </fieldset>
 			  
@@ -280,7 +281,7 @@
 				<a href='${pageContext.request.contextPath}/showActs'>回到活動管理</a>
 
 		</div>
-		<button id="insert">123</button>
+<!-- 		<button id="insert">123</button> -->
 		<!-- body -->
 
 		<!-- footer -->
@@ -288,6 +289,24 @@
 		<!-- footer -->
 		
 
+
+<script>
+
+$("#finish").click(function(){
+
+$('#act_Name').val('哈利波特讀書會') ;
+$('#act_Theme').val('讀書會') ;
+$('#act_Date').val('2021-01-31') ;
+$('#act_Time').val('10:30') ;
+$('#act_Loc').val('新北市,中和區,錦和運動公園') ;
+$('#act_Intro').val('歡迎來到哈利波特讀書會!自 2020 年 6 月 23 日起,一群熱愛《哈利波特》的「導賞巫」們,每週陪你閱讀《神秘的魔法石》章節,用新的視角重新探索、回味經典故事,並與其他哈迷們一同交流故事內容的各種看法!') ;
+$('#act_Guest').val('林傳瓏') ;
+$('#act_Pax').val('50') ;
+$('#act_Place').val('現場') ;
+$('#act_Rule').val('每週的讀書會內容,將由當週的「導賞巫」開啟新的主題串與各位哈迷們分享,每位導賞巫將會用他們獨特的觀點,分享他們閱讀當週章節範圍所注意到、想到的有趣看點,也會列出幾則問題,歡迎參與讀書會的哈迷們一同在留言中討論、分享大家各自不同的看法!') ;
+});
+
+</script>
 
 
 		<script type="text/javascript">

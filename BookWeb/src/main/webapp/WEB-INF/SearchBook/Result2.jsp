@@ -68,7 +68,7 @@ white-space:pre-wrap;
 <body>
 
 	<!-- header -->
-	<header class="blog-header py-3" id="bookWebheader"></header>
+	<header class="blog-header" id="bookWebheader"></header>
 	<!-- header -->
 
 	<!-- body -->
@@ -79,13 +79,13 @@ white-space:pre-wrap;
 		<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 		<div class="collectindex">
-			<a class="btn btn-outline-dark" href="<c:url value='SearchBook/Search' />" role="button">搜尋首頁</a>
+<%-- 			<a class="btn btn-outline-dark" href="<c:url value='SearchBook/Search' />" role="button">搜尋首頁</a> --%>
 			
 			<form name=a3 class=a3 action="<c:url value='/collectlist' />" method="get">
 				<button type="submit" name="list" class="btn btn-outline-dark">收藏清單</button>
 			</form>
 				
-			<a class="btn btn-outline-dark" href="<c:url value='/addnewbook' />" role="button">新增書籍</a>			
+<%-- 			<a class="btn btn-outline-dark" href="<c:url value='/addnewbook' />" role="button">新增書籍</a>			 --%>
 		</div>
 		<br> <br>
 

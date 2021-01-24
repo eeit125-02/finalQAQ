@@ -66,7 +66,7 @@ span{
 <body>
 
 	<!-- header -->
-	<header class="blog-header py-3" id="bookWebheader"></header>
+	<header class="blog-header" id="bookWebheader"></header>
 	<!-- header -->
 
 	<!-- body -->
@@ -202,16 +202,16 @@ span{
 
 $("#finish").click(function(){
 
-document.getElementById('bk_Name').value = '資策會EEIT125(Java班)成果發表全集' ;
-document.getElementById('bk_Author').value = 'EEIT125' ;
-document.getElementById('bk_Translator').value = '編譯器' ;
-document.getElementById('bk_Publish').value = '資策會' ;
-document.getElementById('bk_Date').value = '2021-01-28' ;
-document.getElementById('bk_Publisher_Place').value = '出版地：台灣中壢' ;
+document.getElementById('bk_Name').value = 'Anemone 銀蓮花' ;
+document.getElementById('bk_Author').value = '王小九' ;
+document.getElementById('bk_Translator').value = '水野' ;
+document.getElementById('bk_Publish').value = '新御出版社' ;
+document.getElementById('bk_Date').value = '2020-11-29' ;
+document.getElementById('bk_Publisher_Place').value = '出版地：日本' ;
 document.getElementById('bk_ISBN').value = 'EEIT20210128' ;
 document.getElementById('bk_Page').value = '450' ;
-document.getElementById('bk_Language').value = 'JAVA' ;
-document.getElementById('bk_Content').value = 'EEIT125成果發表～' ;
+document.getElementById('bk_Language').value = '日文' ;
+document.getElementById('bk_Content').value = '「希望我們能變成兩只毛茸茸的小動物，躲進任何人都找不到的洞穴里，緊緊挨在一起。若是春天來了，我們就探頭出去看看櫻花。 若是春天不來，我們就永遠的冬眠。」本書以柚香光和明日海為主角，共十篇小說構成，交織出動人的愛情故事。' ;
 });
 
 </script>
