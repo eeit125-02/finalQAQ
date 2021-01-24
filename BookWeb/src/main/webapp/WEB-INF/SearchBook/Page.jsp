@@ -104,7 +104,7 @@ p:focus, textarea:focus {
 <body>
 
 	<!-- header -->
-	<header class="blog-header py-3" id="bookWebheader"></header>
+	<header class="blog-header" id="bookWebheader"></header>
 	<!-- header -->
 
 	<!-- body -->
@@ -116,7 +116,7 @@ p:focus, textarea:focus {
 <!-- 第一列（搜尋首頁＆收藏清單&新增書籍&修改書籍） -->
 		<div class="collectindex">
 
-			<a class="btn btn-outline-dark" href="<c:url value='SearchBook/Search' />" role="button">搜尋首頁</a>
+<%-- 			<a class="btn btn-outline-dark" href="<c:url value='SearchBook/Search' />" role="button">搜尋首頁</a> --%>
 
 			<form name=a3 class=a3 action="<c:url value='/collectlist' />" method="get">
 				<button type="submit" name="list" class="btn btn-outline-dark">收藏清單</button>
@@ -124,13 +124,13 @@ p:focus, textarea:focus {
 
 			<a class="btn btn-outline-dark" href="<c:url value='/addnewbook' />" role="button">新增書籍</a>			
 
-			<form name=a2 class=a3 action="<c:url value='/updatebook' />" method="get">
-				<button type="submit" name="update" class="btn btn-outline-dark" value="${pageresult.bk_ID}">修改書訊</button>
-			</form>		
+<%-- 			<form name=a2 class=a3 action="<c:url value='/updatebook' />" method="get"> --%>
+<%-- 				<button type="submit" name="update" class="btn btn-outline-dark" value="${pageresult.bk_ID}">修改書訊</button> --%>
+<!-- 			</form>		 -->
 			
-			<form name=a2 class=a3 action="<c:url value='/deletebook' />" method="get">
-				<button type="submit" name="delete" class="btn btn-outline-dark" value="${pageresult.bk_ID}">刪除本書</button>
-			</form>	
+<%-- 			<form name=a2 class=a3 action="<c:url value='/deletebook' />" method="get"> --%>
+<%-- 				<button type="submit" name="delete" class="btn btn-outline-dark" value="${pageresult.bk_ID}">刪除本書</button> --%>
+<!-- 			</form>	 -->
 
 		</div>
 		<br> <br>
@@ -190,6 +190,7 @@ p:focus, textarea:focus {
         </form>
       </div>
       <div class="modal-footer">
+      <button id="finish" type="button" class="btn btn-outline-secondary btn-sm">一鍵完成</button>
         <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
         <button type="submit" class="btn btn-primary" name="bk_ID" value="${pageresult.bk_ID}">送出</button>
       </div>
@@ -310,6 +311,12 @@ p:focus, textarea:focus {
 	<footer class="container py-5" id="bookWebFooter"></footer>
 	<!-- footer -->
 	<script>
+	
+	$("#finish").click(function(){
+
+		document.getElementById('message-text').value = '內容簡介的部分有錯字喔～' ;
+		});
+
 	
 	$(window).ready(function loadCollectList() {
 		var i = ${pageresult.bk_ID};
