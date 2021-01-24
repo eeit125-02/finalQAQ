@@ -55,7 +55,7 @@ background-color:#e0ece4
 <body>
 
 	<!-- header -->
-	<header class="container blog-header py-3" id="bookWebheader"></header>
+	<header class="blog-header" id="bookWebheader"></header>
 	<!-- header -->
 
 		<div class="container media">
@@ -86,9 +86,9 @@ background-color:#e0ece4
 					<button class="btn btn-outline-secondary" type="button" id="Update" name="Update">送出</button>
 					<button class="btn btn-outline-secondary" type="reset">清除</button>
 				</form>
+			<button id="insert">一鍵輸入</button>
 			</fieldset>
 			</div>
-			<button id="insert">一鍵輸入</button>
 			<!-- footer -->
 			<footer class="container py-5" id="bookWebFooter"></footer>
 			<!-- footer -->

@@ -660,8 +660,9 @@ legend {
 							+"<td><input type=\"password\" name=\"pwd1\" id=\"pwd1\" size=\"12\" ><span id=\"idsp2\" style=\"color: red\"></span></td>"
 							+"</tr>"
 							+"</table>"
-							+"<input type=\"button\" id=\"Update\" name=\"Update\" value=\"送出\">"
-							+"<button type=\"reset\">清除</button>"
+							+"<input type=\"button\" id=\"Update\" name=\"Update\" class=\"btn btn-outline-secondary\" value=\"送出\">"
+							+"<button type=\"reset\" class=\"btn btn-outline-secondary\">清除</button>"
+							+"<button id=\"insert\" type=\"button\">一鍵輸入</button>"
 					+"</fieldset>"
 						+"</form>"
 		 			$('#change123').html(insertData);
@@ -720,9 +721,10 @@ legend {
 									+"</tr>"
 								+"</table>"
 								+"<div>"
-									+"<button type=\"submit\">送出</button>"
-									+"<button type=\"reset\">清除</button>"
+									+"<button type=\"submit\" class=\"btn btn-outline-secondary\">送出</button>"
+									+"<button type=\"reset\" class=\"btn btn-outline-secondary\">清除</button>"
 								+"</div>"
+								+"<button id=\"insert\" type=\"button\">一鍵輸入</button"
 							+"</fieldset>"
 						+"</form>"
 				 			$('#change123').html(insertData);
@@ -742,6 +744,10 @@ legend {
 		})	 
 			 
 		function showImage(){
+        	$('#insert').click(function(){
+        		$('#address').val('宜蘭縣員山鄉55之55號');
+        		$('#tel').val('0917318555');
+        		})
         	$(document).ready(function() {
         		$("#bookWebheader").load("<c:url value='/header'/>");
         		$("#bookWebFooter").load("<c:url value='/footer'/>");		
@@ -789,6 +795,11 @@ legend {
 	var b1=false;
 	var b2=false;
 	var b3=false;
+	$('#insert').click(function(){
+	$('#oldpwd').val('aaa111');
+	$('#pwd').val('aaa111');
+	$('#pwd1').val('aaa111');
+	})
 	$(document).ready(function() {
 		$("#bookWebheader").load("<c:url value='/header'/>");
 		$("#bookWebFooter").load("<c:url value='/footer'/>");		
