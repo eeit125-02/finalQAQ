@@ -68,7 +68,7 @@
 <body>
 
 	<!-- header -->
-	<header class="container blog-header py-3" id="bookWebheader"></header>
+	<header class=" blog-header " id="bookWebheader"></header>
 	<!-- header -->
 
 	<!-- body -->
@@ -254,7 +254,7 @@
 						    <label >活動摘要:</label>
 <!-- 						  CK EDITOR的東東 -->
 						    <form:textarea  path="act_Rule" rows = "10" cols = "30" class="form-control" />
-						    <form:errors path="act_Image" cssStyle="color:#FF0000;"/>
+						    <form:errors path="act_Rule" cssStyle="color:#FF0000;"/>
 						  </div>
 						  
 						  <div class="form-group  col-md-6">

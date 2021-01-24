@@ -18,6 +18,13 @@
 <!-- <!-- search bar的東東 --> 
 
 
+<!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"> -->
+<!-- <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script> -->
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script> -->
+<!-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script> -->
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+
 <script src='https://kit.fontawesome.com/a076d05399.js'></script>
 
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
@@ -91,6 +98,29 @@ td {
 /* /* background-color:pink; */ */
 /* } */
 
+.modal-content {
+  height: 100%;
+  border-radius: 0;
+  position:relative;
+}
+
+.modal-footer {
+  border-radius: 0;
+  bottom:0px;
+  position:absolute;
+  width:740px;
+}
+
+h6{
+font-size:25px;
+font-weight:bold;
+align:center
+}
+
+.line{
+align:center
+}
+
 </style>
 </head>
 
@@ -134,22 +164,13 @@ td {
 				
 				<br>
 
-
-
-    
-	    
-
-
-
-
-
 				<hr>
 				<section>
 					<div>
 						<div class="container" style="text-align: center">
 							<h1 >活動清單</h1>
-							<div class="line-it-button" data-lang="zh_Hant" data-type="share-a" data-ver="3" data-url="http://localhost:8080/BookWeb/toLogin" data-color="default" data-size="large" data-count="true" style="display: none;"></div>
- 							<script src="https://www.line-website.com/social-plugins/js/thirdparty/loader.min.js" async="async" defer="defer"></script>
+<!-- 							<div class="line-it-button" data-lang="zh_Hant" data-type="share-a" data-ver="3" data-url="http://localhost:8080/BookWeb/toLogin" data-color="default" data-size="large" data-count="true" style="display: none;"></div> -->
+<!--  							<script src="https://www.line-website.com/social-plugins/js/thirdparty/loader.min.js" async="async" defer="defer"></script> -->
 						</div>
 					</div>
 				</section>
@@ -158,18 +179,18 @@ td {
 					<div class="row" id="change">
 						<c:forEach var='act' items='${allacts}'>	
 							<div class="col-6,col-md-3" style="width: 380px; height: 1000px">
-								<div class="thumbnail" style="width: 350px; height: 1000px">
+								<div class="thumbnail " style="width: 350px; height: 1000px">
 									<p>
 										<b style='font-size: 25px;'>${act.act_Name}</b>
 									</p>
 									<div align="center">
-									<input type ="image" src="${act.act_Image}" data-toggle="modal" data-target="#exampleModalCenter${act.act_Name}" style="width: 300px; height: 380px; align:center">
+									<input type ="image" src="${act.act_Image}" data-toggle="modal" data-target="#exampleModalCenter${act.act_Name}" style="width: 300px; height: 380px; align:center" class="center"></div>
 										<div class="modal fade" id="exampleModalCenter${act.act_Name}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   										<div class="modal-dialog modal-dialog-centered" role="document">
-   										 <div class="modal-content">
-    									  <div class="modal-header">
+   										 <div class="modal-content" style="width:800px; height:900px">
+    									  <div class="modal-header" >
 <!--     									  //彈跳視窗標頭 -->
-      										  <h5 class="modal-title" id="#exampleModalCenter${act.act_Name}">${act.act_Name}</h5>
+      										  <h3 class="modal-title"  id="#exampleModalCenter${act.act_Name}">${act.act_Name}</h3>
 												<div class="line-it-button" data-lang="zh_Hant" data-type="share-a" data-ver="3" data-url="http://localhost:8080/BookWeb/toLogin" data-color="default" data-size="large" data-count="true" style="display: none;"></div>
  													<script src="https://www.line-website.com/social-plugins/js/thirdparty/loader.min.js" async="async" defer="defer"></script>
        											 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -177,29 +198,70 @@ td {
      												   </button>
      														 </div>
 <!--      									//彈跳視窗內容 -->
-     										 <div class="modal-body">
-     										 <p><input type ="image" src="${act.act_Image}"  style="width: 300px; height: 380px; align:center"></p>
-     										 <p>${act.act_Tag}</p>
-     										 <p>活動主題:${act.act_Theme}</p>
-										     <p><img src=${pageContext.request.contextPath}/image/date.png style="width:22px;height:22px">${act.act_Date}</p>
-											 <p><img src=${pageContext.request.contextPath}/image/time.png style="width:22px;height:22px">${act.act_Time}</p>										     									     
-										     <p><button class="mapbutton" style="background-color:white" id="myModal"  value="${act.act_Loc}" data-toggle="modal"  title="Google地圖" data-target="#myModal1"><img src=${pageContext.request.contextPath}/image/map1.png style="width:25px;height:25px" title="Google地圖">${act.act_Loc}</button></p>     
-										     <p>活動簡介:<br>${act.act_Intro}</p>
-										     <p>活動名額:${act.act_Differentpax}/${act.act_Pax}</p>		
+     										 <div class="modal-body" style="width:800px; height:900px">
+     										 <div class="container">
+											 <div class="media">
+     										 <input type ="image" src="${act.act_Image}"  style="width: 300px; height: 380px; align:center">
+     										 
+     										 <div class="media-body ml-5">
+     										 
+     										 <form  class="col-ml-4">
+     										 <br>
+											 <div class="form-group">
+											 <div><a href="#" class="btn btn-info" style="font-size:1em">活動標籤:${act.act_Tag}</a> 
+											</div>
+											 </div>
+											 
+											 <div class="form-group">
+										     <div><img src=${pageContext.request.contextPath}/image/date.png style="width:22px;height:22px">${act.act_Date}</div>
+											 </div>
+											 
+											 <div class="form-group">
+											 <div><img src=${pageContext.request.contextPath}/image/time.png style="width:22px;height:22px">${act.act_Time}</div>										     									     
+										     </div>
+										     
+										      <div class="form-group">
+										     <div><button class="mapbutton" style="background-color:white" id="myModal"  value="${act.act_Loc}" data-toggle="modal"  title="Google地圖" data-target="#myModal1"><img src=${pageContext.request.contextPath}/image/map1.png style="width:25px;height:25px" title="Google地圖">${act.act_Loc}</button></div>
+										     </div>     
+										     
+										     <div class="form-group">
+										     <div>活動嘉賓:${act.act_Guest}</div>
+										     </div>
+										     
+										     <div class="form-group">
+										     <div>活動名額:${act.act_Differentpax}/${act.act_Pax}</div>
+										     </div>										  
+										     
+      										 </form>
+										     </div>
+										     		
 										     <hr>
       										 </div>
+      										 <br><br>
+											<h3 align="center">活動簡介:</h3>
+											<hr>
+											<div>${act.act_Intro}</div>
+											<br>
+											
+											
+											
      									 <div class="modal-footer">
         									<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        									<input type="hidden" id="ID" value="${act.act_ID}">
         									<input type="hidden" id="check" value="${check}">
-      										 <a href="<c:url value='/showJoinForm'/>?act_ID=${act.act_ID}"><button type="button" id="joinact" class="btn btn-primary">報名</button></a> 
+      										 <a href="<c:url value='/showJoinForm'/>?act_ID=${act.act_ID}"><button type="button" id="joinact" class="btn btn-primary">報名</button></a>       										 
      										   </div>
   											  </div>
  											 </div>
 											</div>				
 										   </div>
+										   </div>
+<!-- 										   </div> -->
 <!--       										//頁尾 -->
 
 <!-- 									大視窗的內容 -->
+										   <div class="line-it-button line" data-lang="zh_Hant" data-type="share-a" data-ver="3" data-url="http://localhost:8080/BookWeb/toLogin" data-color="default" data-size="large" data-count="true" style="display: none;"></div>
+ 											<script src="https://www.line-website.com/social-plugins/js/thirdparty/loader.min.js" async="async" defer="defer"></script>
 									<div class="caption">
 										<p>${act.act_Theme}</p>
 										<p><img src=${pageContext.request.contextPath}/image/date.png style="width:22px;height:22px">${act.act_Date}</p>
@@ -207,6 +269,7 @@ td {
 										<p><img src=${pageContext.request.contextPath}/image/time.png style="width:22px;height:22px">${act.act_Time}</p>
 										<p><button class="mapbutton" style="background-color:white" id="myModal"  value="${act.act_Loc}" data-toggle="modal"  title="Google地圖" data-target="#myModal1"><img src=${pageContext.request.contextPath}/image/map1.png style="width:25px;height:25px" title="Google地圖">${act.act_Loc}</button></p>
 										<hr>
+
 										<p>
 										
 										<!-- Trigger the modal with a button -->
@@ -261,15 +324,13 @@ console.log("1231456")
 console.log($("#check").val())
 console.log($('#memberid').val())
 $(document).ready(function(){
-if(typeof($.cookie('Member_ID')) != "undefined" ){
-	console.log("123")
-}
-})
-
+	console.log("1231456")
+	console.log($("#check").val())
+	console.log($('#memberid').val())
 if($("#check").val() == "repeat"){
 	alert("你已報名過此活動")
 }
-
+})
 $('button').click(function(){
 	mapId = $(this).val();
 	console.log(mapId);
@@ -309,6 +370,8 @@ $('#create').click(function(){
 	
 	
 	$('#search').click(function(){
+		console.log("123")
+		var act_ID = $('#ID').val();
 	var keyword=$('#enter1').val();
 		$.ajax({
 			async : false,
@@ -317,67 +380,98 @@ $('#create').click(function(){
 			data : {'keyword' : keyword},
 			dataType : "json",
 			contentType : "application/json;charset=utf-8",
-			error : function() {
-				alert('123 ');
-			},
 			success : function(data) {
-				console.log(data)
-				var insertData = "";
-				if(data != null){
+				var insertData="";
 				for (let i = 0; i < data.length; i++) {
-					insertData += "<div class='col-6,col-md-3' style='width: 350px; height: 1000px'>"
-								+"<div class='thumbnail' style='width: 320px; height: 1000px'>"
+					insertData += "<div class='col-6,col-md-3' style='width: 380px; height: 1000px'>"
+								+"<div class='thumbnail' style='width: 350px; height: 1000px'>"
 									+"<p>"
 										+"<b style='font-size: 25px;'>"+data[i].act_Name+"</b>"
 									+"</p>"
-									+"<div>"
-									+"<input type ='image' src='"+data[i].act_Image+"' data-toggle='modal' data-target='#exampleModalCenter"+data[i].act_Name+"' style='width: 300px; height: 380px;'>"
+									+"<div align=\"center\">"
+									+"<input type ='image' src='"+data[i].act_Image+"' data-toggle='modal' data-target='#exampleModalCenter"+data[i].act_Name+"' style='width: 300px; height: 380px;' class='center'></div>"
 										+"<div class='modal fade' id='exampleModalCenter"+data[i].act_Name+"' tabindex=''-1' role='dialog' aria-labelledby='exampleModalCenterTitle' aria-hidden='true'>"
   										+"<div class='modal-dialog modal-dialog-centered' role='document'>"
-   										+ "<div class='modal-content'>"
+   										+ "<div class='modal-content'  style=\"width:800px; height:900px\">"
     									 + "<div class='modal-header'>"
       										 + "<h5 class='modal-title' id='#exampleModalCenter"+data[i].act_Name+"'>"+data[i].act_Name+"</h5>"
        											+ "<button type='button' class='close' data-dismiss='modal' aria-label='Close'>"
      											  +  "<span aria-hidden='true'>&times;</span>"
      												  + "</button>"
      														+ "</div>"
-     										+"<div class='modal-body'>"
-     										 +"<p>"+data[i].act_Theme+"</p>"
-										+"<p>"+data[i].act_Date+"</p>"
-										+"<p>"+data[i].act_Loc+"</p>"
-										+"<p>"+data[i].act_Intro+"</p>"			
+     										+"<div class='modal-body' style=\"width:800px; height:900px\">"
+     										+"<div class=\"container\">"
+											 +"<div class=\"media\">"
+    										 +"<input type =\"image\" src=\""+data[i].act_Image+"\"  style=\"width: 300px; height: 380px; align:center\">"
+    										 
+    										 +"<div class=\"media-body ml-5\">"
+    										 
+    										 +"<form  class=\"col-ml-4\">"
+    										 +"<br>"
+											 +"<div class=\"form-group\">"
+											 +"<div><a href=\"#\" class=\"btn btn-info\" style=\"font-size:1em\">活動標籤:"+data[i].act_Tag+"</a>" 
+											+"</div>"
+											 +"</div>"
+											 
+											 +"<div class=\"form-group\">"
+										     +"<div><img src=${pageContext.request.contextPath}/image/date.png style=\"width:22px;height:22px\">"+data[i].act_Date+"</div>"
+											 +"</div>"
+											 
+											 +"<div class=\"form-group\">"
+											 +"<div><img src=${pageContext.request.contextPath}/image/time.png style=\"width:22px;height:22px\">"+data[i].act_Time+"</div>"										     									     
+										     +"</div>"
+										     
+										      +"<div class=\"form-group\">"
+										     +"<div><button class=\"mapbutton\" style=\"background-color:white\" id=\"myModal\"  value=\""+data[i].act_Loc+"\" data-toggle=\"modal\"  title=\"Google地圖\" data-target=\"#myModal1\"><img src=${pageContext.request.contextPath}/image/map1.png style=\"width:25px;height:25px\" title=\"Google地圖\">"+data[i].act_Loc+"</button></div>"
+										     +"</div>"     
+										     
+										     +"<div class=\"form-group\">"
+										     +"<div>活動嘉賓:"+data[i].act_Guest+"</div>"
+										     +"</div>"
+										     
+										     +"<div class=\"form-group\">"
+										     +"<div>活動名額:"+data[i].act_Differentpax+"/"+data[i].act_Pax+"</div>"
+										     +"</div>"
+     										 +"</form>"
+										     +"</div>"	
 										+"<hr>"
       										+"</div>"
+      										+"<br><br>"
+											+"<h3 align=\"center\">活動簡介:</h3>"
+											+"<hr>"
+											+"<div>"+data[i].act_Intro+"</div>"
+											+"<br>"
+      										
      									 +"<div class='modal-footer'>"
         									+"<button type='button' class='btn btn-secondary' data-dismiss='modal'>Close</button>"
-      										  +"<button type='button' class='btn btn-primary'>報名</button>"
+        									+"<input type=\"hidden\" id=\"check\" value=\"${check}\">"
+        									 +"<a href=\"<c:url value='/showJoinForm'/>?act_ID="+data[i].act_ID+"\"><button type=\"button\" id=\"joinact\" class=\"btn btn-primary\">報名</button></a>"
      										   +"</div>"
   											  +"</div>"
  											 +"</div>"
-											+"</div>"				
-									+"</div>"
+											+"</div>"		
+											+"</div>"
+											+"</div>"
+// 									+"</div>"
 									+"<div class='caption'>"
 									 +"<p>"+data[i].act_Theme+"</p>"
-										+"<p>"+data[i].act_Date+"</p>"
-										+"<p>"+data[i].act_Loc+"</p>"
-										+"<p>"+data[i].act_Intro+"</p>"					
+									 +"<p><img src=${pageContext.request.contextPath}/image/date.png style=\"width:22px;height:22px\">"+data[i].act_Date+"</p>"
+									 +"<p></p>"
+									 +"<p><img src=${pageContext.request.contextPath}/image/time.png style=\"width:22px;height:22px\">"+data[i].act_Time+"</p>"
+									 +"<p><button class=\"mapbutton\" style=\"background-color:white\" id=\"myModal\"  value=\""+data[i].act_Loc+"\" data-toggle=\"modal\"  title=\"Google地圖\" data-target=\"#myModal1\">"
+									 +"<img src=${pageContext.request.contextPath}/image/map1.png style=\"width:25px;height:25px\" title=\"Google地圖\">"+data[i].act_Loc+"</button></p>"			
 										+"<hr>"
 										+"<p>"
-										+"<button type='button' class='btn btn-info btn-lg' id = 'myModal'  value='"+data[i].act_Loc+"' data-toggle='modal' data-target=''#myModal1'>詳細資料</button>"											
 										+"<p>"
-										+"<button class='btn btn-outline-info'><a href=\"<c:url value='/showUpdateForm'/>?act_ID="+data[i].act_ID+"\" />編輯</a></button>"
-										+"<button class='btn btn-outline-info'><a href=\"<c:url value='deleteAct'/>?act_ID="+data[i].act_ID+"\">刪除</a></button>"
+										+"<a href=\"<c:url value='/showUpdateForm'/>?act_ID="+data[i].act_ID+"\" /><button class='btn btn-outline-info'>編輯</button></a>"
+										+"<a href=\"<c:url value='deleteAct'/>?act_ID="+data[i].act_ID+"\"><button class='btn btn-outline-info'>刪除</button></a>"
 										+"</p>"				
 									+"</div>"
 								+"</div>"
 							+"</div>"
-					+"</div>"
-				}
-				$('#change').html(insertData);
-				}else{
-					$('#change').html(insertData);
-				}
+					$("#change").html(insertData);
 			}
+	}
 		});
 	})
 				

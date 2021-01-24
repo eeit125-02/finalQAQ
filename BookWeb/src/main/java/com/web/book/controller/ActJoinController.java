@@ -58,6 +58,7 @@ public class ActJoinController {
 			) {
 		System.out.println("aaaaaaaa");
 		List<ActJoinBean> mbjoinlist = actjoinService.getJoinRecords(loginUser.getMb_ID());
+		model.addAttribute("name",loginUser.getMb_Name());
 		model.addAttribute("mbjoinlist", mbjoinlist);		
 		return "Activity/showJoinbyID";
 		
@@ -80,7 +81,7 @@ public class ActJoinController {
 			,Model model
 			,@RequestParam("act_ID")Integer act_ID
 			) {
-		if(actjoinService.check(loginUser.getMb_ID(), act_ID)==false) {
+		if(actjoinService.check(loginUser.getMb_ID(),act_ID)==false) {
 		String act_Name = actService.getAct(act_ID).getact_Name();
 		ActJoinBean ajb = new ActJoinBean();
 		model.addAttribute("act_Name", act_Name);

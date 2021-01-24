@@ -401,8 +401,16 @@ response.setDateHeader("Expires", 0);
 									CKEDITOR.replace('post_content');
 
 									$('#lazy_input').click(function(){
-										$('#post_title').val('自動帶入貼文標題');
-										CKEDITOR.instances["post_content"].setData('自動帶入貼文內容');
+										$('#post_title').val('請幫忙推薦奇幻小說');
+										CKEDITOR.instances["post_content"].setData(
+												'<p>如題</p>'+ 
+												'<p>這應該算是異世界類型的小說吧...</p>'+
+												'<p><img alt="" src="http://i.imgur.com/8VhXIvG.png" style="height:187px; width:200px" /></p>'+
+												'<p>總之就是主角從現實世界中踏上未知的奇幻大陸</p>'+
+												'<h3><strong>有沒有出到結局都沒關係 </strong></h3>'+
+												'<h3><strong>比較喜歡注重在人物刻寫生動的作品 </strong></h3>'+
+												'<p>各位有推薦的嗎?</p>'
+										);
 									})
 							</script>
 							
@@ -423,9 +431,11 @@ response.setDateHeader("Expires", 0);
 											  title: "貼文新增成功",
 											  icon: "success",
 											  button: "ok",
-										});
-										window.location.hash = 'add_post_reload';
-										window.location.reload();
+										}).then((goreload)=>{
+											if(goreload){
+												window.location.hash = 'add_post_reload';
+												window.location.reload();
+											}})
 										}										
 								})				
 							}
@@ -483,9 +493,11 @@ response.setDateHeader("Expires", 0);
 															swal({
 															      title: "貼文刪除成功",
 															      icon: "success"
-															 });
-															window.location.hash = 'delete_post_reload';
-															window.location.reload();
+															 }).then((goreload)=>{
+																if(goreload){
+																	window.location.hash = 'delete_post_reload';
+																	window.location.reload();
+																}})
 															}
 													})
 												}})													
@@ -788,6 +800,10 @@ response.setDateHeader("Expires", 0);
 																	success : function(rb) {
 																		$('#last_edit_time').html(rb.rule_time)
 																		$('#show_rule').html(rb.rule_content)
+																		swal({
+														    			  title: "板規已更新",
+														    			  icon: "success",
+																		 });
 																	}
 																})
 													})
@@ -873,9 +889,11 @@ response.setDateHeader("Expires", 0);
 														swal({
 														      title: "貼文刪除成功",
 														      icon: "success",
-														 });
-														window.location.hash = 'manager_delete_post_reload';
-														window.location.reload();
+														 }).then((goreload)=>{
+															if(goreload){
+																window.location.hash = 'manager_delete_post_reload';
+																window.location.reload();
+															}})
 													}
 												})	
 											}})
@@ -928,9 +946,11 @@ response.setDateHeader("Expires", 0);
 																	swal({
 																	      title: "貼文刪除成功",
 																	      icon: "success",
-																	 });
-																	window.location.hash = 'manager_ajax_delete_post_reload';
-																	window.location.reload();
+																	 }).then((goreload)=>{
+																		if(goreload){
+																			window.location.hash = 'manager_ajax_delete_post_reload';
+																			window.location.reload();
+																		}})
 																	}
 															})	
 														}})

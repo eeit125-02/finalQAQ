@@ -86,11 +86,11 @@ public class ActFormValidator implements Validator {
 			errors.rejectValue("act_Tag", " ", "actbean.acttag.empty");
 		}
 
-		if (actbean.getact_Rule() != null && actbean.getact_Rule().isEmpty() && actbean.getact_Rule().contains(" ") && actbean.getact_Rule().length() < 2 || actbean.getact_Rule().length() > 30) {
+		if (actbean.getact_Rule() != null && actbean.getact_Rule().isEmpty() && actbean.getact_Rule().contains(" ") && actbean.getact_Rule().length() < 2 || actbean.getact_Rule().length() > 200) {
 			errors.rejectValue("act_Rule", " ", "actbean.actrule.empty");
 		}
 		
-		if (actbean.getact_Intro() != null && actbean.getact_Intro().isEmpty()) {
+		if (actbean.getact_Intro().isEmpty()) {
 			errors.rejectValue("act_Intro", " ", "actbean.actimage.empty");
 		}
 		System.out.println("578967867856786786+++++++++");	
