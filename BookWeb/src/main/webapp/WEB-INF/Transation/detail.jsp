@@ -51,6 +51,7 @@
 	<div class="container">
 		<input type="hidden" id="bks_ID"
 			value="${bookdetail.bks_ID}">
+		<br>
 		<hr>
 		<div class="row">
 			<div class="col-lg-4">
@@ -58,25 +59,25 @@
 					height="400px" src="<c:url value='${bookdetail.book.bk_Pic}'/>">
 			</div>
 			<div class="col-lg-8">
-				<h3>
-				<span> ${bookdetail.book.bk_Name}</span></h3>
+				<h2>
+				<span> ${bookdetail.book.bk_Name}</span></h2>
 				<hr>
-				<h5>作者：
-				<span> ${bookdetail.book.bk_Author}</span></h5>
+				<h4>作者：
+				<span> ${bookdetail.book.bk_Author}</span></h4>
 				<hr>
-				<h5>出版社：
-				<span> ${bookdetail.book.bk_Publish}</span></h5>
+				<h4>出版社：
+				<span> ${bookdetail.book.bk_Publish}</span></h4>
 				<hr>
-				<h5>出版日：
-				<span> ${bookdetail.book.bk_Date}</span></h5>
+				<h4>出版日：
+				<span> ${bookdetail.book.bk_Date}</span></h4>
 				<hr>
-				<h5>價錢：
+				<h4>價錢：
 				<span> ${bookdetail.bs_Price}</span> <a
 					href="<c:url value='/qaqManyPrice?ID=${bookdetail.book.bk_ID}'/>"
-					style="margin-left: 50px;font-size:16px">查看其他價格 </a></h5>
+					style="margin-left: 50px;font-size:16px">查看其他價格 </a></h4>
 				<hr>
-				<h5>庫存：
-				<span id="amount">${bookdetail.bs_Num}</span></h5>
+				<h4>庫存：
+				<span id="amount">${bookdetail.bs_Num}</span></h4>
 <%-- 				<input type="text" value="${bookdetail.bs_Num}" disabled="disabled"> --%>
 <hr>
 <div class="row">
@@ -127,8 +128,8 @@
 	<!-- 		qaq   max="${bookdetail.bs_Num}"-->
 	<div class="container">
 		<hr>
-		<div class="col-lg-12">
-			<textarea rows="20" cols="150" readonly="readonly"
+		<div class="col-lg-10">
+			<textarea rows="20" cols="120" readonly="readonly"
 				style="border-style: none;">
 			${bookdetail.book.bk_Content }
 			</textarea>
@@ -158,18 +159,6 @@ $('#buyNum').change(function() {
 		sp.innerHTML="";
 	}
 })
-// 	function checkBuy() {
-// 		var buyNum = document.getElementById("buyNum");
-// 		var amount = document.getElementById("amount");
-// 		var buyNumVal = buyNum.value;
-// 		var sp = document.getElementById("sp");
-// 		if (buyNumVal < 1 || buyNumVal > parseInt(amount.innerHTML)) {
-// 			sp.innerHTML="超過庫存上限";
-// 			document.getElementById("buyNum").value = parseInt(amount.innerHTML);
-// 		} else{
-// 			sp.innerHTML="";
-// 		}
-// 	}
 	
 		function goToCart(id) {
 			if (typeof ($.cookie('Member_ID')) != "undefined") {
@@ -197,7 +186,7 @@ $('#buyNum').change(function() {
 						alert("你做錯了喔!!!");
 					},
 					success : function(data) {
-						$('#amount').html(data.qty);
+// 						$('#amount').html(data.qty);
 						Swal.fire({
 							  position: 'top-center',
 							  icon: 'success',

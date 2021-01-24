@@ -53,11 +53,11 @@
 	<!-- body -->
 	<!-- 	我是測試線 -->
 	<!-- 	我是測試線 -->
+	<br>
 	<div class="container">
-<%-- 		<form action="<c:url value='/searchBookName'/>" method="post"> --%>
 			<div class="row">
 				<div class="col-lg-4">
-					<h2>請搜尋書名來新增!!!</h2>
+					<h2>請輸入要上架的書名</h2>
 				</div>
 				<div class="input-group col-lg-5">
 					<input type="text" class="form-control test" name="searchbk" id="bkName"
@@ -66,10 +66,7 @@
 						data-container="body" data-toggle="popover" data-placement="bottom" data-content="不可以空白和含有特殊符號">
 							<img alt="圖勒?" src='<c:url value="/image/qaqsearch.png" />'
 								width="20px" height="20px">
-						</button>
-<!-- 						測試用 -->
-<!-- 						<input type="button" style="z-index: -1" class="test"/> -->
-<!-- 						測試用 -->						
+						</button>			
 					</span>
 				</div>
 				<div class=col-lg-3>
@@ -77,14 +74,11 @@
 					<button type="button" class="btn btn-outline-dark" id="noData">無資料</button>
 				</div>
 			</div>
-			
-<!-- 		</form> -->
 	</div>
+	<br>
 	<div class="container" >
-	<div class="row" id="qaqResult">
-		
-<%-- 			<h3>請按此<a href="<c:url value='/addMyBookA'/>">新增</a></h3> --%>
-	</div>
+		<div class="row" id="qaqResult">
+		</div>
 	</div>
 <!-- 分頁顯示測試線 -->
 <!-- 	<div class="row"> -->
@@ -99,17 +93,17 @@
 <!-- 分頁顯示測試線 -->
 		<!-- body -->
 	<!-- footer -->
-	<footer class="container py-5" id="bookWebFooter"></footer>
+<!-- 	<footer class="container py-5" id="bookWebFooter"></footer> -->
 	<!-- footer -->
 	<script type="text/javascript">
 	
 	$('#noData').click(function () {
-		$('#bkName').val("Spring MVC 動態網站開發實務");
+		$('#bkName').val("Spring in Action");
 	})
 	$('#yepData').click(function() {
-		$('#bkName').val("科技")
+		$('#bkName').val("深入淺出")
 	})
-	
+
 	function searchBookName() {
 		let bkName = document.getElementById("bkName");
 		let bkNameVal = bkName.value;
@@ -174,8 +168,8 @@
 						+ "<span class=\"card-text\">出版日: " + data.searchData[i].bk_Date + "</span> <br>"
 						+ "</div>"
 						+ "<div class=\"form-group\">"
-						+ "數量<input type=\"number\" class=\"form-control\" name=\"qtyNew\">"
-						+ "價格<input type=\"number\" class=\"form-control\" name=\"priceNew\"><br>"
+						+ "數量<input type=\"number\" class=\"form-control num\" name=\"qtyNew\" id=\"qwe\" >"
+						+ "價格<input type=\"number\" class=\"form-control pce\" name=\"priceNew\"><br>"
 						+ "<button type=\"submit\" class=\"btn btn-outline-primary\">刊登</button>"
 						+ "</div>"
 						+ "</form>"

@@ -53,9 +53,9 @@
 <%--    src="${pageContext.request.contextPath}/image/shoppingCart1.png" --%>
 <!--    width="35px" height="35px"></a> -->
 		<!-- 偷偷放購物車QAQ end -->
-		<form action='<c:url value="/testPage" />'>
-			<button type="submit" class="btn btn-primary">測試頁面</button>
-		</form>
+<%-- 		<form action='<c:url value="/testPage" />'> --%>
+<!-- 			<button type="submit" class="btn btn-primary">測試頁面</button> -->
+<!-- 		</form> -->
 	<!-- 灌值 -->
 <%-- 			<form action="<c:url value='/boobplay'/>" method="get"> --%>
 <!-- 				<button type="submit">不要隨便亂按會爆炸</button> -->
@@ -86,10 +86,9 @@
 					<button type="button" class="btn btn-outline-secondary"
 						onclick="storeCheck()">我的賣場</button>
 				<button type="button" class="btn btn-outline-secondary"
-						id="search1">一鍵輸入</button>
-				</div>
+						id="search1">新增</button>
 			</div>
-
+</div>
 			<br>
 			<!-- 搜尋商品欄	end -->
 			<!-- 	版面置中 -->
@@ -133,11 +132,10 @@
 					<hr>
 					<br>
 					<div class="row">
-						<div class="col-lg-4"></div>
-						<div class="col-lg-8">
-							<h1>查無資料!!!</h1>
-						</div>
+						<div class="col-sm-5"></div>
+						<h1 class="col-sm-7">查無資料</h1>
 					</div>
+					
 				</c:otherwise>
 			</c:choose>
 			<!-- 分頁顯示		 -->
@@ -209,7 +207,7 @@
 			}
 		}
 		$('#search1').click(function() {
-			$('.form-control').val("心靈");
+			$('.form-control').val("Spring in Action");
 		})
 	</script>
 </body>

@@ -7,6 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<script src="http://cdn.ckeditor.com/4.6.1/standard/ckeditor.js"></script>
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
@@ -46,6 +47,7 @@
 	$(document).ready(function() {
 		$("#bookWebheader").load("//localhost:8080/BookWeb/header");
 		$("#bookWebFooter").load("//localhost:8080/BookWeb/footer");
+		CKEDITOR.replace('content');
 	});
 </script>
 <title>書適圈</title>
@@ -55,7 +57,7 @@
 	<!-- header -->
 	<header class="blog-header" id="bookWebheader"></header>
 	<!-- header -->
-
+<br>
 	<div class="container">
 		<!-- 		<h1>我又是測試頁 &gt;.&lt;&quot;</h1> -->
 		<!-- body -->
@@ -64,11 +66,17 @@
 			action="${tempUrl}" enctype="multipart/form-data">
 			<div class="row">
 				<div class="form-group col-sm-12">
+					<h1>新增商品資訊</h1>
+				</div>
+			</div>
+			<div class="row">
+				<div class="form-group col-sm-12">
 					<form:label path="bk_Name" for="exampleFormControlInput1">書名</form:label>
 					<form:input path="bk_Name" type="text" class="form-control"
 						id="ControlInput1" placeholder="必填" required="required" />
 				</div>
 			</div>
+			<br>
 			<div class="row">
 				<div class="form-group col-sm-6">
 					<form:label path="bk_Author" for="exampleFormControlInput1">作者</form:label>
@@ -81,6 +89,7 @@
 						id="ControlInput3" placeholder="必填" required="required" />
 				</div>
 			</div>
+			<br>
 			<div class="row">
 				<div class="form-group col-sm-6">
 					<form:label path="bk_Pic" for="exampleFormControlFile1">封面照片</form:label>
@@ -93,6 +102,7 @@
 						id="ControlFile5" />
 				</div>
 			</div>
+			<br>
 			<!-- 			測試分隔線!!!!!!!!!!!!!!! -->
 			<div class="row">
 				<div class="form-group col-sm-6">
@@ -106,14 +116,16 @@
 						placeholder="必填" required="required">
 				</div>
 			</div>
+			<br>
 			<!-- 				測試結束線!!!!!!!!!!!!!!!! -->
 			<div class="row">
 				<div class="form-group col-sm-12">
 					<form:label path="bk_Content" for="exampleFormControlTextarea1">內容簡介 </form:label>
 					<form:textarea path="bk_Content" class="form-control"
-						id="ControlInput8" rows="3"></form:textarea>
+						id="content" name="content" rows="3"></form:textarea>
 				</div>
 			</div>
+			<br>
 			<div class="row">
 				<div class="form-group col-sm-10"></div>
 				<div class="form-group col-sm-1" >
@@ -135,14 +147,16 @@
 	<!-- footer -->
 	<script type="text/javascript">
 		$('.btn.btn-outline-dark').click(function() {
-			$('#ControlInput1').val("Spring MVC 動態網站開發實務");
-			$('#ControlInput2').val("王憲春");
-			$('#ControlInput3').val("資策會");
+			$('#ControlInput1').val("Spring in Action");
+			$('#ControlInput2').val("Craig Walls");
+			$('#ControlInput3').val("Manning Publications");
 			var dateControl = document.querySelector('input[type="date"]');
-			dateControl.value = '2020-09-22';
-			$('#ControlInput6').val(100000);
-			$('#ControlInput7').val(33);
-			$('#ControlInput8').val("非常重要的東東");
+			dateControl.value = '2018-11-05';
+			$('#ControlInput6').val(2250);
+			$('#ControlInput7').val(9);
+			CKEDITOR.instances.content.setData( "<p>Summary</p>"
+					+"<p>Spring in Action, 5th Edition is the fully updated revision of Manning\'s bestselling Spring in Action. This new edition includes all Spring 5.0 updates, along with new examples on reactive programming, Spring WebFlux, and microservices. You\'ll also find the latest Spring best practices, including Spring Boot for application setup and configuration.</p>"
+					+"<p>Purchase of the print book includes a free eBook in PDF, Kindle, and ePub formats from Manning Publications.</p>" );
 
 		})
 	</script>

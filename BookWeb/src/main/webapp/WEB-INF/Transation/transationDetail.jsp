@@ -48,11 +48,11 @@
 	<!-- header -->
 	<header class="blog-header" id="bookWebheader"></header>
 	<!-- header -->
-
+<br><br>
 	<!-- body -->
-	<div class="container media">
+	<div class="container media" >
 
-		<div class="card" style="font-size: 16px">
+		<div class="card" style="font-size: 16px" >
 			<div class="card-header text-center">二手書圖感謝您的購買歡迎再次光臨</div>
 			<div class="card-body">
 				<h3 class="card-title">交易明細</h3>

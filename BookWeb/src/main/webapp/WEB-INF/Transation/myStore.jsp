@@ -47,17 +47,17 @@
 	<!-- header -->
 	<header class="blog-header" id="bookWebheader"></header>
 	<!-- header -->
-
+<br>
 	<div class="container media">
 		<form></form>
 		<!-- body -->
-		<form action="<c:url value='/addMyStore'/>" method="post">
-			<button type="submit" class="btn btn-outline-info">我要賣東西</button>
+<%-- 		<form action="<c:url value='/addMyStore'/>" method="post"> --%>
+			<button type="button" class="btn btn-outline-info" id="turn">我要賣東西</button>
 			<br>
-		</form>
+<!-- 		</form> -->
 	</div>
 	<br>
-	<div class="container">
+	<div class="container" id="search">
 		<c:choose>
 			<c:when test="${not empty myBookList}">
 
@@ -141,12 +141,16 @@
 	<!-- footer -->
 	<footer class="container py-5" id="bookWebFooter"></footer>
 	<!-- footer -->
-	<script>
+	<script>	
 		$('.bsPrice').change(function() {
 			let re = /[0-9]/gi;
 			if ($('.bsPrice').val() < 1 || !re.test($('.bsPrice').val())) {
 				$('.bsPrice').val(1)
 			}
+		})
+		
+		$('#turn').click(function() {
+			$('#search').load("//localhost:8080/BookWeb/addMyStore");
 		})
 
 		$('.bsNum').change(function() {
