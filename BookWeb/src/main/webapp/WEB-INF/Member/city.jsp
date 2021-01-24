@@ -13,7 +13,7 @@
 <%-- <link rel="stylesheet" href="${pageContext.request.contextPath}/css/navbar2.css"> --%>
 <!-- sidemenu -->
 
-<!-- <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script> -->
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script> -->
 <!-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script> -->
 <!-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.23/datatables.min.css"/>
@@ -683,9 +683,6 @@ legend {
         		$('#tel').val('0917318555');
         		})
         	$(document).ready(function() {
-        		$("#bookWebheader").load("<c:url value='/header'/>");
-        		$("#bookWebFooter").load("<c:url value='/footer'/>");		
-        		       //得到当前时间
         			var date_now = new Date();
         			//得到当前年份
         			var year = date_now.getFullYear();
@@ -734,9 +731,7 @@ legend {
 	$('#pwd').val('aaa111');
 	$('#pwd1').val('aaa111');
 	})
-	$(document).ready(function() {
-		$("#bookWebheader").load("<c:url value='/header'/>");
-		$("#bookWebFooter").load("<c:url value='/footer'/>");		
+	$(document).ready(function() {	
 		       //得到当前时间
 			var date_now = new Date();
 			//得到当前年份
