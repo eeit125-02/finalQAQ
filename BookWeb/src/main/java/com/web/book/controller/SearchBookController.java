@@ -613,14 +613,14 @@ public class SearchBookController {
 		BookBean finalresult=searchService.savebk(result);
 		for(Integer i : tylist) {
 			if(i == 0) {
-				attr.addAttribute("page",finalresult.getBk_ID());
-				return "redirect:/bookpage";
+//				attr.addAttribute("page",finalresult.getBk_ID());
+				return "redirect:toCity";
 			}
 		}
 		searchService.savebkty(tylist, result.getBk_ID());
 		
-		attr.addAttribute("page",finalresult.getBk_ID());
-		return "redirect:/bookpage";
+//		attr.addAttribute("page",finalresult.getBk_ID());
+		return "redirect:toCity";
 	}
 	
 	// 前往修改書籍頁面
