@@ -186,7 +186,7 @@ public class Login {
 			memId.setMaxAge(600*600);
 			response.addCookie(memId);
 			model.addAttribute("loginUser", loginMember);
-			logincheck = "c" ;
+//			logincheck = "c" ;
 			return true;
 		}
 	// 會員登入
@@ -207,7 +207,7 @@ public class Login {
 				memId.setMaxAge(60*60);
 				response.addCookie(memId);
 				model.addAttribute("loginUser", mb);
-				logincheck = "a" ;	
+//				logincheck = "a" ;	
 			}else {
 			String sessionId = GlobalService.createSessionID(String.valueOf(mb.getMb_ID()),
 					mb.getMb_Name(), mb.getMb_Account());
@@ -322,7 +322,7 @@ public class Login {
 			ms.deleteMember(deleteId);
 			List<MemberBean> inf = ms.adminselect();
 			model.addAttribute("memberall", inf);
-			logincheck="a";
+//			logincheck="a";
 			return "redirect:toCity";
 	}
 //	// 管理員更新
@@ -385,17 +385,15 @@ public class Login {
 		MemberBean inf = ms.select(loginUser.getMb_Account());
 		System.out.println(inf);
 		model.addAttribute("login",inf);
-		if(logincheck.equals("c")) {
-			model.addAttribute("third","third");
-			return "Member/city";
-		}else if(logincheck.equals("a")) {
+		if(loginUser.getMb_Account().equals("a123456")) {
 			model.addAttribute("third","admin");
 			return "Member/city";
 		}else if(logincheck.equals("b")) {
 			model.addAttribute("common","common");
 			return "Member/city";
 		}else {
-			return "Member/login";
+			model.addAttribute("third","third");
+			return "Member/city";
 		}
 	}
 	
