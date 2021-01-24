@@ -86,7 +86,7 @@ public class ActFormValidator implements Validator {
 			errors.rejectValue("act_Tag", " ", "actbean.acttag.empty");
 		}
 
-		if (actbean.getact_Rule() != null && actbean.getact_Rule().isEmpty() && actbean.getact_Rule().contains(" ") && actbean.getact_Rule().length() < 2 || actbean.getact_Rule().length() > 30) {
+		if (actbean.getact_Rule() != null && actbean.getact_Rule().isEmpty() && actbean.getact_Rule().contains(" ") && actbean.getact_Rule().length() < 2 || actbean.getact_Rule().length() > 200) {
 			errors.rejectValue("act_Rule", " ", "actbean.actrule.empty");
 		}
 		
