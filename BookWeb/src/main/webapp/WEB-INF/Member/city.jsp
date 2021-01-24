@@ -185,40 +185,61 @@ legend {
 						id="pwdModify" name="pwdModify" data-toggle="list" href="#list-manager"
 						role="tab">密碼修改</a>
 						
-					<form name=a3 class=a3 action="<c:url value='/collectlist' />" method="get">
-					<div>
-					<button type="submit" name="list" id="bookEdit" class="list-group-item list-group-item-action">收藏清單</button>
-					</div>
-					</form>
-						
-					<form name=a3 class=a3 action="<c:url value='/myStore' />" method="get">
-					<div>
-					<button type="submit" name="sell" id="sellEdit" class="list-group-item list-group-item-action">我的賣場</button>
-					</div>
-					</form>	
-					
-					<form name=a3 class=a3 action="<c:url value='/showJoinbyID' />" method="get">
-					<div>
-					<button type="submit" name="getjoinrecords" id="joinEdit" class="list-group-item list-group-item-action">報名紀錄</button>
-					</div>
-					</form>
-					
-					<form name=a3 class=a3 action="<c:url value='/showActbyID' />" method="get">
-					<div>
-					<button type="submit" name="getactrecords" id="actEdit" class="list-group-item list-group-item-action">活動紀錄</button>
-					</div>
-					</form>
-					
-					<div>
-					<button type="button" id="editBookReport" name="getjoinrecords" class="list-group-item list-group-item-action">讀書心得</button>
-					</div>
-					<div>
-					<button type="button" id="editDiscussion" name="getjoinrecords" class="list-group-item list-group-item-action">討論管理</button>
-					</div>
-						
-					</div>
-					</div>
+					<a class="list-group-item list-group-item-action"
+						data-toggle="list" href="" id="bookEdit"
+						role="tab">收藏清單</a>	
 
+					<a class="list-group-item list-group-item-action"
+						data-toggle="list" href="" id="sellEdit"
+						role="tab">我的賣場</a>
+						
+					<a class="list-group-item list-group-item-action"
+						data-toggle="list" href="" id="join"
+						role="tab">報名紀錄</a>
+						
+					<a class="list-group-item list-group-item-action"
+						data-toggle="list" href="" id="act"
+						role="tab">活動紀錄</a>
+						
+					<a class="list-group-item list-group-item-action"
+						 data-toggle="list" href='#' id="editBookReport"
+						role="tab">讀書心得</a>
+						
+					<a class="list-group-item list-group-item-action"
+						data-toggle="list" href="" id="editDiscussion"
+						role="tab">討論管理</a>		
+
+
+
+<%-- 					<form name=a3 class=a3 action="<c:url value='/collectlist' />" method="get"> --%>
+<!-- 					<div> -->
+<!-- 					<button type="submit" name="list" id="bookEdit" class="list-group-item list-group-item-action">收藏清單</button> -->
+<!-- 					</div> -->
+<!-- 					</form>	 -->
+<%-- 					<form name=a3 class=a3 action="<c:url value='/myStore' />" method="get"> --%>
+<!-- 					<div> -->
+<!-- 					<button type="submit" name="sell" id="sellEdit" class="list-group-item list-group-item-action">我的賣場</button> -->
+<!-- 					</div> -->
+<!-- 					</form>	 -->
+<%-- 					<form name=a3 class=a3 action="<c:url value='/showJoinbyID' />" method="get"> --%>
+<!-- 					<div> -->
+<!-- 					<button type="submit" name="getjoinrecords" id="joinEdit" class="list-group-item list-group-item-action">報名紀錄</button> -->
+<!-- 					</div> -->
+<!-- 					</form> -->
+<%-- 					<form name=a3 class=a3 action="<c:url value='/showActbyID' />" method="get"> --%>
+<!-- 					<div> -->
+<!-- 					<button type="submit" name="getactrecords" id="actEdit" class="list-group-item list-group-item-action">活動紀錄</button> -->
+<!-- 					</div> -->
+<!-- 					</form> -->
+<!-- 					<div> -->
+<!-- 					<button type="button" id="editBookReport" name="getjoinrecords" class="list-group-item list-group-item-action">讀書心得</button> -->
+<!-- 					</div> -->
+<!-- 					<div> -->
+<!-- 					<button type="button" id="editDiscussion" name="getjoinrecords" class="list-group-item list-group-item-action">討論管理</button> -->
+<!-- 					</div> -->
+						
+					</div>
+					</div>
 
 	
 	
@@ -317,6 +338,7 @@ legend {
 	}); 
         var check = $("#test").val();
         if(check=="third"){
+        	$('#editDiscussion').hide();
         	$("#inf").hide();
 			$("#pwdModify").hide();
 			$("#admin1").hide();
@@ -335,6 +357,7 @@ legend {
 			$("#inf").hide();
 			$("#third").hide();
 		}else{
+			$('#editDiscussion').hide();
 			$("#third").hide();
 			$("#admin1").hide();
 		}
@@ -850,6 +873,9 @@ legend {
 			if(check=="admin"){
 				
 				$('#change123').load("//localhost:8080/BookWeb/Admin/Book")
+			}else{
+				
+				window.location.href = "http://localhost:8080/BookWeb/collectlist";
 			}
 		});
 		
@@ -858,16 +884,12 @@ legend {
 			if(check=="admin"){
 				
 				$('#change123').load("//localhost:8080/BookWeb/Admin/Stroe")
+			}else{
+				
+				window.location.href = "http://localhost:8080/BookWeb/myStore";
 			}
 		});
 		
-		$('#actEdit').click(function(){
-			
-			if(check=="admin"){
-				
-				$('#change123').load("//localhost:8080/BookWeb/Admin/Act")
-			}
-		});
 		
 		$('#editDiscussion').click(function(){
 			
@@ -877,7 +899,26 @@ legend {
 			}
 		});
 		
-		
+		$('#join').click(function(){
+			
+			if(check=="admin"){
+				
+				$('#change123').load("//localhost:8080/BookWeb/Admin/Act")
+			}else{
+				
+				window.location.href = "http://localhost:8080/BookWeb/showJoins";
+			}
+		});
+		$('#act').click(function(){
+			
+			if(check=="admin"){
+				
+				$('#change123').load("//localhost:8080/BookWeb/Admin/Act")
+			}else{
+				
+				window.location.href = "http://localhost:8080/BookWeb/showActbyID";
+			}
+		});
 	</script>
 	
 	
