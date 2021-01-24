@@ -2,7 +2,7 @@ package com.web.book.service;
 
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.List;
+//import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
 
@@ -12,8 +12,8 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import com.google.api.core.ApiFuture;
 import com.google.cloud.firestore.DocumentReference;
 import com.google.cloud.firestore.DocumentSnapshot;
-import com.google.cloud.firestore.QueryDocumentSnapshot;
-import com.google.cloud.firestore.QuerySnapshot;
+//import com.google.cloud.firestore.QueryDocumentSnapshot;
+//import com.google.cloud.firestore.QuerySnapshot;
 
 public class GlobalService {	
 	
@@ -52,13 +52,13 @@ public class GlobalService {
 		
 		FirebaseService firebase = new FirebaseService();
 		
-		ApiFuture<QuerySnapshot> future = firebase.getFirestore().collection(SESSION_ID).get();
-		List<QueryDocumentSnapshot> documents = future.get().getDocuments();
-		for (QueryDocumentSnapshot document : documents) {
-			  if (document.getString("id").equals(id)) {
-				  firebase.getFirestore().collection(SESSION_ID).document(document.getId()).delete();
-			  }
-		}
+//		ApiFuture<QuerySnapshot> future = firebase.getFirestore().collection(SESSION_ID).get();
+//		List<QueryDocumentSnapshot> documents = future.get().getDocuments();
+//		for (QueryDocumentSnapshot document : documents) {
+//			  if (document.getString("id").equals(id)) {
+//				  firebase.getFirestore().collection(SESSION_ID).document(document.getId()).delete();
+//			  }
+//		}
 		Map<String, Object> sessionValue = new HashMap<>();
 		sessionValue.put("id", id);
 		sessionValue.put("name", name);	

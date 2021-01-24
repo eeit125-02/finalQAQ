@@ -1,7 +1,5 @@
 package com.web.book.model;
 
-import java.sql.Timestamp;
-
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
