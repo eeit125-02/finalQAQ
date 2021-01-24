@@ -359,6 +359,7 @@ public class Login {
 	@GetMapping("/toLogin")
 	public String tologin(SessionStatus sessionStatus) {
 		sessionStatus.setComplete();
+		logincheck=null;
 		System.out.println("++++++++++++++++++++++++++++++++++++++");
 		return "Member/login";
 	}

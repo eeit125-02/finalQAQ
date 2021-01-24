@@ -56,7 +56,7 @@ legend {
     </style>
 </head>
 <body>
-<header class="container blog-header py-3" id="bookWebheader"></header>
+<header class="blog-header" id="bookWebheader"></header>
 <div class="container media">
     <fieldset>
         <legend>尋找密碼</legend>
@@ -65,7 +65,7 @@ legend {
         <hr>
         <div>
             <input type="text" id="" name="mail">
-            <span><button id="send1">送出</button></span>
+            <span><button id="send1" class="btn btn-outline-secondary">送出</button></span>
         </div>
         </form>
     </fieldset>
