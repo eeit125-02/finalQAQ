@@ -20,6 +20,8 @@
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
 	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
 	crossorigin="anonymous">
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.23/datatables.min.css"/>
+<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.23/datatables.min.js"></script>
 <link rel="icon" href="${pageContext.request.contextPath}/image/logo1.ico" type="image/x-icon" />
 <style>
 .bd-placeholder-img {
@@ -31,6 +33,10 @@
 	.bd-placeholder-img-lg {
 		font-size: 3.5rem;
 	}
+}
+
+th{
+text-align:center;
 }
 
 td{
@@ -58,57 +64,57 @@ text-align:center;
 	<!-- body -->
 	<div class="container media">
 		<br>
+		<br>
 
 
 
 		<p>&nbsp;</p>
 		<hr>
 		<div class='center'>
+		<br>
 			<h1>${name}的報名紀錄</h1>
+			<hr><br>
 			<c:if test='${empty mbjoinlist}'>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
 			查無您的報名紀錄<br>
 			</c:if>
 			<c:if test='${not empty mbjoinlist}'>
-				<%-- 			<c:if test ='${vs.first }'> --%>
-				<%-- 				<c:out value="<table border='1'>" escapeXml='false'/> --%>
-				<%-- 				<c:out value="<tr> --%>
-				<table border='1'>
+
+				<table border='1' id="myTable" class="display">
+				<thead>
 					<tr>
-						<td>會員ID</td>				
-						<td>會員帳號</td>				
-						<td>活動名稱</td>
-						<td>會員名稱</td>
-						<td>email</td>
-						<td>聯絡電話</td>
-						<td>活動人數</td>
-						<td colspan=2>編輯活動</td>
+						<th>會員ID</th>				
+						<th>會員帳號</th>				
+						<th>活動名稱</th>
+						<th>會員名稱</th>
+						<th>email</th>
+						<th>聯絡電話</th>
+						<th>修改</th>
+						<th>刪除</th>
 					</tr>
-					<!-- 				</tr>" escapeXml='false'/> -->
-					<%-- 			</c:if> --%>
+					</thead>
+
+
 					<c:forEach var='ajb' varStatus='vs' items='${mbjoinlist}'>
-						<%-- 			${act.ACT_Image} --%>
+
+						<tbody>
 						<tr>
-							<%-- 				<td><a href='/FindActServlet?key=${act.ACT_Name}'></a></td> --%>
 							<td>${ajb.member.mb_ID}</td>
 							<td>${ajb.member.mb_Account}</td>
 							<td>${ajb.act.act_Name}</td>
 							<td>${ajb.member.mb_Name}</td>
 							<td>${ajb.member.mb_Mail}</td>
 							<td>${ajb.member.mb_Tel}</td>
-							<td>${ajb.join_Pax}</td>
-							
-							<td><a href="<c:url value='/showJoinUpdateForm'/>?join_ID=${ajb.join_ID}">編輯</a>
-							<td><a href="<c:url value='deleteJoin'/>?join_ID=${ajb.join_ID}&act_ID=${ajb.act.act_ID}">刪除</a>
-			
+							<td><a href="<c:url value='/showJoinUpdateForm'/>?join_ID=${ajb.join_ID}">修改</a>
+							<td><a href="<c:url value='deleteJoin'/>?join_ID=${ajb.join_ID}&act_ID=${ajb.act.act_ID}">刪除</a>			
 						</tr>
+						</tbody>
 					</c:forEach>
 				</table>
-				<%-- 			<c:if test ='${vs.last }'> --%>
-				<%-- 				<c:out value="</table>" escapeXml='false'/> --%>
-				<%-- 			</c:if> --%>
+			
 			</c:if>
 			<p />
-<%-- 			<a href='${pageContext.request.contextPath}/ActHomepage'>回到活動管理</a> --%>
+			<br>
+
 			<a href='${pageContext.request.contextPath}/showActs'><button class="btn btn-outline-info">繼續探索活動</button></a>
 <!-- 			<button onclick="window.location.href='showCreateForm'">新增活動1</button> -->
 		</div>
@@ -119,5 +125,39 @@ text-align:center;
 	<!-- footer -->
 </body>
 <script>
+$(document).ready(function () {
+    $('#myTable').DataTable({
+     bFilter: true,
+     bPaginate: true, // 顯示換頁
+     searching: true, // 顯示搜尋
+     info: true, // 顯示資訊
+     fixedHeader: true,  // 標題置頂
+     destroy:true,
+  	 language:{
+      "processing": "處理中...",
+      "lengthMenu": "顯示_MENU_項結果",
+      "zeroRecords": "沒有符合的結果",
+      "info": "顯示第_START_至_END_項結果，共_TOTAL_項",
+      "infoEmpty": "顯示第 0 至 0 項結果，共 0 項",
+      "infoFiltered": "(從_MAX_項結果中過濾)",
+      "search": "搜尋:",
+      "paginate": {
+          "first": "第一頁",
+          "previous": "上一頁",
+          "next": "下一頁",
+          "last": "最後一頁"
+      },
+      "aria": {
+          "sortAscending": ": 升冪排列",
+          "sortDescending": ": 降冪排列"
+      },
+      "select": {
+          "1": "%d 列已選擇",
+          "2": "%d 列已選擇",
+          "_": "%d 列已選擇"
+      }
+  } 
+});
+});
 </script>
 </html>

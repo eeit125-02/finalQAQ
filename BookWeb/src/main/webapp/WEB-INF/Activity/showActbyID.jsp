@@ -22,6 +22,8 @@
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
 	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
 	crossorigin="anonymous">
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.23/datatables.min.css"/>
+<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.23/datatables.min.js"></script>
 <link rel="icon" href="${pageContext.request.contextPath}/image/logo1.ico" type="image/x-icon" />
 
 <style>
@@ -36,8 +38,13 @@
 	}
 }
 
-td{
+th{
+text-align:center;
 width:100px;
+}
+
+td{
+width:20px;
 border:solid 1px;
 text-align:center;
 }
@@ -61,20 +68,19 @@ text-align:center;
 		<p>&nbsp;</p>
 		<hr>
 		<div class='center'>
+		<br>
 			<h1>${aib.mb_Name}的活動創建紀錄</h1>
 			<c:if test='${empty mbactlist}'>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
 			查無您的活動創建紀錄<br>
 			</c:if>
 			<c:if test='${not empty mbactlist}'>
-				<%-- 			<c:if test ='${vs.first }'> --%>
-				<%-- 				<c:out value="<table border='1'>" escapeXml='false'/> --%>
-				<%-- 				<c:out value="<tr> --%>
-				<table border='1' id="change">
-					<thead><tr>
+
+				<table border='1' id="myTable" class="display" width="1200px">
+					<thead>
+					<tr>
 						<th>會員ID</th>				
 						<th>會員帳號</th>				
 						<th>活動名稱</th>
-						<th>活動圖片</th>
 						<th>活動主題</th>
 						<th>活動日期</th>
 						<th>活動時間</th>
@@ -84,20 +90,19 @@ text-align:center;
 						<th>活動標籤</th>
 						<th>活動場所</th>
 						<th>活動名額</th>
-						<th>活動報名人數</th>
-						<th colspan=2>編輯活動</th>
-					</tr></thead>
-					<!-- 				</tr>" escapeXml='false'/> -->
-					<%-- 			</c:if> --%>
+						<th>報名人數</th>
+						<th >修改</th>
+						<th >刪除</th>
+					</tr>
+					</thead>
+
 					<c:forEach var='ajb' varStatus='vs' items='${mbactlist}'>
-						<%-- 			${act.ACT_Image} --%>
-						 <tbody>
+
+						<tbody>
 						<tr>
-							<%-- 				<td><a href='/FindActServlet?key=${act.ACT_Name}'></a></td> --%>
 							<td>${aib.mb_ID}</td>
 							<td>${aib.mb_Account}</td>
 							<td>${ajb.act_Name}</td>
-							<td>${ajb.act_Image}</td>
 							<td>${ajb.act_Theme}</td>
 							<td>${ajb.act_Date}</td>
 							<td>${ajb.act_Time}</td>
@@ -108,18 +113,16 @@ text-align:center;
 							<td>${ajb.act_Place}</td>
 							<td>${ajb.act_Pax}</td>
 							<td>${ajb.act_Differentpax}</td>
-							<td><a href="<c:url value='/showUpdateForm'/>?act_ID=${ajb.act_ID}">編輯</a>
-							<a href="<c:url value='deleteAct1'/>?mb_ID=${aib.mb_ID}&act_ID=${ajb.act_ID}">刪除</a></td>
+							<td><a href="<c:url value='/showUpdateForm'/>?act_ID=${ajb.act_ID}">修改</a></td>
+							<td><a href="<c:url value='deleteAct1'/>?mb_ID=${aib.mb_ID}&act_ID=${ajb.act_ID}">刪除</a></td>
 						</tr>
 						</tbody>
 					</c:forEach>
 				</table>
-				<%-- 			<c:if test ='${vs.last }'> --%>
-				<%-- 				<c:out value="</table>" escapeXml='false'/> --%>
-				<%-- 			</c:if> --%>
+
 			</c:if>
 			<p />
-<%-- 			<a href='${pageContext.request.contextPath}/ActHomepage'>回到活動管理</a> --%>
+			<br>
 			<a href='${pageContext.request.contextPath}/showActs'><button class="btn btn-outline-info">繼續探索活動</button></a>
 <!-- 			<button onclick="window.location.href='showCreateForm'">新增活動1</button> -->
 		</div>
@@ -130,18 +133,16 @@ text-align:center;
 	<!-- footer -->
 </body>
 <script>
-$(document).ready(function() {
-	console.log("123")
-    $('#change').DataTable({
+$(document).ready(function () {
+    $('#myTable').DataTable({
      bFilter: true,
      bPaginate: true, // 顯示換頁
-    searching: true, // 顯示搜尋
-    info: true, // 顯示資訊
-    fixedHeader: true,  // 標題置頂
-  destroy:true,
-  language:{
+     searching: true, // 顯示搜尋
+     info: true, // 顯示資訊
+     fixedHeader: true,  // 標題置頂
+     destroy:true,
+  	 language:{
       "processing": "處理中...",
-      "loadingRecords": "載入中...",
       "lengthMenu": "顯示_MENU_項結果",
       "zeroRecords": "沒有符合的結果",
       "info": "顯示第_START_至_END_項結果，共_TOTAL_項",
@@ -165,8 +166,9 @@ $(document).ready(function() {
       }
   } 
 });
-})
+});
 </script>
+
 <script>
 	$(document).ready(function() {
 		$("#bookWebheader").load("//localhost:8080/BookWeb/header");

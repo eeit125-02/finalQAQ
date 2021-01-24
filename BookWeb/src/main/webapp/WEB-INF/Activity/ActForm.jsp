@@ -10,9 +10,8 @@
 
 <link rel='stylesheet' href='${pageContext.request.contextPath}/css/style.css' />
 
-<!-- CK EDITOR的東東 -->
-<script src="https://cdn.ckeditor.com/ckeditor5/24.0.0/classic/ckeditor.js"></script>
-
+<!-- 引用CK Editor -->
+<script src="${pageContext.request.contextPath}/js/ckeditor/ckeditor.js"></script>
 
 
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
@@ -39,6 +38,7 @@
 	});
 </script>
 
+
 <style>
 .bd-placeholder-img {
 	font-size: 1. 125rem;
@@ -55,7 +55,7 @@
 	border: 1px solid background-color:pink
 }
 
-.ck-editor__editable_inline {
+.ck{
 	/* 設定最低高度 */
     min-height: 215px;
 }
@@ -88,6 +88,7 @@
 
 				<fieldset>
 					<!-- 					<legend>活動創建表單</legend> -->
+					
 
 					<form>
 						<div class="form-row">
@@ -124,9 +125,9 @@
 							</div>
 							<div class="form-group col-md-2">
 							<img src="${ab.act_Image}" id="show" width="100%">
+								<div><form:errors path="act_Image" cssStyle="color:#FF0000;"/></div>
 							</div>	
 							</div>
-								<form:errors path="act_Image" cssStyle="color:#FF0000;"/>
 
 						
 						<div class="form-row">
@@ -253,14 +254,14 @@
 						  <div class="form-group col-md-6">
 						    <label >活動摘要:</label>
 <!-- 						  CK EDITOR的東東 -->
-						    <form:textarea  path="act_Rule" rows = "10" cols = "30" class="form-control" />
+						    <form:textarea  path="act_Rule" rows = "10" cols = "30" class="form-control" style="height:307px"/>
 						    <form:errors path="act_Rule" cssStyle="color:#FF0000;"/>
 						  </div>
 						  
 						  <div class="form-group  col-md-6">
 						    <label >活動簡介:</label>
 <!-- 						  CK EDITOR的東東 -->
-						  <form:textarea id="editor1" path="act_Intro" rows = "10" cols = "30" />
+						  <form:textarea class="ck" id="act_Intro" path="act_Intro" rows = "10" cols = "30" />
 						  </div>
 						  </div>
 <!-- 						  <button class="add_field_button btn btn-primary">添加標籤</button> -->
@@ -278,7 +279,7 @@
 
 				<br>
 				<br>
-				<a href='${pageContext.request.contextPath}/showActs'>回到活動管理</a>
+				<a href='${pageContext.request.contextPath}/showActs'>繼續探索活動</a>
 
 		</div>
 <!-- 		<button id="insert">123</button> -->
@@ -289,24 +290,33 @@
 		<!-- footer -->
 		
 
-
 <script>
 
 $("#finish").click(function(){
 
-$('#act_Name').val('哈利波特讀書會') ;
+$('#aaa').val('哈利波特讀書會') ;
 $('#act_Theme').val('讀書會') ;
 $('#act_Date').val('2021-01-31') ;
 $('#act_Time').val('10:30') ;
-$('#act_Loc').val('新北市,中和區,錦和運動公園') ;
-$('#act_Intro').val('歡迎來到哈利波特讀書會!自 2020 年 6 月 23 日起,一群熱愛《哈利波特》的「導賞巫」們,每週陪你閱讀《神秘的魔法石》章節,用新的視角重新探索、回味經典故事,並與其他哈迷們一同交流故事內容的各種看法!') ;
+$('#act_Loc').val('錦和運動公園') ;
+$('#act_Rule').val('歡迎來到哈利波特讀書會!自2020年6月23日起,一群熱愛哈利波特的「導賞巫」們,每週陪你閱讀《神秘的魔法石》章節,用新的視角重新探索、回味經典故事,並與其他哈迷們一同交流故事內容的各種看法!') ;
 $('#act_Guest').val('林傳瓏') ;
 $('#act_Pax').val('50') ;
 $('#act_Place').val('現場') ;
-$('#act_Rule').val('每週的讀書會內容,將由當週的「導賞巫」開啟新的主題串與各位哈迷們分享,每位導賞巫將會用他們獨特的觀點,分享他們閱讀當週章節範圍所注意到、想到的有趣看點,也會列出幾則問題,歡迎參與讀書會的哈迷們一同在留言中討論、分享大家各自不同的看法!') ;
+CKEDITOR.instances["act_Intro"].setData(
+		'<p>為了慶祝全系列第一本書-哈利波特:神祕的魔法石出版20週年,</p>'+ 
+		'<p>Pottermore聯合了英美兩地的哈利波特系列小說出版社,</p>'+
+		'<p>從滿20週年當天展開為期數個月的讀書會活動,邀請哈迷們重新拿起書本閱讀,</p>'+
+		'<h3>並歡迎新世代的讀者一起加入魔法世界</h3>'
+
+);
 });
 
 </script>
+
+
+
+
 
 
 		<script type="text/javascript">
@@ -513,11 +523,33 @@ $('#act_Rule').val('每週的讀書會內容,將由當週的「導賞巫」開�
 <!-- 		CK EDITOR的西西 -->
 
 <script>
-    ClassicEditor
-        .create( document.querySelector( '#editor1' ) )
-        .catch( error =>  {
-            console.error( error );
-        } );
+	 	CKEDITOR.addCss('.cke_editable { font-size: 20px; padding: 1em; }');
+	 	var editor = CKEDITOR.replace( 'act_Intro' ,{
+			toolbar: [
+		        {
+		          name: 'clipboard',
+		          items: ['Undo', 'Redo']
+		        },
+		        {
+			          name: 'styles',
+			          items: ['Format', 'Font', 'FontSize']
+			    },
+		        {
+		          name: 'basicstyles',
+		          items: ['Bold']
+			    },
+		        {
+		          name: 'colors',
+		          items: ['TextColor']
+		        },
+		        {
+		          name: 'align',
+		          items: ['JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock']
+		        }
+		      ]
+
+		      
+		});
 </script>
 
 

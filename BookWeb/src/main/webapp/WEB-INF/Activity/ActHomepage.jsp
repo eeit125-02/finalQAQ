@@ -146,21 +146,31 @@ align:center
 				  <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
 				    <form action="showCreateForm" id="test">
 					<button type="button" class="btn btn-outline-info" id="create">新增活動</button>
-				    </form>	
+				    </form>
+				    
 				    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
 				      <li class="nav-item active">
-				        <a href="<c:url value='/showJoins'/>"><button class="btn btn-outline-info">查看報名紀錄</button></a>
+				      <button id="finish1" type="button"  class="btn btn-outline-info">一鍵輸入</button>
+<%-- 				        <a href="<c:url value='/showJoins'/>"><button class="btn btn-outline-info">查看報名紀錄</button></a> --%>
 				      </li>
-				      <li class="nav-item">
-				        <a href="<c:url value='/showActbyID'/>"><button class="btn btn-outline-info">查看會員報名紀錄</button></a>
-				      </li>
+<!-- 				      <li class="nav-item"> -->
+<%-- 				        <a href="<c:url value='/showActbyID'/>"><button class="btn btn-outline-info">查看會員報名紀錄</button></a> --%>
+<!-- 				      </li> -->
 				    </ul>	    			
-				    
-		
-				      <input class="form-control mr-sm-2" id="enter1" type="search" placeholder="Search" aria-label="Search">
-				      <input id="search" class="btn btn-outline-success my-2 my-sm-0" type="button" value="Search">
+				      <input class="form-control mr-sm-2" id="enter1" type="search" placeholder="請輸入活動關鍵字" aria-label="Search" style="width:300px">
+				      <input id="search" class="btn btn-outline-secondary my-2 my-sm-0" type="button" value="Search">
 				  </div>
 				</nav>
+				
+				<script>
+
+$("#finish1").click(function(){
+
+$('#enter1').val('未來') ;
+});
+
+</script>
+				
 				
 				<br>
 
@@ -178,8 +188,8 @@ align:center
 				<section class="container" style="width:1200px">
 					<div class="row" id="change">
 						<c:forEach var='act' items='${allacts}'>	
-							<div class="col-6,col-md-3" style="width: 380px; height: 1000px">
-								<div class="thumbnail " style="width: 350px; height: 1000px">
+							<div class="col-6,col-md-3" style="width: 380px; height: 800px">
+								<div class="thumbnail " style="width: 350px; height: 800px">
 									<p>
 										<b style='font-size: 25px;'>${act.act_Name}</b>
 									</p>
@@ -208,7 +218,7 @@ align:center
      										 <form  class="col-ml-4">
      										 <br>
 											 <div class="form-group">
-											 <div><a href="#" class="btn btn-info" style="font-size:1em">活動標籤:${act.act_Tag}</a> 
+											 <div>活動標籤:<br><a href="#" class="btn btn-info" style="font-size:1em">${act.act_Tag}</a> 
 											</div>
 											 </div>
 											 
@@ -221,7 +231,7 @@ align:center
 										     </div>
 										     
 										      <div class="form-group">
-										     <div><button class="mapbutton" style="background-color:white" id="myModal"  value="${act.act_Loc}" data-toggle="modal"  title="Google地圖" data-target="#myModal1"><img src=${pageContext.request.contextPath}/image/map1.png style="width:25px;height:25px" title="Google地圖">${act.act_Loc}</button></div>
+										     <div><img src=${pageContext.request.contextPath}/image/map1.png style="width:22px;height:22px" >${act.act_Loc}</div>
 										     </div>     
 										     
 										     <div class="form-group">
@@ -260,14 +270,16 @@ align:center
 <!--       										//頁尾 -->
 
 <!-- 									大視窗的內容 -->
-										   <div class="line-it-button line" data-lang="zh_Hant" data-type="share-a" data-ver="3" data-url="http://localhost:8080/BookWeb/toLogin" data-color="default" data-size="large" data-count="true" style="display: none;"></div>
- 											<script src="https://www.line-website.com/social-plugins/js/thirdparty/loader.min.js" async="async" defer="defer"></script>
+
+								     <div class="line-it-button" data-lang="zh_Hant" data-type="share-c" data-ver="3" data-url="https://social-plugins.line.me/zh_TW/how_to_install" data-color="default" data-size="small" data-count="true" style="display: none;"></div>
+									 <script src="https://www.line-website.com/social-plugins/js/thirdparty/loader.min.js" async="async" defer="defer"></script>
+									
 									<div class="caption">
 										<p>${act.act_Theme}</p>
 										<p><img src=${pageContext.request.contextPath}/image/date.png style="width:22px;height:22px">${act.act_Date}</p>
 										<p></p>
 										<p><img src=${pageContext.request.contextPath}/image/time.png style="width:22px;height:22px">${act.act_Time}</p>
-										<p><button class="mapbutton" style="background-color:white" id="myModal"  value="${act.act_Loc}" data-toggle="modal"  title="Google地圖" data-target="#myModal1"><img src=${pageContext.request.contextPath}/image/map1.png style="width:25px;height:25px" title="Google地圖">${act.act_Loc}</button></p>
+										<p><button class="mapbutton" style="background-color:white" id="myModal"  value="${act.act_Loc}" data-toggle="modal"  title="Google地圖" data-target="#myModal1"><img src=${pageContext.request.contextPath}/image/map1.png style="width:22px;height:22px" title="Google地圖">${act.act_Loc}</button></p>
 										<hr>
 
 										<p>
@@ -383,8 +395,8 @@ $('#create').click(function(){
 			success : function(data) {
 				var insertData="";
 				for (let i = 0; i < data.length; i++) {
-					insertData += "<div class='col-6,col-md-3' style='width: 380px; height: 1000px'>"
-								+"<div class='thumbnail' style='width: 350px; height: 1000px'>"
+					insertData += "<div class='col-6,col-md-3' style='width: 380px; height: 800px'>"
+								+"<div class='thumbnail' style='width: 350px; height: 800px'>"
 									+"<p>"
 										+"<b style='font-size: 25px;'>"+data[i].act_Name+"</b>"
 									+"</p>"
@@ -394,7 +406,7 @@ $('#create').click(function(){
   										+"<div class='modal-dialog modal-dialog-centered' role='document'>"
    										+ "<div class='modal-content'  style=\"width:800px; height:900px\">"
     									 + "<div class='modal-header'>"
-      										 + "<h5 class='modal-title' id='#exampleModalCenter"+data[i].act_Name+"'>"+data[i].act_Name+"</h5>"
+      										 + "<h3 class='modal-title' id='#exampleModalCenter"+data[i].act_Name+"'>"+data[i].act_Name+"</h3>"
        											+ "<button type='button' class='close' data-dismiss='modal' aria-label='Close'>"
      											  +  "<span aria-hidden='true'>&times;</span>"
      												  + "</button>"
@@ -409,7 +421,7 @@ $('#create').click(function(){
     										 +"<form  class=\"col-ml-4\">"
     										 +"<br>"
 											 +"<div class=\"form-group\">"
-											 +"<div><a href=\"#\" class=\"btn btn-info\" style=\"font-size:1em\">活動標籤:"+data[i].act_Tag+"</a>" 
+											 +"<div>活動標籤:<br><a href=\"#\" class=\"btn btn-info\" style=\"font-size:1em\">"+data[i].act_Tag+"</a>" 
 											+"</div>"
 											 +"</div>"
 											 
@@ -422,7 +434,7 @@ $('#create').click(function(){
 										     +"</div>"
 										     
 										      +"<div class=\"form-group\">"
-										     +"<div><button class=\"mapbutton\" style=\"background-color:white\" id=\"myModal\"  value=\""+data[i].act_Loc+"\" data-toggle=\"modal\"  title=\"Google地圖\" data-target=\"#myModal1\"><img src=${pageContext.request.contextPath}/image/map1.png style=\"width:25px;height:25px\" title=\"Google地圖\">"+data[i].act_Loc+"</button></div>"
+										     +"<div><img src=${pageContext.request.contextPath}/image/map1.png style=\"width:22px;height:22px\">"+data[i].act_Loc+"</div>"
 										     +"</div>"     
 										     
 										     +"<div class=\"form-group\">"
