@@ -63,7 +63,7 @@
 	        <tr>
 	            <th>編號</th>
 	            <th>會員帳號</th>
-	            <th>標題</th>
+	            <th style="width:200px">標題</th>
 	            <th>價格</th>
 	            <th>撰寫日期</th>
 	            <th>操作</th>
@@ -100,22 +100,22 @@
 	$.ajax({
 		async : false,
 		type : 'POST',
-		url : "http://localhost:8080/BookWeb/Admin/getMonthReportWrite",
+		url : "http://localhost:8080/BookWeb/Admin/getStoreMonthPrice",
 		dataType : "json",
 		success : function(data) {
-			monthWriteName = data.month
-			monthWriteNum = data.monthNumber
+			monthWriteName = data.name
+			monthWriteNum = data.value
 		}
 	});
 	
 	$.ajax({
 		async : false,
 		type : 'POST',
-		url : "http://localhost:8080/BookWeb/Admin/getMonthReportViews",
+		url : "http://localhost:8080/BookWeb/Admin/getStoreMonthPsc",
 		dataType : "json",
 		success : function(data) {
-			monthViewName = data.month
-			monthViewNum = data.viewNumber
+			monthViewName = data.name
+			monthViewNum = data.value
 		}
 	});
 	
@@ -124,7 +124,7 @@
 	    data: {
 	        labels: monthWriteName,
 	        datasets: [{
-	        	label: '人數',
+	        	label: '金額',
 	            data: monthWriteNum,
 	            fill: false,
 	            backgroundColor: 'rgba(255, 99, 132)',
@@ -135,7 +135,7 @@
 			title: {
 				display: true,
 				fontSize: 20,
-				text: '每月撰寫心得數量'
+				text: '近半年交易金額'
 			}
 		}
 	});
@@ -145,7 +145,7 @@
 	    data: {
 	        labels: monthViewName,
 	        datasets: [{
-	        	label: '人數',
+	        	label: '數量',
 	            data: monthViewNum,
 	            fill: false,
 	            backgroundColor: 'rgba(54, 162, 235, 1)',
@@ -156,7 +156,7 @@
 			title: {
 				display: true,
 				fontSize: 20,
-				text: '每月瀏覽心得數量'
+				text: '近半年交易數量'
 			}
 		}
 	});
@@ -182,7 +182,7 @@
 	            { "data": "bkName" },
 	            { "data": "bsPrice" },
 	            { "data": "bsDate" },
-	            { data: "brId",
+	            { data: "bsId",
 	              render: function (data, type, row, meta) { 
 	                    return "<button type=\"button\" class=\"btn btn-outline-primary\" onclick='viewData(" + data + ")' value = \""+ data +"\">查看</button>"
 			               + "<button type=\"button\" class=\"btn btn-outline-danger ml-3\" onclick='DelData(" + data + ")' value = \""+ data +"\">刪除</button>";
@@ -216,58 +216,79 @@
         }); 
 	}
 	
-	function viewData(reportId){
+	/* function viewData(reportId){
 		var insertHtml;
 		$.ajax({
 			async : false,
 			type : 'POST',
-			url : "http://localhost:8080/BookWeb/BookReport/viewBookReport/"+reportId,
+			url : "http://localhost:8080/BookWeb/Admin/getStore",
+			data: {store:reportId}
 			dataType : "json",
-			contentType : "application/json;charset=utf-8",
 			success : function(data) {
 				
-				insertHtml = "<div class=\"media\">"
-						   + "<img id=\"bkPic\" src=\""+ data.bk_Pic +"\" class=\"w-25 h-25 p-2\">"
-						   + "<div class=\"media-body ml-5\">"
-						   + "<form class=\"col-ml-4\">"
-						   + "<br>"
-						   + "<div class=\"form-inline\">"
-						   + "<p class=\"messageSize\" id=\"brTitel\">閱讀標題："+ data.br_Name +"</p> "
-						   + "</div>"
-						   + "<div class=\"form-inline\">"
-						   + "<p class=\"messageSize\" id=\"userAccount\">撰寫者："+ data.userAccount +"</p>"
-						   + "</div>"
-						   + "<div class=\"form-inline\">"
-						   + "<p class=\"messageSize ellipsis\" id=\"bkName\">書名："+ data.bk_Name +"</p>"
-						   + "</div>"
-						   + "<div id=\"bookWriter\" class=\"form-inline\">"
-						   + "<p class=\"messageSize\" id=\"bkAuthor\">作者："+ data.bk_Author +"</p>"
-						   + "</div>"
-						   + "<div class=\"form-inline\">"
-						   + "<p class=\"messageSize\" id=\"bkPublish\">出版社："+ data.bk_Publish +"</p>"
-						   + "</div>"
-						   + "<div class=\"form-inline\">"
-						   + "<lable class=\"messageSize\">評分：</lable>"
+				insertHtml = "<div class=\"row\">"
+						   	+ "<div class=\"col-lg-4\">"
+						   	+ "<label for=\"url\"></label> <img alt=\"圖勒?\" width=\"300px\" height=\"400px\" src=\""+data.bkPic+"\"/>"
+						   	+ "</div>"
+						   	+ "<div class=\"col-lg-8\">"
+							+ "<h5>賣場編號:</h5>"
+							+ "<span>" + data.bksID + "</span>"
+							+ "<hr>"
+							+ "<h5>賣家名子:</h5>"
+							+ "<span>"+ data.mbName +"</span>"
+							+ "<hr>"
+							+ "<h5>上架時間:</h5>"
+							+ "<span>"+ data.bksDate +"</span>"
+							+ "<hr>"
+							+ "<h5>書本價格:</h5>"
+							+ "<span>"+ data.bsPrice +"</span>"
+							+ "<hr>"
+							+ "<h5>庫存:</h5>"
+							+ "<span>" + data.bsNum +"</span>"
+							+ "</div>"
+							+ "</div>"
 						   
-						   for(let i = 0; i < data.br_Score; i++){
-							   
-							   insertHtml += "<span class=\"fa fa-star checked ml-2\"></span>"
-						   }
-						   for(let i = 0; i < 5-data.br_Score; i++){
-							   
-							   insertHtml += "<span class=\"fa fa-star unchecked ml-2\"></span>"
-						   }
+			   swal.fire({
+					  width: '850px',
+					  html: insertHtml,  
+					  confirmButtonText: "ok"
+				})
+			}
+		});
+	} */
+	function viewData(selectId){
+		var insertHtml;
+		console.log(selectId);
+		$.ajax({
+			async : false,
+			type : 'POST',
+			url : "http://localhost:8080/BookWeb/Admin/getStore",
+			data :{ store : selectId },
+			dataType : "json",
+			success : function(data) {
+				
+				insertHtml = "<div class=\"row\">"
+				   	+ "<div class=\"col-lg-4\">"
+				   	+ "<label for=\"url\"></label> <img alt=\"圖勒?\" width=\"300px\" height=\"400px\" src=\""+data.bkPic+"\"/>"
+				   	+ "</div>"
+				   	+ "<div class=\"col-lg-8\">"
+					+ "<h5>賣場編號:</h5>"
+					+ "<span>" + data.bksID + "</span>"
+					+ "<hr>"
+					+ "<h5>賣家名子:</h5>"
+					+ "<span>"+ data.mbName +"</span>"
+					+ "<hr>"
+					+ "<h5>上架時間:</h5>"
+					+ "<span>"+ data.bksDate +"</span>"
+					+ "<hr>"
+					+ "<h5>書本價格:</h5>"
+					+ "<span>"+ data.bsPrice +"</span>"
+					+ "<hr>"
+					+ "<h5>庫存:</h5>"
+					+ "<span>" + data.bsNum +"</span>"
+					+ "</div>"
+					+ "</div>"
 						   
-			   insertHtml += "</div>"
-						   + "</form>"
-						   + "</div>"
-						   + "</div>"
-						   + "<br>"
-						   + "<h3>心得:</h3>"
-						   + "<hr>"
-						   + "<p>"+ data.br_Content +"</p>"
-						   
-			   star = data.br_Score
 			   swal.fire({
 					  width: '850px',
 					  html: insertHtml,  
@@ -277,7 +298,6 @@
 		});
 		
 	}
-	
 	
 	
 	function DelData(deleteBrId){
@@ -294,8 +314,8 @@
 				 $.ajax({
 					async : false,
 					type : 'POST',
-					url : "http://localhost:8080/BookWeb/Admin/deleteBookReport",
-					data : {brId:deleteBrId},
+					url : "http://localhost:8080/BookWeb/Admin/deleteStore",
+					data : {bksId:deleteBrId},
 					dataType : "json",
 					success : function(data) {
 						if(data && typeof(data) == "boolean"){								

@@ -95,6 +95,48 @@ public class AdminRestController {
 		return adminservice.getBookTpyeTable();
 	}
 	
+	// 活動類型分別有多少藏書的比例圖
+	@PostMapping("/getActCategoryRatio")
+	public Map<String, Object> getActCategoryRatio(){
+		
+		return adminservice.getActCategoryRatio();
+	}
+	
+	// 活動類型分別有多少藏書的比例圖
+	@PostMapping("/getActMonthNumberOfParticipants")
+	public Map<String, Object> getActMonthNumberOfParticipants(){
+		
+		return adminservice.getActMonthNumberOfParticipants();
+	}
+	
+	// 取得每半年成交量數量
+	@PostMapping("/getStoreMonthPrice")
+	public Map<String, Object> getStoreMonthPrice(){
+		
+		return adminservice.getStoreMonthPrice();
+	}
+	
+	// 取得每半年成交金額
+	@PostMapping("/getStoreMonthPsc")
+	public Map<String, Object> getStoreMonthPsc(){
+		
+		return adminservice.getStoreMonthPsc();
+	}
+	
+	// 取得註冊會員男女比例
+	@PostMapping("/getSexRatio")
+	public Map<String, Object> getSexRatio(){
+		
+		return adminservice.getSexRatio();
+	}
+	
+	// 取得註冊會員男女比例
+	@PostMapping("/getRegistereMonth")
+	public Map<String, Object> getRegistereMonth(){
+		
+		return adminservice.getRegistereMonth();
+	}
+	
 	// 回傳單一圖書資訊
 	@PostMapping("/getBook")
 	public Map<String, Object> getAllBook( @RequestParam(value = "bkId" , required = true) Integer bkId){
@@ -114,6 +156,20 @@ public class AdminRestController {
 	public Map<String, Object> getAllAct( @RequestParam(value = "actId" , required = true) Integer actId){
 		
 		return adminservice.getActInfo(actId);
+	}
+	
+	// 回傳單一活動資訊
+	@PostMapping("/getMemebr")
+	public Map<String, Object> getMemebr( @RequestParam(value = "member" , required = true) String memebr){
+		
+		return adminservice.getMemberInfo(memebr);
+	}
+	
+	// 回傳單一商店資訊
+	@PostMapping("/getStore")
+	public Map<String, Object> getStore( @RequestParam(value = "store" , required = true) Integer bksId){
+		
+		return adminservice.getStoreInfo(bksId);
 	}
 	
 	// 刪除圖書資料
@@ -136,4 +192,12 @@ public class AdminRestController {
 		
 		return adminservice.deletePost(postId);
 	}
+	
+	// 刪除貼文資料
+	@PostMapping("/deleteStore")
+	public Boolean deleteStore(@RequestParam(value = "bksId", required = true) Integer bksId) {
+		
+		return adminservice.deleteStore(bksId);
+	}
+	
 }

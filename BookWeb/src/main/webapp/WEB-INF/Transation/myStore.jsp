@@ -141,7 +141,21 @@
 	<!-- footer -->
 	<footer class="container py-5" id="bookWebFooter"></footer>
 	<!-- footer -->
-	<script>	
+	<script>
+	//測試用
+//載入前未使用foreach
+// 	$('.form-control.num').change(function() {
+// 					alert('lsm');
+// 	})
+//載入前使用each
+// 	$('.form-control.num').each(function() {
+// 		$(this).change(function() {
+// 			alert("lsm");
+// 		})
+// 	})
+	//測試用
+	
+	
 		$('.bsPrice').change(function() {
 			let re = /[0-9]/gi;
 			if ($('.bsPrice').val() < 1 || !re.test($('.bsPrice').val())) {

@@ -168,7 +168,7 @@
 						+ "<span class=\"card-text\">出版日: " + data.searchData[i].bk_Date + "</span> <br>"
 						+ "</div>"
 						+ "<div class=\"form-group\">"
-						+ "數量<input type=\"number\" class=\"form-control num\" name=\"qtyNew\" id=\"qwe\" >"
+						+ "數量<input type=\"number\" class=\"form-control num\" name=\"qtyNew\">"
 						+ "價格<input type=\"number\" class=\"form-control pce\" name=\"priceNew\"><br>"
 						+ "<button type=\"submit\" class=\"btn btn-outline-primary\">刊登</button>"
 						+ "</div>"
@@ -183,10 +183,42 @@
 					$('#qaqResult').html(insertData);				
 				}
 			}
-				
+			
+		})
+		$('.form-control.num').change(function() {
+			var qty = $(this);
+			if($(this).val() < 0){
+				Swal.fire({
+					  position: 'top-center',
+					  icon: 'warning',
+					  title: '您輸入的值不能小於1',
+					  showConfirmButton: false,
+					  timer: 1000
+					}).then((result) =>{
+						qty.val(1);
+					})
+			}
+		})
+		$('.form-control.pce').change(function() {
+			var price = $(this);
+			if($(this).val() < 0){
+				Swal.fire({
+					  position: 'top-center',
+					  icon: 'warning',
+					  title: '您輸入的值不能小於1',
+					  showConfirmButton: false,
+					  timer: 1000
+					}).then((result) =>{
+						price.val(1);
+					})
+			}
 		})
 	}
 	}
+// 				$('.form-control.num').change(function() {
+// 					alert('lsm');
+// 				})
+				
 	
 	</script>
 </body>

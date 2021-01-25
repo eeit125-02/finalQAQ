@@ -48,6 +48,12 @@ public interface AdminDao {
 	// 獲得所有購物資料
 	List<BookStoreBean> getAllStrore();
 	
+	// 取得每半年成交量數量
+	List<Object> getStoreMonthPsc();
+	
+	// 取得每半年成交金額
+	List<Object> getStoreMonthPrice();
+	
 	// 獲取書籍資料
 	BookBean getBook(Integer bkId);
 	
@@ -58,6 +64,7 @@ public interface AdminDao {
 	Boolean deletePost(Integer postId);
 	
 	//刪除指定活動
-	Boolean deleteAct(Integer actId);
+	Boolean deleteAct(Integer bksId);
+	
 	
 }

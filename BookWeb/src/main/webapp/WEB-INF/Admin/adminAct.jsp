@@ -100,18 +100,18 @@
 	$.ajax({
 		async : false,
 		type : 'POST',
-		url : "http://localhost:8080/BookWeb/Admin/getMonthReportWrite",
+		url : "http://localhost:8080/BookWeb/Admin/getActCategoryRatio",
 		dataType : "json",
 		success : function(data) {
-			monthWriteName = data.month
-			monthWriteNum = data.monthNumber
+			monthWriteName = data.act
+			monthWriteNum = data.number
 		}
 	});
 	
 	$.ajax({
 		async : false,
 		type : 'POST',
-		url : "http://localhost:8080/BookWeb/Admin/getMonthReportViews",
+		url : "http://localhost:8080/BookWeb/Admin//getActMonthNumberOfParticipants",
 		dataType : "json",
 		success : function(data) {
 			monthViewName = data.month
@@ -120,22 +120,36 @@
 	});
 	
 	var myChart = new Chart(writeChart, {
-	    type: 'line',
+	    type: 'pie',
 	    data: {
 	        labels: monthWriteName,
 	        datasets: [{
 	        	label: '人數',
 	            data: monthWriteNum,
 	            fill: false,
-	            backgroundColor: 'rgba(255, 99, 132)',
-	            borderColor: 'rgba(255, 99, 132)'
+	            backgroundColor: [
+	                'rgba(255, 99, 132, 0.2)',
+	                'rgba(54, 162, 235, 0.2)',
+	                'rgba(255, 206, 86, 0.2)',
+	                'rgba(75, 192, 192, 0.2)',
+	                'rgba(153, 102, 255, 0.2)',
+	                'rgba(255, 159, 64, 0.2)'
+	            ],
+	            borderColor: [
+	                'rgba(255, 99, 132, 1)',
+	                'rgba(54, 162, 235, 1)',
+	                'rgba(255, 206, 86, 1)',
+	                'rgba(75, 192, 192, 1)',
+	                'rgba(153, 102, 255, 1)',
+	                'rgba(255, 159, 64, 1)'
+	            ]
 	        }],
 	    },
 	    options: {
 			title: {
 				display: true,
 				fontSize: 20,
-				text: '每月撰寫心得數量'
+				text: ''
 			}
 		}
 	});
@@ -148,15 +162,29 @@
 	        	label: '人數',
 	            data: monthViewNum,
 	            fill: false,
-	            backgroundColor: 'rgba(54, 162, 235, 1)',
-	            borderColor: 'rgba(54, 162, 235, 1)'
+	            backgroundColor: [
+	                'rgba(255, 99, 132, 0.5)',
+	                'rgba(54, 162, 235, 0.5)',
+	                'rgba(255, 206, 86, 0.5)',
+	                'rgba(75, 192, 192, 0.5)',
+	                'rgba(153, 102, 255, 0.5)',
+	                'rgba(255, 159, 64, 0.5)'
+	            ],
+	            borderColor: [
+	                'rgba(255, 99, 132, 1)',
+	                'rgba(54, 162, 235, 1)',
+	                'rgba(255, 206, 86, 1)',
+	                'rgba(75, 192, 192, 1)',
+	                'rgba(153, 102, 255, 1)',
+	                'rgba(255, 159, 64, 1)'
+	            ]
 	        }],
 	    },
 	    options: {
 			title: {
 				display: true,
 				fontSize: 20,
-				text: '每月瀏覽心得數量'
+				text: '近半年活動發布數量'
 			}
 		}
 	});
@@ -224,16 +252,16 @@
 			dataType : "json",
 			success : function(data) {
 				
-				/* insertHtml = "<div class=\"modal-body\">"
+				insertHtml = "<div class=\"modal-body\">"
 		        			+ "<p><input type =\"image\" src=\""+ data.actImage +"\"  style=\"width: 300px; height: 380px; align:center\"></p>"
 		       				+ "<p>活動主題:"+ data.actTheme +"</p>"
-		       				+ "<p><img src=\""+${pageContext.request.contextPath}+"/image/date.png\" style=\"width:22px;height:22px\">"+ data.actDate +"</p>"
-		        			+ "<p><img src=\""+${pageContext.request.contextPath}+"/image/time.png\" style=\"width:22px;height:22px\">"+ data.actTime +"</p>"                             
-		       				+ "<p><button class=\"mapbutton\" style=\"background-color:white\" id=\"myModal\"  value=\""+ data.actLoc +"\" data-toggle=\"modal\"  title=\"Google地圖\" data-target=\"#myModal1\"><img src=\""+${pageContext.request.contextPath}+"/image/map1.png\"style=\"width:25px;height:25px\" title=\"Google地圖\">"+ data.actLoc +"</button></p>"     
+		       				+ "<p><img src= ${pageContext.request.contextPath}/image/date.png style=\"width:22px;height:22px\">"+ data.actDate +"</p>"
+		        			+ "<p><img src= ${pageContext.request.contextPath}/image/time.png style=\"width:22px;height:22px\">"+ data.actTime +"</p>"                             
+		       				+ "<p><button class=\"mapbutton\" style=\"background-color:white\" id=\"myModal\"  value=\""+ data.actLoc +"\" data-toggle=\"modal\"  title=\"Google地圖\" data-target=\"#myModal1\"><img src=${pageContext.request.contextPath}/image/map1.png style=\"width:25px;height:25px\" title=\"Google地圖\">"+ data.actLoc +"</button></p>"     
 		       				+ "<p>活動簡介:<br>"+ data.actIntro +"</p>"
 		       				+ "<p>活動名額:"+ data.actDifferentpax +"/"+ data.actPax +"</p>"  
 		       				+ "<hr>"
-		       				+ "</div>" */
+		       				+ "</div>"
 						   
 			   swal.fire({
 					  width: '850px',

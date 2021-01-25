@@ -144,6 +144,8 @@ public class MemberBean {
 	}
 
 	public Timestamp getMb_Date() {
+		
+		
 		return mb_Date;
 	}
 
