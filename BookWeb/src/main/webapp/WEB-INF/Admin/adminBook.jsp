@@ -140,11 +140,11 @@ font-size:16px;
 	$.ajax({
 		async : false,
 		type : 'POST',
-		url : "http://localhost:8080/BookWeb/Admin/getMonthReportWrite",
+		url : "http://localhost:8080/BookWeb/Admin/getBookTpyeTable",
 		dataType : "json",
 		success : function(data) {
 			monthWriteName = data.month
-			monthWriteNum = data.monthNumber
+			monthWriteNum = data.viewNumber
 		}
 	});
 	
@@ -160,27 +160,43 @@ font-size:16px;
 	});
 	
 	var myChart = new Chart(writeChart, {
-	    type: 'line',
+	    type: 'pie',
 	    data: {
 	        labels: monthWriteName,
 	        datasets: [{
 	        	label: '人數',
 	            data: monthWriteNum,
 	            fill: false,
-	            backgroundColor: 'rgba(255, 99, 132)',
-	            borderColor: 'rgba(255, 99, 132)'
+	            backgroundColor: [
+	                'rgba(255, 99, 132, 1)',
+	                'rgba(54, 162, 235, 1)',
+	                'rgba(255, 206, 86, 1)',
+	                'rgba(75, 192, 192, 1)',
+	                'rgba(153, 102, 255, 1)',
+	                'rgba(255, 159, 64, 1)',
+	                'rgba(0, 0, 0, 1)'
+	            ],
+	            borderColor: [
+	                'rgba(255, 99, 132, 1)',
+	                'rgba(54, 162, 235, 1)',
+	                'rgba(255, 206, 86, 1)',
+	                'rgba(75, 192, 192, 1)',
+	                'rgba(153, 102, 255, 1)',
+	                'rgba(255, 159, 64, 1)',
+	                'rgba(0, 0, 0, 1)'
+	            ],
 	        }],
 	    },
 	    options: {
 			title: {
 				display: true,
 				fontSize: 20,
-				text: '每月撰寫心得數量'
+				text: '書本類別資料比例'
 			}
 		}
 	});
 	
-	var myChart = new Chart(viewChart, {
+	/* var myChart = new Chart(viewChart, {
 	    type: 'bar',
 	    data: {
 	        labels: monthViewName,
@@ -199,7 +215,7 @@ font-size:16px;
 				text: '每月瀏覽心得數量'
 			}
 		}
-	});
+	}); */
 	
 	var reportTable;
 

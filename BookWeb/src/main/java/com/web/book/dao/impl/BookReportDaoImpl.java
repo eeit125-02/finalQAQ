@@ -208,9 +208,9 @@ public class BookReportDaoImpl implements BookReportDao {
 	public void delteCollectReport(Integer rcId) {
 		
 		Session session = fatory.getCurrentSession();
-		session.delete(session.load(BookReportCollectBean.class, rcId));
-		Integer brId = session.load(BookReportCollectBean.class, rcId).getBookReport().getBr_ID();
-		session.get(BookReportBean.class, brId).setBr_CollectionNumber(session.get(BookReportBean.class, brId).getBr_CollectionNumber() - 1);
+		String hql = "Delete BookReportCollectBean rc Where rc.rc_ID = :rcId";
+		session.createQuery(hql).setParameter("rcId", rcId).executeUpdate();
+		
 	}
 
 	@SuppressWarnings("unchecked")
@@ -243,7 +243,8 @@ public class BookReportDaoImpl implements BookReportDao {
 	@Override
 	public void deletReportMessage(Integer bmId) {
 		Session session = fatory.getCurrentSession();
-		session.delete(session.get(BookReportMessageBean.class, bmId));
+		String hql = "Delete BookReportMessageBean bm Where bm.bm_ID = :bmId";
+		session.createQuery(hql).setParameter("bmId", bmId).executeUpdate();
 	}
 	
 	

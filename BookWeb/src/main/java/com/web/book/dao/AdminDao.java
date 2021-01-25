@@ -15,11 +15,11 @@ public interface AdminDao {
 	// 獲得半年心得瀏覽數量
 	List<Object> getMonthReportViews();
 	
-	// 取得每半年心得撰寫數量
+	// 取得每半年心得貼文數量
 	List<Object> getMonthPostWrite();
 	
-	// 取得每小時貼文撰寫數量
-	List<Object> getHourPostWrite();
+	// 取得近半年貼文點擊數量
+	List<Object> getMonthPostView();
 	
 	// 書籍類型(共九大類)分別有多少藏書的比例圖
 	List<Object> getBookTpyeTable();

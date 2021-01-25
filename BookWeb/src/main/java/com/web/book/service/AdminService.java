@@ -35,6 +35,27 @@ public interface AdminService {
 	// 獲得近半年心得瀏覽報表
 	Map<String,Object> getMonthReportView();
 	
+	// 取得近半年撰寫貼文數量
+	Map<String, Object>  getMonthPostWrite();
+	
+	// 取得近半年貼文點擊數量
+	Map<String, Object>  getMonthPostView();
+	
+	// 書籍類型(共九大類)分別有多少藏書的比例圖
+	Map<String, Object> getBookTpyeTable();
+	
+	// 取得每半年註冊會員數量
+	Map<String, Object>  getRegistereMonth();
+	
+	// 取得註冊會員男女比例
+	Map<String, Object>  getSexRatio();
+	
+	// 取得活動類別比例
+	Map<String, Object>  getActCategoryRatio();
+	
+	// 獲得近半年活動參與人數
+	Map<String, Object>  getActMonthNumberOfParticipants();
+		
 	// 刪除指定心得
 	Boolean deleteBookReport(Integer brId);
 	

@@ -227,61 +227,14 @@
 				/* insertHtml = "<div class=\"modal-body\">"
 		        			+ "<p><input type =\"image\" src=\""+ data.actImage +"\"  style=\"width: 300px; height: 380px; align:center\"></p>"
 		       				+ "<p>活動主題:"+ data.actTheme +"</p>"
-		       				+ "<p><img src="+${pageContext.request.contextPath}+"/image/date.png style=\"width:22px;height:22px\">"+ data.actDate +"</p>"
-		        			+ "<p><img src="+${pageContext.request.contextPath}+"/image/time.png style=\"width:22px;height:22px\">"+ data.actTime +"</p>"                             
-		       				+ "<p><button class=\"mapbutton\" style=\"background-color:white\" id=\"myModal\"  value=\""+ data.actLoc +"\" data-toggle=\"modal\"  title=\"Google地圖\" data-target=\"#myModal1\"><img src="+${pageContext.request.contextPath}+"/image/map1.png style=\"width:25px;height:25px\" title=\"Google地圖\">"+ data.actLoc +"</button></p>"     
+		       				+ "<p><img src=\""+${pageContext.request.contextPath}+"/image/date.png\" style=\"width:22px;height:22px\">"+ data.actDate +"</p>"
+		        			+ "<p><img src=\""+${pageContext.request.contextPath}+"/image/time.png\" style=\"width:22px;height:22px\">"+ data.actTime +"</p>"                             
+		       				+ "<p><button class=\"mapbutton\" style=\"background-color:white\" id=\"myModal\"  value=\""+ data.actLoc +"\" data-toggle=\"modal\"  title=\"Google地圖\" data-target=\"#myModal1\"><img src=\""+${pageContext.request.contextPath}+"/image/map1.png\"style=\"width:25px;height:25px\" title=\"Google地圖\">"+ data.actLoc +"</button></p>"     
 		       				+ "<p>活動簡介:<br>"+ data.actIntro +"</p>"
 		       				+ "<p>活動名額:"+ data.actDifferentpax +"/"+ data.actPax +"</p>"  
 		       				+ "<hr>"
-		       				+ "</div>"
-		    				+ "<div class=\"modal-footer\">"
-		          			+ "</div>"
-		          			+ "</div>"
-		        			+ "</div>"
-		      				+ "</div>"    
-		     				+ "</div>" */
-				/* insertHtml = "<div class=\"media\">"
-						   + "<img id=\"bkPic\" src=\""+ data.bk_Pic +"\" class=\"w-25 h-25 p-2\">"
-						   + "<div class=\"media-body ml-5\">"
-						   + "<form class=\"col-ml-4\">"
-						   + "<br>"
-						   + "<div class=\"form-inline\">"
-						   + "<p class=\"messageSize\" id=\"brTitel\">閱讀標題："+ data.br_Name +"</p> "
-						   + "</div>"
-						   + "<div class=\"form-inline\">"
-						   + "<p class=\"messageSize\" id=\"userAccount\">撰寫者："+ data.userAccount +"</p>"
-						   + "</div>"
-						   + "<div class=\"form-inline\">"
-						   + "<p class=\"messageSize ellipsis\" id=\"bkName\">書名："+ data.bk_Name +"</p>"
-						   + "</div>"
-						   + "<div id=\"bookWriter\" class=\"form-inline\">"
-						   + "<p class=\"messageSize\" id=\"bkAuthor\">作者："+ data.bk_Author +"</p>"
-						   + "</div>"
-						   + "<div class=\"form-inline\">"
-						   + "<p class=\"messageSize\" id=\"bkPublish\">出版社："+ data.bk_Publish +"</p>"
-						   + "</div>"
-						   + "<div class=\"form-inline\">"
-						   + "<lable class=\"messageSize\">評分：</lable>"
+		       				+ "</div>" */
 						   
-						   for(let i = 0; i < data.br_Score; i++){
-							   
-							   insertHtml += "<span class=\"fa fa-star checked ml-2\"></span>"
-						   }
-						   for(let i = 0; i < 5-data.br_Score; i++){
-							   
-							   insertHtml += "<span class=\"fa fa-star unchecked ml-2\"></span>"
-						   }
-						   
-			   insertHtml += "</div>"
-						   + "</form>"
-						   + "</div>"
-						   + "</div>"
-						   + "<br>"
-						   + "<h3>心得:</h3>"
-						   + "<hr>"
-						   + "<p>"+ data.br_Content +"</p>" */
-						   
-			   star = data.br_Score
 			   swal.fire({
 					  width: '850px',
 					  html: insertHtml,  

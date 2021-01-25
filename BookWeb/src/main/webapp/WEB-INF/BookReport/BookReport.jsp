@@ -30,7 +30,7 @@
 }
 
 .messageSize{
-	 font-size: 25px;
+	 font-size: 16px;
 }
 </style>
 </head>
@@ -89,6 +89,7 @@
 			<input type="text" class="form-control" id="command_input" placeholder="請輸入留言"> <input type="hidden" name="post_id" id="post_id" value="6">
 			<div class="input-group-append">
 				<button class="btn btn-outline-secondary" id="command_btn" type="button" data-toggle="modal" data-target="#checkLogin">留言</button>
+				<button class="btn btn-outline-secondary" id="insertData" type="button" data-toggle="modal" data-target="#checkLogin">一鍵輸入</button>
 			</div>
 		</div>
 		<div id="show_command" >
@@ -192,6 +193,10 @@
 			}
 			
 		});
+		
+		$('#insertData').click(function(){
+			$('#command_input').val('這篇心得撰寫的十分好');
+		})
 		
 		$('#addSub').click(function(){
 			$.ajax({

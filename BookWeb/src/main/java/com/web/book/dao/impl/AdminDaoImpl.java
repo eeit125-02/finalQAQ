@@ -170,16 +170,15 @@ public class AdminDaoImpl implements AdminDao {
 		return query.getResultList();
 	}
 	
-	// 取得每小時貼文撰寫數量
+	// 獲得半年貼文點擊數量
 	@SuppressWarnings("unchecked")
-	public List<Object> getHourPostWrite() {
+	public List<Object> getMonthPostView() {
 		
 		Session session = factory.getCurrentSession();
-		String hql = "Select DATEPART(hour,post.post_time), count(post) "
+		String hql = "Select YEAR(post.post_time), MONTH(post.post_time), sum(post.click) "
 				   + "from PostBean post "
-				   + "where DATEDIFF(day, post.post_time, GETDATE()) = 0 "
-				   + "group DatePart(hour, post.post_time) "
-				   + "ORDER by DatePart(hour, post.post_time) DESC";
+				   + "group by YEAR(post.post_time), MONTH(post.post_time) "
+				   + "ORDER by YEAR(post.post_time) DESC, MONTH (post.post_time) DESC";
 		Query<Object> query = session.createQuery(hql);
 		query.setFirstResult(0);
 		query.setMaxResults(6);
@@ -192,11 +191,12 @@ public class AdminDaoImpl implements AdminDao {
 	public List<Object> getBookTpyeTable() {
 		
 		Session session = factory.getCurrentSession();
-		String hql = "Select bt.sty_ID ,COUNT(bt)  "
+		String hql = "Select bt.searchtype.sty_Name, bt.searchtype.sty_ID ,COUNT(bt)  "
 				   + "from BookTypeBean bt "
-				   + "where bt.sty_ID = 0 or bt.sty_ID = 9 or bt.sty_ID = 17 or bt.sty_ID = 27 or bt.sty_ID = 36 "
-				   + "or bt.sty_ID = 46 or bt.sty_ID = 56 or bt.sty_ID = 62 or bt.sty_ID = 69 "
-				   + "group by bt.sty_ID ";
+				   + "where bt.searchtype.sty_ID = 9 or bt.searchtype.sty_ID = 17 or bt.searchtype.sty_ID = 27 or bt.searchtype.sty_ID = 36 "
+				   + "or bt.searchtype.sty_ID = 46 or bt.searchtype.sty_ID = 56 or bt.searchtype.sty_ID = 62 or bt.searchtype.sty_ID = 69 "
+				   + "group by bt.searchtype.sty_ID , bt.searchtype.sty_Name "
+				   + "order by bt.searchtype.sty_ID ASC";
 		Query<Object> query = session.createQuery(hql);
 		
 		return query.getResultList();
