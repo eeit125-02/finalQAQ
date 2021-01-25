@@ -1,5 +1,7 @@
 package com.web.book.controller;
 
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -61,7 +63,7 @@ public class SearchBookController {
 	@Autowired
 	SearchService searchService;
 	
-	MemberBean loginUser;
+	MemberBean loginUser=null;
 
 	// 抓取當前登入的會員資訊
 	@ModelAttribute
@@ -263,7 +265,7 @@ public class SearchBookController {
 				, @RequestParam(value = "publish", required=false) String publishname
 				, @RequestParam(value = "apage", required=false,defaultValue = "1") Integer nowpage
 				) {
-			
+			System.out.println("asdasdasdasd");
 			if ("".equals(bookname)) {
 				bookname=null;}			
 			if ("".equals(authorname)) {
@@ -310,8 +312,7 @@ public class SearchBookController {
 			
 			if(count==0) { //資料總筆數確認
 				model.addAttribute("searchresultzero", "很抱歉，查無資料");			
-			}
-						
+			}	
 			return "SearchBook/Result2";
 		}
 		
@@ -322,7 +323,7 @@ public class SearchBookController {
 			Map<String, Object>  data = new HashMap<>();
 			//存放最終搜尋結果list的變數
 			List<Map<String, Object>> book = new ArrayList<>();
-			System.out.println("finalresult"+finalresult);
+//			System.out.println("finalresult"+finalresult);
 			for (BookBean bookBean : finalresult) {
 				Map<String, Object> finaldata = new HashMap<>();
 				finaldata.put("bk_ID", bookBean.getBk_ID());
@@ -334,7 +335,7 @@ public class SearchBookController {
 				finaldata.put("bk_Content", bookBean.getBk_Content());
 				finaldata.put("bk_Page", bookBean.getBk_Page());
 				finaldata.put("bk_Click", bookBean.getBk_Click());
-//				if(bookBean.getBk_Page().equals(null)) {
+//				if(bookBean.getBk_Page()=="null) {
 //					finaldata.put("bk_Page","無資料");
 //				}
 				book.add(finaldata);
@@ -353,9 +354,9 @@ public class SearchBookController {
 		
 	// 在查詢結果頁判斷收藏
 	@GetMapping("/searchbook/checkcollect/{bk_ID}")
-	public @ResponseBody boolean gotoCheckCollect(@PathVariable("bk_ID") Integer bk_id
-//			, @ModelAttribute("loginUser") MemberBean loginUser
+	public @ResponseBody boolean gotoCheckCollect(@PathVariable("bk_ID") Integer bk_id,@ModelAttribute("loginUser") MemberBean loginUser
 			) {
+		System.out.println(bk_id);
 		boolean result2=searchService.checkbc(bk_id, loginUser.getMb_ID());
 		return result2;
 	}
@@ -367,19 +368,32 @@ public class SearchBookController {
 		return result2;
 	}
 	
+	public  boolean gotoCheckCollect1(Integer bk_id) {
+		boolean result2 = false;
+		System.out.println("789");
+		if(loginUser!=null) {
+	    result2 = searchService.checkbc(bk_id, loginUser.getMb_ID());
+		}
+		System.out.println("2222");
+		return result2;
+	}
 
 	// 取得單一本書的詳細資訊(含類型)
 	@GetMapping("/bookpage")
-	public String gotoPage(Model model, @RequestParam(value = "page") Integer bk_id
-//			, @ModelAttribute("loginUser") MemberBean loginUser
+	public String gotoPage(Model model, @RequestParam(value = "page",required = false) Integer bk_id
 			) {
+		System.out.println(bk_id);
 		BookBean result = searchService.getBook(bk_id);
+		System.out.println("++++++++++++++++++++++++");
+		System.out.println(result.getBk_ID());
 		model.addAttribute("pageresult", result);
 		List<BookTypeBean> result2=searchService.getBookType(bk_id);
 		model.addAttribute("pageresulttype", result2);		
 		searchService.addclick(bk_id);
-//		boolean a=gotoCheckCollect(bk_id, loginUser);
-		boolean a=gotoCheckCollect(bk_id);
+		System.out.println("123");
+		boolean a=gotoCheckCollect1(bk_id);
+		System.out.println("456");
+//		boolean a=gotoCheckCollect(bk_id);
 		if(a==true) {
 			model.addAttribute("havebc", a);					
 		}			
@@ -391,6 +405,7 @@ public class SearchBookController {
 	// 會員收藏清單(純導向)
 	@GetMapping("/collectlist")
 	public String gotoList(Model model) {
+		System.out.println("123456");
 		return "SearchBook/Collect";
 	}
 	// 導出收藏清單

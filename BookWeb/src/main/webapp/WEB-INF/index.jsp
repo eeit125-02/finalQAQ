@@ -134,7 +134,7 @@ overflow-x: hidden;
         </div>
         
         <div style="width:100px;height:45px;background-color:#C68463;margin-left:230px;margin-top:0px;">
-        <a style="color:white;font-size:18px;">登入會員</a>
+        <a style="color:white;font-size:18px;" href="//localhost:8080/BookWeb/toCity">登入會員</a>
         </div>
         
        </div> 
