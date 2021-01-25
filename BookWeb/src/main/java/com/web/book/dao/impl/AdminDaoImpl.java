@@ -203,8 +203,8 @@ public class AdminDaoImpl implements AdminDao {
 		Session session = factory.getCurrentSession();
 		String hql = "Select bt.searchtype.sty_Name, bt.searchtype.sty_ID ,COUNT(bt)  "
 				   + "from BookTypeBean bt "
-				   + "where bt.searchtype.sty_ID = 9 or bt.searchtype.sty_ID = 17 or bt.searchtype.sty_ID = 27 or bt.searchtype.sty_ID = 36 "
-				   + "or bt.searchtype.sty_ID = 46 or bt.searchtype.sty_ID = 56 or bt.searchtype.sty_ID = 62 or bt.searchtype.sty_ID = 69 "
+				   + "where bt.searchtype.sty_ID = 9 or bt.searchtype.sty_ID = 10 or bt.searchtype.sty_ID = 18 or bt.searchtype.sty_ID = 28 "
+				   + "or bt.searchtype.sty_ID = 37 or bt.searchtype.sty_ID = 47 or bt.searchtype.sty_ID = 63 or bt.searchtype.sty_ID = 70 "
 				   + "group by bt.searchtype.sty_ID , bt.searchtype.sty_Name "
 				   + "order by bt.searchtype.sty_ID ASC";
 		Query<Object> query = session.createQuery(hql);
