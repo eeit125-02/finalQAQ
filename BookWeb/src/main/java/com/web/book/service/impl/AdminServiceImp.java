@@ -443,31 +443,146 @@ public class AdminServiceImp implements AdminService {
 		}
 		returnData.put("month", monthList);
 		returnData.put("viewNumber", monthNumberList);
-		System.out.println(returnData);
+		return returnData;
+	}
+
+	// 取得每半年註冊會員數量
+	@Override
+	public Map<String, Object> getRegistereMonth() {
+		
+		List<Object> selectData = adminDao.getMonthPostView();
+		Map<String, Object> returnData = new HashMap<>();
+		
+		List<String> monthList = new ArrayList<>();
+		List<Integer> monthNumberList = new ArrayList<>();
+		for(int i= 5; 0 <= i; i-- ){
+			Object[] maxDay = (Object[])selectData.get(0);
+
+			Integer thisMonth;
+			Integer thisYear;
+
+			if( (Integer.valueOf(maxDay[1].toString()) - i) <= 0) {
+				
+				thisYear = Integer.valueOf(maxDay[0].toString()) - 1;
+				thisMonth = 12 + (Integer.valueOf( maxDay[1].toString()) - i);
+			}else {
+				
+				thisYear = Integer.valueOf(maxDay[0].toString());
+				thisMonth = Integer.valueOf(maxDay[1].toString())-i;
+			}
+			Object[] value;
+			for(int j = 5; 0 <= j; j-- ) {
+				try {
+					value = (Object[]) selectData.get(j);
+				} catch (Exception e) {
+					value = (Object[]) selectData.get(0);
+				}
+				
+				if( Integer.valueOf( value[0].toString()).equals(thisYear) && Integer.valueOf( value[1].toString()).equals(thisMonth)) {
+					monthList.add(value[0].toString()+ "-" + value[1].toString());
+				    monthNumberList.add(Integer.valueOf(value[2].toString()));
+				    break;
+			    }else if (j == 0){
+			    	monthList.add(thisYear + "-" + thisMonth);
+				    monthNumberList.add(0);
+				}
+			}
+		}
+		
+		returnData.put("name", monthList);
+		returnData.put("value", monthNumberList);
+		
+		return returnData;
+	}
+
+	// 取得註冊會員男女比例
+	@Override
+	public Map<String, Object> getSexRatio() {
+		List<Object> selectData = adminDao.getSexRatio();
+		Map<String, Object> returnData = new HashMap<>();
+		
+		List<String> monthList = new ArrayList<>();
+		List<Integer> monthNumberList = new ArrayList<>();
+		
+		Object[] value;
+		for(int i = 1; i < selectData.size(); i++ ) {
+			
+			value = (Object[]) selectData.get(i);
+			monthList.add(value[0].toString());
+		    monthNumberList.add(Integer.valueOf(value[1].toString()));
+		}
+		returnData.put("name", monthList);
+		returnData.put("value", monthNumberList);
 		return returnData;
 	}
 
 	@Override
-	public Map<String, Object> getRegistereMonth() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Map<String, Object> getSexRatio() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public Map<String, Object> getActCategoryRatio() {
-		// TODO Auto-generated method stub
-		return null;
+		
+		List<Object> selectData = adminDao.getActCategoryRatio();
+		Map<String, Object> returnData = new HashMap<>();
+		
+		List<String> monthList = new ArrayList<>();
+		List<Integer> monthNumberList = new ArrayList<>();
+		
+		Object[] value;
+		for(int i = 0; i < selectData.size(); i++ ) {
+			
+			value = (Object[]) selectData.get(i);
+			monthList.add(value[0].toString());
+		    monthNumberList.add(Integer.valueOf(value[1].toString()));
+			   
+		    
+		}
+		returnData.put("act", monthList);
+		returnData.put("number", monthNumberList);
+		return returnData;
 	}
 
 	@Override
 	public Map<String, Object> getActMonthNumberOfParticipants() {
-		// TODO Auto-generated method stub
-		return null;
+		List<Object> selectData = adminDao.getActMonthNumberOfParticipants();
+		Map<String, Object> returnData = new HashMap<>();
+		
+		List<String> monthList = new ArrayList<>();
+		List<Integer> monthNumberList = new ArrayList<>();
+		for(int i= 5; 0 <= i; i-- ){
+			Object[] maxDay = (Object[])selectData.get(0);
+
+			Integer thisMonth;
+			Integer thisYear;
+
+			if( (Integer.valueOf(maxDay[1].toString()) - i) <= 0) {
+				
+				thisYear = Integer.valueOf(maxDay[0].toString()) - 1;
+				thisMonth = 12 + (Integer.valueOf( maxDay[1].toString()) - i);
+			}else {
+				
+				thisYear = Integer.valueOf(maxDay[0].toString());
+				thisMonth = Integer.valueOf(maxDay[1].toString())-i;
+			}
+			Object[] value;
+			for(int j = 5; 0 <= j; j-- ) {
+				try {
+					value = (Object[]) selectData.get(j);
+				} catch (Exception e) {
+					value = (Object[]) selectData.get(0);
+				}
+				
+				if( Integer.valueOf( value[0].toString()).equals(thisYear) && Integer.valueOf( value[1].toString()).equals(thisMonth)) {
+					monthList.add(value[0].toString()+ "-" + value[1].toString());
+				    monthNumberList.add(Integer.valueOf(value[2].toString()));
+				    break;
+			    }else if (j == 0){
+			    	monthList.add(thisYear + "-" + thisMonth);
+				    monthNumberList.add(0);
+				}
+			}
+		}
+		
+		returnData.put("month", monthList);
+		returnData.put("viewNumber", monthNumberList);
+		
+		return returnData;
 	}
 }

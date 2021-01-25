@@ -264,7 +264,7 @@ public class AdminDaoImpl implements AdminDao {
 		Session session = factory.getCurrentSession();
 		String hql = "Select ar.act_Theme, count(ar) "
 				   + "from ActBean ar "
-				   + "ar.act_Theme";
+				   + "group by  ar.act_Theme";
 		Query<Object> query = session.createQuery(hql);
 		
 		return query.getResultList();
@@ -278,11 +278,11 @@ public class AdminDaoImpl implements AdminDao {
 		Session session = factory.getCurrentSession();
 		String hql = "Select YEAR(ar.act_Date), MONTH(ar.act_Date), count(ar) "
 				   + "from ActBean ar "
-				   + "group by YEAR(ar.act_Date), MONTH(ar.act_Date) "
-				   + "ORDER by YEAR(ar.act_Date) DESC, MONTH (ar.act_Date) DESC";
+				   + "group by YEAR(ar.act_Date), MONTH(ar.act_Date), DAY(ar.act_Date)"
+				   + "ORDER by YEAR(ar.act_Date) DESC, MONTH (ar.act_Date), DAY(ar.act_Date) DESC";
 		Query<Object> query = session.createQuery(hql);
 		query.setFirstResult(0);
-		query.setMaxResults(6);
+		query.setMaxResults(7);
 		
 		return query.getResultList();
 	}

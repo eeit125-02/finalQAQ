@@ -95,6 +95,34 @@ public class AdminRestController {
 		return adminservice.getBookTpyeTable();
 	}
 	
+	// 活動類型分別有多少藏書的比例圖
+	@PostMapping("/getActCategoryRatio")
+	public Map<String, Object> getActCategoryRatio(){
+		
+		return adminservice.getActCategoryRatio();
+	}
+	
+	// 活動類型分別有多少藏書的比例圖
+	@PostMapping("/getActMonthNumberOfParticipants")
+	public Map<String, Object> getActMonthNumberOfParticipants(){
+		
+		return adminservice.getActMonthNumberOfParticipants();
+	}
+	
+	// 取得註冊會員男女比例
+	@PostMapping("/getSexRatio")
+	public Map<String, Object> getSexRatio(){
+		
+		return adminservice.getSexRatio();
+	}
+	
+	// 取得註冊會員男女比例
+	@PostMapping("/getRegistereMonth")
+	public Map<String, Object> getRegistereMonth(){
+		
+		return adminservice.getRegistereMonth();
+	}
+	
 	// 回傳單一圖書資訊
 	@PostMapping("/getBook")
 	public Map<String, Object> getAllBook( @RequestParam(value = "bkId" , required = true) Integer bkId){

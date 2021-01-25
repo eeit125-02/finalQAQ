@@ -123,6 +123,15 @@ legend {
 <body id="abc">
 	<div class="container">
 		<br>
+		<div class="form-inline">
+			<div style="width:48%;" class = "ml-1">
+				<canvas id="writeChart" width="400" height="400"></canvas>
+			</div>
+			<div style="width:48%;" class = "ml-3">
+				<canvas id="viewChart" width="400" height="400"></canvas>
+			</div>
+		</div>
+		<br>
 			<fieldset id="admin" style="text-align:center">
 				<legend>會員清單</legend>
 <%-- 		<form action="<c:url value='admindelete' />" method="post" id="admindelete"> --%>
@@ -167,6 +176,109 @@ legend {
 	</div>
 </body>
 	<script>
+	
+	var writeChart = document.getElementById("writeChart");
+	var viewChart = document.getElementById("viewChart");
+	
+	var monthWriteName;
+	var monthWriteNum;
+	
+	var monthViewName;
+	var monthViewNum;
+	
+	
+	$.ajax({
+		async : false,
+		type : 'POST',
+		url : "http://localhost:8080/BookWeb/Admin/getSexRatio",
+		dataType : "json",
+		success : function(data) {
+			monthWriteName = data.name
+			monthWriteNum = data.value
+		}
+	});
+	
+	$.ajax({
+		async : false,
+		type : 'POST',
+		url : "http://localhost:8080/BookWeb/Admin//getActMonthNumberOfParticipants",
+		dataType : "json",
+		success : function(data) {
+			monthViewName = data.name
+			monthViewNum = data.value
+		}
+	});
+	
+	var myChart = new Chart(writeChart, {
+	    type: 'pie',
+	    data: {
+	        labels: monthWriteName,
+	        datasets: [{
+	        	label: '人數',
+	            data: monthWriteNum,
+	            fill: false,
+	            backgroundColor: [
+	                'rgba(255, 99, 132, 0.2)',
+	                'rgba(54, 162, 235, 0.2)',
+	                'rgba(255, 206, 86, 0.2)',
+	                'rgba(75, 192, 192, 0.2)',
+	                'rgba(153, 102, 255, 0.2)',
+	                'rgba(255, 159, 64, 0.2)'
+	            ],
+	            borderColor: [
+	                'rgba(255, 99, 132, 1)',
+	                'rgba(54, 162, 235, 1)',
+	                'rgba(255, 206, 86, 1)',
+	                'rgba(75, 192, 192, 1)',
+	                'rgba(153, 102, 255, 1)',
+	                'rgba(255, 159, 64, 1)'
+	            ]
+	        }],
+	    },
+	    options: {
+			title: {
+				display: true,
+				fontSize: 16,
+				text: '會員男女比例'
+			}
+		}
+	});
+	
+	var myChart = new Chart(viewChart, {
+	    type: 'bar',
+	    data: {
+	        labels: monthViewName,
+	        datasets: [{
+	        	label: '人數',
+	            data: monthViewNum,
+	            fill: false,
+	            backgroundColor: [
+	                'rgba(255, 99, 132, 0.5)',
+	                'rgba(54, 162, 235, 0.5)',
+	                'rgba(255, 206, 86, 0.5)',
+	                'rgba(75, 192, 192, 0.5)',
+	                'rgba(153, 102, 255, 0.5)',
+	                'rgba(255, 159, 64, 0.5)'
+	            ],
+	            borderColor: [
+	                'rgba(255, 99, 132, 1)',
+	                'rgba(54, 162, 235, 1)',
+	                'rgba(255, 206, 86, 1)',
+	                'rgba(75, 192, 192, 1)',
+	                'rgba(153, 102, 255, 1)',
+	                'rgba(255, 159, 64, 1)'
+	            ]
+	        }],
+	    },
+	    options: {
+			title: {
+				display: true,
+				fontSize: 20,
+				text: '近半年活動發布數量'
+			}
+		}
+	});
+	
 	$('#searchbtn').click(function(){
 		console.log($('#site-search').val())
 		$.ajax({
