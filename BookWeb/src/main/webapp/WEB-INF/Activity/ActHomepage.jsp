@@ -201,7 +201,7 @@ $('#enter1').val('未來') ;
     									  <div class="modal-header" >
 <!--     									  //彈跳視窗標頭 -->
       										  <h3 class="modal-title"  id="#exampleModalCenter${act.act_Name}">${act.act_Name}</h3>
-												<div class="line-it-button" data-lang="zh_Hant" data-type="share-a" data-ver="3" data-url="http://localhost:8080/BookWeb/toLogin" data-color="default" data-size="large" data-count="true" style="display: none;"></div>
+												<div class="line-it-button" data-lang="zh_Hant" data-type="share-a" data-ver="3" data-url="http://localhost:8080/BookWeb/toLogin" data-color="default" data-size="large" data-count="false" style="display: none;"></div>
  													<script src="https://www.line-website.com/social-plugins/js/thirdparty/loader.min.js" async="async" defer="defer"></script>
        											 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
      											     <span aria-hidden="true">&times;</span>
@@ -271,7 +271,7 @@ $('#enter1').val('未來') ;
 
 <!-- 									大視窗的內容 -->
 
-								     <div class="line-it-button" data-lang="zh_Hant" data-type="share-c" data-ver="3" data-url="https://social-plugins.line.me/zh_TW/how_to_install" data-color="default" data-size="small" data-count="true" style="display: none;"></div>
+								     <div class="line-it-button" data-lang="zh_Hant" data-type="share-c" data-ver="3" data-url="https://social-plugins.line.me/zh_TW/how_to_install" data-color="default" data-size="small" data-count="false" style="display: none;"></div>
 									 <script src="https://www.line-website.com/social-plugins/js/thirdparty/loader.min.js" async="async" defer="defer"></script>
 									
 									<div class="caption">
@@ -471,7 +471,7 @@ $('#create').click(function(){
 									 +"<p></p>"
 									 +"<p><img src=${pageContext.request.contextPath}/image/time.png style=\"width:22px;height:22px\">"+data[i].act_Time+"</p>"
 									 +"<p><button class=\"mapbutton\" style=\"background-color:white\" id=\"myModal\"  value=\""+data[i].act_Loc+"\" data-toggle=\"modal\"  title=\"Google地圖\" data-target=\"#myModal1\">"
-									 +"<img src=${pageContext.request.contextPath}/image/map1.png style=\"width:25px;height:25px\" title=\"Google地圖\">"+data[i].act_Loc+"</button></p>"			
+									 +"<img src=${pageContext.request.contextPath}/image/map1.png style=\"width:22px;height:22px\" title=\"Google地圖\">"+data[i].act_Loc+"</button></p>"			
 										+"<hr>"
 										+"<p>"
 										+"<p>"

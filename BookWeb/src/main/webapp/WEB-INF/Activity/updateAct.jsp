@@ -58,24 +58,7 @@ color:#3C3C3C;
 	href='${pageContext.request.contextPath}/css/style.css' type="text/css" />
 <meta charset="UTF-8">
 <title>書適圈</title>
-<script type="text/javascript">
-	function confirmDelete(act_Name) {
-		var result = confirm("確定刪除此筆記錄(活動名稱:" + act_Name + ")?");
-		if (result) {
-			document.forms[0].finalDecision.value = "DELETE";
-			return true;
-		}
-		return false;
-	}
-	function confirmUpdate(act_Name) {
-		var result = confirm("確定送出此筆記錄(活動名稱:" + act_Name + ")?");
-		if (result) {
-			document.forms[0].finalDecision.value = "UPDATE";
-			return true;
-		}
-		return false;
-	}
-</script>
+
 </head>
 <body>
 
@@ -269,7 +252,7 @@ color:#3C3C3C;
 
 					
 						<div colspan="2" align="center">
-						
+						<input type="hidden" id="actname" value="${ab.act_Name}">
 						<input class="btn btn-primary" type="submit" value="更新" name='updateBtn'onclick="return confirmUpdate('${ab.act_ID}');"/> 
 						<input class="btn btn-primary" type="submit" value="刪除" name='deleteBtn'onclick="return confirmDelete('${ab.act_Name}');"/>
 						
@@ -292,6 +275,27 @@ color:#3C3C3C;
 	<footer class="container py-5" id="bookWebFooter"></footer>
 	<!-- footer -->
 </body>
+
+		<script type="text/javascript">
+			function confirmDelete() {
+				var act_Name = $('#actname').val();
+				var result = confirm("確定刪除此筆記錄(活動名稱:" + act_Name + ")?");
+				if (result) {
+					document.forms[0].finalDecision.value = "DELETE";
+					return true;
+				}
+				return false;
+			}
+			function confirmUpdate() {
+				var act_Name = $('#actname').val();
+				var result = confirm("確定送出此筆記錄(活動名稱:" + act_Name + ")?");
+				if (result) {
+					document.forms[0].finalDecision.value = "UPDATE";
+					return true;
+				}
+				return false;
+			}
+		</script>
 
 		<script type="text/javascript">
 				$(function() {

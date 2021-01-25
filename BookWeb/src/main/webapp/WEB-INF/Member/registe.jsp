@@ -38,12 +38,15 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 /* 	line-height: 2; */
 /* 	font-size: 18px; */
 /* } */
-
+label{
+text-align: center;
+}
 fieldset {
 	border-radius: 25px;
-	padding: 20px;
+	padding: 50px;
 	background-color: #F3F3FA;
-	width: 400px
+	width: 700px;
+	margin:20px;
 }
 
 legend {
@@ -108,43 +111,84 @@ form {
 		<form action="<c:url value='/registe' />" method="post">
 			<fieldset>
 				<legend>會員註冊</legend>
-				<div>
-					<label>帳號:</label> <input type="text" name="account" id="account"
+				
+<!-- <div class="form-row"> -->
+<!--     <div class="form-group col-md-6"> -->
+				<div class="form-group row">
+<!-- 				<div> -->
+					<label class="col-sm-2 col-form-label" >帳號</label>
+					<div class="col-sm-4">
+					<input type="text" name="account" id="account" class="form-control"
 						value="" size="12"> <span id="idsp2" style="color: red;"></span><br />
 					<p style="color: gray;">(1.不可空白 2.至少6個字且必須包含英文字母、數字)</p>
 				</div>
-				<div>
-					<label>密碼:</label> <input type="password" name="pwd" id="pwd"
+					<label class="col-sm-2 col-form-label">姓名</label>
+					<div class="col-sm-4">
+					<input type="text" id="name1" name="name" size="12" value="" class="form-control">
+				</div>
+</div>
+
+				<div class="form-group row">
+<!-- <div class="form-row"> -->
+<!--     <div class="form-group col-md-6"> -->
+<!-- 				<div> -->
+					<label class="col-sm-2 col-form-label">密碼</label>
+					<div class="col-sm-4">
+					<input type="password" name="pwd" id="pwd" class="form-control"
 						value="" size="12"> <span id="idsp1" style="color: red;"></span><br />
 					<p style="color: gray;">(1.不可空白，2.至少6個字且必須包含英文字母、數字)</p>
+					</div>
+<!-- 				<div class="space"> -->
+					<label class="col-sm-2 col-form-label space">確認密碼</label>
+					<div class="col-sm-4">
+					<input type="password" name="pwd1" id="pwd1" class="form-control"
+						value="" size="12"> <span id="idsp9" style="color: red;"></span>
+<!-- 				</div> -->
 				</div>
-				<div class="space">
-					<label>確認密碼:</label> <input type="password" name="pwd1" id="pwd1"
-						value="" size="12"> <span id="idsp9" style="color: red;"></span><br />
+<!-- 				</div> -->
+				
+</div>
+				
+<!-- <div class="form-row"> -->
+							
+<!--     <div class="form-group space"> -->
+				<div class="form-group row">
+<!-- 				<div class="space"> -->
+					<label class="col-sm-2 col-form-label">性別</label>
+					<div class="col-sm-4">
+						<input type="radio" name="sex" id="sex_m" style="padding-buttom:0px"
+						onblur="" value="男" checked="checked">
+						 <label class="form-check-label" for="inlineRadio2" style="padding-buttom:0px">男</label>
+						<input type="radio" name="sex" style="margin-buttom:0px"
+						id="sex_g" onblur="" value="女"><span id="idsp3"></span>
+						 <label class="form-check-label" for="inlineRadio2" style="margin-buttom:0px">女</label>
+					</div>				
+<!-- 				<div > -->
+					<label class="col-sm-2 col-form-label">生日</label>
+					<div class="col-sm-4">
+					<input class="form-control" type="date" name="birthday" id="birthday"/> 
+<!-- 				</div> -->
 				</div>
-				<div>
-					<label>姓名:</label> <input type="text" id="name1" name="name" size="12" value="">
-				</div>
+					</div>
 				<br>
-				<div class="space">
-					<label>性別:</label> <input type="radio" name="sex" id="sex_m"
-						onblur="" value="男" checked="checked">男 <input type="radio" name="sex"
-						id="sex_g" onblur="" value="女">女 <span id="idsp3"></span>
-				</div>
-				<div >
-					<label>生日:</label> <input type="date" name="birthday" id="birthday"/> 
-				</div>
-				<br />
-				<div>
-					<label>E-mail:</label> <input type="email" name="mail" id="mail"
+<!-- </div>				 -->
+<!-- </div>				 -->
+				
+				<div class="form-group row">
+<!-- 					<div class="col-sm-2"> -->
+					<label class="col-sm-2 col-form-label">E-mail</label>
+<!-- 					</div> -->
+					<div class="col-sm-10">
+					<input class="form-control" type="email" name="mail" id="mail"
 						> <span id="idsp7" style="color: red;"></span><br />
+					</div>
 				</div>
 				<br>
 				<div class="send">
 					<button type="button" id="send" class="btn btn-outline-secondary">送出</button>
 					<button type="reset" class="btn btn-outline-secondary">清除</button>
 				</div>
-				<button id="insert" type="button">一鍵輸入</button>
+				<button style="text-align: center"id="insert" type="button"class="btn btn-outline-secondary btn-sm">一鍵輸入</button>
 			</fieldset>
 		</form>
 	</div>
