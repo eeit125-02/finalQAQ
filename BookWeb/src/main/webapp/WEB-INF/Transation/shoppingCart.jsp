@@ -184,7 +184,7 @@
 				</div>
 				<div class="pull-right" style="margin: 10px">
 					<button type="button" class="btn btn-primary pull-right"
-						data-toggle="modal" data-target="#exampleModal"
+						 data-target="#exampleModal"
 						data-whatever="@mdo">結帳</button>
 					<div class="pull-right" style="margin: 5px">
 						Total price: <b id="total">0</b>
@@ -244,6 +244,19 @@
 	<footer class="container py-5" id="bookWebFooter"></footer>
 	<!-- footer -->
 	<script>
+	$('.btn.btn-primary.pull-right').click(function() {
+		if(parseInt($('#total').html())==0){
+			Swal.fire({
+				title: '警告!',
+				text: "您並無購買商品!",
+				icon: 'warning',
+				confirmButtonText: "確定"
+				})
+		}else{
+			$(this).attr("data-toggle", "modal")			
+		}
+	})	
+	
 					$(document).ready(function() {
 						$("#bookWebheader").load("//localhost:8080/BookWeb/header");
 						$("#bookWebFooter").load("//localhost:8080/BookWeb/footer");
@@ -390,7 +403,9 @@
 							}			
 						})
 					})
-		
+
+				
+	
 	$('.btn.btn-outline-danger.btn-xs').each(function() {
 		$(this).click(function() {
 			Swal.fire({

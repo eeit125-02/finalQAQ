@@ -901,7 +901,7 @@ legend {
 				$('#change123').load("//localhost:8080/BookWeb/Admin/Act")
 			}else{
 				
-				window.location.href = "http://localhost:8080/BookWeb/showJoins";
+				window.location.href = "http://localhost:8080/BookWeb/showJoinbyID";
 			}
 		});
 		$('#act').click(function(){

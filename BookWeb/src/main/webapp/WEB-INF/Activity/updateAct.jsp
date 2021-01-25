@@ -7,8 +7,8 @@
 <html>
 <head>
 
-<!-- CK EDITOR的東東 -->
-<script src="https://cdn.ckeditor.com/ckeditor5/24.0.0/classic/ckeditor.js"></script>
+<!-- 引用CK Editor -->
+<script src="${pageContext.request.contextPath}/js/ckeditor/ckeditor.js"></script>
 
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script
@@ -255,13 +255,13 @@ color:#3C3C3C;
                             <div class="form-row">
 						  <div class="form-group col-md-6">
 						    <label >活動摘要:</label>
-						    <form:textarea path="act_Rule" rows = "20" cols = "30" class="form-control"/>
+						    <form:textarea path="act_Rule" rows = "20" cols = "30" class="form-control" style="height:307px"/>
 						  </div>
 						  
 						  <div class="form-group  col-md-6">
 						    <label >活動簡介:</label>
 <!-- 						  CK EDITOR的東東 -->
-						  <form:textarea id="editor1" path="act_Intro" rows = "20" cols = "30" />
+						   <form:textarea class="ck" id="act_Intro" path="act_Intro" rows = "10" cols = "30" />
 						  </div>
 						  </div>
 											
@@ -270,8 +270,8 @@ color:#3C3C3C;
 					
 						<div colspan="2" align="center">
 						
-						<input type="submit" value="更新" name='updateBtn'onclick="return confirmUpdate('${ab.act_ID}');"/> 
-						<input type="submit" value="刪除" name='deleteBtn'onclick="return confirmDelete('${ab.act_Name}');"/>
+						<input class="btn btn-primary" type="submit" value="更新" name='updateBtn'onclick="return confirmUpdate('${ab.act_ID}');"/> 
+						<input class="btn btn-primary" type="submit" value="刪除" name='deleteBtn'onclick="return confirmDelete('${ab.act_Name}');"/>
 						
 						</div>
 				</form:form>
@@ -281,8 +281,9 @@ color:#3C3C3C;
 				</c:if>
 
 
-			<p /><small>&lt;&lt;<a href="showActs">回上一頁</a>&gt;&gt;
-			</small>
+				<br>
+				<br>
+			<a href='${pageContext.request.contextPath}/showActs'>繼續探索活動</a>
 
 	</div>
 
@@ -492,13 +493,35 @@ color:#3C3C3C;
 <!-- 		CK EDITOR的東東 -->
 
 <script>
-    ClassicEditor
-        .create( document.querySelector( '#editor1' ) )
-        .catch( error => {
-            console.error( error );
-        } );
-</script>		
-		
+	 	CKEDITOR.addCss('.cke_editable { font-size: 20px; padding: 1em; }');
+	 	var editor = CKEDITOR.replace( 'act_Intro' ,{
+			toolbar: [
+		        {
+		          name: 'clipboard',
+		          items: ['Undo', 'Redo']
+		        },
+		        {
+			          name: 'styles',
+			          items: ['Format', 'Font', 'FontSize']
+			    },
+		        {
+		          name: 'basicstyles',
+		          items: ['Bold']
+			    },
+		        {
+		          name: 'colors',
+		          items: ['TextColor']
+		        },
+		        {
+		          name: 'align',
+		          items: ['JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock']
+		        }
+		      ]
+
+		      
+		});
+</script>
+
 		
 
 </html>

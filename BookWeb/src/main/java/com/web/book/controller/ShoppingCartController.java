@@ -70,11 +70,11 @@ public class ShoppingCartController {
 			@RequestParam Integer bo_Cel
 			) {
 //		List<String> relist = new ArrayList<String>();
-		System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++");
-		System.out.println("bo_Name= " + bo_Name);
-		System.out.println("bo_Cel= " + bo_Cel);
-		System.out.println("bo_Add= " + bo_Add);
-		System.out.println("---------------------------------------------------");
+//		System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++");
+//		System.out.println("bo_Name= " + bo_Name);
+//		System.out.println("bo_Cel= " + bo_Cel);
+//		System.out.println("bo_Add= " + bo_Add);
+//		System.out.println("---------------------------------------------------");
 //			relist.add("/Member/login");
 //			return relist;
 		if (loginUser == null) {
@@ -93,6 +93,10 @@ public class ShoppingCartController {
 		List<ShoppingCartBean> list = scService.searchCart(loginUser.getMb_ID());
 		for (ShoppingCartBean cart : list) {
 			total += cart.getCart_Num()*cart.getCart_Price();
+// 庫存扣掉購買
+			BookStoreBean oneMbStore = bsService.getOneBookStore(cart.getBks_ID());
+			bsService.updateBookStore(cart.getBks_ID(), oneMbStore.getBs_Num()-cart.getCart_Num(), oneMbStore.getBs_Price());
+//			cart.getMemberSel().getMb_ID();
 		}
 // 建立訂單
 		scService.insertOrder(date, total, bo_Name, bo_Add, bo_Cel, loginUser.getMb_ID(), success);
@@ -108,7 +112,7 @@ public class ShoppingCartController {
 				product.append("#" + cart.getBook().getBk_Name());			
 				product.append("   單價: " + cart.getCart_Price()+"      數量: " + cart.getCart_Num() + "      賣家: " + cart.getMemberSel().getMb_Name());
 			}
-		}
+		}		
 // 把購物車資料清掉
 		scService.deleteAllCart(loginUser.getMb_ID());
 		String form = genAioCheckOutOneTime(oreder.getBo_ID(), sdf.format(date), total, product.toString(), url);
@@ -117,11 +121,14 @@ public class ShoppingCartController {
 		model.addAttribute("item", item);
 		model.addAttribute("total", oreder.getBo_Total());
 		model.addAttribute("tstime", date);
-//		return relist;   
+//		return relist;
+//實際跑
 		return "/Transation/bkCheckout";
+//測試
 //		return "/Transation/transationDetail";
 	}
 	
+	// 導入交易明細
 	@GetMapping(value = "/transation")
 	public String tsDetail(Model model) {
 		return "/Transation/transationDetail";
@@ -151,20 +158,20 @@ public class ShoppingCartController {
 		if (loginUser == null) {
 			return "redirect:/toLogin";
 		}
-		Boolean qaq = true;
+		Boolean onOff = true;
 		List<ShoppingCartBean> list = scService.searchCart(loginUser.getMb_ID());
 		for (ShoppingCartBean shoppingCartBean : list) {
 			if (bk_ID == shoppingCartBean.getBook().getBk_ID() && bs_Price == shoppingCartBean.getCart_Price()) {
-				qaq = false;
+				onOff = false;
 				scService.updateCartAll(cart_Num + shoppingCartBean.getCart_Num(), bk_ID);
-				bsService.updateBookStore(bks_ID, (bs_Num - cart_Num), bs_Price);
+//				bsService.updateBookStore(bks_ID, (bs_Num - cart_Num), bs_Price);
 				list = scService.searchCart(loginUser.getMb_ID());
 				model.addAttribute("listCart", list);
 			}
 		}
-		if (qaq) {
+		if (onOff) {
 			scService.addToCart(cart_Num, bs_Price, bk_ID, loginUser.getMb_ID(), bs_ID, bks_ID);
-			bsService.updateBookStore(bks_ID, (bs_Num - cart_Num), bs_Price);
+//			bsService.updateBookStore(bks_ID, (bs_Num - cart_Num), bs_Price);
 			list = scService.searchCart(loginUser.getMb_ID());
 			model.addAttribute("listCart", list);
 		}
@@ -190,7 +197,7 @@ public class ShoppingCartController {
 //			 如果購物車已經有這筆資料更新
 			if (bk.equals(shoppingCartBean.getBook().getBk_ID())) {
 				scService.updateCartAll(shoppingCartBean.getCart_Num() + qty, bk);
-				scService.updateBookStore(bks, amount);
+//				scService.updateBookStore(bks, amount);
 				qaq = false;
 				break;
 			}
@@ -200,7 +207,7 @@ public class ShoppingCartController {
 		if (qaq) {
 			scService.addToCart(qty, bp, bk, loginUser.getMb_ID(),
 					bsService.getOneBookStore(bks).getMember().getMb_ID(), bks);
-			scService.updateBookStore(bks, amount);
+//			scService.updateBookStore(bks, amount);
 		}
 		return map;
 	}
@@ -222,7 +229,7 @@ public class ShoppingCartController {
 		for (ShoppingCartBean shoppingCartBean : list) {
 			if (bookStoreBean.getBook().getBk_ID() == shoppingCartBean.getBook().getBk_ID()) {
 				scService.updateCartAll(shoppingCartBean.getCart_Num() + cart_Num, bookStoreBean.getBook().getBk_ID());
-				scService.updateBookStore(bks_ID, bookStoreBean.getBs_Num() - cart_Num);
+//				scService.updateBookStore(bks_ID, bookStoreBean.getBs_Num() - cart_Num);
 				qaqCart = false;
 				break;
 			}
@@ -231,7 +238,7 @@ public class ShoppingCartController {
 		if (qaqCart) {
 			scService.addToCart(cart_Num, bookStoreBean.getBs_Price(), bookStoreBean.getBook().getBk_ID(),
 					loginUser.getMb_ID(), bsService.getOneBookStore(bks_ID).getMember().getMb_ID(), bks_ID);
-			scService.updateBookStore(bookStoreBean.getBks_ID(), bookStoreBean.getBs_Num() - 1);
+//			scService.updateBookStore(bookStoreBean.getBks_ID(), bookStoreBean.getBs_Num() - 1);
 		}
 		list = scService.searchCart(loginUser.getMb_ID());
 		model.addAttribute("listCart", list);

@@ -62,13 +62,14 @@
 						height="300px" src="<c:url value='${v.bk_Pic}'/>">
 				</div>
 				<div class="col-lg-8">
-					<h2>書名: ${v.bk_Name}</h2>
-					<h4>作者: ${v.bk_Author}</h4>
-					<h4>出版社: ${v.bk_Publish}</h4>
-					<h4>出版日: ${v.bk_PublishDate}</h4>
+					<h2><span>書名: ${v.bk_Name}</span></h2>
+					<h4><span>作者: ${v.bk_Author}</span></h4>
+					<h4><span>出版社: ${v.bk_Publish}</span></h4>
+					<h4><span>出版日: ${v.bk_PublishDate}</span></h4>
 				</div>
 			</div>
 		</c:forEach>
+		<br><br>
 		<div class="row">
 			<div class="col-lg-2">賣家</div>
 			<div class="col-lg-2">二手價</div>
@@ -143,24 +144,16 @@
 				$("#bookWebheader").load("//localhost:8080/BookWeb/header");
 				$("#bookWebFooter").load("//localhost:8080/BookWeb/footer");
 // 			console.log($(this).val()>parseInt($(this).attr("max")))
-			$('.form-control').each(function() {
-				$(this).change(function() {
-					if( $(this).val()>parseInt($(this).attr("max")) ){
-						$(this).val($(this).attr("max"))
-					} else if($(this).val() < parseInt($(this).attr("min"))){
-						$(this).val($(this).attr("min"))
-					}
-				})	
-			})
-			
+				$('.form-control').each(function() {
+					$(this).change(function() {
+						if( $(this).val()>parseInt($(this).attr("max")) ){
+							$(this).val($(this).attr("max"))
+						} else if($(this).val() < parseInt($(this).attr("min"))){
+							$(this).val($(this).attr("min"))
+						}
+					})	
+				})
 			});
-			
-// 			$('.btn.btn-outline-secondary.direct').each(function() {
-// 				$(this).click(function() {
-// 					console.log($(this).parent().prev().children().val())
-// 					$(this).submit();
-// 				})
-// 			})
 	</script>
 </body>
 </html>

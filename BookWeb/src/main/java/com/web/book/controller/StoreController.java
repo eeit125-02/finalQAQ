@@ -157,11 +157,20 @@ public class StoreController {
 			data.put("bs_Date", sdf1.format(store.getBs_Date()));
 			data.put("bk_Name", store.getBook().getBk_Name());
 			data.put("bk_Author", store.getBook().getBk_Author());
-			data.put("bk_Publish", store.getBook().getBk_Publish());
-			data.put("bk_Date", sdf.format(store.getBook().getBk_Date()));
 			data.put("bs_Price", store.getBs_Price());
 			data.put("bs_Num", store.getBs_Num());
-			map.add(data);
+			if (store.getBook().getBk_Publish()!=null) {
+				data.put("bk_Publish", store.getBook().getBk_Publish());				
+			}else {
+				data.put("bk_Publish", "未知");
+			}
+			if (store.getBook().getBk_Date()!=null) {
+				data.put("bk_Date", sdf.format(store.getBook().getBk_Date()));				
+				map.add(data);
+			} else {
+				data.put("bk_Date", "未知");
+				map.add(data);
+			}
 		}
 		model.addAttribute("myBookList", map);
 		return "/Transation/myStore";
@@ -198,7 +207,7 @@ public class StoreController {
 	}
 
 	// 點擊我要賣東西
-	@PostMapping("addMyStore")
+	@GetMapping("addMyStore")
 	public String goToStore(Model model) {
 		if (loginUser == null) {
 			return "redirect:/toLogin";
@@ -210,8 +219,8 @@ public class StoreController {
 	@GetMapping("/Transation/addMyStore")
 	@ResponseBody
 	public Map<String, Object> qaqBookName(@RequestParam(value = "qaqBookName", required = false) String bk_Name,
-			@RequestParam(value = "pageType", defaultValue = "search", required = true) String searchType,
-			@RequestParam(value = "pageNow", defaultValue = "1", required = true) Integer searchPage) {
+			@RequestParam(value = "pageType", defaultValue = "search", required = false) String searchType,
+			@RequestParam(value = "pageNow", defaultValue = "1", required = false) Integer searchPage) {
 		page = searchPage;
 		pageType = searchType;
 		Map<String, Object> data = new HashMap<>();
@@ -224,9 +233,18 @@ public class StoreController {
 			searchData.put("bk_Pic", bookStoreBean.getBook().getBk_Pic());
 			searchData.put("bk_Name", bookStoreBean.getBook().getBk_Name());
 			searchData.put("bk_Author", bookStoreBean.getBook().getBk_Author());
-			searchData.put("bk_Publish", bookStoreBean.getBook().getBk_Publish());
-			searchData.put("bk_Date", sdf.format(bookStoreBean.getBook().getBk_Date()));
-			bookList.add(searchData);
+			if (bookStoreBean.getBook().getBk_Publish()!=null) {
+				searchData.put("bk_Publish", bookStoreBean.getBook().getBk_Publish());				
+			}else {
+				searchData.put("bk_Publish", "未知");
+			}
+			if (bookStoreBean.getBook().getBk_Date()!=null) {
+				searchData.put("bk_Date", sdf.format(bookStoreBean.getBook().getBk_Date()));				
+				bookList.add(searchData);
+			} else {
+				searchData.put("bk_Date", "未知");
+				bookList.add(searchData);
+			}
 		}
 		data.put("pageSize", bookStoreService.getSearchStoreBookNameSize(bk_Name, 14));
 		data.put("pageNow", page);
@@ -290,7 +308,7 @@ public class StoreController {
 		}
 		searchService.savebk(book);
 		bookStoreService.insertSearchBookName(asd, qwe, book.getBk_ID(), loginUser.getMb_ID());
-		bookStoreService.insertSearchBookName(asd, (qwe + 5000), book.getBk_ID(), 14);
+		bookStoreService.insertSearchBookName(1, (int)(qwe*1.3), book.getBk_ID(), 14);
 		return "redirect:/myStore";
 	}
 
