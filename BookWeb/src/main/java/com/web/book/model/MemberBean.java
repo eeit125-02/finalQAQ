@@ -1,7 +1,6 @@
 package com.web.book.model;
 import java.sql.Date;
 import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -146,7 +145,7 @@ public class MemberBean {
 
 	public Timestamp getMb_Date() {
 		
-		//new SimpleDateFormat("yyyy-MM-dd").format(mb_Date);
+		
 		return mb_Date;
 	}
 

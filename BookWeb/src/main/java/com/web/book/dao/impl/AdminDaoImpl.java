@@ -99,6 +99,8 @@ public class AdminDaoImpl implements AdminDao {
 		Session session = factory.getCurrentSession();
 		String hql = "From BookStoreBean where bs_ID != 14 order by bks_ID DESC";
 		Query<BookStoreBean> query = session.createQuery(hql);
+		query.setFirstResult(0);
+		query.setMaxResults(1000);
 		
 		return query.getResultList();
 	}
@@ -241,6 +243,41 @@ public class AdminDaoImpl implements AdminDao {
 		
 		return query.getResultList();
 	}
+	
+	// 取得每半年成交量數量
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Object> getStoreMonthPsc() {
+		
+		Session session = factory.getCurrentSession();
+		String hql = "Select YEAR (a.bo_Date), MONTH (a.bo_Date), sum(b.oi_Qty) "
+				   + "from BookOrderBean a, OrderItemBean b "
+				   + "where a.bo_ID = b.order.bo_ID "
+				   + "GROUP by YEAR (a.bo_Date) , MONTH (a.bo_Date) "
+				   + "ORDER by YEAR (a.bo_Date) DESC , MONTH (a.bo_Date) DESC";
+		Query<Object> query = session.createQuery(hql);
+		query.setFirstResult(0);
+		query.setMaxResults(6);
+		
+		return query.getResultList();
+	}
+	
+	// 取得每半年成交價格
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Object> getStoreMonthPrice() {
+		
+		Session session = factory.getCurrentSession();
+		String hql = "Select YEAR (a.bo_Date), MONTH (a.bo_Date), sum(a.bo_Total) "
+				   + "from BookOrderBean a "
+				   + "GROUP by YEAR (a.bo_Date) , MONTH (a.bo_Date) "
+				   + "ORDER by YEAR (a.bo_Date) DESC , MONTH (a.bo_Date) DESC";
+		Query<Object> query = session.createQuery(hql);
+		query.setFirstResult(0);
+		query.setMaxResults(6);
+		
+		return query.getResultList();
+	}
 
 	// 取得註冊會員男女比例
 	@SuppressWarnings("unchecked")
@@ -286,6 +323,7 @@ public class AdminDaoImpl implements AdminDao {
 		
 		return query.getResultList();
 	}
+
 	
 	
 	

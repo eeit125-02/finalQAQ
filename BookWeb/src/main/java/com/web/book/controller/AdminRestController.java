@@ -109,6 +109,20 @@ public class AdminRestController {
 		return adminservice.getActMonthNumberOfParticipants();
 	}
 	
+	// 取得每半年成交量數量
+	@PostMapping("/getStoreMonthPrice")
+	public Map<String, Object> getStoreMonthPrice(){
+		
+		return adminservice.getStoreMonthPrice();
+	}
+	
+	// 取得每半年成交金額
+	@PostMapping("/getStoreMonthPsc")
+	public Map<String, Object> getStoreMonthPsc(){
+		
+		return adminservice.getStoreMonthPsc();
+	}
+	
 	// 取得註冊會員男女比例
 	@PostMapping("/getSexRatio")
 	public Map<String, Object> getSexRatio(){
@@ -144,6 +158,20 @@ public class AdminRestController {
 		return adminservice.getActInfo(actId);
 	}
 	
+	// 回傳單一活動資訊
+	@PostMapping("/getMemebr")
+	public Map<String, Object> getMemebr( @RequestParam(value = "member" , required = true) String memebr){
+		
+		return adminservice.getMemberInfo(memebr);
+	}
+	
+	// 回傳單一商店資訊
+	@PostMapping("/getStore")
+	public Map<String, Object> getStore( @RequestParam(value = "store" , required = true) Integer bksId){
+		
+		return adminservice.getStoreInfo(bksId);
+	}
+	
 	// 刪除圖書資料
 	@PostMapping("/deleteBook")
 	public Boolean deleteBook(@RequestParam(value = "bkId", required = true) Integer bkId) {
@@ -164,4 +192,12 @@ public class AdminRestController {
 		
 		return adminservice.deletePost(postId);
 	}
+	
+	// 刪除貼文資料
+	@PostMapping("/deleteStore")
+	public Boolean deleteStore(@RequestParam(value = "bksId", required = true) Integer bksId) {
+		
+		return adminservice.deleteStore(bksId);
+	}
+	
 }

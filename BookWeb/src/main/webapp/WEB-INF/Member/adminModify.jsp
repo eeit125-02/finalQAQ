@@ -24,18 +24,11 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.23/datatables.min.css"/>
 <link rel="icon" href="${pageContext.request.contextPath}/image/logo1.ico" type="image/x-icon" />
 <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.23/datatables.min.js"></script>
-<!-- <script -->
-<!-- 	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" -->
-<!-- 	integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" -->
-<!-- 	crossorigin="anonymous"></script> -->
-<!-- <script -->
-<!-- 	src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" -->
-<!-- 	integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" -->
-<!-- 	crossorigin="anonymous"></script> -->
-<!-- <link rel="stylesheet" -->
-<!-- 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" -->
-<!-- 	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" -->
-<!-- 	crossorigin="anonymous"> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
 	
 <style>
 /* //aaaa */
@@ -139,9 +132,9 @@ legend {
 					<c:forEach items="${memberall}" var="u" varStatus="loop">
 						<c:if test="${loop.index == 0}">
 							<thead><tr>
-								<th>帳號</th>
-								<th>姓名</th>
-								<th>註冊日期</th>
+								<th style="width:200px">帳號</th>
+								<th style="width:150px">姓名</th>
+								<th style="width:90px">註冊日期</th>
 								<th></th>
 								<th></th>
 							</tr>
@@ -150,9 +143,13 @@ legend {
 						<tr>
 							<td>${u.mb_Account}</td>
 							<td>${u.mb_Name}</td>
-							<td>${u.mb_Date}</td>
-							<td><button type="button" id="delete${u.mb_ID}"
-									class="btn btn-outline-secondary" >刪除</button>								
+							<td id="date${u.mb_ID}">${u.mb_Date}</td>
+							<td>
+							<button type="button" id="edit${u.mb_ID}"
+									class="btn btn-outline-secondary" onclick='viewData("${u.mb_Account}")' >查看</button>
+							<button type="button" id="delete${u.mb_ID}"
+									class="btn btn-outline-secondary" >刪除</button>
+																
 						<input type="hidden" id="dl${u.mb_ID}" name="dl" value="${u.mb_ID}"></td>	
 							<td><label class="switch"> <input type="checkbox">
 									<span id="ball" class="slider" check="${u.checkColume}"></span>
@@ -161,6 +158,10 @@ legend {
 <!-- aaa -->
 						</tr>
 						<script>
+						var thisTime =  "${u.mb_Date}";
+						var splitTime = thisTime.split(" ")[0];
+						console.log(splitTime);
+						$('#date${u.mb_ID}').html(splitTime);
 						$('#delete${u.mb_ID}').click(function(){
 							console.log("123")
 							let a = $('#dl${u.mb_ID}').val()
@@ -201,7 +202,7 @@ legend {
 	$.ajax({
 		async : false,
 		type : 'POST',
-		url : "http://localhost:8080/BookWeb/Admin//getActMonthNumberOfParticipants",
+		url : "http://localhost:8080/BookWeb/Admin/getRegistereMonth",
 		dataType : "json",
 		success : function(data) {
 			monthViewName = data.name
@@ -383,35 +384,85 @@ legend {
 			  } 
 			});
 		}
-/* 		 "<div id=\"change123\" class=\"container\" style=\"text-align:center\">"
-        +"<fieldset id=\"mb_inf\">"
-        +"<legend>會員資料</legend>"
-        +"<form>"
-        +"<div>"
-        +"<img src=\""+${login.mb_pic}+"\" style=\"width: 200px; height: 200px; text-align:center; border-radius: 50%;\"/>"
-        +"</div>"
-        +"<br>"
-        +"<table class=\"table\" >"
-        +"<tr class=\"tr1\" style=\"background-color:#68b0ab\">"
-        +"<th scope=\"col\" >帳號</th>"
-        +"<th scope=\"col\" >姓名</th>"
-        +"</tr>"
-        +"<tr class=\"table-light\">"
-        +"<td>"+${login.mb_Account}+"</td>"
-        +"<td>+"${login.mb_Name}+"</td>"
-        +"</tr>"
-	    +"<tr class=\"tr2\" style=\"background-color:#e0ece4\">"
-	        +"<th scope=\"col\">性別</th>"
-	        +"<th scope=\"col\">電話</th>"
-	    +"</tr>"
-	    +"<tr class=\"table-light\">"
-	        +"<td>"+${login.mb_Sex}+"</td>" */
 		
-        /* <div style="border: #ADADAD 2px solid; border-radius: 5px; text-align: left; padding: 10px; margin: 0px 10px">
-        <p>貼文會員<br>貼文時間</p>
-        <h3><strong>貼文標題</strong></h3>
-        <p>貼文內容</p>
-   		</div> */
+		function viewData(selectId){
+			console.log(selectId)
+			var insertHtml;
+			$.ajax({
+				async : false,
+				type : 'POST',
+				url : "http://localhost:8080/BookWeb/Admin/getMemebr",
+				data :{ member : selectId },
+				dataType : "json",
+				success : function(data) {
+					console.log(data)
+					insertHtml =  "<div id=\"change123\" class=\"container\" style=\"text-align:center\">"
+							        +"<fieldset id=\"mb_inf\">"
+							        +"<legend>會員資料</legend>"
+							        +"<form>"
+							        +"<div>"
+							        +"<img src=\""+ data.mbPic +"\" style=\"width: 200px; height: 200px; text-align:center; border-radius: 50%;\"/>"
+							        +"</div>"
+							        +"<br>"
+							        +"<table class=\"table\" >"
+							        +"<tr class=\"tr1\" style=\"background-color:#68b0ab\">"
+							        +"<th scope=\"col\" >帳號</th>"
+							        +"<th scope=\"col\" >姓名</th>"
+							        +"</tr>"
+							        +"<tr class=\"table-light\">"
+							        +"<td>"+ data.mbAccount +"</td>"
+							        +"<td>"+data.mbName+"</td>"
+							        +"</tr>"
+							   		+"<tr class=\"tr2\" style=\"background-color:#e0ece4\">"
+							        +"<th scope=\"col\">性別</th>"
+							        +"<th scope=\"col\">電話</th>"
+								    +"</tr>"
+								    +"<tr class=\"table-light\">"
+							        +"<td>"+data.mbSex+"</td>"
+							        +"<td>"+data.mbTel+"</td>"
+								    +"</tr>"
+								    +"<tr class=\"tr2\" style=\"background-color:#e0ece4\">"
+							        +"<th colspan=\"2\">生日</th>"
+								    +"</tr>"
+								    +"<tr class=\"table-light\">"
+							        +"<td colspan=\"2\">"+data.mbBirthday+"</td>"
+								    +"</tr>"
+								    +"<tr class=\"tr2\" style=\"background-color:#e0ece4\">"
+							      	+"<th colspan=\"2\">Email</th>"
+							    	+"</tr>"
+							    	+"<tr class=\"table-light\">"
+							        +"<td colspan=\"2\">"+data.mbMail+"</td>"
+							    	+"</tr>"
+			
+							    	+"<tr class=\"tr2\" style=\"background-color:#e0ece4\">"
+							        +"<th colspan=\"2\">地址</th>"
+							    	+"</tr>"
+							    	+"<tr  class=\"table-light\">"
+							        +"<td colspan=\"2\">"+data.mbAddress+"</td>"
+							    	+"</tr>"
+							    	+"<tr class=\"tr2\" style=\"background-color:#e0ece4\">"
+							        +"<th colspan=\"2\">喜好類型</th>"
+							        +"</tr>"
+							    	+"<tr  class=\"table-light\">"
+							        +"<td colspan=\"2\">"+data.mbType+"</td>"
+							    	+"</tr>"
+									+"</table>"
+									+"</form>"
+									+"</fieldset>"
+									+"</div>"
+							   
+									swal.fire({
+										  width: '850px',
+										  html: insertHtml,  
+										  confirmButtonText: "ok"
+									});
+				}
+			});
+			
+		}
+		
+		
+		
       
 	</script>
 

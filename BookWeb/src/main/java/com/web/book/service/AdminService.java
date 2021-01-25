@@ -3,6 +3,7 @@ package com.web.book.service;
 import java.util.List;
 import java.util.Map;
 
+
 public interface AdminService {
 	
 	// 取得所有心得數量
@@ -28,6 +29,12 @@ public interface AdminService {
 	
 	// 取得單一活動資料
 	Map<String, Object> getActInfo(Integer actId);
+	
+	// 取得單一會員資料
+	Map<String, Object> getMemberInfo(String mbAccount);
+	
+	// 取得單一商店資料
+	Map<String, Object> getStoreInfo(Integer bksId);
 	
 	// 獲得近半年心得撰寫報表
 	Map<String, Object> getMonthReportWrite();
@@ -55,6 +62,13 @@ public interface AdminService {
 	
 	// 獲得近半年活動參與人數
 	Map<String, Object>  getActMonthNumberOfParticipants();
+	
+	// 取得每半年成交量數量
+	Map<String, Object>  getStoreMonthPsc();
+	
+	// 取得每半年成交金額
+	Map<String, Object>  getStoreMonthPrice();
+	
 		
 	// 刪除指定心得
 	Boolean deleteBookReport(Integer brId);
@@ -68,7 +82,7 @@ public interface AdminService {
 	//刪除指定活動
 	Boolean deleteAct(Integer actId);
 
-	
-	
+	//刪除指定賣家
+	Boolean deleteStore(Integer bksId);
 	
 }
