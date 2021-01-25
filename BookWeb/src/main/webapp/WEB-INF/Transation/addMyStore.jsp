@@ -183,7 +183,6 @@
 					$('#qaqResult').html(insertData);				
 				}
 			}
-				
 		})
 	}
 	}

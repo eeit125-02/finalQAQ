@@ -120,10 +120,18 @@ public class AdminDaoImpl implements AdminDao {
 	public Boolean deleteBook(Integer bkId) {
 		
 		Session session = factory.getCurrentSession();
+		
 		String hql = "Delete BookStoreBean bs Where bs.book.bk_ID = :bk_ID";
+		session.createQuery(hql).setParameter("bk_ID", bkId).executeUpdate();
+		hql = "Delete BookReportBean br where br.book.bk_ID = :bk_ID";
+		session.createQuery(hql).setParameter("bk_ID", bkId).executeUpdate();
+		hql = "Delete BookTypeBean bt where bt.book.bk_ID = :bk_ID";
+		session.createQuery(hql).setParameter("bk_ID", bkId).executeUpdate();
+		hql = "Delete OrderItemBean bo where bo.book.bk_ID = :bk_ID";
 		session.createQuery(hql).setParameter("bk_ID", bkId).executeUpdate();
 		hql = "Delete BookBean bk Where bk.bk_ID = :bk_ID";
 		session.createQuery(hql).setParameter("bk_ID", bkId).executeUpdate();
+		
 		
 		return true;
 	}
