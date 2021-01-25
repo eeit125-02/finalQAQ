@@ -162,7 +162,7 @@ public class BookStoreDaoImpl implements BookStoreDao {
 		Session session = factory.getCurrentSession();
 		Integer qaqQty = 0;
 		Integer qaqPrice = 0;
-		MemberBean member = session.load(MemberBean.class, 20);
+		MemberBean member = session.load(MemberBean.class, 9);
 		// 24 9 20
 		// 管理員灌值 start
 //		MemberBean member = session.load(MemberBean.class, 14);
@@ -202,9 +202,9 @@ public class BookStoreDaoImpl implements BookStoreDao {
 		// 製造不同庫存不同價錢區間 end
 //		假資料
 		Date date = new Date();
-		for (int i = 1; i < 50; i++) {
+		for (int i = 1; i < 100; i++) {
 			BookBean book = session.load(BookBean.class, i);
-			qaqQty = (int) (Math.random() * (10)) + 1;
+			qaqQty = (int) (Math.random() * (100)) + 1;
 			if (book.getBk_Price()==null) {
 				book.setBk_Price(100);
 				qaqPrice = (int) (Math.random() * ((book.getBk_Price() / 10) - 5)) + 5;

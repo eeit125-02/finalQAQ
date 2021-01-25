@@ -164,7 +164,7 @@ p:focus, textarea:focus {
 						</div>
 				<button type="button" name="" class="btn btn-outline-info btn-sm"data-toggle="modal" data-target="#exampleModal" data-whatever="【書適圈】管理員">通報錯誤</button>
 				<button type="button" id="addBookReport" value="${pageresult.bk_ID}" class="btn btn-outline-info btn-sm">撰寫心得</button>
-				<button type="submit" name="" class="btn btn-outline-info btn-sm">尋找二手書</button>
+				<button type="button" id="bkPrices" onclick="goTransation(${pageresult.bk_ID})" class="btn btn-outline-info btn-sm">尋找二手書</button>
 				</div>
 			</div>
 <form action="<c:url value='/toAdminJavaMail' />" method="post">	
@@ -451,6 +451,11 @@ p:focus, textarea:focus {
 			})
 			
 		});
+		
+//尋找二手書連結
+		function goTransation(bk) {
+			window.location.href = "//localhost:8080/BookWeb/qaqManyPrice?ID=" + bk + "";
+		}
 	</script>
 
 </body>
