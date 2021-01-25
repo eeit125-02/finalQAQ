@@ -100,7 +100,7 @@
 	$.ajax({
 		async : false,
 		type : 'POST',
-		url : "http://localhost:8080/BookWeb/Admin/getMonthReportWrite",
+		url : "http://localhost:8080/BookWeb/Admin/getMonthPostWrite",
 		dataType : "json",
 		success : function(data) {
 			monthWriteName = data.month
@@ -111,7 +111,7 @@
 	$.ajax({
 		async : false,
 		type : 'POST',
-		url : "http://localhost:8080/BookWeb/Admin/getMonthReportViews",
+		url : "http://localhost:8080/BookWeb/Admin/getMonthPostView",
 		dataType : "json",
 		success : function(data) {
 			monthViewName = data.month
@@ -127,15 +127,15 @@
 	        	label: '人數',
 	            data: monthWriteNum,
 	            fill: false,
-	            backgroundColor: 'rgba(255, 99, 132)',
-	            borderColor: 'rgba(255, 99, 132)'
+	            backgroundColor: 'rgba(54, 162, 235, 1)',
+	            borderColor: 'rgba(54, 162, 235, 1)'
 	        }],
 	    },
 	    options: {
 			title: {
 				display: true,
 				fontSize: 20,
-				text: '每月撰寫心得數量'
+				text: '近半年貼文撰寫數量'
 			}
 		}
 	});
@@ -148,15 +148,15 @@
 	        	label: '人數',
 	            data: monthViewNum,
 	            fill: false,
-	            backgroundColor: 'rgba(54, 162, 235, 1)',
-	            borderColor: 'rgba(54, 162, 235, 1)'
+	            backgroundColor: 'rgba(255, 206, 86, 1)',
+	            borderColor: 'rgba(255, 206, 86, 1)'
 	        }],
 	    },
 	    options: {
 			title: {
 				display: true,
 				fontSize: 20,
-				text: '每月瀏覽心得數量'
+				text: '近半年貼文點擊數量'
 			}
 		}
 	});

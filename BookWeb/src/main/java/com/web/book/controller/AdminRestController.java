@@ -64,7 +64,6 @@ public class AdminRestController {
 	@PostMapping("/getMonthReportWrite")
 	public Map<String, Object> getMonthReportWrite(){
 		
-		System.out.println(adminservice.getMonthReportWrite());
 		return adminservice.getMonthReportWrite();
 	}
 	
@@ -73,6 +72,27 @@ public class AdminRestController {
 	public Map<String, Object> getMonthReportViews(){
 		
 		return adminservice.getMonthReportView();
+	}
+	
+	// 取得近半年貼文撰寫數量
+	@PostMapping("/getMonthPostWrite")
+	public Map<String, Object> getMonthPostWrite(){
+		
+		return adminservice.getMonthPostWrite();
+	}
+	
+	// 取得近半年貼文點擊數量
+	@PostMapping("/getMonthPostView")
+	public Map<String, Object> getMonthPostView(){
+		
+		return adminservice.getMonthPostView();
+	}
+	
+	// 書籍類型(共九大類)分別有多少藏書的比例圖
+	@PostMapping("/getBookTpyeTable")
+	public Map<String, Object> getBookTpyeTable(){
+		
+		return adminservice.getBookTpyeTable();
 	}
 	
 	// 回傳單一圖書資訊

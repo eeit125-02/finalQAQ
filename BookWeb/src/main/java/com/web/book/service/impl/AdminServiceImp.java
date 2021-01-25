@@ -327,4 +327,147 @@ public class AdminServiceImp implements AdminService {
 		
 		return adminDao.deleteAct(actId);
 	}
+
+	// 取得每半年心得貼文數量
+	@Override
+	public Map<String, Object> getMonthPostWrite() {
+		List<Object> selectData = adminDao.getMonthPostWrite();
+		Map<String, Object> returnData = new HashMap<>();
+		
+		List<String> monthList = new ArrayList<>();
+		List<Integer> monthNumberList = new ArrayList<>();
+		for(int i= 5; 0 <= i; i-- ){
+			Object[] maxDay = (Object[])selectData.get(0);
+
+			Integer thisMonth;
+			Integer thisYear;
+
+			if( (Integer.valueOf(maxDay[1].toString()) - i) <= 0) {
+				
+				thisYear = Integer.valueOf(maxDay[0].toString()) - 1;
+				thisMonth = 12 + (Integer.valueOf( maxDay[1].toString()) - i);
+			}else {
+				
+				thisYear = Integer.valueOf(maxDay[0].toString());
+				thisMonth = Integer.valueOf(maxDay[1].toString())-i;
+			}
+			Object[] value;
+			for(int j = 5; 0 <= j; j-- ) {
+				 try {
+						value = (Object[]) selectData.get(j);
+					} catch (Exception e) {
+						value = (Object[]) selectData.get(0);
+					}
+				if( Integer.valueOf( value[0].toString()).equals(thisYear) && Integer.valueOf( value[1].toString()).equals(thisMonth)) {
+					monthList.add(value[0].toString()+ "-" + value[1].toString());
+				    monthNumberList.add(Integer.valueOf(value[2].toString()));
+				    break;
+			    }else if (j == 0){
+			    	monthList.add(thisYear + "-" + thisMonth);
+				    monthNumberList.add(0);
+				}
+			}
+		}
+		
+		returnData.put("month", monthList);
+		returnData.put("monthNumber", monthNumberList);
+		
+		return returnData;
+	}
+
+	// 取得半年貼文點擊數量
+	@Override
+	public Map<String, Object> getMonthPostView() {
+		List<Object> selectData = adminDao.getMonthPostView();
+		Map<String, Object> returnData = new HashMap<>();
+		
+		List<String> monthList = new ArrayList<>();
+		List<Integer> monthNumberList = new ArrayList<>();
+		for(int i= 5; 0 <= i; i-- ){
+			Object[] maxDay = (Object[])selectData.get(0);
+
+			Integer thisMonth;
+			Integer thisYear;
+
+			if( (Integer.valueOf(maxDay[1].toString()) - i) <= 0) {
+				
+				thisYear = Integer.valueOf(maxDay[0].toString()) - 1;
+				thisMonth = 12 + (Integer.valueOf( maxDay[1].toString()) - i);
+			}else {
+				
+				thisYear = Integer.valueOf(maxDay[0].toString());
+				thisMonth = Integer.valueOf(maxDay[1].toString())-i;
+			}
+			Object[] value;
+			for(int j = 5; 0 <= j; j-- ) {
+				try {
+					value = (Object[]) selectData.get(j);
+				} catch (Exception e) {
+					value = (Object[]) selectData.get(0);
+				}
+				
+				if( Integer.valueOf( value[0].toString()).equals(thisYear) && Integer.valueOf( value[1].toString()).equals(thisMonth)) {
+					monthList.add(value[0].toString()+ "-" + value[1].toString());
+				    monthNumberList.add(Integer.valueOf(value[2].toString()));
+				    break;
+			    }else if (j == 0){
+			    	monthList.add(thisYear + "-" + thisMonth);
+				    monthNumberList.add(0);
+				}
+			}
+		}
+		
+		returnData.put("month", monthList);
+		returnData.put("viewNumber", monthNumberList);
+		
+		return returnData;
+	}
+
+	// 書籍類型(共九大類)分別有多少藏書的比例圖
+	@Override
+	public Map<String, Object> getBookTpyeTable() {
+		List<Object> selectData = adminDao.getBookTpyeTable();
+		Map<String, Object> returnData = new HashMap<>();
+		
+		List<String> monthList = new ArrayList<>();
+		List<Integer> monthNumberList = new ArrayList<>();
+		
+		Object[] value;
+		for(int i = 0; i < selectData.size(); i++ ) {
+			
+			value = (Object[]) selectData.get(i);
+			monthList.add(value[0].toString());
+		    monthNumberList.add(Integer.valueOf(value[1].toString()));
+			   
+		    
+		}
+		returnData.put("month", monthList);
+		returnData.put("viewNumber", monthNumberList);
+		System.out.println(returnData);
+		return returnData;
+	}
+
+	@Override
+	public Map<String, Object> getRegistereMonth() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Map<String, Object> getSexRatio() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Map<String, Object> getActCategoryRatio() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Map<String, Object> getActMonthNumberOfParticipants() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
