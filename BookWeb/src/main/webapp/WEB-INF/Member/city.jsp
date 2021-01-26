@@ -22,7 +22,7 @@
 <script src="${pageContext.request.contextPath}/js/jquery.rateyo.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-
+<link rel="icon" href="${pageContext.request.contextPath}/image/logo1.ico" type="image/x-icon" />
 <style>
 #admin,#mb_modify,#mb_pwd,#mb_inf {
 	border-radius: 25px;
