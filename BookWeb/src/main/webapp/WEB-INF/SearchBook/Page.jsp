@@ -88,11 +88,7 @@ p:focus, textarea:focus {
 
 
 <script>
-	$(document).ready(function() {
-		$("#bookWebheader").load("//localhost:8080/BookWeb/header");
-		$("#bookWebFooter").load("//localhost:8080/BookWeb/footer");
-
-	});
+	
 	
 	
 // 	$(document).ready(function() {
@@ -164,6 +160,7 @@ p:focus, textarea:focus {
 						</div>
 				<button type="button" name="" class="btn btn-outline-info btn-sm"data-toggle="modal" data-target="#exampleModal" data-whatever="【書適圈】管理員">通報錯誤</button>
 				<button type="button" id="addBookReport" value="${pageresult.bk_ID}" class="btn btn-outline-info btn-sm">撰寫心得</button>
+<!-- 				<button type="submit" name="" class="btn btn-outline-info btn-sm">尋找二手書</button> -->
 				<button type="button" id="bkPrices" onclick="goTransation(${pageresult.bk_ID})" class="btn btn-outline-info btn-sm">尋找二手書</button>
 				</div>
 			</div>
@@ -310,18 +307,24 @@ p:focus, textarea:focus {
 	<!-- footer -->
 	<footer class="container py-5" id="bookWebFooter"></footer>
 	<!-- footer -->
+	
 	<script>
 	
-	$("#finish").click(function(){
-
-		document.getElementById('message-text').value = '內容簡介的部分有錯字喔～' ;
-		});
-
+	//尋找二手書連結
+	function goTransation(bk) {
+		window.location.href = "//localhost:8080/BookWeb/qaqManyPrice?ID=" + bk + "";
+	}
 	
-	$(window).ready(function loadCollectList() {
-		var i = ${pageresult.bk_ID};
-		console.log(i);
-		let editURL = "searchbook/checkcollect/"+i;
+	
+	let bk_ID = $('#addBookReport').val();
+	console.log(bk_ID);
+	$(document).ready(function() {
+		$("#bookWebheader").load("//localhost:8080/BookWeb/header");
+		$("#bookWebFooter").load("//localhost:8080/BookWeb/footer");
+
+		let i = ${pageresult.bk_ID};
+		
+		let editURL = "searchbook/checkcollect/"+bk_ID;
 		$.ajax({
 			async : false,
 			type : 'GET',
@@ -355,8 +358,13 @@ p:focus, textarea:focus {
 			}
 		});
 	})
+	</script>
+	<script>
 	
-	
+	$("#finish").click(function(){
+
+		document.getElementById('message-text').value = '內容簡介的部分有錯字喔～' ;
+		});
 	
 	
 		$('#collect').click(function collect() {
@@ -451,11 +459,6 @@ p:focus, textarea:focus {
 			})
 			
 		});
-		
-//尋找二手書連結
-		function goTransation(bk) {
-			window.location.href = "//localhost:8080/BookWeb/qaqManyPrice?ID=" + bk + "";
-		}
 	</script>
 
 </body>
