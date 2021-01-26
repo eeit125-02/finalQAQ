@@ -32,7 +32,7 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 fieldset {
 	border-radius: 25px;
 	padding: 20px;
-	background-color: #F3F3FA;
+	background-color:#f3f3f4;
 	margin:auto;
 	width: 400px;
 	text-align:center;

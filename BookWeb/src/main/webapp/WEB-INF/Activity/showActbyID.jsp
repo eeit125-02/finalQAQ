@@ -75,7 +75,7 @@ text-align:center;
 			</c:if>
 			<c:if test='${not empty mbactlist}'>
 
-				<table border='1' id="myTable" class="display" width="1200px">
+				<table border='1' id="myTable" class="display"">
 					<thead>
 					<tr>
 						<th>會員ID</th>				
@@ -95,6 +95,7 @@ text-align:center;
 						<th >刪除</th>
 					</tr>
 					</thead>
+
 
 					<c:forEach var='ajb' varStatus='vs' items='${mbactlist}'>
 

@@ -44,7 +44,7 @@ text-align: center;
 fieldset {
 	border-radius: 25px;
 	padding: 50px;
-	background-color: #F3F3FA;
+	background-color:#f3f3f4;
 	width: 700px;
 	margin:20px;
 }

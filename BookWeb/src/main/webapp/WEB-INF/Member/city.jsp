@@ -36,18 +36,22 @@ p {
 }
 
 .tr1{
-background-color:#68b0ab
+background-color:#f8ad9d
 
 }
 
 .tr2{
-background-color:#e0ece4
+background-color:#FFF3EE
+}
+
+td{
+background-color:#b2f7ef
 }
 
   #city {  
   	border-radius: 25px;  
   	padding: 20px; 
-  	background-color: 	#F0F0F0; 
+  	background-color: #F0F0F0; 
   	height:auto; 
 	width: 200px; 
  	float:left;
@@ -111,6 +115,8 @@ legend {
   background-color: #3e8e41;
 }
 
+
+
 </style>
 </head>
 <body>
@@ -119,46 +125,6 @@ legend {
 <br>
 	<!-- header -->
 	<div class="container media" >
-	
-<!-- 	<div id="city" > -->
-	
-<!-- 	<div class="dropdown">	 -->
-<!-- 		<button class="btn btn-outline-secondary dropbtn" >會員中心</button> -->
-<!-- 				<div class="dropdown-content"> -->
-<!-- 				<button  id="admin1" name="admin" class="btn btn-outline-secondary">會員資訊</button>				 -->
-<!-- 				<button  id="inf" name="mb_inf" class="btn btn-outline-secondary">會員資訊</button>				 -->
-<!-- 				<button  id="third" name="third" class="btn btn-outline-secondary">會員資訊</button>				 -->
-<!-- 				<button  id="Modify" name="Modify" class="btn btn-outline-secondary">會員修改</button>				 -->
-<!-- 				<button  id="pwdModify" name="pwdModify" class="btn btn-outline-secondary">密碼修改</button> -->
-<!-- 				</div> -->
-<!-- 				</div> -->
-<%-- 				<form name=a3 class=a3 action="<c:url value='/collectlist' />" method="get"> --%>
-<!-- 				<div> -->
-<!-- 				<button type="submit" name="list" id="bookEdit" class="btn btn-outline-secondary">收藏清單</button> -->
-<!-- 				</div> -->
-<!-- 				</form> -->
-<%-- 				<form name=a3 class=a3 action="<c:url value='/myStore' />" method="get"> --%>
-<!-- 				<div> -->
-<!-- 				<button type="submit" name="sell" id="sellEdit" class="btn btn-outline-secondary">我的賣場</button> -->
-<!-- 				</div> -->
-<!-- 				</form>	 -->
-<%-- 				<form name=a3 class=a3 action="<c:url value='/showJoinbyID' />" method="get"> --%>
-<!-- 				<div> -->
-<!-- 				<button type="submit" name="getjoinrecords" id="joinEdit" class="btn btn-outline-secondary">報名紀錄</button> -->
-<!-- 				</div> -->
-<!-- 				</form> -->
-<%-- 				<form name=a3 class=a3 action="<c:url value='/showActbyID' />" method="get"> --%>
-<!-- 				<div> -->
-<!-- 				<button type="submit" name="getactrecords" id="actEdit" class="btn btn-outline-secondary">活動紀錄</button> -->
-<!-- 				</div> -->
-<!-- 				</form> -->
-<!-- 				<div> -->
-<!-- 				<button type="button" id="editBookReport" name="getjoinrecords" class="btn btn-outline-secondary">讀書心得</button> -->
-<!-- 				</div> -->
-<!-- 				<div> -->
-<!-- 				<button type="button" id="editDiscussion" name="getjoinrecords" class="btn btn-outline-secondary">討論管理</button> -->
-<!-- 				</div> -->
-<!-- 	</div> -->
 	
 
 <!-- sidebar area -->
@@ -210,35 +176,6 @@ legend {
 					<a class="list-group-item list-group-item-action"
 						data-toggle="list" href="#" id="editDiscussion"
 						role="tab">討論管理</a>		
-
-
-
-<%-- 					<form name=a3 class=a3 action="<c:url value='/collectlist' />" method="get"> --%>
-<!-- 					<div> -->
-<!-- 					<button type="submit" name="list" id="bookEdit" class="list-group-item list-group-item-action">收藏清單</button> -->
-<!-- 					</div> -->
-<!-- 					</form>	 -->
-<%-- 					<form name=a3 class=a3 action="<c:url value='/myStore' />" method="get"> --%>
-<!-- 					<div> -->
-<!-- 					<button type="submit" name="sell" id="sellEdit" class="list-group-item list-group-item-action">我的賣場</button> -->
-<!-- 					</div> -->
-<!-- 					</form>	 -->
-<%-- 					<form name=a3 class=a3 action="<c:url value='/showJoinbyID' />" method="get"> --%>
-<!-- 					<div> -->
-<!-- 					<button type="submit" name="getjoinrecords" id="joinEdit" class="list-group-item list-group-item-action">報名紀錄</button> -->
-<!-- 					</div> -->
-<!-- 					</form> -->
-<%-- 					<form name=a3 class=a3 action="<c:url value='/showActbyID' />" method="get"> --%>
-<!-- 					<div> -->
-<!-- 					<button type="submit" name="getactrecords" id="actEdit" class="list-group-item list-group-item-action">活動紀錄</button> -->
-<!-- 					</div> -->
-<!-- 					</form> -->
-<!-- 					<div> -->
-<!-- 					<button type="button" id="editBookReport" name="getjoinrecords" class="list-group-item list-group-item-action">讀書心得</button> -->
-<!-- 					</div> -->
-<!-- 					<div> -->
-<!-- 					<button type="button" id="editDiscussion" name="getjoinrecords" class="list-group-item list-group-item-action">討論管理</button> -->
-<!-- 					</div> -->
 						
 					</div>
 					</div>

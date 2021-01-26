@@ -62,9 +62,9 @@ text-align:center;
 	<!-- header -->
 
 	<!-- body -->
-	<div class='center'>
+	<div class="container media">
 		<br>
-		<br>
+
 
 
 
