@@ -81,7 +81,7 @@ text-align:center;
 			</c:if>
 			<c:if test='${not empty mbjoinlist}'>
 
-				<table border='1' id="myTable" class="display">
+				<table border='1' id="myTable" class="display" width="1200px">
 				<thead>
 					<tr>
 						<th>會員ID</th>				
@@ -90,8 +90,7 @@ text-align:center;
 						<th>會員名稱</th>
 						<th>email</th>
 						<th>聯絡電話</th>
-						<th>修改</th>
-						<th>刪除</th>
+						<th>操作</th>
 					</tr>
 					</thead>
 
@@ -106,8 +105,10 @@ text-align:center;
 							<td>${ajb.member.mb_Name}</td>
 							<td>${ajb.member.mb_Mail}</td>
 							<td>${ajb.member.mb_Tel}</td>
-							<td><a href="<c:url value='/showJoinUpdateForm'/>?join_ID=${ajb.join_ID}">修改</a>
-							<td><a href="<c:url value='deleteJoin'/>?join_ID=${ajb.join_ID}&act_ID=${ajb.act.act_ID}">刪除</a>			
+							<td>
+							<a href="<c:url value='/showJoinUpdateForm'/>?join_ID=${ajb.join_ID}"><button class="btn btn-outline-info">修改</a></button>
+							<a href="<c:url value='deleteJoin'/>?join_ID=${ajb.join_ID}&act_ID=${ajb.act.act_ID}"><button class="btn btn-outline-info">刪除</a></button>
+							</td>			
 						</tr>
 						</tbody>
 					</c:forEach>

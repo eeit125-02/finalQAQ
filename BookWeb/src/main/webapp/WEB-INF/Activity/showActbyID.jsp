@@ -72,6 +72,7 @@ text-align:center;
 		<div style='text-align:center'>
 		<br>
 			<h1>${aib.mb_Name}的活動創建紀錄</h1>
+			<hr><br>
 			<c:if test='${empty mbactlist}'>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
 			查無您的活動創建紀錄<br>
 			</c:if>
@@ -93,7 +94,7 @@ text-align:center;
 						<th>活動場所</th>
 						<th>活動名額</th>
 						<th>報名人數</th>
-						<th >修改</th>
+						<th >操作</th>
 <!-- 						<th >刪除</th> -->
 					</tr>
 					</thead>
@@ -116,8 +117,11 @@ text-align:center;
 							<td>${ajb.act_Place}</td>
 							<td>${ajb.act_Pax}</td>
 							<td>${ajb.act_Differentpax}</td>
-							<td><a href="<c:url value='/showUpdateForm'/>?act_ID=${ajb.act_ID}">修改</a></td>
-<%-- 							<td><a  href="<c:url value='deleteAct1'/>?mb_ID=${aib.mb_ID}&act_ID=${ajb.act_ID}">刪除</a></td> --%>
+							<td>
+							<button type="button" class="btn btn-outline-primary" value = "brID">查看</button>
+							<a href="<c:url value='/showUpdateForm'/>?act_ID=${ajb.act_ID}"><button class="btn btn-outline-info">修改</button></a>
+							<a href="<c:url value='deleteAct1'/>?mb_ID=${aib.mb_ID}&act_ID=${ajb.act_ID}"><button class="btn btn-outline-info">刪除</button></a>
+							</td>
 						</tr>
 						</tbody>
 					</c:forEach>

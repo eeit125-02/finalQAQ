@@ -83,7 +83,7 @@
 
 		<p>&nbsp;</p>
 		<hr>
-		<div style="text-align:center">
+		<div >
 			<H1>新增活動資料</H1>
 			<form:form method="POST" modelAttribute="actbean" id="aaa"
 				enctype="multipart/form-data">
@@ -182,7 +182,7 @@
                         
                         <div class="form-row">
                         <div class="form-group input_fields_wrap">
-                        <div class="btn-group-toggle" data-toggle="buttons">
+                        <div class="btn-group-toggle" data-toggle="buttons" style="text-align:center">
 						    <label >活動標籤:</label><br>
 							<p class="btn btn-info"style="margin:3px">
 								<form:checkbox path="act_Tag" name="b" value="戶外體驗" /> 戶外體驗
@@ -307,6 +307,7 @@ $('#act_Rule').val('歡迎來到哈利波特讀書會!自2020年6月23日起,一
 $('#act_Guest').val('林傳瓏') ;
 $('#act_Pax').val('50') ;
 $('#act_Place').val('現場') ;
+$('#act_Tag').val('電影')
 CKEDITOR.instances["act_Intro"].setData(
 		'<p>為了慶祝全系列第一本書-哈利波特:神祕的魔法石出版20週年,</p>'+ 
 		'<p>Pottermore聯合了英美兩地的哈利波特系列小說出版社,</p>'+

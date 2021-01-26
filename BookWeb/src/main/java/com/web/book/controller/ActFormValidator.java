@@ -34,7 +34,7 @@ public class ActFormValidator implements Validator {
 //		}	
 		System.out.println("515156++++++++++++++++++");
 		if (actbean.getact_Name() != null && actbean.getact_Name().contains(" ")) {
-			errors.rejectValue("act_Name", " ", "請填寫活動名稱");
+			errors.rejectValue("act_Name", "請填寫活動名稱");
 		}
 
 		if (actbean.getact_Theme().contentEquals("NONE")) {
