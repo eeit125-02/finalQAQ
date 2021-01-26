@@ -41,12 +41,7 @@ text-align: center;
 }
 </style>
 
-<script>
-	$(document).ready(function() {
-		$("#bookWebheader").load("//localhost:8080/BookWeb/header");
-		$("#bookWebFooter").load("//localhost:8080/BookWeb/footer");
-	});
-</script>
+
 <title>書適圈</title>
 </head>
 <body>
