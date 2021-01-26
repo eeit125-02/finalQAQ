@@ -40,11 +40,11 @@
 
 th{
 text-align:center;
-width:100px;
+
 }
 
 td{
-width:20px;
+width:100px;
 border:solid 1px;
 text-align:center;
 }
@@ -67,7 +67,7 @@ text-align:center;
 
 		<p>&nbsp;</p>
 		<hr>
-		<div class='center'>
+		<div style='text-align:center'>
 		<br>
 			<h1>${aib.mb_Name}的活動創建紀錄</h1>
 			<c:if test='${empty mbactlist}'>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   

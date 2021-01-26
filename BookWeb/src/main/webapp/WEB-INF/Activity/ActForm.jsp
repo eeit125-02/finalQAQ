@@ -79,7 +79,7 @@
 
 		<p>&nbsp;</p>
 		<hr>
-		<div class="center">
+		<div style="text-align:center">
 			<H1>新增活動資料</H1>
 			<form:form method="POST" modelAttribute="actbean"
 				enctype="multipart/form-data">

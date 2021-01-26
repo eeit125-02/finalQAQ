@@ -70,9 +70,9 @@
 			<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 				<button id="lazy_command" class="btn btn-outline-info" style="border-radius:50%;margin-bottom:10px">command_1</button><br>
 				<button id="lazy_command2" class="btn btn-outline-info" style="border-radius:50%;margin-bottom:10px">command_2</button><br>
-				<button id="lazy_command3" class="btn btn-outline-info" style="border-radius:50%;margin-bottom:10px">command_3</button><br>
+				
 				<button id="lazy_nested_command1" class="btn btn-outline-info" style="border-radius:50%;margin-bottom:10px">nested_command_1</button>
-				<button id="lazy_nested_command2" class="btn btn-outline-info" style="border-radius:50%;">nested_command_2</button>
+				
 			</div>
 
 			<div class="col-10" style='text-align: center;'>
@@ -102,7 +102,7 @@
 
 							<div style="background-color: #C4E1FF; margin: 10px; padding: 5px; border-radius: 10px;">
 
-								<button class="btn btn-link btn-sm float-right" type="submit"
+								<button class="btn btn-link btn-sm float-right nc_button" type="submit"
 									data-toggle="collapse" 
 									data-target="#nested_command${stored_command.command_id}">
 									回覆
@@ -163,15 +163,12 @@
 					$(document).on("click", '#lazy_command2', function(){
 						$('#command_input').val('格列佛遊記......');
 					})
-					$(document).on("click", '#lazy_command3', function(){
-						$('#command_input').val('綠野仙蹤?哈利波特?');
-					})
 					
 					$(document).on("click", '#lazy_nested_command1', function(){
 						$('.nc_input').val('謝謝喔...有沒有比較適合大人讀的?');
 					})
-					$(document).on("click", '#lazy_nested_command2', function(){
-						$('.nc_input').val('這個電影我有看過，還不錯');
+					$(document).on("click", '.nc_button', function(){
+						$('.nc_input').val('');
 					})
 					
 						$(document).on("click", '.nestcommand', function(){
