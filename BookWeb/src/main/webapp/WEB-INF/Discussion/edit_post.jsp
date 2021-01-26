@@ -107,7 +107,7 @@ response.setDateHeader("Expires", 0);
 						<script>
 							CKEDITOR.replace('edit_post_content');
 							$('#lazy_input').click(function(){
-								$('#edit_post_title').val('[已修改]請幫忙推薦奇幻小說');
+								$('#edit_post_title').val('請幫忙推薦奇幻小說');
 							})
 						</script>
 						
