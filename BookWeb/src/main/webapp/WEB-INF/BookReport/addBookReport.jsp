@@ -175,9 +175,9 @@
 		});
 
 		$('#insertData').click(function(){
-			$('#brTitle').val('這本書誰十分好看推快速輸入')
+			$('#brTitle').val('這本書十分好看推快速輸入')
 			
-			editor.setData( "這本書誰十分好看推，在這裡推薦給各位" )
+			editor.setData( "這本書十分好看推，在這裡推薦給各位" )
 		})
 		
 	</script>

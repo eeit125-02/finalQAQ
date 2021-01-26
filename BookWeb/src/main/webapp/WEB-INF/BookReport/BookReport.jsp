@@ -175,7 +175,7 @@
 								});
 							}else{
 								swal({
-									  title: "已加撰寫過留言",
+									  title: "已撰寫過留言",
 									  icon: "error",
 									  button: "ok",
 								});

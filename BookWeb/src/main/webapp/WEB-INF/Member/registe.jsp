@@ -29,6 +29,8 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
 	crossorigin="anonymous">
 <link rel="icon" href="${pageContext.request.contextPath}/image/logo1.ico" type="image/x-icon" />
+<link rel="stylesheet" type="text/css" href="dist/sweetalert.css">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <style>
 /* @import url(https://fonts.googleapis.com/earlyaccess/cwtexyen.css); */
 
@@ -330,21 +332,24 @@ form {
 			var b = $('#birthday').val();
 			var mail = $('#mail').val();
 			var name = $('#name1').val();
-			console.log(name)
-			console.log(mail)
-			console.log(mb_Account)
-			console.log(pwd)
-			console.log(a1)
-			console.log(a2)
-			console.log(a3)
-			console.log(a4)
-			console.log(b)
-			if (name == "" || mail == "" || mb_Account == "" || pwd =="" || a1 != true || a2 != true || a3 != true || a4 != true || b == "") {
-				alert("有資料錯誤");
-			} else {
-				alert("請至信箱點擊連結後，才完成註冊。")
-				$('form').submit();
-			}
+			Swal.fire({
+				  title: '是否提交?',
+				  icon: 'warning',
+				  showCancelButton: true,
+				  confirmButtonColor: '#3085d6',
+				  cancelButtonColor: '#d33',
+				  confirmButtonText: 'Yes'
+				}).then((result) => {
+				  if (result.isConfirmed) {
+					  if (name == "" || mail == "" || mb_Account == "" || pwd =="" || a1 != true || a2 != true || a3 != true || a4 != true || b == "") {
+							alert("有資料錯誤");
+						} else {
+							alert("請至信箱點擊連結後，才完成註冊。")
+							$('form').submit();
+						}
+				  }
+				})
+			
 		})
 	</script>
 </body>

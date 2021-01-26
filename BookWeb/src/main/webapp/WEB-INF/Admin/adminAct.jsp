@@ -149,7 +149,7 @@
 			title: {
 				display: true,
 				fontSize: 20,
-				text: ''
+				text: '活動主題比例圖'
 			}
 		}
 	});

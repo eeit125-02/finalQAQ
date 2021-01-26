@@ -23,6 +23,8 @@
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.23/datatables.min.css"/>
 <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.23/datatables.min.js"></script>
 <link rel="icon" href="${pageContext.request.contextPath}/image/logo1.ico" type="image/x-icon" />
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+<link rel="icon" href="${pageContext.request.contextPath}/image/logo1.ico" type="image/x-icon" />
 <style>
 .bd-placeholder-img {
 	font-size: 1. 125rem;

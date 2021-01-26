@@ -48,7 +48,7 @@
 		<img style="width:300px" src="${pageContext.request.contextPath}/image/error404.png"/>
 		
 		<br><br>
-		<input class="btn btn-outline-primary" name="Submit" type="button" id="Submit" onClick="javascript:history.back(1)" value="回一上頁" />
+		<input class="btn btn-outline-primary" name="Submit" type="button" id="Submit" onClick="javascript:history.back(1)" value="回上一頁" />
 	</div>
 	<!-- body -->
 	</div>

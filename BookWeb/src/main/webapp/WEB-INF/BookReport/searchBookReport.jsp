@@ -124,10 +124,23 @@
 
 				<!-- Side Widget -->
 				<div class="card my-4">
-					<h5 class="card-header">Side Widget</h5>
-					<div class="card-body">You can put anything you want inside
-						of these side widgets. They are easy to use, and feature the new
-						Bootstrap 4 card containers!</div>
+					<h5 class="card-header">熱門標籤</h5>
+					<div class="card-body">
+						<button type="button" class="btn btn-primary mb-2">詩</button>
+						<button type="button" class="btn btn-secondary mb-2">小說</button>
+						<button type="button" class="btn btn-success mb-2">理財</button>
+						<button type="button" class="btn btn-danger mb-2">工具書</button>
+						<button type="button" class="btn btn-warning mb-2">考用</button>
+						<button type="button" class="btn btn-info mb-2 ">醫療</button>
+						<button type="button" class="btn btn-light mb-2">翻譯文學</button>
+						<button type="button" class="btn btn-dark mb-2">療癒小說</button>
+						<button type="button" class="btn btn-primary mb-2">散文</button>
+						<button type="button" class="btn btn-secondary mb-2">投資</button>
+						<button type="button" class="btn btn-success mb-2">學習</button>
+						<button type="button" class="btn btn-danger mb-2">科幻</button>
+						<button type="button" class="btn btn-warning mb-2">台灣旅遊</button>
+						<button type="button" class="btn btn-info mb-2">管理學</button>
+					</div>
 				</div>
 
 			</div>

@@ -7,6 +7,8 @@
 <head>
 <meta charset="UTF-8">
 
+<script src="dist/sweetalert.min.js"></script>
+
 
 <link rel='stylesheet' href='${pageContext.request.contextPath}/css/style.css' />
 
@@ -29,7 +31,9 @@
 	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
 	crossorigin="anonymous">
 <link rel="icon" href="${pageContext.request.contextPath}/image/logo1.ico" type="image/x-icon" />
-
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<link rel="stylesheet" type="text/css" href="dist/sweetalert.css">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <script>
 	$(document).ready(function() {
 		$("#bookWebheader").load("//localhost:8080/BookWeb/header");
@@ -81,7 +85,7 @@
 		<hr>
 		<div style="text-align:center">
 			<H1>新增活動資料</H1>
-			<form:form method="POST" modelAttribute="actbean"
+			<form:form method="POST" modelAttribute="actbean" id="aaa"
 				enctype="multipart/form-data">
 				<hr>
 				<br>
@@ -268,7 +272,7 @@
 						  
 						  
 						<hr>
-						<button type="submit" class="btn btn-primary">提交</button>
+						<button id="send" type="button" class="btn btn-primary">提交</button>
 						<button type="reset" class="btn btn-primary">還原</button>
 						<button id="finish" type="button"  class="btn btn-primary">一鍵完成</button>
 					</form>
@@ -550,6 +554,23 @@ CKEDITOR.instances["act_Intro"].setData(
 
 		      
 		});
+</script>
+
+<script>
+$("#send").click(function(){
+	Swal.fire({
+		  title: '是否提交?',
+		  icon: 'warning',
+		  showCancelButton: true,
+		  confirmButtonColor: '#3085d6',
+		  cancelButtonColor: '#d33',
+		  confirmButtonText: 'Yes'
+		}).then((result) => {
+		  if (result.isConfirmed) {
+			  $('#aaa').submit();
+		  }
+		})
+		})
 </script>
 
 

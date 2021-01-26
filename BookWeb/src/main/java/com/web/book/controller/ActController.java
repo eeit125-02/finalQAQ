@@ -180,6 +180,7 @@ public class ActController {
 	// 刪除活動後redirect所有活動紀錄
 		@GetMapping("/deleteAct1")
 		public String deleteAct1(@RequestParam("act_ID") Integer act_ID) {
+			System.out.println("123445");
 			actService.deleteAct(act_ID);
 			return "redirect:/showActbyID";
 		}

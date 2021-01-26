@@ -401,7 +401,7 @@ response.setDateHeader("Expires", 0);
 									CKEDITOR.replace('post_content');
 
 									$('#lazy_input').click(function(){
-										$('#post_title').val('請幫忙推薦奇幻小說');
+										$('#post_title').val('請幫忙推薦奇幻小縮縮');
 										CKEDITOR.instances["post_content"].setData(
 												'<p>如題</p>'+ 
 												'<p>這應該算是異世界類型的小說吧...</p>'+
@@ -826,7 +826,7 @@ response.setDateHeader("Expires", 0);
 								
 								<script>
 								$(document).on("click", '#lazy_manager_search', function(){
-									$('#keyword_manager').val('修改');
+									$('#keyword_manager').val('小說');
 								})
 								</script>
 								

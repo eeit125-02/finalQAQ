@@ -6,6 +6,10 @@
 <!DOCTYPE HTML>
 <html>
 <head>
+
+<script src="dist/sweetalert.min.js"></script>
+<link rel="stylesheet" type="text/css" href="dist/sweetalert.css">
+
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
@@ -19,6 +23,8 @@
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
 	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
 	crossorigin="anonymous">
+<link rel="icon" href="${pageContext.request.contextPath}/image/logo1.ico" type="image/x-icon" />
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <link rel="icon" href="${pageContext.request.contextPath}/image/logo1.ico" type="image/x-icon" />
 <style>
 .bd-placeholder-img {
@@ -44,21 +50,29 @@
 <meta charset="UTF-8">
 <title>書適圈</title>
 <script type="text/javascript">
-	function confirmDelete(act_Name) {
-		var result = confirm("確定刪除此筆報名記錄(帳號:" + act_Name + ")?");
-		if (result) {
-			document.forms[0].finalDecision.value = "DELETE";
-			return true;
-		}
-		return false;
-	}
+// 	function confirmDelete(act_Name) {
+// 		var result = confirm("確定刪除此筆報名記錄(帳號:" + act_Name + ")?");
+// 		if (result) {
+// 			document.forms[0].finalDecision.value = "DELETE";
+// 			return true;
+// 		}
+// 		return false;
+// 	}
+
+
 	function confirmUpdate(act_Name) {
-		var result = confirm("確定送出此筆報名記錄(帳號:" + act_Name + ")?");
-		if (result) {
-			document.forms[0].finalDecision.value = "UPDATE";
-			return true;
-		}
-		return false;
+			Swal.fire({
+				  title:"確定送出此筆報名記錄(帳號:" + act_Name + ")?",
+				  icon: 'warning',
+				  showCancelButton: true,
+				  confirmButtonColor: '#3085d6',
+				  cancelButtonColor: '#d33',
+				  confirmButtonText: 'Yes'
+				}).then((result) => {
+				  if (result.isConfirmed) {
+					  $('#aaa').submit();
+				  }
+				})
 	}
 </script>
 </head>
@@ -79,7 +93,7 @@
 		<H1 class='center'>更新報名資料</H1>
 		<hr>
 		<p>
-			<form:form method="POST" modelAttribute="ajb">
+			<form:form method="POST" modelAttribute="ajb" id="aaa">
 
 				<input type="hidden" name="join_ID" value="${join_ID}"/>
 <%-- 				<form:input type="hidden" path="member.mb_Account" value="${loginUser.getMb_Account()}"/> --%>
@@ -116,8 +130,8 @@
 					<TR>
 						<TD colspan="2" align="center">
 						<input type="hidden" name="act_ID" value="${ajb.act.act_ID}">
-						<input type="submit" value="更新" name='updateBtn'onclick="return confirmUpdate('${join_ID}');"/> 
-						<input type="submit" value="刪除" name='deleteBtn'onclick="return confirmDelete('${join_ID}');"/>
+						<input type="button" value="更新" name='updateBtn'onclick="return confirmUpdate('${join_ID}');"/> 
+<%-- 						<input type="submit" value="刪除" name='deleteBtn'onclick="return confirmDelete('${join_ID}');"/> --%>
 						</TD>
 					</TR>
 				</Table>
