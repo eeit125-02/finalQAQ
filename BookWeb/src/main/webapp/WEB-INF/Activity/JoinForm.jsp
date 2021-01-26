@@ -70,7 +70,7 @@
 
 		<p>&nbsp;</p>
 		<hr>
-		<div class="center">
+		<div style="text-align:center">
 			<H1>新增報名資料</H1>
 			<form:form method="POST" modelAttribute="ajb" enctype="multipart/form-data" id="showAlert">
 			<hr>

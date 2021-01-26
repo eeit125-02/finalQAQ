@@ -94,6 +94,7 @@ text-align: center;
 <!-- 		</div> -->
 <!-- 		<hr> -->
 <tbody>
+    <tr>
 		<c:forEach items="${bookPrices}" var="v" varStatus="status">
 		<form action="<c:url value="/directBuy"/>" method="post">
 
@@ -102,7 +103,6 @@ text-align: center;
 				<input type="hidden" name="bs_Price" value="${v.bs_Price}">
 				<input type="hidden" name="bs_ID" value="${v.bs_ID}">
 				<input type="hidden" name="bks_ID" value="${v.bks_ID}">
-    <tr>
 <%--       <td scope="row">${status.index + 1}</td> --%>
 <!--       <th scope="row">1</th> -->
       <th scope="row"><c:out value="${status.index+1}"/></th>

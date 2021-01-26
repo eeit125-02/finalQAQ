@@ -10,7 +10,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "ACT_Join1")
+@Table(name = "Join_Records")
 public class ActJoinBean {
 
 	

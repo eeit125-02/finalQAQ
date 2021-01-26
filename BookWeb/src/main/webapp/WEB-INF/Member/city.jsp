@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Document</title>
+<title>書適圈</title>
 
 <!-- sidemenu -->
 
@@ -349,11 +349,12 @@ legend {
 			$('#bookEdit').removeAttr("type").attr("type", "button");
 			$('#sellEdit').html('賣場管理')
 			$('#sellEdit').removeAttr("type").attr("type", "button");
-			$('#joinEdit').html('報名管理')
-			$('#joinEdit').removeAttr("type").attr("type", "button");
+// 			$('#joinEdit').html('報名管理')
+// 			$('#joinEdit').removeAttr("type").attr("type", "button");
 			$('#actEdit').html('活動管理')
 			$('#actEdit').removeAttr("type").attr("type", "button");
 			$('#editBookReport').html('心得管理')
+			$('#join').hide();
 			$("#pwdModify").hide();
 			$("#Modify").hide();
 			$("#inf").hide();

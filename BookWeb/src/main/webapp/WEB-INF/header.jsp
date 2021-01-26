@@ -64,9 +64,7 @@ color:white
 
 <!--     <li class="menu-item" style="padding-right:30px;margin-right:50px"><a class="blog-header-logo text-dark" href="//localhost:8080/BookWeb"> -->
 
-			<img alt="LOGO"
-			src="${pageContext.request.contextPath}/image/logo1.png"
-			id="Img/logo" height="75px">
+		<img alt="LOGO" src="${pageContext.request.contextPath}/image/logo1.png" id="Img/logo" height="75px">
 		</a></li>
     <li class="menu-item" style="padding:35px"><a href='<c:url value="/SearchBook/Search"/>' style="font-size:20px;font-family: 'Noto Serif TC';color:#8E8E8E;font-weight:bold">圖書漂流瓶</a></li>
     <li class="menu-item" style="padding:35px"><a href='<c:url value="/qaqTest"/>' style="font-size:20px;font-family: 'Noto Serif TC';color:#8E8E8E;font-weight:bold">二手書圖</a></li>
