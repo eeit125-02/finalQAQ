@@ -55,9 +55,16 @@
 <style>
 p {
 	color: #293241;
-	font-size: 15px;
 	font-family: 'Noto Serif TC', serif;
-	text-align: center
+	height:45px;
+	vertical-align:middle;
+
+	
+/* 	text-align: center */
+}
+
+.caption{
+width:345px
 }
 
 /* .menu { */
@@ -117,8 +124,32 @@ font-weight:bold;
 align:center
 }
 
-.line{
-align:center
+
+/* .line{ */
+/* align:center */
+/* } */
+
+.searchbar{
+background-image: url('${pageContext.request.contextPath}/image/m1.jpg')
+
+
+}
+
+.btn-group .button {
+  background-color: #4CAF50; 
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  float: left;
+}
+
+.btn-group .button:hover {
+  background-color: #3e8e41;
 }
 
 </style>
@@ -127,7 +158,7 @@ align:center
 <body>
 <c:url value="" />
 	<!-- header -->
-	<header class=" blog-header py-3" id="bookWebheader"></header>
+	<header class=" blog-header" id="bookWebheader"></header>
 	<!-- header -->
 
 	<div class="container media" >
@@ -138,27 +169,26 @@ align:center
 
 
 				<main>
+				<br>
+				<nav class="navbar navbar-expand-lg navbar-light bg-light searchbar btn-group" style="height:80px">
 				
-				<nav class="navbar navbar-expand-lg navbar-light bg-light">
 				  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
-				    <span class="navbar-toggler-icon"></span>
+				    <span class="navbar-toggler-icon"  style="align:center"></span>
 				  </button>
+				  
 				  <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
 				    <form action="showCreateForm" id="test">
-					<button type="button" class="btn btn-outline-info" id="create">新增活動</button>
+					<button type="button" class="btn btn-info button" id="create" style="background-color:#eef4ed;color:#ADADAD;font-weight:bold">新增活動</button>
 				    </form>
 				    
-				    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-				      <li class="nav-item active">
-				      <button id="finish1" type="button"  class="btn btn-outline-info">一鍵輸入</button>
-<%-- 				        <a href="<c:url value='/showJoins'/>"><button class="btn btn-outline-info">查看報名紀錄</button></a> --%>
+				    <ul class="navbar-nav mr-auto ">
+				      <li class="nav-item active" >
+				      <button id="finish1" type="button"  class="btn btn-info button" style="background-color:#eef4ed;color:#ADADAD;font-weight:bold">一鍵輸入</button>
 				      </li>
-<!-- 				      <li class="nav-item"> -->
-<%-- 				        <a href="<c:url value='/showActbyID'/>"><button class="btn btn-outline-info">查看會員報名紀錄</button></a> --%>
-<!-- 				      </li> -->
+
 				    </ul>	    			
-				      <input class="form-control mr-sm-2" id="enter1" type="search" placeholder="請輸入活動關鍵字" aria-label="Search" style="width:300px">
-				      <input id="search" class="btn btn-outline-secondary my-2 my-sm-0" type="button" value="Search">
+				      <input class="form-control " id="enter1" type="search" placeholder="請輸入活動關鍵字" aria-label="Search" style="width:300px;height:54px">
+				      <input id="search" class="btn btn-info button" type="button" value="Search" style="height:54px;color:white;border:none;background-color:#a1cca5;font-weight:bold;font-size:17px">
 				  </div>
 				</nav>
 				
@@ -179,22 +209,18 @@ $('#enter1').val('未來') ;
 					<div>
 						<div class="container" style="text-align: center">
 							<h1 >活動清單</h1>
-<!-- 							<div class="line-it-button" data-lang="zh_Hant" data-type="share-a" data-ver="3" data-url="http://localhost:8080/BookWeb/toLogin" data-color="default" data-size="large" data-count="true" style="display: none;"></div> -->
-<!--  							<script src="https://www.line-website.com/social-plugins/js/thirdparty/loader.min.js" async="async" defer="defer"></script> -->
 						</div>
 					</div>
 				</section>
-				<hr style="height: 1px; border: none; color: #333; background-color: #333;">
+				<hr style="height: 1px; border: none; color: #333; background-color: #333;" >
 				<section class="container" style="width:1200px">
-					<div class="row" id="change">
+					<div class="row" id="change" >
 						<c:forEach var='act' items='${allacts}'>	
-							<div class="col-6,col-md-3" style="width: 380px; height: 800px">
-								<div class="thumbnail " style="width: 350px; height: 800px">
-									<p>
-										<b style='font-size: 25px;'>${act.act_Name}</b>
-									</p>
+							<div class="col-6,col-md-3" style="width: 380px; height: 800px;" >
+								<div class="thumbnail " style="width: 345px; height: 800px;">
 									<div align="center">
-									<input type ="image" src="${act.act_Image}" data-toggle="modal" data-target="#exampleModalCenter${act.act_Name}" style="width: 300px; height: 380px; align:center" class="center"></div>
+									<p><b style="font-size:25px;align:center">${act.act_Name}</b></p>
+									<input type ="image" src="${act.act_Image}" data-toggle="modal" data-target="#exampleModalCenter${act.act_Name}" style="width: 345px; height: 420px; align:center" class="center"></div>
 										<div class="modal fade" id="exampleModalCenter${act.act_Name}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   										<div class="modal-dialog modal-dialog-centered" role="document">
    										 <div class="modal-content" style="width:800px; height:900px">
@@ -207,39 +233,40 @@ $('#enter1').val('未來') ;
      											     <span aria-hidden="true">&times;</span>
      												   </button>
      														 </div>
+     														 
 <!--      									//彈跳視窗內容 -->
      										 <div class="modal-body" style="width:800px; height:900px">
      										 <div class="container">
 											 <div class="media">
-     										 <input type ="image" src="${act.act_Image}"  style="width: 300px; height: 380px; align:center">
+     										 <input type ="image" src="${act.act_Image}"  style="width: 350px; height: 390px; align:center">
      										 
      										 <div class="media-body ml-5">
      										 
      										 <form  class="col-ml-4">
      										 <br>
 											 <div class="form-group">
-											 <div>活動標籤:<br><a href="#" class="btn btn-info" style="font-size:1em">${act.act_Tag}</a> 
+											 <div style="font-size:20px">活動標籤:<br><a href="#" class="btn btn-info" style="font-size:1em">${act.act_Tag}</a> 
 											</div>
 											 </div>
 											 
 											 <div class="form-group">
-										     <div><img src=${pageContext.request.contextPath}/image/date.png style="width:22px;height:22px">${act.act_Date}</div>
+										     <div style="font-size:20px"><img src=${pageContext.request.contextPath}/image/date.png style="width:22px;height:22px">${act.act_Date}</div>
 											 </div>
 											 
 											 <div class="form-group">
-											 <div><img src=${pageContext.request.contextPath}/image/time.png style="width:22px;height:22px">${act.act_Time}</div>										     									     
+											 <div style="font-size:20px"><img src=${pageContext.request.contextPath}/image/time.png style="width:22px;height:22px">${act.act_Time}</div>										     									     
 										     </div>
 										     
 										      <div class="form-group">
-										     <div><img src=${pageContext.request.contextPath}/image/map1.png style="width:22px;height:22px" >${act.act_Loc}</div>
+										     <div style="font-size:20px"><img src=${pageContext.request.contextPath}/image/map1.png style="width:22px;height:22px" >${act.act_Loc}</div>
 										     </div>     
 										     
 										     <div class="form-group">
-										     <div>活動嘉賓:${act.act_Guest}</div>
+										     <div style="font-size:20px">活動嘉賓:${act.act_Guest}</div>
 										     </div>
 										     
 										     <div class="form-group">
-										     <div>活動名額:${act.act_Differentpax}/${act.act_Pax}</div>
+										     <div style="font-size:20px">活動名額:${act.act_Differentpax}/${act.act_Pax}</div>
 										     </div>										  
 										     
       										 </form>
@@ -270,31 +297,30 @@ $('#enter1').val('未來') ;
 <!--       										//頁尾 -->
 
 <!-- 									大視窗的內容 -->
-
-								     <div class="line-it-button" data-lang="zh_Hant" data-type="share-c" data-ver="3" data-url="https://social-plugins.line.me/zh_TW/how_to_install" data-color="default" data-size="small" data-count="true" style="display: none;"></div>
-									 <script src="https://www.line-website.com/social-plugins/js/thirdparty/loader.min.js" async="async" defer="defer"></script>
-									
-									<div class="caption">
-										<p>${act.act_Theme}</p>
-										<p><img src=${pageContext.request.contextPath}/image/date.png style="width:22px;height:22px">${act.act_Date}</p>
-										<p></p>
-										<p><img src=${pageContext.request.contextPath}/image/time.png style="width:22px;height:22px">${act.act_Time}</p>
-										<p><button class="mapbutton" style="background-color:white" id="myModal"  value="${act.act_Loc}" data-toggle="modal"  title="Google地圖" data-target="#myModal1"><img src=${pageContext.request.contextPath}/image/map1.png style="width:22px;height:22px" title="Google地圖">${act.act_Loc}</button></p>
+									<div class="caption" style="width:345px">
+									<p style="background-color:#9ed8db;color:#6C6C6C;border:none;font-size:20px" class="btn btn-info" >${act.act_Theme}</p>
+									<!-- line share的東西 -->
+									<div style="float:right">
+								  <div class="line-it-button" data-lang="zh_Hant" data-type="share-c" data-ver="3" data-url="https://social-plugins.line.me/zh_TW/how_to_install" data-color="default" data-size="large" data-count="false" style="display: none;"></div>
+ 									<script src="https://www.line-website.com/social-plugins/js/thirdparty/loader.min.js" async="async" defer="defer"></script>
+									</div>
+									<!-- line share的東西 -->
+										<br>
+										<br>
+										<div align="center"><span style="font-size:20px">&ensp;<img src=${pageContext.request.contextPath}/image/date.png style="width:25px;height:25px">${act.act_Date}</span>
+										<span style="font-size:20px">&ensp;<img src=${pageContext.request.contextPath}/image/time.png style="width:22px;height:22px">${act.act_Time}</span></div>
+										<br>
+										<div align="center"><button class="mapbutton" style="background-color:white;font-size:20px" id="myModal"  value="${act.act_Loc}" data-toggle="modal"  title="Google地圖" data-target="#myModal1"><img src=${pageContext.request.contextPath}/image/map1.png style="width:22px;height:22px" title="Google地圖">${act.act_Loc}</button></div>
 										<hr>
 
-										<p>
+<!-- 										<p> -->
 										
-										<!-- Trigger the modal with a button -->
 										
-<%-- 										<button type="button" id = "myModal"  value="${act.act_Loc}" data-toggle="modal" data-target="#myModal1"><img src="map.png">活動地圖</button> --%>
-<!-- 										<div><a href="https://www.flaticon.com/authors/freepik" title="Freepik"></a><a href="https://www.flaticon.com/" title="Flaticon"></a></div> -->
-										
-										<!-- Modal -->												
-										<p>
-										<a href="<c:url value='/showUpdateForm'/>?act_ID=${act.act_ID}"><button  class="btn btn-outline-info">編輯</button></a>
-										<a href="<c:url value='deleteAct'/>?act_ID=${act.act_ID}"><button  class="btn btn-outline-info">刪除</button></a>
+<!-- 										<p> -->
+<%-- 										<a href="<c:url value='/showUpdateForm'/>?act_ID=${act.act_ID}"><button  class="btn btn-outline-info">編輯</button></a> --%>
+<%-- 										<a href="<c:url value='deleteAct'/>?act_ID=${act.act_ID}"><button  class="btn btn-outline-info">刪除</button></a> --%>
 <%-- 										<button class="btn btn-outline-info"><a href="<c:url value='/showJoinForm'/>?act_ID=${act.act_ID}">報名</a></button> --%>
-										</p>
+<!-- 										</p> -->
 										
 									</div>
 								</div>
@@ -471,7 +497,7 @@ $('#create').click(function(){
 									 +"<p></p>"
 									 +"<p><img src=${pageContext.request.contextPath}/image/time.png style=\"width:22px;height:22px\">"+data[i].act_Time+"</p>"
 									 +"<p><button class=\"mapbutton\" style=\"background-color:white\" id=\"myModal\"  value=\""+data[i].act_Loc+"\" data-toggle=\"modal\"  title=\"Google地圖\" data-target=\"#myModal1\">"
-									 +"<img src=${pageContext.request.contextPath}/image/map1.png style=\"width:25px;height:25px\" title=\"Google地圖\">"+data[i].act_Loc+"</button></p>"			
+									 +"<img src=${pageContext.request.contextPath}/image/map1.png style=\"width:22px;height:22px\" title=\"Google地圖\">"+data[i].act_Loc+"</button></p>"			
 										+"<hr>"
 										+"<p>"
 										+"<p>"

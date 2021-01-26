@@ -62,7 +62,7 @@ text-align:center;
 	<!-- header -->
 
 	<!-- body -->
-	<div class="container media">
+	<div class='center'>
 		<br>
 		<br>
 
@@ -70,7 +70,7 @@ text-align:center;
 
 		<p>&nbsp;</p>
 		<hr>
-		<div class='center'>
+		<div style="text-align:center">
 		<br>
 			<h1>${name}的報名紀錄</h1>
 			<hr><br>
