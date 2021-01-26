@@ -108,7 +108,7 @@
 				<div class="modal-content">
 					<div class="card-center">
 						<img class="card-img-top" alt="..."
-							style="height: 15rem; width: 10rem">
+							style="height: 15rem; width: 12rem;margin-left: 10rem">
 						<div class="card-body">
 							<h5 class="card-title">${v.bk_Name}</h5>
 							<p class="card-text Author">作者: ${v.bk_Author}</p>
@@ -125,8 +125,8 @@
 								</p>
 								<p class="card-text" class="sp2" style="color: red"></p>
 								<button type="button" class="btn btn-outline-secondary"
-									data-dismiss="modal">取消</button>
-								<button type="submit" class="btn btn-outline-success">儲存</button>
+									data-dismiss="modal" style="margin-left: 10rem">取消</button>
+								<button type="submit" class="btn btn-outline-success" >儲存</button>
 							</form>
 						</div>
 					</div>

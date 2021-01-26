@@ -372,9 +372,9 @@ public class StoreController {
 	}
 
 //  灌庫存值
-	@GetMapping("boobplay")
-	public String boob(Model model) {
-		bookStoreService.boobqaq();
-		return "redirect:/qaqTest";
-	}
+//	@GetMapping("boobplay")
+//	public String boob(Model model) {
+//		bookStoreService.boobqaq();
+//		return "redirect:/qaqTest";
+//	}
 }
