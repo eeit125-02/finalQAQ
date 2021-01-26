@@ -111,14 +111,14 @@ p:focus, textarea:focus {
 
 <!-- 第一列（搜尋首頁＆收藏清單&新增書籍&修改書籍） -->
 		<div class="collectindex">
-
+		<br>
 <%-- 			<a class="btn btn-outline-dark" href="<c:url value='SearchBook/Search' />" role="button">搜尋首頁</a> --%>
 
 			<form name=a3 class=a3 action="<c:url value='/collectlist' />" method="get">
 				<button type="submit" name="list" class="btn btn-outline-dark">收藏清單</button>
 			</form>
 
-			<a class="btn btn-outline-dark" href="<c:url value='/addnewbook' />" role="button">新增書籍</a>			
+<%-- 			<a class="btn btn-outline-dark" href="<c:url value='/addnewbook' />" role="button">新增書籍</a>			 --%>
 
 <%-- 			<form name=a2 class=a3 action="<c:url value='/updatebook' />" method="get"> --%>
 <%-- 				<button type="submit" name="update" class="btn btn-outline-dark" value="${pageresult.bk_ID}">修改書訊</button> --%>

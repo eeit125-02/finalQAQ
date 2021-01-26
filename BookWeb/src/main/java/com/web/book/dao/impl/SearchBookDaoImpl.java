@@ -380,7 +380,7 @@ maxpage=query.getResultList().size();
 	public void addBookClick(Integer bk_ID) {
 		Session session = factory.getCurrentSession();
 		BookBean bk = session.get(BookBean.class, bk_ID);
-		bk.setBk_Click(bk.getBk_Click()+100);	
+		bk.setBk_Click(bk.getBk_Click()+177);	
 	}
 	
 	// 選取全部書籍
