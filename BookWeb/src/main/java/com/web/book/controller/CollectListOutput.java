@@ -33,7 +33,7 @@ public class CollectListOutput {
 	@Autowired
 	SearchService searchService;
 	
-	private static final String collectPath="C://collectBook//myCollectList.log";
+	private static final String collectPath="/Users/hsin/Pictures/書適圈/myCollectList.log";
 	//指定預設檔案路徑
 	
 	@RequestMapping(value="/download1", method = RequestMethod.GET)
@@ -44,7 +44,7 @@ public class CollectListOutput {
 	
 //		-----------------------------------------------------------------
 		
-		File fileFolder = new File("C://collectBook");
+		File fileFolder = new File("/Users/hsin/Pictures/書適圈/");
 		fileFolder.mkdir();//創造檔案夾位置
 		
 		File collectionFile=new File(collectPath);
