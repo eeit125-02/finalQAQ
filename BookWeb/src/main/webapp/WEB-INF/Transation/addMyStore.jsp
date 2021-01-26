@@ -101,7 +101,7 @@
 		$('#bkName').val("Spring in Action");
 	})
 	$('#yepData').click(function() {
-		$('#bkName').val("深入淺出")
+		$('#bkName').val("程式")
 	})
 
 	function searchBookName() {

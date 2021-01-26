@@ -20,7 +20,9 @@
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
 	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
 	crossorigin="anonymous">
-<link rel="icon" href="${pageContext.request.contextPath}/image/logo1.ico" type="image/x-icon" />
+<link rel="icon"
+	href="${pageContext.request.contextPath}/image/logo1.ico"
+	type="image/x-icon" />
 <style>
 .bd-placeholder-img {
 	font-size: 1. 125rem;
@@ -47,14 +49,14 @@
 	<!-- header -->
 	<header class="blog-header" id="bookWebheader"></header>
 	<!-- header -->
-<br>
+	<br>
 	<div class="container media">
 		<form></form>
 		<!-- body -->
-<%-- 		<form action="<c:url value='/addMyStore'/>" method="post"> --%>
-			<button type="button" class="btn btn-outline-info" id="turn">我要賣東西</button>
-			<br>
-<!-- 		</form> -->
+		<%-- 		<form action="<c:url value='/addMyStore'/>" method="post"> --%>
+		<button type="button" class="btn btn-outline-info" id="turn">我要賣東西</button>
+		<br>
+		<!-- 		</form> -->
 	</div>
 	<br>
 	<div class="container" id="search">
@@ -103,77 +105,88 @@
 		<!-- 修改 -->
 		<div class="modal fade" id="exampleModalCenter" tabindex="-1"
 			role="dialog" aria-labelledby="exampleModalCenterTitle"
-			aria-hidden="true" >
+			aria-hidden="true">
 			<div class="modal-dialog modal-dialog-centered" role="document">
 				<div class="modal-content">
 					<div class="card-center">
 						<img class="card-img-top" alt="..."
-							style="height: 20rem; width: 15rem;margin-left: 10rem;padding:20px">
-						<div class="card-body"style="padding:25px">
+							style="height: 20rem; width: 15rem; margin-left: 10rem; padding: 20px">
+						<div class="card-body" style="padding: 25px">
 							<form action="<c:url value='/updatebk'/>" method="post">
-							<h4 class="card-title"style="text-align:center;">${v.bk_Name}</h4>
-							
-							
-<!--       <div class="modal-body"> -->
-<!--         <form> -->
-<!--           <div class="form-group"> -->
-<!--             <label for="recipient-name" class="col-form-label">書名</label> -->
-<%--             <input type="text" class="form-control" id="recipient-name"readonly="readonly" value="${v.bk_Author}"> --%>
-<!--           </div> -->
-<!--           <div class="form-group"> -->
-<!--             <label for="message-text" class="col-form-label">錯誤說明</label> -->
-<!--             <textarea class="form-control" id="message-text" name="report"></textarea> -->
-<!--           </div> -->
-<!--         </form> -->
-<!--       </div>							 -->
-					
-  <div class="form-group row">
-    <label for="recipient-name" class="col-sm-2 col-form-label"style="text-align:center;">作者</label>
-    <div class="col-sm-10">
-	  <input type="text" class="form-control" id="recipient-name"readonly="readonly" value="${v.bk_Author}">
-    </div>
-  </div>
-  <div class="form-group row">
-    <label for="recipient-name" class="col-sm-2 col-form-label"style="text-align:center;">出版社</label>
-    <div class="col-sm-10">
-	  <input type="text" class="form-control" id="recipient-name"readonly="readonly" value="${v.bk_Publish}">
-    </div>
-  </div>
-  <div class="form-group row">
-    <label for="recipient-name" class="col-sm-2 col-form-label"style="text-align:center;">出版日</label>
-    <div class="col-sm-10">
-	  <input type="text" class="form-control" id="recipient-name"readonly="readonly" value="${v.bk_Date}">
-    </div>
-  </div>
-  <div class="form-group row">
-    <label for="recipient-name" class="col-sm-2 col-form-label"style="text-align:center;">二手價</label>
-    <div class="col-sm-10">
-	  <input type="number" class="form-control bsPrice" id="recipient-name" name="bsPrice">
-    </div>
-  </div>
-  <div class="form-group row">
-    <label for="recipient-name" class="col-sm-2 col-form-label"style="text-align:center;">數量</label>
-    <div class="col-sm-10">
-	  <input type="number" class="form-control bsNum" name="bsNum">
-    </div>
-  </div>
+								<h4 class="card-title" style="text-align: center;">${v.bk_Name}</h4>
 
-<%-- 							<p class="card-text Author">作者: ${v.bk_Author}</p> --%>
-<%-- 							<p class="card-text Publish">出版社: ${v.bk_Publish}</p> --%>
-<%-- 							<p class="card-text Date">出版日: ${v.bk_Date}</p> --%>
+
+								<!--       <div class="modal-body"> -->
+								<!--         <form> -->
+								<!--           <div class="form-group"> -->
+								<!--             <label for="recipient-name" class="col-form-label">書名</label> -->
+								<%--             <input type="text" class="form-control" id="recipient-name"readonly="readonly" value="${v.bk_Author}"> --%>
+								<!--           </div> -->
+								<!--           <div class="form-group"> -->
+								<!--             <label for="message-text" class="col-form-label">錯誤說明</label> -->
+								<!--             <textarea class="form-control" id="message-text" name="report"></textarea> -->
+								<!--           </div> -->
+								<!--         </form> -->
+								<!--       </div>							 -->
+
+								<div class="form-group row">
+									<label for="recipient-name" class="col-sm-2 col-form-label"
+										style="text-align: center;">作者</label>
+									<div class="col-sm-10">
+										<input type="text" class="form-control Author"
+											id="recipient-name" readonly="readonly"
+											value="${v.bk_Author}">
+									</div>
+								</div>
+								<div class="form-group row">
+									<label for="recipient-name" class="col-sm-2 col-form-label"
+										style="text-align: center;">出版社</label>
+									<div class="col-sm-10">
+										<input type="text" class="form-control Publish"
+											id="recipient-name" readonly="readonly"
+											value="${v.bk_Publish}">
+									</div>
+								</div>
+								<div class="form-group row">
+									<label for="recipient-name" class="col-sm-2 col-form-label"
+										style="text-align: center;">出版日</label>
+									<div class="col-sm-10">
+										<input type="text" class="form-control Date"
+											id="recipient-name" readonly="readonly" value="${v.bk_Date}">
+									</div>
+								</div>
+								<div class="form-group row">
+									<label for="recipient-name" class="col-sm-2 col-form-label"
+										style="text-align: center;">二手價</label>
+									<div class="col-sm-10">
+										<input type="number" class="form-control bsPrice"
+											id="recipient-name" name="bsPrice">
+									</div>
+								</div>
+								<div class="form-group row">
+									<label for="recipient-name" class="col-sm-2 col-form-label"
+										style="text-align: center;">數量</label>
+									<div class="col-sm-10">
+										<input type="number" class="form-control bsNum" name="bsNum">
+									</div>
+								</div>
+
+								<%-- 							<p class="card-text Author">作者: ${v.bk_Author}</p> --%>
+								<%-- 							<p class="card-text Publish">出版社: ${v.bk_Publish}</p> --%>
+								<%-- 							<p class="card-text Date">出版日: ${v.bk_Date}</p> --%>
 								<input type="hidden" name="updateBk" class="updateBk">
 
-<!-- 								<p class="card-text"> -->
-<!-- 									二手價: <input type="number" class="bsPrice" name="bsPrice"> -->
-<!-- 								</p> -->
-<!-- 								<p class="card-text" class="sp1" style="color: red"></p> -->
-<!-- 								<p class="card-text"> -->
-<!-- 									數量: <input type="number" class="bsNum" name="bsNum"> -->
-<!-- 								</p> -->
+								<!-- 								<p class="card-text"> -->
+								<!-- 									二手價: <input type="number" class="bsPrice" name="bsPrice"> -->
+								<!-- 								</p> -->
+								<!-- 								<p class="card-text" class="sp1" style="color: red"></p> -->
+								<!-- 								<p class="card-text"> -->
+								<!-- 									數量: <input type="number" class="bsNum" name="bsNum"> -->
+								<!-- 								</p> -->
 								<p class="card-text" class="sp2" style="color: red"></p>
 								<button type="button" class="btn btn-outline-secondary"
 									data-dismiss="modal" style="margin-left: 10rem">取消</button>
-								<button type="submit" class="btn btn-outline-success" >儲存</button>
+								<button type="submit" class="btn btn-outline-success">儲存</button>
 							</form>
 						</div>
 					</div>
@@ -223,6 +236,7 @@
 
 		$('.btn.btn-outline-info.upda').each(
 				function() {
+					var qaq = $(this)
 					$(this).click(
 							function() {
 								$('.card-img-top').attr(
@@ -232,19 +246,13 @@
 								$('.card-title').html(
 										$(this).parent().parent().children()
 												.eq(1).html());
-								$('.card-text.Author').html(
-										"作者: "
-												+ $(this).parent().parent()
+								$('.form-control.Author').val($(this).parent().parent()
 														.children().eq(2)
 														.html());
-								$('.card-text.Publish').html(
-										"出版社: "
-												+ $(this).parent().parent()
+								$('.form-control.Publish').val($(this).parent().parent()
 														.children().eq(3)
 														.html());
-								$('.card-text.Date').html(
-										"出版日: "
-												+ $(this).parent().parent()
+								$('.form-control.Date').val($(this).parent().parent()
 														.children().eq(4)
 														.html());
 								$('.bsPrice').val(
