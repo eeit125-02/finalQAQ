@@ -52,7 +52,6 @@
 		<input type="hidden" id="bks_ID"
 			value="${bookdetail.bks_ID}">
 		<br>
-		<hr>
 		<div class="row">
 			<div class="col-lg-4">
 				<label for="url"></label> <img alt="圖勒?" width="300px"
@@ -91,7 +90,7 @@
 <div class="col-sm-6">
 					<button type="submit" class="btn btn-outline-success" style="float:right;margin-top:15px;margin-right:15px"
 					onclick="goToCart(${bookdetail.bks_ID})">直接購買</button>
-					<button type="submit" class="btn btn-outline-success" style="float:right;margin-top:15px"
+					<button type="submit" class="btn btn-outline-success" style="float:right;margin-top:15px;margin-right:15px;"
 					onclick="addCart(${bookdetail.book.bk_ID},${bookdetail.bs_Price})">放入購物車</button>
 </div>
 </div>

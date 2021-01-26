@@ -103,30 +103,77 @@
 		<!-- 修改 -->
 		<div class="modal fade" id="exampleModalCenter" tabindex="-1"
 			role="dialog" aria-labelledby="exampleModalCenterTitle"
-			aria-hidden="true">
+			aria-hidden="true" >
 			<div class="modal-dialog modal-dialog-centered" role="document">
 				<div class="modal-content">
 					<div class="card-center">
 						<img class="card-img-top" alt="..."
-							style="height: 15rem; width: 10rem">
-						<div class="card-body">
-							<h5 class="card-title">${v.bk_Name}</h5>
-							<p class="card-text Author">作者: ${v.bk_Author}</p>
-							<p class="card-text Publish">出版社: ${v.bk_Publish}</p>
-							<p class="card-text Date">出版日: ${v.bk_Date}</p>
+							style="height: 20rem; width: 15rem;margin-left: 10rem;padding:20px">
+						<div class="card-body"style="padding:25px">
 							<form action="<c:url value='/updatebk'/>" method="post">
+							<h4 class="card-title"style="text-align:center;">${v.bk_Name}</h4>
+							
+							
+<!--       <div class="modal-body"> -->
+<!--         <form> -->
+<!--           <div class="form-group"> -->
+<!--             <label for="recipient-name" class="col-form-label">書名</label> -->
+<%--             <input type="text" class="form-control" id="recipient-name"readonly="readonly" value="${v.bk_Author}"> --%>
+<!--           </div> -->
+<!--           <div class="form-group"> -->
+<!--             <label for="message-text" class="col-form-label">錯誤說明</label> -->
+<!--             <textarea class="form-control" id="message-text" name="report"></textarea> -->
+<!--           </div> -->
+<!--         </form> -->
+<!--       </div>							 -->
+					
+  <div class="form-group row">
+    <label for="recipient-name" class="col-sm-2 col-form-label"style="text-align:center;">作者</label>
+    <div class="col-sm-10">
+	  <input type="text" class="form-control" id="recipient-name"readonly="readonly" value="${v.bk_Author}">
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="recipient-name" class="col-sm-2 col-form-label"style="text-align:center;">出版社</label>
+    <div class="col-sm-10">
+	  <input type="text" class="form-control" id="recipient-name"readonly="readonly" value="${v.bk_Publish}">
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="recipient-name" class="col-sm-2 col-form-label"style="text-align:center;">出版日</label>
+    <div class="col-sm-10">
+	  <input type="text" class="form-control" id="recipient-name"readonly="readonly" value="${v.bk_Date}">
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="recipient-name" class="col-sm-2 col-form-label"style="text-align:center;">二手價</label>
+    <div class="col-sm-10">
+	  <input type="number" class="form-control bsPrice" id="recipient-name" name="bsPrice">
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="recipient-name" class="col-sm-2 col-form-label"style="text-align:center;">數量</label>
+    <div class="col-sm-10">
+	  <input type="number" class="form-control bsNum" name="bsNum">
+    </div>
+  </div>
+
+<%-- 							<p class="card-text Author">作者: ${v.bk_Author}</p> --%>
+<%-- 							<p class="card-text Publish">出版社: ${v.bk_Publish}</p> --%>
+<%-- 							<p class="card-text Date">出版日: ${v.bk_Date}</p> --%>
 								<input type="hidden" name="updateBk" class="updateBk">
-								<p class="card-text">
-									二手價: <input type="number" class="bsPrice" name="bsPrice">
-								</p>
-								<p class="card-text" class="sp1" style="color: red"></p>
-								<p class="card-text">
-									數量: <input type="number" class="bsNum" name="bsNum">
-								</p>
+
+<!-- 								<p class="card-text"> -->
+<!-- 									二手價: <input type="number" class="bsPrice" name="bsPrice"> -->
+<!-- 								</p> -->
+<!-- 								<p class="card-text" class="sp1" style="color: red"></p> -->
+<!-- 								<p class="card-text"> -->
+<!-- 									數量: <input type="number" class="bsNum" name="bsNum"> -->
+<!-- 								</p> -->
 								<p class="card-text" class="sp2" style="color: red"></p>
 								<button type="button" class="btn btn-outline-secondary"
-									data-dismiss="modal">取消</button>
-								<button type="submit" class="btn btn-outline-success">儲存</button>
+									data-dismiss="modal" style="margin-left: 10rem">取消</button>
+								<button type="submit" class="btn btn-outline-success" >儲存</button>
 							</form>
 						</div>
 					</div>

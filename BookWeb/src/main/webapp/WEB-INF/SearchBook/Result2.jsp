@@ -80,7 +80,7 @@ white-space:pre-wrap;
 
 		<div class="collectindex">
 <%-- 			<a class="btn btn-outline-dark" href="<c:url value='SearchBook/Search' />" role="button">搜尋首頁</a> --%>
-			
+			<br>
 			<form name=a3 class=a3 action="<c:url value='/collectlist' />" method="get">
 				<button type="submit" name="list" class="btn btn-outline-dark">收藏清單</button>
 			</form>
@@ -230,7 +230,10 @@ white-space:pre-wrap;
 					
 					var insertData = "<div>";
 					for (let i = 0; i < data.finaldata.length; i++) {
-						
+						if(data.finaldata[i].bk_Page==null){
+							data.finaldata[i].bk_Page ="無資料";
+							console.log(data.finaldata[i].bk_Page);
+						}
 						console.log(data);
 						
 						insertData = "<div class=\"row\">"
@@ -241,7 +244,6 @@ white-space:pre-wrap;
 							+data.finaldata[i].bk_Pic
 							+"\" width=\"150\">"
 							+"</div>"
-							
 							+"<div class=\"col-sm-10\">"
 							+"<h3>"
 							+"<form name=a1 action=\"<c:url value='/bookpage' />\" method=\"get\">"
@@ -249,6 +251,7 @@ white-space:pre-wrap;
 							+data.finaldata[i].bk_ID+"\">"+data.finaldata[i].bk_Name+"</button></form>"
 							+"</h3>"
 							+"｜ 作者："+data.finaldata[i].bk_Author
+							
 							+" ｜  出版社："+data.finaldata[i].bk_Publish
 							+"｜  出版日期："+data.finaldata[i].bk_Date
 							+"｜  頁數："+data.finaldata[i].bk_Page
@@ -328,7 +331,6 @@ white-space:pre-wrap;
 		
 		
 	</script>
-
 	<!-- 內容結束 -->
 	
 	<!-- body -->

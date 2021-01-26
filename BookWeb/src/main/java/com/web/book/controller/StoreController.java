@@ -66,9 +66,9 @@ public class StoreController {
 	public String qaqMainPage(Model model) {
 		page = 1;
 		pageType = "main";
-		List<BookStoreBean> list = bookStoreService.searchBookStore(page, 14);
+		List<BookStoreBean> list = bookStoreService.searchBookStore(page, 55);
 		model.addAttribute("store", list);
-		model.addAttribute("pageSize", bookStoreService.getAllSearchBookStoreSize(14));
+		model.addAttribute("pageSize", bookStoreService.getAllSearchBookStoreSize(55));
 		model.addAttribute("pageNow", page);
 		model.addAttribute("pageType", pageType);
 		return "/Transation/qaqMain";
@@ -77,11 +77,11 @@ public class StoreController {
 	// 商店首頁搜尋書名
 	@GetMapping("qaqSBookName")
 	public String qaqSBookName(Model model, @RequestParam(value = "sBkNe") String bk_Name) {
-		List<BookStoreBean> list = bookStoreService.searchStoreBookName(bk_Name, page, 14);
+		List<BookStoreBean> list = bookStoreService.searchStoreBookName(bk_Name, page, 55);
 		page = 1;
 		pageType = bk_Name;
 		model.addAttribute("store", list);
-		model.addAttribute("pageSize", bookStoreService.getSearchStoreBookNameSize(bk_Name, 14));
+		model.addAttribute("pageSize", bookStoreService.getSearchStoreBookNameSize(bk_Name, 55));
 		model.addAttribute("pageNow", page);
 		model.addAttribute("pageType", pageType);
 		return "/Transation/qaqMain";
@@ -92,13 +92,13 @@ public class StoreController {
 	public String qaqNextPage(Model model, @PathVariable Integer page, @PathVariable String pageType,
 			@RequestParam(value = "sBkNe", required = false) String bk_Name) {
 		if (pageType.equals("main")) {
-			List<BookStoreBean> list = bookStoreService.searchBookStore(page, 14);
-			model.addAttribute("pageSize", bookStoreService.getAllSearchBookStoreSize(14));
+			List<BookStoreBean> list = bookStoreService.searchBookStore(page, 55);
+			model.addAttribute("pageSize", bookStoreService.getAllSearchBookStoreSize(55));
 			model.addAttribute("store", list);
 		} else {
-			List<BookStoreBean> list = bookStoreService.searchStoreBookName(pageType, page, 14);
+			List<BookStoreBean> list = bookStoreService.searchStoreBookName(pageType, page, 55);
 			model.addAttribute("store", list);
-			model.addAttribute("pageSize", bookStoreService.getSearchStoreBookNameSize(pageType, 14));
+			model.addAttribute("pageSize", bookStoreService.getSearchStoreBookNameSize(pageType, 55));
 		}
 		model.addAttribute("pageNow", page);
 		model.addAttribute("pageType", pageType);
@@ -225,7 +225,7 @@ public class StoreController {
 		pageType = searchType;
 		Map<String, Object> data = new HashMap<>();
 		List<Map<String, Object>> bookList = new ArrayList<>();
-		List<BookStoreBean> list = bookStoreService.searchStoreBookName(bk_Name, page, 14);
+		List<BookStoreBean> list = bookStoreService.searchStoreBookName(bk_Name, page, 55);
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		for (BookStoreBean bookStoreBean : list) {
 			Map<String, Object> searchData = new HashMap<>();
@@ -246,7 +246,7 @@ public class StoreController {
 				bookList.add(searchData);
 			}
 		}
-		data.put("pageSize", bookStoreService.getSearchStoreBookNameSize(bk_Name, 14));
+		data.put("pageSize", bookStoreService.getSearchStoreBookNameSize(bk_Name, 55));
 		data.put("pageNow", page);
 		data.put("pageType", pageType);
 		data.put("searchData", bookList);
@@ -308,7 +308,7 @@ public class StoreController {
 		}
 		searchService.savebk(book);
 		bookStoreService.insertSearchBookName(asd, qwe, book.getBk_ID(), loginUser.getMb_ID());
-		bookStoreService.insertSearchBookName(1, (int)(qwe*1.3), book.getBk_ID(), 14);
+		bookStoreService.insertSearchBookName(0, qwe, book.getBk_ID(), 55);
 		return "redirect:/myStore";
 	}
 
@@ -372,9 +372,9 @@ public class StoreController {
 	}
 
 //  灌庫存值
-	@GetMapping("boobplay")
-	public String boob(Model model) {
-		bookStoreService.boobqaq();
-		return "redirect:/qaqTest";
-	}
+//	@GetMapping("boobplay")
+//	public String boob(Model model) {
+//		bookStoreService.boobqaq();
+//		return "redirect:/qaqTest";
+//	}
 }

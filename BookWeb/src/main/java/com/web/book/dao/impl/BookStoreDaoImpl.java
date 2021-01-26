@@ -55,7 +55,7 @@ public class BookStoreDaoImpl implements BookStoreDao {
 	@SuppressWarnings("unchecked")
 	public List<BookStoreBean> bookPrices(Integer bk_ID) {
 		Session session = factory.getCurrentSession();
-		String hql = "from BookStoreBean where bk_ID = :bk_ID  order by bs_Price";
+		String hql = "from BookStoreBean where bk_ID = :bk_ID and bs_ID != 14 order by bs_Price";
 		Query<BookStoreBean> query = session.createQuery(hql);
 		return query.setParameter("bk_ID", bk_ID).getResultList();
 	}
@@ -156,19 +156,20 @@ public class BookStoreDaoImpl implements BookStoreDao {
 	}
 
 	// 灌庫存值給商店
+	@SuppressWarnings("deprecation")
 	@Override
 	public void boobqaq() {
 		// 6242 /80~84、11 /13 /a123456
 		Session session = factory.getCurrentSession();
 		Integer qaqQty = 0;
 		Integer qaqPrice = 0;
-		MemberBean member = session.load(MemberBean.class, 9);
+		MemberBean member = session.load(MemberBean.class, 24);
 		// 24 9 20
-		// 管理員灌值 start
+		// 管理員灌值 start 55
 //		MemberBean member = session.load(MemberBean.class, 14);
 //			for (int i = 1; i < 6243; i++) {
 //				BookBean book = session.load(BookBean.class, i);
-//				qaqQty = (int)(Math.random()*(20))+1;
+//				qaqQty = (int)(Math.random()*(50))+20;
 //				if (book.getBk_Price()==null) {
 //					book.setBk_Price(100);
 //				}
@@ -202,9 +203,9 @@ public class BookStoreDaoImpl implements BookStoreDao {
 		// 製造不同庫存不同價錢區間 end
 //		假資料
 		Date date = new Date();
-		for (int i = 1; i < 100; i++) {
+		for (int i = 1; i < 200; i++) {
 			BookBean book = session.load(BookBean.class, i);
-			qaqQty = (int) (Math.random() * (100)) + 1;
+			qaqQty = (int) (Math.random() * (50)) + 10;
 			if (book.getBk_Price()==null) {
 				book.setBk_Price(100);
 				qaqPrice = (int) (Math.random() * ((book.getBk_Price() / 10) - 5)) + 5;

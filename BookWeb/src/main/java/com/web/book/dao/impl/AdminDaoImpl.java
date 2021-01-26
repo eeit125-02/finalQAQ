@@ -99,6 +99,8 @@ public class AdminDaoImpl implements AdminDao {
 		Session session = factory.getCurrentSession();
 		String hql = "From BookStoreBean where bs_ID != 14 order by bks_ID DESC";
 		Query<BookStoreBean> query = session.createQuery(hql);
+		query.setFirstResult(0);
+		query.setMaxResults(1000);
 		
 		return query.getResultList();
 	}
@@ -120,10 +122,18 @@ public class AdminDaoImpl implements AdminDao {
 	public Boolean deleteBook(Integer bkId) {
 		
 		Session session = factory.getCurrentSession();
+		
 		String hql = "Delete BookStoreBean bs Where bs.book.bk_ID = :bk_ID";
+		session.createQuery(hql).setParameter("bk_ID", bkId).executeUpdate();
+		hql = "Delete BookReportBean br where br.book.bk_ID = :bk_ID";
+		session.createQuery(hql).setParameter("bk_ID", bkId).executeUpdate();
+		hql = "Delete BookTypeBean bt where bt.book.bk_ID = :bk_ID";
+		session.createQuery(hql).setParameter("bk_ID", bkId).executeUpdate();
+		hql = "Delete OrderItemBean bo where bo.book.bk_ID = :bk_ID";
 		session.createQuery(hql).setParameter("bk_ID", bkId).executeUpdate();
 		hql = "Delete BookBean bk Where bk.bk_ID = :bk_ID";
 		session.createQuery(hql).setParameter("bk_ID", bkId).executeUpdate();
+		
 		
 		return true;
 	}
@@ -193,8 +203,8 @@ public class AdminDaoImpl implements AdminDao {
 		Session session = factory.getCurrentSession();
 		String hql = "Select bt.searchtype.sty_Name, bt.searchtype.sty_ID ,COUNT(bt)  "
 				   + "from BookTypeBean bt "
-				   + "where bt.searchtype.sty_ID = 9 or bt.searchtype.sty_ID = 17 or bt.searchtype.sty_ID = 27 or bt.searchtype.sty_ID = 36 "
-				   + "or bt.searchtype.sty_ID = 46 or bt.searchtype.sty_ID = 56 or bt.searchtype.sty_ID = 62 or bt.searchtype.sty_ID = 69 "
+				   + "where bt.searchtype.sty_ID = 9 or bt.searchtype.sty_ID = 10 or bt.searchtype.sty_ID = 18 or bt.searchtype.sty_ID = 28 "
+				   + "or bt.searchtype.sty_ID = 37 or bt.searchtype.sty_ID = 47 or bt.searchtype.sty_ID = 63 or bt.searchtype.sty_ID = 70 "
 				   + "group by bt.searchtype.sty_ID , bt.searchtype.sty_Name "
 				   + "order by bt.searchtype.sty_ID ASC";
 		Query<Object> query = session.createQuery(hql);
@@ -233,6 +243,41 @@ public class AdminDaoImpl implements AdminDao {
 		
 		return query.getResultList();
 	}
+	
+	// 取得每半年成交量數量
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Object> getStoreMonthPsc() {
+		
+		Session session = factory.getCurrentSession();
+		String hql = "Select YEAR (a.bo_Date), MONTH (a.bo_Date), sum(b.oi_Qty) "
+				   + "from BookOrderBean a, OrderItemBean b "
+				   + "where a.bo_ID = b.order.bo_ID "
+				   + "GROUP by YEAR (a.bo_Date) , MONTH (a.bo_Date) "
+				   + "ORDER by YEAR (a.bo_Date) DESC , MONTH (a.bo_Date) DESC";
+		Query<Object> query = session.createQuery(hql);
+		query.setFirstResult(0);
+		query.setMaxResults(6);
+		
+		return query.getResultList();
+	}
+	
+	// 取得每半年成交價格
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Object> getStoreMonthPrice() {
+		
+		Session session = factory.getCurrentSession();
+		String hql = "Select YEAR (a.bo_Date), MONTH (a.bo_Date), sum(a.bo_Total) "
+				   + "from BookOrderBean a "
+				   + "GROUP by YEAR (a.bo_Date) , MONTH (a.bo_Date) "
+				   + "ORDER by YEAR (a.bo_Date) DESC , MONTH (a.bo_Date) DESC";
+		Query<Object> query = session.createQuery(hql);
+		query.setFirstResult(0);
+		query.setMaxResults(6);
+		
+		return query.getResultList();
+	}
 
 	// 取得註冊會員男女比例
 	@SuppressWarnings("unchecked")
@@ -256,7 +301,7 @@ public class AdminDaoImpl implements AdminDao {
 		Session session = factory.getCurrentSession();
 		String hql = "Select ar.act_Theme, count(ar) "
 				   + "from ActBean ar "
-				   + "ar.act_Theme";
+				   + "group by  ar.act_Theme";
 		Query<Object> query = session.createQuery(hql);
 		
 		return query.getResultList();
@@ -270,14 +315,15 @@ public class AdminDaoImpl implements AdminDao {
 		Session session = factory.getCurrentSession();
 		String hql = "Select YEAR(ar.act_Date), MONTH(ar.act_Date), count(ar) "
 				   + "from ActBean ar "
-				   + "group by YEAR(ar.act_Date), MONTH(ar.act_Date) "
-				   + "ORDER by YEAR(ar.act_Date) DESC, MONTH (ar.act_Date) DESC";
+				   + "group by YEAR(ar.act_Date), MONTH(ar.act_Date), DAY(ar.act_Date)"
+				   + "ORDER by YEAR(ar.act_Date) DESC, MONTH (ar.act_Date), DAY(ar.act_Date) DESC";
 		Query<Object> query = session.createQuery(hql);
 		query.setFirstResult(0);
-		query.setMaxResults(6);
+		query.setMaxResults(7);
 		
 		return query.getResultList();
 	}
+
 	
 	
 	
