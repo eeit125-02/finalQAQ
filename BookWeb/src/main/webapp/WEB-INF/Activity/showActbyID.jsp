@@ -40,11 +40,11 @@
 
 th{
 text-align:center;
-width:100px;
+
 }
 
 td{
-width:20px;
+width:100px;
 border:solid 1px;
 text-align:center;
 }
