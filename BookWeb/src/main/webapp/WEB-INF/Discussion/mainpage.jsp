@@ -826,7 +826,7 @@ response.setDateHeader("Expires", 0);
 								
 								<script>
 								$(document).on("click", '#lazy_manager_search', function(){
-									$('#keyword_manager').val('修改');
+									$('#keyword_manager').val('小說');
 								})
 								</script>
 								
