@@ -23,6 +23,12 @@
 	href="${pageContext.request.contextPath}/image/logo1.ico"
 	type="image/x-icon" />
 <style>
+th{
+text-align: center;
+}
+td{
+text-align: center;
+}
 .bd-placeholder-img {
 	font-size: 1. 125rem;
 	text-anchor: middle;
@@ -50,68 +56,97 @@
 	<!-- header -->
 
 	<!-- body -->
-	<div style="text-align: center">
-		<h2>二手書圖</h2>
-	</div>
 	<div class="container">
-		<hr>
+		<br>
 		<c:forEach items="${bookPrices}" var="v" begin="0" end="0">
 			<div class="row">
 				<div class="col-lg-4">
-					<label for="url"></label> <img alt="圖勒?" width="200px"
-						height="300px" src="<c:url value='${v.bk_Pic}'/>">
+					<label for="url"></label> <img alt="圖勒?" width="300px"
+						height="400px" src="<c:url value='${v.bk_Pic}'/>">
 				</div>
 				<div class="col-lg-8">
-					<h2><span>書名: ${v.bk_Name}</span></h2>
-					<h4><span>作者: ${v.bk_Author}</span></h4>
-					<h4><span>出版社: ${v.bk_Publish}</span></h4>
-					<h4><span>出版日: ${v.bk_PublishDate}</span></h4>
+					<h2><span>${v.bk_Name}</span></h2><hr>
+					<h4><span>作者: ${v.bk_Author}</span></h4><hr>
+					<h4><span>出版社: ${v.bk_Publish}</span></h4><hr>
+					<h4><span>出版日: ${v.bk_PublishDate}</span></h4><hr>
 				</div>
 			</div>
 		</c:forEach>
 		<br><br>
-		<div class="row">
-			<div class="col-lg-2">賣家</div>
-			<div class="col-lg-2">二手價</div>
-			<div class="col-lg-1">庫存</div>
-			<div class="col-lg-2">上架日期</div>
-			<div class="col-lg-2">購買數量</div>
-			<div class="col-lg-3">&nbsp;</div>
-		</div>
-		<hr>
-		<c:forEach items="${bookPrices}" var="v">
+		
+<table class="table">
+  <thead class="thead-light">
+    <tr>
+      <th scope="col">編號</th>
+      <th scope="col">賣家</th>
+      <th scope="col">二手價</th>
+      <th scope="col">庫存</th>
+      <th scope="col">上架日期</th>
+      <th scope="col">購買數量</th>
+      <th scope="col"> </th>
+<!--       <th scope="col"> </th> -->
+    </tr>
+  </thead>
+		
+		
+<!-- 		<div class="row"> -->
+<!-- 			<div class="col-lg-2">賣家</div> -->
+<!-- 			<div class="col-lg-2">二手價</div> -->
+<!-- 			<div class="col-lg-1">庫存</div> -->
+<!-- 			<div class="col-lg-2">上架日期</div> -->
+<!-- 			<div class="col-lg-2">購買數量</div> -->
+<!-- 			<div class="col-lg-3">&nbsp;</div> -->
+<!-- 		</div> -->
+<!-- 		<hr> -->
+<tbody>
+		<c:forEach items="${bookPrices}" var="v" varStatus="status">
 		<form action="<c:url value="/directBuy"/>" method="post">
-			<div class="row">
+
 				<input type="hidden" name="bk_ID" value="${v.bk_ID}"> 
 				<input type="hidden" name="bs_Num" value="${v.bs_Num}">
 				<input type="hidden" name="bs_Price" value="${v.bs_Price}">
 				<input type="hidden" name="bs_ID" value="${v.bs_ID}">
 				<input type="hidden" name="bks_ID" value="${v.bks_ID}">
-				<div class="col-lg-2">
-					<c:out value="${v.mb_Name}" />
-				</div>
-				<div class="col-lg-2">
-					<c:out value="${v.bs_Price}" />
-				</div>
-				<div class="col-lg-1">
-					<c:out value="${v.bs_Num}" />
-				</div>
-				<div class="col-lg-2">
-					<c:out value="${v.bs_Date}" />
-				</div>
-				<div class="col-lg-2">
-					<input type="number" name="cart_Num" min="1" max="${v.bs_Num}" value="1" 
-					class="form-control">
-				</div>
-				<div class="col-lg-3">
-					<button type="submit" class="btn btn-outline-secondary direct">直接購買</button>
-					<!-- 					<button type="button" class="btn btn-outline-secondary indirect" -->
-					<!-- 						onclick="addCart()">查看詳情</button> -->
-				</div>
-			</div>
-			<hr>
+    <tr>
+<%--       <td scope="row">${status.index + 1}</td> --%>
+<!--       <th scope="row">1</th> -->
+      <th scope="row"><c:out value="${status.index+1}"/></th>
+      <td><c:out value="${v.mb_Name}" /></td>
+      <td><c:out value="${v.bs_Price}" /></td>
+      <td><c:out value="${v.bs_Num}" /></td>
+      <td><c:out value="${v.bs_Date}" /></td>
+      <td><input type="number" name="cart_Num" min="1" max="${v.bs_Num}" value="1" 
+					class="form-control"></td>
+      <td><button type="submit" class="btn btn-outline-secondary direct">直接購買</button></td>
+    </tr>
+<!-- 			<div class="row"> -->
+<!-- 				<div class="col-lg-2"> -->
+<%-- 					<c:out value="${v.mb_Name}" /> --%>
+<!-- 				</div> -->
+<!-- 				<div class="col-lg-2"> -->
+<%-- 					<c:out value="${v.bs_Price}" /> --%>
+<!-- 				</div> -->
+<!-- 				<div class="col-lg-1"> -->
+<%-- 					<c:out value="${v.bs_Num}" /> --%>
+<!-- 				</div> -->
+<!-- 				<div class="col-lg-2"> -->
+<%-- 					<c:out value="${v.bs_Date}" /> --%>
+<!-- 				</div> -->
+<!-- 				<div class="col-lg-2"> -->
+<%-- 					<input type="number" name="cart_Num" min="1" max="${v.bs_Num}" value="1"  --%>
+<!-- 					class="form-control"> -->
+<!-- 				</div> -->
+<!-- 				<div class="col-lg-3"> -->
+<!-- 					<button type="submit" class="btn btn-outline-secondary direct">直接購買</button> -->
+<!-- 										<button type="button" class="btn btn-outline-secondary indirect" -->
+<!-- 											onclick="addCart()">查看詳情</button> -->
+<!-- 				</div> -->
+<!-- 			</div> -->
+<!-- 			<hr> -->
 		</form>
-	
+		</c:forEach>
+</tbody>
+</table>	
 	
 	
 	
@@ -130,7 +165,6 @@
 <!-- // 				document.forms[0].submit(); -->
 <!-- // 			} -->
 <!-- // 		} -->
-		</c:forEach>
 	</div>
 
 	<!-- body -->

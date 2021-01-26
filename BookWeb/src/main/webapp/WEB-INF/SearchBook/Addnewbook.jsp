@@ -77,6 +77,7 @@ span{
 		<form:form method="POST" modelAttribute="newonebook" id="form" enctype="multipart/form-data">
 
 			<div class="back">
+			<br>
 				<h2 class="check">新增書目資訊</h2>
 				<hr>
 				<form:hidden path="bk_ID" name="page"/>
@@ -161,7 +162,7 @@ span{
 <!-- 								<select class='form-control selectCategory'id=a name='types'> -->
 <!-- 								<option value='NONE'>請選擇主類別</option> -->
 <!-- 								</select> -->
-							<form:option path="" value="0" label="請選擇主類別" />                   
+							<form:option path="" id="asd" value="0" label="請選擇主類別" />                   
                         	<form:options items="${maintype}" itemLabel="sty_Name" itemValue="sty_ID" />
 
 						</form:select>
@@ -171,7 +172,7 @@ span{
 						<label>（次）</label>
 <%-- 						<form:select path="" class="form-control" id="selectSubcat" name="types"> --%>
 						<form:select path="" class="form-control" id="ba0" name="types">
-							<form:option path="" value="0" label="請選擇子類別" />                   
+							<form:option path="" value="0" id="aa0" label="請選擇子類別" />                   
 <%--                         	<form:options items="${maintype}" itemLabel="sty_Name" itemValue="sty_ID"/> --%>
 						</form:select>
 						</div>
@@ -217,6 +218,12 @@ document.getElementById('bk_Content').value = '「希望我們能變成兩只毛
 </script>
 
 <script>
+
+a = $('#asd').val()
+if(a!=0){
+console.log($("#ba0").val())
+}
+
  
 var count = 0;
 var sbmcount = count + 1 ;
@@ -291,7 +298,7 @@ $("#newtype").click(function(){
 			+"</div>"
 			+"<div class='form-group col-md-5'>"
 			+"<label>（次）</label>"
-			+"<select path='' class='form-control' id=ba"+sbmcount+" name='types'>"
+			+"<select path='' class='form-control' id=ba"+sbmcount+" name='types' value=\"asd\">"
 			+"<option path='' value='NONE' label='請選擇子類別' />"	
 			+"</select>"
 			+"</div>"

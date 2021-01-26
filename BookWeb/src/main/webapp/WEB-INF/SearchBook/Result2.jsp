@@ -80,7 +80,7 @@ white-space:pre-wrap;
 
 		<div class="collectindex">
 <%-- 			<a class="btn btn-outline-dark" href="<c:url value='SearchBook/Search' />" role="button">搜尋首頁</a> --%>
-			
+			<br>
 			<form name=a3 class=a3 action="<c:url value='/collectlist' />" method="get">
 				<button type="submit" name="list" class="btn btn-outline-dark">收藏清單</button>
 			</form>

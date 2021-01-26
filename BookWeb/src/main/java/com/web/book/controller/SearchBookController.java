@@ -28,6 +28,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.jsf.FacesContextUtils;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -669,12 +670,18 @@ public class SearchBookController {
 			@RequestParam(value = "types", required = false) List<Integer> tylist,
 			@RequestParam(value="bk_ID",required=false) Integer bk_ID,
 			@RequestParam(value = "file", required = false) CommonsMultipartFile file, HttpServletRequest request,
+			@RequestParam(value = "test",required = false) String test,
 			RedirectAttributes attr) throws Exception {
 		// 圖片上傳用
-		System.out.println("123132156315");
+		BookBean a = searchService.getBook(bk_ID);
+		if(test.equals("abc")) {
 		String img=GlobalService.saveImage("booksearch", file, result.getBk_Name());
-		result.setBk_Pic(img);
+		a.setBk_Pic(img);
+		}
+		System.out.println("==-------------------------------------------");
+		result.setBk_Pic(a.getBk_Pic());
 		searchService.updatebk(result);
+//		searchService.updatebk(a);
 		searchService.deletebkty(result.getBk_ID());
 		for(Integer i : tylist) {
 			if(i == 0) {

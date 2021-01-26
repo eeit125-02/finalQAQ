@@ -96,11 +96,13 @@ margin-right:10px;
 
 		<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-			<div class="collect">
-				<a class="btn btn-outline-dark" href="<c:url value='SearchBook/Search' />" role="button">搜尋首頁</a>
-			</div>
+<!-- 			<div class="collect"> -->
+<%-- 				<a class="btn btn-outline-dark" href="<c:url value='SearchBook/Search' />" role="button">搜尋首頁</a> --%>
+<!-- 			</div> -->
 			<br>
-			<h3>收藏清單：</h3>
+			<h3>收藏清單：
+<button id="finish" type="button" class="btn btn-outline-secondary btn-sm"style="float:right;border:none">一鍵完成</button>  
+			</h3>
 						<nav class="navbar navbar-light bg-light justify-content-between">
 							<a class="navbar-brand"></a>
 							
@@ -125,6 +127,7 @@ margin-right:10px;
 <!-- 							</div> -->
 						</nav>
 			
+			<br>
 		<div class="bookcollectlist" id="bookcollectlist">
 
 		</div>
@@ -133,6 +136,10 @@ margin-right:10px;
 
 <script>
 
+$("#finish").click(function(){
+	document.getElementById('keyword').value = '興趣' ;
+	});
+	
 			function loadBookCollectList() {
 				$.ajax({
 					async : true,

@@ -126,6 +126,7 @@
 						<div class="form-group col-md-5" style="margin:auto">
 							<form:label path="bk_Pic">封面圖片</form:label>
 							<input class="form-control" name="file" type="file" id="imgInp"/>
+							<input id="test" name="test" type="hidden" value="">
 <%-- 							<form:input path="" class="form-control" type="file" /> --%>
 <%-- 							<form:hidden path="bk_Pic" /> --%>
 						</div>
@@ -226,6 +227,10 @@
 
 
 <script>
+$('#imgInp').change(function(){
+	console.log("123")
+	$('#test').val("abc")
+})
 
 var count = 0;
 var sbmcount = count + 1 ;

@@ -96,6 +96,7 @@ font-size:16px;
 <br>
 <br>
 <div>
+<a class="btn btn-outline-dark" href="http://localhost:8080/BookWeb/addnewbook" role="button"style="float:right">新增書籍</a>	
 	<form id="myForm" action="http://localhost:8080/BookWeb/updatebook" method="get"> 
 		<table id="bookReport_Table" class="display" >
 		    <thead>
