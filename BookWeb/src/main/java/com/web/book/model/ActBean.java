@@ -1,5 +1,6 @@
 package com.web.book.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -14,19 +15,44 @@ public class ActBean {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer act_ID;
+
+	@Column(columnDefinition="nvarchar(MAX)")
 	private String act_Image;
+	
+	@Column(columnDefinition="nvarchar(MAX)")
 	private String act_Name;
+	
+	@Column(columnDefinition="nvarchar(MAX)")
 	private String act_Theme;
+	
+	@Column(columnDefinition="nvarchar(MAX)")
 	private String act_Date;
-//	private String act_EndDate;
+	
+	@Column(columnDefinition="nvarchar(MAX)")
 	private String act_Time;
+	
+	@Column(columnDefinition="nvarchar(MAX)")
 	private String act_Loc;
+	
+	@Column(columnDefinition="nvarchar(MAX)")
 	private String act_Intro;
+	
+	@Column(columnDefinition="nvarchar(MAX)")
 	private String act_Guest;
+	
+	@Column(columnDefinition="nvarchar(MAX)")
 	private String act_Pax;
+	
+	@Column(columnDefinition="nvarchar(MAX)")
 	private String act_Rule;
+	
+	@Column(columnDefinition="nvarchar(MAX)")
 	private String act_Tag;
+	
+	@Column(columnDefinition="nvarchar(MAX)")
 	private String act_Place;
+	
+	
 	private Integer mb_ID;
 	private Integer act_Differentpax;
 
