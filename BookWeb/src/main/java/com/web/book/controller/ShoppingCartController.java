@@ -115,17 +115,17 @@ public class ShoppingCartController {
 		}		
 // 把購物車資料清掉
 		scService.deleteAllCart(loginUser.getMb_ID());
-//		String form = genAioCheckOutOneTime(oreder.getBo_ID(), sdf.format(date), total, product.toString(), url);
+		String form = genAioCheckOutOneTime(oreder.getBo_ID(), sdf.format(date), total, product.toString(), url);
 		List<OrderItemBean> item = scService.orderDetail(oreder.getBo_ID());
-//		model.addAttribute("obj", form);
+		model.addAttribute("obj", form);
 		model.addAttribute("item", item);
 		model.addAttribute("total", oreder.getBo_Total());
 		model.addAttribute("tstime", date);
 //		return relist;
 //實際跑
-//		return "/Transation/bkCheckout";
+		return "/Transation/bkCheckout";
 //測試
-		return "/Transation/transationDetail";
+//		return "/Transation/transationDetail";
 	}
 	
 	// 導入交易明細
