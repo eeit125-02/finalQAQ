@@ -134,36 +134,9 @@
 
 	function cool(){
 		console.log("12222")
-		
-// 		Swal.fire({
-// 		  title: 'Are you sure?',
-// 		  text: "You won't be able to revert this!",
-// 		  icon: 'warning',
-// 		  showCancelButton: true,
-// 		  confirmButtonColor: '#3085d6',
-// 		  cancelButtonColor: '#d33',
-// 		  confirmButtonText: 'Yes, delete it!',
-// 		  background: '#fff url(/images/trees.png)',
-// 		  backdrop: `
-// 		    rgba(0,0,123,0.4)
-// 		    url("https://i.imgur.com/60cOgdt.gif")
-// 		    left top
-// 		    no-repeat
-// 		  `
-// 		}).then((result) => {
-// 		  if (result.isConfirmed) {
-// 		    Swal.fire(
-// 		      'Deleted!',
-// 		      'Your file has been deleted.',
-// 		      'success'
-// 		    ).then((result)=>{
-// 		    	$('#showAlert').submit();
-// 		    })
-// 		  }
-// 		})
-		
+				
 		Swal.fire({
-			  title: '您已報名成功囉!',
+			  title: '您已報名成功囉!已寄出活動資訊到您的信箱',
 			  width: 600,
 			  padding: '3em',
 			  background: '#fff url(/images/trees.png)',
@@ -174,7 +147,7 @@
 			  `
 			})
 				
-				    $('#showAlert').submit();
+		  $('#showAlert').submit();
 			
 	}
 

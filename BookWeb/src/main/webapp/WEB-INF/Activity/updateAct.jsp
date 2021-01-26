@@ -23,6 +23,8 @@
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
 	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
 	crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" href="dist/sweetalert.css">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <link rel="icon" href="${pageContext.request.contextPath}/image/logo1.ico" type="image/x-icon" />
 <style>
 .bd-placeholder-img {
@@ -74,7 +76,7 @@ color:#3C3C3C;
 		<H1 class='center'>更新活動資料</H1>
 		<hr>
 		<p>
-			<form:form method="POST" modelAttribute="ab" enctype="multipart/form-data">
+			<form:form method="POST" modelAttribute="ab" enctype="multipart/form-data" id="aaa" >
 			<input type="hidden" id="picpath" name="picpath">
 <div>
 <!-- 				<label>會員帳號:</label> -->
@@ -253,8 +255,8 @@ color:#3C3C3C;
 					
 						<div colspan="2" align="center">
 						<input type="hidden" id="actname" value="${ab.act_Name}">
-						<input class="btn btn-primary" type="submit" value="更新" name='updateBtn'onclick="return confirmUpdate('${ab.act_ID}');"/> 
-						<input class="btn btn-primary" type="submit" value="刪除" name='deleteBtn'onclick="return confirmDelete('${ab.act_Name}');"/>
+						<input class="btn btn-primary" type="button" value="更新" name='updateBtn' onclick="return confirmUpdate('${ab.act_ID}');"/> 
+<%-- 						<input class="btn btn-primary" type="button" value="取消" name='deleteBtn' onclick="return confirmDelete('${ab.act_Name}');"/> --%>
 						
 						</div>
 				</form:form>
@@ -276,24 +278,41 @@ color:#3C3C3C;
 	<!-- footer -->
 </body>
 
-		<script type="text/javascript">
+		<script>
 			function confirmDelete() {
 				var act_Name = $('#actname').val();
-				var result = confirm("確定刪除此筆記錄(活動名稱:" + act_Name + ")?");
-				if (result) {
-					document.forms[0].finalDecision.value = "DELETE";
-					return true;
-				}
-				return false;
+				Swal.fire({
+					  title: "確定刪除此筆記錄(活動名稱:" + act_Name + ")?",
+					 
+					  icon: 'warning',
+					  showCancelButton: true,
+					  confirmButtonColor: '#3085d6',
+					  cancelButtonColor: '#d33',
+					  confirmButtonText: 'Yes'
+					}).then((result) => {
+					  if (result.isConfirmed) {
+					    Swal.fire(
+					     $("#aaa").submit();
+					    )
+					  }
+					})
 			}
+					
 			function confirmUpdate() {
 				var act_Name = $('#actname').val();
-				var result = confirm("確定送出此筆記錄(活動名稱:" + act_Name + ")?");
-				if (result) {
-					document.forms[0].finalDecision.value = "UPDATE";
-					return true;
-				}
-				return false;
+				Swal.fire({
+					  title: "確定送出此筆記錄(活動名稱:" + act_Name + ")?",				 
+					  icon: 'warning',
+					  showCancelButton: true,
+					  confirmButtonColor: '#3085d6',
+					  cancelButtonColor: '#d33',
+					  confirmButtonText: 'Yes'
+					}).then((result) => {
+					  if (result.isConfirmed) {
+					     $("#aaa").submit();
+					    
+					  }
+					})
 			}
 		</script>
 
