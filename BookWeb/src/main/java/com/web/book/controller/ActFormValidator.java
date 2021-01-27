@@ -17,14 +17,14 @@ public class ActFormValidator implements Validator {
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "act_Name" , "actbean.actname.empty" , "請填寫活動名稱");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "act_Theme", "actbean.acttheme.empty", "請選擇活動主題");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "act_Guest", "actbean.actguest.empty", "請輸入活動嘉賓");
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "act_Image", "actbean.actimage.empty", "請上傳活動圖片");
+//		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "act_Image", "actbean.actimage.empty", "請上傳活動圖片");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "act_Pax"  , "actbean.actpax.empty"  , "請輸入活動人數");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "act_Place", "actbean.actplace.empty", "請選擇活動場所");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "act_Date" , "actbean.actdate.empty" , "請選擇活動日期");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "act_Time" , "actbean.acttime.empty" , "請選擇活動時間");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "act_Loc"  , "actbean.actloc.empty"  , "請選擇縣市區域並輸入地址");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "act_Tag"  , "actbean.acttag.empty"  , "請選擇活動標籤");
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "act_Rule" , "actbean.actrule.empty" , "請輸入活動規則");
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "act_Rule" , "actbean.actrule.empty" , "請輸入活動摘要");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "act_Intro", "actbean.actintro.empty", "請輸入活動簡介");
 		System.out.println("5151561561561");
 		ActBean actbean = (ActBean) target;
@@ -34,7 +34,7 @@ public class ActFormValidator implements Validator {
 //		}	
 		System.out.println("515156++++++++++++++++++");
 		if (actbean.getact_Name() != null && actbean.getact_Name().contains(" ")) {
-			errors.rejectValue("act_Name", "請填寫活動名稱");
+			errors.rejectValue("act_Name", " ", "請填寫活動名稱");
 		}
 
 		if (actbean.getact_Theme().contentEquals("NONE")) {
@@ -45,10 +45,10 @@ public class ActFormValidator implements Validator {
 			errors.rejectValue("act_Guest", " ", "請填寫活動嘉賓");
 		}		
 		
-		if (actbean.getact_Image().isEmpty()) {
-			errors.rejectValue("act_Image", " ", "請上傳圖片");			
-		}
-		
+//		if (actbean.getact_Image().isEmpty()) {
+//			errors.rejectValue("act_Image", " ", "請上傳圖片");			
+//		}
+//		
 		try {
 			System.out.println("41414144++++++++++++++");
 			Integer act_Pax = Integer.valueOf(actbean.getact_Pax());

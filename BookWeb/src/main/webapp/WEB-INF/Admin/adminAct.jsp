@@ -256,10 +256,10 @@
 		        			+ "<p><input type =\"image\" src=\""+ data.actImage +"\"  style=\"width: 300px; height: 380px; align:center\"></p>"
 		       				+ "<p>活動主題:"+ data.actTheme +"</p>"
 		       				+ "<p><img src= ${pageContext.request.contextPath}/image/date.png style=\"width:22px;height:22px\">"+ data.actDate +"</p>"
-		        			+ "<p><img src= ${pageContext.request.contextPath}/image/time.png style=\"width:22px;height:22px\">"+ data.actTime +"</p>"                             
-		       				+ "<p><button class=\"mapbutton\" style=\"background-color:white\" id=\"myModal\"  value=\""+ data.actLoc +"\" data-toggle=\"modal\"  title=\"Google地圖\" data-target=\"#myModal1\"><img src=${pageContext.request.contextPath}/image/map1.png style=\"width:25px;height:25px\" title=\"Google地圖\">"+ data.actLoc +"</button></p>"     
-		       				+ "<p>活動簡介:<br>"+ data.actIntro +"</p>"
+		        			+ "<p><img src= ${pageContext.request.contextPath}/image/time.png style=\"width:22px;height:22px\">"+ data.actTime +"</p>"   
+		       				+ "<p>活動地點:<br>"+ data.actLoc +"</p>"
 		       				+ "<p>活動名額:"+ data.actDifferentpax +"/"+ data.actPax +"</p>"  
+		       				+ "<p>活動簡介:<hr>"+ data.actIntro +"</p>"
 		       				+ "<hr>"
 		       				+ "</div>"
 						   

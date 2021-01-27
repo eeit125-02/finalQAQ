@@ -41,11 +41,7 @@ th{
 text-align:center;
 }
 
-td{
-width:100px;
-border:solid 1px;
-text-align:center;
-}
+
 </style>
 
 <script>
@@ -64,7 +60,7 @@ text-align:center;
 	<!-- header -->
 
 	<!-- body -->
-	<div class="container media">
+	<div class="container">
 		<br>
 
 
@@ -74,7 +70,8 @@ text-align:center;
 		<hr>
 		<div style="text-align:center">
 		<br>
-			<h1>${name}的報名紀錄</h1>
+		<div style="text-align:center">
+			<h1 >${name}的報名紀錄</h1>
 			<hr><br>
 			<c:if test='${empty mbjoinlist}'>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
 			查無您的報名紀錄<br>
@@ -118,10 +115,10 @@ text-align:center;
 			<p />
 			<br>
 
-			<a href='${pageContext.request.contextPath}/showActs'><button class="btn btn-outline-info">繼續探索活動</button></a>
 <!-- 			<button onclick="window.location.href='showCreateForm'">新增活動1</button> -->
 		</div>
 	</div>
+			<a href='${pageContext.request.contextPath}/showActs'><button class="btn btn-outline-info">繼續探索活動</button></a>
 
 	<!-- footer -->
 	<footer class="container py-5" id="bookWebFooter"></footer>

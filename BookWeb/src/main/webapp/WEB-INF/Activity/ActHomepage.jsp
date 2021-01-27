@@ -49,6 +49,7 @@
 	});
 </script>
 
+<script src="https://www.line-website.com/social-plugins/js/thirdparty/loader.min.js" async="async" defer="defer"></script>
 
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDWIiCwzdTb9GmpcVV2ulFDGmVube4SI3Y&callback=initMap" async defer></script>
 
@@ -302,7 +303,6 @@ $('#enter1').val('未來') ;
 									<!-- line share的東西 -->
 									<div style="float:right">
 								  <div class="line-it-button" data-lang="zh_Hant" data-type="share-c" data-ver="3" data-url="https://social-plugins.line.me/zh_TW/how_to_install" data-color="default" data-size="large" data-count="false" style="display: none;"></div>
- 									<script src="https://www.line-website.com/social-plugins/js/thirdparty/loader.min.js" async="async" defer="defer"></script>
 									</div>
 									<!-- line share的東西 -->
 										<br>
@@ -422,16 +422,14 @@ $('#create').click(function(){
 				var insertData="";
 				for (let i = 0; i < data.length; i++) {
 					insertData += "<div class='col-6,col-md-3' style='width: 380px; height: 800px'>"
-								+"<div class='thumbnail' style='width: 350px; height: 800px'>"
-									+"<p>"
-										+"<b style='font-size: 25px;'>"+data[i].act_Name+"</b>"
-									+"</p>"
-									+"<div align=\"center\">"
-									+"<input type ='image' src='"+data[i].act_Image+"' data-toggle='modal' data-target='#exampleModalCenter"+data[i].act_Name+"' style='width: 300px; height: 380px;' class='center'></div>"
-										+"<div class='modal fade' id='exampleModalCenter"+data[i].act_Name+"' tabindex=''-1' role='dialog' aria-labelledby='exampleModalCenterTitle' aria-hidden='true'>"
-  										+"<div class='modal-dialog modal-dialog-centered' role='document'>"
-   										+ "<div class='modal-content'  style=\"width:800px; height:900px\">"
-    									 + "<div class='modal-header'>"
+								+"<div class='thumbnail' style='width: 345px; height: 800px'>"
+								+"<div align=\"center\">"
+								+"<p><b style=\"font-size:25px;align:center\">"+data[i].act_Name+"</b></p>"
+								+"<input type =\"image\" src=\""+data[i].act_Image+"\" data-toggle=\"modal\" data-target=\"#exampleModalCenter${act.act_Name}\" style=\"width: 345px; height: 420px; align:center\" class=\"center\"></div>"
+									+"<div class=\"modal fade\" id=\"exampleModalCenter${act.act_Name}\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"exampleModalCenterTitle\" aria-hidden=\"true\">"
+										+"<div class=\"modal-dialog modal-dialog-centered\" role=\"document\">"
+										 +"<div class=\"modal-content\" style=\"width:800px; height:900px\">"
+									  +"<div class=\"modal-header\" >"
       										 + "<h3 class='modal-title' id='#exampleModalCenter"+data[i].act_Name+"'>"+data[i].act_Name+"</h3>"
        											+ "<button type='button' class='close' data-dismiss='modal' aria-label='Close'>"
      											  +  "<span aria-hidden='true'>&times;</span>"
@@ -491,19 +489,20 @@ $('#create').click(function(){
 											+"</div>"
 											+"</div>"
 // 									+"</div>"
-									+"<div class='caption'>"
-									 +"<p>"+data[i].act_Theme+"</p>"
-									 +"<p><img src=${pageContext.request.contextPath}/image/date.png style=\"width:22px;height:22px\">"+data[i].act_Date+"</p>"
-									 +"<p></p>"
-									 +"<p><img src=${pageContext.request.contextPath}/image/time.png style=\"width:22px;height:22px\">"+data[i].act_Time+"</p>"
-									 +"<p><button class=\"mapbutton\" style=\"background-color:white\" id=\"myModal\"  value=\""+data[i].act_Loc+"\" data-toggle=\"modal\"  title=\"Google地圖\" data-target=\"#myModal1\">"
-									 +"<img src=${pageContext.request.contextPath}/image/map1.png style=\"width:22px;height:22px\" title=\"Google地圖\">"+data[i].act_Loc+"</button></p>"			
-										+"<hr>"
-										+"<p>"
-										+"<p>"
-										+"<a href=\"<c:url value='/showUpdateForm'/>?act_ID="+data[i].act_ID+"\" /><button class='btn btn-outline-info'>編輯</button></a>"
-										+"<a href=\"<c:url value='deleteAct'/>?act_ID="+data[i].act_ID+"\"><button class='btn btn-outline-info'>刪除</button></a>"
-										+"</p>"				
+									+"<div class=\"caption\" style=\"width:345px\">"
+									+"<p style=\"margin-left:120px;background-color:#9ed8db;color:#6C6C6C;border:none;font-size:20px\" class=\"btn btn-info\" >"+data[i].act_Theme+"</p>"
+									<!-- line share的東西 -->
+									+"<div style=\"float:right\">"
+								  +"<div class=\"line-it-button\" data-lang=\"zh_Hant\" data-type=\"share-c\" data-ver=\"3\" data-url=\"https://social-plugins.line.me/zh_TW/how_to_install\" data-color=\"default\" data-size=\"large\" data-count=\"false\" style=\"display: none;\"></div>"
+ 									+"</div>"
+									<!-- line share的東西 -->
+										+"<br>"
+										+"<br>"
+										+"<div align=\"center\"><span style=\"font-size:20px\">&ensp;<img src=${pageContext.request.contextPath}/image/date.png style=\"width:25px;height:25px\">"+data[i].act_Date+"</span>"
+										+"<span style=\"font-size:20px\">&ensp;<img src=${pageContext.request.contextPath}/image/time.png style=\"width:22px;height:22px\">"+data[i].act_Time+"</span></div>"
+										+"<br>"
+										+"<div align=\"center\"><button class=\"mapbutton\" style=\"background-color:white;font-size:20px\" id=\"myModal\"  value=\""+data[i].act_Loc+"\" data-toggle=\"modal\"  title=\"Google地圖\" data-target=\"#myModal1\"><img src=${pageContext.request.contextPath}/image/map1.png style=\"width:22px;height:22px\" title=\"Google地圖\">"+data[i].act_Loc+"</button></div>"
+										+"<hr>"		
 									+"</div>"
 								+"</div>"
 							+"</div>"
@@ -524,6 +523,7 @@ $('#create').click(function(){
 	
 	} */
 </script>
+
 
 <script>
 $(document).ready(function(){
