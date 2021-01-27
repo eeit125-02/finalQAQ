@@ -98,7 +98,7 @@
 						<div class="form-row">
 							<div class="form-group col-md-6">
 								<label >活動名稱:</label>
-								<form:input path="act_Name" id="aaa" class="form-control" placeholder="必填" />
+								<form:input path="act_Name" id="bbb" class="form-control" placeholder="必填" />
 								<form:errors path="act_Name" cssStyle="color:#FF0000;"/>
 							</div>
 							<div class="form-group col-md-6">
@@ -298,7 +298,7 @@
 
 $("#finish").click(function(){
 
-$('#aaa').val('哈利波特讀書會') ;
+$('#bbb').val('哈利波特讀書會') ;
 $('#act_Theme').val('讀書會') ;
 $('#act_Date').val('2021-01-31') ;
 $('#act_Time').val('10:30') ;

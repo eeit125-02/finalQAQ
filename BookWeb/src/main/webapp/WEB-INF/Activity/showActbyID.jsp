@@ -45,21 +45,17 @@ text-align:center;
 
 }
 
-td{
-width:100px;
-border:solid 1px;
-text-align:center;
-}
 
-.btn-group .button {
-  padding: 15px 25px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  cursor: pointer;
-  float: left;
-}
+
+/* .btn-group .button { */
+/*   padding: 15px 25px; */
+/*   text-align: center; */
+/*   text-decoration: none; */
+/*   display: inline-block; */
+/*   font-size: 16px; */
+/*   cursor: pointer; */
+/*   float: left; */
+/* } */
 
 /* .btn-group .button:hover { */
 /*   background-color: #3e8e41; */
@@ -77,7 +73,7 @@ text-align:center;
 	<!-- header -->
 
 	<!-- body -->
-	<div class="container media">
+	<div class="container">
 		<br>
 
 
@@ -86,6 +82,7 @@ text-align:center;
 		<hr>
 		<div style='text-align:center'>
 		<br>
+		<div style='text-align:center'>
 			<h1>${aib.mb_Name}的活動創建紀錄</h1>
 			<hr><br>
 			<c:if test='${empty mbactlist}'>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
@@ -147,10 +144,11 @@ text-align:center;
 			</c:if>
 			<p />
 			<br>
-			<a href='${pageContext.request.contextPath}/showActs'><button class="btn btn-outline-info">繼續探索活動</button></a>
 
 		</div>
 	</div>
+
+			<a href='${pageContext.request.contextPath}/showActs'><button class="btn btn-outline-info">繼續探索活動</button></a>
 	
 	
 <!-- 	查看按鍵內的內容 -->
@@ -223,7 +221,7 @@ text-align:center;
         									<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         									<input type="hidden" id="ID" value="${ajb.act_ID}">
         									<input type="hidden" id="check" value="${check}">
-      										 <a href="<c:url value='/showJoinForm'/>?act_ID=${ajb.act_ID}"><button type="button" id="joinact" class="btn btn-primary">報名</button></a>       										 
+<%--       										 <a href="<c:url value='/showJoinForm'/>?act_ID=${ajb.act_ID}"><button type="button" id="joinact" class="btn btn-primary">報名</button></a>       										  --%>
      										   </div>
   											  </div>
  											 </div>

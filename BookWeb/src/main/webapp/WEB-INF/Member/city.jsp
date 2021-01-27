@@ -44,9 +44,9 @@ background-color:#f8ad9d
 background-color:#FFF3EE
 }
 
-td{
-background-color:#b2f7ef
-}
+/* td{ */
+/* background-color:#b2f7ef */
+/* } */
 
   #city {  
   	border-radius: 25px;  
