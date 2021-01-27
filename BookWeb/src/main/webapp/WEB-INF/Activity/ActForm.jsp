@@ -272,9 +272,9 @@
 						  
 						  
 						<hr>
-						<button id="send" type="button" class="btn btn-primary">提交</button>
-						<button type="reset" class="btn btn-primary">還原</button>
-						<button id="finish" type="button"  class="btn btn-primary">一鍵完成</button>
+						<button id="send" type="button" class="btn btn-info">提交</button>
+						<button type="reset" class="btn btn-info">還原</button>
+						<button id="finish" type="button"  class="btn btn-info">一鍵完成</button>
 					</form>
 			  </fieldset>
 			  
@@ -283,7 +283,7 @@
 
 				<br>
 				<br>
-				<a href='${pageContext.request.contextPath}/showActs'>繼續探索活動</a>
+				<a href='${pageContext.request.contextPath}/showActs'><button class="btn btn-outline-info">繼續探索活動</button></a>
 
 		</div>
 <!-- 		<button id="insert">123</button> -->

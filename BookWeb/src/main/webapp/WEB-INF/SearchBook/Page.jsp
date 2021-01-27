@@ -238,7 +238,7 @@ p:focus, textarea:focus {
 
 		<!-- 出版日＆語言 -->
 					<div class="row" style="margin-bottom:15px"> 
-					<div class="col-sm-2 detail">出版日期：</div>
+					<div class="col-sm-2 detail">出版日：</div>
 					<div class="col-sm-4">${pageresult.bk_Date}</div>
 					
 						<c:if test='${empty pageresult.bk_Language}'>
