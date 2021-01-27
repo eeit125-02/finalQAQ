@@ -332,25 +332,14 @@ form {
 			var b = $('#birthday').val();
 			var mail = $('#mail').val();
 			var name = $('#name1').val();
-			Swal.fire({
-				  title: '是否提交?',
-				  icon: 'warning',
-				  showCancelButton: true,
-				  confirmButtonColor: '#3085d6',
-				  cancelButtonColor: '#d33',
-				  confirmButtonText: 'Yes'
-				}).then((result) => {
-				  if (result.isConfirmed) {
 					  if (name == "" || mail == "" || mb_Account == "" || pwd =="" || a1 != true || a2 != true || a3 != true || a4 != true || b == "") {
 							alert("有資料錯誤");
 						} else {
 							alert("請至信箱點擊連結後，才完成註冊。")
 							$('form').submit();
 						}
-				  }
 				})
 			
-		})
 	</script>
 </body>
 </html>

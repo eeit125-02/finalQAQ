@@ -291,9 +291,9 @@ color:#3C3C3C;
 					  confirmButtonText: 'Yes'
 					}).then((result) => {
 					  if (result.isConfirmed) {
-					    Swal.fire(
+					    
 					     $("#aaa").submit();
-					    )
+					    
 					  }
 					})
 			}

@@ -28,6 +28,8 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
 	crossorigin="anonymous">
 <link rel="icon" href="${pageContext.request.contextPath}/image/logo1.ico" type="image/x-icon" />
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+<link rel="icon" href="${pageContext.request.contextPath}/image/logo1.ico" type="image/x-icon" />
 <style>
 fieldset {
 	border-radius: 25px;
@@ -65,7 +67,7 @@ legend {
         <hr>
         <div>
             <input type="text" id="" name="mail">
-            <span><button id="send1" class="btn btn-outline-secondary">送出</button></span>
+            <span><button id="send1" type="button" class="btn btn-outline-secondary">送出</button></span>
         </div>
         </form>
     </fieldset>
@@ -78,8 +80,20 @@ $(document).ready(function() {
 	$("#bookWebFooter").load("<c:url value='/footer'/>");
 });
 	$("#send1").click(function(){
-		alert("請至信箱收取信件後再行登入");
-		$('form').submit();
+		Swal.fire({
+			  title: "送出後請至信箱收信",			 
+			  icon: 'warning',
+			  showCancelButton: true,
+			  confirmButtonColor: '#3085d6',
+			  cancelButtonColor: '#d33',
+			  confirmButtonText: 'Yes'
+			}).then((result) => {
+			  if (result.isConfirmed) {
+				  console.log("123")
+			    	$('form').submit();
+				  console.log("1456")
+			  }
+			})
 	})
 </script>
 </html>

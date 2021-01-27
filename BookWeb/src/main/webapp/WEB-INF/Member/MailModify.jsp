@@ -42,12 +42,12 @@ border: solid 1px border-radius:10px
 }
 
 .tr1{
-background-color:#68b0ab
+background-color:#f8ad9d
 
 }
 
 .tr2{
-background-color:#e0ece4
+background-color:#FFF3EE
 }
 </style>
 </head>
@@ -86,6 +86,7 @@ background-color:#e0ece4
 					<button class="btn btn-outline-secondary" type="button" id="Update" name="Update">送出</button>
 					<button class="btn btn-outline-secondary" type="reset">清除</button>
 				</form>
+				<br>
 			<button id="insert">一鍵輸入</button>
 			</fieldset>
 			</div>
