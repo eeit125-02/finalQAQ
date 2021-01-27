@@ -106,8 +106,8 @@ text-align:center;
 							<td>${ajb.member.mb_Mail}</td>
 							<td>${ajb.member.mb_Tel}</td>
 							<td>
-							<a href="<c:url value='/showJoinUpdateForm'/>?join_ID=${ajb.join_ID}"><button class="btn btn-outline-info">修改</a></button>
-							<a href="<c:url value='deleteJoin'/>?join_ID=${ajb.join_ID}&act_ID=${ajb.act.act_ID}"><button class="btn btn-outline-info">刪除</a></button>
+							<a href="<c:url value='/showJoinUpdateForm'/>?join_ID=${ajb.join_ID}"><button class="btn btn-outline-secondary">修改</button></a>
+							<a href="<c:url value='deleteJoin'/>?join_ID=${ajb.join_ID}&act_ID=${ajb.act.act_ID}"><button class="btn btn-outline-danger">刪除</button></a>
 							</td>			
 						</tr>
 						</tbody>

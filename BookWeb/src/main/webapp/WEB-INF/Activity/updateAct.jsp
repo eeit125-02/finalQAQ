@@ -255,7 +255,7 @@ color:#3C3C3C;
 					
 						<div colspan="2" align="center">
 						<input type="hidden" id="actname" value="${ab.act_Name}">
-						<input class="btn btn-primary" type="button" value="更新" name='updateBtn' onclick="return confirmUpdate('${ab.act_ID}');"/> 
+						<input class="btn btn-info" type="button" value="更新" name='updateBtn' onclick="return confirmUpdate('${ab.act_ID}');"/> 
 <%-- 						<input class="btn btn-primary" type="button" value="取消" name='deleteBtn' onclick="return confirmDelete('${ab.act_Name}');"/> --%>
 						
 						</div>
@@ -268,7 +268,7 @@ color:#3C3C3C;
 
 				<br>
 				<br>
-			<a href='${pageContext.request.contextPath}/showActs'>繼續探索活動</a>
+			<a href='${pageContext.request.contextPath}/showActs'><button class="btn btn-outline-info">繼續探索活動</button></a>
 
 	</div>
 

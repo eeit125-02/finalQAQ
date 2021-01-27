@@ -80,7 +80,7 @@
 				
 					<div class="form-group">
 					<label>會員帳號:${loginUser.mb_Account}</label>
-					<form:input type="hidden" path="member.mb_Account" value="${loginUser.mb_Account}"/>
+					<form:input class="form-control" type="hidden" path="member.mb_Account" value="${loginUser.mb_Account}"/>
 					</div>
 				
 					<div class="form-group">     
@@ -94,20 +94,21 @@
 
 					<div class="form-group">
 					
-					<label >email:</label>
-					<form:input path="member.mb_Mail" value="${loginUser.getMb_Mail()}"/>
+					<label>Email:</label>
+					<form:input class="form-control" path="member.mb_Mail" value="${loginUser.getMb_Mail()}" />
 					</div>
 
 					<div class="form-group">
 					<form:label path="member.mb_Tel">聯絡電話:</form:label>
-					<form:input path="member.mb_Tel" value="${loginUser.getMb_Tel()}"/>
+					<form:input class="form-control" path="member.mb_Tel" value="${loginUser.getMb_Tel()}"/>
 					</div>
+					<br>
 
 
 
 				<hr>
-				<input type='reset' class="btn btn-primary" value='還原' />
-				<button id="cools" class="btn btn-primary" type='button' onclick='cool()' >提交</button>
+				<input type='reset' class="btn btn-info" value='還原' />
+				<button id="cools" class="btn btn-info" type='button' onclick='cool()' >提交</button>
 	
 				</form>
 				</fieldset>
@@ -116,7 +117,7 @@
 				
 				<br>
 				<br>
-				<a href='${pageContext.request.contextPath}/showActs'>繼續探索活動</a>
+				<a href='${pageContext.request.contextPath}/showActs'><button class="btn btn-outline-info">繼續探索活動</button></a>
 				</div>
 
 

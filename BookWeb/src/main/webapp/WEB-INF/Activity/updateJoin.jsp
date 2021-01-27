@@ -62,7 +62,7 @@
 
 	function confirmUpdate(act_Name) {
 			Swal.fire({
-				  title:"確定送出此筆報名記錄(帳號:" + act_Name + ")?",
+				  title:"確定送出此筆報名記錄?",
 				  icon: 'warning',
 				  showCancelButton: true,
 				  confirmButtonColor: '#3085d6',
@@ -89,9 +89,10 @@
 
 	<p>&nbsp;</p>
 	<hr>
-	<div class='center'>
-		<H1 class='center'>更新報名資料</H1>
+	<div style="text-align:center">
+		<H1>更新報名資料</H1>
 		<hr>
+		<br>
 		<p>
 			<form:form method="POST" modelAttribute="ajb" id="aaa">
 
@@ -109,41 +110,44 @@
 						<label>會員姓名:${loginUser.getMb_Name()}</label>
 						</div>		
 					
-						<div class="form-row">
+
 						<div class="form-group">
 						<form:label path="member.mb_Mail">email:</form:label>
-						<form:input path="member.mb_Mail" value="${loginUser.getMb_Mail()}"/>
-					    </div>
+						<form:input class="form-control" path="member.mb_Mail" value="${loginUser.getMb_Mail()}"/>
 					    </div>
 
-					<div class="form-row">
+
+
 						<div class="form-group">
 						<form:label path="member.mb_Tel">聯絡電話:</form:label>
-						<form:input path="member.mb_Tel" value="${loginUser.getMb_Tel()}"/>
+						<form:input class="form-control" path="member.mb_Tel" value="${loginUser.getMb_Tel()}"/>
 					</div>
-					</div>
+
 <!-- 					<tr> -->
 <%-- 						<td><form:label path="join_Pax">報名人數:</form:label></td> --%>
 <%-- 						<td><form:input path="join_Pax" /></td> --%>
 <!-- 					</tr> -->
+<br>
 
-					<TR>
-						<TD colspan="2" align="center">
+					<div>
+
 						<input type="hidden" name="act_ID" value="${ajb.act.act_ID}">
-						<input type="button" value="更新" name='updateBtn'onclick="return confirmUpdate('${join_ID}');"/> 
+						<input type="button"  class="btn btn-info" value="更新" name='updateBtn'onclick="return confirmUpdate('${join_ID}');"/> 
 <%-- 						<input type="submit" value="刪除" name='deleteBtn'onclick="return confirmDelete('${join_ID}');"/> --%>
-						</TD>
-					</TR>
-				</Table>
+					</div>
+
 				<c:if test="${not empty requestScope.modify}">
 					<c:remove var="act" scope="request" />
 				</c:if>
 			</form:form>
 
-			<p /><small>&lt;&lt;<a href='${pageContext.request.contextPath}/ActHomepage'>回到探索活動</a>&gt;&gt;
-			</small>
+			<p />
+			
+			<br>
+				<br>
 
 	</div>
+			<a href='${pageContext.request.contextPath}/showActs'><button class="btn btn-outline-info">繼續探索活動</button></a>
 
 
 	
