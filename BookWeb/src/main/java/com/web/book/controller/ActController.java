@@ -102,7 +102,7 @@ public class ActController {
 		System.out.println("++++++++++++++++++++++");
 		if (file.isEmpty()) {
 			bindingResult.rejectValue("act_Image", "", "請上傳圖片");
-			return "Activity/ActForm";
+//			return "Activity/ActForm";
 		}
 		System.out.println(file);
 		System.out.println("++++++++++++++++++++++");
