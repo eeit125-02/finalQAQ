@@ -123,5 +123,10 @@ public class DiscussionController {
 		return "Discussion/mainpage";
 	}
 	
+	@PostMapping("Discussion/catch_404_exception")
+	public String catch404Exception(Model model) {
+		return "Discussion/not_existed_page";
+	}
+	
 	
 }
