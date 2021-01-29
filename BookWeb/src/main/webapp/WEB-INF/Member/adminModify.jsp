@@ -166,7 +166,7 @@ legend {
 							console.log("123")
 							let a = $('#dl${u.mb_ID}').val()
 							alert("確定刪除")
-							window.location.href="http://localhost:8080/BookWeb/admindelete?dl="+a
+							window.location.href="http://eeit125g2.ddns.net:8080/BookWeb/admindelete?dl="+a
 									console.log("+++++++++")
 						})
 						</script>
@@ -191,7 +191,7 @@ legend {
 	$.ajax({
 		async : false,
 		type : 'POST',
-		url : "http://localhost:8080/BookWeb/Admin/getSexRatio",
+		url : "http://eeit125g2.ddns.net:8080/BookWeb/Admin/getSexRatio",
 		dataType : "json",
 		success : function(data) {
 			monthWriteName = data.name
@@ -202,7 +202,7 @@ legend {
 	$.ajax({
 		async : false,
 		type : 'POST',
-		url : "http://localhost:8080/BookWeb/Admin/getRegistereMonth",
+		url : "http://eeit125g2.ddns.net:8080/BookWeb/Admin/getRegistereMonth",
 		dataType : "json",
 		success : function(data) {
 			monthViewName = data.name
@@ -391,7 +391,7 @@ legend {
 			$.ajax({
 				async : false,
 				type : 'POST',
-				url : "http://localhost:8080/BookWeb/Admin/getMemebr",
+				url : "http://eeit125g2.ddns.net:8080/BookWeb/Admin/getMemebr",
 				data :{ member : selectId },
 				dataType : "json",
 				success : function(data) {

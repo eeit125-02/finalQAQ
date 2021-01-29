@@ -100,7 +100,7 @@
 	$.ajax({
 		async : false,
 		type : 'POST',
-		url : "http://localhost:8080/BookWeb/Admin/getActCategoryRatio",
+		url : "http://eeit125g2.ddns.net:8080/BookWeb/Admin/getActCategoryRatio",
 		dataType : "json",
 		success : function(data) {
 			monthWriteName = data.act
@@ -111,7 +111,7 @@
 	$.ajax({
 		async : false,
 		type : 'POST',
-		url : "http://localhost:8080/BookWeb/Admin//getActMonthNumberOfParticipants",
+		url : "http://eeit125g2.ddns.net:8080/BookWeb/Admin//getActMonthNumberOfParticipants",
 		dataType : "json",
 		success : function(data) {
 			monthViewName = data.month
@@ -199,7 +199,7 @@
 	function getDataTable(){
 		reportTable = $('#bookReport_Table').DataTable({
 			"ajax": {
-	            "url": "http://localhost:8080/BookWeb/Admin/getAllAct",
+	            "url": "http://eeit125g2.ddns.net:8080/BookWeb/Admin/getAllAct",
 	            "type": "POST",
 	            "dataSrc": ""
 	        },
@@ -247,7 +247,7 @@
 		$.ajax({
 			async : false,
 			type : 'POST',
-			url : "http://localhost:8080/BookWeb/Admin/getAct",
+			url : "http://eeit125g2.ddns.net:8080/BookWeb/Admin/getAct",
 			data :{ actId : selectId },
 			dataType : "json",
 			success : function(data) {
@@ -289,7 +289,7 @@
 				 $.ajax({
 					async : false,
 					type : 'POST',
-					url : "http://localhost:8080/BookWeb/Admin/deleteAct",
+					url : "http://eeit125g2.ddns.net:8080/BookWeb/Admin/deleteAct",
 					data : {actId:deleteBrId},
 					dataType : "json",
 					success : function(data) {

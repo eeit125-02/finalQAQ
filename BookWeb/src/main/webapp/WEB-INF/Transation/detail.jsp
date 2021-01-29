@@ -142,8 +142,8 @@
 	<!-- footer -->
 	<script>
 	$(document).ready(function() {
-		$("#bookWebheader").load("//localhost:8080/BookWeb/header");
-		$("#bookWebFooter").load("//localhost:8080/BookWeb/footer");
+		$("#bookWebheader").load("//eeit125g2.ddns.net:8080/BookWeb/header");
+		$("#bookWebFooter").load("//eeit125g2.ddns.net:8080/BookWeb/footer");
 	});
 // 	檢查購買數量是否正確
 $('#buyNum').change(function() {

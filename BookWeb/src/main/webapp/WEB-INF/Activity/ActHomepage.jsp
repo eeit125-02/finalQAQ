@@ -43,8 +43,8 @@
 <link rel="icon" href="${pageContext.request.contextPath}/image/logo1.ico" type="image/x-icon" />
 <script>
 	$(document).ready(function() {
-		$("#bookWebheader").load("//localhost:8080/BookWeb/header");
-		$("#bookWebFooter").load("//localhost:8080/BookWeb/footer");
+		$("#bookWebheader").load("//eeit125g2.ddns.net:8080/BookWeb/header");
+		$("#bookWebFooter").load("//eeit125g2.ddns.net:8080/BookWeb/footer");
 
 	});
 </script>
@@ -228,7 +228,8 @@ $('#enter1').val('未來') ;
     									  <div class="modal-header" >
 <!--     									  //彈跳視窗標頭 -->
       										  <h3 class="modal-title"  id="#exampleModalCenter${act.act_Name}">${act.act_Name}</h3>
-												<div class="line-it-button" data-lang="zh_Hant" data-type="share-a" data-ver="3" data-url="http://localhost:8080/BookWeb/toLogin" data-color="default" data-size="large" data-count="false" style="display: none;"></div>
+												<div class="line-it-button" data-lang="zh_Hant" data-type="share-a" data-ver="3" data-url="http://eeit125g2.ddns.net:8080
+												/BookWeb/toLogin" data-color="default" data-size="large" data-count="false" style="display: none;"></div>
  													<script src="https://www.line-website.com/social-plugins/js/thirdparty/loader.min.js" async="async" defer="defer"></script>
        											 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
      											     <span aria-hidden="true">&times;</span>
@@ -401,7 +402,7 @@ $('#create').click(function(){
 		$("#test").submit();
 	}else{
 		alert("請先登入會員");
-		window.location.href="//localhost:8080/BookWeb/toLogin";
+		window.location.href="//eeit125g2.ddns.net:8080/BookWeb/toLogin";
 	}
 })
 

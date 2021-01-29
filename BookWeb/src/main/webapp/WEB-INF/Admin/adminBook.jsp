@@ -96,8 +96,8 @@ font-size:16px;
 <br>
 <br>
 <div>
-<a class="btn btn-outline-dark" href="http://localhost:8080/BookWeb/addnewbook" role="button"style="float:right">新增書籍</a>	
-	<form id="myForm" action="http://localhost:8080/BookWeb/updatebook" method="get"> 
+<a class="btn btn-outline-dark" href="http://eeit125g2.ddns.net:8080/BookWeb/addnewbook" role="button"style="float:right">新增書籍</a>	
+	<form id="myForm" action="http://eeit125g2.ddns.net:8080/BookWeb/updatebook" method="get"> 
 		<table id="bookReport_Table" class="display" >
 		    <thead>
 		        <tr>
@@ -141,7 +141,7 @@ font-size:16px;
 	$.ajax({
 		async : false,
 		type : 'POST',
-		url : "http://localhost:8080/BookWeb/Admin/getBookTpyeTable",
+		url : "http://eeit125g2.ddns.net:8080/BookWeb/Admin/getBookTpyeTable",
 		dataType : "json",
 		success : function(data) {
 			monthWriteName = data.month
@@ -152,7 +152,7 @@ font-size:16px;
 	$.ajax({
 		async : false,
 		type : 'POST',
-		url : "http://localhost:8080/BookWeb/Admin/getMonthReportViews",
+		url : "http://eeit125g2.ddns.net:8080/BookWeb/Admin/getMonthReportViews",
 		dataType : "json",
 		success : function(data) {
 			monthViewName = data.month
@@ -227,7 +227,7 @@ font-size:16px;
 	function getDataTable(){
 		reportTable = $('#bookReport_Table').DataTable({
 			"ajax": {
-	            "url": "http://localhost:8080/BookWeb/Admin/getAllBook",
+	            "url": "http://eeit125g2.ddns.net:8080/BookWeb/Admin/getAllBook",
 	            "type": "POST",
 	            "dataSrc": ""
 	        },
@@ -278,7 +278,7 @@ font-size:16px;
 		$.ajax({
 			async : false,
 			type : 'POST',
-			url : "http://localhost:8080/BookWeb/Admin/getBook",
+			url : "http://eeit125g2.ddns.net:8080/BookWeb/Admin/getBook",
 			data :{ bkId : bookId },
 			dataType : "json",
 			success : function(data) {
@@ -364,7 +364,7 @@ font-size:16px;
 				 $.ajax({
 					async : false,
 					type : 'POST',
-					url : "http://localhost:8080/BookWeb/Admin/deleteBook",
+					url : "http://eeit125g2.ddns.net:8080/BookWeb/Admin/deleteBook",
 					data : {bkId : deleteBkId},
 					dataType : "json",
 					success : function(data) {

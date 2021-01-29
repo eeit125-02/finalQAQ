@@ -134,7 +134,7 @@ overflow-x: hidden;
         </div>
         
         <div style="width:100px;height:45px;background-color:#C68463;margin-left:230px;margin-top:0px;">
-        <a style="color:white;font-size:18px;" href="//localhost:8080/BookWeb/toCity">登入會員</a>
+        <a style="color:white;font-size:18px;" href="//eeit125g2.ddns.net:8080/BookWeb/toCity">登入會員</a>
         </div>
         
        </div> 
@@ -171,7 +171,7 @@ overflow-x: hidden;
 
 <div class="img_div" style="position: absolute;top:80px;left:100px;width:400px; height:300px;">
    <img src="${pageContext.request.contextPath}/image/bookreport1111.jpg"  width="400px" height="300px">        
-            <a href='//localhost:8080/BookWeb/BookReport/searchBookReport/all/1'>
+            <a href='//eeit125g2.ddns.net:8080/BookWeb/BookReport/searchBookReport/all/1'>
             <div class="mask"> 
               <h3 style=";text-align:center;line-height:300px">閱讀履歷</h3>
                 </div>
@@ -232,8 +232,8 @@ overflow-x: hidden;
 <div class = "loader" style="height: 100%;width:100%">
 </div>
 	<script>
-		$("#bookWebheader").load("//localhost:8080/BookWeb/header");
-		$("#bookWebFooter").load("//localhost:8080/BookWeb/footer");
+		$("#bookWebheader").load("//eeit125g2.ddns.net:8080/BookWeb/header");
+		$("#bookWebFooter").load("//eeit125g2.ddns.net:8080/BookWeb/footer");
 		
 jQuery(window).on("load",function(){
 	jQuery(".loader").fadeOut(1000)});

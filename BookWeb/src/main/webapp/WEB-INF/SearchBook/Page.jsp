@@ -312,15 +312,15 @@ p:focus, textarea:focus {
 	
 	//尋找二手書連結
 	function goTransation(bk) {
-		window.location.href = "//localhost:8080/BookWeb/qaqManyPrice?ID=" + bk + "";
+		window.location.href = "//eeit125g2.ddns.net:8080/BookWeb/qaqManyPrice?ID=" + bk + "";
 	}
 	
 	
 	let bk_ID = $('#addBookReport').val();
 	console.log(bk_ID);
 	$(document).ready(function() {
-		$("#bookWebheader").load("//localhost:8080/BookWeb/header");
-		$("#bookWebFooter").load("//localhost:8080/BookWeb/footer");
+		$("#bookWebheader").load("//eeit125g2.ddns.net:8080/BookWeb/header");
+		$("#bookWebFooter").load("//eeit125g2.ddns.net:8080/BookWeb/footer");
 
 		let i = ${pageresult.bk_ID};
 		
@@ -437,13 +437,13 @@ p:focus, textarea:focus {
 			$.ajax({
 				async : false,
 				type : 'POST',
-				url : 'http://localhost:8080/BookWeb/BookReport/checkBookReport',
+				url : 'http://eeit125g2.ddns.net:8080/BookWeb/BookReport/checkBookReport',
 				data : check,
 				dataType : 'json',
 				success : function(data){
 					if (data){
 						let form = $("<form method='post'></form>");
-						form.attr({"action":"//localhost:8080/BookWeb/BookReport/addBookReport/"+ $('#addBookReport').val()});
+						form.attr({"action":"//eeit125g2.ddns.net:8080/BookWeb/BookReport/addBookReport/"+ $('#addBookReport').val()});
 						$(document.body).append(form);
 						form.submit();
 					}

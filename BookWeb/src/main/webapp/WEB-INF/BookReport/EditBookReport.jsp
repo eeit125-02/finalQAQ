@@ -280,8 +280,8 @@
 		
 		$(document).ready(function() {
 			
-			$("#bookWebheader").load("//localhost:8080/BookWeb/header");
-			$("#bookWebFooter").load("//localhost:8080/BookWeb/footer");
+			$("#bookWebheader").load("//eeit125g2.ddns.net:8080/BookWeb/header");
+			$("#bookWebFooter").load("//eeit125g2.ddns.net:8080/BookWeb/footer");
 			
 			loadBookReportList();
 			loadCollectReport();
@@ -319,7 +319,7 @@
 		});
 		
 		function deleteMessage(deleteId) {
-			var deleteURL = "http://localhost:8080/BookWeb/BookReport/deleteReportMessage";
+			var deleteURL = "http://eeit125g2.ddns.net:8080/BookWeb/BookReport/deleteReportMessage";
 			swal({
 				  title: "是否要刪除留言",
 				  icon: "warning",
@@ -350,7 +350,7 @@
 		};
 		
 		function deleteCollect(rc_ID) {
-			var deleteURL = "http://localhost:8080/BookWeb/BookReport/EditBookReport/deleteCollectReport/" + rc_ID;
+			var deleteURL = "http://eeit125g2.ddns.net:8080/BookWeb/BookReport/EditBookReport/deleteCollectReport/" + rc_ID;
 			swal({
 				  title: "是否要取消收藏",
 				  icon: "warning",
@@ -380,7 +380,7 @@
 		};
 
 		function deleteReport(br_ID) {
-			var deleteURL = "http://localhost:8080/BookWeb/BookReport/EditBookReport/deleteBookReport/" + br_ID;
+			var deleteURL = "http://eeit125g2.ddns.net:8080/BookWeb/BookReport/EditBookReport/deleteBookReport/" + br_ID;
 			swal({
 				  title: "確定要刪除",
 				  icon: "warning",
@@ -423,7 +423,7 @@
 								  	+ "<div class=\"card flex-md-row mb-4 shadow-sm h-md-250\">"
 								  	+ "<div class=\"card-body d-flex flex-column align-items-start\">"
 						      	  	+ "<h4 class=\"mb-2\">"
-						      	  	+ "<a href=\"http://localhost:8080/BookWeb/BookReport/"+ data[i].brId +"\">"+ data[i].brName +"</a>"
+						      	  	+ "<a href=\"http://eeit125g2.ddns.net:8080/BookWeb/BookReport/"+ data[i].brId +"\">"+ data[i].brName +"</a>"
 								  	+ "</h4>"
 									+ "<div class=\"mb-1 text-muted\">"
 									+ "撰寫者："+ data[i].mbAccount
@@ -581,7 +581,7 @@
 					
 				}
 				if($(this).attr("id") == 'view'){
-					window.location.href = "http://localhost:8080/BookWeb/BookReport/"+$(this).val();
+					window.location.href = "http://eeit125g2.ddns.net:8080/BookWeb/BookReport/"+$(this).val();
 				}
 			});
 		};

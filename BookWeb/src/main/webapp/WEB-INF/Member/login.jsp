@@ -117,7 +117,7 @@ form {
 <!-- 					<div class="col-md-3"> -->
 				<!--用戶一鍵Google登入或綁定Google帳戶時使用↓-->
 <!-- 				<button class="btn btn-outline-dark" type="button"   style="text-transform:none ;background-color: white;">Facebook -->
-<!-- 				<img width="20px" style="margin-bottom:3px; margin-right:5px" alt="Google sign-in" src="http://localhost:8080/BookWeb/image/FB.png" /> -->
+<!-- 				<img width="20px" style="margin-bottom:3px; margin-right:5px" alt="Google sign-in" src="http://eeit125g2.ddns.net:8080/BookWeb/image/FB.png" /> -->
 <!-- 				</button> -->
 				<button class="btn btn-outline-dark" type="button"  id="btnSignIn" style="text-transform:none ;background-color: white;">Google
 				<img width="20px" style="margin-bottom:3px; margin-right:5px" alt="Google sign-in" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/512px-Google_%22G%22_Logo.svg.png" />

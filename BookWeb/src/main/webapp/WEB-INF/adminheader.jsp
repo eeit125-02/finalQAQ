@@ -15,7 +15,7 @@
 	<div class="row flex-nowrap justify-content-between align-items-center">
 
 		<div class="col-4 text-center">
-			<a class="blog-header-logo text-dark" href="//localhost:8080/BookWeb">圖書資訊網</a>
+			<a class="blog-header-logo text-dark" href="//eeit125g2.ddns.net:8080/BookWeb">圖書資訊網</a>
 		</div>
 		<div id="loginButton" class="col-4 d-flex justify-content-end align-items-center">
 			
@@ -26,8 +26,8 @@
 
 	<div class="nav-scroller py-1 mb-2">
 		<nav class="nav d-flex justify-content-between">
-			<a class="p-2 text-muted" href="//localhost:8080/BookWeb/SearchBook/Search">圖書漂流瓶</a> 
-			<a class="p-2 text-muted" href="//localhost:8080/BookWeb/Transation/storeMain">二手書交易系統</a> 
+			<a class="p-2 text-muted" href="//eeit125g2.ddns.net:8080/BookWeb/SearchBook/Search">圖書漂流瓶</a> 
+			<a class="p-2 text-muted" href="//eeit125g2.ddns.net:8080/BookWeb/Transation/storeMain">二手書交易系統</a> 
 			<a class="p-2 text-muted" href='<c:url value="/showActs"/>'>共樂聚落</a> 
 			<a class="p-2 text-muted" href='<c:url value="/Discussion/mainpage"/>'>書適論壇</a>
 			<a class="nav-link dropdown-toggle text-muted" href="#"
@@ -35,9 +35,9 @@
 				aria-haspopup="true" aria-expanded="false"> 閱讀履歷 </a>
 			<div class="dropdown-menu text-muted"
 				aria-labelledby="navbarDropdownMenuLink2">
-				<a class="dropdown-item text-muted" href="//localhost:8080/BookWeb/BookReport">讀書心得</a> 
+				<a class="dropdown-item text-muted" href="//eeit125g2.ddns.net:8080/BookWeb/BookReport">讀書心得</a> 
 				<a class="dropdown-item text-muted" href="#">Another action</a> 
-				<a class="dropdown-item text-muted" href="//localhost:8080/BookWeb/BookReport/EditBookReport">編輯資訊</a>
+				<a class="dropdown-item text-muted" href="//eeit125g2.ddns.net:8080/BookWeb/BookReport/EditBookReport">編輯資訊</a>
 			</div>
 
 		</nav>
@@ -45,15 +45,15 @@
 	
 	<script>
 		if (typeof($.cookie('Member_ID')) != "undefined"){
-				$('#loginButton').html("<a href=\"//localhost:8080/BookWeb/toAdmin\">會員中心</a><p>&nbsp;</p>"
-						+ "<a id=\"logout\" href=\"//localhost:8080/BookWeb/toLogin\">登出</a>");
+				$('#loginButton').html("<a href=\"//eeit125g2.ddns.net:8080/BookWeb/toAdmin\">會員中心</a><p>&nbsp;</p>"
+						+ "<a id=\"logout\" href=\"//eeit125g2.ddns.net:8080/BookWeb/toLogin\">登出</a>");
 				$("#logout").click(function(){
 					$.removeCookie('Member_ID', { path: '/BookWeb' });
 					$.removeCookie('Member_ID', { path: '/BookWeb/toLogin' });
 				});
 		}else{
 			console.log("log")
-			$('#loginButton').html("<a id=\"login\" href=\"//localhost:8080/BookWeb/toLogin\">登入</a>");
+			$('#loginButton').html("<a id=\"login\" href=\"//eeit125g2.ddns.net:8080/BookWeb/toLogin\">登入</a>");
 		};
 				
 	</script>

@@ -115,8 +115,8 @@
 		
 		let brScore = 0;
 
-		$("#bookWebheader").load("//localhost:8080/BookWeb/header");
-		$("#bookWebFooter").load("//localhost:8080/BookWeb/footer");
+		$("#bookWebheader").load("//eeit125g2.ddns.net:8080/BookWeb/header");
+		$("#bookWebFooter").load("//eeit125g2.ddns.net:8080/BookWeb/footer");
 		$("#rateYo").rateYo({
 			rating: 0.0,
 			fullStar: true,
@@ -129,7 +129,7 @@
 		$.ajax({
 			async : false,
 			type : 'POST',
-			url : "http://localhost:8080/BookWeb/BookReport/addBookReport/bookInfo/" + window.location.href.split("/").pop(),
+			url : "http://eeit125g2.ddns.net:8080/BookWeb/BookReport/addBookReport/bookInfo/" + window.location.href.split("/").pop(),
 			dataType : "json",
 			contentType : "application/json;charset=utf-8",
 			success : function(data) {
@@ -155,13 +155,13 @@
 			$.ajax({
 				async : false,
 				type : 'POST',
-				url : 'http://localhost:8080/BookWeb/BookReport/addBookReport/addReport',
+				url : 'http://eeit125g2.ddns.net:8080/BookWeb/BookReport/addBookReport/addReport',
 				data : addData,
 				dataType : 'json',
 				success : function(data){
 					if (data){
 						console.log(data)
-						window.location.href = "http://localhost:8080/BookWeb/BookReport/EditBookReport"
+						window.location.href = "http://eeit125g2.ddns.net:8080/BookWeb/BookReport/EditBookReport"
 					}
 					else{s
 						alert.val(已傳野果);
