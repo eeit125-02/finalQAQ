@@ -127,10 +127,7 @@ response.setDateHeader("Expires", 0);
 						<br><br>
 						
 						<form class="form-inline" action='catch_exception' method="post">
-						<button id="catch_exception" class="btn btn-outline-warning" type="submit" style="margin-right:10px">錯誤<br>攔截</button>
-						</form>
-						<form class="form-inline" action='catch_404_exception' method="post">
-						<button id="catch_404_exception" class="btn btn-outline-warning" type="submit">404<br>攔截</button>
+						<button id="catch_exception" class="btn btn-outline-warning" type="submit">錯誤<br>攔截</button>
 						</form>
 						
 			</div>
