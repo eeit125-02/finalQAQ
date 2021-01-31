@@ -199,9 +199,10 @@ maxpage=query.getResultList().size();
 		List<BookCollectBean> list = new ArrayList<>();
 		String hql = "From BookCollectBean bc Where "
 				+ "bc.member = :mbid"
-				+ " AND bc.bc_Tag_one like :searchString"
-				+ " or bc.bc_Tag_two like :searchString"
-				+ " or bc.bc_Tag_three like :searchString";
+//				+ " AND bc.bc_Tag_one like :searchString"
+//				+ " or bc.bc_Tag_two like :searchString"
+//				+ " or bc.bc_Tag_three like :searchString";
+				+ " AND (bc.bc_Tag_one like :searchString or bc.bc_Tag_two like :searchString or bc.bc_Tag_three like :searchString)";
 		Session session = factory.getCurrentSession();
 		BookCollectBean bc = session.load(BookCollectBean.class, MB_ID);
 		Query<BookCollectBean> query = session.createQuery(hql);
