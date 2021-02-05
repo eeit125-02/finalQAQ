@@ -106,16 +106,16 @@
 						<div class="row">
 							<div class="col-lg-6">
 								<ul class="list-unstyled mb-0">
-									<li><a href="http://localhost:8080/BookWeb/BookReport/searchBookReport/文學創作/1">文學創作</a></li>
-									<li><a href="http://localhost:8080/BookWeb/BookReport/searchBookReport/圖文漫畫/1">圖文漫畫</a></li>
-									<li><a href="http://localhost:8080/BookWeb/BookReport/searchBookReport/商業/1">商業</a></li>
+									<li><a href="http://eeit125g2.ddns.net:8080/BookWeb/BookReport/searchBookReport/文學創作/1">文學創作</a></li>
+									<li><a href="http://eeit125g2.ddns.net:8080/BookWeb/BookReport/searchBookReport/圖文漫畫/1">圖文漫畫</a></li>
+									<li><a href="http://eeit125g2.ddns.net:8080/BookWeb/BookReport/searchBookReport/商業/1">商業</a></li>
 								</ul>
 							</div>
 							<div class="col-lg-6">
 								<ul class="list-unstyled mb-0">
-									<li><a href="http://localhost:8080/BookWeb/BookReport/searchBookReport/生活/1">生活</a></li>
-									<li><a href="http://localhost:8080/BookWeb/BookReport/searchBookReport/旅遊/1">旅遊</a></li>
-									<li><a href="http://localhost:8080/BookWeb/BookReport/searchBookReport/學習/1">學習</a></li>
+									<li><a href="http://eeit125g2.ddns.net:8080/BookWeb/BookReport/searchBookReport/生活/1">生活</a></li>
+									<li><a href="http://eeit125g2.ddns.net:8080/BookWeb/BookReport/searchBookReport/旅遊/1">旅遊</a></li>
+									<li><a href="http://eeit125g2.ddns.net:8080/BookWeb/BookReport/searchBookReport/學習/1">學習</a></li>
 								</ul>
 							</div>
 						</div>
@@ -155,8 +155,8 @@
 
 	<script>
 		$(document).ready(function(){
-			$("#bookWebheader").load("//localhost:8080/BookWeb/header");
-			$("#bookWebFooter").load("//localhost:8080/BookWeb/footer");
+			$("#bookWebheader").load("//eeit125g2.ddns.net:8080/BookWeb/header");
+			$("#bookWebFooter").load("//eeit125g2.ddns.net:8080/BookWeb/footer");
 			page();			
 		});
 		
@@ -172,7 +172,7 @@
 				async : false,
 				cache : false,
 				type : 'POST',
-				url : "http://localhost:8080/BookWeb/BookReport" + "/serchBookReportPage",
+				url : "http://eeit125g2.ddns.net:8080/BookWeb/BookReport" + "/serchBookReportPage",
 				data : {searchType:type, searchPage:page},
 				dataType : "json",
 				error : function() {
@@ -184,20 +184,20 @@
 					if(data.pageSize != 0){
 						if(data.searchPage != 1){						
 							innerHtml += "<li class=\"page-item\">"
-							 		  + " <a class=\"page-link\" href=\"http://localhost:8080/BookWeb/BookReport/searchBookReport/"+data.searchType+"/"+ (data.searchPage - 1)+"\" aria-label=\"Previous\">"
+							 		  + " <a class=\"page-link\" href=\"http://eeit125g2.ddns.net:8080/BookWeb/BookReport/searchBookReport/"+data.searchType+"/"+ (data.searchPage - 1)+"\" aria-label=\"Previous\">"
 									  + "<span aria-hidden=\"true\">&laquo;</span>"
 									  + "</a>"
 									  + "</li>"
-							innerHtml += "<li class=\"page-item \"><a class=\"page-link\" href=\"http://localhost:8080/BookWeb/BookReport/searchBookReport/"+data.searchType+"/"+ (data.searchPage - 1)+"\">"+ (data.searchPage - 1) +"</a></li>"
+							innerHtml += "<li class=\"page-item \"><a class=\"page-link\" href=\"http://eeit125g2.ddns.net:8080/BookWeb/BookReport/searchBookReport/"+data.searchType+"/"+ (data.searchPage - 1)+"\">"+ (data.searchPage - 1) +"</a></li>"
 						}
 						
 						    
-						innerHtml += "<li class=\"page-item active\"><a class=\"page-link\" href=\"http://localhost:8080/BookWeb/BookReport/searchBookReport/"+data.searchType+"/"+ data.searchPage +"\">"+ data.searchPage +"</a></li>"
+						innerHtml += "<li class=\"page-item active\"><a class=\"page-link\" href=\"http://eeit125g2.ddns.net:8080/BookWeb/BookReport/searchBookReport/"+data.searchType+"/"+ data.searchPage +"\">"+ data.searchPage +"</a></li>"
 						
 						if(data.searchPage != data.pageSize){						
-							innerHtml += "<li class=\"page-item \"><a class=\"page-link\" href=\"http://localhost:8080/BookWeb/BookReport/searchBookReport/"+data.searchType+"/"+ (data.searchPage + 1) +"\">"+ (data.searchPage + 1) +"</a></li>"
+							innerHtml += "<li class=\"page-item \"><a class=\"page-link\" href=\"http://eeit125g2.ddns.net:8080/BookWeb/BookReport/searchBookReport/"+data.searchType+"/"+ (data.searchPage + 1) +"\">"+ (data.searchPage + 1) +"</a></li>"
 							innerHtml += "<li class=\"page-item\"></li>"
-									  + "<a class=\"page-link\" href=\"http://localhost:8080/BookWeb/BookReport/searchBookReport/"+data.searchType+"/"+ (data.searchPage + 1)+"\" aria-label=\"Next\">"
+									  + "<a class=\"page-link\" href=\"http://eeit125g2.ddns.net:8080/BookWeb/BookReport/searchBookReport/"+data.searchType+"/"+ (data.searchPage + 1)+"\" aria-label=\"Next\">"
 									  + "<span aria-hidden=\"true\">&raquo;</span>"
 									  + "</a>"
 									  + "</li>"
@@ -217,7 +217,7 @@
 									    + 	"<div class=\"col-md-8\">"
 									    + 	"<div class=\"card-body\">"
 									    + 	"<h4 class=\"card-title\">"
-									    +	"<a class=\"\" href=\"http://localhost:8080/BookWeb/BookReport/"+data.searchData[i].br_ID+"\">"+data.searchData[i].br_Name+"</a>"
+									    +	"<a class=\"\" href=\"http://eeit125g2.ddns.net:8080/BookWeb/BookReport/"+data.searchData[i].br_ID+"\">"+data.searchData[i].br_Name+"</a>"
 									    +	"</h4>"
 									   	+	"<p class=\"card-title \"> 撰寫者："+ data.searchData[i].loginUser + "</p>"
 									   	+   "<p class=\"card-text \"> 撰寫日期：" + data.searchData[i].br_DateTime+ "</p>"
@@ -245,9 +245,9 @@
 		$('#searchButton').click(function(){
 			
 			if($('#searchValue').val() == ""){
-				$('#searchForm').attr({"action":"//localhost:8080/BookWeb/BookReport/searchBookReport/all/1"})
+				$('#searchForm').attr({"action":"//eeit125g2.ddns.net:8080/BookWeb/BookReport/searchBookReport/all/1"})
 			}else{
-				$('#searchForm').attr({"action":"//localhost:8080/BookWeb/BookReport/searchBookReport/"+ $('#searchValue').val() + "/1"})
+				$('#searchForm').attr({"action":"//eeit125g2.ddns.net:8080/BookWeb/BookReport/searchBookReport/"+ $('#searchValue').val() + "/1"})
 			}
 			
 		});

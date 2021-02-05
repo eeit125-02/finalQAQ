@@ -46,7 +46,7 @@ color:white
 	</form>
 	<div class="row flex-nowrap justify-content-between align-items-center">
 
-<!-- 		<a class="blog-header-logo text-dark" href="//localhost:8080/BookWeb"> -->
+<!-- 		<a class="blog-header-logo text-dark" href="//eeit125g2.ddns.net:8080/BookWeb"> -->
 <!-- 			<img alt="LOGO" style="margin-left:270px" -->
 <%-- 			src="${pageContext.request.contextPath}/image/321123.png" --%>
 <!-- 			id="Img/logo" height="75px"> -->
@@ -60,9 +60,9 @@ color:white
 
   <ol style="margin-right:550px">  
 
-    <li class="menu-item" style="padding-right:100px;margin-right:25px"><a class="blog-header-logo text-dark" href="//localhost:8080/BookWeb">
+    <li class="menu-item" style="padding-right:100px;margin-right:25px"><a class="blog-header-logo text-dark" href="//eeit125g2.ddns.net:8080/BookWeb">
 
-<!--     <li class="menu-item" style="padding-right:30px;margin-right:50px"><a class="blog-header-logo text-dark" href="//localhost:8080/BookWeb"> -->
+<!--     <li class="menu-item" style="padding-right:30px;margin-right:50px"><a class="blog-header-logo text-dark" href="//eeit125g2.ddns.net:8080/BookWeb"> -->
 
 		<img alt="LOGO" src="${pageContext.request.contextPath}/image/logo1.png" id="Img/logo" height="75px">
 		</a></li>
@@ -74,8 +74,8 @@ color:white
     <li class="menu-item" style="padding:35px;font-family: 'Noto Serif TC';color:#8E8E8E;font-weight:bold">
       <a href='<c:url value="/Discussion/mainpage"/>' style="font-size:20px;font-family: 'Noto Serif TC';color:#8E8E8E;font-weight:bold">書適論壇</a>
     </li >
-    <li class="menu-item" style="padding:35px"><a href='//localhost:8080/BookWeb/BookReport/searchBookReport/all/1' style="font-size:20px;font-family:'Noto Serif TC';color:#8E8E8E;font-weight:bold">閱讀履歷</a></li>
-      <li class="menu-item" style="padding:35px"><a href='//localhost:8080/BookWeb/toCity' style="font-size:20px;font-family: 'Noto Serif TC';color:#8E8E8E;font-weight:bold">會員專區</a></li>
+    <li class="menu-item" style="padding:35px"><a href='//eeit125g2.ddns.net:8080/BookWeb/BookReport/searchBookReport/all/1' style="font-size:20px;font-family:'Noto Serif TC';color:#8E8E8E;font-weight:bold">閱讀履歷</a></li>
+      <li class="menu-item" style="padding:35px"><a href='//eeit125g2.ddns.net:8080/BookWeb/toCity' style="font-size:20px;font-family: 'Noto Serif TC';color:#8E8E8E;font-weight:bold">會員專區</a></li>
   </ol>
 </nav>	
 	
@@ -94,10 +94,10 @@ color:white
 										.append("<img src=\""
 														+ pic
 														+ "\" style=\"width: 35px; height: 35px; text-align:center; border-radius: 50%\"/>&nbsp;"
-														+ "<a href=\"//localhost:8080/BookWeb/toCity\" style=\"color:white\">"
+														+ "<a href=\"//eeit125g2.ddns.net:8080/BookWeb/toCity\" style=\"color:white\">"
 														+ name
 														+ "</a>&nbsp;"
-														+ "<a id=\"logout\" href=\"//localhost:8080/BookWeb/toLogin\" style=\"color:white\">登出</a>");
+														+ "<a id=\"logout\" href=\"//eeit125g2.ddns.net:8080/BookWeb/toLogin\" style=\"color:white\">登出</a>");
 								$("#logout").click(function() {
 									console.log("123")
 									$.removeCookie('Member_ID', {
@@ -110,11 +110,11 @@ color:white
 							} else {
 								$('#loginButton')
 										.append(
-												"<a id=\"login\" href=\"//localhost:8080/BookWeb/toLogin\" style=\"color:white;font-size:20px\"><img src=\""
+												"<a id=\"login\" href=\"//eeit125g2.ddns.net:8080/BookWeb/toLogin\" style=\"color:white;font-size:20px\"><img src=\""
 												+ "${pageContext.request.contextPath}/image/login1.png"
 												+ "\" style=\"width: 25px; height: 25px; text-align:center; border-radius: 50%\"/></a>");
-								// 								if(window.location.href !="http://localhost:8080/BookWeb/toLogin"){ 								 
-								// 								window.location.replace("//localhost:8080/BookWeb/toLogin");}
+								// 								if(window.location.href !="http://eeit125g2.ddns.net:8080/BookWeb/toLogin"){ 								 
+								// 								window.location.replace("//eeit125g2.ddns.net:8080/BookWeb/toLogin");}
 							}
 							;
 						})
@@ -122,12 +122,12 @@ color:white
 			if (typeof ($.cookie('Member_ID')) != "undefined") {
 				$('.shop').submit();
 			} else {
-				window.location.href = "//localhost:8080/BookWeb/toLogin";
+				window.location.href = "//eeit125g2.ddns.net:8080/BookWeb/toLogin";
 			}
 		}
 		// 		$(document).ready(function() {
-		// 			if(typeof($.cookie('Member_ID')) == "undefined" && window.location.href !="http://localhost:8080/BookWeb/toLogin"){
-		// 				window.location.href="//localhost:8080/BookWeb/toLogin";
+		// 			if(typeof($.cookie('Member_ID')) == "undefined" && window.location.href !="http://eeit125g2.ddns.net:8080/BookWeb/toLogin"){
+		// 				window.location.href="//eeit125g2.ddns.net:8080/BookWeb/toLogin";
 		// 			}
 		// 		})
 	</script>

@@ -611,7 +611,7 @@ legend {
 			 })
 		
 			 $('#admin1').click(function(){
-			$('#change123').load("//localhost:8080/BookWeb/adminall",function(){
+			$('#change123').load("//eeit125g2.ddns.net:8080/BookWeb/adminall",function(){
 // 				dataTable();
 				console.log("11111111111111111")
 			})
@@ -796,10 +796,10 @@ legend {
 			
 			if(check=="admin"){
 				
-				$('#change123').load("//localhost:8080/BookWeb/Admin/BookReport")
+				$('#change123').load("//eeit125g2.ddns.net:8080/BookWeb/Admin/BookReport")
 			}else{
 				
-				window.location.href = "http://localhost:8080/BookWeb/BookReport/EditBookReport";
+				window.location.href = "http://eeit125g2.ddns.net:8080/BookWeb/BookReport/EditBookReport";
 			}
 		});
 		
@@ -807,10 +807,10 @@ legend {
 			
 			if(check=="admin"){
 				
-				$('#change123').load("//localhost:8080/BookWeb/Admin/Book")
+				$('#change123').load("//eeit125g2.ddns.net:8080/BookWeb/Admin/Book")
 			}else{
 				
-				window.location.href = "http://localhost:8080/BookWeb/collectlist";
+				window.location.href = "http://eeit125g2.ddns.net:8080/BookWeb/collectlist";
 			}
 		});
 		
@@ -818,10 +818,10 @@ legend {
 			
 			if(check=="admin"){
 				
-				$('#change123').load("//localhost:8080/BookWeb/Admin/Stroe")
+				$('#change123').load("//eeit125g2.ddns.net:8080/BookWeb/Admin/Stroe")
 			}else{
 				
-				window.location.href = "http://localhost:8080/BookWeb/myStore";
+				window.location.href = "http://eeit125g2.ddns.net:8080/BookWeb/myStore";
 			}
 		});
 		
@@ -830,7 +830,7 @@ legend {
 			
 			if(check=="admin"){
 				
-				$('#change123').load("//localhost:8080/BookWeb/Admin/Discussion")
+				$('#change123').load("//eeit125g2.ddns.net:8080/BookWeb/Admin/Discussion")
 			}
 		});
 		
@@ -838,20 +838,20 @@ legend {
 			
 			if(check=="admin"){
 				
-				$('#change123').load("//localhost:8080/BookWeb/Admin/Act")
+				$('#change123').load("//eeit125g2.ddns.net:8080/BookWeb/Admin/Act")
 			}else{
 				
-				window.location.href = "http://localhost:8080/BookWeb/showJoinbyID";
+				window.location.href = "http://eeit125g2.ddns.net:8080/BookWeb/showJoinbyID";
 			}
 		});
 		$('#act').click(function(){
 			
 			if(check=="admin"){
 				
-				$('#change123').load("//localhost:8080/BookWeb/Admin/Act")
+				$('#change123').load("//eeit125g2.ddns.net:8080/BookWeb/Admin/Act")
 			}else{
 				
-				window.location.href = "http://localhost:8080/BookWeb/showActbyID";
+				window.location.href = "http://eeit125g2.ddns.net:8080/BookWeb/showActbyID";
 			}
 		});
 	</script>

@@ -170,8 +170,8 @@ text-align: center;
 		<script type="text/javascript">
 			
 			$(document).ready(function() {
-				$("#bookWebheader").load("//localhost:8080/BookWeb/header");
-				$("#bookWebFooter").load("//localhost:8080/BookWeb/footer");
+				$("#bookWebheader").load("//eeit125g2.ddns.net:8080/BookWeb/header");
+				$("#bookWebFooter").load("//eeit125g2.ddns.net:8080/BookWeb/footer");
 // 			console.log($(this).val()>parseInt($(this).attr("max")))
 				$('.form-control').each(function() {
 					$(this).change(function() {

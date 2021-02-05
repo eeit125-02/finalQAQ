@@ -36,8 +36,8 @@
 
 <script>
 	$(document).ready(function() {
-		$("#bookWebheader").load("//localhost:8080/BookWeb/header");
-		$("#bookWebFooter").load("//localhost:8080/BookWeb/footer");
+		$("#bookWebheader").load("//eeit125g2.ddns.net:8080/BookWeb/header");
+		$("#bookWebFooter").load("//eeit125g2.ddns.net:8080/BookWeb/footer");
 	});
 </script>
 <title>書適圈</title>
@@ -193,9 +193,9 @@
 	<script type="text/javascript">
 		function storeCheck() {
 			if (typeof ($.cookie('Member_ID')) != "undefined") {
-				window.location.href = "//localhost:8080/BookWeb/myStore";
+				window.location.href = "//eeit125g2.ddns.net:8080/BookWeb/myStore";
 			} else {
-				window.location.href = "//localhost:8080/BookWeb/toLogin";
+				window.location.href = "//eeit125g2.ddns.net:8080/BookWeb/toLogin";
 			}
 			;
 		}
@@ -204,7 +204,7 @@
 			if (typeof ($.cookie('Member_ID')) != "undefined") {
 				$('.shop').submit();
 			} else {
-				window.location.href = "//localhost:8080/BookWeb/toLogin";
+				window.location.href = "//eeit125g2.ddns.net:8080/BookWeb/toLogin";
 			}
 		}
 		$('#search1').click(function() {

@@ -71,8 +71,8 @@ margin-right:10px;
 
 <script>
 	$(document).ready(function() {
-		$("#bookWebheader").load("//localhost:8080/BookWeb/header");
-       	$("#bookWebFooter").load("//localhost:8080/BookWeb/footer");
+		$("#bookWebheader").load("//eeit125g2.ddns.net:8080/BookWeb/header");
+       	$("#bookWebFooter").load("//eeit125g2.ddns.net:8080/BookWeb/footer");
 
 	});
 	
@@ -149,7 +149,7 @@ $("#finish").click(function(){
 					contentType : "application/json;charset=utf-8",
 					error : function() {
 						swal("尚未登入", "請先登入會員～","error")
-						window.location.href="//localhost:8080/BookWeb/toLogin";
+						window.location.href="//eeit125g2.ddns.net:8080/BookWeb/toLogin";
 					},
 					success : function(data) {
 						$("#bookcollectlist").empty();
@@ -379,7 +379,7 @@ $("#finish").click(function(){
 			$.ajax({
 				async : true,
 				type : 'POST',
-				url : 'http://localhost:8080/BookWeb/setbctag',
+				url : 'http://eeit125g2.ddns.net:8080/BookWeb/setbctag',
 				data : check,
 				dataType : 'json',
 				error : function() {
@@ -407,7 +407,7 @@ $("#finish").click(function(){
 			$.ajax({
 				async : true,
 				type : 'POST',
-				url : 'http://localhost:8080/BookWeb/deletebctag',
+				url : 'http://eeit125g2.ddns.net:8080/BookWeb/deletebctag',
 				data : check,
 				dataType : 'json',
 				error : function() {
@@ -432,7 +432,7 @@ $("#finish").click(function(){
 			$.ajax({
 				async : true,
 				type : 'POST',
-				url : 'http://localhost:8080/BookWeb/deletebctag',
+				url : 'http://eeit125g2.ddns.net:8080/BookWeb/deletebctag',
 				data : check,
 				dataType : 'json',
 				error : function() {
@@ -457,7 +457,7 @@ $("#finish").click(function(){
 			$.ajax({
 				async : true,
 				type : 'POST',
-				url : 'http://localhost:8080/BookWeb/deletebctag',
+				url : 'http://eeit125g2.ddns.net:8080/BookWeb/deletebctag',
 				data : check,
 				dataType : 'json',
 				error : function() {

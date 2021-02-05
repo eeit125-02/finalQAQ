@@ -100,7 +100,7 @@
 	$.ajax({
 		async : false,
 		type : 'POST',
-		url : "http://localhost:8080/BookWeb/Admin/getMonthPostWrite",
+		url : "http://eeit125g2.ddns.net:8080/BookWeb/Admin/getMonthPostWrite",
 		dataType : "json",
 		success : function(data) {
 			monthWriteName = data.month
@@ -111,7 +111,7 @@
 	$.ajax({
 		async : false,
 		type : 'POST',
-		url : "http://localhost:8080/BookWeb/Admin/getMonthPostView",
+		url : "http://eeit125g2.ddns.net:8080/BookWeb/Admin/getMonthPostView",
 		dataType : "json",
 		success : function(data) {
 			monthViewName = data.month
@@ -170,7 +170,7 @@
 	function getDataTable(){
 		reportTable = $('#bookReport_Table').DataTable({
 			"ajax": {
-	            "url": "http://localhost:8080/BookWeb/Admin/getAllPost",
+	            "url": "http://eeit125g2.ddns.net:8080/BookWeb/Admin/getAllPost",
 	            "type": "POST",
 	            "dataSrc": ""
 	        },
@@ -219,7 +219,7 @@
 		$.ajax({
 			async : false,
 			type : 'POST',
-			url : "http://localhost:8080/BookWeb/Admin/getPost",
+			url : "http://eeit125g2.ddns.net:8080/BookWeb/Admin/getPost",
 			data :{ postId : selectId },
 			dataType : "json",
 			success : function(data) {
@@ -256,7 +256,7 @@
 				 $.ajax({
 					async : false,
 					type : 'POST',
-					url : "http://localhost:8080/BookWeb/Admin/deletePost",
+					url : "http://eeit125g2.ddns.net:8080/BookWeb/Admin/deletePost",
 					data : {postId:deleteBrId},
 					dataType : "json",
 					success : function(data) {
